@@ -49,7 +49,26 @@ export class ProjectConfig extends SeedConfig {
     //   path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js'
     // }];
     //
-    // this.addPackagesBundles(additionalPackages);
+    this.addPackagesBundles([
+      {
+        name: 'devextreme-angular',
+        path: 'node_modules/devextreme-angular',
+        packageMeta:{main:'index.js',defaultExtension:'js'}
+      }
+      ,{
+        name: 'devextreme',
+        path: 'node_modules/devextreme/dist/js',
+        packageMeta: {main:'dx.all.js',defaultExtension: 'js'}
+      },
+      {
+        name: 'jquery',
+        path: 'node_modules/jquery/dist/jquery.min.js'
+      },
+      {
+        name: 'jszip',
+        path: 'node_modules/jszip/dist/jszip.min.js'
+      }
+    ]);
 
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [

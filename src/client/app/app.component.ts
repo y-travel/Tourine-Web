@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as dx from "devextreme/ui/themes";
 import { Config } from './shared/config/env.config';
 import './operators';
 
