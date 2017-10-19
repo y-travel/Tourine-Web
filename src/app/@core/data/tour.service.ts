@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from "./api.service";
+import { GetTours } from "./models/server.dtos";
 
 @Injectable()
 export class TourService {
@@ -425,7 +427,16 @@ export class TourService {
     'age': 16,
   }];
 
+  constructor(private apiService:ApiService){
+
+  }
+
   getList() {
+    let getTour=new GetTours();
+    getTour.Code="1";
+    this.apiService.getEntities(getTour).subscribe(res=>{
+      console.log(res);
+    });
     return this.data;
   }
 }
