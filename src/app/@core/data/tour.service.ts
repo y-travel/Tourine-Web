@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class SmartTableService {
+export class TourService {
 
   data = [{
     id: 1,
@@ -425,7 +425,7 @@ export class SmartTableService {
     'age': 16,
   }];
 
-  getData() {
+  getList() {
     return this.data;
   }
 }

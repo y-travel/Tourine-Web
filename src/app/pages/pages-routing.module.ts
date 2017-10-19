@@ -10,11 +10,16 @@ const routes: Routes = [{
   children: [{
     path: 'dashboard',
     component: DashboardComponent,
-  }, {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  }],
+  },
+    {
+      path:"tour",
+      loadChildren:"./tour/tour.module#TourModule",
+    },
+    {
+      path: '',
+      redirectTo: 'dashboard',
+      pathMatch: 'full',
+    }],
 }];
 
 @NgModule({

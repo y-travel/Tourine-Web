@@ -4,7 +4,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'صفحه اصلی',
     icon: 'nb-home',
-    link: '/pages/dashboard',
+    link: '/dashboard',
     home: true,
+  },
+  {
+    title:"تور",
+    icon:"nb-paper-plane",
+    children:[
+      {
+        title:"لیست تورها",
+        link:"/pages/tour/list",
+        icon:"nb-compose"
+      }
+    ]
   }
 ];
