@@ -1,11 +1,12 @@
-@import '../../styles/themes';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+@import '../styles/themes';
+@import '../../../../node_modules/bootstrap/scss/mixins/_breakpoints';
+@import '../../../../node_modules/@nebular/theme/styles/global/bootstrap/_breakpoints';
 
 @include nb-install-component() {
   nb-layout-column.small {
     flex: 0.15 !important;
   }
+  $nebular-icons-font-family:'fontawsome';
 
   nb-sidebar.settings-sidebar {
     $sidebar-width: 7.5rem;
@@ -32,7 +33,6 @@
       background: nb-theme(color-bg);
       transition: width 0.3s ease;
       overflow: hidden;
-
       .scrollable {
         width: $sidebar-width;
       }
@@ -42,7 +42,9 @@
       }
     }
   }
-
+  nb-layout-header{
+    box-shadow: 5px 5px 20px nb-theme(shadow-color);
+  }
   nb-sidebar.menu-sidebar {
 
     margin-top: nb-theme(sidebar-header-gap);
@@ -50,7 +52,9 @@
     /deep/ .main-container {
       height:
         calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;
-      border-top-right-radius: nb-theme(radius);
+      border-top-left-radius: nb-theme(radius);
+      direction: rtl;
+      box-shadow: 5px 5px 20px  nb-theme(shadow-color);
     }
 
     /deep/ nb-sidebar-header {
@@ -127,4 +131,7 @@
       display: none;
     }
   }
+
 }
+
+

@@ -5568,6 +5568,10 @@ ncname@1.0.x:
   dependencies:
     xml-char-classes "^1.0.0"
 
+nebular-icons@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/nebular-icons/-/nebular-icons-1.0.6.tgz#6a944d3102e318fdb1e071c1aad18cbc1c069e51"
+
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"

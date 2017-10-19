@@ -25,7 +25,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../node_modules/font-awesome/scss/font-awesome.scss",
+        "../node_modules/nebular-icons/scss/nebular-icons.scss",
+        "./app/@theme/styles/iranian-sans.scss",
         "./app/@theme/styles/styles.scss"
       ],
       "scripts": [

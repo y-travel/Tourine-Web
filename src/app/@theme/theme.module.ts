@@ -18,19 +18,13 @@ import {
 } from '@nebular/theme';
 
 import {
-  FooterComponent,
   HeaderComponent,
   SearchInputComponent,
-  ThemeSettingsComponent,
   ThemeSwitcherComponent,
-  TinyMCEComponent,
 } from './components';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import {
-  OneColumnLayoutComponent,
-  SampleLayoutComponent,
-  ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
+  TourineLayoutComponent,
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
@@ -54,14 +48,8 @@ const NB_MODULES = [
 const COMPONENTS = [
   ThemeSwitcherComponent,
   HeaderComponent,
-  FooterComponent,
   SearchInputComponent,
-  ThemeSettingsComponent,
-  TinyMCEComponent,
-  OneColumnLayoutComponent,
-  SampleLayoutComponent,
-  ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
+  TourineLayoutComponent,
 ];
 
 const PIPES = [
@@ -74,7 +62,7 @@ const PIPES = [
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
     {
-      name: 'cosmic',
+      name: 'default',
     },
     [ DEFAULT_THEME, COSMIC_THEME ],
   ).providers,

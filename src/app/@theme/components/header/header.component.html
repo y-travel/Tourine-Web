@@ -2,8 +2,8 @@
      [class.left]="position === 'normal'"
      [class.right]="position === 'inverse'">
   <div class="logo-containter">
+    <div class="logo" (click)="goToHome()">تورینه</div>
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
-    <div class="logo" (click)="goToHome()">ngx-<span>admin</span></div>
   </div>
   <ngx-theme-switcher></ngx-theme-switcher>
 </div>
@@ -11,9 +11,9 @@
 <nb-actions
   size="medium"
   class="header-container"
-  [class.right]="position === 'normal'"
-  [class.left]="position === 'inverse'">
-  <nb-action icon="nb-grid-b" class="toggle-layout" (click)="toggleSettings()"></nb-action>
+  class.right="true"
+  class.left="false">
+  <nb-action icon="nb-grid-b" class="toggle-layout"></nb-action>
   <nb-action>
     <nb-user [menu]="userMenu" [name]="user?.name" [picture]="user?.picture"></nb-user>
   </nb-action>

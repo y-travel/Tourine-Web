@@ -5,15 +5,17 @@
 
 // which themes you what to enable (empty to enable all)
 $nb-enabled-themes: (default, cosmic);
+$nebular-icons-font-family:'fontawsome';
 
 $nb-themes: nb-register-theme((
  // app wise variables for each theme
   sidebar-header-gap: 2rem,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
+  shadow-color:#747474,
 
-  font-main: Roboto,
-  font-secondary: Exo,
+  font-main: Tahoma,
+  font-secondary: one-iransans,
 ), default, default);
 
 $nb-themes: nb-register-theme((
@@ -21,7 +23,8 @@ $nb-themes: nb-register-theme((
   sidebar-header-gap: 2rem,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
+  shadow-color:#212121,
 
-  font-main: Roboto,
-  font-secondary: Exo,
+  font-main: Tahoma,
+  font-secondary: one-iransans,
 ), cosmic, cosmic);
