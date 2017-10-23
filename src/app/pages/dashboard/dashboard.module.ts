@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { ElectricityComponent } from './electricity/electricity.component';
 import { ElectricityChartComponent } from './electricity/electricity-chart/electricity-chart.component';
 import { WeatherComponent } from './weather/weather.component';
+import { AppTranslationModule } from "../../app-translation.module";
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { WeatherComponent } from './weather/weather.component';
     ThemeModule,
     AngularEchartsModule,
     ToasterModule,
+    AppTranslationModule
   ],
   declarations: [
     DashboardComponent,
