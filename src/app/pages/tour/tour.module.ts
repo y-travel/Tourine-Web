@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -8,9 +9,11 @@ import { ApiService } from "../../@core/data/api.service";
 import { DataService } from "../../@core/data/data.service";
 import { TourUpsertComponent } from "./tour-upsert.component";
 import { AppTranslationModule } from "../../app-translation.module";
+import { CouponUpsertComponent } from "./coupon-upsert.component";
 
-const tourComponents=[
-  TourUpsertComponent
+const tourComponents = [
+  TourUpsertComponent,
+  CouponUpsertComponent,
 ];
 
 @NgModule({
@@ -19,6 +22,8 @@ const tourComponents=[
     TourRoutingModule,
     Ng2SmartTableModule,
     AppTranslationModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     ...tourComponents,
@@ -29,8 +34,9 @@ const tourComponents=[
     ApiService,
     DataService,
   ],
-  entryComponents:[
-    TourUpsertComponent
+  entryComponents: [
+    TourUpsertComponent,
+    CouponUpsertComponent,
   ]
 })
 export class TourModule {

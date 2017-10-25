@@ -1,4 +1,4 @@
-import { TourStatus ,HttpMethod} from "./enums";
+import { TourStatus, HttpMethod } from "./enums";
 import { Helper } from "../../utils/utils";
 
 
@@ -18,6 +18,7 @@ export interface Dictionary<T> {
 
 export interface IReturn<T> {
   createResponse(): T;
+
   getTypeName(): string;
 }
 

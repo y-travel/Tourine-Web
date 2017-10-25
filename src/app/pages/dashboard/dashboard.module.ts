@@ -9,6 +9,12 @@ import { ElectricityChartComponent } from './electricity/electricity-chart/elect
 import { WeatherComponent } from './weather/weather.component';
 import { AppTranslationModule } from "../../app-translation.module";
 
+const DASHBOARD_COMPONENTS = [
+  DashboardComponent,
+  ElectricityComponent,
+  ElectricityChartComponent,
+  WeatherComponent,
+];
 
 @NgModule({
   imports: [
@@ -18,10 +24,7 @@ import { AppTranslationModule } from "../../app-translation.module";
     AppTranslationModule
   ],
   declarations: [
-    DashboardComponent,
-    ElectricityComponent,
-    ElectricityChartComponent,
-    WeatherComponent,
+    ...DASHBOARD_COMPONENTS
   ],
 })
 export class DashboardModule {

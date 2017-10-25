@@ -1,0 +1,22 @@
+<div class="modal-header">
+  {{"header"|translate}}
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <div class="row">
+      <form-field label="Name">
+        <input trh-input placeholder="Name" formControlName="Name">
+      </form-field>
+      <form-field label="Family">
+        <input trh-input placeholder="Family" formControlName="Family">
+      </form-field>
+      {{message}}
+    </div>
+  </form>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <button class="btn btn-primary col-xl" (click)="submit()">{{"submit"|translate}}</button>
+  </div>
+</div>
+

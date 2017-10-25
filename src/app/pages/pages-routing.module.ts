@@ -12,8 +12,8 @@ const routes: Routes = [{
     component: DashboardComponent,
   },
     {
-      path:"tour",
-      loadChildren:"./tour/tour.module#TourModule",
+      path: "tour",
+      loadChildren: "./tour/tour.module#TourModule",
     },
     {
       path: '',

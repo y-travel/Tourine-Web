@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
   moduleId: module.id,
@@ -10,5 +10,5 @@ import { Component } from "@angular/core";
   }
 })
 export class FormFieldComponent {
-
+  @Input() label:string;
 }

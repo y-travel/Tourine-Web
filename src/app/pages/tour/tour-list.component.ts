@@ -4,6 +4,7 @@ import { LocalDataSource } from "ng2-smart-table";
 
 import { TourService } from "../../@core/data/tour.service";
 import { TourUpsertComponent } from "./tour-upsert.component";
+import { CouponUpsertComponent } from "./coupon-upsert.component";
 
 @Component({
   selector: "tour-list",
@@ -62,5 +63,9 @@ export class TourListComponent {
 
   upsert(){
     this.modalService.open(TourUpsertComponent,{size:"lg",backdrop:"static",container:"nb-layout"});
+  }
+
+  copponUpsert(){
+    this.modalService.open(CouponUpsertComponent,{size:"lg",backdrop:"static",container:"nb-layout"});
   }
 }
