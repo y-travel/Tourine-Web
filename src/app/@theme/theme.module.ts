@@ -21,6 +21,9 @@ import {
   HeaderComponent,
   SearchInputComponent,
   ThemeSwitcherComponent,
+  TrhButtonComponent,
+  TrhInputComponent,
+  FormFieldComponent,
 } from './components';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import {
@@ -50,6 +53,9 @@ const COMPONENTS = [
   HeaderComponent,
   SearchInputComponent,
   TourineLayoutComponent,
+  TrhInputComponent,
+  TrhButtonComponent,
+  FormFieldComponent,
 ];
 
 const PIPES = [
@@ -64,7 +70,7 @@ const NB_THEME_PROVIDERS = [
     {
       name: 'default',
     },
-    [ DEFAULT_THEME, COSMIC_THEME ],
+    [DEFAULT_THEME, COSMIC_THEME],
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,

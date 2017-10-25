@@ -6,20 +6,31 @@ import { TourService } from "../../@core/data/tour.service";
 import { TourRoutingModule, routedComponents } from "./tour-routing.module";
 import { ApiService } from "../../@core/data/api.service";
 import { DataService } from "../../@core/data/data.service";
+import { TourUpsertComponent } from "./tour-upsert.component";
+import { AppTranslationModule } from "../../app-translation.module";
+
+const tourComponents=[
+  TourUpsertComponent
+];
 
 @NgModule({
   imports: [
     ThemeModule,
     TourRoutingModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    AppTranslationModule,
   ],
   declarations: [
+    ...tourComponents,
     ...routedComponents
   ],
   providers: [
     TourService,
     ApiService,
-    DataService
+    DataService,
+  ],
+  entryComponents:[
+    TourUpsertComponent
   ]
 })
 export class TourModule {

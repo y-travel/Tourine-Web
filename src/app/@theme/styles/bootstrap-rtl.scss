@@ -1,0 +1,16 @@
+.RightToLeft{
+  direction: rtl;
+}
+.LeftToRight{
+  direction: ltr;
+}
+.modal-footer {
+  @extend .RightToLeft;
+  text-align: center;
+}
+.modal-body{
+  @extend .RightToLeft;
+}
+.modal-header{
+  @extend .RightToLeft;
+}

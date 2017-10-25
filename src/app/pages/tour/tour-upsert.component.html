@@ -1,0 +1,69 @@
+<div class="modal-header">
+  {{"tour.upsert"|translate}}
+</div>
+<div class="right modal-body">
+  <form [formGroup]="form">
+    <div class="row">
+      <form-field>
+        <input trh-input placeholder="{{'destination'|translate}}">
+      </form-field>
+      <form-field>
+        <input trh-input placeholder="{{'AdultCount'|translate}}">
+      </form-field>
+    </div>
+    <div class="row">
+      <form-field>
+        <input trh-input placeholder="{{'Duration'|translate}}">
+      </form-field>
+      <form-field>
+        <input trh-input placeholder="{{'MinAdultPrice'|translate}}">
+      </form-field>
+    </div>
+    <div class="row">
+      <form-field>
+        <input trh-input placeholder="{{'CommitDate'|translate}}">
+      </form-field>
+      <div class="col-xl">
+        <div class="row">
+          <form-field>
+            <nb-checkbox>
+              <i class="material-icons md-1">airport_shuttle</i>
+            </nb-checkbox>
+          </form-field>
+          <form-field>
+            <input trh-input placeholder="{{'Toman'|translate}}">
+          </form-field>
+        </div>
+        <div class="row">
+          <nb-checkbox>
+            <i class="material-icons md-1">airline_seat_individual_suite</i>
+          </nb-checkbox>
+          <form-field>
+            <input trh-input placeholder="{{'Toman'|translate}}">
+          </form-field>
+        </div>
+        <div class="row">
+          <form-field>
+            <nb-checkbox>
+              <i class="material-icons md-1">room_service</i>
+            </nb-checkbox>
+          </form-field>
+          <form-field>
+            <input trh-input placeholder="{{'Toman'|translate}}">
+          </form-field>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <form-field>
+        <input trh-input placeholder="{{'Hotel'|translate}}">
+      </form-field>
+      <form-field>
+        <input trh-input placeholder="{{'Infant'|translate}}">
+      </form-field>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button trh-button></button>
+</div>

@@ -1,7 +1,9 @@
 import { Component } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { LocalDataSource } from "ng2-smart-table";
 
 import { TourService } from "../../@core/data/tour.service";
+import { TourUpsertComponent } from "./tour-upsert.component";
 
 @Component({
   selector: "tour-list",
@@ -54,7 +56,11 @@ export class TourListComponent {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private tourService: TourService) {
+  constructor(private tourService: TourService,public modalService:NgbModal) {
     this.source.load(tourService.getList());
+  }
+
+  upsert(){
+    this.modalService.open(TourUpsertComponent,{size:"lg",backdrop:"static",container:"nb-layout"});
   }
 }

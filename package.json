@@ -13,7 +13,7 @@
     "gulp": "gulp",
     "i18n": "gulp i18n.build --build-type prod && ng-xi18n -p dist/tmp/tsconfig.json --i18nFormat xlf && gulp i18n.merge",
     "lint": "gulp tslint",
-    "postinstall": "gulp check.versions && gulp build.bundle.rxjs && gulp print.banner",
+    "postinstall": "gulp print.banner",
     "reinstall": "yarn"
   },
   "engines": {
@@ -137,6 +137,7 @@
     "intl": "^1.2.5",
     "jquery": "^3.2.1",
     "jszip": "^3.1.4",
+    "material-icons": "^0.1.0",
     "nebular-icons": "1.0.6",
     "ng2-smart-table": "1.1.0",
     "ngx-echarts": "1.2.2",

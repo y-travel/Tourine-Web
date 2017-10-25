@@ -11,6 +11,6 @@
     "no-trailing-whitespace": false,
     "eofline": false,
     "no-input-rename": false,
-    "no-access-missing-member": false//@TODO shall be improved in future version, temporary disabled
+    "no-access-missing-member": false //@TODO shall be improved in future version, temporary disabled
   }
 }
