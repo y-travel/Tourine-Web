@@ -5,6 +5,7 @@ import { LocalDataSource } from "ng2-smart-table";
 import { TourService } from "../../@core/data/tour.service";
 import { TourUpsertComponent } from "./tour-upsert.component";
 import { CouponUpsertComponent } from "./coupon-upsert.component";
+import { ReagentUpsertComponent } from "./reagent-upsert.component";
 
 @Component({
   selector: "tour-list",
@@ -28,29 +29,25 @@ export class TourListComponent {
       confirmDelete: true,
     },
     columns: {
-      id: {
-        title: 'ID',
+      destination: {
+        title: 'مقصد',
+        type: 'string',
+      },
+      date: {
+        title: 'تاریخ',
+        type: 'string',
+      },
+      hotel: {
+        title: 'هتل',
+        type: 'string',
+      },
+      capacity: {
+        title: 'ظرفیت',
         type: 'number',
       },
-      firstName: {
-        title: 'First Name',
+      status: {
+        title: 'وضعیت',
         type: 'string',
-      },
-      lastName: {
-        title: 'Last Name',
-        type: 'string',
-      },
-      username: {
-        title: 'Username',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      age: {
-        title: 'Age',
-        type: 'number',
       },
     },
   };
@@ -67,5 +64,9 @@ export class TourListComponent {
 
   copponUpsert(){
     this.modalService.open(CouponUpsertComponent,{size:"lg",backdrop:"static",container:"nb-layout"});
+  }
+
+  reagentUpsert(){
+    this.modalService.open(ReagentUpsertComponent,{size:"lg",backdrop:"static",container:"nb-layout"});
   }
 }

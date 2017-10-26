@@ -10,10 +10,12 @@ import { DataService } from "../../@core/data/data.service";
 import { TourUpsertComponent } from "./tour-upsert.component";
 import { AppTranslationModule } from "../../app-translation.module";
 import { CouponUpsertComponent } from "./coupon-upsert.component";
+import { ReagentUpsertComponent } from "./reagent-upsert.component";
 
 const tourComponents = [
   TourUpsertComponent,
   CouponUpsertComponent,
+  ReagentUpsertComponent,
 ];
 
 @NgModule({
@@ -37,6 +39,7 @@ const tourComponents = [
   entryComponents: [
     TourUpsertComponent,
     CouponUpsertComponent,
+    ReagentUpsertComponent,
   ]
 })
 export class TourModule {

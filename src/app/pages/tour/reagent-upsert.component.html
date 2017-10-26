@@ -1,0 +1,35 @@
+<div class="modal-header">
+  {{"ثبت معرف"|translate}}
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <div class="row">
+      <form-field label="نام مدیر">
+        <input trh-input placeholder="نام مدیر" formControlName="Name">
+      </form-field>
+      <form-field label="نام آژانس">
+        <input trh-input placeholder="نام آژانس" formControlName="Family">
+      </form-field>
+      {{message}}
+    </div>
+    <div class="row">
+      <form-field label="شماره همراه">
+        <input trh-input placeholder="شماره همراه" formControlName="Family">
+      </form-field>
+      <form-field label="شماره تماس">
+        <input trh-input placeholder="شماره تماس" formControlName="Family">
+      </form-field>
+    </div>
+    <div class="row" style="width:50%">
+      <form-field label="ایمیل">
+        <input trh-input placeholder="ایمیل" formControlName="Email">
+      </form-field>
+    </div>
+  </form>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <button class="btn btn-primary col-xl" (click)="submit()">{{"submit"|translate}}</button>
+  </div>
+</div>
+
