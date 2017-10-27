@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormService } from "../../@core/data/form.service";
 
 @Component({
     moduleId: module.id,
@@ -10,17 +11,10 @@ import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
 })
 export class CouponUpsertComponent {
   form:FormGroup;
-   message:string;
   constructor(){
-    this.form=new FormBuilder().group(
-      {
-        Name:["",Validators.required],
-        Family:["",Validators.required],
-      }
-    );
+    this.form=FormService.CreateTourForm();
   }
 
   submit(){
-    this.message=this.form.controls['Name'].value;
   }
 }

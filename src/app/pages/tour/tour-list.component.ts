@@ -54,16 +54,20 @@ export class TourListComponent {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private tourService: TourService,public modalService:NgbModal) {
+  constructor(private tourService: TourService, public modalService: NgbModal) {
     this.source.load(tourService.getList());
   }
 
-  upsert(){
-    this.modalService.open(TourUpsertComponent,{size:"lg",backdrop:"static",container:"nb-layout"});
+  upsert() {
+    const ref = this.modalService.open(TourUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+    ref.componentInstance.show();
+    ref.result.then(data =>{console.log(data);} );
   }
 
-  copponUpsert(){
-    this.modalService.open(CouponUpsertComponent,{size:"lg",backdrop:"static",container:"nb-layout"});
+  copponUpsert() {
+    const ref = this.modalService.open(CouponUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+    ref.componentInstance.show();
+    ref.result.then(data =>{console.log(data);} );
   }
 
   reagentUpsert(){

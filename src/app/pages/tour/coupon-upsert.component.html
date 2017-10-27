@@ -10,13 +10,12 @@
       <form-field label="Family">
         <input trh-input placeholder="Family" formControlName="Family">
       </form-field>
-      {{message}}
     </div>
   </form>
 </div>
 <div class="modal-body">
   <div class="row">
-    <button class="btn btn-primary col-xl" (click)="submit()">{{"submit"|translate}}</button>
+    <button trh-button (click)="submit()">{{"submit"|translate}}</button>
   </div>
 </div>
 

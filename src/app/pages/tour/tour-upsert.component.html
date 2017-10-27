@@ -4,66 +4,62 @@
 <div class="right modal-body">
   <form [formGroup]="form">
     <div class="row">
-      <form-field>
-        <input trh-input placeholder="{{'destination'|translate}}">
+      <form-field label="destination">
+        <input trh-input formControlName="destinationId">
       </form-field>
-      <form-field>
-        <input trh-input placeholder="{{'AdultCount'|translate}}">
-      </form-field>
-    </div>
-    <div class="row">
-      <form-field>
-        <input trh-input placeholder="{{'Duration'|translate}}">
-      </form-field>
-      <form-field>
-        <input trh-input placeholder="{{'MinAdultPrice'|translate}}">
+      <form-field label="_adult.Count">
+        <input trh-input formControlName="adultCount">
       </form-field>
     </div>
     <div class="row">
-      <form-field>
-        <input trh-input placeholder="{{'CommitDate'|translate}}">
+      <form-field label="duration">
+        <input trh-input formControlName="duration">
+      </form-field>
+      <form-field label="_adult.MinPrice">
+        <input trh-input formControlName="adultMinPrice">
+      </form-field>
+    </div>
+    <div class="row">
+      <form-field label="date">
+        <input trh-input formControlName="date">
       </form-field>
       <div class="col-xl">
         <div class="row">
-          <form-field>
-            <nb-checkbox>
-              <i class="material-icons md-1">airport_shuttle</i>
-            </nb-checkbox>
-          </form-field>
-          <form-field>
-            <input trh-input placeholder="{{'Toman'|translate}}">
+          <nb-checkbox>
+            <i class="material-icons md-1">airport_shuttle</i>
+          </nb-checkbox>
+          <form-field label="Toman">
+            <input trh-input formControlName="roomPrice">
           </form-field>
         </div>
         <div class="row">
           <nb-checkbox>
             <i class="material-icons md-1">airline_seat_individual_suite</i>
           </nb-checkbox>
-          <form-field>
-            <input trh-input placeholder="{{'Toman'|translate}}">
+          <form-field label="Toman">
+            <input trh-input formControlName="foodPrice">
           </form-field>
         </div>
         <div class="row">
-          <form-field>
-            <nb-checkbox>
-              <i class="material-icons md-1">room_service</i>
-            </nb-checkbox>
-          </form-field>
-          <form-field>
-            <input trh-input placeholder="{{'Toman'|translate}}">
+          <nb-checkbox>
+            <i class="material-icons md-1">room_service</i>
+          </nb-checkbox>
+          <form-field label="Toman">
+            <input trh-input fromControlName="foodPrice">
           </form-field>
         </div>
       </div>
     </div>
     <div class="row">
-      <form-field>
-        <input trh-input placeholder="{{'Hotel'|translate}}">
+      <form-field label="Hotel">
+        <input trh-input fromControlName="placeId">
       </form-field>
-      <form-field>
-        <input trh-input placeholder="{{'Infant'|translate}}">
+      <form-field label="Toman">
+        <input trh-input fromControlName="infantPrice">
       </form-field>
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button trh-button></button>
+  <button trh-button (click)="save()"></button>
 </div>

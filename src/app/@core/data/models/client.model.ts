@@ -1,14 +1,30 @@
-import { TourStatus, HttpMethod } from "./enums";
+import { TourStatus, HttpMethod, TourType, ServiceType } from "./enums";
 import { Helper } from "../../utils/utils";
 
+export class Destination {
+  id = 0;
+  name = "";
+}
+
+export class Place {
+  id = 0;
+  name = 0;
+}
 
 export class Tour {
   id = 0;
-  code = "";
-  price = 0;
-  capacity = 0;
-  status: TourStatus = undefined;
-  destination = "";
+  destinationId = 0;//@TODO merge destination and place into one table
+  duration = 0;
+  date = 0;
+  placeId = 0;
+  type: TourType = TourType.Flight;
+  status: TourStatus = TourStatus.Create;
+  adultCount = 0;
+  adultMinPrice = 0;
+  busPrice=0;
+  roomPrice=0;
+  foodPrice=0;
+  infantPrice = 0;
 }
 
 //@TODO replace with a good class

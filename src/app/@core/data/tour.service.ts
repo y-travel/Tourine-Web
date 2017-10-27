@@ -1,36 +1,73 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
-import { GetTours } from "./models/server.dtos";
+import { Tour } from "./models/client.model";
+import { Serializable } from "../utils/serializable";
 
 @Injectable()
 export class TourService {
 
-  data = [    {
-    'destination': 'نجف',
-    'date': '96/08/02',
-    'hotel': 'قصرالصور',
-    'capacity': '52',
-    'status': 'اعزام',
-  },
-    {
-      'destination': 'کربلا',
-      'date': '96/08/05',
-      'hotel': 'قصرالصور',
-      'capacity': '35',
-      'status': 'ثبت نام',
-    },
-  ];
+  data = new Array<Tour>();
 
-  constructor(private apiService:ApiService){
-
+  constructor(private apiService: ApiService) {
+    this.fillData();
   }
 
   getList() {
-    let getTour=new GetTours();
-    getTour.Code="1";
-    this.apiService.getEntities(getTour).subscribe(res=>{
-      console.log(res);
-    });
+    // let getTour = new GetTours();
+    // getTour.Code = "1";
+    // this.apiService.getEntities(getTour).subscribe(res => {
+    //   console.log(res);
+    // });
     return this.data;
+  }
+
+  addTour(model: Tour) {
+    this.data.push(model);
+  }
+
+  private fillData() {
+    this.data = Serializable.fromJSONToArray(Tour, [
+        {
+          id: 1,
+          destinationId: 1,
+          duration: 7,
+          adultCount: 3,
+          adultMinPrice: 1000000,
+          busPrice: 120000,
+          roomPrice: 300000,
+          foodPrice: 150000,
+          infantPrice: 120000,
+          date: Date.now(),
+          placeId: 1
+        },
+        {
+          id: 2,
+          destinationId: 1,
+          duration: 7,
+          adultCount: 3,
+          adultMinPrice: 1000000,
+          busPrice: 120000,
+          roomPrice: 300000,
+          foodPrice: 150000,
+          infantPrice: 120000,
+          date: Date.now(),
+          placeId: 2
+        },
+        {
+          id: 3,
+          destinationId: 2,
+          duration: 7,
+          adultCount: 3,
+          adultMinPrice: 1000000,
+          busPrice: 120000,
+          roomPrice: 300000,
+          foodPrice: 150000,
+          infantPrice: 120000,
+          date: Date.now(),
+          placeId: 3
+        }
+      ]
+    );
+
   }
 }
