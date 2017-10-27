@@ -1,23 +1,22 @@
 <div class="modal-header">
-  {{"ثبت معرف"|translate}}
+  {{"ثبت آژانس"|translate}}
 </div>
 <div class="modal-body">
   <form [formGroup]="form">
     <div class="row">
       <form-field label="نام مدیر">
-        <input trh-input placeholder="نام مدیر" formControlName="Name">
+        <input trh-input placeholder="نام مدیر" formControlName="ManagerName">
       </form-field>
       <form-field label="نام آژانس">
-        <input trh-input placeholder="نام آژانس" formControlName="Family">
+        <input trh-input placeholder="نام آژانس" formControlName="AgencyName">
       </form-field>
-      {{message}}
     </div>
     <div class="row">
       <form-field label="شماره همراه">
-        <input trh-input placeholder="شماره همراه" formControlName="Family">
+        <input trh-input placeholder="شماره همراه" formControlName="Phone">
       </form-field>
       <form-field label="شماره تماس">
-        <input trh-input placeholder="شماره تماس" formControlName="Family">
+        <input trh-input placeholder="شماره تماس" formControlName="CellPhone">
       </form-field>
     </div>
     <div class="row" style="width:50%">

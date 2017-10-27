@@ -14,8 +14,12 @@ export class ReagentUpsertComponent {
   constructor(){
     this.form=new FormBuilder().group(
       {
-        Name:["",Validators.required],
-        Family:["",Validators.required],
+        ManagerName:["",Validators.required],
+        AgencyName:["",Validators.required],
+        Phone:["",Validators.required],
+        CellPhone:["",Validators.required],
+        Email:["",Validators.required],
+
       }
     );
   }
