@@ -1,5 +1,5 @@
 <div class="modal-header">
-  {{"tour.upsert"|translate}}
+  {{"_tour.upsert"|translate}}
 </div>
 <div class="right modal-body">
   <form [formGroup]="form">
@@ -7,7 +7,7 @@
       <form-field label="destination">
         <input trh-input formControlName="destinationId">
       </form-field>
-      <form-field label="_adult.Count">
+      <form-field label="_adult.count">
         <input trh-input formControlName="adultCount">
       </form-field>
     </div>
@@ -15,12 +15,12 @@
       <form-field label="duration">
         <input trh-input formControlName="duration">
       </form-field>
-      <form-field label="_adult.MinPrice">
+      <form-field label="_adult.minPrice">
         <input trh-input formControlName="adultMinPrice">
       </form-field>
     </div>
     <div class="row">
-      <form-field label="date">
+      <form-field label="_tour.date">
         <input trh-input formControlName="date">
       </form-field>
       <div class="col-xl">
@@ -28,38 +28,38 @@
           <nb-checkbox>
             <i class="material-icons md-1">airport_shuttle</i>
           </nb-checkbox>
-          <form-field label="Toman">
-            <input trh-input formControlName="roomPrice">
+          <form-field >
+            <input trh-input placeholder="toman" formControlName="roomPrice">
           </form-field>
         </div>
         <div class="row">
           <nb-checkbox>
             <i class="material-icons md-1">airline_seat_individual_suite</i>
           </nb-checkbox>
-          <form-field label="Toman">
-            <input trh-input formControlName="foodPrice">
+          <form-field >
+            <input trh-input placeholder="toman" formControlName="foodPrice">
           </form-field>
         </div>
         <div class="row">
           <nb-checkbox>
             <i class="material-icons md-1">room_service</i>
           </nb-checkbox>
-          <form-field label="Toman">
-            <input trh-input fromControlName="foodPrice">
+          <form-field >
+            <input trh-input placeholder="toman" fromControlName="foodPrice">
           </form-field>
         </div>
       </div>
     </div>
     <div class="row">
-      <form-field label="Hotel">
+      <form-field label="hotel">
         <input trh-input fromControlName="placeId">
       </form-field>
-      <form-field label="Toman">
+      <form-field label="infantPrice">
         <input trh-input fromControlName="infantPrice">
       </form-field>
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button trh-button (click)="save()"></button>
+  <button trh-button (click)="save()">{{"save"|translate}}</button>
 </div>

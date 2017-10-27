@@ -21,9 +21,9 @@ export class Tour {
   status: TourStatus = TourStatus.Create;
   adultCount = 0;
   adultMinPrice = 0;
-  busPrice=0;
-  roomPrice=0;
-  foodPrice=0;
+  busPrice: number = undefined;
+  roomPrice: number = undefined;
+  foodPrice: number = undefined;
   infantPrice = 0;
 }
 
