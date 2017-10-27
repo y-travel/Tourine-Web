@@ -4,6 +4,8 @@
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/auth/styles/all';
 @import "material-icon";
+@import "default";
+
 // install the framework and custom global styles
 @include nb-install() {
 
@@ -25,5 +27,5 @@
   }
   @include material_default();
 }
+@include set_defaults();//@TODO html and body style not work inside of nb_install
 
-;

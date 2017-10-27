@@ -1,16 +1,37 @@
-.RightToLeft{
+@import "../../@theme/styles/themes";
+
+.RightToLeft {
   direction: rtl;
 }
-.LeftToRight{
+
+.LeftToRight {
   direction: ltr;
 }
+
+.center {
+  text-align: center;
+}
+
 .modal-footer {
   @extend .RightToLeft;
   text-align: center;
 }
-.modal-body{
+
+.modal-body {
   @extend .RightToLeft;
 }
-.modal-header{
+
+.modal-header {
   @extend .RightToLeft;
+  background-color: nb-theme(color-primary);
+  height: 40px;
+}
+
+.modal-title {
+  width: 100%;
+  text-align: center;
+  color: nb-theme(color-white);
+}
+.modal-content{
+  width: 500px;
 }

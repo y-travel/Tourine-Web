@@ -1,0 +1,12 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  :host{
+    margin-bottom: 10px;
+  }
+  .hint {
+    color: nb-theme(color-primary);
+    font-size: nb-theme(label-hint-size);
+    margin:5px 0;
+  }
+}

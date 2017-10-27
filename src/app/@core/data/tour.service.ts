@@ -36,6 +36,7 @@ export class TourService {
           busPrice: 120000,
           roomPrice: 300000,
           foodPrice: 150000,
+          capacity:100,
           infantPrice: 120000,
           date: Date.now(),
           placeId: 1
@@ -50,6 +51,7 @@ export class TourService {
           roomPrice: 300000,
           foodPrice: 150000,
           infantPrice: 120000,
+          capacity:100,
           date: Date.now(),
           placeId: 2
         },
@@ -64,6 +66,7 @@ export class TourService {
           foodPrice: 150000,
           infantPrice: 120000,
           date: Date.now(),
+          capacity:100,
           placeId: 3
         }
       ]

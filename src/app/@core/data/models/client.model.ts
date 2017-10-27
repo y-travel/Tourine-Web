@@ -19,6 +19,7 @@ export class Tour {
   placeId = 0;
   type: TourType = TourType.Flight;
   status: TourStatus = TourStatus.Create;
+  capacity=0;
   adultCount = 0;
   adultMinPrice = 0;
   busPrice: number = undefined;

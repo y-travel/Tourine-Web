@@ -1,0 +1,11 @@
+@import '../../@theme/styles/themes';
+
+@mixin set_defaults {
+  html,body{
+    font-size: nb-theme(base-font-size);
+  }
+
+  input, select, textarea {
+    height: nb-theme(input-height);
+  }
+}

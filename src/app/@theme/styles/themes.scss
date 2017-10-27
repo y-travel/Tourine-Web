@@ -14,8 +14,10 @@ $nb-themes: nb-register-theme((
   layout-content-width: 1400px,
   shadow-color:#747474,
   card-header-bg:#303f9f,
-
-  font-main: Tahoma,
+  input-height:35px,
+  base-font-size:14px,
+  label-hint-size:.75rem,
+font-main: one-iransans,
   font-secondary: one-iransans,
 ), default, default);
 
@@ -26,7 +28,9 @@ $nb-themes: nb-register-theme((
   layout-content-width: 1400px,
   shadow-color:#212121,
   card-header-bg:#1a237e,
-
-  font-main: Tahoma,
+  input-height:35px,
+  base-font-size:14px,
+  label-hint-size:.75rem,
+  font-main: one-iransans,
   font-secondary: one-iransans,
 ), cosmic, cosmic);

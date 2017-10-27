@@ -1,5 +1,7 @@
 <div class="modal-header">
-  {{"_tour.upsert"|translate}}
+  <div class="modal-title">
+    {{"_tour.upsert"|translate}}
+  </div>
 </div>
 <div class="right modal-body">
   <form [formGroup]="form">
@@ -28,7 +30,7 @@
           <nb-checkbox>
             <i class="material-icons md-1">airport_shuttle</i>
           </nb-checkbox>
-          <form-field >
+          <form-field>
             <input trh-input placeholder="toman" formControlName="roomPrice">
           </form-field>
         </div>
@@ -36,7 +38,7 @@
           <nb-checkbox>
             <i class="material-icons md-1">airline_seat_individual_suite</i>
           </nb-checkbox>
-          <form-field >
+          <form-field>
             <input trh-input placeholder="toman" formControlName="foodPrice">
           </form-field>
         </div>
@@ -44,7 +46,7 @@
           <nb-checkbox>
             <i class="material-icons md-1">room_service</i>
           </nb-checkbox>
-          <form-field >
+          <form-field>
             <input trh-input placeholder="toman" fromControlName="foodPrice">
           </form-field>
         </div>

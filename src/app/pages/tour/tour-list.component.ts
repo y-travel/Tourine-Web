@@ -59,13 +59,13 @@ export class TourListComponent {
   }
 
   upsert() {
-    const ref = this.modalService.open(TourUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+    const ref = this.modalService.open(TourUpsertComponent, {size: "sm", backdrop: "static", container: "nb-layout"});
     ref.componentInstance.show();
     ref.result.then(data =>{console.log(data);} );
   }
 
   copponUpsert() {
-    const ref = this.modalService.open(CouponUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+    const ref = this.modalService.open(CouponUpsertComponent, {size: "sm", backdrop: "static", container: "nb-layout"});
     ref.componentInstance.show();
     ref.result.then(data =>{console.log(data);} );
   }
