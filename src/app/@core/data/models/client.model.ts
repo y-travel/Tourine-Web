@@ -13,7 +13,7 @@ export class Place {
 
 export class Tour {
   id = 0;
-  destinationId = 0;//@TODO merge destination and place into one table
+  destinationId = 1;//@TODO merge destination and place into one table
   duration = 0;
   date = 0;
   placeId = 0;

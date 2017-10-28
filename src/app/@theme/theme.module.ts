@@ -24,6 +24,7 @@ import {
   TrhButtonComponent,
   TrhInputComponent,
   FormFieldComponent,
+  TrhDropdownComponent,
 } from './components';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import {
@@ -57,6 +58,7 @@ const COMPONENTS = [
   TrhInputComponent,
   TrhButtonComponent,
   FormFieldComponent,
+  TrhDropdownComponent,
 ];
 
 const PIPES = [

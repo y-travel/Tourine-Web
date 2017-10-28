@@ -6,7 +6,7 @@ import { Component, Input } from "@angular/core";
   templateUrl: "form-field.component.html",
   styleUrls: ["form-field.component.scss"],
   host:{
-    "class":"col-xl"
+    "class":"col"
   }
 })
 export class FormFieldComponent {

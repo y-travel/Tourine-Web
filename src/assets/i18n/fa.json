@@ -1,18 +1,18 @@
 {
-  "_adult":{
-    "count":"تعداد ظرفیت بزرگسال",
-    "minPrice":"حداقل قیمت ثبت نام بزرگسال"
+  "_adult": {
+    "count": "تعداد ظرفیت بزرگسال",
+    "minPrice": "حداقل قیمت ثبت نام بزرگسال"
   },
   "_tour": {
     "upsert": "ثبت تور",
-    "date":"تاریخ اجرا"
+    "date": "تاریخ اجرا"
   },
-  "destination":"مقصد",
-  "duration":"مدت زمان",
+  "destination": "مقصد",
+  "duration": "مدت زمان",
   "tour": "تور",
-  "toman":"تومان",
-  "hotel":"هتل",
-  "infantPrice":"قیمت انفند",
-  "save":"ثبت"
-
+  "toman": "تومان",
+  "hotel": "هتل",
+  "infantPrice": "قیمت انفند",
+  "save": "ثبت",
+  "pleaseSelect": "لطفاً انتخاب کنید"
 }

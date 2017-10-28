@@ -7,7 +7,7 @@
   <form [formGroup]="form">
     <div class="row">
       <form-field label="destination">
-        <input trh-input formControlName="destinationId">
+        <trh-dropdown textField="name" valueField="id" [items]="destinations" formControlName="destinationId"></trh-dropdown>
       </form-field>
       <form-field label="_adult.count">
         <input trh-input formControlName="adultCount">
@@ -25,7 +25,7 @@
       <form-field label="_tour.date">
         <input trh-input formControlName="date">
       </form-field>
-      <div class="col-xl">
+      <div class="col">
         <div class="row">
           <nb-checkbox>
             <i class="material-icons md-1">airport_shuttle</i>
@@ -54,10 +54,10 @@
     </div>
     <div class="row">
       <form-field label="hotel">
-        <input trh-input fromControlName="placeId">
+        <trh-dropdown textField="name" valueField="id" [items]="hotels" formControlName="placeId"></trh-dropdown>
       </form-field>
       <form-field label="infantPrice">
-        <input trh-input fromControlName="infantPrice">
+        <input trh-input formControlName="infantPrice">
       </form-field>
     </div>
   </form>

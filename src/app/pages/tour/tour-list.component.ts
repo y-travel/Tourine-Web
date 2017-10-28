@@ -61,16 +61,16 @@ export class TourListComponent {
   upsert() {
     const ref = this.modalService.open(TourUpsertComponent, {size: "sm", backdrop: "static", container: "nb-layout"});
     ref.componentInstance.show();
-    ref.result.then(data =>{console.log(data);} );
+    ref.result.then(data => this.source.refresh());
   }
 
   copponUpsert() {
     const ref = this.modalService.open(CouponUpsertComponent, {size: "sm", backdrop: "static", container: "nb-layout"});
     ref.componentInstance.show();
-    ref.result.then(data =>{console.log(data);} );
+    ref.result.then(data => this.source.refresh());
   }
 
-  reagentUpsert(){
-    this.modalService.open(ReagentUpsertComponent,{size:"lg",backdrop:"static",container:"nb-layout"});
+  reagentUpsert() {
+    this.modalService.open(ReagentUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
   }
 }
