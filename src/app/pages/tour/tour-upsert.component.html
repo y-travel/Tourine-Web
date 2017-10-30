@@ -39,27 +39,27 @@
       </form-field>
       <div class="col">
         <div class="row">
-          <nb-checkbox #checkBusPrice (change)="busPrice.disabled=!checkBusPrice.value">
+          <nb-checkbox #checkBusPrice>
             <i class="material-icons md-1">airport_shuttle</i>
           </nb-checkbox>
           <form-field>
-            <input trh-input placeholder="toman" disabled #busPrice formControlName="busPrice">
+            <input trh-input placeholder="toman" *ngIf="checkBusPrice.value" formControlName="busPrice">
           </form-field>
         </div>
         <div class="row">
-          <nb-checkbox #checkRoomPrice (change)="roomPrice.disabled=!checkRoomPrice.value">
+          <nb-checkbox #checkRoomPrice>
             <i class="material-icons md-1">airline_seat_individual_suite</i>
           </nb-checkbox>
           <form-field>
-            <input trh-input placeholder="toman" disabled #roomPrice formControlName="roomPrice">
+            <input trh-input placeholder="toman" *ngIf="checkRoomPrice.value" formControlName="roomPrice">
           </form-field>
         </div>
         <div class="row">
-          <nb-checkbox #checkFoodPrice (change)="foodPrice.disabled=!checkFoodPrice.value">
+          <nb-checkbox #checkFoodPrice>
             <i class="material-icons md-1">room_service</i>
           </nb-checkbox>
           <form-field>
-            <input trh-input placeholder="toman" disabled #foodPrice formControlName="foodPrice">
+            <input trh-input placeholder="toman" *ngIf="checkFoodPrice.value" formControlName="foodPrice">
           </form-field>
         </div>
       </div>
