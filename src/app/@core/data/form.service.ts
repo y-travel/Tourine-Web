@@ -16,7 +16,7 @@ export class FormService implements OnDestroy {
       duration: [model.duration, Validators.required],
       date: [model.date, Validators.required],
       placeId: [model.placeId, Validators.required],
-      type: [model.type],
+      isFlight: [model.isFlight],
       status: [model.status],
       adultCount: [model.adultCount, [Validators.required, Validators.min(1)]],
       adultMinPrice: [model.adultMinPrice, Validators.min(1)],

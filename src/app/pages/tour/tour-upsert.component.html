@@ -6,6 +6,18 @@
 <div class="right modal-body">
   <form [formGroup]="form">
     <div class="row">
+      <form-field>
+        <trh-slider falseText="rial" trueText="dollar"></trh-slider>
+      </form-field>
+      <form-field>
+        <div style="float: left;">
+          <i class="material-icons">flight</i>
+          <trh-slider falseText="ground" trueText="flight" formControlName="isFlight"></trh-slider>
+          <i class="material-icons">directions_bus</i>
+        </div>
+      </form-field>
+    </div>
+    <div class="row">
       <form-field label="destination">
         <trh-dropdown textField="name" valueField="id" [items]="destinations" formControlName="destinationId"></trh-dropdown>
       </form-field>
@@ -27,27 +39,27 @@
       </form-field>
       <div class="col">
         <div class="row">
-          <nb-checkbox>
+          <nb-checkbox #checkBusPrice (change)="busPrice.disabled=!checkBusPrice.value">
             <i class="material-icons md-1">airport_shuttle</i>
           </nb-checkbox>
           <form-field>
-            <input trh-input placeholder="toman" formControlName="roomPrice">
+            <input trh-input placeholder="toman" disabled #busPrice formControlName="busPrice">
           </form-field>
         </div>
         <div class="row">
-          <nb-checkbox>
+          <nb-checkbox #checkRoomPrice (change)="roomPrice.disabled=!checkRoomPrice.value">
             <i class="material-icons md-1">airline_seat_individual_suite</i>
           </nb-checkbox>
           <form-field>
-            <input trh-input placeholder="toman" formControlName="foodPrice">
+            <input trh-input placeholder="toman" disabled #roomPrice formControlName="roomPrice">
           </form-field>
         </div>
         <div class="row">
-          <nb-checkbox>
+          <nb-checkbox #checkFoodPrice (change)="foodPrice.disabled=!checkFoodPrice.value">
             <i class="material-icons md-1">room_service</i>
           </nb-checkbox>
           <form-field>
-            <input trh-input placeholder="toman" fromControlName="foodPrice">
+            <input trh-input placeholder="toman" disabled #foodPrice formControlName="foodPrice">
           </form-field>
         </div>
       </div>

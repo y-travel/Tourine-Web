@@ -7,6 +7,10 @@
     "upsert": "ثبت تور",
     "date": "تاریخ اجرا"
   },
+  "rial":"ریال",
+  "dollar":"دلار",
+  "flight":"هوایی",
+  "ground":"زمینی",
   "destination": "مقصد",
   "duration": "مدت زمان",
   "tour": "تور",

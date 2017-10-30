@@ -5,3 +5,4 @@ export * from "./trh-button.component";
 export * from "./trh-input.component";
 export * from "./form-field/form-field.component";
 export * from "./dropdown/trh-dropdown.component";
+export * from "./slider/trh-slider.component";

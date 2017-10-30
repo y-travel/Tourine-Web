@@ -66,4 +66,8 @@ export class TourUpsertComponent implements ModalInterface {
     this.service.addTour(this.model);
     this.modalInstance.close(this.model);
   }
+
+  submit(event){
+    console.log(event);
+  }
 }

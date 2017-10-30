@@ -1,4 +1,4 @@
-import { TourStatus, HttpMethod, TourType, ServiceType } from "./enums";
+import { TourStatus, HttpMethod } from "./enums";
 import { Helper } from "../../utils/utils";
 
 export class Destination {
@@ -14,18 +14,18 @@ export class Place {
 export class Tour {
   id = 0;
   destinationId = 1;//@TODO merge destination and place into one table
-  duration = 0;
-  date = 0;
+  duration: number = undefined;
+  date: string = undefined;
   placeId = 0;
-  type: TourType = TourType.Flight;
+  isFlight = true;
   status: TourStatus = TourStatus.Create;
-  capacity=0;
-  adultCount = 0;
-  adultMinPrice = 0;
+  capacity = 0;
+  adultCount: number = undefined;
+  adultMinPrice: number = undefined;
   busPrice: number = undefined;
   roomPrice: number = undefined;
   foodPrice: number = undefined;
-  infantPrice = 0;
+  infantPrice: number = undefined;
 }
 
 //@TODO replace with a good class
