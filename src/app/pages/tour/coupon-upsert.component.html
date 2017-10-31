@@ -1,21 +1,44 @@
 <div class="modal-header">
-  {{"header"|translate}}
+  <div class="modal-title">
+    {{"coupon_.upsert"|translate}}
+  </div>
 </div>
 <div class="modal-body">
-  <form [formGroup]="form">
+  <form [formGroup]="form.form">
     <div class="row">
-      <form-field label="Name">
-        <input trh-input placeholder="Name" formControlName="Name">
+      <form-field>
+        <trh-slider falseText="passenger" trueText="reagent"></trh-slider>
       </form-field>
-      <form-field label="Family">
-        <input trh-input placeholder="Family" formControlName="Family">
+    </div>
+    <div class="row">
+      <form-field>
+        <trh-dropdown [items]="reagents" textField="id" valueField="title"></trh-dropdown>
+        <button trhButton>+</button>
+      </form-field>
+    </div>
+    <div class="row">
+      <form-field label="adultCount">
+        <input trhInput formControlName="adultCount">
+      </form-field>
+      <form-field label="emptyCount">0</form-field>
+      <form-field label="offValue">
+        <input trhInput formControlName="adultPrice">
+      </form-field>
+    </div>
+    <div class="row">
+      <form-field label="infantCount">
+        <input trhInput formControlName="infantCount">
+      </form-field>
+      <form-field label="emptyCount">0</form-field>
+      <form-field label="offValue">
+        <input trhInput formControlName="infantPrice">
       </form-field>
     </div>
   </form>
 </div>
 <div class="modal-body">
   <div class="row">
-    <button trh-button (click)="submit()">{{"submit"|translate}}</button>
+    <button trhButton (click)="submit()">{{"submit"|translate}}</button>
   </div>
 </div>
 

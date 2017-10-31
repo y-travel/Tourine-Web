@@ -13,7 +13,7 @@ export class Place {
 
 export class Tour {
   id = 0;
-  destinationId = 1;//@TODO merge destination and place into one table
+  destinationId = 0;//@TODO merge destination and place into one table
   duration: number = undefined;
   date: string = undefined;
   placeId = 0;
@@ -26,6 +26,23 @@ export class Tour {
   roomPrice: number = undefined;
   foodPrice: number = undefined;
   infantPrice: number = undefined;
+}
+
+export class Coupon {
+  reagentId: number = undefined;
+  reagent: Customer = undefined;
+  passengers:Customer[]=[];
+  adultCount=1;
+  adultPrice=0;
+  infantCount=0;
+  infantPrice=0;
+  busPrice=0;
+  roomPrice=0;
+  foodPrice=0;
+}
+
+export class Customer {
+
 }
 
 //@TODO replace with a good class

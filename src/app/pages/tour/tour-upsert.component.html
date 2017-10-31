@@ -1,10 +1,10 @@
 <div class="modal-header">
   <div class="modal-title">
-    {{"_tour.upsert"|translate}}
+    {{"tour_.upsert"|translate}}
   </div>
 </div>
 <div class="right modal-body">
-  <form [formGroup]="form">
+  <form [formGroup]="form.form">
     <div class="row">
       <form-field>
         <trh-slider falseText="rial" trueText="dollar"></trh-slider>
@@ -21,21 +21,21 @@
       <form-field label="destination">
         <trh-dropdown textField="name" valueField="id" [items]="destinations" formControlName="destinationId"></trh-dropdown>
       </form-field>
-      <form-field label="_adult.count">
-        <input trh-input formControlName="adultCount">
+      <form-field label="adult_.count">
+        <input trhInput formControlName="adultCount">
       </form-field>
     </div>
     <div class="row">
       <form-field label="duration">
-        <input trh-input formControlName="duration">
+        <input trhInput formControlName="duration">
       </form-field>
-      <form-field label="_adult.minPrice">
-        <input trh-input formControlName="adultMinPrice">
+      <form-field label="adult_.minPrice">
+        <input trhInput formControlName="adultMinPrice">
       </form-field>
     </div>
     <div class="row">
-      <form-field label="_tour.date">
-        <input trh-input formControlName="date">
+      <form-field label="tour_.date">
+        <input trhInput formControlName="date">
       </form-field>
       <div class="col">
         <div class="row">
@@ -43,7 +43,7 @@
             <i class="material-icons md-1">airport_shuttle</i>
           </nb-checkbox>
           <form-field>
-            <input trh-input placeholder="toman" *ngIf="checkBusPrice.value" formControlName="busPrice">
+            <input trhInput placeholder="toman" *ngIf="checkBusPrice.value" formControlName="busPrice">
           </form-field>
         </div>
         <div class="row">
@@ -51,7 +51,7 @@
             <i class="material-icons md-1">airline_seat_individual_suite</i>
           </nb-checkbox>
           <form-field>
-            <input trh-input placeholder="toman" *ngIf="checkRoomPrice.value" formControlName="roomPrice">
+            <input trhInput placeholder="toman" *ngIf="checkRoomPrice.value" formControlName="roomPrice">
           </form-field>
         </div>
         <div class="row">
@@ -59,7 +59,7 @@
             <i class="material-icons md-1">room_service</i>
           </nb-checkbox>
           <form-field>
-            <input trh-input placeholder="toman" *ngIf="checkFoodPrice.value" formControlName="foodPrice">
+            <input trhInput placeholder="toman" *ngIf="checkFoodPrice.value" formControlName="foodPrice">
           </form-field>
         </div>
       </div>
@@ -69,11 +69,11 @@
         <trh-dropdown textField="name" valueField="id" [items]="hotels" formControlName="placeId"></trh-dropdown>
       </form-field>
       <form-field label="infantPrice">
-        <input trh-input formControlName="infantPrice">
+        <input trhInput formControlName="infantPrice">
       </form-field>
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button trh-button (click)="save()">{{"save"|translate}}</button>
+  <button trhButton (click)="save()">{{"save"|translate}}</button>
 </div>

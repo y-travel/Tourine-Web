@@ -12,7 +12,7 @@ var TrhInputComponent = /** @class */ (function () {
     }
     TrhInputComponent = __decorate([
         core_1.Directive({
-            selector: "input[trh-input]",
+            selector: "input[trhInput]",
             host: {
                 "class": "form-control"
             }

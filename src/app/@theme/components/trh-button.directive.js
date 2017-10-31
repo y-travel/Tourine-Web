@@ -12,7 +12,7 @@ var TrhButtonComponent = /** @class */ (function () {
     }
     TrhButtonComponent = __decorate([
         core_1.Directive({
-            selector: "input[trh-button]",
+            selector: "input[trhButton]",
             host: {
                 "class": "btn btn-primary"
             }

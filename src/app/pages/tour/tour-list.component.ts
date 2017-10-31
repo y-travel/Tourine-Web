@@ -64,7 +64,7 @@ export class TourListComponent {
     ref.result.then(data => this.source.refresh());
   }
 
-  copponUpsert() {
+  couponUpsert() {
     const ref = this.modalService.open(CouponUpsertComponent, {size: "sm", backdrop: "static", container: "nb-layout"});
     ref.componentInstance.show();
     ref.result.then(data => this.source.refresh());

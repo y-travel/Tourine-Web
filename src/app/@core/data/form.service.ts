@@ -1,41 +1,21 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Tour } from "./models";
-import { Serializable } from "../utils/serializable";
+import { Tour, Coupon } from "./models";
+import { Serializable, TypeConstructor } from "../utils/serializable";
 
-@Injectable()
-export class FormService implements OnDestroy {
-
+export class FormService<T> implements OnDestroy {
   subsciptionList = [];
-  model: any;
-  form: FormGroup;
+  model: T;
 
-  static CreateTourForm(model: Tour = new Tour()): FormGroup {
-    return new FormBuilder().group({
-      destinationId: [model.id, Validators.required],
-      duration: [model.duration, Validators.required],
-      date: [model.date, Validators.required],
-      placeId: [model.placeId, Validators.required],
-      isFlight: [model.isFlight],
-      status: [model.status],
-      adultCount: [model.adultCount, [Validators.required, Validators.min(1)]],
-      adultMinPrice: [model.adultMinPrice, Validators.min(1)],
-      busPrice: [model.busPrice],
-      roomPrice: [model.roomPrice],
-      foodPrice: [model.foodPrice],
-      infantPrice: [model.infantPrice, Validators.min(1)],
-    });
+  constructor(model: TypeConstructor<T>, public form: FormGroup) {
+    this.model = new model();
+    //@TODO fill model from form
+    this.init();
   }
 
-  constructor() {
-
-  }
-
-  init(form: FormGroup, model: any) {
-    this.form = form;
-    this.model = model;
+  init() {
     this.subsciptionList.push(
-      form.valueChanges.subscribe(data => this.onValueChanges(data))
+      this.form.valueChanges.subscribe(data => this.onValueChanges(data))
     );
   }
 

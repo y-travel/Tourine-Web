@@ -35,8 +35,8 @@ var COMPONENTS = [
     components_1.HeaderComponent,
     components_1.SearchInputComponent,
     layouts_1.TourineLayoutComponent,
-    components_1.TrhInputComponent,
-    components_1.TrhButtonComponent,
+    components_1.TrhInputDirective,
+    components_1.TrhButtonDirective,
 ];
 var PIPES = [
     pipes_1.CapitalizePipe,

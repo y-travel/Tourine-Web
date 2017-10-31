@@ -1,11 +1,11 @@
 import { Directive } from "@angular/core";
 
 @Directive({
-  selector: "button[trh-button]",
+  selector: "button[trhButton]",
   host: {
     "class": "btn btn-primary col"
   }
 })
-export class TrhButtonComponent {
+export class TrhButtonDirective {
 
 }

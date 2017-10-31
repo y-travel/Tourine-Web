@@ -1,16 +1,19 @@
 {
-  "_adult": {
+  "adult_": {
     "count": "تعداد ظرفیت بزرگسال",
     "minPrice": "حداقل قیمت ثبت نام بزرگسال"
   },
-  "_tour": {
+  "tour_": {
     "upsert": "ثبت تور",
     "date": "تاریخ اجرا"
   },
-  "rial":"ریال",
-  "dollar":"دلار",
-  "flight":"هوایی",
-  "ground":"زمینی",
+  "coupon_": {
+    "upsert": "ثبت کوپن"
+  },
+  "rial": "ریال",
+  "dollar": "دلار",
+  "flight": "هوایی",
+  "ground": "زمینی",
   "destination": "مقصد",
   "duration": "مدت زمان",
   "tour": "تور",

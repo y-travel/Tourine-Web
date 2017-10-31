@@ -1,6 +1,6 @@
 //we can not new generic types that's why have to use this interface
 
-export interface NoParamConstructor<T> {
+export interface TypeConstructor<T> {
     new (): T;
 }
 
@@ -10,7 +10,7 @@ export interface ComponentType<T> {
 
 export class Serializable {
 
-    static fromJSONToArray<T>(model: NoParamConstructor<T>, arrayJson: any[], checkItem = false): Array<T> {
+    static fromJSONToArray<T>(model: TypeConstructor<T>, arrayJson: any[], checkItem = false): Array<T> {
         let array = new Array<T>();
         for (const item of arrayJson) {
             array.push(this.fromJSON(new model(), item, checkItem));
@@ -25,7 +25,7 @@ export class Serializable {
         return model;
     }
 
-    static fromJSONToType<T>(model: NoParamConstructor<T>, json): T {
+    static fromJSONToType<T>(model: TypeConstructor<T>, json): T {
         return Serializable.fromJSON(new model(), json, true);
     }
 

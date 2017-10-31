@@ -2,13 +2,13 @@ import { Directive, AfterViewInit, Input } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 
 @Directive({
-  selector: "input[trh-input]",
+  selector: "input[trhInput]",
   host: {
     "class": "form-control",
     "[placeholder]": "placeholder"
   }
 })
-export class TrhInputComponent {
+export class TrhInputDirective {
 
   _placeholder = "";
   @Input()

@@ -1,11 +1,12 @@
-import { Component, ViewEncapsulation } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { FormService } from "../../@core/data/form.service";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { ModalInterface } from "../../@theme/components/modal.interface";
-import { Tour } from "../../@core/data/models/client.model";
-import { TourService } from "../../@core/data/tour.service";
 import { TranslateService } from "@ngx-translate/core";
+//
+import { FormService } from "../../@core/data/form.service";
+import { ModalInterface } from "../../@theme/components/modal.interface";
+import { Tour, FormFactory } from "../../@core/data/models";
+import { TourService } from "../../@core/data/tour.service";
 
 @Component({
   selector: "tour-upsert",
@@ -13,12 +14,11 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ["tour-upsert.component.scss"],
 })
 export class TourUpsertComponent implements ModalInterface {
-  form: FormGroup;
-  model: Tour;
+  form: FormService<Tour>;
   destinations: any;
   hotels: any;
 
-  constructor(public formService: FormService, public modalInstance: NgbActiveModal, public service: TourService, private translateService: TranslateService) {
+  constructor(public formFactory: FormFactory, public modalInstance: NgbActiveModal, public service: TourService, private translateService: TranslateService) {
     this.developerSeed();
   }
 
@@ -27,13 +27,13 @@ export class TourUpsertComponent implements ModalInterface {
       {
         id: 1,
         name: "سوریه"
-      },  {
+      }, {
         id: 2,
         name: "کربلا"
-      },  {
+      }, {
         id: 3,
         name: "نجف"
-      },  {
+      }, {
         id: 4,
         name: "مکه"
       },
@@ -42,13 +42,13 @@ export class TourUpsertComponent implements ModalInterface {
       {
         id: 1,
         name: "القدیر"
-      },  {
+      }, {
         id: 2,
         name: "مشکوکات"
-      },  {
+      }, {
         id: 3,
         name: "ساحره"
-      },  {
+      }, {
         id: 4,
         name: "نریمان"
       },
@@ -56,18 +56,16 @@ export class TourUpsertComponent implements ModalInterface {
   }
 
   show(model: Tour = new Tour()) {
-    this.model = model;
-    this.form = FormService.CreateTourForm(this.model);
-    this.formService.init(this.form, model);
+    this.form = this.formFactory.createTourForm(model);
   }
 
   save() {
     //@TODO check validation
-    this.service.addTour(this.model);
-    this.modalInstance.close(this.model);
+    this.service.addTour(this.form.model);
+    this.modalInstance.close(this.form.model);
   }
 
-  submit(event){
+  submit(event) {
     console.log(event);
   }
 }
