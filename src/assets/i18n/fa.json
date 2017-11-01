@@ -10,6 +10,16 @@
   "coupon_": {
     "upsert": "ثبت کوپن"
   },
+  "reagent_": {
+    "name": "نام"
+  },
+  "reagent":"معرف",
+  "passenger":"مسافر",
+  "adultCount": "تعداد بزرگسال",
+  "infantCount":"تعداد بچه",
+  "infantPrice":"قیمت بچه",
+  "emptyCount":"تعداد خالی",
+  "offValue":"تخفیف",
   "rial": "ریال",
   "dollar": "دلار",
   "flight": "هوایی",

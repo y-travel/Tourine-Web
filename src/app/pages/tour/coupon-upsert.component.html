@@ -6,39 +6,72 @@
 <div class="modal-body">
   <form [formGroup]="form.form">
     <div class="row">
-      <form-field>
+      <form-field >
         <trh-slider falseText="passenger" trueText="reagent"></trh-slider>
       </form-field>
     </div>
     <div class="row">
-      <form-field>
-        <trh-dropdown [items]="reagents" textField="id" valueField="title"></trh-dropdown>
-        <button trhButton>+</button>
+      <form-field label="reagent_.name">
+        <div class="row align-items-center">
+          <trh-dropdown [items]="reagents" class="col-4" textField="id" valueField="title"></trh-dropdown>
+          <button trhButton size="micro" kind="secondary">+</button>
+        </div>
       </form-field>
     </div>
     <div class="row">
-      <form-field label="adultCount">
-        <input trhInput formControlName="adultCount">
-      </form-field>
-      <form-field label="emptyCount">0</form-field>
-      <form-field label="offValue">
-        <input trhInput formControlName="adultPrice">
-      </form-field>
+      <div class="col">
+        <div class="row">
+          <form-field label="adultCount">
+            <input trhInput formControlName="adultCount">
+          </form-field>
+          <form-field label="emptyCount" class="col-4">0</form-field>
+          <form-field label="offValue" class="col-3">
+            <input trhInput formControlName="adultPrice">
+          </form-field>
+        </div>
+        <div class="row">
+          <form-field label="infantCount">
+            <input trhInput formControlName="infantCount">
+          </form-field>
+          <form-field label="emptyCount" class="col-4">0</form-field>
+          <form-field label="offValue" class="col-3">
+            <input trhInput formControlName="infantPrice">
+          </form-field>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="row">
+          <form-field>
+            <div class="row">
+              <i class="material-icons md-1 ml-2">airport_shuttle</i>
+              <input trhInput class="col-4" formControlName="busPrice">
+            </div>
+          </form-field>
+        </div>
+        <div class="row">
+          <form-field>
+            <div class="row">
+              <i class="material-icons md-1 ml-2">airline_seat_individual_suite</i>
+              <input trhInput class="col-4" formControlName="roomPrice">
+            </div>
+          </form-field>
+        </div>
+        <div class="row">
+          <form-field>
+            <div class="row">
+              <i class="material-icons md-1 ml-2">room_service</i>
+              <input trhInput class="col-4" formControlName="foodPrice">
+            </div>
+          </form-field>
+        </div>
+      </div>
     </div>
-    <div class="row">
-      <form-field label="infantCount">
-        <input trhInput formControlName="infantCount">
-      </form-field>
-      <form-field label="emptyCount">0</form-field>
-      <form-field label="offValue">
-        <input trhInput formControlName="infantPrice">
-      </form-field>
-    </div>
+
   </form>
 </div>
 <div class="modal-body">
   <div class="row">
-    <button trhButton (click)="submit()">{{"submit"|translate}}</button>
+    <button trhButton (click)="save()">{{"save"|translate}}</button>
   </div>
 </div>
 

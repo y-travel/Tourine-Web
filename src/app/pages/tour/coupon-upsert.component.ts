@@ -20,6 +20,6 @@ export class CouponUpsertComponent {
     this.form = formFactory.createCouponForm();
   }
 
-  submit() {
+  save() {
   }
 }

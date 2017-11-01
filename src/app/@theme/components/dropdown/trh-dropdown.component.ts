@@ -25,8 +25,7 @@ export class TrhDropdownComponent extends TrhEditControlBase{
   @Input() currentItem: any;
   @Input() textField: string;
   @Input() valueField: string;
-  // @Input() value: any;
-
+  @Input() className:string;
   selectedChange(event) {
     console.log(event);
   }

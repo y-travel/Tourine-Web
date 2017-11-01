@@ -31,14 +31,14 @@ export class Tour {
 export class Coupon {
   reagentId: number = undefined;
   reagent: Customer = undefined;
-  passengers:Customer[]=[];
-  adultCount=1;
-  adultPrice=0;
-  infantCount=0;
-  infantPrice=0;
-  busPrice=0;
-  roomPrice=0;
-  foodPrice=0;
+  passengers: Customer[] = [];
+  adultCount = 1;
+  adultPrice = 0;
+  infantCount = 0;
+  infantPrice = 0;
+  busPrice = 0;
+  roomPrice = 0;
+  foodPrice = 0;
 }
 
 export class Customer {

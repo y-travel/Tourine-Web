@@ -1,4 +1,5 @@
 @import '../../@theme/styles/themes';
+@import "~@nebular/theme/styles/global/bootstrap/default-buttons";
 
 @mixin set_defaults {
   html,body{
@@ -7,5 +8,11 @@
 
   input, select, textarea {
     height: nb-theme(input-height);
+  }
+
+  .btn-micro{
+    transform: scale(.7);
+    padding: 3px 8px;
+    border-radius: 100%;
   }
 }
