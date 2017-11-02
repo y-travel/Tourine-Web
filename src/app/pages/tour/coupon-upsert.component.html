@@ -6,10 +6,11 @@
 <div class="modal-body">
   <form [formGroup]="form.form">
     <div class="row">
-      <form-field >
-        <trh-slider falseText="passenger" trueText="reagent"></trh-slider>
+      <form-field>
+        <trh-slider #slider falseText="passenger" trueText="reagent" value="true"></trh-slider>
       </form-field>
     </div>
+    <div [hidden]="!slider.value">
     <div class="row">
       <form-field label="reagent_.name">
         <div class="row align-items-center">
@@ -66,7 +67,11 @@
         </div>
       </div>
     </div>
-
+    </div>
+    <div [hidden]="slider.value">
+      <ng2-smart-table dir="rtl" [settings]="settings" [source]="source" >
+      </ng2-smart-table>
+    </div>
   </form>
 </div>
 <div class="modal-body">
