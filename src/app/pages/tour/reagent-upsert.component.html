@@ -1,34 +1,37 @@
 <div class="modal-header">
-  {{"ثبت آژانس"|translate}}
+  <div class="modal-title">
+    {{"reagent_.upsert"|translate}}
+  </div>
 </div>
 <div class="modal-body">
   <form [formGroup]="form">
     <div class="row">
       <form-field label="نام مدیر">
-        <input trhInput placeholder="نام مدیر" formControlName="ManagerName">
+        <input trhInput placeholder="نام مدیر" formControlName="managerName">
       </form-field>
       <form-field label="نام آژانس">
-        <input trhInput placeholder="نام آژانس" formControlName="AgencyName">
+        <input trhInput placeholder="نام آژانس" formControlName="agencyName">
       </form-field>
     </div>
     <div class="row">
       <form-field label="شماره همراه">
-        <input trhInput placeholder="شماره همراه" formControlName="Phone">
+        <input trhInput placeholder="شماره همراه" formControlName="phone">
       </form-field>
       <form-field label="شماره تماس">
-        <input trhInput placeholder="شماره تماس" formControlName="CellPhone">
+        <input trhInput placeholder="شماره تماس" formControlName="cellPhone">
       </form-field>
     </div>
-    <div class="row" style="width:50%">
+    <div class="row">
       <form-field label="ایمیل">
-        <input trhInput placeholder="ایمیل" formControlName="Email">
+        <input trhInput placeholder="ایمیل" formControlName="email">
       </form-field>
+      <div class="col"></div>
     </div>
   </form>
 </div>
 <div class="modal-body">
   <div class="row">
-    <button class="btn btn-primary col" (click)="submit()">{{"submit"|translate}}</button>
+    <button class="btn btn-primary col" (click)="save()">{{"save"|translate}}</button>
   </div>
 </div>
 

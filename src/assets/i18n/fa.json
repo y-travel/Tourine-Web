@@ -11,15 +11,28 @@
     "upsert": "ثبت کوپن"
   },
   "reagent_": {
-    "name": "نام"
+    "upsert": "ثبت معرف",
+    "managerName": "نام مدیر",
+    "agencyName": "نام آژانس",
+    "phone":"تلفن",
+    "cellPhone":"همراه",
+    "email":"رایانامه"
   },
-  "reagent":"معرف",
-  "passenger":"مسافر",
+  "user_": {
+    "upsert": "ثبت کاربر",
+    "uname": "نام",
+    "email": "رایانامه",
+    "username": "نام کاربری",
+    "password": "کلمه عبور",
+    "rePassword": "تکرار کلمه عبور"
+  },
+  "reagent": "معرف",
+  "passenger": "مسافر",
   "adultCount": "تعداد بزرگسال",
-  "infantCount":"تعداد بچه",
-  "infantPrice":"قیمت بچه",
-  "emptyCount":"تعداد خالی",
-  "offValue":"تخفیف",
+  "infantCount": "تعداد بچه",
+  "infantPrice": "قیمت بچه",
+  "emptyCount": "تعداد خالی",
+  "offValue": "تخفیف",
   "rial": "ریال",
   "dollar": "دلار",
   "flight": "هوایی",

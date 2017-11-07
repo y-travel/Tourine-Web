@@ -12,11 +12,13 @@ import { AppTranslationModule } from "../../app-translation.module";
 import { CouponUpsertComponent } from "./coupon-upsert.component";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
 import { FormFactory } from "../../@core/data/models";
+import { UserUpsertComponent } from "./user-upsert.component";
 
 const tourComponents = [
   TourUpsertComponent,
   CouponUpsertComponent,
   ReagentUpsertComponent,
+  UserUpsertComponent,
 ];
 
 @NgModule({
@@ -42,6 +44,7 @@ const tourComponents = [
     TourUpsertComponent,
     CouponUpsertComponent,
     ReagentUpsertComponent,
+    UserUpsertComponent,
   ]
 })
 export class TourModule {

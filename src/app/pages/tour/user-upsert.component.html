@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <div class="modal-title">
+    {{"user_.upsert"|translate}}
+  </div>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <div class="row">
+      <form-field label="نام">
+        <input trhInput placeholder="نام" formControlName="name">
+      </form-field>
+      <form-field label="رایانامه">
+        <input trhInput placeholder="رایانامه" formControlName="email">
+      </form-field>
+    </div>
+    <div class="row">
+      <form-field label="نام کاربری">
+        <input trhInput placeholder="نام کاربری" formControlName="username">
+      </form-field>
+      <form-field label="کلمه عبور">
+        <input trhInput placeholder="کلمه عبور" formControlName="password">
+      </form-field>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+      <form-field label="تکرار">
+        <input trhInput placeholder="تکرار" formControlName="rePassword">
+      </form-field>
+    </div>
+  </form>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <button class="btn btn-primary col" (click)="save()">{{"save"|translate}}</button>
+  </div>
+</div>

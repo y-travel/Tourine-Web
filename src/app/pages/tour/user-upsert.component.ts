@@ -3,22 +3,22 @@ import { TranslateService } from "@ngx-translate/core";
 import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
-    moduleId: module.id,
-    selector: "reagent-upsert",
-    templateUrl: "reagent-upsert.component.html",
-    styleUrls: ["reagent-upsert.component.scss"]
+  moduleId: module.id,
+    selector: "user-upsert",
+    templateUrl: "user-upsert.component.html",
+    styleUrls: ["user-upsert.component.scss"]
 })
-export class ReagentUpsertComponent {
+export class UserUpsertComponent {
   form:FormGroup;
    message:string;
   constructor(){
     this.form=new FormBuilder().group(
       {
-        managerName:["",Validators.required],
-        agencyName:["",Validators.required],
-        phone:["",Validators.required],
-        cellPhone:["",Validators.required],
+        name:["",Validators.required],
         email:["",Validators.required],
+        userName:["",Validators.required],
+        password:["",Validators.required],
+        rePassword:["",Validators.required],
       }
     );
   }

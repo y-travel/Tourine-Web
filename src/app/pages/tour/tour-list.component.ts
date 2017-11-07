@@ -6,6 +6,7 @@ import { TourService } from "../../@core/data/tour.service";
 import { TourUpsertComponent } from "./tour-upsert.component";
 import { CouponUpsertComponent } from "./coupon-upsert.component";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
+import { UserUpsertComponent } from "./user-upsert.component";
 
 @Component({
   selector: "tour-list",
@@ -72,5 +73,9 @@ export class TourListComponent {
 
   reagentUpsert() {
     this.modalService.open(ReagentUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+  }
+
+  userUpsert() {
+    this.modalService.open(UserUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
   }
 }
