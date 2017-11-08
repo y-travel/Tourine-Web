@@ -14,8 +14,8 @@ export class UserUpsertComponent {
   constructor(){
     this.form=new FormBuilder().group(
       {
+        cellphone:["",Validators.required],
         name:["",Validators.required],
-        email:["",Validators.required],
         userName:["",Validators.required],
         password:["",Validators.required],
         rePassword:["",Validators.required],

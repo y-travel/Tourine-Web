@@ -42,8 +42,8 @@ export class Coupon {
 }
 
 export class User {
+  cellphone: string = undefined;
   name: string = undefined;
-  email: string = undefined;
   userName: string = undefined;
   password: string = undefined;
   rePassword: string = undefined;
@@ -52,8 +52,8 @@ export class User {
 export class Reagent {
   managerName:string = undefined;
   agencyName:string = undefined;
-  phone:string = undefined;
   cellPhone:string = undefined;
+  phone:string = undefined;
   email:string = undefined;
 }
 

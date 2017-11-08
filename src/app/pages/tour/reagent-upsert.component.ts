@@ -16,8 +16,8 @@ export class ReagentUpsertComponent {
       {
         managerName:["",Validators.required],
         agencyName:["",Validators.required],
-        phone:["",Validators.required],
         cellPhone:["",Validators.required],
+        phone:["",Validators.required],
         email:["",Validators.required],
       }
     );
