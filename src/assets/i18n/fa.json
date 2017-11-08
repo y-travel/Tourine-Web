@@ -3,46 +3,44 @@
     "count": "تعداد ظرفیت بزرگسال",
     "minPrice": "حداقل قیمت ثبت نام بزرگسال"
   },
-  "tour_": {
-    "upsert": "ثبت تور",
-    "date": "تاریخ اجرا"
-  },
+  "adultCount": "تعداد بزرگسال",
+  "agencyName": "نام آژانس",
+  "cellPhone": "همراه",
   "coupon_": {
     "upsert": "ثبت کوپن"
   },
-  "reagent_": {
-    "upsert": "ثبت معرف",
-    "managerName": "نام مدیر",
-    "agencyName": "نام آژانس",
-    "phone":"تلفن",
-    "cellPhone":"همراه",
-    "email":"رایانامه"
-  },
-  "user_": {
-    "upsert": "ثبت کاربر",
-    "uname": "نام",
-    "email": "رایانامه",
-    "username": "نام کاربری",
-    "password": "کلمه عبور",
-    "rePassword": "تکرار کلمه عبور"
-  },
-  "reagent": "معرف",
-  "passenger": "مسافر",
-  "adultCount": "تعداد بزرگسال",
-  "infantCount": "تعداد بچه",
-  "infantPrice": "قیمت بچه",
-  "emptyCount": "تعداد خالی",
-  "offValue": "تخفیف",
-  "rial": "ریال",
+  "destination": "مقصد",
   "dollar": "دلار",
+  "duration": "مدت زمان",
+  "email": "رایانامه",
+  "emptyCount": "تعداد خالی",
   "flight": "هوایی",
   "ground": "زمینی",
-  "destination": "مقصد",
-  "duration": "مدت زمان",
-  "tour": "تور",
-  "toman": "تومان",
   "hotel": "هتل",
-  "infantPrice": "قیمت انفند",
+  "infantCount": "تعداد بچه",
+  "infantPrice": "قیمت بچه",
+  "managerName": "نام مدیر",
+  "name": "نام",
+  "offValue": "تخفیف",
+  "passenger": "مسافر",
+  "password": "کلمه عبور",
+  "phone": "تلفن",
+  "pleaseSelect": "لطفاً انتخاب کنید",
+  "reagent": "معرف",
+  "reagent_": {
+    "upsert": "ثبت معرف"
+  },
+  "rePassword": "تکرار کلمه عبور",
+  "rial": "ریال",
   "save": "ثبت",
-  "pleaseSelect": "لطفاً انتخاب کنید"
+  "toman": "تومان",
+  "tour": "تور",
+  "tour_": {
+    "date": "تاریخ اجرا",
+    "upsert": "ثبت تور"
+  },
+  "user_": {
+    "upsert": "ثبت کاربر"
+  },
+  "username": "نام کاربری"
 }
