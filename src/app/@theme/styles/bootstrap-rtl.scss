@@ -33,5 +33,8 @@
   color: nb-theme(color-white);
 }
 .modal-content{
-  width: 500px;
+  width: fit-content;
+}
+.modal-dialog {
+  max-width: 1200px;
 }

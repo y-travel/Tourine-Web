@@ -2,7 +2,7 @@ import { Form, FormBuilder, Validators } from "@angular/forms";
 import { Injectable } from "@angular/core";
 //
 import { FormService } from "../form.service";
-import { Coupon, Tour } from "./client.model";
+import { Coupon, Customer, Tour } from "./client.model";
 
 @Injectable()
 export class FormFactory {
@@ -25,7 +25,7 @@ export class FormFactory {
     return new FormService(Tour, form);
   }
 
-  createCouponForm(model: Coupon = new Coupon()):FormService<Coupon> {
+  createCouponForm(model: Coupon = new Coupon()): FormService<Coupon> {
     let form = new FormBuilder().group({
       reagentId: [model.reagentId],
       passengers: [model.passengers],
@@ -38,5 +38,19 @@ export class FormFactory {
       foodPrice: [model.foodPrice]
     });
     return new FormService(Coupon, form);
+  }
+
+  createCustomerForm(model: Customer = new Customer()): FormService<Customer> {
+    let form = new FormBuilder().group({
+      name: [model.name, Validators.required],
+      family: [model.family, Validators.required],
+      mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
+      nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(10)]],
+      fatherName: [model.fatherName, Validators.required],
+      birthDate: [model.birthDate, Validators.required],
+      passportExpireDate: [model.passportExpireDate, Validators.required],
+      passportNo: [model.passportNo, Validators.required]
+    });
+    return new FormService(Customer, form);
   }
 }

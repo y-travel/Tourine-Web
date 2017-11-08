@@ -6,8 +6,7 @@ import { Directive, Input } from "@angular/core";
     "[class.btn]": "true",
     "[class.btn-primary]": "kind==='primary'",
     "[class.col]": "kind ==='primary'&&size ==='large'",
-    "[class.btn-micro]": "isMicro()",
-    "[class.btn-outline-warning]": "isMicro()"
+    "[class.btn-micro]": "isMicro()"
   }
 })
 export class TrhButtonDirective {

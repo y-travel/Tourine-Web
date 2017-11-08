@@ -58,7 +58,14 @@ export class Reagent {
 }
 
 export class Customer {
-
+  name = "";
+  family = "";
+  mobileNumber = "";
+  nationalCode = "";
+  fatherName = "";
+  birthDate = "";
+  passportExpireDate: Date;
+  passportNo = 0;
 }
 
 //@TODO replace with a good class

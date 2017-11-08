@@ -1,4 +1,14 @@
 {
+  "buyer":"خریدار",
+  "fellows":"همراهان",
+  "mobileNumber":"شماره موبایل",
+  "passport_": {
+    "number":"شماره پاسپورت",
+    "expireDate":"تاریخ انقضاء پاسپورت"
+  },
+  "birthDate":"تاریخ تولد",
+  "nationalCode":"کد ملی",
+  "fatherName":"نام پدر",
   "adult_": {
     "count": "تعداد ظرفیت بزرگسال",
     "minPrice": "حداقل قیمت ثبت نام بزرگسال"
@@ -15,6 +25,7 @@
   "email": "رایانامه",
   "emptyCount": "تعداد خالی",
   "flight": "هوایی",
+  "family":"نام خانوادگی",
   "ground": "زمینی",
   "hotel": "هتل",
   "infantCount": "تعداد بچه",
@@ -28,7 +39,8 @@
   "pleaseSelect": "لطفاً انتخاب کنید",
   "reagent": "معرف",
   "reagent_": {
-    "upsert": "ثبت معرف"
+    "upsert": "ثبت معرف",
+    "name": "نام معرف"
   },
   "rePassword": "تکرار کلمه عبور",
   "rial": "ریال",
