@@ -13,6 +13,7 @@ import { CouponUpsertComponent } from "./coupon-upsert.component";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
 import { FormFactory } from "../../@core/data/models";
 import { UserUpsertComponent } from "./user-upsert.component";
+import { CouponService } from "../../@core/data/coupon.service";
 
 const tourComponents = [
   TourUpsertComponent,
@@ -39,6 +40,7 @@ const tourComponents = [
     ApiService,
     DataService,
     FormFactory,
+    CouponService,
   ],
   entryComponents: [
     TourUpsertComponent,
