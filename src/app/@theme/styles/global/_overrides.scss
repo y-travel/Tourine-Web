@@ -4,18 +4,12 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-@import 'components/tree.theme';
 @import 'components/toaster.theme';
-@import 'maps/leaflet.theme';
-@import 'tables/smart-table.theme';
 
 @import 'typography/typography';
 
 @mixin nb-theme-overrides() {
   @include nb-typography();
 
-  @include nb-components-tree-theme();
-  @include nb-maps-leaflet-theme();
-  @include nb-tables-smart-table-theme();
   @include nb-components-toaster-theme();
 }
