@@ -56,9 +56,9 @@
     font-weight: nb-theme(font-weight-normal);
     border-bottom: 1px dashed $body-color;
 
-    @include hover-focus {
-      border-bottom: 1px solid $body-color;
-    }
+    //@include hover-focus {
+    //  border-bottom: 1px solid $body-color;
+    //}
   }
 }
 
@@ -190,9 +190,9 @@
   a {
     color: nb-theme(link-color);
 
-    @include hover-focus {
-      color: nb-theme(link-color-hover);
-    }
+    //@include hover-focus {
+    //  color: nb-theme(link-color-hover);
+    //}
   }
 
   ol,ul {

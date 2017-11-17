@@ -5592,10 +5592,6 @@ ncname@1.0.x:
   dependencies:
     xml-char-classes "^1.0.0"
 
-nebular-icons@1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/nebular-icons/-/nebular-icons-1.0.6.tgz#6a944d3102e318fdb1e071c1aad18cbc1c069e51"
-
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
@@ -5603,21 +5599,6 @@ negotiator@0.6.1:
 next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
-
-ng2-completer@^1.2.2:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/ng2-completer/-/ng2-completer-1.6.3.tgz#b12c902b786f685c6b1256dd87d746e2abf2e505"
-
-ng2-smart-table@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ng2-smart-table/-/ng2-smart-table-1.1.0.tgz#0e9538d6253346611107b3895d606d6422482ecb"
-  dependencies:
-    lodash "^4.17.4"
-    ng2-completer "^1.2.2"
-
-ngx-echarts@1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/ngx-echarts/-/ngx-echarts-1.2.2.tgz#7e2b8b01eb6bc696fee695841b412d823458a93e"
 
 no-case@^2.2.0:
   version "2.3.2"

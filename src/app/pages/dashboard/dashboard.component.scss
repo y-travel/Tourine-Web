@@ -1,12 +1,6 @@
 @import '../../@theme/styles/install';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
 @include nb-install-component() {
-  .solar-card nb-card-header {
-    border: none;
-    padding-bottom: 0;
-  }
 
   /* stylelint-disable */
   toaster-container /deep/ {
@@ -16,15 +10,15 @@
   }
   /* stylelint-enable */
 
-  @include media-breakpoint-down(sm) {
-    ngx-traffic {
-      display: none;
-    }
-  }
+  //@include media-breakpoint-down(sm) {
+  //  ngx-traffic {
+  //    display: none;
+  //  }
+  //}
 
-  @include media-breakpoint-down(is) {
-    /deep/ nb-card.large-card {
-      height: nb-theme(card-height-medium);
-    }
-  }
+  //@include media-breakpoint-down(is) {
+  //  /deep/ nb-card.large-card {
+  //    height: nb-theme(card-height-medium);
+  //  }
+  //}
 }

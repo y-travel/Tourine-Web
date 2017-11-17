@@ -21,14 +21,9 @@
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "./app/@theme/styles/bootstrap-rtl.scss",
-        "../node_modules/nebular-icons/scss/nebular-icons.scss",
         "./app/@theme/styles/iranian-sans.scss",
         "./app/@theme/styles/material-icon.scss",
         "./app/@theme/styles/styles.scss"
-      ],
-      "scripts": [
-        "./assets/vendors/echarts.min.js",
-        "./assets/vendors/echarts.world.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

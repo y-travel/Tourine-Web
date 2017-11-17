@@ -1,12 +1,10 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+
 import { FormService } from "../../@core/data/form.service";
 import { FormFactory } from "../../@core/data/models/form-factory";
 import { Coupon, Customer } from "../../@core/data/models/client.model";
-import { LocalDataSource } from "ng2-smart-table";
 import { ModalInterface } from "../../@theme/components/modal.interface";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
 
 @Component({
@@ -34,7 +32,7 @@ export class CouponUpsertComponent implements ModalInterface {
   }
 
   reagentUpsert() {
-    let ref = this.modalService.open(ReagentUpsertComponent, {size: "sm", backdrop: "static", container: "nb-layout"});
+    let ref = this.modalService.open(ReagentUpsertComponent, {size: "sm", backdrop: "static", container: "trh-layout"});
     ref.componentInstance.show();
   }
 }

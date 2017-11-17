@@ -1,78 +1,94 @@
-import { Component, OnDestroy } from '@angular/core';
-import {
-  NbMediaBreakpoint,
-  NbMediaBreakpointsService,
-  NbMenuService,
-  NbSidebarService,
-  NbThemeService,
-} from '@nebular/theme';
-
-import { StateService } from '../../@core/data/state.service';
-
+import { Component, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/delay';
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+
+import { StateService } from '../../@core/data/state.service';
+import { SidebarService } from "../components/sidebar/sidebar.service";
+import { ThemeService } from "../../@core/utils/theme.service";
+import { MenuService } from "../components/menu/menu.service";
+import { SpinnerService } from "../../@core/utils/spinner.service";
 
 // TODO: move layouts into the framework
 @Component({
-  selector: 'ngx-sample-layout',
+  selector: 'trh-sample-layout',
   styleUrls: ['tourine.layout.scss'],
   template: `
-    <nb-layout [center]="layout.id === 'center-column'" windowMode>
-      <nb-layout-header fixed>
-        <ngx-header position="inverse"></ngx-header>
-      </nb-layout-header>
+    <trh-layout  >
+      <div class="layout-header" fixed>
+        <trh-header position="inverse"></trh-header>
+      </div>
 
-      <nb-sidebar class="menu-sidebar"
+      <trh-sidebar class="menu-sidebar"
                    tag="menu-sidebar"
                    responsive
                    right="true">
-        <nb-sidebar-header>
+        <div class="sidebar-header">
           <a href="#" class="btn btn-hero-success main-btn">
             <i class="nb-keypad"></i>
           </a>
-        </nb-sidebar-header>
-        <ng-content select="nb-menu"></ng-content>
-      </nb-sidebar>
+        </div>
+        <ng-content select="trh-menu"></ng-content>
+      </trh-sidebar>
 
-      <nb-layout-column class="main-content">
+      <div class="layout-content main-content">
         <ng-content select="router-outlet"></ng-content>
-      </nb-layout-column>
-    </nb-layout>
+      </div>
+    </trh-layout>
   `,
 })
-export class TourineLayoutComponent  implements OnDestroy {
+export class TourineLayoutComponent implements OnDestroy {
 
   layout: any = {};
   sidebar: any = {};
 
+  protected afterViewInit$ = new BehaviorSubject(null);
   protected layoutState$: Subscription;
   protected sidebarState$: Subscription;
   protected menuClick$: Subscription;
+  private appendClassSubscription: Subscription;
+  private themeSubscription: Subscription;
+  private removeClassSubscription: Subscription;
 
   constructor(protected stateService: StateService,
-              protected menuService: NbMenuService,
-              protected themeService: NbThemeService,
-              protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
+              protected spinnerService:SpinnerService,
+              protected menuService: MenuService,
+              protected themeService: ThemeService,
+              protected sidebarService: SidebarService,
+              protected renderer:Renderer2,
+              protected elementRef:ElementRef) {
     this.layoutState$ = this.stateService.onLayoutState()
       .subscribe((layout: string) => this.layout = layout);
 
     this.sidebarState$ = this.stateService.onSidebarState()
       .subscribe((sidebar: string) => {
-        this.sidebar = sidebar
+        this.sidebar = sidebar;
       });
+    this.themeSubscription = this.themeService.onThemeChange().subscribe((theme) => {
 
-    const isBp = this.bpService.getByName('is');
-    this.menuClick$ = this.menuService.onItemSelect()
-      .withLatestFrom(this.themeService.onMediaQueryChange())
-      .delay(20)
-      .subscribe(([item, [bpFrom, bpTo]]: [any, [NbMediaBreakpoint, NbMediaBreakpoint]]) => {
+      const body = document.getElementsByTagName('body')[0];
+      if (theme.previous) {
+        this.renderer.removeClass(body, `trh-theme-${theme.previous}`);
+      }
+      this.renderer.addClass(body, `trh-theme-${theme.name}`);
+    });
 
-        if (bpTo.width <= isBp.width) {
-          this.sidebarService.collapse('menu-sidebar');
-        }
-      });
+    this.appendClassSubscription = this.themeService.onAppendLayoutClass().subscribe((className) => {
+      this.renderer.addClass(this.elementRef.nativeElement, className);
+    });
+
+    this.removeClassSubscription = this.themeService.onRemoveLayoutClass().subscribe((className) => {
+      this.renderer.removeClass(this.elementRef.nativeElement, className);
+    });
+
+    this.spinnerService.registerLoader(new Promise((resolve, reject) => {
+      this.afterViewInit$.subscribe((_) => resolve());
+    }));
+    this.spinnerService.load();
+
+    // trigger first time so that after the change we have the initial value
+    this.themeService.changeWindowWidth(window.innerWidth);
   }
 
   ngOnDestroy() {

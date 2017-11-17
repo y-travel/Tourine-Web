@@ -1,25 +1,11 @@
-<div class="header-container"
-     [class.left]="position === 'normal'"
-     [class.right]="position === 'inverse'">
-  <div class="logo-containter">
-    <div class="logo" (click)="goToHome()">تورینه</div>
-    <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
+<nav>
+  <div class="header-container"
+       [class.left]="position === 'normal'"
+       [class.right]="position === 'inverse'">
+    <div class="logo-containter">
+      <div class="logo" (click)="goToHome()">تورینه</div>
+      <a (click)="toggleSidebar()" href="#" class="navigation"><i class="trh-menu"></i></a>
+    </div>
+    <trh-theme-switcher></trh-theme-switcher>
   </div>
-  <ngx-theme-switcher></ngx-theme-switcher>
-</div>
-
-<nb-actions
-  size="medium"
-  class="header-container"
-  class.right="true"
-  class.left="false">
-  <nb-action icon="nb-grid-b" class="toggle-layout"></nb-action>
-  <nb-action>
-    <nb-user [menu]="userMenu" [name]="user?.name" [picture]="user?.picture"></nb-user>
-  </nb-action>
-  <nb-action class="control-item" disabled icon="nb-notifications"></nb-action>
-  <nb-action class="control-item" icon="nb-email"></nb-action>
-  <nb-action class="control-item">
-    <nb-search type="rotate-layout" (click)="startSearch()"></nb-search>
-  </nb-action>
-</nb-actions>
+</nav>

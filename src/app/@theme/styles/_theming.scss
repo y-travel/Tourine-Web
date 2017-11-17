@@ -92,7 +92,7 @@ $nb-themes-export: () !global;
 }
 
 @mixin install-css-variables($theme-name, $variables) {
-  .nb-theme-#{$theme-name} {
+  .trh-theme-#{$theme-name} {
     @each $var, $value in $variables {
       --#{$var}: $value;
     }
@@ -105,7 +105,7 @@ $nb-themes-export: () !global;
   $themes-to-install: get-enabled-themes();
 
   @each $theme-name, $theme in $themes-to-install {
-    :host-context(.nb-theme-#{$theme-name}) {
+    :host-context(.trh-theme-#{$theme-name}) {
       $theme: set-global-theme-vars($theme, $theme-name);
       @content;
     }
@@ -137,7 +137,7 @@ $nb-themes-export: () !global;
   $themes-to-install: get-enabled-themes();
 
   @each $theme-name, $theme in $themes-to-install {
-    .nb-theme-#{$theme-name} {
+    .trh-theme-#{$theme-name} {
       $theme: set-global-theme-vars($theme, $theme-name);
       @content;
     }

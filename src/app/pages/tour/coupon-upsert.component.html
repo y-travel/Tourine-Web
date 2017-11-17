@@ -72,8 +72,8 @@
     <div [hidden]="slider.value" style="width:1100px;">
       <div>
         <span>{{"buyer"|translate}}</span>
-        <nb-card>
-          <nb-card-body>
+        <trh-card>
+          <div class="card-body">
             <div class="row">
               <form-field label="nationalCode">
                 <input trhInput [formControl]="customer.form.get('nationalCode')">
@@ -100,8 +100,8 @@
                 <input trhInput [formControl]="customer.form.get('passportNo')">
               </form-field>
             </div>
-          </nb-card-body>
-        </nb-card>
+          </div>
+        </trh-card>
       </div>
       <div>
         {{"fellows"|translate}}
@@ -110,8 +110,8 @@
         </button>
         <div class="container">
           <div *ngFor="let item of passengers;let indx=index">
-            <nb-card>
-              <nb-card-body>
+            <trh-card>
+              <div class="card-body">
                 <button trhButton class="btn-outline-danger closeButton" (click)="passengers.splice(indx,1)" size="micro" kind="secondary">
                   <i class="material-icons">clear</i>
                 </button>
@@ -141,8 +141,8 @@
                     <input trhInput [formControl]="item.form.get('passportNo')">
                   </form-field>
                 </div>
-              </nb-card-body>
-            </nb-card>
+              </div>
+            </trh-card>
           </div>
         </div>
       </div>

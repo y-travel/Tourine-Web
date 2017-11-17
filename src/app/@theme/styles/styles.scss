@@ -1,7 +1,6 @@
 // themes - our custom or/and out of the box themes
 @import 'install';
 // framework component themes (styles tied to theme variables)
-@import 'globals';
 @import 'all';
 @import "material-icon";
 @import "default";
@@ -11,19 +10,8 @@
 
   // framework global styles
   @include nb-theme-global();
-  nb-card {
-    box-shadow: 5px 5px 20px nb-theme(shadow-color);
-    direction: rtl;
-  }
-  nb-card-header {
-    background-color: nb-theme(card-header-bg);
-    color: nb-theme(card-header-fg);
-  }
-  nb-checkbox{
-    .custom-control-indicator{
-      right: 0;
-    }
-  }
+
+
   @include material_default();
   @include set_defaults();//@TODO html and body style not work inside of nb_install
 

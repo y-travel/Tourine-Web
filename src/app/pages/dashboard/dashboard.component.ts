@@ -4,7 +4,7 @@ import { ToasterConfig, Toast, BodyOutputType, ToasterService } from "angular2-t
 import 'style-loader!angular2-toaster/toaster.css';
 
 @Component({
-  selector: 'ngx-dashboard',
+  selector: 'dashboard',
   styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
 })

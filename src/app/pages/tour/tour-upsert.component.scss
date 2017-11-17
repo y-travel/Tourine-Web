@@ -1,6 +1,4 @@
 @import '../../@theme/styles/install';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
 @include nb-install-component() {
   .menu-icon{

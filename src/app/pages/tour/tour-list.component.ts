@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { LocalDataSource } from "ng2-smart-table";
 
 import { TourService } from "../../@core/data/tour.service";
 import { TourUpsertComponent } from "./tour-upsert.component";
@@ -53,29 +52,28 @@ export class TourListComponent {
     },
   };
 
-  source: LocalDataSource = new LocalDataSource();
+  source:any;
 
   constructor(private tourService: TourService, public modalService: NgbModal) {
-    this.source.load(tourService.getList());
   }
 
   upsert() {
-    const ref = this.modalService.open(TourUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+    const ref = this.modalService.open(TourUpsertComponent, {size: "lg", backdrop: "static", container: "trh-layout"});
     ref.componentInstance.show();
     ref.result.then(data => this.source.refresh());
   }
 
   couponUpsert() {
-    const ref = this.modalService.open(CouponUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+    const ref = this.modalService.open(CouponUpsertComponent, {size: "lg", backdrop: "static", container: "trh-layout"});
     ref.componentInstance.show();
     ref.result.then(data => this.source.refresh());
   }
 
   reagentUpsert() {
-    this.modalService.open(ReagentUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+    this.modalService.open(ReagentUpsertComponent, {size: "lg", backdrop: "static", container: "trh-layout"});
   }
 
   userUpsert() {
-    this.modalService.open(UserUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+    this.modalService.open(UserUpsertComponent, {size: "lg", backdrop: "static", container: "trh-layout"});
   }
 }

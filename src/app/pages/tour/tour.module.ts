@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { Ng2SmartTableModule } from "ng2-smart-table";
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { TourService } from "../../@core/data/tour.service";
@@ -25,7 +24,6 @@ const tourComponents = [
   imports: [
     ThemeModule,
     TourRoutingModule,
-    Ng2SmartTableModule,
     AppTranslationModule,
     FormsModule,
     ReactiveFormsModule,
@@ -34,12 +32,7 @@ const tourComponents = [
     ...tourComponents,
     ...routedComponents
   ],
-  providers: [
-    TourService,
-    ApiService,
-    DataService,
-    FormFactory,
-  ],
+  providers: [],
   entryComponents: [
     TourUpsertComponent,
     CouponUpsertComponent,

@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { MENU_ITEMS } from './pages-menu';
 
 @Component({
-  selector: 'ngx-pages',
+  selector: 'trh-pages',
   template: `
-    <ngx-sample-layout>
-      <nb-menu [items]="menu"></nb-menu>
+    <trh-sample-layout>
+      <trh-menu [items]="menu"></trh-menu>
       <router-outlet></router-outlet>
-    </ngx-sample-layout>
+    </trh-sample-layout>
   `,
 })
 export class PagesComponent {

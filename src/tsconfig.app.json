@@ -10,9 +10,6 @@
       "@angular/*": [
         "../node_modules/@angular/*"
       ],
-      "@nebular/*": [
-        "../node_modules/@nebular/*"
-      ],
       "rxjs/*": [
         "../node_modules/rxjs/*"
       ]
