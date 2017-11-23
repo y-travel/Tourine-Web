@@ -21,11 +21,11 @@
     "npm": ">=3.10.3"
   },
   "devDependencies": {
-    "@angular/cli": "1.2.6",
+    "@angular-devkit/build-optimizer": "0.0.33",
+    "@angular/cli": "^1.5.4",
     "@angular/compiler-cli": "^5.0.1",
     "@angular/language-service": "^5.0.1",
     "@angular/platform-server": "^5.0.1",
-    "@angular-devkit/build-optimizer": "0.0.33",
     "@compodoc/compodoc": "^1.0.4",
     "@types/async": "^2.0.45",
     "@types/browser-sync": "^0.0.37",

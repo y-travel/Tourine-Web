@@ -22,7 +22,7 @@ export class CouponUpsertComponent implements ModalInterface {
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Coupon>,
               public dialogInstance: MatDialogRef<ModalInterface>,
               private dialogService: DialogService,
-              private formFactory: FormFactory) {
+              public formFactory: FormFactory) {
     this.customer = formFactory.createCustomerForm();
   }
 
