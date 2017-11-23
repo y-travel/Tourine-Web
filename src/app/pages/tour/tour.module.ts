@@ -10,6 +10,7 @@ import { CouponUpsertComponent } from "./coupon-upsert.component";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
 import { UserUpsertComponent } from "./user-upsert.component";
 import { DialogService } from "../../@core/utils/dialog.service";
+import { CouponService } from "../../@core/data/coupon.service";
 
 const entryComponents = [
   TourUpsertComponent,

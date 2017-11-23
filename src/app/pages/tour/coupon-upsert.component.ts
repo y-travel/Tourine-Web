@@ -7,10 +7,11 @@ import { ReagentUpsertComponent } from "./reagent-upsert.component";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { DialogService } from "../../@core/utils/dialog.service";
 import { FormFactory } from "../../@core/data/models/form-factory";
+import { CouponService } from "../../@core/data/coupon.service";
 
 @Component({
   moduleId: module.id,
-  selector: "coppon-upsert",
+  selector: "coupon-upsert",
   templateUrl: "coupon-upsert.component.html",
   styleUrls: ["coupon-upsert.component.scss"]
 })
@@ -27,14 +28,17 @@ export class CouponUpsertComponent implements ModalInterface {
   }
 
   save() {
-
+    //@TODO Impl. validation
+    const model = this.coupon.model;
+    this.couponService.addCoupon(model);
+    this.modalInstance.close(model);
   }
 
   show() {
   }
 
   reagentUpsert() {
-    this.dialogService.open(ReagentUpsertComponent, null/*@TODO*/);
-
+    let ref = this.dialogService.open(ReagentUpsertComponent,null);
+    ref.afterClosed().subscribe(model => this.reagents.push(model));
   }
 }
