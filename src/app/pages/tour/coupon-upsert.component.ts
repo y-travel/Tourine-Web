@@ -1,11 +1,12 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Component, Inject } from "@angular/core";
 
 import { FormService } from "../../@core/data/form.service";
-import { FormFactory } from "../../@core/data/models/form-factory";
 import { Coupon, Customer } from "../../@core/data/models/client.model";
 import { ModalInterface } from "../../@theme/components/modal.interface";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { DialogService } from "../../@core/utils/dialog.service";
+import { FormFactory } from "../../@core/data/models/form-factory";
 
 @Component({
   moduleId: module.id,
@@ -14,13 +15,14 @@ import { ReagentUpsertComponent } from "./reagent-upsert.component";
   styleUrls: ["coupon-upsert.component.scss"]
 })
 export class CouponUpsertComponent implements ModalInterface {
-  coupon: FormService<Coupon>;
   customer: FormService<Customer>;
   reagents = [];
   passengers: Array<FormService<Customer>> = [];
 
-  constructor(public formFactory: FormFactory, private modalService: NgbModal) {
-    this.coupon = formFactory.createCouponForm();
+  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Coupon>,
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              private formFactory: FormFactory) {
     this.customer = formFactory.createCustomerForm();
   }
 
@@ -32,7 +34,7 @@ export class CouponUpsertComponent implements ModalInterface {
   }
 
   reagentUpsert() {
-    let ref = this.modalService.open(ReagentUpsertComponent, {size: "sm", backdrop: "static", container: "trh-layout"});
-    ref.componentInstance.show();
+    this.dialogService.open(ReagentUpsertComponent, null/*@TODO*/);
+
   }
 }

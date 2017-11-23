@@ -1,30 +1,21 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, Inject } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { User } from "../../@core/data/models/client.model";
+import { FormService } from "../../@core/data/form.service";
+import { ModalInterface } from "../../@theme/components/modal.interface";
 
 @Component({
   moduleId: module.id,
-    selector: "user-upsert",
-    templateUrl: "user-upsert.component.html",
-    styleUrls: ["user-upsert.component.scss"]
+  selector: "user-upsert",
+  templateUrl: "user-upsert.component.html",
+  styleUrls: ["user-upsert.component.scss"]
 })
 export class UserUpsertComponent {
-  form:FormGroup;
-   message:string;
-  constructor(){
-    this.form=new FormBuilder().group(
-      {
-        cellphone:["",Validators.required],
-        name:["",Validators.required],
-        userName:["",Validators.required],
-        password:["",Validators.required],
-        rePassword:["",Validators.required],
-      }
-    );
+  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<User>,
+              public dialogInstance: MatDialogRef<ModalInterface>) {
+
   }
 
-  save(){
-    //this.message=this.form.controls['Name'].value;
-    alert("OK");
+  save() {
   }
 }

@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatDialogModule } from "@angular/material";
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { TourService } from "../../@core/data/tour.service";
-import { TourRoutingModule, routedComponents } from "./tour-routing.module";
-import { ApiService } from "../../@core/data/api.service";
-import { DataService } from "../../@core/data/data.service";
+import { routedComponents, TourRoutingModule } from "./tour-routing.module";
 import { TourUpsertComponent } from "./tour-upsert.component";
 import { AppTranslationModule } from "../../app-translation.module";
 import { CouponUpsertComponent } from "./coupon-upsert.component";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
-import { FormFactory } from "../../@core/data/models";
 import { UserUpsertComponent } from "./user-upsert.component";
+import { DialogService } from "../../@core/utils/dialog.service";
 
-const tourComponents = [
+const entryComponents = [
   TourUpsertComponent,
   CouponUpsertComponent,
   ReagentUpsertComponent,
@@ -23,22 +21,18 @@ const tourComponents = [
 @NgModule({
   imports: [
     ThemeModule,
+    MatDialogModule,
     TourRoutingModule,
     AppTranslationModule,
     FormsModule,
     ReactiveFormsModule,
   ],
   declarations: [
-    ...tourComponents,
+    ...entryComponents,
     ...routedComponents
   ],
-  providers: [],
-  entryComponents: [
-    TourUpsertComponent,
-    CouponUpsertComponent,
-    ReagentUpsertComponent,
-    UserUpsertComponent,
-  ]
+  providers: [DialogService],
+  entryComponents: entryComponents
 })
 export class TourModule {
 }

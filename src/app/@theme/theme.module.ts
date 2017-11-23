@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatFormFieldModule } from "@angular/material";
 
 import {
   FormFieldComponent,
@@ -23,13 +23,12 @@ import { TrhSidebarComponent } from './components/sidebar/trh-sidebar.component'
 import { SidebarService } from "./components/sidebar/sidebar.service";
 import { MenuService } from "./components/menu/menu.service";
 import { TrhCheckboxComponent } from './components/checkbox/trh-checkbox.component';
-import { MatFormFieldModule } from "@angular/material";
+import { DialogService } from "../@core/utils/dialog.service";
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
   MatFormFieldModule,
-  NgbModule,
 ];
 
 const COMPONENTS = [
@@ -59,7 +58,7 @@ const PIPES = [
 const THEME_PROVIDERS = [
   MenuService,
   SidebarService,
-
+  DialogService,
 ];
 
 @NgModule({

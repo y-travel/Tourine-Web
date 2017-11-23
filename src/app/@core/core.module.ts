@@ -6,21 +6,29 @@ import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
 import { ThemeService } from "./utils/theme.service";
 import { SpinnerService } from "./utils/spinner.service";
+import { DialogService } from "./utils/dialog.service";
+import { MatDialogModule } from "@angular/material";
 
 const NB_CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
   AnalyticsService,
   ThemeService,
   SpinnerService,
+  DialogService,
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    MatDialogModule,
   ],
   declarations: [],
 })
 export class CoreModule {
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
+  }
+
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: CoreModule,
@@ -28,9 +36,5 @@ export class CoreModule {
         ...NB_CORE_PROVIDERS,
       ],
     };
-  }
-
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 }
