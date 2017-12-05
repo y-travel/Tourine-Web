@@ -23,22 +23,23 @@ export class CouponUpsertComponent implements ModalInterface {
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Coupon>,
               public dialogInstance: MatDialogRef<ModalInterface>,
               private dialogService: DialogService,
-              public formFactory: FormFactory) {
+              public formFactory: FormFactory,
+              private couponService: CouponService) {
     this.customer = formFactory.createCustomerForm();
   }
 
   save() {
     //@TODO Impl. validation
-    const model = this.coupon.model;
+    const model = this.data.model;
     this.couponService.addCoupon(model);
-    this.modalInstance.close(model);
+    this.dialogInstance.close(model);
   }
 
   show() {
   }
 
   reagentUpsert() {
-    let ref = this.dialogService.open(ReagentUpsertComponent,null);
+    const ref = this.dialogService.open(ReagentUpsertComponent, null);
     ref.afterClosed().subscribe(model => this.reagents.push(model));
   }
 }

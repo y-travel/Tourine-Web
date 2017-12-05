@@ -5,32 +5,32 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="data.form">
-    <div class="row">
-      <form-field label="cellPhone">
-        <input trhInput placeholder="cellPhone" formControlName="cellphone">
-      </form-field>
-      <form-field label="name">
-        <input trhInput placeholder="name" formControlName="name">
-      </form-field>
+    <div fxLayout="row">
+      <mat-form-field label="cellPhone">
+        <input matInput placeholder="cellPhone" formControlName="cellphone">
+      </mat-form-field>
+      <mat-form-field label="name">
+        <input matInput placeholder="name" formControlName="name">
+      </mat-form-field>
     </div>
-    <div class="row">
-      <form-field label="username">
-        <input trhInput placeholder="username" formControlName="username">
-      </form-field>
-      <form-field label="password">
-        <input trhInput placeholder="password" formControlName="password">
-      </form-field>
+    <div fxLayout="row">
+      <mat-form-field label="username">
+        <input matInput placeholder="username" formControlName="username">
+      </mat-form-field>
+      <mat-form-field label="password">
+        <input matInput placeholder="password" formControlName="password">
+      </mat-form-field>
     </div>
-    <div class="row">
+    <div fxLayout="row">
       <div class="col"></div>
-      <form-field label="rePassword">
-        <input trhInput placeholder="rePassword" formControlName="rePassword">
-      </form-field>
+      <mat-form-field label="rePassword">
+        <input matInput placeholder="rePassword" formControlName="rePassword">
+      </mat-form-field>
     </div>
   </form>
 </div>
 <div class="modal-body">
-  <div class="row">
+  <div fxLayout="row">
     <button class="btn btn-primary col" (click)="save()">{{"save"|translate}}</button>
   </div>
 </div>

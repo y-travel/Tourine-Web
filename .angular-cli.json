@@ -16,7 +16,7 @@
       "main": "main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
-      "tsconfig": "tsconfig.app.json",
+      "tsconfig": "tsconfig.ng.json",
       "testTsconfig": "tsconfig.spec.json",
       "styles": [
         "./app/@theme/styles/iranian-sans.scss",
@@ -38,7 +38,7 @@
   "lint": [
     {
       "files": "src/**/*.ts",
-      "project": "src/tsconfig.app.json"
+      "project": "src/tsconfig.ng.json"
     },
     {
       "project": "src/tsconfig.spec.json"

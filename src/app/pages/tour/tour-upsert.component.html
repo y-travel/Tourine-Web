@@ -4,76 +4,81 @@
   </div>
 </div>
 <div class="right modal-body" style="width: 510px">
-  <form [formGroup]="data.form">
-    <div class="row">
-      <form-field>
-        <trh-slider falseText="rial" trueText="dollar"></trh-slider>
-      </form-field>
-      <form-field>
-        <div style="float: left;">
-          <i class="material-icons">flight</i>
-          <trh-slider falseText="ground" trueText="flight" formControlName="isFlight"></trh-slider>
-          <i class="material-icons">directions_bus</i>
-        </div>
-      </form-field>
-    </div>
-    <div class="row">
-      <form-field label="destination">
-        <trh-dropdown textField="name" valueField="id" [items]="destinations" formControlName="destinationId"></trh-dropdown>
-      </form-field>
-      <form-field label="adult_.count">
-        <input trhInput formControlName="adultCount">
-      </form-field>
-    </div>
-    <div class="row">
-      <form-field label="duration">
-        <input trhInput formControlName="duration">
-      </form-field>
-      <form-field label="adult_.minPrice">
-        <input trhInput formControlName="adultMinPrice">
-      </form-field>
-    </div>
-    <div class="row">
-      <form-field label="tour_.date">
-        <input trhInput formControlName="date">
-      </form-field>
-      <div class="col">
-        <div class="row">
-          <trh-checkbox #checkBusPrice>
-            <i class="material-icons md-1">airport_shuttle</i>
-          </trh-checkbox>
-          <form-field>
-            <input trhInput placeholder="toman" *ngIf="checkBusPrice.value" formControlName="busPrice">
-          </form-field>
-        </div>
-        <div class="row">
-          <trh-checkbox #checkRoomPrice>
-            <i class="material-icons md-1">airline_seat_individual_suite</i>
-          </trh-checkbox>
-          <form-field>
-            <input trhInput placeholder="toman" *ngIf="checkRoomPrice.value" formControlName="roomPrice">
-          </form-field>
-        </div>
-        <div class="row">
-          <trh-checkbox #checkFoodPrice>
-            <i class="material-icons md-1">room_service</i>
-          </trh-checkbox>
-          <form-field>
-            <input trhInput placeholder="toman" *ngIf="checkFoodPrice.value" formControlName="foodPrice">
-          </form-field>
-        </div>
+  <form dir="rtl" [formGroup]="data.form">
+    <div fxLayout="row">
+      <trh-slider fxFlex trueText="dollar" falseText="rial"></trh-slider>
+      <div fxFlex="80" fxLayoutAlign="end center">
+        <i class="material-icons">flight</i>
+        <trh-slider formControlName="isFlight" falseText="ground" trueText="flight"></trh-slider>
+        <i class="material-icons">directions_bus</i>
       </div>
     </div>
-    <div class="row">
-      <form-field label="hotel">
-        <trh-dropdown textField="name" valueField="id" [items]="hotels" formControlName="placeId"></trh-dropdown>
-      </form-field>
-      <form-field label="infantPrice">
-        <input trhInput formControlName="infantPrice">
-      </form-field>
+    <div fxLayout="row" >
+      <mat-form-field fxFlex>
+        <mat-select placeholder="destination" formControlName="destinationId">
+          <mat-option>{{"none"|translate}}</mat-option>
+          <mat-option *ngFor="let item of destinations" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="adult_.count" formControlName="adultCount">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="duration" formControlName="duration">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="adult_.minPrice" formControlName="adultMinPrice">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <mat-form-field >
+        <input matInput placeholder="tour_.date" formControlName="date">
+      </mat-form-field>
+      <div fxLayout="column" fxFlex="50">
+      <div  fxFlex>
+        <mat-checkbox #checkBusPrice>
+          <i class="material-icons md-1">airport_shuttle</i>
+        </mat-checkbox>
+        <mat-form-field *ngIf="checkBusPrice.checked">
+          <input matInput placeholder="toman" formControlName="busPrice">
+        </mat-form-field>
+      </div>
+      <div fxFlex>
+        <mat-checkbox #checkRoomPrice>
+          <i class="material-icons md-1">airline_seat_individual_suite</i>
+        </mat-checkbox>
+        <mat-form-field *ngIf="checkRoomPrice.checked">
+          <input matInput placeholder="toman" formControlName="roomPrice">
+        </mat-form-field>
+      </div>
+      <div fxFlex>
+        <mat-checkbox #checkFoodPrice>
+          <i class="material-icons md-1">room_service</i>
+        </mat-checkbox>
+        <mat-form-field *ngIf="checkFoodPrice.checked">
+          <input matInput placeholder="toman" formControlName="foodPrice">
+        </mat-form-field>
+      </div>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+        <mat-select placeholder="hotel" formControlName="placeId">
+          <mat-option *ngFor="let item of hotels" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="infantPrice" formControlName="infantPrice">
+      </mat-form-field>
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button trhButton (click)="save()">{{"save"|translate}}</button>
+  <button mat-button fxFlex (click)="save()">{{"save"|translate}}</button>
 </div>

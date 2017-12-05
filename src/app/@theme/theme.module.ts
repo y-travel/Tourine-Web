@@ -1,18 +1,10 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from "@angular/material";
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSlideToggleModule } from "@angular/material";
 
-import {
-  FormFieldComponent,
-  HeaderComponent,
-  SearchInputComponent,
-  ThemeSwitcherComponent,
-  TrhButtonDirective,
-  TrhDropdownComponent,
-  TrhInputDirective,
-  TrhSliderComponent,
-} from './components';
+import { FormFieldComponent, HeaderComponent, SearchInputComponent, ThemeSwitcherComponent, TrhDropdownComponent, TrhSliderComponent, } from './components';
+import { TrhButtonDirective, TrhInputDirective, TrhRowDirective } from "./directives";
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { TourineLayoutComponent } from './layouts';
 import { AppTranslationModule } from "../app-translation.module";
@@ -24,11 +16,18 @@ import { SidebarService } from "./components/sidebar/sidebar.service";
 import { MenuService } from "./components/menu/menu.service";
 import { TrhCheckboxComponent } from './components/checkbox/trh-checkbox.component';
 import { DialogService } from "../@core/utils/dialog.service";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
   MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatSlideToggleModule,
+  MatSelectModule,
+  MatCheckboxModule,
+  FlexLayoutModule,
 ];
 
 const COMPONENTS = [
@@ -46,6 +45,7 @@ const COMPONENTS = [
   TrhMenuComponent,
   TrhSidebarComponent,
   TrhCheckboxComponent,
+  TrhRowDirective,
 ];
 
 const PIPES = [
