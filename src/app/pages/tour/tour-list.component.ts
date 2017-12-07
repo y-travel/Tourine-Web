@@ -4,7 +4,7 @@ import { TourService } from "../../@core/data/tour.service";
 import { TourUpsertComponent } from "./tour-upsert.component";
 import { CouponUpsertComponent } from "./coupon-upsert.component";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
-import { UserUpsertComponent } from "./user-upsert.component";
+import { EditPasswordComponent } from "./edit-password.component";
 import { DialogService } from "../../@core/utils/dialog.service";
 import { FormFactory } from "../../@core/data/models/form-factory";
 
@@ -70,10 +70,10 @@ export class TourListComponent {
   }
 
   reagentUpsert() {
-    this.dialogService.open(ReagentUpsertComponent, null);
+    this.dialogService.open(ReagentUpsertComponent, this.formFactory.createReagentForm());
   }
 
   userUpsert() {
-    this.dialogService.open(UserUpsertComponent, null);
+    this.dialogService.open(EditPasswordComponent, this.formFactory.createEditPasswordForm());
   }
 }

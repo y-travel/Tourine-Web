@@ -15,7 +15,7 @@
   },
   "adultCount": "تعداد بزرگسال",
   "agencyName": "نام آژانس",
-  "cellPhone": "همراه",
+  "cellphone": "شماره همراه",
   "coupon_": {
     "upsert": "ثبت کوپن"
   },
@@ -33,7 +33,6 @@
   "hotel": "هتل",
   "infantCount": "تعداد بچه",
   "infantPrice": "قیمت بچه",
-  "managerName": "نام مدیر",
   "name": "نام",
   "offValue": "تخفیف",
   "passenger": "مسافر",

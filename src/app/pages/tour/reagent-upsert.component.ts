@@ -13,7 +13,6 @@ import { ModalInterface } from "../../@theme/components/modal.interface";
 export class ReagentUpsertComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Reagent>,
               public dialogRef: MatDialogRef<ModalInterface>) {
-
   }
 
   save() {

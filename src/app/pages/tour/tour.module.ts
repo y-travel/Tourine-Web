@@ -8,15 +8,14 @@ import { TourUpsertComponent } from "./tour-upsert.component";
 import { AppTranslationModule } from "../../app-translation.module";
 import { CouponUpsertComponent } from "./coupon-upsert.component";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
-import { UserUpsertComponent } from "./user-upsert.component";
+import { EditPasswordComponent } from "./edit-password.component";
 import { DialogService } from "../../@core/utils/dialog.service";
-import { CouponService } from "../../@core/data/coupon.service";
 
 const entryComponents = [
   TourUpsertComponent,
   CouponUpsertComponent,
   ReagentUpsertComponent,
-  UserUpsertComponent,
+  EditPasswordComponent,
 ];
 
 @NgModule({

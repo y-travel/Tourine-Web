@@ -3,35 +3,35 @@
     {{"reagent_.upsert"|translate}}
   </div>
 </div>
-<div class="modal-body">
+<div class="modal-body" dir="rtl">
   <form [formGroup]="data.form">
     <div fxLayout="row">
-      <mat-form-field label="managerName">
-        <input matInput placeholder="managerName" formControlName="managerName">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="name" formControlName="name">
       </mat-form-field>
-      <mat-form-field label="agencyName">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="family" formControlName="family">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
         <input matInput placeholder="agencyName" formControlName="agencyName">
       </mat-form-field>
-    </div>
-    <div fxLayout="row">
-      <mat-form-field label="cellPhone">
+      <mat-form-field fxFlex>
         <input matInput placeholder="cellPhone" formControlName="cellPhone">
       </mat-form-field>
-      <mat-form-field label="phone">
-        <input matInput placeholder="phone" formControlName="phone">
-      </mat-form-field>
     </div>
     <div fxLayout="row">
-      <mat-form-field label="email">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="phone" formControlName="phone">
+      </mat-form-field>
+      <mat-form-field fxFlex>
         <input matInput placeholder="email" formControlName="email">
       </mat-form-field>
-      <div class="col"></div>
     </div>
   </form>
 </div>
-<div class="modal-body">
-  <div fxLayout="row">
-    <button class="btn btn-primary col" (click)="save()">{{"save"|translate}}</button>
-  </div>
+<div class="modal-footer">
+  <button fxFlex mat-button (click)="save()">{{"save"|translate}}</button>
 </div>
 

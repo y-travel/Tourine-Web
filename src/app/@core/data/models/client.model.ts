@@ -50,16 +50,15 @@ export class Coupon extends Model {
   foodPrice: number = undefined;
 }
 
-export class User extends Model {
-  cellphone: string = undefined;
-  name: string = undefined;
-  userName: string = undefined;
+export class EditPassword extends Model {
+  oldPassword: string = undefined;
   password: string = undefined;
   rePassword: string = undefined;
 }
 
 export class Reagent extends Model {
-  managerName: string = undefined;
+  name: string = undefined;
+  family: string = undefined;
   agencyName: string = undefined;
   cellPhone: string = undefined;
   phone: string = undefined;
