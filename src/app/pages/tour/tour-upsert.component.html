@@ -3,8 +3,8 @@
     {{"tour_.upsert"|translate}}
   </div>
 </div>
-<div class="right modal-body" style="width: 510px">
-  <form dir="rtl" [formGroup]="data.form">
+<div class="right modal-body" dir="rtl" [style.width.px]="510">
+  <form  [formGroup]="data.form">
     <div fxLayout="row">
       <trh-slider fxFlex trueText="dollar" falseText="rial"></trh-slider>
       <div fxFlex="80" fxLayoutAlign="end center">
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div fxLayout="row" >
-      <mat-form-field fxFlex>
+      <mat-form-field >
         <mat-select placeholder="destination" formControlName="destinationId">
           <mat-option>{{"none"|translate}}</mat-option>
           <mat-option *ngFor="let item of destinations" [value]="item.id">
@@ -22,7 +22,13 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field fxFlex>
+      <mat-form-field >
+        <input matInput placeholder="adult_.count" formControlName="adultCount">
+      </mat-form-field>
+      <mat-form-field >
+        <input matInput placeholder="adult_.count" formControlName="adultCount">
+      </mat-form-field>
+      <mat-form-field >
         <input matInput placeholder="adult_.count" formControlName="adultCount">
       </mat-form-field>
     </div>

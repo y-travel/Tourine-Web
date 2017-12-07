@@ -62,12 +62,11 @@ export class TourListComponent {
 
   upsert() {
     const ref = this.dialogService.open(TourUpsertComponent, this.formFactory.createTourForm());
-    ref.afterClosed().subscribe(data => this.source.refresh());
+    ref.afterClosed().subscribe(data => this.source.push(data));
   }
 
   couponUpsert() {
     const ref = this.dialogService.open(CouponUpsertComponent, this.formFactory.createCouponForm());
-    ref.afterClosed().subscribe(data => this.source.refresh());
   }
 
   reagentUpsert() {

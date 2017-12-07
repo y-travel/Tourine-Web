@@ -8,11 +8,13 @@ import { PlayerService } from './player.service';
 import { FormFactory } from "./models/form-factory";
 import { DataService } from "./data.service";
 import { ApiService } from "./api.service";
+import { CouponService } from "./coupon.service";
 
 const SERVICES = [
   UserService,
   StateService,
   TourService,
+  CouponService,
   ApiService,
   DataService,
   FormFactory,

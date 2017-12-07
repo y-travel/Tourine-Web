@@ -1,7 +1,10 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSlideToggleModule } from "@angular/material";
+import {
+  MatButtonModule, MatCheckboxModule, MatCommonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatSlideToggleModule,
+  MatStepperModule
+} from "@angular/material";
 
 import { FormFieldComponent, HeaderComponent, SearchInputComponent, ThemeSwitcherComponent, TrhDropdownComponent, TrhSliderComponent, } from './components';
 import { TrhButtonDirective, TrhInputDirective, TrhRowDirective } from "./directives";
@@ -28,6 +31,9 @@ const NB_MODULES = [
   MatSelectModule,
   MatCheckboxModule,
   FlexLayoutModule,
+  MatStepperModule,
+  MatIconModule,
+  MatCommonModule,
 ];
 
 const COMPONENTS = [

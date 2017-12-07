@@ -24,6 +24,9 @@
   "duration": "مدت زمان",
   "email": "رایانامه",
   "emptyCount": "تعداد خالی",
+  "steps":"گام {{value}}",
+  "first":"اول",
+  "second":"دوم",
   "flight": "هوایی",
   "family":"نام خانوادگی",
   "ground": "زمینی",
@@ -46,6 +49,7 @@
   "rial": "ریال",
   "save": "ثبت",
   "toman": "تومان",
+  "tomanFormat": "(تومان)",
   "tour": "تور",
   "tour_": {
     "date": "تاریخ اجرا",

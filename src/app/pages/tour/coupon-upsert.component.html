@@ -4,156 +4,70 @@
   </div>
 </div>
 
-<div class="modal-body">
-  <form [formGroup]="data.form">
-    <div fxLayout="row">
-      <trh-slider #slider falseText="passenger" trueText="reagent" value="true"></trh-slider>
-    </div>
-    <div [hidden]="!slider.value" style="width: 500px">
-      <div fxLayout="row">
-        <mat-form-field fxFlex>
-          <mat-select placeholder="reagent_.name" formControlName="reagentId">
-            <mat-option *ngFor="let item of reagents" [value]="item.id">{{item.title}}</mat-option>
-          </mat-select>
-          <button mat-button class="btn-outline-warning" size="micro" kind="secondary" (click)="reagentUpsert()"><i class="material-icons">add</i></button>
-        </mat-form-field>
-      </div>
-      <div fxLayout="row">
+<div class="modal-body" dir="rtl" [style.width.px]="500">
+  <mat-horizontal-stepper linear>
+    <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'first'|translate})}}">
+      <form [formGroup]="data.form">
         <div fxLayout="row">
-          <mat-form-field fxFlex>
-            <input matInput placeholder="adultCount" formControlName="adultCount">
+          <mat-form-field>
+            <mat-select placeholder="reagent_.name" formControlName="reagentId">
+              <mat-option *ngFor="let item of reagents" [value]="item.id">{{item.title}}</mat-option>
+            </mat-select>
           </mat-form-field>
-          <div fxFlex="30">
-            <mat-hint>{{"emptyCount"|translate}}</mat-hint>
-            000
-          </div>
-          <mat-form-field fxFlex="30">
-            <input matInput placeholder="offValue" formControlName="adultPrice">
-          </mat-form-field>
+          <button mat-button class="btn-outline-warning" size="micro" kind="secondary" (click)="reagentUpsert()"><i class="material-icons">add</i></button>
         </div>
         <div fxLayout="row">
-          <mat-form-field fxFlex>
+          <mat-form-field fxFlex="40">
             <input matInput placeholder="infantCount" formControlName="infantCount">
           </mat-form-field>
-          <mat-form-field fxFlex>
+          <div fxFlex="20"><!--important for IE-->
             <mat-hint>{{"emptyCount"|translate}}</mat-hint>
-            000
-          </mat-form-field>
-          <mat-form-field fxFlex>
+            <div fxFlex fxFlexAlign="center">0000</div>
+          </div>
+          <mat-form-field fxFlex="20">
             <input matInput placeholder="offValue" formControlName="infantPrice">
           </mat-form-field>
         </div>
-        <div class="col-5">
-          <div fxLayout="row">
-            <mat-form-field>
-              <div fxLayout="row">
-                <i class="material-icons md-1 ml-2">airport_shuttle</i>
-                <input matInput class="col-4" formControlName="busPrice">
-              </div>
-            </mat-form-field>
+        <div fxLayout="row">
+          <mat-form-field fxFlex="40">
+            <input matInput placeholder="adultCount" formControlName="adultCount">
+          </mat-form-field>
+          <div fxFlex="20"><!--important for IE-->
+            <mat-hint>{{"emptyCount"|translate}}</mat-hint>
+            <div fxFlex fxFlexAlign="center">0000</div>
           </div>
-          <div fxLayout="row">
-            <mat-form-field>
-              <div fxLayout="row">
-                <i class="material-icons md-1 ml-2">airline_seat_individual_suite</i>
-                <input matInput class="col-4" formControlName="roomPrice">
-              </div>
-            </mat-form-field>
-          </div>
-          <div fxLayout="row">
-            <mat-form-field>
-              <div fxLayout="row">
-                <i class="material-icons md-1 ml-2">room_service</i>
-                <input matInput class="col-4" formControlName="foodPrice">
-              </div>
-            </mat-form-field>
-          </div>
+          <mat-form-field fxFlex="20">
+            <input matInput placeholder="offValue" formControlName="adultPrice">
+          </mat-form-field>
+
         </div>
-      </div>
-    </div>
-    <div [hidden]="slider.value" style="width:1100px;">
-      <div>
-        <span>{{"buyer"|translate}}</span>
-        <trh-card>
-          <div class="card-body">
-            <div fxLayout="row">
-              <mat-form-field label="nationalCode">
-                <input matInput [formControl]="customer.form.get('nationalCode')">
-              </mat-form-field>
-              <mat-form-field label="name">
-                <input matInput [formControl]="customer.form.get('name')">
-              </mat-form-field>
-              <mat-form-field label="family">
-                <input matInput [formControl]="customer.form.get('family')">
-              </mat-form-field>
-              <mat-form-field label="mobileNumber">
-                <input matInput [formControl]="customer.form.get('mobileNumber')">
-              </mat-form-field>
-              <mat-form-field label="fatherName">
-                <input matInput [formControl]="customer.form.get('fatherName')">
-              </mat-form-field>
-              <mat-form-field label="birthDate">
-                <input matInput [formControl]="customer.form.get('birthDate')">
-              </mat-form-field>
-              <mat-form-field label="passport_.expireDate">
-                <input matInput [formControl]="customer.form.get('passportExpireDate')">
-              </mat-form-field>
-              <mat-form-field label="passport_.number">
-                <input matInput [formControl]="customer.form.get('passportNo')">
-              </mat-form-field>
-            </div>
-          </div>
-        </trh-card>
-      </div>
-      <div>
-        {{"fellows"|translate}}
-        <button mat-button class="btn-outline-success" size="micro" kind="secondary" (click)="passengers.push(formFactory.createCustomerForm())">
-          <i class="material-icons">add</i>
-        </button>
-        <div class="container">
-          <div *ngFor="let item of passengers;let indx=index">
-            <trh-card>
-              <div class="card-body">
-                <button mat-button class="btn-outline-danger closeButton" (click)="passengers.splice(indx,1)" size="micro" kind="secondary">
-                  <i class="material-icons">clear</i>
-                </button>
-                <div fxLayout="row">
-                  <mat-form-field label="nationalCode">
-                    <input matInput [formControl]="item.form.get('nationalCode')">
-                  </mat-form-field>
-                  <mat-form-field label="name">
-                    <input matInput [formControl]="item.form.get('name')">
-                  </mat-form-field>
-                  <mat-form-field label="family">
-                    <input matInput [formControl]="item.form.get('family')">
-                  </mat-form-field>
-                  <mat-form-field label="mobileNumber">
-                    <input matInput [formControl]="item.form.get('mobileNumber')">
-                  </mat-form-field>
-                  <mat-form-field label="fatherName">
-                    <input matInput [formControl]="item.form.get('fatherName')">
-                  </mat-form-field>
-                  <mat-form-field label="birthDate">
-                    <input matInput [formControl]="item.form.get('birthDate')">
-                  </mat-form-field>
-                  <mat-form-field label="passport_.expireDate">
-                    <input matInput [formControl]="item.form.get('passportExpireDate')">
-                  </mat-form-field>
-                  <mat-form-field label="passport_.number">
-                    <input matInput [formControl]="item.form.get('passportNo')">
-                  </mat-form-field>
-                </div>
-              </div>
-            </trh-card>
-          </div>
+        <div fxLayout="row">
+          <mat-form-field fxFlex="33">
+            <input matInput mask="number" placeholder="busPrice" formControlName="busPrice">
+            <mat-icon matPrefix>airport_shuttle</mat-icon>
+            <span matSuffix translate>tomanFormat</span>
+          </mat-form-field>
+          <mat-form-field fxFlex="33">
+            <input matInput mask="number" placeholder="roomPrice" formControlName="roomPrice">
+            <mat-icon matPrefix> airline_seat_individual_suite</mat-icon>
+            <span matSuffix translate>tomanFormat</span>
+          </mat-form-field>
+          <mat-form-field fxFlex="33">
+            <input matInput mask="number" placeholder="foodPrice" formControlName="foodPrice">
+            <mat-icon matPrefix>room_service</mat-icon>
+            <span matSuffix translate>tomanFormat</span>
+          </mat-form-field>
         </div>
-      </div>
-    </div>
-  </form>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="customer.form" label="{{'steps'|translate:({value:'second'|translate})}}">
+      <form [formGroup]="customer.form">
+
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>
 <div class="modal-body">
-  <div fxLayout="row">
-    <button mat-button (click)="save()">{{"save"|translate}}</button>
-  </div>
+  <button mat-button fxFlex (click)="save()">{{"save"|translate}}</button>
 </div>
 

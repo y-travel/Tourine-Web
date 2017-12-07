@@ -26,7 +26,7 @@ export class SpinnerService {
   }
 
   /**
-   * Start the loader process, show spinnder and execute loaders
+   * Start the loader process, show spinner and execute loaders
    */
   load(): void {
     this.showSpinner();

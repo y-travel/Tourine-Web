@@ -13,15 +13,15 @@ export class Model implements IModel {
   }
 }
 
-export class Destination extends Model{
+export class Destination extends Model {
   name = "";
 }
 
-export class Place extends Model{
+export class Place extends Model {
   name = 0;
 }
 
-export class Tour extends Model{
+export class Tour extends Model {
   destinationId = 0; //@TODO merge destination and place into one table
   duration: number = undefined;
   date: string = undefined;
@@ -37,20 +37,20 @@ export class Tour extends Model{
   infantPrice: number = undefined;
 }
 
-export class Coupon extends Model{
+export class Coupon extends Model {
   reagentId: number = undefined;
   reagent: Customer = undefined;
   passengers: Customer[] = [];
-  adultCount = 1;
-  adultPrice = 0;
-  infantCount = 0;
-  infantPrice = 0;
-  busPrice = 0;
-  roomPrice = 0;
-  foodPrice = 0;
+  adultCount: number = undefined;
+  adultPrice: number = undefined;
+  infantCount: number = undefined;
+  infantPrice: number = undefined;
+  busPrice: number = undefined;
+  roomPrice: number = undefined;
+  foodPrice: number = undefined;
 }
 
-export class User extends Model{
+export class User extends Model {
   cellphone: string = undefined;
   name: string = undefined;
   userName: string = undefined;
@@ -58,7 +58,7 @@ export class User extends Model{
   rePassword: string = undefined;
 }
 
-export class Reagent extends Model{
+export class Reagent extends Model {
   managerName: string = undefined;
   agencyName: string = undefined;
   cellPhone: string = undefined;
@@ -66,7 +66,7 @@ export class Reagent extends Model{
   email: string = undefined;
 }
 
-export class Customer extends Model{
+export class Customer extends Model {
   name = "";
   family = "";
   mobileNumber = "";

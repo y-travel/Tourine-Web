@@ -1,4 +1,4 @@
-import { Form, FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Injectable } from "@angular/core";
 //
 import { FormService } from "../form.service";
@@ -8,7 +8,7 @@ import { Coupon, Customer, Tour } from "./client.model";
 export class FormFactory {
 
   createTourForm(model: Tour = new Tour()): FormService<Tour> {
-    let form = new FormBuilder().group({
+    const form = new FormBuilder().group({
       destinationId: [model.destinationId, Validators.required],
       duration: [model.duration, Validators.required],
       date: [model.date, Validators.required],
@@ -26,10 +26,10 @@ export class FormFactory {
   }
 
   createCouponForm(model: Coupon = new Coupon()): FormService<Coupon> {
-    let form = new FormBuilder().group({
-      reagentId: [model.reagentId],
-      passengers: [model.passengers],
-      adultCount: [model.adultCount, Validators.min(1)],
+    const form = new FormBuilder().group({
+      reagentId: [model.reagentId, Validators.required],
+      passengers: [model.passengers, Validators.required],
+      adultCount: [model.adultCount, [Validators.required, Validators.min(1)]],
       adultPrice: [model.adultPrice],
       infantCount: [model.infantCount],
       infantPrice: [model.infantPrice],
@@ -41,7 +41,7 @@ export class FormFactory {
   }
 
   createCustomerForm(model: Customer = new Customer()): FormService<Customer> {
-    let form = new FormBuilder().group({
+    const form = new FormBuilder().group({
       name: [model.name, Validators.required],
       family: [model.family, Validators.required],
       mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
