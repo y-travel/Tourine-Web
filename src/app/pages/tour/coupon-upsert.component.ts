@@ -25,7 +25,17 @@ export class CouponUpsertComponent implements ModalInterface {
               private dialogService: DialogService,
               public formFactory: FormFactory,
               private couponService: CouponService) {
-    this.customer = formFactory.createCustomerForm();
+    this.init();
+  }
+
+  init() {
+    this.customer = this.formFactory.createCustomerForm();
+    this.reagents
+      .push(
+        {id: 1, title: "aziz vazifeh"},
+        {id: 2, title: "ali zendehdel"},
+        {id: 3, title: "mohammad roosta"},
+      ); //@TODO
   }
 
   save() {

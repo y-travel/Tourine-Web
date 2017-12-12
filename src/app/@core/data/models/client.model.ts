@@ -63,6 +63,10 @@ export class Reagent extends Model {
   cellPhone: string = undefined;
   phone: string = undefined;
   email: string = undefined;
+
+  get title(): string {
+    return `${this.name} ${this.family}`;
+  }
 }
 
 export class Customer extends Model {

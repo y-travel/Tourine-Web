@@ -2,7 +2,17 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-  MatButtonModule, MatCheckboxModule, MatCommonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSelectModule, MatSlideToggleModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatCommonModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatSlideToggleModule,
   MatStepperModule
 } from "@angular/material";
 
@@ -34,6 +44,9 @@ const NB_MODULES = [
   MatStepperModule,
   MatIconModule,
   MatCommonModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatNativeDateModule, //@TODO Should be localize with moment.js
 ];
 
 const COMPONENTS = [

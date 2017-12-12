@@ -4,65 +4,62 @@
   </div>
 </div>
 
-<div class="modal-body" dir="rtl" [style.width.px]="500">
-  <mat-horizontal-stepper linear>
+<div class="modal-body" dir="rtl" [style.width.px]="600"><!--width set for IE-->
+  <mat-horizontal-stepper >
+   <mat-step label="{{'selectCustomer'|translate}}">
+
+<mat-icon>user</mat-icon>
+<mat-icon>customer</mat-icon>
+   </mat-step>
     <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'first'|translate})}}">
       <form [formGroup]="data.form">
         <div fxLayout="row">
-          <mat-form-field>
-            <mat-select placeholder="reagent_.name" formControlName="reagentId">
-              <mat-option *ngFor="let item of reagents" [value]="item.id">{{item.title}}</mat-option>
-            </mat-select>
+          <mat-form-field fxFlex="40">
+            <input matInput mask="number" #adultCount placeholder="adultCount" formControlName="adultCount">
+            <mat-hint align="end" translate>{{"emptyCount"|translate:({outof:"100",value:adultCount.value})}}</mat-hint>
           </mat-form-field>
-          <button mat-button class="btn-outline-warning" size="micro" kind="secondary" (click)="reagentUpsert()"><i class="material-icons">add</i></button>
+          <mat-form-field fxFlex="20">
+            <input matInput placeholder="offValue" formControlName="adultPrice">
+          </mat-form-field>
         </div>
         <div fxLayout="row">
           <mat-form-field fxFlex="40">
-            <input matInput placeholder="infantCount" formControlName="infantCount">
+            <input matInput #infantCount placeholder="infantCount" formControlName="infantCount">
+            <mat-hint align="end" translate>{{"emptyCount"|translate:({outof:"100",value:infantCount.value})}} </mat-hint>
           </mat-form-field>
-          <div fxFlex="20"><!--important for IE-->
-            <mat-hint>{{"emptyCount"|translate}}</mat-hint>
-            <div fxFlex fxFlexAlign="center">0000</div>
-          </div>
           <mat-form-field fxFlex="20">
             <input matInput placeholder="offValue" formControlName="infantPrice">
           </mat-form-field>
         </div>
-        <div fxLayout="row">
-          <mat-form-field fxFlex="40">
-            <input matInput placeholder="adultCount" formControlName="adultCount">
-          </mat-form-field>
-          <div fxFlex="20"><!--important for IE-->
-            <mat-hint>{{"emptyCount"|translate}}</mat-hint>
-            <div fxFlex fxFlexAlign="center">0000</div>
-          </div>
-          <mat-form-field fxFlex="20">
-            <input matInput placeholder="offValue" formControlName="adultPrice">
-          </mat-form-field>
-
-        </div>
-        <div fxLayout="row">
+        <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex="33">
             <input matInput mask="number" placeholder="busPrice" formControlName="busPrice">
-            <mat-icon matPrefix>airport_shuttle</mat-icon>
-            <span matSuffix translate>tomanFormat</span>
+            <mat-icon matSuffix>airport_shuttle</mat-icon>
+            <mat-hint align="end" translate>tomanFormat</mat-hint>
           </mat-form-field>
           <mat-form-field fxFlex="33">
             <input matInput mask="number" placeholder="roomPrice" formControlName="roomPrice">
-            <mat-icon matPrefix> airline_seat_individual_suite</mat-icon>
-            <span matSuffix translate>tomanFormat</span>
+            <mat-icon matSuffix> airline_seat_individual_suite</mat-icon>
+            <mat-hint align="end" translate>tomanFormat</mat-hint>
           </mat-form-field>
           <mat-form-field fxFlex="33">
             <input matInput mask="number" placeholder="foodPrice" formControlName="foodPrice">
-            <mat-icon matPrefix>room_service</mat-icon>
-            <span matSuffix translate>tomanFormat</span>
+            <mat-icon matSuffix>room_service</mat-icon>
+            <mat-hint align="end" translate>tomanFormat</mat-hint>
           </mat-form-field>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="customer.form" label="{{'steps'|translate:({value:'second'|translate})}}">
       <form [formGroup]="customer.form">
-
+        <div fxLayout="row">
+          <mat-form-field>
+            <mat-select placeholder="reagent_.name" >
+              <mat-option *ngFor="let item of reagents" [value]="item.id">{{item.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-button class="btn-outline-warning" size="micro" kind="secondary" (click)="reagentUpsert()"><i class="material-icons">add</i></button>
+        </div>
       </form>
     </mat-step>
   </mat-horizontal-stepper>
