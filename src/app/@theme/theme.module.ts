@@ -1,54 +1,52 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import {
-  NbActionsModule,
-  NbCardModule,
-  NbLayoutModule,
-  NbMenuModule,
-  NbRouteTabsetModule,
-  NbSearchModule,
-  NbSidebarModule,
-  NbTabsetModule,
-  NbThemeModule,
-  NbUserModule,
-  NbCheckboxModule,
-} from '@nebular/theme';
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatCommonModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatSlideToggleModule,
+  MatStepperModule
+} from "@angular/material";
 
-import {
-  HeaderComponent,
-  SearchInputComponent,
-  ThemeSwitcherComponent,
-  TrhButtonDirective,
-  TrhInputDirective,
-  FormFieldComponent,
-  TrhDropdownComponent,
-  TrhSliderComponent,
-} from './components';
+import { FormFieldComponent, HeaderComponent, SearchInputComponent, ThemeSwitcherComponent, TrhDropdownComponent, TrhSliderComponent, } from './components';
+import { TrhButtonDirective, TrhInputDirective, TrhRowDirective } from "./directives";
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
-import {
-  TourineLayoutComponent,
-} from './layouts';
-import { DEFAULT_THEME } from './styles/theme.default';
-import { COSMIC_THEME } from './styles/theme.cosmic';
+import { TourineLayoutComponent } from './layouts';
 import { AppTranslationModule } from "../app-translation.module";
+import { TrhCardComponent } from './components/card/trh-card.component';
+import { TrhLayoutComponent } from './components/layout/trh-layout.component';
+import { TrhMenuComponent } from './components/menu/trh-menu.component';
+import { TrhSidebarComponent } from './components/sidebar/trh-sidebar.component';
+import { SidebarService } from "./components/sidebar/sidebar.service";
+import { MenuService } from "./components/menu/menu.service";
+import { TrhCheckboxComponent } from './components/checkbox/trh-checkbox.component';
+import { DialogService } from "../@core/utils/dialog.service";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
-  NbCardModule,
-  NbLayoutModule,
-  NbTabsetModule,
-  NbRouteTabsetModule,
-  NbMenuModule,
-  NbUserModule,
-  NbActionsModule,
-  NbSearchModule,
-  NbSidebarModule,
-  NbCheckboxModule,
-  NgbModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatSlideToggleModule,
+  MatSelectModule,
+  MatCheckboxModule,
+  FlexLayoutModule,
+  MatStepperModule,
+  MatIconModule,
+  MatCommonModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatNativeDateModule, //@TODO Should be localize with moment.js
 ];
 
 const COMPONENTS = [
@@ -56,11 +54,17 @@ const COMPONENTS = [
   HeaderComponent,
   SearchInputComponent,
   TourineLayoutComponent,
+  FormFieldComponent,
   TrhInputDirective,
   TrhButtonDirective,
-  FormFieldComponent,
   TrhDropdownComponent,
   TrhSliderComponent,
+  TrhCardComponent,
+  TrhLayoutComponent,
+  TrhMenuComponent,
+  TrhSidebarComponent,
+  TrhCheckboxComponent,
+  TrhRowDirective,
 ];
 
 const PIPES = [
@@ -70,15 +74,10 @@ const PIPES = [
   TimingPipe,
 ];
 
-const NB_THEME_PROVIDERS = [
-  ...NbThemeModule.forRoot(
-    {
-      name: 'default',
-    },
-    [DEFAULT_THEME, COSMIC_THEME],
-  ).providers,
-  ...NbSidebarModule.forRoot().providers,
-  ...NbMenuModule.forRoot().providers,
+const THEME_PROVIDERS = [
+  MenuService,
+  SidebarService,
+  DialogService,
 ];
 
 @NgModule({
@@ -90,7 +89,7 @@ export class ThemeModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: ThemeModule,
-      providers: [...NB_THEME_PROVIDERS],
+      providers: [...THEME_PROVIDERS],
     };
   }
 }

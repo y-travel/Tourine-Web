@@ -1,6 +1,4 @@
-@import '../../styles/themes';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+@import '../../styles/install';
 
 @include nb-install-component() {
   display: flex;
@@ -67,49 +65,49 @@
     }
   }
 
-  @include media-breakpoint-down(md) {
+  //@include media-breakpoint-down(md) {
+  //
+  //  nb-action:not(.toggle-layout) {
+  //    border: none;
+  //  }
+  //
+  //  .control-item {
+  //    display: none;
+  //  }
+  //
+  //  .toggle-layout {
+  //    padding: 0;
+  //  }
+  //}
 
-    nb-action:not(.toggle-layout) {
-      border: none;
-    }
+  //@include media-breakpoint-down(sm) {
+  //
+  //  nb-user /deep/ .user-name {
+  //    display: none;
+  //  }
+  //}
 
-    .control-item {
-      display: none;
-    }
+  //@include media-breakpoint-down(is) {
+  //
+  //  .header-container {
+  //    .logo {
+  //      font-size: 1.25rem;
+  //    }
+  //  }
+  //
+  //  .toggle-layout {
+  //    display: none;
+  //  }
+  //
+  //  nb-action:not(.toggle-layout) {
+  //    padding: 0;
+  //  }
+  //}
 
-    .toggle-layout {
-      padding: 0;
-    }
-  }
-
-  @include media-breakpoint-down(sm) {
-
-    nb-user /deep/ .user-name {
-      display: none;
-    }
-  }
-
-  @include media-breakpoint-down(is) {
-
-    .header-container {
-      .logo {
-        font-size: 1.25rem;
-      }
-    }
-
-    .toggle-layout {
-      display: none;
-    }
-
-    nb-action:not(.toggle-layout) {
-      padding: 0;
-    }
-  }
-
-  @include media-breakpoint-down(xs) {
-    .right /deep/ {
-      display: none;
-    }
-  }
+  //@include media-breakpoint-down(xs) {
+  //  .right /deep/ {
+  //    display: none;
+  //  }
+  //}
 }
 

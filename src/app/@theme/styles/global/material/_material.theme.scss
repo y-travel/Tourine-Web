@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+
+@mixin trh-material-theme() {
+  @include mat-core();
+
+  $trh-primary-palette: mat-palette($mat-indigo);
+  $trh-accent-palette: mat-palette($mat-pink, A200, A100, A400);
+  $trh-warn-palette: mat-palette($mat-red);
+  $trh-material-theme: mat-light-theme($trh-primary-palette, $trh-accent-palette, $trh-warn-palette);
+  @include angular-material-theme($trh-material-theme);
+
+  //dark theme definition
+  $trh-dark-primary: mat-palette($mat-blue-grey);
+  $trh-dark-accent: mat-palette($mat-amber, A200, A100, A400);
+  $trh-dark-warn: mat-palette($mat-deep-orange);
+  $trh-dark-theme: mat-dark-theme($trh-dark-primary, $trh-dark-accent, $trh-dark-warn);
+  .trh-theme-dark {
+    @include angular-material-theme($trh-dark-theme);
+  }
+
+  input {
+    &[matInput][mask="number"] {
+      direction: ltr;
+    }
+  }
+  span {
+    &[matSuffix] {
+      padding-right: 5px;
+    }
+  }
+}

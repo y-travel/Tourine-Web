@@ -1,3 +1,2 @@
-export interface ModalInterface{
-  show(model:any);
+export interface ModalInterface {
 }

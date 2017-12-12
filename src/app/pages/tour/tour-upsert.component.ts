@@ -1,12 +1,11 @@
-import { Component } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { Component, Inject } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 //
 import { FormService } from "../../@core/data/form.service";
 import { ModalInterface } from "../../@theme/components/modal.interface";
-import { Tour, FormFactory } from "../../@core/data/models";
+import { Tour } from "../../@core/data/models";
 import { TourService } from "../../@core/data/tour.service";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 @Component({
   selector: "tour-upsert",
@@ -18,7 +17,10 @@ export class TourUpsertComponent implements ModalInterface {
   destinations: any;
   hotels: any;
 
-  constructor(public formFactory: FormFactory, public modalInstance: NgbActiveModal, public service: TourService, private translateService: TranslateService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              public service: TourService,
+              private translateService: TranslateService) {
     this.developerSeed();
   }
 
@@ -55,14 +57,10 @@ export class TourUpsertComponent implements ModalInterface {
     ];
   }
 
-  show(model: Tour = new Tour()) {
-    this.form = this.formFactory.createTourForm(model);
-  }
-
   save() {
     //@TODO check validation
-    this.service.addTour(this.form.model);
-    this.modalInstance.close(this.form.model);
+    this.service.addTour(this.data.model);
+    this.dialogInstance.close(this.data.model);
   }
 
   submit(event) {

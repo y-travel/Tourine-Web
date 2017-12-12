@@ -1,14 +1,12 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, Inject } from "@angular/core";
+
 import { FormService } from "../../@core/data/form.service";
-import { FormFactory } from "../../@core/data/models/form-factory";
 import { Coupon, Customer } from "../../@core/data/models/client.model";
-import { LocalDataSource } from "ng2-smart-table";
 import { ModalInterface } from "../../@theme/components/modal.interface";
-import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
-import { modelGroupProvider } from "@angular/forms/src/directives/ng_model_group";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { DialogService } from "../../@core/utils/dialog.service";
+import { FormFactory } from "../../@core/data/models/form-factory";
 import { CouponService } from "../../@core/data/coupon.service";
 
 @Component({
@@ -18,29 +16,40 @@ import { CouponService } from "../../@core/data/coupon.service";
   styleUrls: ["coupon-upsert.component.scss"]
 })
 export class CouponUpsertComponent implements ModalInterface {
-  coupon: FormService<Coupon>;
   customer: FormService<Customer>;
   reagents = [];
   passengers: Array<FormService<Customer>> = [];
 
-  constructor(public formFactory: FormFactory, private modalService: NgbModal, private modalInstance: NgbActiveModal, private couponService: CouponService) {
-    this.coupon = formFactory.createCouponForm();
-    this.customer = formFactory.createCustomerForm();
+  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Coupon>,
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              public formFactory: FormFactory,
+              private couponService: CouponService) {
+    this.init();
+  }
+
+  init() {
+    this.customer = this.formFactory.createCustomerForm();
+    this.reagents
+      .push(
+        {id: 1, title: "aziz vazifeh"},
+        {id: 2, title: "ali zendehdel"},
+        {id: 3, title: "mohammad roosta"},
+      ); //@TODO
   }
 
   save() {
     //@TODO Impl. validation
-    const model = this.coupon.model;
+    const model = this.data.model;
     this.couponService.addCoupon(model);
-    this.modalInstance.close(model);
+    this.dialogInstance.close(model);
   }
 
   show() {
   }
 
   reagentUpsert() {
-    let ref = this.modalService.open(ReagentUpsertComponent, {size: "lg", backdrop: "static", container: "coupon-upsert"});
-    ref.componentInstance.show();
-    ref.result.then(model => this.reagents.push(model));
+    const ref = this.dialogService.open(ReagentUpsertComponent, null);
+    ref.afterClosed().subscribe(model => this.reagents.push(model));
   }
 }

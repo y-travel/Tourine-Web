@@ -1,6 +1,4 @@
-@import '../styles/themes';
-@import '../../../../node_modules/bootstrap/scss/mixins/_breakpoints';
-@import '../../../../node_modules/@nebular/theme/styles/global/bootstrap/_breakpoints';
+@import '../styles/install';
 
 @include nb-install-component() {
   nb-layout-column.small {
@@ -104,33 +102,33 @@
     }
   }
 
-  @include media-breakpoint-down(xs) {
-    .main-content {
-      padding: 0.75rem !important;
-
-    }
-  }
-
-  @include media-breakpoint-down(sm) {
-
-    nb-sidebar.menu-sidebar {
-
-      margin-top: 0;
-
-      /deep/ .main-container {
-        height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)}) !important;
-        border-top-right-radius: 0;
-
-        .scrollable {
-          padding-top: 0;
-        }
-      }
-    }
-
-    .main-btn {
-      display: none;
-    }
-  }
+  //@include media-breakpoint-down(xs) {
+  //  .main-content {
+  //    padding: 0.75rem !important;
+  //
+  //  }
+  //}
+  //
+  //@include media-breakpoint-down(sm) {
+  //
+  //  nb-sidebar.menu-sidebar {
+  //
+  //    margin-top: 0;
+  //
+  //    /deep/ .main-container {
+  //      height: calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)}) !important;
+  //      border-top-right-radius: 0;
+  //
+  //      .scrollable {
+  //        padding-top: 0;
+  //      }
+  //    }
+  //  }
+  //
+  //  .main-btn {
+  //    display: none;
+  //  }
+  //}
 
 }
 

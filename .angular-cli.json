@@ -16,19 +16,12 @@
       "main": "main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
-      "tsconfig": "tsconfig.app.json",
+      "tsconfig": "tsconfig.ng.json",
       "testTsconfig": "tsconfig.spec.json",
       "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "./app/@theme/styles/bootstrap-rtl.scss",
-        "../node_modules/nebular-icons/scss/nebular-icons.scss",
         "./app/@theme/styles/iranian-sans.scss",
         "./app/@theme/styles/material-icon.scss",
         "./app/@theme/styles/styles.scss"
-      ],
-      "scripts": [
-        "./assets/vendors/echarts.min.js",
-        "./assets/vendors/echarts.world.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -45,7 +38,7 @@
   "lint": [
     {
       "files": "src/**/*.ts",
-      "project": "src/tsconfig.app.json"
+      "project": "src/tsconfig.ng.json"
     },
     {
       "project": "src/tsconfig.spec.json"

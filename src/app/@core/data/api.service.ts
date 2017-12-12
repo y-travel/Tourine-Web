@@ -19,44 +19,44 @@ export class ApiService {
     this.headers.append("Accept", "application/json");
   }
 
-  getEntities<T>(data: IReturn<QueryResponse<T>>): Observable<QueryResponse<T>> {
-
-    return this.internalSend(data);
-  }
-
-  // protected saveEntity<T>(data: IReturn<EntityCreatedResponse<T>>): Observable<EntityCreatedResponse<T>> {
-  //     return this.internalSend(data);
+  // getEntities<T>(data: IReturn<QueryResponse<T>>): Observable<QueryResponse<T>> {
+  //
+  //   return this.internalSend(data);
   // }
-
-  get<T>(data: IReturn<T>): Observable<T> {
-
-    return this.internalSend(data);
-  }
-
-  send<T>(data: IReturn<T>): Observable<T> {
-    return this.internalSend(data);
-  }
-
-  private internalSend<T>(data: IReturn<T>): Observable<T | any> {
-    const httpMethod = Helper.getHttpMethod(data);
-    let requestMethod = RequestMethod.Get;
-    switch (httpMethod) {
-      case "POST":
-        requestMethod = RequestMethod.Post;
-        break;
-      case "PUT":
-        requestMethod = RequestMethod.Put;
-        break;
-    }
-
-
-    return this.dataService.request(requestMethod, data.getTypeName(), Serializable.toJSON(data), new RequestOptions({headers: this.headers})).map(
-      res => {
-        const type = data.createResponse();
-        if (type)
-          return Serializable.fromJSON(type, res);
-        return res;
-      });
-  }
+  //
+  // // protected saveEntity<T>(data: IReturn<EntityCreatedResponse<T>>): Observable<EntityCreatedResponse<T>> {
+  // //     return this.internalSend(data);
+  // // }
+  //
+  // get<T>(data: IReturn<T>): Observable<T> {
+  //
+  //   return this.internalSend(data);
+  // }
+  //
+  // send<T>(data: IReturn<T>): Observable<T> {
+  //   return this.internalSend(data);
+  // }
+  //
+  // private internalSend<T>(data: IReturn<T>): Observable<T | any> {
+  //   const httpMethod = Helper.getHttpMethod(data);
+  //   let requestMethod = RequestMethod.Get;
+  //   switch (httpMethod) {
+  //     case "POST":
+  //       requestMethod = RequestMethod.Post;
+  //       break;
+  //     case "PUT":
+  //       requestMethod = RequestMethod.Put;
+  //       break;
+  //   }
+  //
+  //
+  //   return this.dataService.request(requestMethod, data.getTypeName(), Serializable.toJSON(data), new RequestOptions({headers: this.headers})).map(
+  //     res => {
+  //       const type = data.createResponse();
+  //       if (type)
+  //         return Serializable.fromJSON(type, res);
+  //       return res;
+  //     });
+  // }
 
 }

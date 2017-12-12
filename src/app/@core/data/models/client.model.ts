@@ -1,19 +1,28 @@
-import { TourStatus, HttpMethod } from "./enums";
+import { HttpMethod, TourStatus } from "./enums";
 import { Helper } from "../../utils/utils";
 
-export class Destination {
+export interface IModel {
+  isNew(): boolean;
+}
+
+export class Model implements IModel {
   id = 0;
+
+  isNew(): boolean {
+    return !this.id;
+  }
+}
+
+export class Destination extends Model {
   name = "";
 }
 
-export class Place {
-  id = 0;
+export class Place extends Model {
   name = 0;
 }
 
-export class Tour {
-  id = 0;
-  destinationId = 0;//@TODO merge destination and place into one table
+export class Tour extends Model {
+  destinationId = 0; //@TODO merge destination and place into one table
   duration: number = undefined;
   date: string = undefined;
   placeId = 0;
@@ -28,36 +37,39 @@ export class Tour {
   infantPrice: number = undefined;
 }
 
-export class Coupon {
+export class Coupon extends Model {
   reagentId: number = undefined;
   reagent: Customer = undefined;
   passengers: Customer[] = [];
-  adultCount = 1;
-  adultPrice = 0;
-  infantCount = 0;
-  infantPrice = 0;
-  busPrice = 0;
-  roomPrice = 0;
-  foodPrice = 0;
+  adultCount: number = undefined;
+  adultPrice: number = undefined;
+  infantCount: number = undefined;
+  infantPrice: number = undefined;
+  busPrice: number = undefined;
+  roomPrice: number = undefined;
+  foodPrice: number = undefined;
 }
 
-export class User {
-  cellphone: string = undefined;
-  name: string = undefined;
-  userName: string = undefined;
+export class EditPassword extends Model {
+  oldPassword: string = undefined;
   password: string = undefined;
   rePassword: string = undefined;
 }
 
-export class Reagent {
-  managerName:string = undefined;
-  agencyName:string = undefined;
-  cellPhone:string = undefined;
-  phone:string = undefined;
-  email:string = undefined;
+export class Reagent extends Model {
+  name: string = undefined;
+  family: string = undefined;
+  agencyName: string = undefined;
+  cellPhone: string = undefined;
+  phone: string = undefined;
+  email: string = undefined;
+
+  get title(): string {
+    return `${this.name} ${this.family}`;
+  }
 }
 
-export class Customer {
+export class Customer extends Model {
   name = "";
   family = "";
   mobileNumber = "";
@@ -85,14 +97,14 @@ export interface IReturnVoid extends IReturn<void> {
 export function Route(path: string, type: HttpMethod = "GET") {
   return (target: any) => {
 
-    var original = target;
-    var pathFn = function () {
+    const original = target;
+    const pathFn = function () {
       return Helper.createApiPath(path, this);
-    };//by using ()=>{} "this" got a wrong value
-    var httpMethodFn = function () {
+    }; //by using ()=>{} "this" got a wrong value
+    const httpMethodFn = function () {
       return type;
     };
-    var wrapper: any = function (...args: any[]) {//if we use (...args)=> or without parameters raise error: <classname> is not a constructor
+    const wrapper: any = function (...args: any[]) {//if we use (...args)=> or without parameters raise error: <classname> is not a constructor
       Reflect.defineProperty(wrapper.prototype,
         "apiPath",
         {
@@ -107,9 +119,8 @@ export function Route(path: string, type: HttpMethod = "GET") {
       return wrapper.prototype;
     };
 
-    // copy prototype so instanceof operator still works
+    // copy prototype so instance of operator still works
     wrapper.prototype = original.prototype;
     return wrapper;
-
   };
 }

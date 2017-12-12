@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { LocalDataSource } from "ng2-smart-table";
 
 import { TourService } from "../../@core/data/tour.service";
 import { TourUpsertComponent } from "./tour-upsert.component";
 import { CouponUpsertComponent } from "./coupon-upsert.component";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
-import { UserUpsertComponent } from "./user-upsert.component";
+import { EditPasswordComponent } from "./edit-password.component";
+import { DialogService } from "../../@core/utils/dialog.service";
+import { FormFactory } from "../../@core/data/models/form-factory";
 
 @Component({
   selector: "tour-list",
@@ -53,29 +53,27 @@ export class TourListComponent {
     },
   };
 
-  source: LocalDataSource = new LocalDataSource();
+  source: any;
 
-  constructor(private tourService: TourService, public modalService: NgbModal) {
-    this.source.load(tourService.getList());
+  constructor(private tourService: TourService,
+              private formFactory: FormFactory,
+              public dialogService: DialogService) {
   }
 
   upsert() {
-    const ref = this.modalService.open(TourUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
-    ref.componentInstance.show();
-    ref.result.then(data => this.source.refresh());
+    const ref = this.dialogService.open(TourUpsertComponent, this.formFactory.createTourForm());
+    ref.afterClosed().subscribe(data => this.source.push(data));
   }
 
   couponUpsert() {
-    const ref = this.modalService.open(CouponUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
-    ref.componentInstance.show();
-    ref.result.then(data => this.source.refresh());
+    const ref = this.dialogService.open(CouponUpsertComponent, this.formFactory.createCouponForm());
   }
 
   reagentUpsert() {
-    this.modalService.open(ReagentUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+    this.dialogService.open(ReagentUpsertComponent, this.formFactory.createReagentForm());
   }
 
   userUpsert() {
-    this.modalService.open(UserUpsertComponent, {size: "lg", backdrop: "static", container: "nb-layout"});
+    this.dialogService.open(EditPasswordComponent, this.formFactory.createEditPasswordForm());
   }
 }

@@ -1,0 +1,9 @@
+@import 'components/toaster.theme';
+@import "material/material.theme";
+@import 'typography/typography';
+
+@mixin nb-theme-overrides() {
+  @include nb-typography();
+  @include trh-material-theme();
+  @include nb-components-toaster-theme();
+}

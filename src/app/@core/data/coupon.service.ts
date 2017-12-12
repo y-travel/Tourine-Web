@@ -4,13 +4,14 @@ import { ApiService } from "./api.service";
 import { Coupon } from "./models/client.model";
 
 @Injectable()
-export class CouponService{
-  data=[];
-  constructor(private apiService:ApiService){
+export class CouponService {
+  data = [];
+
+  constructor(private apiService: ApiService) {
   }
 
-  addCoupon(model:Coupon){
+  addCoupon(model: Coupon) {
     //@TODO refactor
-      this.data.push(model);
+    this.data.push(model);
   }
 }

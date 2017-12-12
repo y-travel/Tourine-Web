@@ -1,30 +1,20 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, Inject } from "@angular/core";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { Reagent } from "../../@core/data/models/client.model";
+import { FormService } from "../../@core/data/form.service";
+import { ModalInterface } from "../../@theme/components/modal.interface";
 
 @Component({
-    moduleId: module.id,
-    selector: "reagent-upsert",
-    templateUrl: "reagent-upsert.component.html",
-    styleUrls: ["reagent-upsert.component.scss"]
+  moduleId: module.id,
+  selector: "reagent-upsert",
+  templateUrl: "reagent-upsert.component.html",
+  styleUrls: ["reagent-upsert.component.scss"]
 })
 export class ReagentUpsertComponent {
-  form:FormGroup;
-   message:string;
-  constructor(){
-    this.form=new FormBuilder().group(
-      {
-        managerName:["",Validators.required],
-        agencyName:["",Validators.required],
-        cellPhone:["",Validators.required],
-        phone:["",Validators.required],
-        email:["",Validators.required],
-      }
-    );
+  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Reagent>,
+              public dialogRef: MatDialogRef<ModalInterface>) {
   }
 
-  save(){
-    //this.message=this.form.controls['Name'].value;
-    alert("OK");
+  save() {
   }
 }

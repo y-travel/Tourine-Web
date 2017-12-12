@@ -1,0 +1,14 @@
+@import 'install';
+
+@mixin set_defaults {
+  html,body{
+    font-size: nb-theme(base-font-size);
+  }
+
+  .btn-micro{
+    transform: scale(.7);
+    line-height:0;
+    padding: 3px;
+    border-radius: 100%;
+  }
+}

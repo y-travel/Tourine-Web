@@ -4,154 +4,67 @@
   </div>
 </div>
 
-<div class="modal-body">
-  <form [formGroup]="coupon.form">
-    <div class="row">
-      <form-field>
-        <trh-slider #slider falseText="passenger" trueText="reagent" value="true"></trh-slider>
-      </form-field>
-    </div>
-    <div [hidden]="!slider.value" style="width: 500px">
-      <div class="row">
-        <form-field label="reagent_.name">
-          <div class="row align-items-center">
-            <trh-dropdown [items]="reagents" class="col-4" textField="id" valueField="title"></trh-dropdown>
-            <button trhButton class="btn-outline-warning" size="micro" kind="secondary" (click)="reagentUpsert()"><i class="material-icons">add</i></button>
-          </div>
-        </form-field>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="row">
-            <form-field label="adultCount">
-              <input trhInput formControlName="adultCount">
-            </form-field>
-            <form-field label="emptyCount" class="col-4">0</form-field>
-            <form-field label="offValue" class="col-3">
-              <input trhInput formControlName="adultPrice">
-            </form-field>
-          </div>
-          <div class="row">
-            <form-field label="infantCount">
-              <input trhInput formControlName="infantCount">
-            </form-field>
-            <form-field label="emptyCount" class="col-4">0</form-field>
-            <form-field label="offValue" class="col-3">
-              <input trhInput formControlName="infantPrice">
-            </form-field>
-          </div>
+<div class="modal-body" dir="rtl" [style.width.px]="600"><!--width set for IE-->
+  <mat-horizontal-stepper >
+   <mat-step label="{{'selectCustomer'|translate}}">
+
+<mat-icon>user</mat-icon>
+<mat-icon>customer</mat-icon>
+   </mat-step>
+    <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'first'|translate})}}">
+      <form [formGroup]="data.form">
+        <div fxLayout="row">
+          <mat-form-field fxFlex="40">
+            <input matInput mask="number" #adultCount placeholder="adultCount" formControlName="adultCount">
+            <mat-hint align="end" translate>{{"emptyCount"|translate:({outof:"100",value:adultCount.value})}}</mat-hint>
+          </mat-form-field>
+          <mat-form-field fxFlex="20">
+            <input matInput placeholder="offValue" formControlName="adultPrice">
+          </mat-form-field>
         </div>
-        <div class="col-5">
-          <div class="row">
-            <form-field>
-              <div class="row">
-                <i class="material-icons md-1 ml-2">airport_shuttle</i>
-                <input trhInput class="col-4" formControlName="busPrice">
-              </div>
-            </form-field>
-          </div>
-          <div class="row">
-            <form-field>
-              <div class="row">
-                <i class="material-icons md-1 ml-2">airline_seat_individual_suite</i>
-                <input trhInput class="col-4" formControlName="roomPrice">
-              </div>
-            </form-field>
-          </div>
-          <div class="row">
-            <form-field>
-              <div class="row">
-                <i class="material-icons md-1 ml-2">room_service</i>
-                <input trhInput class="col-4" formControlName="foodPrice">
-              </div>
-            </form-field>
-          </div>
+        <div fxLayout="row">
+          <mat-form-field fxFlex="40">
+            <input matInput #infantCount placeholder="infantCount" formControlName="infantCount">
+            <mat-hint align="end" translate>{{"emptyCount"|translate:({outof:"100",value:infantCount.value})}} </mat-hint>
+          </mat-form-field>
+          <mat-form-field fxFlex="20">
+            <input matInput placeholder="offValue" formControlName="infantPrice">
+          </mat-form-field>
         </div>
-      </div>
-    </div>
-    <div [hidden]="slider.value" style="width:1100px;">
-      <div>
-        <span>{{"buyer"|translate}}</span>
-        <nb-card>
-          <nb-card-body>
-            <div class="row">
-              <form-field label="nationalCode">
-                <input trhInput [formControl]="customer.form.get('nationalCode')">
-              </form-field>
-              <form-field label="name">
-                <input trhInput [formControl]="customer.form.get('name')">
-              </form-field>
-              <form-field label="family">
-                <input trhInput [formControl]="customer.form.get('family')">
-              </form-field>
-              <form-field label="mobileNumber">
-                <input trhInput [formControl]="customer.form.get('mobileNumber')">
-              </form-field>
-              <form-field label="fatherName">
-                <input trhInput [formControl]="customer.form.get('fatherName')">
-              </form-field>
-              <form-field label="birthDate">
-                <input trhInput [formControl]="customer.form.get('birthDate')">
-              </form-field>
-              <form-field label="passport_.expireDate">
-                <input trhInput [formControl]="customer.form.get('passportExpireDate')">
-              </form-field>
-              <form-field label="passport_.number">
-                <input trhInput [formControl]="customer.form.get('passportNo')">
-              </form-field>
-            </div>
-          </nb-card-body>
-        </nb-card>
-      </div>
-      <div>
-        {{"fellows"|translate}}
-        <button trhButton class="btn-outline-success" size="micro" kind="secondary" (click)="passengers.push(formFactory.createCustomerForm())">
-          <i class="material-icons">add</i>
-        </button>
-        <div class="container">
-          <div *ngFor="let item of passengers;let indx=index">
-            <nb-card>
-              <nb-card-body>
-                <button trhButton class="btn-outline-danger closeButton" (click)="passengers.splice(indx,1)" size="micro" kind="secondary">
-                  <i class="material-icons">clear</i>
-                </button>
-                <div class="row">
-                  <form-field label="nationalCode">
-                    <input trhInput [formControl]="item.form.get('nationalCode')">
-                  </form-field>
-                  <form-field label="name">
-                    <input trhInput [formControl]="item.form.get('name')">
-                  </form-field>
-                  <form-field label="family">
-                    <input trhInput [formControl]="item.form.get('family')">
-                  </form-field>
-                  <form-field label="mobileNumber">
-                    <input trhInput [formControl]="item.form.get('mobileNumber')">
-                  </form-field>
-                  <form-field label="fatherName">
-                    <input trhInput [formControl]="item.form.get('fatherName')">
-                  </form-field>
-                  <form-field label="birthDate">
-                    <input trhInput [formControl]="item.form.get('birthDate')">
-                  </form-field>
-                  <form-field label="passport_.expireDate">
-                    <input trhInput [formControl]="item.form.get('passportExpireDate')">
-                  </form-field>
-                  <form-field label="passport_.number">
-                    <input trhInput [formControl]="item.form.get('passportNo')">
-                  </form-field>
-                </div>
-              </nb-card-body>
-            </nb-card>
-          </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field fxFlex="33">
+            <input matInput mask="number" placeholder="busPrice" formControlName="busPrice">
+            <mat-icon matSuffix>airport_shuttle</mat-icon>
+            <mat-hint align="end" translate>tomanFormat</mat-hint>
+          </mat-form-field>
+          <mat-form-field fxFlex="33">
+            <input matInput mask="number" placeholder="roomPrice" formControlName="roomPrice">
+            <mat-icon matSuffix> airline_seat_individual_suite</mat-icon>
+            <mat-hint align="end" translate>tomanFormat</mat-hint>
+          </mat-form-field>
+          <mat-form-field fxFlex="33">
+            <input matInput mask="number" placeholder="foodPrice" formControlName="foodPrice">
+            <mat-icon matSuffix>room_service</mat-icon>
+            <mat-hint align="end" translate>tomanFormat</mat-hint>
+          </mat-form-field>
         </div>
-      </div>
-    </div>
-  </form>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="customer.form" label="{{'steps'|translate:({value:'second'|translate})}}">
+      <form [formGroup]="customer.form">
+        <div fxLayout="row">
+          <mat-form-field>
+            <mat-select placeholder="reagent_.name" >
+              <mat-option *ngFor="let item of reagents" [value]="item.id">{{item.title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-button class="btn-outline-warning" size="micro" kind="secondary" (click)="reagentUpsert()"><i class="material-icons">add</i></button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>
-<div class="modal-body">
-  <div class="row">
-    <button trhButton (click)="save()">{{"save"|translate}}</button>
-  </div>
+<div class="modal-footer">
+  <button mat-button fxFlex (click)="save()">{{"save"|translate}}</button>
 </div>
 

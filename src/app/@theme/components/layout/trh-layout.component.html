@@ -1,0 +1,15 @@
+<ng-template #layoutTopDynamicArea></ng-template>
+<div class="scrollable-container">
+  <div class="layout">
+    <ng-content select="trh-header"></ng-content>
+    <div class="layout-container">
+      <ng-content select="trh-sidebar"></ng-content>
+      <div class="content" [class.center]="centerValue">
+        <div class="columns">
+          <ng-content ></ng-content>
+        </div>
+        <ng-content select="trh-footer"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
