@@ -13,7 +13,7 @@ import { MenuService } from "../menu/menu.service";
 export class HeaderComponent implements OnInit {
 
 
-  @Input() position: string = 'normal';
+  @Input() position = 'normal';
 
   user: any;
 

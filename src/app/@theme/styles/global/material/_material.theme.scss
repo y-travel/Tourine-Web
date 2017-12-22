@@ -3,7 +3,7 @@
 @mixin trh-material-theme() {
   @include mat-core();
 
-  $trh-primary-palette: mat-palette($mat-indigo);
+  $trh-primary-palette: mat-palette($mat-deep-purple);
   $trh-accent-palette: mat-palette($mat-pink, A200, A100, A400);
   $trh-warn-palette: mat-palette($mat-red);
   $trh-material-theme: mat-light-theme($trh-primary-palette, $trh-accent-palette, $trh-warn-palette);

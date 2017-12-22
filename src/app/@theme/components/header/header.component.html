@@ -1,11 +1,14 @@
-<nav>
-  <div class="header-container"
-       [class.left]="position === 'normal'"
-       [class.right]="position === 'inverse'">
-    <div class="logo-containter">
-      <div class="logo" (click)="goToHome()">تورینه</div>
-      <a (click)="toggleSidebar()" href="#" class="navigation"><i class="trh-menu"></i></a>
-    </div>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="toggleSidebar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="logo" (click)="goToHome()">تورینه</div>
     <trh-theme-switcher></trh-theme-switcher>
-  </div>
-</nav>
+    <span fxFlex></span><!--spacer-->
+    <button mat-icon-button>
+      <mat-icon>account_box</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+

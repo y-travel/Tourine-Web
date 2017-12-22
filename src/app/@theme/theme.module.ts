@@ -13,7 +13,7 @@ import {
   MatNativeDateModule,
   MatSelectModule,
   MatSlideToggleModule,
-  MatStepperModule
+  MatStepperModule, MatToolbarModule
 } from "@angular/material";
 
 import { FormFieldComponent, HeaderComponent, SearchInputComponent, ThemeSwitcherComponent, TrhDropdownComponent, TrhSliderComponent, } from './components';
@@ -47,6 +47,7 @@ const NB_MODULES = [
   MatCardModule,
   MatDatepickerModule,
   MatNativeDateModule, //@TODO Should be localize with moment.js
+  MatToolbarModule,
 ];
 
 const COMPONENTS = [

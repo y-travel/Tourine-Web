@@ -4,17 +4,8 @@ import { ThemeService } from "../../../@core/utils/theme.service";
 
 @Component({
   selector: 'trh-theme-switcher',
-  styleUrls: ['./theme-switcher.component.scss'],
-  template: `
-    <label class="theme-switch">
-      <span class="light nb-sunny"></span>
-      <div class="switch">
-        <input type="checkbox" [checked]="isDark" (change)="toggleTheme(theme.checked)" #theme>
-        <span class="slider"></span>
-      </div>
-      <span class="cosmic nb-star"></span>
-    </label>
-  `,
+  styleUrls: ['./trh-theme-switcher.component.scss'],
+  templateUrl: "trh-theme-switcher.component.html",
 })
 export class ThemeSwitcherComponent implements OnInit {
 

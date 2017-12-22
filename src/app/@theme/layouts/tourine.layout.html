@@ -1,0 +1,16 @@
+<trh-layout>
+  <div class="layout-header" fixed>
+    <trh-header  position="inverse"></trh-header>
+  </div>
+  <trh-sidebar class="menu-sidebar">
+    <div class="sidebar-header">
+      <a href="#" class="btn btn-hero-success main-btn">
+        <mat-icon>keyboard</mat-icon>
+      </a>
+    </div>
+    <ng-content select="trh-menu"></ng-content>
+  </trh-sidebar>
+  <div class="layout-content main-content">
+    <ng-content select="router-outlet"></ng-content>
+  </div>
+</trh-layout>

@@ -12,31 +12,9 @@ import { SpinnerService } from "../../@core/utils/spinner.service";
 
 // TODO: move layouts into the framework
 @Component({
-  selector: 'trh-sample-layout',
+  selector: 'tourine-layout',
+  templateUrl: "tourine.layout.html",
   styleUrls: ['tourine.layout.scss'],
-  template: `
-    <trh-layout  >
-      <div class="layout-header" fixed>
-        <trh-header position="inverse"></trh-header>
-      </div>
-
-      <trh-sidebar class="menu-sidebar"
-                   tag="menu-sidebar"
-                   responsive
-                   right="true">
-        <div class="sidebar-header">
-          <a href="#" class="btn btn-hero-success main-btn">
-            <i class="nb-keypad"></i>
-          </a>
-        </div>
-        <ng-content select="trh-menu"></ng-content>
-      </trh-sidebar>
-
-      <div class="layout-content main-content">
-        <ng-content select="router-outlet"></ng-content>
-      </div>
-    </trh-layout>
-  `,
 })
 export class TourineLayoutComponent implements OnDestroy {
 
@@ -52,12 +30,12 @@ export class TourineLayoutComponent implements OnDestroy {
   private removeClassSubscription: Subscription;
 
   constructor(protected stateService: StateService,
-              protected spinnerService:SpinnerService,
+              protected spinnerService: SpinnerService,
               protected menuService: MenuService,
               protected themeService: ThemeService,
               protected sidebarService: SidebarService,
-              protected renderer:Renderer2,
-              protected elementRef:ElementRef) {
+              protected renderer: Renderer2,
+              protected elementRef: ElementRef) {
     this.layoutState$ = this.stateService.onLayoutState()
       .subscribe((layout: string) => this.layout = layout);
 
