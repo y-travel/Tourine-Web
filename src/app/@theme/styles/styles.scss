@@ -11,9 +11,8 @@
   // framework global styles
   @include nb-theme-global();
 
-
-  @include material_default();
-  @include set_defaults();//@TODO html and body style not work inside of nb_install
+  @include set_defaults();
+  //@TODO html and body style not work inside of nb_install
 
 }
 

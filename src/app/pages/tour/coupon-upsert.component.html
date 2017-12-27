@@ -1,10 +1,10 @@
-<div class="modal-header">
+<div mat-dialog-title class="modal-header">
   <div class="modal-title">
     {{"coupon_.upsert"|translate}}
   </div>
 </div>
 
-<div class="modal-body" dir="rtl" [style.width.px]="600"><!--width set for IE-->
+<div class="modal-body" dir="rtl" [style.width.px]="600" autoTranslate><!--width set for IE-->
   <mat-horizontal-stepper >
    <mat-step label="{{'selectCustomer'|translate}}">
 
@@ -64,7 +64,7 @@
     </mat-step>
   </mat-horizontal-stepper>
 </div>
-<div class="modal-footer">
-  <button mat-button fxFlex (click)="save()">{{"save"|translate}}</button>
-</div>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" fxFlex (click)="save()">{{"save"|translate}}</button>
+</mat-dialog-actions>
 

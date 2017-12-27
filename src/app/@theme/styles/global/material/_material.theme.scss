@@ -1,8 +1,6 @@
 @import '~@angular/material/theming';
 
-@mixin trh-material-theme() {
-  @include mat-core();
-
+@mixin init_palette() {
   $trh-primary-palette: mat-palette($mat-deep-purple);
   $trh-accent-palette: mat-palette($mat-pink, A200, A100, A400);
   $trh-warn-palette: mat-palette($mat-red);
@@ -14,10 +12,29 @@
   $trh-dark-accent: mat-palette($mat-amber, A200, A100, A400);
   $trh-dark-warn: mat-palette($mat-deep-orange);
   $trh-dark-theme: mat-dark-theme($trh-dark-primary, $trh-dark-accent, $trh-dark-warn);
-  .trh-theme-dark {
+  &.trh-theme-dark {
     @include angular-material-theme($trh-dark-theme);
   }
+}
 
+@mixin init_font() {
+  $custom-typography: mat-typography-config(
+    $font-family: nb-theme(font-main),
+    $headline: mat-typography-level(32px, 48px, 700),
+    $body-1: mat-typography-level(16px, 24px, 500)
+  );
+  @include mat-base-typography($custom-typography);
+  @include mat-checkbox-typography($custom-typography);
+  @include angular-material-typography($custom-typography);
+}
+
+@mixin material_initialization() {
+  @include mat-core();
+  @include init_palette();
+  @include init_font();
+}
+
+@mixin override_defaults() {
   input {
     &[matInput][mask="number"] {
       direction: ltr;
@@ -28,4 +45,9 @@
       padding-right: 5px;
     }
   }
+}
+
+@mixin trh-material-theme() {
+  @include material_initialization();
+  @include override_defaults();
 }

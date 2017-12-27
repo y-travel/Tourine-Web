@@ -59,7 +59,7 @@ export class FormFactory {
       name: [model.name],
       family: [model.family, Validators.required],
       agencyName: [model.agencyName],
-      cellPhone: [model.cellPhone],
+      mobileNumber: [model.mobileNumber],
       phone: [model.phone],
       email: [model.email],
     });

@@ -16,8 +16,8 @@ import {
   MatStepperModule, MatToolbarModule
 } from "@angular/material";
 
-import { FormFieldComponent, HeaderComponent, SearchInputComponent, ThemeSwitcherComponent, TrhDropdownComponent, TrhSliderComponent, } from './components';
-import { TrhButtonDirective, TrhInputDirective, TrhRowDirective } from "./directives";
+import { HeaderComponent, SearchInputComponent, ThemeSwitcherComponent, TrhDropdownComponent, TrhSliderComponent, } from './components';
+import { TrhButtonDirective, TrhInputDirective, AutoTranslateDirective } from "./directives";
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { TourineLayoutComponent } from './layouts';
 import { AppTranslationModule } from "../app-translation.module";
@@ -55,7 +55,6 @@ const COMPONENTS = [
   HeaderComponent,
   SearchInputComponent,
   TourineLayoutComponent,
-  FormFieldComponent,
   TrhInputDirective,
   TrhButtonDirective,
   TrhDropdownComponent,
@@ -65,7 +64,7 @@ const COMPONENTS = [
   TrhMenuComponent,
   TrhSidebarComponent,
   TrhCheckboxComponent,
-  TrhRowDirective,
+  AutoTranslateDirective,
 ];
 
 const PIPES = [

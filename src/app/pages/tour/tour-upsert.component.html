@@ -1,9 +1,9 @@
-<div class="modal-header">
+<div mat-dialog-title class="modal-header">
   <div class="modal-title">
     {{"tour_.upsert"|translate}}
   </div>
 </div>
-<div matdi class="right modal-body" dir="rtl" [style.width.px]="700"><!--width set for IE-->
+<div class="right modal-body" dir="rtl" [style.width.px]="700" autoTranslate><!--width set for IE-->
   <form [formGroup]="data.form">
     <div fxLayout="row">
       <trh-slider fxFlex trueText="dollar" falseText="rial"></trh-slider>
@@ -25,8 +25,8 @@
 
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between">
-      <mat-card  fxLayout="column" fxFlex>
-        <div fxLayout="row"  fxLayoutAlign="space-between">
+      <mat-card fxLayout="column" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
             <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour_.date" formControlName="date">
             <mat-datepicker-toggle #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
@@ -80,6 +80,6 @@
     </div>
   </form>
 </div>
-<div class="modal-footer">
-  <button mat-button fxFlex (click)="save()">{{"save"|translate}}</button>
-</div>
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" fxFlex (click)="save()">{{"save"|translate}}</button>
+</mat-dialog-actions>

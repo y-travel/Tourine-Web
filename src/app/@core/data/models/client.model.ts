@@ -60,7 +60,7 @@ export class Reagent extends Model {
   name: string = undefined;
   family: string = undefined;
   agencyName: string = undefined;
-  cellPhone: string = undefined;
+  mobileNumber: string = undefined;
   phone: string = undefined;
   email: string = undefined;
 

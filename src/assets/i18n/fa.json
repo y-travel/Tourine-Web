@@ -15,10 +15,14 @@
   },
   "adultCount": "تعداد بزرگسال",
   "agencyName": "نام آژانس",
-  "cellphone": "شماره همراه",
+  "busPrice":"هزینه اتوبوس",
+  "mobileNumber": "شماره همراه",
   "coupon_": {
     "upsert": "ثبت کوپن"
   },
+  "oldPassword":"کلمه عبور فعلی",
+  "roomPrice":"هزینه اتاق",
+  "foodPrice":"هزینه غذا",
   "destination": "مقصد",
   "dollar": "دلار",
   "duration": "مدت زمان",
