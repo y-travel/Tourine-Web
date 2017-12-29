@@ -9,15 +9,17 @@ import {
   MatDatepickerModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatNativeDateModule,
   MatSelectModule,
+  MatSidenavModule,
   MatSlideToggleModule,
-  MatStepperModule, MatToolbarModule
+  MatStepperModule,
+  MatToolbarModule
 } from "@angular/material";
 
-import { HeaderComponent, SearchInputComponent, ThemeSwitcherComponent, TrhDropdownComponent, TrhSliderComponent, } from './components';
-import { TrhButtonDirective, TrhInputDirective, AutoTranslateDirective } from "./directives";
+import { SearchInputComponent, ThemeSwitcherComponent, TrhDropdownComponent, TrhHeaderComponent, TrhSliderComponent, } from './components';
+import { AutoTranslateDirective, TrhButtonDirective, TrhInputDirective } from "./directives";
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { TourineLayoutComponent } from './layouts';
 import { AppTranslationModule } from "../app-translation.module";
@@ -48,11 +50,13 @@ const NB_MODULES = [
   MatDatepickerModule,
   MatNativeDateModule, //@TODO Should be localize with moment.js
   MatToolbarModule,
+  MatSidenavModule,
+  MatListModule,
 ];
 
 const COMPONENTS = [
   ThemeSwitcherComponent,
-  HeaderComponent,
+  TrhHeaderComponent,
   SearchInputComponent,
   TourineLayoutComponent,
   TrhInputDirective,

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SidebarService } from "./sidebar.service";
+import { MatSidenav } from "@angular/material";
 
 @Component({
   selector: 'trh-sidebar',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrhSidebarComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild(MatSidenav) sidnav: MatSidenav;
+
+  constructor(public sidebarService: SidebarService) {
+    this.sidebarService.toggleChange.subscribe(res => this.sidnav.toggle());
+  }
 
   ngOnInit() {
   }
-
 }

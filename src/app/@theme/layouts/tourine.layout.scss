@@ -1,6 +1,10 @@
 @import '../styles/install';
 
 @include nb-install-component() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   nb-layout-column.small {
     flex: 0.15 !important;
   }
@@ -40,10 +44,10 @@
       }
     }
   }
-  nb-layout-header{
+  .layout-header{
     box-shadow: 5px 5px 20px nb-theme(shadow-color);
   }
-  nb-sidebar.menu-sidebar {
+  .menu-sidebar {
 
     margin-top: nb-theme(sidebar-header-gap);
 

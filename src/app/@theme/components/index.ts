@@ -1,4 +1,4 @@
-export * from './header/header.component';
+export * from './header/trh-header.component';
 export * from './search-input/search-input.component';
 export * from './theme-switcher/trh-theme-switcher.component';
 export * from "./dropdown/trh-dropdown.component";

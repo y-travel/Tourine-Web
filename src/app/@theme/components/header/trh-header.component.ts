@@ -7,16 +7,12 @@ import { MenuService } from "../menu/menu.service";
 
 @Component({
   selector: 'trh-header',
-  styleUrls: ['./header.component.scss'],
-  templateUrl: './header.component.html',
+  styleUrls: ['./trh-header.component.scss'],
+  templateUrl: './trh-header.component.html',
 })
-export class HeaderComponent implements OnInit {
-
-
+export class TrhHeaderComponent implements OnInit {
   @Input() position = 'normal';
-
   user: any;
-
   userMenu = [{title: 'Profile'}, {title: 'Log out'}];
 
   constructor(private sidebarService: SidebarService,

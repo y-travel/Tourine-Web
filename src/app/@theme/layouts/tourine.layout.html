@@ -1,16 +1,26 @@
-<trh-layout>
-  <div class="layout-header" fixed>
-    <trh-header  position="inverse"></trh-header>
-  </div>
-  <trh-sidebar class="menu-sidebar">
-    <div class="sidebar-header">
+<trh-layout dir="rtl">
+  <div class="layout-content main-content">
+    <trh-sidebar class="menu-sidebar">
+      <div class="sidebar-main-header">
+        <trh-header position="inverse"></trh-header>
+      </div>
+      <div class="sidebar-header">
+        <mat-toolbar color="primary">
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <button mat-icon-button (click)="navigate(['/'])" class="rj-margin-right">
+              <mat-icon>home</mat-icon>
+            </button>
+            <span>Angular Lab</span>
+          </div>
+        </mat-toolbar>
+      </div>
+      <div class="sidebar-article">
+        <ng-content select="router-outlet"></ng-content>
+      </div>
       <a href="#" class="btn btn-hero-success main-btn">
         <mat-icon>keyboard</mat-icon>
       </a>
-    </div>
-    <ng-content select="trh-menu"></ng-content>
-  </trh-sidebar>
-  <div class="layout-content main-content">
-    <ng-content select="router-outlet"></ng-content>
+      <ng-content select="trh-menu"></ng-content>
+    </trh-sidebar>
   </div>
 </trh-layout>
