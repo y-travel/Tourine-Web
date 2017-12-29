@@ -64,7 +64,7 @@ export class TourineLayoutComponent implements OnDestroy {
       this.afterViewInit$.subscribe((_) => resolve());
     }));
     this.spinnerService.load();
-
+    this.menuService.onClick.subscribe(res => this.sidebarService.toggle(false));
     // trigger first time so that after the change we have the initial value
     this.themeService.changeWindowWidth(window.innerWidth);
   }

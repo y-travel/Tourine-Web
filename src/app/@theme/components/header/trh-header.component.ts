@@ -27,12 +27,12 @@ export class TrhHeaderComponent implements OnInit {
   }
 
   toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
+    this.sidebarService.toggle(true);
     return false;
   }
 
   toggleSettings(): boolean {
-    this.sidebarService.toggle(false, 'settings-sidebar');
+    this.sidebarService.toggle(false);
     return false;
   }
 

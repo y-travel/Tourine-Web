@@ -8,7 +8,7 @@ export class SidebarService {
   constructor() {
   }
 
-  toggle(open: boolean, name: string) {
+  toggle(open: boolean) {
     this.toggleChange.emit(open);
   }
 }

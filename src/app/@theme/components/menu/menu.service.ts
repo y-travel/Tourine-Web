@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable()
 export class MenuService {
-
-  constructor() { }
+  onClick = new EventEmitter<string>();
 
   navigateHome() {
+    //@TODO impl.
   }
 }
