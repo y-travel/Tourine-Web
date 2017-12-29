@@ -1,6 +1,6 @@
 <div mat-dialog-title class="modal-header">
   <div class="modal-title">
-    {{"tour_.upsert"|translate}}
+    {{"tour.upsert"|translate}}
   </div>
 </div>
 <div class="right modal-body" dir="rtl" [style.width.px]="700" autoTranslate><!--width set for IE-->
@@ -39,10 +39,10 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
-            <input matInput placeholder="adult_.count" formControlName="adultCount">
+            <input matInput placeholder="adult.count" formControlName="adultCount">
           </mat-form-field>
           <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="adult_.minPrice" formControlName="adultMinPrice">
+            <input matInput mask="number" placeholder="adult.minPrice" formControlName="adultMinPrice">
             <mat-hint align="end" translate>tomanFormat</mat-hint>
           </mat-form-field>
 

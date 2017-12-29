@@ -1,66 +1,67 @@
 {
-  "buyer":"خریدار",
-  "fellows":"همراهان",
-  "mobileNumber":"شماره موبایل",
-  "passport_": {
-    "number":"شماره پاسپورت",
-    "expireDate":"تاریخ انقضاء پاسپورت"
-  },
-  "birthDate":"تاریخ تولد",
-  "nationalCode":"کد ملی",
-  "fatherName":"نام پدر",
-  "adult_": {
+  "adult": {
     "count": "تعداد ظرفیت بزرگسال",
     "minPrice": "حداقل قیمت ثبت نام بزرگسال"
   },
   "adultCount": "تعداد بزرگسال",
   "agencyName": "نام آژانس",
-  "busPrice":"هزینه اتوبوس",
-  "mobileNumber": "شماره همراه",
-  "coupon_": {
+  "birthDate": "تاریخ تولد",
+  "busPrice": "هزینه اتوبوس",
+  "buyer": "خریدار",
+  "coupon": {
     "upsert": "ثبت کوپن"
   },
-  "oldPassword":"کلمه عبور فعلی",
-  "roomPrice":"هزینه اتاق",
-  "foodPrice":"هزینه غذا",
+  "dayFormat": "(روز)",
   "destination": "مقصد",
   "dollar": "دلار",
   "duration": "مدت زمان",
   "email": "رایانامه",
   "emptyCount": "ظرفیت خالی {{value}} از {{outof}}",
-  "steps":"گام {{value}}",
-  "second":"دوم",
-  "from":"از",
-  "first":"اول",
+  "family": "نام خانوادگی",
+  "fatherName": "نام پدر",
+  "fellows": "همراهان",
+  "first": "اول",
   "flight": "هوایی",
-  "family":"نام خانوادگی",
+  "foodPrice": "هزینه غذا",
+  "from": "از",
   "ground": "زمینی",
+  "homePage": "صفحه اصلی",
   "hotel": "هتل",
   "infantCount": "تعداد بچه",
   "infantPrice": "قیمت بچه",
+  "mobileNumber": "شماره همراه",
   "name": "نام",
+  "nationalCode": "کد ملی",
   "offValue": "تخفیف",
+  "oldPassword": "کلمه عبور فعلی",
   "passenger": "مسافر",
+  "passport": {
+    "expireDate": "تاریخ انقضاء پاسپورت",
+    "number": "شماره پاسپورت"
+  },
   "password": "کلمه عبور",
   "phone": "تلفن",
   "pleaseSelect": "لطفاً انتخاب کنید",
-  "reagent": "معرف",
-  "reagent_": {
-    "upsert": "ثبت معرف",
-    "name": "نام معرف"
+  "reagent": {
+    "name": "نام معرف",
+    "upsert": "ثبت معرف"
   },
+  "reagent_": "معرف",
   "rePassword": "تکرار کلمه عبور",
   "rial": "ریال",
+  "roomPrice": "هزینه اتاق",
   "save": "ثبت",
+  "second": "دوم",
+  "steps": "گام {{value}}",
   "toman": "تومان",
   "tomanFormat": "(تومان)",
-  "dayFormat":"(روز)",
-  "tour": "تور",
-  "tour_": {
+  "tour": {
     "date": "تاریخ اجرا",
+    "list": "لیست تورها",
     "upsert": "ثبت تور"
   },
-  "user_": {
+  "tour_": "تور",
+  "user": {
     "upsert": "ثبت کاربر"
   },
   "username": "نام کاربری"

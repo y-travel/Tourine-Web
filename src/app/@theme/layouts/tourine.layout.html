@@ -7,19 +7,15 @@
       <div class="sidebar-header">
         <mat-toolbar color="primary">
           <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            <button mat-icon-button (click)="navigate(['/'])" class="rj-margin-right">
-              <mat-icon>home</mat-icon>
+            <button mat-icon-button >
+              <mat-icon>settings</mat-icon>
             </button>
-            <span>Angular Lab</span>
           </div>
         </mat-toolbar>
       </div>
       <div class="sidebar-article">
         <ng-content select="router-outlet"></ng-content>
       </div>
-      <a href="#" class="btn btn-hero-success main-btn">
-        <mat-icon>keyboard</mat-icon>
-      </a>
       <ng-content select="trh-menu"></ng-content>
     </trh-sidebar>
   </div>

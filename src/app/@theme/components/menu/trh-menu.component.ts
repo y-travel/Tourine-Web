@@ -1,18 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'trh-menu',
   templateUrl: './trh-menu.component.html',
   styleUrls: ['./trh-menu.component.scss']
 })
-export class TrhMenuComponent implements OnInit {
+export class TrhMenuComponent {
 
   @Input() items = [];
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
-  ngOnInit() {
+  navigate(link: string) {
+    this.router.navigate([link]);
   }
-
 }

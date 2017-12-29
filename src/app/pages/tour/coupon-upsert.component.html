@@ -54,7 +54,7 @@
       <form [formGroup]="customer.form">
         <div fxLayout="row">
           <mat-form-field>
-            <mat-select placeholder="reagent_.name" >
+            <mat-select placeholder="reagent.name" >
               <mat-option *ngFor="let item of reagents" [value]="item.id">{{item.title}}</mat-option>
             </mat-select>
           </mat-form-field>

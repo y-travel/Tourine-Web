@@ -1,19 +1,19 @@
-
-export const MENU_ITEMS=[
+export const MENU_ITEMS = [
   {
-    title: 'صفحه اصلی',
-    icon: 'nb-home',
+    title: "homePage",
+    icon: 'home',
     link: '/dashboard',
     home: true,
   },
   {
-    title:"تور",
-    icon:"nb-paper-plane",
-    children:[
+    title: "tour.list",
+    icon: "view_list",
+    link: "/pages/tour/list",
+    children: [
       {
-        title:"لیست تورها",
-        link:"/pages/tour/list",
-        icon:"nb-compose"
+        title: "tourList",
+        link: "/pages/tour/list",
+        icon: "view_list"
       }
     ]
   }
