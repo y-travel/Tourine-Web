@@ -2,12 +2,13 @@ import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { CoreModule } from './@core/core.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
+import { HttpInterceptorService } from "./@core/data/http-interceptor.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,8 +23,9 @@ import { ThemeModule } from './@theme/theme.module';
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
-    { provide: LOCALE_ID, useValue: 'fa' },
+    {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: LOCALE_ID, useValue: 'fa'},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],
 })
 export class AppModule {

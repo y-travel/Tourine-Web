@@ -8,13 +8,19 @@ import { ThemeService } from "./utils/theme.service";
 import { SpinnerService } from "./utils/spinner.service";
 import { DialogService } from "./utils/dialog.service";
 import { MatDialogModule } from "@angular/material";
+import { AuthService } from "./utils/auth.service";
+import { APP_CONFIG, APP_CONFIG_INSTANCE } from "./utils/app.config";
+import { Utils } from "./utils/utils";
 
-const NB_CORE_PROVIDERS = [
+const CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
   AnalyticsService,
   ThemeService,
   SpinnerService,
   DialogService,
+  Utils,
+  AuthService,
+  {provide: APP_CONFIG, useValue: APP_CONFIG_INSTANCE},
 ];
 
 @NgModule({
@@ -33,7 +39,7 @@ export class CoreModule {
     return <ModuleWithProviders>{
       ngModule: CoreModule,
       providers: [
-        ...NB_CORE_PROVIDERS,
+        ...CORE_PROVIDERS,
       ],
     };
   }

@@ -1,23 +1,14 @@
-﻿
-export class Helper {
+﻿export class Utils {
 
-    disableBrowserRefresh = false;
+  disableBrowserRefresh = false;
 
-    static getApiPath(object) {
-        return Reflect.get(object, "apiPath");
-    }
+  getApiPath(object) {
+    return Reflect.get(object, "apiPath");
+  }
 
-    static getHttpMethod(object) {
-        return Reflect.get(object, "httpMethod");
-    }
-
-    static createApiPath(path: string, object): string {
-        var newPath = path;
-        for (const field in object) {
-            newPath = newPath.replace(`{${field}}`, object[field]);
-        }
-        return newPath;
-    }
-
+  getHttpMethod(object) {
+    return Reflect.get(object, "httpMethod");
+  }
 }
+
 

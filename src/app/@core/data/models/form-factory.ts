@@ -2,7 +2,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { Injectable } from "@angular/core";
 //
 import { FormService } from "../form.service";
-import { Coupon, Customer, Reagent, Tour, EditPassword } from "./client.model";
+import { Coupon, Customer, EditPassword, Reagent, Tour, User } from "./client.model";
 
 @Injectable()
 export class FormFactory {
@@ -75,4 +75,11 @@ export class FormFactory {
     return new FormService(EditPassword, form);
   }
 
+  createLoginForm(model: User = new User()): FormService<User> {
+    const form = new FormBuilder().group({
+      username: [model.username, Validators.required],
+      password: [model.password, Validators.required]
+    });
+    return new FormService(User, form);
+  }
 }

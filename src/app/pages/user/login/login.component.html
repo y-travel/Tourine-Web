@@ -1,0 +1,13 @@
+<div autoTranslate>
+  <form [formGroup]="formService.form">
+    <trh-card>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="username" formControlName="username">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="password" formControlName="password">
+      </mat-form-field>
+    </trh-card>
+  </form>
+  <button (click)="login()"></button>
+</div>

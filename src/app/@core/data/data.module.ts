@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserService } from './users.service';
@@ -9,6 +9,7 @@ import { FormFactory } from "./models/form-factory";
 import { DataService } from "./data.service";
 import { ApiService } from "./api.service";
 import { CouponService } from "./coupon.service";
+import { HttpClient } from "@angular/common/http";
 
 const SERVICES = [
   UserService,
@@ -27,6 +28,7 @@ const SERVICES = [
   ],
   providers: [
     ...SERVICES,
+    HttpClient,
   ],
 })
 export class DataModule {

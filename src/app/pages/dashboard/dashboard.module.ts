@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
-import { ToasterModule } from "angular2-toaster";
-
-import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
-import { AppTranslationModule } from "../../app-translation.module";
+import { commonModules } from "../default";
 
 const DASHBOARD_COMPONENTS = [
   DashboardComponent,
@@ -11,9 +8,7 @@ const DASHBOARD_COMPONENTS = [
 
 @NgModule({
   imports: [
-    ThemeModule,
-    ToasterModule,
-    AppTranslationModule
+    ...commonModules,
   ],
   declarations: [
     ...DASHBOARD_COMPONENTS

@@ -1,123 +1,96 @@
 ﻿import { Injectable } from "@angular/core";
-import {
-    Http,
-    Response,
-    Request,
-    RequestMethod,
-    RequestOptionsArgs,
-    RequestOptions,
-    URLSearchParams
-} from "@angular/http";
 import { Observable, Subject } from "rxjs/Rx";
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from "@angular/common/http";
 //
 import { ResponseStatus } from "../data/models/index";
 import { Serializable } from "../utils/serializable";
 import { RestError, RestErrorType } from "../utils/rest-error";
-import { HttpClient, HttpRequest } from "@angular/common/http";
+import { HttpMethod } from "./models/enums";
+
 
 @Injectable()
 export class DataService {
-    response: Response;
-    exception: any;
-    error = new ResponseStatus();
-    baseAddress = "";
-    onError = new Subject<RestError>();
-    onComplete = new Subject<Response>();
-    onException = new Subject<any>();
-    onRequest = new Subject();
+  response: HttpResponse<any>;
+  exception: any;
+  error = new ResponseStatus();
+  baseAddress = "";
+  onError = new Subject<RestError>();
+  onComplete = new Subject<HttpResponse<any>>();
+  onException = new Subject<any>();
+  onRequest = new Subject();
+  private spinnerService: any = {}; //@TODO implement
+  constructor(private http: HttpClient) {
+  }
 
-    constructor(private http: HttpClient) {
+  request(method: HttpMethod, url: string, body?: string, headers?: HttpHeaders): Observable<HttpResponse<any>> {
+    url = this.baseAddress + url;
+    const httpParams = !this.hasBody(method) ? this.getQueryString(JSON.parse(body)) : undefined;
+    // this.spinnerService.start();
+    this.onRequest.next();
+    return Observable.create((observer) => {
+      this.http.request(method, url, {body: body, observe: "response", headers: headers, params: httpParams, responseType: "json"})
+        .map((response: HttpResponse<any>) => {
+          return response.body;
+        })
+        .subscribe(res => {
+            this.onComplete.next(res);
+            observer.next(res);
+            observer.complete();
+            // this.spinnerService.end();
+          },
+          err => {
+            this.handleError(err);
+            // this.spinnerService.end();
+            observer.error(err);
+          }
+        );
+    });
+  }
+
+  private getQueryString(body: any): HttpParams {
+    let params = new HttpParams();
+
+    for (const k in body) {
+      if (body.hasOwnProperty(k)) {
+        params = params.append(k, body[k]);
+      }
     }
+    return params;
+  }
 
-    // get(url: string, options?: RequestOptionsArgs, body?: string): Observable<Response> {
-    //     return this.request(RequestMethod.Get, url, body, options);
-    // }
-    //
-    // post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-    //     return this.request(RequestMethod.Post, url, body, options);
-    // }
-    //
-    // put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-    //     return this.request(RequestMethod.Put, url, body, options);
-    // }
-    //
-    // delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    //     return this.request(RequestMethod.Delete, url, null, options);
-    // }
-    //
-    // patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-    //     return this.request(RequestMethod.Patch, url, body, options);
-    // }
-    //
-    // head(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    //     return this.request(RequestMethod.Head, url, null, options);
-    // }
-    //
-    // request(method: RequestMethod, url: string, body?: string, options?: RequestOptionsArgs): Observable<Response> {
-    //     // url = this.baseAddress + url;
-    //     // if (!this.hasBody(method) && options)
-    //     //     options.params = this.getQueryString(JSON.parse(body));
-    //     // this.onRequest.next();
-    //     // return Observable.create((observer) => {
-    //     //     this.http.request(new HttpRequest(new RequestOptions(options).merge({method: method, url: url, body: body})))
-    //     //         .map((response: Response) => response.json())
-    //     //         .subscribe(res => {
-    //     //                 this.onComplete.next(res);
-    //     //                 observer.next(res);
-    //     //                 observer.complete();
-    //     //             },
-    //     //             err => {
-    //     //                 this.handleError(err);
-    //     //                 observer.error(err);
-    //     //             }
-    //     //         );
-    //     // });
-    // }
-    //
-    // getQueryString(body: {}): URLSearchParams {
-    //     const params = new URLSearchParams();
-    //
-    //     for (let k in body) {
-    //         if (body.hasOwnProperty(k)) {
-    //             params.set(k, body[k]);
-    //         }
-    //     }
-    //     return params;
-    // }
-    //
-    // private hasBody(method: RequestMethod) {
-    //     return !(method === RequestMethod.Get || method === RequestMethod.Delete || method === RequestMethod.Head);
-    // }
-    //
-    // private handleError(error: Response | any) {
-    //     // we can use a remote logging infrastructure
-    //     if (error instanceof Response) {
-    //         this.response = error;
-    //
-    //         try {
-    //             const solvedError = error.json();
-    //             if (solvedError.ResponseStatus)
-    //                 this.setError(solvedError.ResponseStatus);
-    //             else
-    //                 this.setException(solvedError);
-    //
-    //         } catch (e) {
-    //             this.setException(error.text());
-    //         }
-    //
-    //     } else
-    //         this.setException(error);
-    //
-    // }
-    //
-    // private setException(exception) {
-    //     this.exception = exception;
-    //     this.onException.next(this.exception);
-    // }
-    //
-    // private setError(error: ResponseStatus) {
-    //     Serializable.clone(this.error, error);
-    //     const restError = new RestError(error, (this.response.status === 422) ? RestErrorType.Validation : RestErrorType.Other);
-    //     this.onError.next(restError);
-    // }
+  private hasBody(method: HttpMethod) {
+    return !(method === "GET" || method === "DELETE" || method === "HEAD");
+  }
+
+  private handleError(error: HttpResponse<any> | any) {
+    // we can use a remote logging infrastructure
+    if (error instanceof HttpResponse) {
+      this.response = error;
+
+      try {
+        const solvedError = error.body;
+        if (solvedError.ResponseStatus)
+          this.setError(solvedError.ResponseStatus);
+        else
+          this.setException(solvedError);
+
+      } catch (e) {
+        this.setException(error.body);
+      }
+
+    } else
+      this.setException(error);
+
+  }
+
+  private setException(exception) {
+    this.exception = exception;
+    this.onException.next(this.exception);
+  }
+
+  private setError(error: ResponseStatus) {
+    Serializable.clone(this.error, error);
+    const restError = new RestError(error, (this.response.status === 422) ? RestErrorType.Validation : RestErrorType.Other);
+    this.onError.next(restError);
+  }
 }

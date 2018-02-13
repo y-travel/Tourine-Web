@@ -1,5 +1,4 @@
 import { HttpMethod, TourStatus } from "./enums";
-import { Helper } from "../../utils/utils";
 
 export interface IModel {
   isNew(): boolean;
@@ -78,7 +77,25 @@ export class Customer extends Model {
   birthDate = "";
   passportExpireDate: Date;
   passportNo = 0;
+  phone = "";
 }
+
+export enum Role {
+  Admin = 1,
+  Operator = 2,
+  Agency = 4,
+}
+
+export class User extends Model {
+  username = "";
+  password = "";
+  // @References(typeof(Customer))
+  CustomerId: string;
+
+  Customer: Customer;
+  Role: Role;
+}
+
 
 //@TODO replace with a good class
 export interface Dictionary<T> {
@@ -94,16 +111,28 @@ export interface IReturn<T> {
 export interface IReturnVoid extends IReturn<void> {
 }
 
+export interface IPost {
+
+}
+
 export function Route(path: string, type: HttpMethod = "GET") {
   return (target: any) => {
 
     const original = target;
+    const createApiPath = function (path: string, object) {
+      let newPath = path;
+      for (const field in object) {
+        newPath = newPath.replace(`{${field}}`, object[field]);
+      }
+      return newPath;
+    };
     const pathFn = function () {
-      return Helper.createApiPath(path, this);
+      return createApiPath(path, this);
     }; //by using ()=>{} "this" got a wrong value
     const httpMethodFn = function () {
       return type;
     };
+
     const wrapper: any = function (...args: any[]) {//if we use (...args)=> or without parameters raise error: <classname> is not a constructor
       Reflect.defineProperty(wrapper.prototype,
         "apiPath",
