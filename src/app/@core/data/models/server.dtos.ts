@@ -11,11 +11,11 @@ BaseUrl: http://tourine.ir/api
 //AddImplicitVersion:
 //AddDescriptionAsComments: True
 //IncludeTypes:
-ExcludeTypes: IReturn,IReturnVoid,Tour,User,Customer,Role,Destination,Place
-DefaultImports: {IReturn,IReturnVoid,Tour,User,Customer,Role,Destination,Place,IPost}
+ExcludeTypes: IReturn,IReturnVoid,Tour,User,Person,Role,Destination,Place
+DefaultImports: {IReturn,IReturnVoid,Tour,User,Person,Role,Destination,Place,IPost}
 */
 
-import { Customer, Destination, IPost, IReturn, Place, Route, Tour, User } from "./client.model";
+import { Person, Destination, IPost, IReturn, Place, Route, Tour, User } from "./client.model";
 
 
 export class QueryBase {
@@ -111,10 +111,10 @@ export class Block {
   ParentId: string;
 
   Parent: Block;
-  // @References(typeof(Customer))
-  CustomerId: string;
+  // @References(typeof(Person))
+  PersonId: string;
 
-  Customer: Customer;
+  Person: Person;
   SubmitDate: string;
 }
 
@@ -268,42 +268,42 @@ export class GetDestinations extends QueryDb<Destination> implements IReturn<Que
   }
 }
 
-@Route("/customer/{Id}", "GET")
-export class GetCustomer implements IReturn<Customer> {
+@Route("/Person/{Id}", "GET")
+export class GetPerson implements IReturn<Person> {
   Id: string;
 
   createResponse() {
-    return new Customer();
+    return new Person();
   }
 
   getTypeName() {
-    return "GetCustomer";
+    return "GetPerson";
   }
 }
 
-@Route("/customers", "GET")
-export class GetCustomers extends QueryDb<Customer> implements IReturn<QueryResponse<Customer>> {
+@Route("/Persons", "GET")
+export class GetPersons extends QueryDb<Person> implements IReturn<QueryResponse<Person>> {
   createResponse() {
-    return new QueryResponse<Customer>();
+    return new QueryResponse<Person>();
   }
 
   getTypeName() {
-    return "GetCustomers";
+    return "GetPersons";
   }
 }
 
-@Route("/customer/", "POST")
-export class PostCustomer {
-  Customer: Customer;
+@Route("/Person/", "POST")
+export class PostPerson {
+  Person: Person;
 }
 
-@Route("/customer/", "PUT")
-export class PutCustomer {
-  Customer: Customer;
+@Route("/Person/", "PUT")
+export class PutPerson {
+  Person: Person;
 }
 
-@Route("/customer/{Id}", "DELETE")
-export class DeleteCustomer {
+@Route("/Person/{Id}", "DELETE")
+export class DeletePerson {
   Id: string;
 }
 

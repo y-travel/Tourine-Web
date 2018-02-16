@@ -1,7 +1,7 @@
 import { Component, Inject } from "@angular/core";
 
 import { FormService } from "../../@core/data/form.service";
-import { Coupon, Customer } from "../../@core/data/models/client.model";
+import { Coupon, Person } from "../../@core/data/models/client.model";
 import { ModalInterface } from "../../@theme/components/modal.interface";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
@@ -16,9 +16,9 @@ import { CouponService } from "../../@core/data/coupon.service";
   styleUrls: ["coupon-upsert.component.scss"]
 })
 export class CouponUpsertComponent implements ModalInterface {
-  customer: FormService<Customer>;
+  person: FormService<Person>;
   reagents = [];
-  passengers: Array<FormService<Customer>> = [];
+  passengers: Array<FormService<Person>> = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Coupon>,
               public dialogInstance: MatDialogRef<ModalInterface>,
@@ -29,7 +29,7 @@ export class CouponUpsertComponent implements ModalInterface {
   }
 
   init() {
-    this.customer = this.formFactory.createCustomerForm();
+    this.person = this.formFactory.createPersonForm();
     this.reagents
       .push(
         {id: 1, title: "aziz vazifeh"},

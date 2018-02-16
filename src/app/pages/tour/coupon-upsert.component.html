@@ -6,7 +6,7 @@
 
 <div class="modal-body" dir="rtl" [style.width.px]="600" autoTranslate><!--width set for IE-->
   <mat-horizontal-stepper >
-   <mat-step label="{{'selectCustomer'|translate}}">
+   <mat-step label="{{'selectPerson'|translate}}">
 
 <mat-icon>user</mat-icon>
 <mat-icon>customer</mat-icon>
@@ -50,8 +50,8 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="customer.form" label="{{'steps'|translate:({value:'second'|translate})}}">
-      <form [formGroup]="customer.form">
+    <mat-step [stepControl]="person.form" label="{{'steps'|translate:({value:'second'|translate})}}">
+      <form [formGroup]="person.form">
         <div fxLayout="row">
           <mat-form-field>
             <mat-select placeholder="reagent.name" >

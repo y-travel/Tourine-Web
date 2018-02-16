@@ -2,7 +2,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { Injectable } from "@angular/core";
 //
 import { FormService } from "../form.service";
-import { Coupon, Customer, EditPassword, Reagent, Tour, User } from "./client.model";
+import { Coupon, Person, EditPassword, Reagent, Tour, User } from "./client.model";
 
 @Injectable()
 export class FormFactory {
@@ -40,7 +40,7 @@ export class FormFactory {
     return new FormService(Coupon, form);
   }
 
-  createCustomerForm(model: Customer = new Customer()): FormService<Customer> {
+  createPersonForm(model: Person = new Person()): FormService<Person> {
     const form = new FormBuilder().group({
       name: [model.name, Validators.required],
       family: [model.family, Validators.required],
@@ -51,7 +51,7 @@ export class FormFactory {
       passportExpireDate: [model.passportExpireDate, Validators.required],
       passportNo: [model.passportNo, Validators.required]
     });
-    return new FormService(Customer, form);
+    return new FormService(Person, form);
   }
 
   createReagentForm(model: Reagent = new Reagent()): FormService<Reagent> {

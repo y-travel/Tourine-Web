@@ -38,8 +38,8 @@ export class Tour extends Model {
 
 export class Coupon extends Model {
   reagentId: number = undefined;
-  reagent: Customer = undefined;
-  passengers: Customer[] = [];
+  reagent: Person = undefined;
+  passengers: Person[] = [];
   adultCount: number = undefined;
   adultPrice: number = undefined;
   infantCount: number = undefined;
@@ -68,7 +68,7 @@ export class Reagent extends Model {
   }
 }
 
-export class Customer extends Model {
+export class Person extends Model {
   name = "";
   family = "";
   mobileNumber = "";
@@ -89,10 +89,10 @@ export enum Role {
 export class User extends Model {
   username = "";
   password = "";
-  // @References(typeof(Customer))
-  CustomerId: string;
+  // @References(typeof(Person))
+  PersonId: string;
 
-  Customer: Customer;
+  Person: Person;
   Role: Role;
 }
 
