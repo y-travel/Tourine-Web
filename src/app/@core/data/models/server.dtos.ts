@@ -15,7 +15,7 @@ ExcludeTypes: IReturn,IReturnVoid,Tour,User,Person,Role,Destination,Place
 DefaultImports: {IReturn,IReturnVoid,Tour,User,Person,Role,Destination,Place,IPost}
 */
 
-import { Person, Destination, IPost, IReturn, Place, Route, Tour, User } from "./client.model";
+import { Destination, IPost, IReturn, Person, Place, Route, Tour, User } from "./client.model";
 
 
 export class QueryBase {
@@ -323,10 +323,7 @@ export class PostBlock {
   Block: Block;
 }
 
-@Route("/auth")
-@Route("/auth/{provider}")
-@Route("/authenticate")
-@Route("/authenticate/{provider}")
+@Route("/auth", "POST")
 // @DataContract
 export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
   // @DataMember(Order=1)

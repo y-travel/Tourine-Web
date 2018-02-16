@@ -3,6 +3,8 @@ import { FormService } from "../../../@core/data/form.service";
 import { AuthService } from "../../../@core/utils/auth.service";
 import { FormFactory } from "../../../@core/data/models/form-factory";
 import { User } from "../../../@core/data/models";
+import { TranslateService } from "@ngx-translate/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,8 +13,11 @@ import { User } from "../../../@core/data/models";
 })
 export class LoginComponent implements OnInit {
   formService: FormService<User>;
+  errorMessage: string;
 
-  constructor(public formFactory: FormFactory, public authService: AuthService) {
+  constructor(public formFactory: FormFactory,
+              public authService: AuthService,
+              private router: Router) {
     this.formService = this.formFactory.createLoginForm();
   }
 
@@ -21,9 +26,12 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService
-      .login(this.formService.model)
+      .authenticate(this.formService.model)
       .subscribe(res => {
-        console.log(res);
+        if (!res)
+          this.errorMessage = "msg.invalidUsernameOrPassword";
+        else
+          this.router.navigate(['/pages']);
       });
   }
 }

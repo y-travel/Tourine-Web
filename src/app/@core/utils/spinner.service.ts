@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class SpinnerService {
 
   private loaders: Promise<any>[] = [];
-  private selector: string = 'nb-global-spinner';
+  private selector = 'nb-global-spinner';
 
   /**
    * Appends new loader to the list of loader to be completed before
@@ -33,7 +33,8 @@ export class SpinnerService {
     this.executeAll();
   }
 
-  private executeAll(done = () => {}): void {
+  private executeAll(done = () => {
+  }): void {
     Promise.all(this.loaders).then((values) => {
       this.hideSpinner();
       done.call(null, values);

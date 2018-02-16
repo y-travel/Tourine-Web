@@ -1,10 +1,18 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { RouterGuard } from "./app-router-guard";
 
 const routes: Routes = [
-  { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
+  {
+    path: 'pages',
+    canLoad: [RouterGuard],
+    canActivateChild: [RouterGuard],
+    canActivate: [RouterGuard],
+    loadChildren: 'app/pages/pages.module#PagesModule'
+  },
+  {path: 'user', loadChildren: 'app/pages/user/user.module#UserModule'},
+  {path: '', redirectTo: 'user', pathMatch: 'full'},
+  {path: '**', redirectTo: 'user'},
 ];
 
 const config: ExtraOptions = {
@@ -14,6 +22,7 @@ const config: ExtraOptions = {
 @NgModule({
   imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule],
+  providers: [RouterGuard],
 })
 export class AppRoutingModule {
 }

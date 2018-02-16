@@ -30,6 +30,9 @@
   "infantCount": "تعداد بچه",
   "infantPrice": "قیمت بچه",
   "mobileNumber": "شماره همراه",
+  "msg": {
+    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
+  },
   "name": "نام",
   "nationalCode": "کد ملی",
   "offValue": "تخفیف",

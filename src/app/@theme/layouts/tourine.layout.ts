@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/delay';
@@ -10,6 +10,8 @@ import { ThemeService } from "../../@core/utils/theme.service";
 import { MenuService } from "../components/menu/menu.service";
 import { SpinnerService } from "../../@core/utils/spinner.service";
 
+declare type LayoutType = "layout1" | "layout2";
+
 // TODO: move layouts into the framework
 @Component({
   selector: 'tourine-layout',
@@ -20,11 +22,11 @@ export class TourineLayoutComponent implements OnDestroy {
 
   layout: any = {};
   sidebar: any = {};
+  @Input() layoutType: LayoutType = "layout1";
 
   protected afterViewInit$ = new BehaviorSubject(null);
   protected layoutState$: Subscription;
   protected sidebarState$: Subscription;
-  protected menuClick$: Subscription;
   private appendClassSubscription: Subscription;
   private themeSubscription: Subscription;
   private removeClassSubscription: Subscription;
@@ -72,6 +74,5 @@ export class TourineLayoutComponent implements OnDestroy {
   ngOnDestroy() {
     this.layoutState$.unsubscribe();
     this.sidebarState$.unsubscribe();
-    this.menuClick$.unsubscribe();
   }
 }

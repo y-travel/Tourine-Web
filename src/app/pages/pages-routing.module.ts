@@ -21,10 +21,6 @@ const routes: Routes = [{
       path: "tour",
       loadChildren: "./tour/tour.module#TourModule",
     },
-    {
-      path: "user",
-      loadChildren: "./user/user.module#UserModule",
-    },
   ],
 }];
 
