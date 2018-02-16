@@ -3,7 +3,6 @@ import { FormService } from "../../../@core/data/form.service";
 import { AuthService } from "../../../@core/utils/auth.service";
 import { FormFactory } from "../../../@core/data/models/form-factory";
 import { User } from "../../../@core/data/models";
-import { TranslateService } from "@ngx-translate/core";
 import { Router } from "@angular/router";
 
 @Component({
@@ -25,13 +24,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    if (this.formService.form.invalid)
+      return;
     this.authService
       .authenticate(this.formService.model)
       .subscribe(res => {
-        if (!res)
-          this.errorMessage = "msg.invalidUsernameOrPassword";
-        else
+        if (res)
           this.router.navigate(['/pages']);
+      }, error => {
+        this.errorMessage = "msg.invalidUsernameOrPassword";
       });
   }
 }

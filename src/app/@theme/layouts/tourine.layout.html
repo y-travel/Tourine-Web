@@ -19,7 +19,7 @@
       <ng-content select="trh-menu"></ng-content>
     </trh-sidebar>
   </div>
-  <div *ngSwitchCase="'layout2'">
+  <div *ngSwitchCase="'layout2'" [style.height.px]="600" fxLayout="row" fxLayoutAlign="center center" >
     <ng-content selected="layout2-content"></ng-content>
   </div>
 </trh-layout>

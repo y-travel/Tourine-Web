@@ -2,12 +2,14 @@
   <form [formGroup]="formService.form">
     <trh-card>
       <mat-form-field fxFlex>
-        <input matInput placeholder="username" formControlName="username">
+        <input matInput placeholder="username" formControlName="username" autofocus>
       </mat-form-field>
       <mat-form-field fxFlex>
         <input matInput placeholder="password" formControlName="password">
       </mat-form-field>
+      <!--@Todo impl. validation error message style-->
+      <label [style.color]="'red'" [style.font-size]="'x-small'">{{errorMessage|translate}}</label>
+      <button class="card-footer" mat-raised-button color="primary" fxFlex (click)="login()">{{"save"|translate}}</button>
     </trh-card>
   </form>
-  <button (click)="login()"></button>
 </div>
