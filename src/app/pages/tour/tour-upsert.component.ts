@@ -6,6 +6,8 @@ import { ModalInterface } from "../../@theme/components/modal.interface";
 import { Tour } from "../../@core/data/models";
 import { TourService } from "../../@core/data/tour.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { Observable } from "rxjs/Observable";
+import { Destination, Place } from "../../@core/data/models/client.model";
 
 @Component({
   selector: "tour-upsert",
@@ -14,56 +16,31 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 })
 export class TourUpsertComponent implements ModalInterface {
   form: FormService<Tour>;
-  destinations: any;
-  hotels: any;
+  destinations: Observable<Destination[]>;
+  places: Observable<Place[]>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
               public dialogInstance: MatDialogRef<ModalInterface>,
               public service: TourService,
               private translateService: TranslateService) {
-    this.developerSeed();
+    this.initData();
   }
 
-  developerSeed() {
-    this.destinations = [
-      {
-        id: 1,
-        name: "سوریه"
-      }, {
-        id: 2,
-        name: "کربلا"
-      }, {
-        id: 3,
-        name: "نجف"
-      }, {
-        id: 4,
-        name: "مکه"
-      },
-    ];
-    this.hotels = [
-      {
-        id: 1,
-        name: "القدیر"
-      }, {
-        id: 2,
-        name: "مشکوکات"
-      }, {
-        id: 3,
-        name: "ساحره"
-      }, {
-        id: 4,
-        name: "نریمان"
-      },
-    ];
+  initData() {
+    this.places = this.service.getPlaces();
+    this.destinations = this.service.getDistinations();
   }
 
   save() {
     //@TODO check validation
-    this.service.addTour(this.data.model);
+    this.service.addTour(this.data.model).subscribe(tour => {
+      console.log(tour);
+    });
     this.dialogInstance.close(this.data.model);
   }
 
   submit(event) {
     console.log(event);
   }
+
 }

@@ -9,18 +9,21 @@ export class FormFactory {
 
   createTourForm(model: Tour = new Tour()): FormService<Tour> {
     const form = new FormBuilder().group({
-      destinationId: [model.destinationId, Validators.required],
-      duration: [model.duration, Validators.required],
-      date: [model.date, Validators.required],
-      placeId: [model.placeId, Validators.required],
-      isFlight: [model.isFlight],
       status: [model.status],
-      adultCount: [model.adultCount, [Validators.required, Validators.min(1)]],
-      adultMinPrice: [model.adultMinPrice, Validators.min(1)],
-      busPrice: [model.busPrice],
-      roomPrice: [model.roomPrice],
-      foodPrice: [model.foodPrice],
-      infantPrice: [model.infantPrice, Validators.min(1)],
+      basePrice: [model.basePrice],
+      capacity: [model.capacity, [Validators.required, Validators.min(1)]],
+      tourDetail: new FormBuilder().group({
+        startDate: [new Date(2000, 2, 2), Validators.required],
+        leaderId: [undefined],
+        duration: [0, Validators.required],
+        destinationId: [0, Validators.required],
+        placeId: ["", Validators.required],
+        busPrice: [0],
+        roomPrice: [0],
+        foodPrice: [0],
+        isFlight: [true],
+        infantPrice: [0, Validators.min(1)],
+      }),
     });
     return new FormService(Tour, form);
   }
@@ -35,7 +38,7 @@ export class FormFactory {
       infantPrice: [model.infantPrice],
       busPrice: [model.busPrice],
       roomPrice: [model.roomPrice],
-      foodPrice: [model.foodPrice]
+      foodPrice: [model.foodPrice],
     });
     return new FormService(Coupon, form);
   }

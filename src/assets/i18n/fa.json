@@ -8,7 +8,7 @@
   "birthDate": "تاریخ تولد",
   "busPrice": "هزینه اتوبوس",
   "buyer": "خریدار",
-  "coupon": {
+  "coupon_": {
     "upsert": "ثبت کوپن"
   },
   "dayFormat": "(روز)",

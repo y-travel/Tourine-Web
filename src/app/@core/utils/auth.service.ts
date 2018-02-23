@@ -21,9 +21,10 @@ export class AuthService {
 //@TODO Person info should be impl.
   authenticate(user: User): Observable<any> {
     const auth = new Authenticate();
-    auth.UserName = user.username;
-    auth.Password = user.password;
-    auth.RememberMe = true;
+    auth.userName = user.username;
+    auth.password = user.password;
+    auth.rememberMe = true;
+    auth.useTokenCookie = true;
     auth.provider = "credentials";
     return this.apiService.send(auth).map(res => {
       this.person = Serializable.fromJSONToType(Person, res);

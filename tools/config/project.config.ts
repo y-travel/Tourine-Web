@@ -1,6 +1,7 @@
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
+
 // import { ExtendPackages } from './seed.config.interfaces';
 
 /**
@@ -10,9 +11,11 @@ import { SeedConfig } from './seed.config';
 export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'project');
+  SyncPath = `${this.APP_SRC}/../../SyncBuild/Tourine/`;
 
   constructor() {
     super();
+    console.log("sync" + this.SyncPath);
     // this.APP_TITLE = 'Put name of your app here';
     // this.GOOGLE_ANALYTICS_ID = 'Your site's ID';
 
@@ -53,12 +56,12 @@ export class ProjectConfig extends SeedConfig {
       {
         name: 'devextreme-angular',
         path: 'node_modules/devextreme-angular',
-        packageMeta:{main:'index.js',defaultExtension:'js'}
+        packageMeta: {main: 'index.js', defaultExtension: 'js'}
       }
-      ,{
+      , {
         name: 'devextreme',
         path: 'node_modules/devextreme/dist/js',
-        packageMeta: {main:'dx.all.js',defaultExtension: 'js'}
+        packageMeta: {main: 'dx.all.js', defaultExtension: 'js'}
       },
       {
         name: 'jquery',

@@ -10,13 +10,13 @@
     "build:prod": "npm run build -- --prod",
     "build:prod:aot": "npm run build:prod -- --aot",
     "copy.to.sync.folder":"",
-    "gulpBuild.prod": "gulp build.prod --color --env-config prod --build-type prod",
+    "gulpBuild": "gulp build.prod --client .. --color --env-config dev --build-type dev",
     "gulp": "gulp",
     "generate.i18n":"ng xi18n --outputPath src/assets/i18n --outFile  messages.fa.xlf --locale fa",
     "i18n": "gulp i18n.build --build-type prod && ng-xi18n -p dist/tmp/tsconfig.json --i18nFormat xlf && gulp i18n.merge",
     "lint": "gulp tslint",
     "postinstall": "gulp print.banner",
-    "reinstall": "yarn"
+    "reinstall": "yarn  --pure-lockfile"
   },
   "engines": {
     "node": ">=6.9.0",

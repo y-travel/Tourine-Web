@@ -4,7 +4,7 @@
   </div>
 </div>
 <div class="right modal-body" dir="rtl" [style.width.px]="700" autoTranslate><!--width set for IE-->
-  <form [formGroup]="data.form">
+  <form [formGroup]="data.form.get('tourDetail')">
     <div fxLayout="row">
       <trh-slider fxFlex trueText="dollar" falseText="rial"></trh-slider>
       <div fxFlex="80" fxLayoutAlign="end center">
@@ -17,7 +17,7 @@
       <mat-form-field>
         <mat-select placeholder="destination" formControlName="destinationId">
           <mat-option>{{"none"|translate}}</mat-option>
-          <mat-option *ngFor="let item of destinations" [value]="item.id">
+          <mat-option *ngFor="let item of destinations | async" [value]="item.id">
             {{item.name}}
           </mat-option>
         </mat-select>
@@ -28,7 +28,7 @@
       <mat-card fxLayout="column" fxFlex>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
-            <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour_.date" formControlName="date">
+            <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour_.date" formControlName="startDate">
             <mat-datepicker-toggle #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
             <mat-datepicker #tourDate disabled="false"></mat-datepicker>
           </mat-form-field>
@@ -39,13 +39,12 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
-            <input matInput placeholder="adult.count" formControlName="adultCount">
+            <input matInput placeholder="adult.count" [formControl]="data.form.get('capacity')">
           </mat-form-field>
           <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="adult.minPrice" formControlName="adultMinPrice">
+            <input matInput mask="number" placeholder="adult.minPrice" [formControl]="data.form.get('basePrice')">
             <mat-hint align="end" translate>tomanFormat</mat-hint>
           </mat-form-field>
-
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
@@ -54,7 +53,7 @@
           </mat-form-field>
           <mat-form-field fxFlex>
             <mat-select placeholder="hotel" formControlName="placeId">
-              <mat-option *ngFor="let item of hotels" [value]="item.id">{{item.name}}</mat-option>
+              <mat-option *ngFor="let item of places|async" [value]="item.id">{{item.name}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

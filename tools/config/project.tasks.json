@@ -1,4 +1,11 @@
 {
+  "build.prod": [
+    "build.ng",
+    "copy.to.sync"
+  ],
+  "serve.dev": [
+    "serve.ng"
+  ],
   "test": [
     "tslint",
     "build.test",

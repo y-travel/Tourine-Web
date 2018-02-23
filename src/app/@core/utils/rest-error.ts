@@ -12,7 +12,7 @@ export class RestError {
 
   getValidationErrors(): ValidationError[] {
     let validationErrors = new Array<ValidationError>();
-    for (let error of this.error.Errors) {
+    for (let error of this.error.errors) {
       validationErrors.push(Serializable.fromJSONToType(ValidationError, error));
     }
     return validationErrors;

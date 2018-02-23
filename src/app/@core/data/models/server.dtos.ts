@@ -1,8 +1,8 @@
 /* Options:
-Date: 2018-01-18 20:39:56
+Date: 2018-02-23 12:14:41
 Version: 4.514
 Tip: To override a DTO option, remove "//" prefix before updating
-BaseUrl: http://tourine.ir/api
+BaseUrl: http://www.tourine.ir/api
 
 //GlobalNamespace:
 //MakePropertiesOptional: True
@@ -11,196 +11,268 @@ BaseUrl: http://tourine.ir/api
 //AddImplicitVersion:
 //AddDescriptionAsComments: True
 //IncludeTypes:
-ExcludeTypes: IReturn,IReturnVoid,Tour,User,Person,Role,Destination,Place
-DefaultImports: {IReturn,IReturnVoid,Tour,User,Person,Role,Destination,Place,IPost}
+ExcludeTypes: Agency,TourDetail,TourStatus,IReturn,IReturnVoid,Tour,User,Person,Role,Destination,Place
+DefaultImports: {Agency,IReturn,IReturnVoid,Tour,User,Person,Role,Destination,Place,IPost}
 */
 
-import { Destination, IPost, IReturn, Person, Place, Route, Tour, User } from "./client.model";
-
+import { TourDetail, Agency, IReturn, IReturnVoid, Tour, User, Person, Role, Destination, Place, IPost, Route } from "./client.model";
 
 export class QueryBase {
   // @DataMember(Order=1)
-  Skip: number;
+  skip: number;
 
   // @DataMember(Order=2)
-  Take: number;
+  take: number;
 
   // @DataMember(Order=3)
-  OrderBy: string;
+  orderBy: string;
 
   // @DataMember(Order=4)
-  OrderByDesc: string;
+  orderByDesc: string;
 
   // @DataMember(Order=5)
-  Include: string;
+  include: string;
 
   // @DataMember(Order=6)
-  Fields: string;
+  fields: string;
 
   // @DataMember(Order=7)
-  Meta: { [index: string]: string; };
+  meta: { [index: string]: string; };
 }
 
-export class QueryDb<T> extends QueryBase {
+export class QueryDb_1<T> extends QueryBase {
 }
 
 // @DataContract
 export class ResponseError {
   // @DataMember(Order=1, EmitDefaultValue=false)
-  ErrorCode: string;
+  errorCode: string;
 
   // @DataMember(Order=2, EmitDefaultValue=false)
-  FieldName: string;
+  fieldName: string;
 
   // @DataMember(Order=3, EmitDefaultValue=false)
-  Message: string;
+  message: string;
 
   // @DataMember(Order=4, EmitDefaultValue=false)
-  Meta: { [index: string]: string; };
+  meta: { [index: string]: string; };
 }
 
 // @DataContract
 export class ResponseStatus {
   // @DataMember(Order=1)
-  ErrorCode: string;
+  errorCode: string;
 
   // @DataMember(Order=2)
-  Message: string;
+  message: string;
 
   // @DataMember(Order=3)
-  StackTrace: string;
+  stackTrace: string;
 
   // @DataMember(Order=4)
-  Errors: ResponseError[];
+  errors: ResponseError[];
 
   // @DataMember(Order=5)
-  Meta: { [index: string]: string; };
+  meta: { [index: string]: string; };
 }
 
-export class Agency {
-  Id: string;
-  Name: string;
-  PhoneNumber: string;
-}
-
-export class Passenger {
-  Id: string;
-  Name: string;
-  Family: string;
-  MobileNumber: string;
-  NationalCode: string;
-  BirthDate: string;
-  PassportExpireDate: string;
-  // @References(typeof(Agency))
-  AgencyId: string;
-
-  Agency: Agency;
-  PassportNo: string;
-}
-
-export class Block {
-  Id: string;
-  Code: string;
+export class Team {
+  id: string;
   // @References(typeof(Tour))
-  TourId: string;
+  tourId: string;
 
-  Tour: Tour;
-  Price: number;
-  Capacity: number;
-  // @References(typeof(Block))
-  ParentId: string;
-
-  Parent: Block;
+  tour: Tour;
+  count: number;
+  price: number;
+  submitDate: string;
   // @References(typeof(Person))
-  PersonId: string;
+  leaderId: string;
 
-  Person: Person;
-  SubmitDate: string;
+  leader: Person;
+  // @References(typeof(Person))
+  buyerId: string;
+
+  buyer: Person;
+}
+
+export class TeamPerson {
+  id: string;
+  // @References(typeof(Team))
+  teamId: string;
+
+  team: Team;
+  // @References(typeof(Person))
+  personId: string;
+
+  person: Person;
+}
+
+// @Flags()
+export enum ServiceType {
+  Empty = 0,
+  Bed = 1,
+  Bus = 2,
+  Food = 4,
+}
+
+export enum ServiceStatus {
+}
+
+export class QueryDb_2<From, Into> extends QueryBase {
+}
+
+// @Flags()
+export enum PersonType {
+  Passenger = 1,
+  Customer = 2,
+  Leader = 4,
 }
 
 // @DataContract
 export class QueryResponse<T> {
   // @DataMember(Order=1)
-  Offset: number;
+  offset: number;
 
   // @DataMember(Order=2)
-  Total: number;
+  total: number;
 
   // @DataMember(Order=3)
-  Results: T[];
+  results: T[];
 
   // @DataMember(Order=4)
-  Meta: { [index: string]: string; };
+  meta: { [index: string]: string; };
 
   // @DataMember(Order=5)
-  ResponseStatus: ResponseStatus;
+  responseStatus: ResponseStatus;
+}
+
+export class Service {
+  id: string;
+  // @References(typeof(Person))
+  personId: string;
+
+  person: Person;
+  // @References(typeof(Tour))
+  tourId: string;
+
+  tour: Tour;
+  type: ServiceType;
+  status: ServiceStatus;
+  isGateSettelled: boolean;
+}
+
+export class AgencyPerson {
+  id: string;
+  // @References(typeof(Agency))
+  agencyId: string;
+
+  agency: Agency;
+  // @References(typeof(Person))
+  personId: string;
+
+  person: Person;
 }
 
 // @DataContract
 export class AuthenticateResponse {
   // @DataMember(Order=1)
-  UserId: string;
+  userId: string;
 
   // @DataMember(Order=2)
-  SessionId: string;
+  sessionId: string;
 
   // @DataMember(Order=3)
-  UserName: string;
+  userName: string;
 
   // @DataMember(Order=4)
-  DisplayName: string;
+  displayName: string;
 
   // @DataMember(Order=5)
-  ReferrerUrl: string;
+  referrerUrl: string;
 
   // @DataMember(Order=6)
-  BearerToken: string;
+  bearerToken: string;
 
   // @DataMember(Order=7)
-  RefreshToken: string;
+  refreshToken: string;
 
   // @DataMember(Order=8)
-  ResponseStatus: ResponseStatus;
+  responseStatus: ResponseStatus;
 
   // @DataMember(Order=9)
-  Meta: { [index: string]: string; };
+  meta: { [index: string]: string; };
 }
 
 // @DataContract
 export class ConvertSessionToTokenResponse {
   // @DataMember(Order=1)
-  Meta: { [index: string]: string; };
+  meta: { [index: string]: string; };
 
   // @DataMember(Order=2)
-  ResponseStatus: ResponseStatus;
+  responseStatus: ResponseStatus;
 }
 
 // @DataContract
 export class GetAccessTokenResponse {
   // @DataMember(Order=1)
-  AccessToken: string;
+  accessToken: string;
 
   // @DataMember(Order=2)
-  ResponseStatus: ResponseStatus;
+  responseStatus: ResponseStatus;
+}
+
+@Route("/disBot", "GET")
+export class TourineBotDisabler implements IReturn<string> {
+  createResponse() {
+    return "";
+  }
+
+  getTypeName() {
+    return "TourineBotDisabler";
+  }
+}
+
+@Route("/enBot", "GET")
+export class TourineBotEnabler implements IReturn<string> {
+  createResponse() {
+    return "";
+  }
+
+  getTypeName() {
+    return "TourineBotEnabler";
+  }
 }
 
 @Route("/user/{Id}", "GET")
 export class GetUser {
-  Id: string;
+  id: string;
 }
 
 @Route("/user/", "POST")
-export class PostUser {
-  User: User;
+export class PostUser implements IReturn<User> {
+  user: User;
+
+  createResponse() {
+    return new User();
+  }
+
+  getTypeName() {
+    return "PostUser";
+  }
 }
 
-@Route("/tour/{Id}", "GET")
+@Route("/user", "PUT")
+export class PutUser {
+  user: User;
+}
+
+@Route("/tours/{ID}", "GET")
 export class GetTour {
-  Id: string;
+  id: string;
 }
 
 @Route("/tours", "GET")
-export class GetTours extends QueryDb<Tour> implements IReturn<QueryResponse<Tour>> {
+export class GetTours extends QueryDb_1<Tour> implements IReturn<QueryResponse<Tour>> {
   createResponse() {
     return new QueryResponse<Tour>();
   }
@@ -210,79 +282,163 @@ export class GetTours extends QueryDb<Tour> implements IReturn<QueryResponse<Tou
   }
 }
 
-@Route("/tour/", "POST")
-export class PostTour {
-  Tour: Tour;
+@Route("/tours/", "POST")
+export class CreateTour implements IReturn<Tour> {
+  capacity: number;
+  basePrice: number;
+  tourDetail: TourDetail;
+
+  createResponse() {
+    return new Tour();
+  }
+
+  getTypeName() {
+    return "CreateTour";
+  }
 }
 
-@Route("/tour/", "PUT")
-export class PutTour {
-  Tour: Tour;
+@Route("/tours/", "PUT")
+export class UpdateTour {
+  tour: Tour;
+}
+
+@Route("/getRootTours", "GET")
+export class GetRootTours extends QueryDb_1<Tour> implements IReturn<QueryResponse<Tour>> {
+  createResponse() {
+    return new QueryResponse<Tour>();
+  }
+
+  getTypeName() {
+    return "GetRootTours";
+  }
+}
+
+@Route("/tourDetail/{ID}", "GET")
+export class GetTourDetail implements IReturn<TourDetail> {
+  id: string;
+
+  createResponse() {
+    return new TourDetail();
+  }
+
+  getTypeName() {
+    return "GetTourDetail";
+  }
+}
+
+@Route("/tourDetail", "PUT")
+export class UpdateTourDetail {
+  tourDetail: TourDetail;
+}
+
+@Route("/team", "POST")
+export class CreateTeam implements IReturn<Team> {
+  team: Team;
+
+  createResponse() {
+    return new Team();
+  }
+
+  getTypeName() {
+    return "CreateTeam";
+  }
+}
+
+@Route("/team", "PUT")
+export class UpdateTeam {
+  team: Team;
 }
 
 @Route("/places")
-export class GetPlace extends QueryDb<Place> implements IReturn<QueryResponse<Place>> {
+export class GetPlaces extends QueryDb_1<Place> implements IReturn<QueryResponse<Place>> {
   createResponse() {
     return new QueryResponse<Place>();
   }
 
   getTypeName() {
-    return "GetPlace";
+    return "GetPlaces";
   }
 }
 
-@Route("/passenger/", "POST")
-export class PostPassenger {
-  Passenger: Passenger;
+@Route("/post/", "POST")
+export class PostPlace {
+  place: Place;
 }
 
-@Route("/passenger/", "PUT")
-export class PutPassenger {
-  Passenger: Passenger;
+@Route("/place", "PUT")
+export class PutPlace {
+  place: Place;
 }
 
-@Route("/passengers", "GET")
-export class GetPassengers extends QueryDb<Passenger> implements IReturn<QueryResponse<Passenger>> {
+@Route("/person/team", "POST")
+export class AddPersonToTeam {
+  teamPerson: TeamPerson;
+}
+
+@Route("/persons/team", "PUT")
+export class ChangePersonsTeam {
+  teamPerson: TeamPerson;
+}
+
+@Route("/team/{TeamId}/persons/", "GET")
+export class GetPersonsOfTeam extends QueryDb_1<Person> implements IReturn<QueryResponse<Person>> {
+  teamId: string;
+
   createResponse() {
-    return new QueryResponse<Passenger>();
+    return new QueryResponse<Person>();
   }
 
   getTypeName() {
-    return "GetPassengers";
+    return "GetPersonsOfTeam";
   }
 }
 
-@Route("/passenger/{Id}", "DELETE")
-export class DeletePassenger {
-  Id: string;
-}
+@Route("/service", "POST")
+export class PostServiceForPassenger implements IReturn<Service> {
+  service: Service;
 
-@Route("/destinations", "GET")
-export class GetDestinations extends QueryDb<Destination> implements IReturn<QueryResponse<Destination>> {
   createResponse() {
-    return new QueryResponse<Destination>();
+    return new Service();
   }
 
   getTypeName() {
-    return "GetDestinations";
+    return "PostServiceForPassenger";
   }
 }
 
-@Route("/Person/{Id}", "GET")
-export class GetPerson implements IReturn<Person> {
-  Id: string;
+@Route("/service", "PUT")
+export class PutServiceForPassenger {
+  service: Service;
+}
+
+@Route("/service/{TourId}")
+export class GetServiceOfTour extends QueryDb_2<Service, Person> implements IReturn<QueryResponse<Person>> {
+  tourId: string;
 
   createResponse() {
-    return new Person();
+    return new QueryResponse<Person>();
   }
 
   getTypeName() {
-    return "GetPerson";
+    return "GetServiceOfTour";
   }
 }
 
-@Route("/Persons", "GET")
-export class GetPersons extends QueryDb<Person> implements IReturn<QueryResponse<Person>> {
+@Route("/persons/", "POST")
+export class CreatePerson {
+  person: Person;
+}
+
+@Route("/persons/", "PUT")
+export class UpdatePerson {
+  person: Person;
+}
+
+@Route("/persons/", "GET")
+@Route("/persons/{id}", "GET")
+export class GetPersons extends QueryDb_1<Person> implements IReturn<QueryResponse<Person>> {
+  id: string;
+
   createResponse() {
     return new QueryResponse<Person>();
   }
@@ -292,45 +448,197 @@ export class GetPersons extends QueryDb<Person> implements IReturn<QueryResponse
   }
 }
 
-@Route("/Person/", "POST")
-export class PostPerson {
-  Person: Person;
-}
-
-@Route("/Person/", "PUT")
-export class PutPerson {
-  Person: Person;
-}
-
-@Route("/Person/{Id}", "DELETE")
+@Route("/persons/{ID}", "DELETE")
 export class DeletePerson {
-  Id: string;
+  id: string;
 }
 
-@Route("/blocks", "GET")
-export class GetBlocks extends QueryDb<Block> implements IReturn<QueryResponse<Block>> {
+@Route("/persons/{NationalCode}", "GET")
+export class FindPersonFromNc implements IReturn<Person> {
+  nationalCode: string;
+
   createResponse() {
-    return new QueryResponse<Block>();
+    return new Person();
   }
 
   getTypeName() {
-    return "GetBlocks";
+    return "FindPersonFromNc";
   }
 }
 
-@Route("/block", "POST")
-export class PostBlock {
-  Block: Block;
+@Route("/persons/{AgencyId}/{Str}", "GET")
+export class FindPersonInAgency extends QueryDb_1<Person> implements IReturn<QueryResponse<Person>> {
+  agencyId: string;
+  str: string;
+
+  createResponse() {
+    return new QueryResponse<Person>();
+  }
+
+  getTypeName() {
+    return "FindPersonInAgency";
+  }
 }
 
-@Route("/auth", "POST")
+@Route("/leaders", "GET")
+export class GetLeaders extends QueryDb_1<Person> implements IReturn<QueryResponse<Person>> {
+  createResponse() {
+    return new QueryResponse<Person>();
+  }
+
+  getTypeName() {
+    return "GetLeaders";
+  }
+}
+
+@Route("/persons/register")
+export class RegisterPerson implements IReturn<Team> {
+  tourId: string;
+  buyerId: string;
+  passengersId: string[];
+
+  createResponse() {
+    return new Team();
+  }
+
+  getTypeName() {
+    return "RegisterPerson";
+  }
+}
+
+@Route("/persons/current", "GET")
+export class GetCurrentPerson implements IReturn<Person> {
+  createResponse() {
+    return new Person();
+  }
+
+  getTypeName() {
+    return "GetCurrentPerson";
+  }
+}
+
+@Route("/destinations/{Id}", "GET")
+@Route("/destinations", "GET")
+export class GetDestinations extends QueryDb_1<Destination> implements IReturn<QueryResponse<Destination>> {
+  id: string;
+
+  createResponse() {
+    return new QueryResponse<Destination>();
+  }
+
+  getTypeName() {
+    return "GetDestinations";
+  }
+}
+
+@Route("/destination/", "POST")
+export class CreateDestination implements IReturn<Destination> {
+  destination: Destination;
+
+  createResponse() {
+    return new Destination();
+  }
+
+  getTypeName() {
+    return "CreateDestination";
+  }
+}
+
+@Route("/destination/", "PUT")
+export class UpdateDestination {
+  destination: Destination;
+}
+
+@Route("/agencies/persons/", "GET")
+export class GetPersonOfAgency extends QueryDb_1<Person> implements IReturn<QueryResponse<Person>> {
+  // @Ignore()
+  agencyId: string;
+
+  createResponse() {
+    return new QueryResponse<Person>();
+  }
+
+  getTypeName() {
+    return "GetPersonOfAgency";
+  }
+}
+
+@Route("/agencies/persons", "POST")
+export class AddPersonToAgency implements IReturn<AgencyPerson> {
+  // @Ignore()
+  agencyId: string;
+
+  personId: string;
+
+  createResponse() {
+    return new AgencyPerson();
+  }
+
+  getTypeName() {
+    return "AddPersonToAgency";
+  }
+}
+
+@Route("/agencies/persons", "PUT")
+export class UpdatePersonToAgency {
+  id: string;
+  agencyId: string;
+  personId: string;
+}
+
+@Route("/agencies/{id}", "GET")
+export class GetAgency implements IReturn<Agency> {
+  id: string;
+
+  createResponse() {
+    return new Agency();
+  }
+
+  getTypeName() {
+    return "GetAgency";
+  }
+}
+
+@Route("/agencies", "POST")
+export class CreateAgency implements IReturn<Agency> {
+  agency: Agency;
+
+  createResponse() {
+    return new Agency();
+  }
+
+  getTypeName() {
+    return "CreateAgency";
+  }
+}
+
+@Route("/agencies", "PUT")
+export class UpdateAgency {
+  agency: Agency;
+}
+
+@Route("/agencies", "GET")
+export class GetAgencies extends QueryDb_1<Agency> implements IReturn<QueryResponse<Agency>> {
+  createResponse() {
+    return new QueryResponse<Agency>();
+  }
+
+  getTypeName() {
+    return "GetAgencies";
+  }
+}
+
+@Route("/auth")
+@Route("/auth/{provider}")
+@Route("/authenticate")
+@Route("/authenticate/{provider}")
 // @DataContract
 export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
   // @DataMember(Order=1)
   provider: string;
 
   // @DataMember(Order=2)
-  State: string;
+  state: string;
 
   // @DataMember(Order=3)
   oauth_token: string;
@@ -339,16 +647,16 @@ export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
   oauth_verifier: string;
 
   // @DataMember(Order=5)
-  UserName: string;
+  userName: string;
 
   // @DataMember(Order=6)
-  Password: string;
+  password: string;
 
   // @DataMember(Order=7)
-  RememberMe: boolean;
+  rememberMe: boolean;
 
   // @DataMember(Order=8)
-  Continue: string;
+  continue: string;
 
   // @DataMember(Order=9)
   nonce: string;
@@ -369,16 +677,16 @@ export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
   cnonce: string;
 
   // @DataMember(Order=15)
-  UseTokenCookie: boolean;
+  useTokenCookie: boolean;
 
   // @DataMember(Order=16)
-  AccessToken: string;
+  accessToken: string;
 
   // @DataMember(Order=17)
-  AccessTokenSecret: string;
+  accessTokenSecret: string;
 
   // @DataMember(Order=18)
-  Meta: { [index: string]: string; };
+  meta: { [index: string]: string; };
 
   createResponse() {
     return new AuthenticateResponse();
@@ -393,7 +701,7 @@ export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
 // @DataContract
 export class ConvertSessionToToken implements IReturn<ConvertSessionToTokenResponse>, IPost {
   // @DataMember(Order=1)
-  PreserveSession: boolean;
+  preserveSession: boolean;
 
   createResponse() {
     return new ConvertSessionToTokenResponse();
@@ -408,7 +716,7 @@ export class ConvertSessionToToken implements IReturn<ConvertSessionToTokenRespo
 // @DataContract
 export class GetAccessToken implements IReturn<GetAccessTokenResponse>, IPost {
   // @DataMember(Order=1)
-  RefreshToken: string;
+  refreshToken: string;
 
   createResponse() {
     return new GetAccessTokenResponse();

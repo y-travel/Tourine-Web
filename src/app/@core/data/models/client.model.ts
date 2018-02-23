@@ -21,19 +21,38 @@ export class Place extends Model {
 }
 
 export class Tour extends Model {
-  destinationId = 0; //@TODO merge destination and place into one table
-  duration: number = undefined;
-  date: string = undefined;
-  placeId = 0;
-  isFlight = true;
-  status: TourStatus = TourStatus.Create;
-  capacity = 0;
-  adultCount: number = undefined;
-  adultMinPrice: number = undefined;
-  busPrice: number = undefined;
-  roomPrice: number = undefined;
-  foodPrice: number = undefined;
-  infantPrice: number = undefined;
+  capacity: number;
+  basePrice: number;
+  parentId: string;
+  parent: Tour;
+  code: string;
+  status: TourStatus;
+  tourDetailId: string;
+  tourDetail: TourDetail;
+  agencyId: string;
+  agency: Agency;
+}
+
+export class TourDetail extends Model{
+  destinationId: string;
+  destination: Destination;
+  duration: number;
+  startDate: string;
+  placeId: string;
+  place: Place;
+  isFlight: boolean;
+  infantPrice: number;
+  busPrice: number;
+  roomPrice: number;
+  foodPrice: number;
+   creationDate: string;
+   leaderId: string;
+  leader: Person;
+}
+
+export class Agency extends Model {
+  name: string;
+  phoneNumber: string;
 }
 
 export class Coupon extends Model {

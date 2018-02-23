@@ -7,6 +7,7 @@ import { IReturn } from "./models/index";
 import { APP_CONFIG, AppConfig } from "../utils/app.config";
 import { Utils } from "../utils";
 import { HttpHeaders } from "@angular/common/http";
+import { QueryResponse } from "./models/server.dtos";
 
 @Injectable()
 export class ApiService {
@@ -29,10 +30,10 @@ export class ApiService {
     return this.internalSend(data);
   }
 
-  // protected getEntities<T>(data: IReturn<QueryResponse<T>>): Observable<QueryResponse<T>> {
-  //
-  //   return this.internalSend(data);
-  // }
+  getEntities<T>(data: IReturn<QueryResponse<T>>): Observable<T[]> {
+    return this.internalSend(data).map(res => res.results);
+  }
+
   //
   // protected saveEntity<T>(data: IReturn<EntityCreatedResponse<T>>): Observable<EntityCreatedResponse<T>> {
   //   return this.internalSend(data);
