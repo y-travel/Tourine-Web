@@ -1,18 +1,18 @@
 import { Component, Inject } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 //
-import { FormService } from "../../@core/data/form.service";
-import { ModalInterface } from "../../@theme/components/modal.interface";
-import { Tour } from "../../@core/data/models";
-import { TourService } from "../../@core/data/tour.service";
+import { FormService } from "../../../@core/data/form.service";
+import { ModalInterface } from "../../../@theme/components/modal.interface";
+import { Tour } from "../../../@core/data/models";
+import { TourService } from "../../../@core/data/tour.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { Observable } from "rxjs/Observable";
-import { Destination, Place } from "../../@core/data/models/client.model";
+import { Destination, Place } from "../../../@core/data/models/client.model";
 
 @Component({
   selector: "tour-upsert",
-  templateUrl: "tour-upsert.component.html",
-  styleUrls: ["tour-upsert.component.scss"],
+  templateUrl: "tour-upsert/tour-upsert.component.html",
+  styleUrls: ["tour-upsert/tour-upsert.component.scss"],
 })
 export class TourUpsertComponent implements ModalInterface {
   form: FormService<Tour>;

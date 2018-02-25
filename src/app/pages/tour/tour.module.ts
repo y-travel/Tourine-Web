@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
+import { AgGridModule } from "ag-grid-angular";
+
 import { routedComponents, TourRoutingModule } from "./tour-routing.module";
-import { TourUpsertComponent } from "./tour-upsert.component";
+import { TourUpsertComponent } from "./tour-upsert/tour-upsert.component";
 import { CouponUpsertComponent } from "./coupon-upsert.component";
 import { ReagentUpsertComponent } from "./reagent-upsert.component";
 import { EditPasswordComponent } from "./edit-password.component";
@@ -18,6 +20,7 @@ const entryComponents = [
   imports: [
     ...commonModules,
     TourRoutingModule,
+    AgGridModule.withComponents([]),
   ],
   declarations: [
     ...entryComponents,

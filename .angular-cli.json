@@ -21,7 +21,9 @@
       "styles": [
         "./app/@theme/styles/iranian-sans.scss",
         "./app/@theme/styles/material-icon.scss",
-        "./app/@theme/styles/styles.scss"
+        "./app/@theme/styles/styles.scss",
+        "../node_modules/ag-grid/dist/styles/ag-grid.css",
+        "../node_modules/ag-grid/dist/styles/ag-theme-material.css"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

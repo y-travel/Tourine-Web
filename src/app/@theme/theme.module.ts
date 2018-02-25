@@ -17,6 +17,7 @@ import {
   MatStepperModule,
   MatToolbarModule
 } from "@angular/material";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { SearchInputComponent, ThemeSwitcherComponent, TrhDropdownComponent, TrhHeaderComponent, TrhSliderComponent, } from './components';
 import { AutoTranslateDirective, TrhButtonDirective, TrhInputDirective } from "./directives";
@@ -31,18 +32,16 @@ import { SidebarService } from "./components/sidebar/sidebar.service";
 import { MenuService } from "./components/menu/menu.service";
 import { TrhCheckboxComponent } from './components/checkbox/trh-checkbox.component';
 import { DialogService } from "../@core/utils/dialog.service";
-import { FlexLayoutModule } from "@angular/flex-layout";
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
-const NB_MODULES = [
+const MAT_MODULES = [
   MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
   MatSlideToggleModule,
   MatSelectModule,
   MatCheckboxModule,
-  FlexLayoutModule,
   MatStepperModule,
   MatIconModule,
   MatCommonModule,
@@ -54,6 +53,9 @@ const NB_MODULES = [
   MatListModule,
 ];
 
+const OTHER_MODULES = [
+  FlexLayoutModule,
+];
 const COMPONENTS = [
   ThemeSwitcherComponent,
   TrhHeaderComponent,
@@ -85,8 +87,8 @@ const THEME_PROVIDERS = [
 ];
 
 @NgModule({
-  imports: [...BASE_MODULES, ...NB_MODULES, AppTranslationModule],
-  exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
+  imports: [...BASE_MODULES, ...MAT_MODULES, ...OTHER_MODULES, AppTranslationModule],
+  exports: [...BASE_MODULES, ...MAT_MODULES, ...OTHER_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
 })
 export class ThemeModule {

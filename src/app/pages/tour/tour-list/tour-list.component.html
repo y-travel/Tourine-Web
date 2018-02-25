@@ -4,5 +4,10 @@
 <button (click)="userUpsert()" >{{"user.upsert"|translate}}</button>
 <trh-card>
   <div class="card-body">
+    <ag-grid-angular #agGrid style="width: 500px; height: 150px;" class="ag-theme-material"
+                     [gridOptions]="gridOptions"
+                     [columnDefs]="columnDefs"
+                     [rowData]="rowData">
+    </ag-grid-angular>
   </div>
 </trh-card>
