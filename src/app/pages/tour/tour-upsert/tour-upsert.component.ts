@@ -11,8 +11,8 @@ import { Destination, Place } from "../../../@core/data/models/client.model";
 
 @Component({
   selector: "tour-upsert",
-  templateUrl: "tour-upsert/tour-upsert.component.html",
-  styleUrls: ["tour-upsert/tour-upsert.component.scss"],
+  templateUrl: "./tour-upsert.component.html",
+  styleUrls: ["./tour-upsert.component.scss"],
 })
 export class TourUpsertComponent implements ModalInterface {
   form: FormService<Tour>;
