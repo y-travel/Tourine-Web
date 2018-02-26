@@ -6,6 +6,10 @@
   "serve.dev": [
     "serve.ng"
   ],
+  "build.watch": [
+    "watch.sync",
+    "build.ng"
+  ],
   "test": [
     "tslint",
     "build.test",

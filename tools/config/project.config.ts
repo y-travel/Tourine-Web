@@ -9,6 +9,7 @@ export class ProjectConfig extends SeedConfig {
 
   constructor() {
     super();
+    this.APP_BASE = "/app/";
   }
 
 }
