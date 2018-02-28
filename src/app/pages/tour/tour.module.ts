@@ -8,6 +8,8 @@ import { ReagentUpsertComponent } from "./reagent-upsert.component";
 import { EditPasswordComponent } from "./edit-password.component";
 import { DialogService } from "../../@core/utils/dialog.service";
 import { commonModules } from "../default";
+import { TourGridService } from "./tour-grid.service";
+import { HeaderComponent } from "../../@theme/components/header-component/header.component";
 
 const entryComponents = [
   TourUpsertComponent,
@@ -20,13 +22,15 @@ const entryComponents = [
   imports: [
     ...commonModules,
     TourRoutingModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([
+      HeaderComponent,
+    ]),
   ],
   declarations: [
     ...entryComponents,
     ...routedComponents
   ],
-  providers: [DialogService],
+  providers: [DialogService, TourGridService],
   entryComponents: entryComponents
 })
 export class TourModule {

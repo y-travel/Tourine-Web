@@ -4,10 +4,13 @@
 <button (click)="userUpsert()" >{{"user.upsert"|translate}}</button>
 <trh-card>
   <div class="card-body">
-    <ag-grid-angular #agGrid style="width: 500px; height: 150px;" class="ag-theme-material"
-                     [gridOptions]="gridOptions"
-                     [columnDefs]="columnDefs"
-                     [rowData]="rowData">
+    <ag-grid-angular #agGrid style="height: 400px;" class="ag-theme-material"
+                     [columnDefs]="tourGridService.columnDefs"
+                     [masterDetail]="true"
+                     [gridOptions]="tourGridService.gridOptions"
+                     [detailCellRendererParams]="tourGridService.detailCellRendererParams"
+                     (gridReady)="tourGridService.onGridReady($event)"
+                     [enableRtl]="true">
     </ag-grid-angular>
   </div>
 </trh-card>

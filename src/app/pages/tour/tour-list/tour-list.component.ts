@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { GridOptions } from "ag-grid";
+import "ag-grid-enterprise";
 
 import { TourService } from "../../../@core/data/tour.service";
 import { TourUpsertComponent } from "../tour-upsert/tour-upsert.component";
@@ -8,6 +9,7 @@ import { ReagentUpsertComponent } from "../reagent-upsert.component";
 import { EditPasswordComponent } from "../edit-password.component";
 import { DialogService } from "../../../@core/utils/dialog.service";
 import { FormFactory } from "../../../@core/data/models/form-factory";
+import { TourGridService } from "../tour-grid.service";
 
 @Component({
   selector: "tour-list",
@@ -15,35 +17,14 @@ import { FormFactory } from "../../../@core/data/models/form-factory";
   styleUrls: ["./tour-list.component.scss"]
 })
 export class TourListComponent {
-  gridOptions: GridOptions;
-  rowData: any[];
-  columnDefs: any[];
+
   source: any;
 
   constructor(private tourService: TourService,
               private formFactory: FormFactory,
-              public dialogService: DialogService) {
-    this.gridOptions = <GridOptions>{
-      onGridReady: () => {
-        this.gridOptions.api.sizeColumnsToFit();
-      }
-    };
-    this.columnDefs = [
-      {headerName: "Make", field: "code"},
-      {headerName: "Model", field: "tourDetail.startDate"},
-      {headerName: "Price", field: "capacity"},
-      {headerName: "Price", field: "basePrice"},
-      {headerName: "Price", field: "tourDetail.placeId"},
-    ];
-    this.rowData = [
-      {make: "Toyota", model: "Celica", price: 35000},
-      {make: "Ford", model: "Mondeo", price: 32000},
-      {make: "Porsche", model: "Boxter", price: 72000}
-    ];
-  }
+              public dialogService: DialogService,
+              public tourGridService: TourGridService) {
 
-  selectAllRows() {
-    this.gridOptions.api.selectAll();
   }
 
   upsert() {

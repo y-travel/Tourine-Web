@@ -19,7 +19,14 @@ import {
 } from "@angular/material";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
-import { SearchInputComponent, ThemeSwitcherComponent, TrhDropdownComponent, TrhHeaderComponent, TrhSliderComponent, } from './components';
+import {
+  SearchInputComponent,
+  ThemeSwitcherComponent,
+  TrhDropdownComponent,
+  TrhHeaderComponent,
+  TrhSliderComponent,
+  HeaderComponent,
+} from './components';
 import { AutoTranslateDirective, TrhButtonDirective, TrhInputDirective } from "./directives";
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { TourineLayoutComponent } from './layouts';
@@ -71,6 +78,7 @@ const COMPONENTS = [
   TrhSidebarComponent,
   TrhCheckboxComponent,
   AutoTranslateDirective,
+  HeaderComponent,
 ];
 
 const PIPES = [
