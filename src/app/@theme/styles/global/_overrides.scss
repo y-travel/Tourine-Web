@@ -2,6 +2,6 @@
 @import "material/material.theme";
 
 @mixin nb-theme-overrides() {
-  @include trh-material-theme();
+  @include trn-material-theme();
   @include nb-components-toaster-theme();
 }

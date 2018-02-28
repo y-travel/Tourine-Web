@@ -3,9 +3,9 @@ import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import { ThemeService } from "../../../@core/utils/theme.service";
 
 @Component({
-  selector: 'trh-theme-switcher',
-  styleUrls: ['./trh-theme-switcher.component.scss'],
-  templateUrl: "trh-theme-switcher.component.html",
+  selector: 'trn-theme-switcher',
+  styleUrls: ['./trn-theme-switcher.component.scss'],
+  templateUrl: "trn-theme-switcher.component.html",
 })
 export class ThemeSwitcherComponent implements OnInit {
 

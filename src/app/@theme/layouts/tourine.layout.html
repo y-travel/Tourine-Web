@@ -1,8 +1,8 @@
-<trh-layout dir="rtl" [ngSwitch]="layoutType">
+<trn-layout dir="rtl" [ngSwitch]="layoutType">
   <div class="main-content" *ngSwitchCase="'layout1'">
-    <trh-sidebar class="menu-sidebar">
+    <trn-sidebar class="menu-sidebar">
       <div class="sidebar-main-header">
-        <trh-header position="inverse"></trh-header>
+        <trn-header position="inverse"></trn-header>
       </div>
       <div class="sidebar-header">
         <mat-toolbar color="primary">
@@ -16,10 +16,10 @@
       <div class="sidebar-article">
         <ng-content select="router-outlet"></ng-content>
       </div>
-      <ng-content select="trh-menu"></ng-content>
-    </trh-sidebar>
+      <ng-content select="trn-menu"></ng-content>
+    </trn-sidebar>
   </div>
   <div *ngSwitchCase="'layout2'" [style.height.px]="600" fxLayout="row" fxLayoutAlign="center center" >
     <ng-content selected="layout2-content"></ng-content>
   </div>
-</trh-layout>
+</trn-layout>

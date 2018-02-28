@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrhLayoutComponent } from './trh-layout.component';
+import { TrnCheckboxComponent } from './trn-checkbox.component';
 
-describe('TrhLayoutComponent', () => {
-  let component: TrhLayoutComponent;
-  let fixture: ComponentFixture<TrhLayoutComponent>;
+describe('TrnCheckboxComponent', () => {
+  let component: TrnCheckboxComponent;
+  let fixture: ComponentFixture<TrnCheckboxComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrhLayoutComponent ]
+      declarations: [ TrnCheckboxComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TrhLayoutComponent);
+    fixture = TestBed.createComponent(TrnCheckboxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

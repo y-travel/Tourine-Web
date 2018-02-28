@@ -6,11 +6,11 @@ import { SidebarService } from "../sidebar/sidebar.service";
 import { MenuService } from "../menu/menu.service";
 
 @Component({
-  selector: 'trh-header',
-  styleUrls: ['./trh-header.component.scss'],
-  templateUrl: './trh-header.component.html',
+  selector: 'trn-header',
+  styleUrls: ['./trn-header.component.scss'],
+  templateUrl: './trn-header.component.html',
 })
-export class TrhHeaderComponent implements OnInit {
+export class TrnHeaderComponent implements OnInit {
   @Input() position = 'normal';
   user: any;
   userMenu = [{title: 'Profile'}, {title: 'Log out'}];

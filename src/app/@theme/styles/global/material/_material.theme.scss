@@ -1,19 +1,19 @@
 @import '~@angular/material/theming';
 
 @mixin init_palette() {
-  $trh-primary-palette: mat-palette($mat-deep-purple);
-  $trh-accent-palette: mat-palette($mat-pink, A200, A100, A400);
-  $trh-warn-palette: mat-palette($mat-red);
-  $trh-material-theme: mat-light-theme($trh-primary-palette, $trh-accent-palette, $trh-warn-palette);
-  @include angular-material-theme($trh-material-theme);
+  $trn-primary-palette: mat-palette($mat-deep-purple);
+  $trn-accent-palette: mat-palette($mat-pink, A200, A100, A400);
+  $trn-warn-palette: mat-palette($mat-red);
+  $trn-material-theme: mat-light-theme($trn-primary-palette, $trn-accent-palette, $trn-warn-palette);
+  @include angular-material-theme($trn-material-theme);
 
   //dark theme definition
-  $trh-dark-primary: mat-palette($mat-blue-grey);
-  $trh-dark-accent: mat-palette($mat-amber, A200, A100, A400);
-  $trh-dark-warn: mat-palette($mat-deep-orange);
-  $trh-dark-theme: mat-dark-theme($trh-dark-primary, $trh-dark-accent, $trh-dark-warn);
-  &.trh-theme-dark {
-    @include angular-material-theme($trh-dark-theme);
+  $trn-dark-primary: mat-palette($mat-blue-grey);
+  $trn-dark-accent: mat-palette($mat-amber, A200, A100, A400);
+  $trn-dark-warn: mat-palette($mat-deep-orange);
+  $trn-dark-theme: mat-dark-theme($trn-dark-primary, $trn-dark-accent, $trn-dark-warn);
+  &.trn-theme-dark {
+    @include angular-material-theme($trn-dark-theme);
   }
 }
 
@@ -47,7 +47,7 @@
   }
 }
 
-@mixin trh-material-theme() {
+@mixin trn-material-theme() {
   @include material_initialization();
   @include override_defaults();
 }

@@ -5,13 +5,13 @@ import { Observable } from "rxjs/Observable";
 import { NgControl } from "@angular/forms";
 
 @Directive({
-  selector: "input[trhInput]",
+  selector: "input[trnInput]",
   host: {
     "class": "form-control mat-input-element",
     "[placeholder]": "placeholder"
   }
 })
-export class TrhInputDirective implements MatFormFieldControl<any> {
+export class TrnInputDirective implements MatFormFieldControl<any> {
   value: any | any;
   stateChanges: Observable<void>;
   id: string;
@@ -24,10 +24,10 @@ export class TrhInputDirective implements MatFormFieldControl<any> {
   errorState: boolean;
   controlType: string;
 
+  _placeholder = "";
+
   constructor(private translateService: TranslateService) {
   }
-
-  _placeholder = "";
 
   @Input()
   get placeholder(): string {

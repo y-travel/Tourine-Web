@@ -3,7 +3,7 @@ import { ControlValueAccessor } from "@angular/forms";
 export const noop = () => {
 };
 
-export class TrhEditControlBase  implements ControlValueAccessor {
+export class TrnEditControlBase  implements ControlValueAccessor {
   protected onTouchedCallBack: () => void = noop;
   protected onChangeCallBack: (_: any) => void = noop;
 

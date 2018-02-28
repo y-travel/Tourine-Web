@@ -49,9 +49,9 @@ export class TourineLayoutComponent implements OnDestroy {
 
       const body = document.getElementsByTagName('body')[0];
       if (theme.previous) {
-        this.renderer.removeClass(body, `trh-theme-${theme.previous}`);
+        this.renderer.removeClass(body, `trn-theme-${theme.previous}`);
       }
-      this.renderer.addClass(body, `trh-theme-${theme.name}`);
+      this.renderer.addClass(body, `trn-theme-${theme.name}`);
     });
 
     this.appendClassSubscription = this.themeService.onAppendLayoutClass().subscribe((className) => {

@@ -22,22 +22,22 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import {
   SearchInputComponent,
   ThemeSwitcherComponent,
-  TrhDropdownComponent,
-  TrhHeaderComponent,
-  TrhSliderComponent,
+  TrnDropdownComponent,
+  TrnHeaderComponent,
+  TrnSliderComponent,
   HeaderComponent,
 } from './components';
-import { AutoTranslateDirective, TrhButtonDirective, TrhInputDirective } from "./directives";
+import { AutoTranslateDirective, TrnButtonDirective, TrnInputDirective } from "./directives";
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { TourineLayoutComponent } from './layouts';
 import { AppTranslationModule } from "../app-translation.module";
-import { TrhCardComponent } from './components/card/trh-card.component';
-import { TrhLayoutComponent } from './components/layout/trh-layout.component';
-import { TrhMenuComponent } from './components/menu/trh-menu.component';
-import { TrhSidebarComponent } from './components/sidebar/trh-sidebar.component';
+import { TrnCardComponent } from './components/card/trn-card.component';
+import { TrnLayoutComponent } from './components/layout/trn-layout.component';
+import { TrnMenuComponent } from './components/menu/trn-menu.component';
+import { TrnSidebarComponent } from './components/sidebar/trn-sidebar.component';
 import { SidebarService } from "./components/sidebar/sidebar.service";
 import { MenuService } from "./components/menu/menu.service";
-import { TrhCheckboxComponent } from './components/checkbox/trh-checkbox.component';
+import { TrnCheckboxComponent } from './components/checkbox/trn-checkbox.component';
 import { DialogService } from "../@core/utils/dialog.service";
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
@@ -65,18 +65,18 @@ const OTHER_MODULES = [
 ];
 const COMPONENTS = [
   ThemeSwitcherComponent,
-  TrhHeaderComponent,
+  TrnHeaderComponent,
   SearchInputComponent,
   TourineLayoutComponent,
-  TrhInputDirective,
-  TrhButtonDirective,
-  TrhDropdownComponent,
-  TrhSliderComponent,
-  TrhCardComponent,
-  TrhLayoutComponent,
-  TrhMenuComponent,
-  TrhSidebarComponent,
-  TrhCheckboxComponent,
+  TrnInputDirective,
+  TrnButtonDirective,
+  TrnDropdownComponent,
+  TrnSliderComponent,
+  TrnCardComponent,
+  TrnLayoutComponent,
+  TrnMenuComponent,
+  TrnSidebarComponent,
+  TrnCheckboxComponent,
   AutoTranslateDirective,
   HeaderComponent,
 ];

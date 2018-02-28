@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrhSidebarComponent } from './trh-sidebar.component';
+import { TrnLayoutComponent } from './trn-layout.component';
 
-describe('TrhSidebarComponent', () => {
-  let component: TrhSidebarComponent;
-  let fixture: ComponentFixture<TrhSidebarComponent>;
+describe('TrnLayoutComponent', () => {
+  let component: TrnLayoutComponent;
+  let fixture: ComponentFixture<TrnLayoutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrhSidebarComponent ]
+      declarations: [ TrnLayoutComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TrhSidebarComponent);
+    fixture = TestBed.createComponent(TrnLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

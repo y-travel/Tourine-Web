@@ -3,11 +3,11 @@ import { SidebarService } from "./sidebar.service";
 import { MatSidenav } from "@angular/material";
 
 @Component({
-  selector: 'trh-sidebar',
-  templateUrl: './trh-sidebar.component.html',
-  styleUrls: ['./trh-sidebar.component.scss']
+  selector: 'trn-sidebar',
+  templateUrl: './trn-sidebar.component.html',
+  styleUrls: ['./trn-sidebar.component.scss']
 })
-export class TrhSidebarComponent implements OnInit {
+export class TrnSidebarComponent implements OnInit {
 
   @ViewChild(MatSidenav) sidnav: MatSidenav;
 

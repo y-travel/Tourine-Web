@@ -1,6 +1,6 @@
 <div autoTranslate>
   <form [formGroup]="formService.form">
-    <trh-card>
+    <trn-card>
       <mat-form-field fxFlex>
         <input matInput placeholder="username" formControlName="username" autofocus>
       </mat-form-field>
@@ -10,6 +10,6 @@
       <!--@Todo impl. validation error message style-->
       <label [style.color]="'red'" [style.font-size]="'x-small'">{{errorMessage|translate}}</label>
       <button class="card-footer" mat-raised-button color="primary" fxFlex (click)="login()">{{"save"|translate}}</button>
-    </trh-card>
+    </trn-card>
   </form>
 </div>

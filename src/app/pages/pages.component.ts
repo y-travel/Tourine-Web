@@ -3,10 +3,10 @@ import { Component } from '@angular/core';
 import { MENU_ITEMS } from './pages-menu';
 
 @Component({
-  selector: 'trh-pages',
+  selector: 'trn-pages',
   template: `
     <tourine-layout>
-      <trh-menu [items]="menu"></trh-menu>
+      <trn-menu [items]="menu"></trn-menu>
       <router-outlet></router-outlet>
     </tourine-layout>
   `,

@@ -1,7 +1,7 @@
 import { Directive, Input } from "@angular/core";
 
 @Directive({
-  selector: "button[trhButton]",
+  selector: "button[trnButton]",
   host: {
     "[class.btn]": "true",
     "[class.btn-primary]": "kind==='primary'",
@@ -9,7 +9,7 @@ import { Directive, Input } from "@angular/core";
     "[class.btn-micro]": "isMicro()"
   }
 })
-export class TrhButtonDirective {
+export class TrnButtonDirective {
   @Input() size: buttonSize = "large";
   @Input() kind: buttonType = "primary";
 

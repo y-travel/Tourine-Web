@@ -3,11 +3,11 @@ import { Router } from "@angular/router";
 import { MenuService } from "./menu.service";
 
 @Component({
-  selector: 'trh-menu',
-  templateUrl: './trh-menu.component.html',
-  styleUrls: ['./trh-menu.component.scss']
+  selector: 'trn-menu',
+  templateUrl: './trn-menu.component.html',
+  styleUrls: ['./trn-menu.component.scss']
 })
-export class TrhMenuComponent {
+export class TrnMenuComponent {
 
   @Input() items = [];
 

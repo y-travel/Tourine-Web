@@ -6,10 +6,10 @@
 <div class="right modal-body" dir="rtl" [style.width.px]="700" autoTranslate><!--width set for IE-->
   <form [formGroup]="data.form.get('tourDetail')">
     <div fxLayout="row">
-      <trh-slider fxFlex trueText="dollar" falseText="rial"></trh-slider>
+      <trn-slider fxFlex trueText="dollar" falseText="rial"></trn-slider>
       <div fxFlex="80" fxLayoutAlign="end center">
         <i class="material-icons">flight</i>
-        <trh-slider formControlName="isFlight" falseText="ground" trueText="flight"></trh-slider>
+        <trn-slider formControlName="isFlight" falseText="ground" trueText="flight"></trn-slider>
         <i class="material-icons">directions_bus</i>
       </div>
     </div>

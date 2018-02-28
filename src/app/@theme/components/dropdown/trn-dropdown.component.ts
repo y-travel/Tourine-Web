@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input } from "@angular/core";
 import { NG_VALUE_ACCESSOR } from "@angular/forms";
-import { TrhEditControlBase } from "../trh-edit-control-base";
+import { TrnEditControlBase } from "../trn-edit-control-base";
 
 export class SelectItem {
   text: string;
@@ -9,18 +9,18 @@ export class SelectItem {
 
 export const customDropdownControlValueAccessor: any = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => TrhDropdownComponent),
+  useExisting: forwardRef(() => TrnDropdownComponent),
   multi: true
 };
 
 @Component({
   moduleId: module.id,
-  selector: "trh-dropdown",
-  templateUrl: "trh-dropdown.component.html",
-  styleUrls: ["trh-dropdown.component.scss"],
+  selector: "trn-dropdown",
+  templateUrl: "trn-dropdown.component.html",
+  styleUrls: ["trn-dropdown.component.scss"],
   providers: [customDropdownControlValueAccessor]
 })
-export class TrhDropdownComponent extends TrhEditControlBase{
+export class TrnDropdownComponent extends TrnEditControlBase{
   @Input() items = [];
   @Input() currentItem: any;
   @Input() textField: string;
