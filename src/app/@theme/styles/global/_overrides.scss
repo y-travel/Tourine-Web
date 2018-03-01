@@ -1,7 +1,8 @@
-@import 'components/toaster.theme';
-@import "material/material.theme";
+@import 'components/all';
+@import 'material/material.theme';
 
 @mixin nb-theme-overrides() {
   @include trn-material-theme();
-  @include nb-components-toaster-theme();
+  @include trn-toaster-theme();
+  @include trn-ag-grid-theme();
 }

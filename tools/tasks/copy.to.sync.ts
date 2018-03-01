@@ -9,6 +9,7 @@ import { changeFileManager } from '../utils/code_change_tools';
  * current application environment.
  */
 export = () => {
+  console.log(`current sync path is${Config.SyncPath}`);
   return gulp.src([
     join(Config.DIST_DIR, '**'),
     '!' + join(Config.DIST_DIR, '**', '*.js.map'),

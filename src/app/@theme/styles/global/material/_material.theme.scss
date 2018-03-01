@@ -1,9 +1,9 @@
-@import '~@angular/material/theming';
+@import '../../core/variables';
 
 @mixin init_palette() {
-  $trn-primary-palette: mat-palette($mat-deep-purple);
-  $trn-accent-palette: mat-palette($mat-pink, A200, A100, A400);
-  $trn-warn-palette: mat-palette($mat-red);
+  $trn-primary-palette: mat-palette($primary-palette);
+  $trn-accent-palette: mat-palette($accent-palette, A200, A100, A400);
+  $trn-warn-palette: mat-palette($error-palette);
   $trn-material-theme: mat-light-theme($trn-primary-palette, $trn-accent-palette, $trn-warn-palette);
   @include angular-material-theme($trn-material-theme);
 

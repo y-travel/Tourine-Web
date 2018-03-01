@@ -1,0 +1,15 @@
+@import "colors";
+
+$hint-little-height: .8rem;
+$validation-font-size: .9rem;
+$dialog-border-radius: 8px !default;
+$card-border-radius: 7px;
+$base-font-size: 12px;
+$background-color: map_get($mat-blue-grey, "100");
+
+$primary-palette: $mat-purple;
+$accent-palette: $mat-orange;
+$error-palette:$mat-red;
+$primary-color: map_get($primary-palette, "500") !default;
+$accent-color: map_get($accent-palette, "500");
+$error-color:map_get($error-palette,"500");

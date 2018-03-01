@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input } from "@angular/core";
+import { Component, EventEmitter, forwardRef, Input, Output } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 
 import { TrnEditControlBase } from "../trn-edit-control-base";
@@ -20,6 +20,7 @@ export const customSliderControlValueAccessor: any = {
 export class TrnSliderComponent extends TrnEditControlBase {
   @Input() trueText: string;
   @Input() falseText: string;
+  @Output() change = new EventEmitter<any>();
 
   constructor(private translateService: TranslateService) {
     super();

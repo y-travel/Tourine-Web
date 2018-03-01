@@ -1,0 +1,28 @@
+@import "../../core/variables";
+@import "../../core/functions";
+
+$icons-path: "~ag-grid/src/styles/icons/";
+
+@import "~ag-grid/src/styles/ag-grid";
+@import "~ag-grid/src/styles/ag-theme-material";
+
+@mixin trn-ag-grid-theme {
+  $params: map_merge($params,(
+    grid-size: $grid-size,
+    icon-size: $icon-size,
+    font-family: nb-theme(font-main),
+    font-size: $font-size,
+    font-weight: $font-weight,
+    secondary-font-family: nb-theme(font-main),
+    secondary-font-size: $secondary-font-size,
+    secondary-font-weight: $secondary-font-weight,
+    accent-color: $accent-color,
+    primary-color: $primary-color,
+    hover-color: $hover-color,
+    selected-color: $selected-color,
+  ));
+
+  .ag-theme-material {
+    @include ag-grid-theme($params);
+  }
+}
