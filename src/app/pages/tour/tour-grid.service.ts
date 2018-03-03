@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { GridOptions } from "ag-grid";
-import { TranslateService } from "@ngx-translate/core";
+import { GridOptions } from 'ag-grid';
+import { TranslateService } from '@ngx-translate/core';
 
-import { TourService } from "../../@core/data/tour.service";
-import { HeaderComponent } from "../../@theme/components/header-component/header.component";
+import { TourService } from '../../@core/data/tour.service';
+import { HeaderComponent } from '../../@theme/components/header-component/header.component';
+import { Dictionary, Place } from '../../@core/data/models';
+import { FormatterService } from '../../@core/utils/formatter.service';
+import { extractStyleParams } from '@angular/animations/browser/src/util';
 
 @Injectable()
 export class TourGridService {
@@ -11,59 +14,58 @@ export class TourGridService {
   rowData: any[];
   columnDefs: any[];
   detailCellRendererParams: any;
+  places: Dictionary<string> = {};
 
-  get translation() {
-    const val = this.translate.instant('tour.code');
-    return val;
-  }
-
-  constructor(private tourService: TourService, private translate: TranslateService) {
+  constructor(private tourService: TourService,
+              private translate: TranslateService,
+              private formatter: FormatterService) {
     this.init();
   }
 
   init() {
+    this.loadPlaces();
     this.gridOptions = {
       defaultColDef: {
         headerComponentFramework: <{ new(): HeaderComponent }>HeaderComponent,
-        headerComponentParams: {
-          menuIcon: 'fa bars',
-        },
       },
     };
     this.columnDefs = [
       {
-        headerName: this.translation,
-        field: "code"
+        headerName: 'tour.code',
+        field: 'code',
       },
       {
-        headerName: this.translate.instant('tour.date'),
-        field: "tourDetail.startDate"
+        headerName: 'tour.date',
+        field: 'tourDetail.startDate',
+        cellRenderer: (params: any) => this.formatter.getDateFormat(params.value),
       },
       {
-        headerName: this.translate.instant('tour.capacity'),
-        field: "capacity"
+        headerName: 'tour.capacity',
+        field: 'capacity',
       },
       {
-        headerName: this.translate.instant('price'),
-        field: "basePrice"
+        headerName: 'price',
+        field: 'basePrice',
+        cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
       },
       {
-        headerName: this.translate.instant('hotel'),
-        field: "tourDetail.placeId"
+        headerName: 'hotel',
+        field: 'tourDetail.placeId',
+        cellRenderer: (params) => this.places[params.value],
       },
     ];
 
     this.detailCellRendererParams = {
       detailGridOptions: {
         columnDefs: [
-          {field: "callId"},
-          {field: "direction"},
-          {field: "number"},
+          {field: 'callId'},
+          {field: 'direction'},
+          {field: 'number'},
           {
-            field: "duration",
-            valueFormatter: "x.toLocaleString() + 's'"
+            field: 'duration',
+            valueFormatter: 'x.toLocaleString() + \'s\''
           },
-          {field: "switchCode"}
+          {field: 'switchCode'}
         ],
         onGridReady: function (params) {
           params.api.sizeColumnsToFit();
@@ -75,15 +77,18 @@ export class TourGridService {
     };
   }
 
+  loadPlaces() {
+    this.tourService.getPlaces().subscribe((places: Place[]) => {
+      places.forEach(place => this.places[place.id] = place.name);
+    });
+  }
+
   onGridReady(params) {
-    console.log("hello");
-    this.tourService.getList().subscribe(res => {
-      params.api.setRowData(res);
+    console.log('hello');
+    this.tourService.getList().subscribe(tours => {
+      params.api.setRowData(tours);
     });
 
   }
 
-  selectAllRows() {
-    this.gridOptions.api.selectAll();
-  }
 }

@@ -1,11 +1,11 @@
-import { HttpMethod, TourStatus } from "./enums";
+import { HttpMethod, TourStatus } from './enums';
 
 export interface IModel {
   isNew(): boolean;
 }
 
 export class Model implements IModel {
-  id = 0;
+  id = '';
 
   isNew(): boolean {
     return !this.id;
@@ -13,11 +13,11 @@ export class Model implements IModel {
 }
 
 export class Destination extends Model {
-  name = "";
+  name = '';
 }
 
 export class Place extends Model {
-  name = 0;
+  name = '';
 }
 
 export class Tour extends Model {
@@ -33,7 +33,7 @@ export class Tour extends Model {
   agency: Agency;
 }
 
-export class TourDetail extends Model{
+export class TourDetail extends Model {
   destinationId: string;
   destination: Destination;
   duration: number;
@@ -45,8 +45,8 @@ export class TourDetail extends Model{
   busPrice: number;
   roomPrice: number;
   foodPrice: number;
-   creationDate: string;
-   leaderId: string;
+  creationDate: string;
+  leaderId: string;
   leader: Person;
 }
 
@@ -88,15 +88,15 @@ export class Reagent extends Model {
 }
 
 export class Person extends Model {
-  name = "";
-  family = "";
-  mobileNumber = "";
-  nationalCode = "";
-  fatherName = "";
-  birthDate = "";
+  name = '';
+  family = '';
+  mobileNumber = '';
+  nationalCode = '';
+  fatherName = '';
+  birthDate = '';
   passportExpireDate: Date;
   passportNo = 0;
-  phone = "";
+  phone = '';
 }
 
 export enum Role {
@@ -106,8 +106,8 @@ export enum Role {
 }
 
 export class User extends Model {
-  username = "";
-  password = "";
+  username = '';
+  password = '';
   // @References(typeof(Person))
   PersonId: string;
 
@@ -134,7 +134,7 @@ export interface IPost {
 
 }
 
-export function Route(path: string, type: HttpMethod = "GET") {
+export function Route(path: string, type: HttpMethod = 'GET') {
   return (target: any) => {
 
     const original = target;
@@ -154,12 +154,12 @@ export function Route(path: string, type: HttpMethod = "GET") {
 
     const wrapper: any = function (...args: any[]) {//if we use (...args)=> or without parameters raise error: <classname> is not a constructor
       Reflect.defineProperty(wrapper.prototype,
-        "apiPath",
+        'apiPath',
         {
           get: pathFn
         });
       Reflect.defineProperty(wrapper.prototype,
-        "httpMethod",
+        'httpMethod',
         {
           get: httpMethodFn
         });

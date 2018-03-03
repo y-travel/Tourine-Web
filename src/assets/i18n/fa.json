@@ -1,74 +1,75 @@
 {
-    "adult": {
-        "count": "تعداد ظرفیت بزرگسال",
-        "minPrice": "حداقل قیمت ثبت نام بزرگسال"
-    },
-    "adultCount": "تعداد بزرگسال",
-    "agencyName": "نام آژانس",
-    "birthDate": "تاریخ تولد",
-    "busPrice": "هزینه اتوبوس",
-    "buyer": "خریدار",
-    "coupon": {
-        "upsert": "ثبت کوپن"
-    },
-    "dayFormat": "(روز)",
-    "destination": "مقصد",
-    "dollar": "دلار",
-    "duration": "مدت زمان",
-    "email": "رایانامه",
-    "emptyCount": "ظرفیت خالی {{value}} از {{outof}}",
-    "family": "نام خانوادگی",
-    "fatherName": "نام پدر",
-    "fellows": "همراهان",
-    "first": "اول",
-    "flight": "هوایی",
-    "foodPrice": "هزینه غذا",
-    "from": "از",
-    "ground": "زمینی",
-    "homePage": "صفحه اصلی",
-    "hotel": "هتل",
-    "infantCount": "تعداد بچه",
-    "infantPrice": "قیمت بچه",
-    "mobileNumber": "شماره همراه",
-    "msg": {
-        "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
-    },
-    "name": "نام",
-    "nationalCode": "کد ملی",
-    "offValue": "تخفیف",
-    "oldPassword": "کلمه عبور فعلی",
-    "passenger": "مسافر",
-    "passport": {
-        "expireDate": "تاریخ انقضاء پاسپورت",
-        "number": "شماره پاسپورت"
-    },
-    "password": "کلمه عبور",
-    "phone": "تلفن",
-    "pleaseSelect": "لطفاً انتخاب کنید",
-    "price": "قیمت",
-    "rePassword": "تکرار کلمه عبور",
-    "reagent": {
-        "name": "نام معرف",
-        "upsert": "ثبت معرف"
-    },
-    "reagent_": "معرف",
-    "rial": "ریال",
-    "roomPrice": "هزینه اتاق",
-    "save": "ثبت",
-    "second": "دوم",
-    "steps": "گام {{value}}",
-    "toman": "تومان",
-    "tomanFormat": "(تومان)",
-    "tour": {
-        "capacity": "ظرفیت",
-        "code": "کد تور",
-        "date": "تاریخ اجرا",
-        "list": "لیست تورها",
-        "upsert": "ثبت تور"
-    },
-    "tour_": "تور",
-    "user": {
-        "upsert": "ثبت کاربر"
-    },
-    "username": "نام کاربری"
+  "adult": {
+    "count": "تعداد ظرفیت بزرگسال",
+    "minPrice": "حداقل قیمت ثبت نام بزرگسال"
+  },
+  "adultCount": "تعداد بزرگسال",
+  "agencyName": "نام آژانس",
+  "birthDate": "تاریخ تولد",
+  "busPrice": "هزینه اتوبوس",
+  "buyer": "خریدار",
+  "coupon": {
+    "upsert": "ثبت کوپن"
+  },
+  "dayFormat": "(روز)",
+  "destination": "مقصد",
+  "dollar": "دلار",
+  "duration": "مدت زمان",
+  "email": "رایانامه",
+  "emptyCount": "ظرفیت خالی {{value}} از {{outof}}",
+  "family": "نام خانوادگی",
+  "fatherName": "نام پدر",
+  "fellows": "همراهان",
+  "first": "اول",
+  "flight": "هوایی",
+  "foodPrice": "هزینه غذا",
+  "from": "از",
+  "ground": "زمینی",
+  "homePage": "صفحه اصلی",
+  "hotel": "هتل",
+  "infantCount": "تعداد بچه",
+  "infantPrice": "قیمت بچه",
+  "mobileNumber": "شماره همراه",
+  "msg": {
+    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
+  },
+  "name": "نام",
+  "nationalCode": "کد ملی",
+  "offValue": "تخفیف",
+  "oldPassword": "کلمه عبور فعلی",
+  "passenger": "مسافر",
+  "passport": {
+    "expireDate": "تاریخ انقضاء پاسپورت",
+    "number": "شماره پاسپورت"
+  },
+  "password": "کلمه عبور",
+  "phone": "تلفن",
+  "pleaseSelect": "لطفاً انتخاب کنید",
+  "price": "قیمت",
+  "rePassword": "تکرار کلمه عبور",
+  "reagent": {
+    "name": "نام معرف",
+    "upsert": "ثبت معرف"
+  },
+  "reagent_": "معرف",
+  "rial": "ریال",
+  "roomPrice": "هزینه اتاق",
+  "save": "ثبت",
+  "second": "دوم",
+  "steps": "گام {{value}}",
+  "toman": "تومان",
+  "tomanFormat": "(تومان)",
+  "tour": {
+    "capacity": "ظرفیت",
+    "code": "کد تور",
+    "date": "تاریخ اجرا",
+    "list": "لیست تورها",
+    "upsert": "ثبت تور"
+  },
+  "tour_": "تور",
+  "user": {
+    "upsert": "ثبت کاربر"
+  },
+  "username": "نام کاربری",
+  "withOutPrice": "بدون قیمت"
 }

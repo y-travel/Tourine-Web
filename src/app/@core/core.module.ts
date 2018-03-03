@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
-import { ThemeService } from "./utils/theme.service";
-import { SpinnerService } from "./utils/spinner.service";
-import { DialogService } from "./utils/dialog.service";
-import { MatDialogModule } from "@angular/material";
-import { AuthService } from "./utils/auth.service";
-import { APP_CONFIG, APP_CONFIG_INSTANCE } from "./utils/app.config";
-import { Utils } from "./utils/utils";
+import { ThemeService } from './utils/theme.service';
+import { SpinnerService } from './utils/spinner.service';
+import { DialogService } from './utils/dialog.service';
+import { MatDialogModule } from '@angular/material';
+import { AuthService } from './utils/auth.service';
+import { APP_CONFIG, APP_CONFIG_INSTANCE } from './utils/app.config';
+import { Utils } from './utils/utils';
+import { FormatterService } from './utils/formatter.service';
 
 const CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
@@ -20,6 +21,7 @@ const CORE_PROVIDERS = [
   DialogService,
   Utils,
   AuthService,
+  FormatterService,
   {provide: APP_CONFIG, useValue: APP_CONFIG_INSTANCE},
 ];
 

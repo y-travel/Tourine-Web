@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from "./api.service";
-import { Destination, Place, Tour } from "./models/client.model";
-import { Serializable } from "../utils/serializable";
-import { CreateTour, GetDestinations, GetPlaces, GetTours } from "./models/server.dtos";
-import { Observable } from "rxjs/Observable";
+import { ApiService } from './api.service';
+import { Destination, Place, Tour } from './models/client.model';
+import { Serializable } from '../utils/serializable';
+import { CreateTour, GetDestinations, GetPlaces, GetTours } from './models/server.dtos';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TourService {

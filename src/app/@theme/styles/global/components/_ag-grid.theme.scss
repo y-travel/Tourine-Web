@@ -26,5 +26,10 @@ $icons-path: "~ag-grid/src/styles/icons/";
 
   .ag-theme-material {
     @include ag-grid-theme($params);
+    .ag-cell,
+    .ag-header-cell {
+      text-align: center;
+    }
+
   }
 }

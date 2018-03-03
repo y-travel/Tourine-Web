@@ -1,8 +1,8 @@
-import { FormBuilder, Validators } from "@angular/forms";
-import { Injectable } from "@angular/core";
+import { FormBuilder, Validators } from '@angular/forms';
+import { Injectable } from '@angular/core';
 //
-import { FormService } from "../form.service";
-import { Coupon, Person, EditPassword, Reagent, Tour, User } from "./client.model";
+import { FormService } from '../form.service';
+import { Coupon, Person, EditPassword, Reagent, Tour, User } from './client.model';
 
 @Injectable()
 export class FormFactory {
@@ -17,7 +17,7 @@ export class FormFactory {
         leaderId: [undefined],
         duration: [0, Validators.required],
         destinationId: [0, Validators.required],
-        placeId: ["", Validators.required],
+        placeId: ['', Validators.required],
         busPrice: [0],
         roomPrice: [0],
         foodPrice: [0],
