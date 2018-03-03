@@ -5,14 +5,14 @@
   justify-content: space-between;
   width: 100%;
   .logo {
-    padding: 0 nb-theme(padding);
+    padding: 0 trn-theme(padding);
     font-size: 1.75rem;
-    font-weight: nb-theme(font-weight-bolder);
-    border-left: 1px solid nb-theme(separator);
+    font-weight: trn-theme(font-weight-bolder);
+    border-left: 1px solid trn-theme(separator);
     white-space: nowrap;
 
     span {
-      font-weight: nb-theme(font-weight-normal);
+      font-weight: trn-theme(font-weight-normal);
     }
   }
 }

@@ -1,33 +1,7 @@
 @import "all";
 // which themes you what to enable (empty to enable all)
 $nb-enabled-themes: (default, cosmic);
-$nebular-icons-font-family:'fontawsome';
 
-$nb-themes: nb-register-theme((
- // app wise variables for each theme
+$nb-themes: nb-register-theme($theme-default, default);
 
-  sidebar-header-gap: 2rem,
-  sidebar-header-height: initial,
-  layout-content-width: 1400px,
-  shadow-color:#747474,
-  card-header-bg:#303f9f,
-  input-height:35px,
-  base-font-size:14px,
-  label-hint-size:.75rem,
-  font-main: one-iransans,
-  font-secondary: one-iransans,
-), default, default);
-
-$nb-themes: nb-register-theme((
-  // app wise variables for each theme
-  sidebar-header-gap: 2rem,
-  sidebar-header-height: initial,
-  layout-content-width: 1400px,
-  shadow-color:#212121,
-  card-header-bg:#1a237e,
-  input-height:35px,
-  base-font-size:14px,
-  label-hint-size:.75rem,
-  font-main: one-iransans,
-  font-secondary: one-iransans,
-), cosmic, cosmic);
+$nb-themes: nb-register-theme($theme-dark, cosmic);

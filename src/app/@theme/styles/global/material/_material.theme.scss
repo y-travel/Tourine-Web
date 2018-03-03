@@ -1,25 +1,30 @@
 @import '../../core/variables';
 
 @mixin init_palette() {
-  $trn-primary-palette: mat-palette($primary-palette);
-  $trn-accent-palette: mat-palette($accent-palette, A200, A100, A400);
-  $trn-warn-palette: mat-palette($error-palette);
-  $trn-material-theme: mat-light-theme($trn-primary-palette, $trn-accent-palette, $trn-warn-palette);
-  @include angular-material-theme($trn-material-theme);
-
-  //dark theme definition
-  $trn-dark-primary: mat-palette($mat-blue-grey);
-  $trn-dark-accent: mat-palette($mat-amber, A200, A100, A400);
-  $trn-dark-warn: mat-palette($mat-deep-orange);
-  $trn-dark-theme: mat-dark-theme($trn-dark-primary, $trn-dark-accent, $trn-dark-warn);
-  &.trn-theme-dark {
-    @include angular-material-theme($trn-dark-theme);
+  $primary: trn-theme(color-primary-palette);
+  $accent: trn-theme(color-accent-palette);
+  $warning: trn-theme(color-warning-palette);
+  @if trn-theme(is-dark) {
+    @include angular-material-theme(
+        mat-dark-theme(
+            mat-palette($primary),
+            mat-palette($accent, A200, A100, A400),
+            mat-palette($warning)
+        ));
+  }
+  @else {
+    @include angular-material-theme(
+        mat-light-theme(
+            mat-palette($primary),
+            mat-palette($accent, A200, A100, A400),
+            mat-palette($warning)
+        ));
   }
 }
 
 @mixin init_font() {
   $custom-typography: mat-typography-config(
-    $font-family: nb-theme(font-main),
+    $font-family: trn-theme(font-main),
     $headline: mat-typography-level(32px, 48px, 700),
     $body-1: mat-typography-level(16px, 24px, 500)
   );

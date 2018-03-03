@@ -2,17 +2,7 @@
 
 @include nb-install-component() {
   :host {
-    box-shadow: 5px 5px 20px nb-theme(shadow-color);
+    box-shadow: 5px 5px 20px trn-theme(shadow-color);
     direction: rtl;
-  }
-  .card-header {
-    background-color: nb-theme(card-header-bg);
-    color: nb-theme(card-header-fg);
-  }
-  .card-body {
-
-  }
-  .card-footer {
-
   }
 }

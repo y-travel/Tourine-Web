@@ -12,7 +12,7 @@ $nb-themes: () !global;
 $nb-themes-non-processed: () !global;
 $nb-themes-export: () !global;
 
-@function nb-theme($key) {
+@function trn-theme($key) {
   @return map-get($theme, $key);
 }
 

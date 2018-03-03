@@ -183,7 +183,7 @@
   @include keyframes(btn-#{$name}-pulse) {
     0% {
       box-shadow: none;
-      opacity: nb-theme(btn-disabled-opacity);
+      opacity: trn-theme(btn-disabled-opacity);
     }
     50% {
       box-shadow: 0 0 1rem 0 $color;
@@ -191,7 +191,7 @@
     }
     100% {
       box-shadow: none;
-      opacity: nb-theme(btn-disabled-opacity);
+      opacity: trn-theme(btn-disabled-opacity);
     }
   }
 }

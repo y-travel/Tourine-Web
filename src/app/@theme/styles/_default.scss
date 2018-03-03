@@ -1,8 +1,8 @@
 @import 'install';
 
 @mixin set_defaults {
-  font-family: nb-theme(font-main);
-  font-size: nb-theme(base-font-size);
+  font-family: trn-theme(font-main);
+  font-size: trn-theme(base-font-size);
 
   .btn-micro {
     transform: scale(.7);

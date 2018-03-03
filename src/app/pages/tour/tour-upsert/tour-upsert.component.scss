@@ -2,7 +2,7 @@
 
 @include nb-install-component() {
   .menu-icon{
-    font-size: nb-theme(menu-icon-font-size);
+    font-size: trn-theme(menu-icon-font-size);
   }
 }
 

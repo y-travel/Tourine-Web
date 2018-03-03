@@ -15,22 +15,22 @@
 
 
       &.light {
-        color: nb-theme(color-fg-text);
+        color: trn-theme(color-fg-text);
         padding-right: 10px;
       }
 
       &.cosmic {
-        color: nb-theme(color-fg);
+        color: trn-theme(color-fg);
         padding-left: 10px;
       }
 
       @include nb-for-theme(cosmic) {
         &.light {
-          color: nb-theme(color-fg);
+          color: trn-theme(color-fg);
         }
 
         &.cosmic {
-          color: nb-theme(color-white);
+          color: trn-theme(color-white);
         }
       }
 
