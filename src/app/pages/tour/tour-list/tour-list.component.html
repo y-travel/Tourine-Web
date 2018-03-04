@@ -7,6 +7,7 @@
     <ag-grid-angular #agGrid style="height: 400px;" class="ag-theme-material"
                      [columnDefs]="tourGridService.columnDefs"
                      [masterDetail]="true"
+                     rowSelection="multiple"
                      [gridOptions]="tourGridService.gridOptions"
                      [detailCellRendererParams]="tourGridService.detailCellRendererParams"
                      (gridReady)="tourGridService.onGridReady($event)"

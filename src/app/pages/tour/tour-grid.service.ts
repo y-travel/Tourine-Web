@@ -15,6 +15,7 @@ export class TourGridService {
   columnDefs: any[];
   detailCellRendererParams: any;
   places: Dictionary<string> = {};
+  gridApi: any;
 
   constructor(private tourService: TourService,
               private translate: TranslateService,
@@ -83,12 +84,14 @@ export class TourGridService {
     });
   }
 
-  onGridReady(params) {
-    console.log('hello');
-    this.tourService.getList().subscribe(tours => {
-      params.api.setRowData(tours);
-    });
-
+  onGridReady(params: any) {
+    this.gridApi = params.api;
+    this.reloadData();
   }
 
+  reloadData() {
+    this.tourService.getList().subscribe(tours => {
+      this.gridApi.setRowData(tours);
+    });
+  }
 }
