@@ -24,7 +24,7 @@ import { HttpInterceptorService } from "./@core/data/http-interceptor.service";
   bootstrap: [AppComponent],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
-    {provide: LOCALE_ID, useValue: 'fa'},
+    {provide: LOCALE_ID, useValue: 'fa-IR'},
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],
 })

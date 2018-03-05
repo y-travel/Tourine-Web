@@ -52,7 +52,7 @@ export class TourGridService {
       {
         headerName: 'hotel',
         field: 'tourDetail.placeId',
-        cellRenderer: (params) => this.places[params.value],
+        cellRenderer: (params: any) => this.places[params.value],
       },
     ];
 
@@ -68,11 +68,11 @@ export class TourGridService {
           },
           {field: 'switchCode'}
         ],
-        onGridReady: function (params) {
+        onGridReady: function (params: any) {
           params.api.sizeColumnsToFit();
         }
       },
-      getDetailRowData: function (params) {
+      getDetailRowData: function (params: any) {
         params.successCallback(params.data.callRecords);
       }
     };

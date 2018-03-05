@@ -2,7 +2,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService } from '../form.service';
-import { Coupon, Person, EditPassword, Reagent, Tour, User } from './client.model';
+import { Coupon, Person, EditPassword, Reagent, Tour, User , TourDetail } from './client.model';
 
 @Injectable()
 export class FormFactory {
@@ -13,7 +13,7 @@ export class FormFactory {
       basePrice: [model.basePrice],
       capacity: [model.capacity, [Validators.required, Validators.min(1)]],
       tourDetail: new FormBuilder().group({
-        startDate: [new Date(2000, 2, 2), Validators.required],
+        startDate: [new Date(), Validators.required],
         leaderId: [undefined],
         duration: [0, Validators.required],
         destinationId: [0, Validators.required],

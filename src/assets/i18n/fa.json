@@ -71,5 +71,8 @@
     "upsert": "ثبت کاربر"
   },
   "username": "نام کاربری",
-  "withOutPrice": "بدون قیمت"
+  "withOutPrice": "بدون قیمت",
+  "selectPerson" : "انتخاب فرد",
+  "leader" : "سرگروه",
+  "none" : "هیچکدام"
 }

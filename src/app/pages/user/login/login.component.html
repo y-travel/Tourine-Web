@@ -5,7 +5,7 @@
         <input matInput placeholder="username" formControlName="username" autofocus>
       </mat-form-field>
       <mat-form-field fxFlex>
-        <input matInput placeholder="password" formControlName="password">
+        <input matInput placeholder="password" formControlName="password" type="password">
       </mat-form-field>
       <!--@Todo impl. validation error message style-->
       <label [style.color]="'red'" [style.font-size]="'x-small'">{{errorMessage|translate}}</label>

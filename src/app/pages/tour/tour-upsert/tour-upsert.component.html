@@ -13,23 +13,31 @@
         <i class="material-icons">directions_bus</i>
       </div>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" fxLayoutAlign="start" >
       <mat-form-field>
-        <mat-select placeholder="destination" formControlName="destinationId">
+        <mat-select placeholder="destination" formControlName="destinationId" >
           <mat-option>{{"none"|translate}}</mat-option>
-          <mat-option *ngFor="let item of destinations | async" [value]="item.id">
+          <mat-option *ngFor="let item of destinations | async"  [value]="item.id">
             {{item.name}}
           </mat-option>
         </mat-select>
+        </mat-form-field>
+        <mat-form-field >
+        <mat-select placeholder="leader" formControlName="leaderId" fxLayoutGap="100px">
+          <mat-option>{{"none"|translate}}</mat-option>
+          <mat-option *ngFor="let leader of leaders | async"  [value]="leader.id">
+            {{leader.name + ' ' + leader.family}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-
     </div>
+
     <div fxLayout="row" fxLayoutAlign="space-between">
       <mat-card fxLayout="column" fxFlex>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
-            <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour_.date" formControlName="startDate">
-            <mat-datepicker-toggle #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
+            <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour.date" formControlName="startDate">
+            <mat-datepicker-toggle utc="true"  #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
             <mat-datepicker #tourDate disabled="false"></mat-datepicker>
           </mat-form-field>
           <mat-form-field fxFlex>
@@ -37,18 +45,18 @@
             <mat-hint align="end" translate>dayFormat</mat-hint>
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="row" fxLayoutAlign="space-between" >
           <mat-form-field fxFlex>
             <input matInput placeholder="adult.count" [formControl]="data.form.get('capacity')">
           </mat-form-field>
           <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="adult.minPrice" [formControl]="data.form.get('basePrice')">
+            <input matInput mask="number"  placeholder="adult.minPrice" [formControl]="data.form.get('basePrice')">
             <mat-hint align="end" translate>tomanFormat</mat-hint>
           </mat-form-field>
-        </div>
+        </div> 
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="infantPrice" formControlName="infantPrice">
+            <input matInput mask="number"  placeholder="infantPrice" formControlName="infantPrice">
             <mat-hint align="end" translate>tomanFormat</mat-hint>
           </mat-form-field>
           <mat-form-field fxFlex>

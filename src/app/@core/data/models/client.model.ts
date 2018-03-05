@@ -138,7 +138,7 @@ export function Route(path: string, type: HttpMethod = 'GET') {
   return (target: any) => {
 
     const original = target;
-    const createApiPath = function (path: string, object) {
+    const createApiPath = function (path: string, object: any) {
       let newPath = path;
       for (const field in object) {
         newPath = newPath.replace(`{${field}}`, object[field]);

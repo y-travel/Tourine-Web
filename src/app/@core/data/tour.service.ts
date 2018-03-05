@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Destination, Place, Tour } from './models/client.model';
+import { Destination, Place, Tour , Person } from './models/client.model';
 import { Serializable } from '../utils/serializable';
-import { CreateTour, GetDestinations, GetPlaces, GetTours } from './models/server.dtos';
+import { CreateTour, GetDestinations, GetPlaces, GetTours, GetLeaders } from './models/server.dtos';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -23,6 +23,11 @@ export class TourService {
     return this.apiService.getEntities(dto);
   }
 
+  getLeaders(): Observable<Person[]> {
+    const dto = new GetLeaders();
+    return this.apiService.getEntities(dto);
+  }
+
   getList(): Observable<Tour[]> {
     const query = new GetTours();
     return this.apiService.getEntities(query);
@@ -31,6 +36,7 @@ export class TourService {
   addTour(model: Tour): Observable<Tour> {
     const dto = new CreateTour();
     Serializable.fromJSON(dto, model);
+    console.log(dto);
     return this.apiService.send(dto);
   }
 }
