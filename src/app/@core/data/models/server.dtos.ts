@@ -1,5 +1,5 @@
 /* Options:
-Date: 2018-02-23 12:14:41
+Date: 2018-03-05 19:42:57
 Version: 4.514
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: http://www.tourine.ir/api
@@ -15,7 +15,7 @@ ExcludeTypes: Agency,TourDetail,TourStatus,IReturn,IReturnVoid,Tour,User,Person,
 DefaultImports: {Agency,IReturn,IReturnVoid,Tour,User,Person,Role,Destination,Place,IPost}
 */
 
-import { TourDetail, Agency, IReturn, IReturnVoid, Tour, User, Person, Role, Destination, Place, IPost, Route } from "./client.model";
+import { Agency, IReturn, IReturnVoid, Tour, User, Person, Role, Destination, Place, IPost, TourDetail, Route } from './client.model';
 
 export class QueryBase {
   // @DataMember(Order=1)
@@ -224,22 +224,22 @@ export class GetAccessTokenResponse {
 @Route("/disBot", "GET")
 export class TourineBotDisabler implements IReturn<string> {
   createResponse() {
-    return "";
+    return '';
   }
 
   getTypeName() {
-    return "TourineBotDisabler";
+    return 'TourineBotDisabler';
   }
 }
 
 @Route("/enBot", "GET")
 export class TourineBotEnabler implements IReturn<string> {
   createResponse() {
-    return "";
+    return '';
   }
 
   getTypeName() {
-    return "TourineBotEnabler";
+    return 'TourineBotEnabler';
   }
 }
 
@@ -257,7 +257,7 @@ export class PostUser implements IReturn<User> {
   }
 
   getTypeName() {
-    return "PostUser";
+    return 'PostUser';
   }
 }
 
@@ -278,11 +278,15 @@ export class GetTours extends QueryDb_1<Tour> implements IReturn<QueryResponse<T
   }
 
   getTypeName() {
-    return "GetTours";
+    return 'GetTours';
   }
 }
 
+/**
+ * ww
+ */
 @Route("/tours/", "POST")
+// @Api(BodyParameter=2, Description="ww", IsRequired=true)
 export class CreateTour implements IReturn<Tour> {
   capacity: number;
   basePrice: number;
@@ -293,7 +297,7 @@ export class CreateTour implements IReturn<Tour> {
   }
 
   getTypeName() {
-    return "CreateTour";
+    return 'CreateTour';
   }
 }
 
@@ -309,7 +313,20 @@ export class GetRootTours extends QueryDb_1<Tour> implements IReturn<QueryRespon
   }
 
   getTypeName() {
-    return "GetRootTours";
+    return 'GetRootTours';
+  }
+}
+
+@Route("/tours/{TourId}/blocks", "GET")
+export class GetBlocks extends QueryDb_1<Tour> implements IReturn<QueryResponse<Tour>> {
+  tourId: string;
+
+  createResponse() {
+    return new QueryResponse<Tour>();
+  }
+
+  getTypeName() {
+    return 'GetBlocks';
   }
 }
 
@@ -322,7 +339,7 @@ export class GetTourDetail implements IReturn<TourDetail> {
   }
 
   getTypeName() {
-    return "GetTourDetail";
+    return 'GetTourDetail';
   }
 }
 
@@ -340,7 +357,7 @@ export class CreateTeam implements IReturn<Team> {
   }
 
   getTypeName() {
-    return "CreateTeam";
+    return 'CreateTeam';
   }
 }
 
@@ -356,7 +373,7 @@ export class GetPlaces extends QueryDb_1<Place> implements IReturn<QueryResponse
   }
 
   getTypeName() {
-    return "GetPlaces";
+    return 'GetPlaces';
   }
 }
 
@@ -389,7 +406,7 @@ export class GetPersonsOfTeam extends QueryDb_1<Person> implements IReturn<Query
   }
 
   getTypeName() {
-    return "GetPersonsOfTeam";
+    return 'GetPersonsOfTeam';
   }
 }
 
@@ -402,7 +419,7 @@ export class PostServiceForPassenger implements IReturn<Service> {
   }
 
   getTypeName() {
-    return "PostServiceForPassenger";
+    return 'PostServiceForPassenger';
   }
 }
 
@@ -420,7 +437,7 @@ export class GetServiceOfTour extends QueryDb_2<Service, Person> implements IRet
   }
 
   getTypeName() {
-    return "GetServiceOfTour";
+    return 'GetServiceOfTour';
   }
 }
 
@@ -452,7 +469,7 @@ export class GetPersons extends QueryDb_1<Person> implements IReturn<QueryRespon
   }
 
   getTypeName() {
-    return "GetPersons";
+    return 'GetPersons';
   }
 }
 
@@ -470,7 +487,7 @@ export class FindPersonFromNc implements IReturn<Person> {
   }
 
   getTypeName() {
-    return "FindPersonFromNc";
+    return 'FindPersonFromNc';
   }
 }
 
@@ -484,7 +501,7 @@ export class FindPersonInAgency extends QueryDb_1<Person> implements IReturn<Que
   }
 
   getTypeName() {
-    return "FindPersonInAgency";
+    return 'FindPersonInAgency';
   }
 }
 
@@ -495,7 +512,7 @@ export class GetLeaders extends QueryDb_1<Person> implements IReturn<QueryRespon
   }
 
   getTypeName() {
-    return "GetLeaders";
+    return 'GetLeaders';
   }
 }
 
@@ -510,7 +527,7 @@ export class RegisterPerson implements IReturn<Team> {
   }
 
   getTypeName() {
-    return "RegisterPerson";
+    return 'RegisterPerson';
   }
 }
 
@@ -521,8 +538,33 @@ export class GetCurrentPerson implements IReturn<Person> {
   }
 
   getTypeName() {
-    return "GetCurrentPerson";
+    return 'GetCurrentPerson';
   }
+}
+
+@Route("/notify/agency/tour/{TourId}/role/{Role}", "POST")
+export class SendNotifyToTourAgencies {
+  tourId: string;
+  role: Role;
+  msg: string;
+}
+
+@Route("/notify/tour/{TourId}/buyers/", "POST")
+export class SendNotifyToTourBuyers {
+  tourId: string;
+  msg: string;
+}
+
+@Route("/notify/tour/{TourId}/passengers/", "POST")
+export class SendNotifyToTourPassengers {
+  tourId: string;
+  msg: string;
+}
+
+@Route("/notify/tour/{TourId}/leader", "POST")
+export class SendNotifyToTourLeader {
+  tourId: string;
+  msg: string;
 }
 
 @Route("/destinations/{Id}", "GET")
@@ -535,7 +577,7 @@ export class GetDestinations extends QueryDb_1<Destination> implements IReturn<Q
   }
 
   getTypeName() {
-    return "GetDestinations";
+    return 'GetDestinations';
   }
 }
 
@@ -548,7 +590,7 @@ export class CreateDestination implements IReturn<Destination> {
   }
 
   getTypeName() {
-    return "CreateDestination";
+    return 'CreateDestination';
   }
 }
 
@@ -567,7 +609,7 @@ export class GetPersonOfAgency extends QueryDb_1<Person> implements IReturn<Quer
   }
 
   getTypeName() {
-    return "GetPersonOfAgency";
+    return 'GetPersonOfAgency';
   }
 }
 
@@ -583,7 +625,7 @@ export class AddPersonToAgency implements IReturn<AgencyPerson> {
   }
 
   getTypeName() {
-    return "AddPersonToAgency";
+    return 'AddPersonToAgency';
   }
 }
 
@@ -603,7 +645,7 @@ export class GetAgency implements IReturn<Agency> {
   }
 
   getTypeName() {
-    return "GetAgency";
+    return 'GetAgency';
   }
 }
 
@@ -616,7 +658,7 @@ export class CreateAgency implements IReturn<Agency> {
   }
 
   getTypeName() {
-    return "CreateAgency";
+    return 'CreateAgency';
   }
 }
 
@@ -632,7 +674,7 @@ export class GetAgencies extends QueryDb_1<Agency> implements IReturn<QueryRespo
   }
 
   getTypeName() {
-    return "GetAgencies";
+    return 'GetAgencies';
   }
 }
 
@@ -701,7 +743,7 @@ export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
   }
 
   getTypeName() {
-    return "Authenticate";
+    return 'Authenticate';
   }
 }
 
@@ -716,7 +758,7 @@ export class ConvertSessionToToken implements IReturn<ConvertSessionToTokenRespo
   }
 
   getTypeName() {
-    return "ConvertSessionToToken";
+    return 'ConvertSessionToToken';
   }
 }
 
@@ -731,6 +773,6 @@ export class GetAccessToken implements IReturn<GetAccessTokenResponse>, IPost {
   }
 
   getTypeName() {
-    return "GetAccessToken";
+    return 'GetAccessToken';
   }
 }

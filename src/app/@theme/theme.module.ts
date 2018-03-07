@@ -16,8 +16,8 @@ import {
   MatSlideToggleModule,
   MatStepperModule,
   MatToolbarModule
-} from "@angular/material";
-import { FlexLayoutModule } from "@angular/flex-layout";
+} from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {
   SearchInputComponent,
@@ -25,20 +25,19 @@ import {
   TrnDropdownComponent,
   TrnHeaderComponent,
   TrnSliderComponent,
-  HeaderComponent,
 } from './components';
-import { AutoTranslateDirective, TrnButtonDirective, TrnInputDirective } from "./directives";
+import { AutoTranslateDirective, TrnButtonDirective, TrnInputDirective } from './directives';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { TourineLayoutComponent } from './layouts';
-import { AppTranslationModule } from "../app-translation.module";
+import { AppTranslationModule } from '../app-translation.module';
 import { TrnCardComponent } from './components/card/trn-card.component';
 import { TrnLayoutComponent } from './components/layout/trn-layout.component';
 import { TrnMenuComponent } from './components/menu/trn-menu.component';
 import { TrnSidebarComponent } from './components/sidebar/trn-sidebar.component';
-import { SidebarService } from "./components/sidebar/sidebar.service";
-import { MenuService } from "./components/menu/menu.service";
+import { SidebarService } from './components/sidebar/sidebar.service';
+import { MenuService } from './components/menu/menu.service';
 import { TrnCheckboxComponent } from './components/checkbox/trn-checkbox.component';
-import { DialogService } from "../@core/utils/dialog.service";
+import { DialogService } from '../@core/utils/dialog.service';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -78,7 +77,6 @@ const COMPONENTS = [
   TrnSidebarComponent,
   TrnCheckboxComponent,
   AutoTranslateDirective,
-  HeaderComponent,
 ];
 
 const PIPES = [

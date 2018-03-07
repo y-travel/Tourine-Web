@@ -5,6 +5,7 @@
   },
   "apps": [
     {
+      "name": "trn",
       "root": "src",
       "outDir": "dist",
       "assets": [

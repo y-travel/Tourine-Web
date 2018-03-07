@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { DashboardComponent } from './dashboard.component';
-import { commonModules } from "../default";
+import { COMMON_MODULES } from '../default';
 
 const DASHBOARD_COMPONENTS = [
   DashboardComponent,
@@ -8,7 +8,7 @@ const DASHBOARD_COMPONENTS = [
 
 @NgModule({
   imports: [
-    ...commonModules,
+    ...COMMON_MODULES,
   ],
   declarations: [
     ...DASHBOARD_COMPONENTS

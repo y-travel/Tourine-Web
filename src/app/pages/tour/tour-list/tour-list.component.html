@@ -9,6 +9,8 @@
                      [masterDetail]="true"
                      rowSelection="multiple"
                      [gridOptions]="tourGridService.gridOptions"
+                     [detailCellRenderer]="tourGridService.detailCellRenderer"
+                     [frameworkComponents]="tourGridService.frameworkComponents"
                      [detailCellRendererParams]="tourGridService.detailCellRendererParams"
                      (gridReady)="tourGridService.onGridReady($event)"
                      [enableRtl]="true">

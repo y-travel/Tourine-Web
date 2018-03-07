@@ -3,7 +3,7 @@ import { GridOptions } from 'ag-grid';
 import { TranslateService } from '@ngx-translate/core';
 
 import { TourService } from '../../@core/data/tour.service';
-import { HeaderComponent } from '../../@theme/components/header-component/header.component';
+import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-header.component';
 import { Dictionary, Place } from '../../@core/data/models';
 import { FormatterService } from '../../@core/utils/formatter.service';
 import { extractStyleParams } from '@angular/animations/browser/src/util';
@@ -13,9 +13,12 @@ export class TourGridService {
   gridOptions: GridOptions;
   rowData: any[];
   columnDefs: any[];
+  frameworkComponents: any;
+  detailCellRenderer: any;
   detailCellRendererParams: any;
   places: Dictionary<string> = {};
   gridApi: any;
+  detailCellRendererFramework: any;
 
   constructor(private tourService: TourService,
               private translate: TranslateService,
@@ -27,13 +30,14 @@ export class TourGridService {
     this.loadPlaces();
     this.gridOptions = {
       defaultColDef: {
-        headerComponentFramework: <{ new(): HeaderComponent }>HeaderComponent,
+        headerComponentFramework: <{ new(): CellHeaderComponent }>CellHeaderComponent,
       },
     };
     this.columnDefs = [
       {
         headerName: 'tour.code',
         field: 'code',
+        cellRenderer: 'agGroupCellRenderer',
       },
       {
         headerName: 'tour.date',
@@ -56,25 +60,38 @@ export class TourGridService {
       },
     ];
 
+    this.detailCellRenderer = 'mydetail';
+    this.frameworkComponents = {mydetail: CellHeaderComponent};
     this.detailCellRendererParams = {
       detailGridOptions: {
         columnDefs: [
-          {field: 'callId'},
-          {field: 'direction'},
-          {field: 'number'},
           {
-            field: 'duration',
-            valueFormatter: 'x.toLocaleString() + \'s\''
+            headerName: 'agency',
+            field: 'agencyId',
+            headerComponentFactory: <{ new(): CellHeaderComponent }>CellHeaderComponent,
           },
-          {field: 'switchCode'}
+          {
+            headerName: 'capacity',
+            field: 'capacity',
+          },
+          {
+            headerName: 'price',
+            field: 'basePrice',
+          },
         ],
-        onGridReady: function (params: any) {
+        onGridReady: (params: any) => {
           params.api.sizeColumnsToFit();
         }
       },
-      getDetailRowData: function (params: any) {
-        params.successCallback(params.data.callRecords);
-      }
+      defaultColDef: {
+        headerComponentFactory: <{ new(): CellHeaderComponent }>CellHeaderComponent,
+      },
+      getDetailRowData: (params: any) => {
+        this.tourService.getBlocks(params.data.id).subscribe(blocks => {
+          params.successCallback(blocks);
+        });
+      },
+
     };
   }
 
@@ -87,6 +104,17 @@ export class TourGridService {
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.reloadData();
+    this.setInitialLayout(this.gridApi);
+  }
+
+  setInitialLayout(api) {
+    api.sizeColumnsToFit();
+    setTimeout(function () {
+      let rowCount = 0;
+      api.forEachNode(function (node) {
+        node.setExpanded(rowCount++ === 1);
+      });
+    }, 500);
   }
 
   reloadData() {

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { GridOptions } from 'ag-grid';
-import 'ag-grid-enterprise';
 
 import { TourService } from '../../../@core/data/tour.service';
 import { TourUpsertComponent } from '../tour-upsert/tour-upsert.component';

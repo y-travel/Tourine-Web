@@ -5,7 +5,7 @@ import { MatDialogModule } from "@angular/material";
 import { ThemeModule } from "../@theme/theme.module";
 import { ToasterModule } from "angular2-toaster";
 
-export const commonModules = [
+export const COMMON_MODULES = [
   ThemeModule,
   MatDialogModule,
   ToasterModule,

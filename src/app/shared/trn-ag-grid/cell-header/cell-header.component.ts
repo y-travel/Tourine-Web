@@ -3,10 +3,11 @@ import { IHeaderAngularComp } from 'ag-grid-angular/dist/interfaces';
 import { IHeaderParams } from 'ag-grid';
 
 @Component({
-  templateUrl: 'header.component.html',
-  styleUrls: ['header.component.scss']
+  selector: 'app-cell-header',
+  templateUrl: 'cell-header.component.html',
+  styleUrls: ['cell-header.component.scss']
 })
-export class HeaderComponent implements IHeaderAngularComp {
+export class CellHeaderComponent implements IHeaderAngularComp {
   params: IHeaderParams;
 
   constructor() {
