@@ -425,8 +425,16 @@ export class GetServiceOfTour extends QueryDb_2<Service, Person> implements IRet
 }
 
 @Route("/persons/", "POST")
-export class CreatePerson {
+export class CreatePerson implements IReturn<Person> {
   person: Person;
+
+  createResponse() {
+    return new Person();
+  }
+
+  getTypeName() {
+    return "CreatePerson";
+  }
 }
 
 @Route("/persons/", "PUT")

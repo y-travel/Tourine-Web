@@ -21,9 +21,9 @@ export class TourUpsertComponent implements ModalInterface {
   leaders: Observable<Person[]>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
-  public dialogInstance: MatDialogRef<ModalInterface>,
-  public service: TourService,
-  private translateService: TranslateService) {
+    public dialogInstance: MatDialogRef<ModalInterface>,
+    public service: TourService,
+    private translateService: TranslateService) {
     this.initData();
   }
 
@@ -35,10 +35,11 @@ export class TourUpsertComponent implements ModalInterface {
 
   save() {
     //@TODO check validation
-    this.service.addTour(this.data.model).subscribe(tour => {
-      console.log(tour);
-    });
-    this.dialogInstance.close(this.data.model);
+    if (this.data.form.valid)
+      this.service.addTour(this.data.model).subscribe(tour => {
+        this.dialogInstance.close(this.data.model);
+        console.log(tour);
+      });
   }
 
   submit(event: any) {

@@ -10,9 +10,11 @@ import { DataService } from "./data.service";
 import { ApiService } from "./api.service";
 import { CouponService } from "./coupon.service";
 import { HttpClient } from "@angular/common/http";
+import { AgencyService } from './agency.service';
 
 const SERVICES = [
   UserService,
+  AgencyService,
   StateService,
   TourService,
   CouponService,

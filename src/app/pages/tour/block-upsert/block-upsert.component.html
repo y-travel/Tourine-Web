@@ -1,17 +1,27 @@
 <div mat-dialog-title class="modal-header">
   <div class="modal-title">
-    {{"coupon.upsert"|translate}}
+    {{"tour.reserve"|translate}}
   </div>
 </div>
 
-<div class="modal-body" dir="rtl" [style.width.px]="600" autoTranslate><!--width set for IE-->
-  <mat-horizontal-stepper >
-   <mat-step label="{{'selectPerson'|translate}}">
-
-<mat-icon>user</mat-icon>
-<mat-icon>customer</mat-icon>
-   </mat-step>
-    <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'first'|translate})}}">
+<div class="modal-body" dir="rtl" [style.width.px]="600" autoTranslate>
+  <!--width set for IE-->
+  <mat-horizontal-stepper #stepper [linear]="true">
+    <mat-step [stepControl]="agencyListForm.form" label="{{'steps'|translate:({value:'first'|translate})}}">
+      <form [formGroup]="agencyListForm.form">
+        <div fxLayout="row">
+          <mat-form-field>
+            <mat-select placeholder="agency.name" formControlName="id" >
+              <mat-option *ngFor="let item of agencies | async" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button class="pull-right" mat-mini-fab color="accent" (click)="agencyUpsert()">
+            <mat-icon class="icon-text-color">add</mat-icon>
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'second'|translate})}}">
       <form [formGroup]="data.form">
         <div fxLayout="row">
           <mat-form-field fxFlex="40">
@@ -50,21 +60,29 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="person.form" label="{{'steps'|translate:({value:'second'|translate})}}">
+    <mat-step [stepControl]="person.form" label="{{'steps'|translate:({value:'third'|translate})}}">
       <form [formGroup]="person.form">
         <div fxLayout="row">
           <mat-form-field>
-            <mat-select placeholder="reagent.name" >
+            <mat-select placeholder="reagent.name">
               <mat-option *ngFor="let item of reagents" [value]="item.id">{{item.title}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <button mat-button class="btn-outline-warning" size="micro" kind="secondary" (click)="reagentUpsert()"><i class="material-icons">add</i></button>
+          <button mat-button class="btn-outline-warning" size="micro" kind="secondary" (click)="reagentUpsert()">
+            <i class="material-icons">add</i>
+          </button>
         </div>
       </form>
     </mat-step>
   </mat-horizontal-stepper>
 </div>
-<mat-dialog-actions>
-  <button mat-raised-button color="primary" fxFlex (click)="save()">{{"save"|translate}}</button>
-</mat-dialog-actions>
+<button class="pull-left" mat-mini-fab color="primary" (click)="stepper.next()">
+  <mat-icon>navigate_before</mat-icon>
+</button>
+<button class="pull-right" mat-mini-fab color="primary" (click)="stepper.previous()">
+  <mat-icon>navigate_next</mat-icon>
+</button>
 
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" fxFlex type="button" >{{"close"|translate}}</button>
+</mat-dialog-actions>

@@ -55,6 +55,17 @@ export class Agency extends Model {
   phoneNumber: string;
 }
 
+export class AgencyInfo extends Model {
+  name: string;
+  phoneNumber: string;
+  person: Person;
+}
+
+export class PersonAgency {
+  agency: Agency;
+  person: Person;
+}
+
 export class Coupon extends Model {
   reagentId: number = undefined;
   reagent: Person = undefined;
@@ -93,10 +104,14 @@ export class Person extends Model {
   mobileNumber = '';
   nationalCode = '';
   fatherName = '';
-  birthDate = '';
+  birthDate: Date;
   passportExpireDate: Date;
   passportNo = 0;
-  phone = '';
+  gender = true;
+  personType = 0;
+  socialNumber = '';
+  isUnder5 = false;
+  isInfant = false;
 }
 
 export enum Role {

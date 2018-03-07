@@ -1,0 +1,41 @@
+<div mat-dialog-title class="modal-header">
+  <div class="modal-title">
+    {{"agency.upsert"|translate}}
+  </div>
+</div>
+<div class="right modal-body" dir="rtl" [style.width.px]="400" autoTranslate>
+  <!--width set for IE-->
+  <form [formGroup]="data.form" fxLayout="column">
+    <div fxLayout="row" formGroupName="agency">
+      <mat-form-field fxFlex> 
+        <input matInput placeholder="agency.name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="agency.phoneNumber" formControlName="phoneNumber">
+        <mat-hint align="end" translate>optional</mat-hint>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" formGroupName="person">
+      <trn-slider formControlName="gender" falseText="female" trueText="male"></trn-slider>
+    </div>
+    <div fxLayout="row" formGroupName="person">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="person.name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="person.family" formControlName="family">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" formGroupName="person">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="person.mobileNumber" formControlName="mobileNumber">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="person.socialNumber" formControlName="socialNumber">
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<mat-dialog-actions>
+  <button fxFlex mat-raised-button color="primary" (click)="save()">{{"save"|translate}}</button>
+</mat-dialog-actions>

@@ -4,10 +4,19 @@
     "minPrice": "حداقل قیمت ثبت نام بزرگسال"
   },
   "adultCount": "تعداد بزرگسال",
+  "agency": {
+    "name": "نام آژانس",
+    "phoneNumber": "شماره تلفن آژانس",
+    "upsert": "ثبت آژانس"
+  },
   "agencyName": "نام آژانس",
   "birthDate": "تاریخ تولد",
+  "block": {
+    "upsert": "رزرو تور"
+  },
   "busPrice": "هزینه اتوبوس",
   "buyer": "خریدار",
+  "close": "بستن",
   "coupon": {
     "upsert": "ثبت کوپن"
   },
@@ -20,6 +29,7 @@
   "family": "نام خانوادگی",
   "fatherName": "نام پدر",
   "fellows": "همراهان",
+  "female": "زن",
   "first": "اول",
   "flight": "هوایی",
   "foodPrice": "هزینه غذا",
@@ -29,22 +39,34 @@
   "hotel": "هتل",
   "infantCount": "تعداد بچه",
   "infantPrice": "قیمت بچه",
+  "leader": "سرگروه",
+  "male": "مرد",
   "mobileNumber": "شماره همراه",
   "msg": {
     "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
   },
   "name": "نام",
   "nationalCode": "کد ملی",
+  "nextStep": "مرحله بعد",
+  "none": "هیچکدام",
   "offValue": "تخفیف",
   "oldPassword": "کلمه عبور فعلی",
+  "optional": "اختیاری",
   "passenger": "مسافر",
   "passport": {
     "expireDate": "تاریخ انقضاء پاسپورت",
     "number": "شماره پاسپورت"
   },
   "password": "کلمه عبور",
+  "person": {
+    "family": "نام خانوادگی",
+    "mobileNumber": "شماره همراه",
+    "name": "نام",
+    "socialNumber": "شماره شبکه اجتماعی"
+  },
   "phone": "تلفن",
   "pleaseSelect": "لطفاً انتخاب کنید",
+  "previousStep": "مرحله قبل",
   "price": "قیمت",
   "rePassword": "تکرار کلمه عبور",
   "reagent": {
@@ -56,7 +78,9 @@
   "roomPrice": "هزینه اتاق",
   "save": "ثبت",
   "second": "دوم",
+  "selectPerson": "انتخاب فرد",
   "steps": "گام {{value}}",
+  "third": "سوم",
   "toman": "تومان",
   "tomanFormat": "(تومان)",
   "tour": {
@@ -64,6 +88,7 @@
     "code": "کد تور",
     "date": "تاریخ اجرا",
     "list": "لیست تورها",
+    "reserve": "رزرو تور",
     "upsert": "ثبت تور"
   },
   "tour_": "تور",
@@ -71,8 +96,5 @@
     "upsert": "ثبت کاربر"
   },
   "username": "نام کاربری",
-  "withOutPrice": "بدون قیمت",
-  "selectPerson" : "انتخاب فرد",
-  "leader" : "سرگروه",
-  "none" : "هیچکدام"
+  "withOutPrice": "بدون قیمت"
 }

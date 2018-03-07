@@ -1,4 +1,4 @@
-@import '../../@theme/styles/install';
+@import '../../../@theme/styles/install';
 
 @include nb-install-component() {
   .closeButton {
@@ -10,5 +10,9 @@
     max-height: 170px;
     overflow-y: scroll;
     padding: 5px;
+  }
+
+  .icon-text-color{
+    color:trn-theme(color-icon-text);
   }
 }

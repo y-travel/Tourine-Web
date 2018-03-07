@@ -2,7 +2,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService } from '../form.service';
-import { Coupon, Person, EditPassword, Reagent, Tour, User , TourDetail } from './client.model';
+import { Coupon, Person, EditPassword, Reagent, Tour, User, TourDetail, Agency, PersonAgency } from './client.model';
 
 @Injectable()
 export class FormFactory {
@@ -28,7 +28,24 @@ export class FormFactory {
     return new FormService(Tour, form);
   }
 
-  createCouponForm(model: Coupon = new Coupon()): FormService<Coupon> {
+  createAddAgencyForm(model: PersonAgency = new PersonAgency()): FormService<PersonAgency> {
+    const form = new FormBuilder().group({
+      agency: new FormBuilder().group({
+        name: [model.agency ? model.agency.name : '', [Validators.required, Validators.minLength(2)]],
+        phoneNumber: [model.agency ? model.agency.phoneNumber : undefined]
+      }),
+      person: new FormBuilder().group({
+        name: [model.person ? model.person.name : '', [Validators.required, Validators.minLength(2)]],
+        family: [model.person ? model.person.family : '', [Validators.required, Validators.minLength(2)]],
+        mobileNumber: [model.person ? model.person.mobileNumber : undefined],
+        socialNumber: [model.person ? model.person.socialNumber : undefined],
+        gender: [model.person ? model.person.gender : true],
+      }),
+    });
+    return new FormService(PersonAgency, form);
+  }
+
+  createBlockUpsertForm(model: Coupon = new Coupon()): FormService<Coupon> {
     const form = new FormBuilder().group({
       reagentId: [model.reagentId, Validators.required],
       passengers: [model.passengers, Validators.required],
@@ -55,6 +72,14 @@ export class FormFactory {
       passportNo: [model.passportNo, Validators.required]
     });
     return new FormService(Person, form);
+  }
+
+  createAgenciesForm(model: Agency = new Agency()): FormService<Agency> {
+    const form = new FormBuilder().group({
+      id: [model.id,Validators.required],
+      name: [model.name]
+    });
+    return new FormService(Agency, form);
   }
 
   createReagentForm(model: Reagent = new Reagent()): FormService<Reagent> {
