@@ -6,7 +6,7 @@
 
 <div class="modal-body" dir="rtl" [style.width.px]="600" autoTranslate>
   <!--width set for IE-->
-  <mat-horizontal-stepper #stepper [linear]="true">
+  <mat-horizontal-stepper #stepper [linear]="false">
     <mat-step [stepControl]="agencyListForm.form" label="{{'steps'|translate:({value:'first'|translate})}}">
       <form [formGroup]="agencyListForm.form">
         <div fxLayout="row">
@@ -15,7 +15,7 @@
               <mat-option *ngFor="let item of agencies | async" [value]="item.id">{{item.name}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <button class="pull-right" mat-mini-fab color="accent" (click)="agencyUpsert()">
+          <button mat-mini-fab color="accent" (click)="agencyUpsert()">
             <mat-icon class="icon-text-color">add</mat-icon>
           </button>
         </div>
@@ -63,26 +63,30 @@
     <mat-step [stepControl]="person.form" label="{{'steps'|translate:({value:'third'|translate})}}">
       <form [formGroup]="person.form">
         <div fxLayout="row">
-          <mat-form-field>
-            <mat-select placeholder="reagent.name">
-              <mat-option *ngFor="let item of reagents" [value]="item.id">{{item.title}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <button mat-button class="btn-outline-warning" size="micro" kind="secondary" (click)="reagentUpsert()">
-            <i class="material-icons">add</i>
-          </button>
+            {{"addPassengerMessage"|translate}}
+
+        </div>
+        <div fxLayout="row" align="end">
+          <mat-dialog-actions>
+            <button mat-raised-button color="primary" fxFlex type="button">{{"add"|translate}}
+              <mat-icon class="icon-text-color">add</mat-icon>
+            </button>
+          </mat-dialog-actions>
+        </div>
+        <div fxLayout="row">
+          <br>
         </div>
       </form>
     </mat-step>
   </mat-horizontal-stepper>
 </div>
-<button class="pull-left" mat-mini-fab color="primary" (click)="stepper.next()">
+<button class="pull-left" mat-mini-fab color="primary" (click)="stepper.next()" [disabled]="stepper.selectedIndex==2">
   <mat-icon>navigate_before</mat-icon>
 </button>
-<button class="pull-right" mat-mini-fab color="primary" (click)="stepper.previous()">
+<button class="pull-right" mat-mini-fab color="primary"  (click)="stepper.previous()" [disabled]='stepper.selectedIndex==0'>
   <mat-icon>navigate_next</mat-icon>
 </button>
 
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" fxFlex type="button" >{{"close"|translate}}</button>
+    <button mat-raised-button color="primary" fxFlex type="button" mat-dialog-close >{{"close"|translate}}</button>
 </mat-dialog-actions>
