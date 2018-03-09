@@ -1,0 +1,10 @@
+@import "../../../@theme/styles/install";
+
+@include nb-install-component() {
+  #cell-detail {
+    box-sizing: border-box;
+    display: block;
+    height: 200px;
+    width: 100%;
+  }
+}

@@ -1,4 +1,10 @@
-
-  <ag-grid-angular #agGrid [columnDefs]="columnDefs" [rowData]="rowData">
+<trn-card>
+  <ag-grid-angular #agGrid
+                   id="cell-detail"
+                   [gridOptions]="gridOptions"
+                   [columnDefs]="columnDefs"
+                   [rowData]="rowData"
+                   (gridReady)="params.detailGridOptions.onGridReady($event,params)"
+                   [enableRtl]="true">
   </ag-grid-angular>
-
+</trn-card>

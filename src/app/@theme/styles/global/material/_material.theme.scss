@@ -25,8 +25,8 @@
 @mixin init_font() {
   $custom-typography: mat-typography-config(
     $font-family: trn-theme(font-main),
-    $headline: mat-typography-level(32px, 48px, 700),
-    $body-1: mat-typography-level(16px, 24px, 500)
+    $headline: mat-typography-level(30px, 46px, 700),
+    $body-1: mat-typography-level(14px, 22px, 500)
   );
   @include mat-base-typography($custom-typography);
   @include mat-checkbox-typography($custom-typography);

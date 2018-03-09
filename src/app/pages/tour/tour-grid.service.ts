@@ -7,6 +7,7 @@ import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-h
 import { Dictionary, Place } from '../../@core/data/models';
 import { FormatterService } from '../../@core/utils/formatter.service';
 import { extractStyleParams } from '@angular/animations/browser/src/util';
+import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
 
 @Injectable()
 export class TourGridService {
@@ -18,7 +19,6 @@ export class TourGridService {
   detailCellRendererParams: any;
   places: Dictionary<string> = {};
   gridApi: any;
-  detailCellRendererFramework: any;
 
   constructor(private tourService: TourService,
               private translate: TranslateService,
@@ -38,6 +38,7 @@ export class TourGridService {
         headerName: 'tour.code',
         field: 'code',
         cellRenderer: 'agGroupCellRenderer',
+        checkboxSelection: true,
       },
       {
         headerName: 'tour.date',
@@ -45,7 +46,7 @@ export class TourGridService {
         cellRenderer: (params: any) => this.formatter.getDateFormat(params.value),
       },
       {
-        headerName: 'tour.capacity',
+        headerName: 'capacity',
         field: 'capacity',
       },
       {
@@ -60,13 +61,13 @@ export class TourGridService {
       },
     ];
 
-    this.detailCellRenderer = 'mydetail';
-    this.frameworkComponents = {mydetail: CellHeaderComponent};
+    this.detailCellRenderer = 'cellDetail';
+    this.frameworkComponents = {cellDetail: CellDetailComponent};
     this.detailCellRendererParams = {
       detailGridOptions: {
         columnDefs: [
           {
-            headerName: 'agency',
+            headerName: 'agencyName',
             field: 'agencyId',
             headerComponentFactory: <{ new(): CellHeaderComponent }>CellHeaderComponent,
           },
@@ -79,19 +80,13 @@ export class TourGridService {
             field: 'basePrice',
           },
         ],
-        onGridReady: (params: any) => {
-          params.api.sizeColumnsToFit();
+        onGridReady: (detailParams: any, parentParams: any = null) => {
+          this.tourService.getBlocks(parentParams.data.id).subscribe(blocks => {
+            detailParams.api.setRowData(blocks);
+            detailParams.api.sizeColumnsToFit();
+          });
         }
       },
-      defaultColDef: {
-        headerComponentFactory: <{ new(): CellHeaderComponent }>CellHeaderComponent,
-      },
-      getDetailRowData: (params: any) => {
-        this.tourService.getBlocks(params.data.id).subscribe(blocks => {
-          params.successCallback(blocks);
-        });
-      },
-
     };
   }
 

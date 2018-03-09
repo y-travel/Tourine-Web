@@ -23,8 +23,7 @@ const GRID_MODULE = AgGridModule.withComponents([
     ThemeModule,
     GRID_MODULE,
   ],
-  declarations: [...COMPONENTS],
-  entryComponents: [...COMPONENTS]
+  declarations: [...COMPONENTS]
 })
 export class TrnAgGridModule {
   static withAgModule(): ModuleWithProviders[] {

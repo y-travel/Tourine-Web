@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { routedComponents, TourRoutingModule } from './tour-routing.module';
+import { ROUTED_COMPONENTS, TourRoutingModule } from './tour-routing.module';
 import { TourUpsertComponent } from './tour-upsert/tour-upsert.component';
 import { ReagentUpsertComponent } from './reagent-upsert.component';
 import { EditPasswordComponent } from './edit-password.component';
@@ -11,7 +11,7 @@ import { TrnAgGridModule } from '../../shared/trn-ag-grid/trn-ag-grid.module';
 import { AgencyUpsertComponent } from './agency-upsert/agency-upsert.component';
 import { BlockUpsertComponent } from './block-upsert/block-upsert.component';
 
-const entryComponents = [
+const ENTRY_COMPONENTS = [
   TourUpsertComponent,
   ReagentUpsertComponent,
   EditPasswordComponent,
@@ -26,11 +26,11 @@ const entryComponents = [
     TrnAgGridModule.withAgModule(),
   ],
   declarations: [
-    ...entryComponents,
-    ...routedComponents,
+    ...ENTRY_COMPONENTS,
+    ...ROUTED_COMPONENTS,
   ],
   providers: [DialogService, TourGridService],
-  entryComponents: entryComponents
+  entryComponents: ENTRY_COMPONENTS
 })
 export class TourModule {
 }

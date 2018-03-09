@@ -1,8 +1,10 @@
 @import "../../styles/install";
 
 @include nb-install-component() {
-  :host {
-    box-shadow: 5px 5px 20px trn-theme(shadow-color);
+  #trn-card {
+    margin: 20px;
+    padding:0 10px 0 10px;
     direction: rtl;
   }
 }
+

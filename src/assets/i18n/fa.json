@@ -18,6 +18,7 @@
   },
   "busPrice": "هزینه اتوبوس",
   "buyer": "خریدار",
+  "capacity": "ظرفیت",
   "close": "بستن",
   "coupon": {
     "upsert": "ثبت کوپن"
@@ -86,7 +87,6 @@
   "toman": "تومان",
   "tomanFormat": "(تومان)",
   "tour": {
-    "capacity": "ظرفیت",
     "code": "کد تور",
     "date": "تاریخ اجرا",
     "list": "لیست تورها",
