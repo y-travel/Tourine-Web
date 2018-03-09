@@ -8,7 +8,7 @@ import { DialogService } from "../../../@core/utils/dialog.service";
 import { FormFactory } from "../../../@core/data/models/form-factory";
 import { CouponService } from "../../../@core/data/coupon.service";
 import { AgencyService } from "../../../@core/data/agency.service";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs/Rx";
 import { TourService } from "../../../@core/data/tour.service";
 import { AgencyUpsertComponent } from '../agency-upsert/agency-upsert.component';
 

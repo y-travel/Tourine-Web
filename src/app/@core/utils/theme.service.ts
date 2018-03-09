@@ -1,7 +1,7 @@
 import { Injectable, Type } from "@angular/core";
 import { ReplaySubject } from "rxjs/ReplaySubject";
 import { Subject } from "rxjs/Subject";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs/Rx";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()

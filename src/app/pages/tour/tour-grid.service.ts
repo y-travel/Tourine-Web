@@ -6,8 +6,8 @@ import { TourService } from '../../@core/data/tour.service';
 import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-header.component';
 import { Dictionary, Place } from '../../@core/data/models';
 import { FormatterService } from '../../@core/utils/formatter.service';
-import { extractStyleParams } from '@angular/animations/browser/src/util';
 import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
+import { Agency } from '../../@core/data/models/client.model';
 
 @Injectable()
 export class TourGridService {
@@ -18,6 +18,7 @@ export class TourGridService {
   detailCellRenderer: any;
   detailCellRendererParams: any;
   places: Dictionary<string> = {};
+  agencies: Dictionary<string> = {};
   gridApi: any;
 
   constructor(private tourService: TourService,
@@ -28,6 +29,7 @@ export class TourGridService {
 
   init() {
     this.loadPlaces();
+    this.loadAgencies();
     this.gridOptions = {
       defaultColDef: {
         headerComponentFramework: <{ new(): CellHeaderComponent }>CellHeaderComponent,
@@ -70,6 +72,7 @@ export class TourGridService {
             headerName: 'agencyName',
             field: 'agencyId',
             headerComponentFactory: <{ new(): CellHeaderComponent }>CellHeaderComponent,
+            cellRenderer: (params: any) => this.agencies[params.value],
           },
           {
             headerName: 'capacity',
@@ -85,7 +88,7 @@ export class TourGridService {
             detailParams.api.setRowData(blocks);
             detailParams.api.sizeColumnsToFit();
           });
-        }
+        },
       },
     };
   }
@@ -93,6 +96,12 @@ export class TourGridService {
   loadPlaces() {
     this.tourService.getPlaces().subscribe((places: Place[]) => {
       places.forEach(place => this.places[place.id] = place.name);
+    });
+  }
+
+  loadAgencies() {
+    this.tourService.getAgencies().subscribe((agencies: Agency[]) => {
+      agencies.forEach(agency => this.agencies[agency.id] = agency.name);
     });
   }
 

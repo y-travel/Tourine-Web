@@ -1,7 +1,7 @@
 import { Directive, Input } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { MatFormFieldControl } from "@angular/material";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs/Rx";
 import { NgControl } from "@angular/forms";
 
 @Directive({

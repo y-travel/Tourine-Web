@@ -1,16 +1,20 @@
 {
   "extends": "./tools/config/seed.tslint.json",
   "rules": {
-    "component-selector":false,
-    "comment-format":false,
+    "component-selector": false,
+    "comment-format": false,
     "no-empty": false,
     "one-line": false,
     "quotemark": false,
-//    "semicolon": false,
-    "max-line-length": [true, 165],
+    //    "semicolon": false,
+    "max-line-length": [
+      true,
+      165
+    ],
     "no-trailing-whitespace": false,
     "eofline": false,
     "no-input-rename": false,
-    "no-access-missing-member": false //@TODO shall be improved in future version, temporary disabled
+    "no-access-missing-member": false
+    //@TODO shall be improved in future version, temporary disabled
   }
 }

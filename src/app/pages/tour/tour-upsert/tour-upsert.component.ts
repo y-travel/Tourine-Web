@@ -6,7 +6,7 @@ import { ModalInterface } from "../../../@theme/components/modal.interface";
 import { Tour } from "../../../@core/data/models";
 import { TourService } from "../../../@core/data/tour.service";
 import { MAT_DIALOG_DATA, MatDialogRef, MatSelect } from "@angular/material";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs/Rx";
 import { Destination, Place, Person } from "../../../@core/data/models/client.model";
 
 @Component({

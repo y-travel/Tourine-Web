@@ -22,7 +22,6 @@ export class TourListComponent {
               private formFactory: FormFactory,
               public dialogService: DialogService,
               public tourGridService: TourGridService) {
-
   }
 
   upsert() {
