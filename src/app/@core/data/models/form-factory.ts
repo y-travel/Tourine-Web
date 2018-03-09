@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 //
 import { FormService } from '../form.service';
 import { Coupon, Person, EditPassword, Reagent, Tour, User, TourDetail, Agency, PersonAgency } from './client.model';
+import { Block } from '.';
 
 @Injectable()
 export class FormFactory {
@@ -58,6 +59,18 @@ export class FormFactory {
       foodPrice: [model.foodPrice],
     });
     return new FormService(Coupon, form);
+  }
+
+  createReserveBlockForm(model: Block = new Block()): FormService<Block> {
+    const form = new FormBuilder().group({
+      capacity: [model.capacity ? model.capacity : undefined , [Validators.required, Validators.min(1)]],
+      infantPrice: [model.infantPrice ? model.infantPrice : undefined , Validators.required],
+      busPrice: [model.busPrice ? model.busPrice : undefined , Validators.required],
+      roomPrice: [model.roomPrice ? model.roomPrice : undefined , Validators.required],
+      foodPrice: [model.foodPrice ? model.foodPrice : undefined , Validators.required],
+      tourPrice: [model.tourPrice ? model.tourPrice : undefined , Validators.required],
+    });
+    return new FormService(Block, form);
   }
 
   createPersonForm(model: Person = new Person()): FormService<Person> {

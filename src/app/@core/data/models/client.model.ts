@@ -79,6 +79,17 @@ export class Coupon extends Model {
   foodPrice: number = undefined;
 }
 
+export class Block extends Model {
+  tourId: string = undefined;
+  capacity: number = undefined;
+  adultPrice: number = undefined;
+  infantPrice: number = undefined;
+  busPrice: number = undefined;
+  roomPrice: number = undefined;
+  foodPrice: number = undefined;
+  tourPrice: number = undefined;
+}
+
 export class EditPassword extends Model {
   oldPassword: string = undefined;
   password: string = undefined;

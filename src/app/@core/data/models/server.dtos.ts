@@ -662,6 +662,32 @@ export class CreateAgency implements IReturn<Agency> {
   }
 }
 
+@Route("/tours/{TourId}/freespace", "GET")
+export class GetTourFreeSpace implements IReturn<string> {
+  tourId: string;
+
+  createResponse(): string {
+    return "";
+  }
+
+  getTypeName() {
+    return 'GetTourFreespace';
+  }
+}
+
+@Route("/tour/{TourId}/reserve","POST")
+export class ReserveBlock implements IReturn<Tour> {
+  tourId: string;
+
+  createResponse(): Tour {
+    return new Tour();
+  }
+
+  getTypeName() {
+    return 'ReserveBlock';
+  }
+}
+
 @Route("/agencies", "PUT")
 export class UpdateAgency {
   agency: Agency;

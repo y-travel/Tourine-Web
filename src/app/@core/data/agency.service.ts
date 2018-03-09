@@ -4,7 +4,7 @@ import { Agency, PersonAgency } from './models/client.model';
 import { Serializable } from '../utils/serializable';
 import { GetAgencies, CreateAgency } from './models/server.dtos';
 import { Observable } from 'rxjs/Rx';
-import { Person } from './models';
+import { Person, GetTourFreeSpace, Block, Tour, ReserveBlock } from './models';
 
 @Injectable()
 export class AgencyService {
@@ -24,4 +24,15 @@ export class AgencyService {
     return this.apiService.send(dto);
   }
 
+  getTourFreeSpace(model: string) : Observable<string> {
+    const query = new GetTourFreeSpace();
+    Serializable.fromJSON(query, model);
+    return this.apiService.send(query);
+  }
+
+  reserveBlock(model: Block) : Observable<Tour> {
+    const query = new ReserveBlock();
+    Serializable.fromJSON(query, model);
+    return this.apiService.send(query);
+  }
 }

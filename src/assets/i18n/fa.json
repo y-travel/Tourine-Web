@@ -1,22 +1,24 @@
 {
   "add": "افزودن",
-  "addPassengerMessage": "برای افزودن مسافر به این تور، بر روی گزینه ثبت مسافر کلیک کنید",
+  "addAgencyMessage": "نام آژانس را از لیست انتخاب نمایید و یا آژانس جدید ایجاد نمایید",
+  "addPassengerMessage": "برای افزودن مسافر به این تور، بر روی گزینه ثبت کلیک نمایید",
   "adult": {
     "count": "تعداد ظرفیت بزرگسال",
     "minPrice": "حداقل قیمت ثبت نام بزرگسال"
   },
-  "adultCount": "تعداد بزرگسال",
+  "adultCount": "تعداد مسافران",
   "agency": {
     "name": "نام آژانس",
     "phoneNumber": "شماره تلفن آژانس",
     "upsert": "ثبت آژانس"
   },
   "agencyName": "نام آژانس",
+  "allPriceIsPerOne": "قیمت های وارد شده به ازای هر نفر می باشد",
   "birthDate": "تاریخ تولد",
   "block": {
     "upsert": "رزرو تور"
   },
-  "busPrice": "هزینه اتوبوس",
+  "busPrice": "قیمت اتوبوس",
   "buyer": "خریدار",
   "capacity": "ظرفیت",
   "close": "بستن",
@@ -28,25 +30,26 @@
   "dollar": "دلار",
   "duration": "مدت زمان",
   "email": "رایانامه",
-  "emptyCount": "ظرفیت خالی {{value}} از {{outof}}",
+  "emptyCount": "ظرفیت خالی {{value}} نفر",
   "family": "نام خانوادگی",
   "fatherName": "نام پدر",
   "fellows": "همراهان",
   "female": "زن",
   "first": "اول",
   "flight": "هوایی",
-  "foodPrice": "هزینه غذا",
+  "foodPrice": "قیمت غذا",
   "from": "از",
   "ground": "زمینی",
   "homePage": "صفحه اصلی",
   "hotel": "هتل",
-  "infantCount": "تعداد بچه",
-  "infantPrice": "قیمت بچه",
+  "infantCount": "تعداد کودک",
+  "infantPrice": "قیمت کودک",
   "leader": "سرگروه",
   "male": "مرد",
   "mobileNumber": "شماره همراه",
   "msg": {
-    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
+    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
+    "blockReservation" : "تعداد {{capacity}}  نفر با موفقیت رزور شد"
   },
   "name": "نام",
   "nationalCode": "کد ملی",
@@ -78,7 +81,8 @@
   },
   "reagent_": "معرف",
   "rial": "ریال",
-  "roomPrice": "هزینه اتاق",
+  "rialFormat": "(ریال)",
+  "roomPrice": "قیمت اتاق",
   "save": "ثبت",
   "second": "دوم",
   "selectPerson": "انتخاب فرد",
@@ -93,6 +97,7 @@
     "reserve": "رزرو تور",
     "upsert": "ثبت تور"
   },
+  "tourPrice": "قیمت تور",
   "tour_": "تور",
   "user": {
     "upsert": "ثبت کاربر"
