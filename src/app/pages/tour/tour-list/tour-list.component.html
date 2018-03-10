@@ -2,7 +2,7 @@
 <button (click)="bockUpsert()" >{{"block.upsert"|translate}}</button>
 <button (click)="reagentUpsert()" >{{"reagent.upsert"|translate}}</button>
 <button (click)="userUpsert()" >{{"user.upsert"|translate}}</button>
-<trn-card>
+<mat-card [stretch]="true">
   <ag-grid-angular #agGrid [style.height.px]="500" class="ag-theme-material"
                    [columnDefs]="tourGridService.columnDefs"
                    [masterDetail]="true"
@@ -14,4 +14,4 @@
                    (gridReady)="tourGridService.onGridReady($event)"
                    [enableRtl]="true">
   </ag-grid-angular>
-</trn-card>
+</mat-card>

@@ -11,8 +11,7 @@
             mat-palette($accent, A200, A100, A400),
             mat-palette($warning)
         ));
-  }
-  @else {
+  } @else {
     @include angular-material-theme(
         mat-light-theme(
             mat-palette($primary),
@@ -49,6 +48,9 @@
     &[matSuffix] {
       padding-right: 5px;
     }
+  }
+  mat-card {
+    margin: 20px;
   }
 }
 

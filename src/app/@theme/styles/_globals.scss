@@ -1,9 +1,9 @@
-@import 'global/components';
+@import 'global/definitions';
 @import 'global/overrides';
 
 @mixin nb-theme-global() {
-  @include nb-theme-components();
-  @include nb-theme-overrides();
+  @include trn-theme-overrides();
+  @include trn-definition();
 }
 
 @mixin nb-install() {

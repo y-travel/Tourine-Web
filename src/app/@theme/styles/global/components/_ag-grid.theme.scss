@@ -30,6 +30,10 @@ $icons-path: "~ag-grid/src/styles/icons/";
     .ag-header-cell {
       text-align: center;
     }
-
+    //use in cell detail check box
+    .ag-selection-checkbox,
+    .ag-cell-value {
+      float: right;
+    }
   }
 }

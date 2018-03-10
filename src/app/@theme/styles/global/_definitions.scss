@@ -1,0 +1,10 @@
+@mixin trn-definition() {
+  .card-stretch {
+    margin: 20px;
+    padding: 0 10px 0 10px;
+    direction: rtl;
+  }
+  .card-shadow-thick {
+    box-shadow: 5px 5px 20px trn-theme(shadow-color) !important;//cos mat-card class is over it
+  }
+}

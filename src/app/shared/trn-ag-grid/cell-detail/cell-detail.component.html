@@ -1,10 +1,12 @@
-<trn-card>
-  <ag-grid-angular #agGrid
-                   id="cell-detail"
-                   [gridOptions]="gridOptions"
-                   [columnDefs]="columnDefs"
-                   [rowData]="rowData"
-                   (gridReady)="params.detailGridOptions.onGridReady($event,params)"
-                   [enableRtl]="true">
-  </ag-grid-angular>
-</trn-card>
+<mat-card [stretch]="true" [thickShadow]="true">
+  <mat-card-content>
+    <ag-grid-angular #agGrid
+                     id="cell-detail"
+                     [gridOptions]="gridOptions"
+                     [columnDefs]="columnDefs"
+                     [rowData]="rowData"
+                     (gridReady)="params.detailGridOptions.onGridReady($event,params)"
+                     [enableRtl]="true">
+    </ag-grid-angular>
+  </mat-card-content>
+</mat-card>
