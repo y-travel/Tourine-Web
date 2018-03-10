@@ -108,14 +108,14 @@ export class TeamPerson {
 }
 
 // @Flags()
-export enum ServiceType {
+export enum OptionType {
   Empty = 0,
   Bed = 1,
   Bus = 2,
   Food = 4,
 }
 
-export enum ServiceStatus {
+export enum OptionStatus {
 }
 
 export class QueryDb_2<From, Into> extends QueryBase {
@@ -146,7 +146,7 @@ export class QueryResponse<T> {
   responseStatus: ResponseStatus;
 }
 
-export class Service {
+export class PassengerList {
   id: string;
   // @References(typeof(Person))
   personId: string;
@@ -156,8 +156,8 @@ export class Service {
   tourId: string;
 
   tour: Tour;
-  type: ServiceType;
-  status: ServiceStatus;
+  type: OptionType;
+  status: OptionStatus;
   isGateSettelled: boolean;
 }
 
@@ -411,11 +411,11 @@ export class GetPersonsOfTeam extends QueryDb_1<Person> implements IReturn<Query
 }
 
 @Route("/service", "POST")
-export class PostServiceForPassenger implements IReturn<Service> {
-  service: Service;
+export class PostServiceForPassenger implements IReturn<PassengerList> {
+  service: PassengerList;
 
   createResponse() {
-    return new Service();
+    return new PassengerList();
   }
 
   getTypeName() {
@@ -425,11 +425,11 @@ export class PostServiceForPassenger implements IReturn<Service> {
 
 @Route("/service", "PUT")
 export class PutServiceForPassenger {
-  service: Service;
+  service: PassengerList;
 }
 
 @Route("/service/{TourId}")
-export class GetServiceOfTour extends QueryDb_2<Service, Person> implements IReturn<QueryResponse<Person>> {
+export class GetServiceOfTour extends QueryDb_2<PassengerList, Person> implements IReturn<QueryResponse<Person>> {
   tourId: string;
 
   createResponse() {
