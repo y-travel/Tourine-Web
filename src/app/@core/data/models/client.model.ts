@@ -80,9 +80,9 @@ export class Coupon extends Model {
 }
 
 export class Block extends Model {
-  tourId: string = undefined;
+  agencyId: string = undefined;
+  parentId: string = undefined;
   capacity: number = undefined;
-  adultPrice: number = undefined;
   infantPrice: number = undefined;
   busPrice: number = undefined;
   roomPrice: number = undefined;

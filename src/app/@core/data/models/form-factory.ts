@@ -2,8 +2,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService } from '../form.service';
-import { Coupon, Person, EditPassword, Reagent, Tour, User, TourDetail, Agency, PersonAgency } from './client.model';
-import { Block } from '.';
+import { Coupon, Person, EditPassword, Reagent, Tour, User, TourDetail, Agency, PersonAgency , Block } from './client.model';
 
 @Injectable()
 export class FormFactory {
@@ -68,7 +67,7 @@ export class FormFactory {
       busPrice: [model.busPrice ? model.busPrice : undefined , Validators.required],
       roomPrice: [model.roomPrice ? model.roomPrice : undefined , Validators.required],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined , Validators.required],
-      tourPrice: [model.tourPrice ? model.tourPrice : undefined , Validators.required],
+      basePrice: [model.tourPrice ? model.tourPrice : undefined , Validators.required],
     });
     return new FormService(Block, form);
   }

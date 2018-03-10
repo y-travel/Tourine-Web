@@ -15,7 +15,7 @@
         </div>
         <div fxLayout="row">
           <mat-form-field>
-            <mat-select placeholder="agency.name" formControlName="id">
+            <mat-select placeholder="agency.name" formControlName="id" (selectionChange)="selectedItem($event,stepper)">
               <mat-option *ngFor="let item of agencies | async" [value]="item.id">{{item.name}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -26,8 +26,8 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="block.form" label="{{'steps'|translate:({value:'second'|translate})}}">
-      <form [formGroup]="block.form">
+    <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'second'|translate})}}">
+      <form [formGroup]="data.form">
 
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex="40">
@@ -44,7 +44,7 @@
 
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="tourPrice" formControlName="tourPrice">
+            <input matInput mask="number" placeholder="tourPrice" formControlName="basePrice">
             <mat-icon matSuffix> landscape</mat-icon>
             <mat-hint align="end" translate>rialFormat</mat-hint>
           </mat-form-field>

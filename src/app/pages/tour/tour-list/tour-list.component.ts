@@ -30,7 +30,10 @@ export class TourListComponent {
   }
 
   bockUpsert() {
-    const ref = this.dialogService.open(BlockUpsertComponent, this.formFactory.createBlockUpsertForm());
+    var blockUpsertForm = this.formFactory.createReserveBlockForm();
+    blockUpsertForm.model.parentId = "c17496cf-7a71-451f-91da-1d10b165be13";
+    const ref = this.dialogService.open(BlockUpsertComponent , blockUpsertForm );
+    ref.afterClosed().subscribe(data => this.tourGridService.reloadData());
   }
 
   reagentUpsert() {
