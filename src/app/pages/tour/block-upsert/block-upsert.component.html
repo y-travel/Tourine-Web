@@ -32,7 +32,7 @@
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex="40">
             <input matInput mask="number" #adultCount placeholder="adultCount" formControlName="capacity">
-            <mat-hint align="end" translate>{{"emptyCount"|translate:({value:(freeSpace-adultCount.value)})}}</mat-hint>
+            <mat-hint align="end" >{{"emptyCount"|translate:({value:freeSpace-adultCount.value}) }}</mat-hint>
           </mat-form-field>
 
           <mat-form-field fxFlex="50">

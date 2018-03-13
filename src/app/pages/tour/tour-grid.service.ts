@@ -8,6 +8,7 @@ import { Dictionary, Place } from '../../@core/data/models';
 import { FormatterService } from '../../@core/utils/formatter.service';
 import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
 import { Agency } from '../../@core/data/models/client.model';
+import { AgGridNg2 } from 'ag-grid-angular';
 
 @Injectable()
 export class TourGridService {
@@ -20,16 +21,21 @@ export class TourGridService {
   places: Dictionary<string> = {};
   agencies: Dictionary<string> = {};
   gridApi: any;
+  grid: AgGridNg2;
 
   constructor(private tourService: TourService,
-              private translate: TranslateService,
+              private translateService: TranslateService,
               private formatter: FormatterService) {
     this.init();
   }
 
-  init() {
+  preLoad() {
     this.loadPlaces();
     this.loadAgencies();
+  }
+
+  init() {
+    this.preLoad();
     this.gridOptions = {
       defaultColDef: {
         headerComponentFramework: <{ new(): CellHeaderComponent }>CellHeaderComponent,
@@ -39,27 +45,33 @@ export class TourGridService {
       {
         headerName: 'tour.code',
         field: 'code',
+        width: 250,
         cellRenderer: 'agGroupCellRenderer',
         checkboxSelection: true,
       },
       {
         headerName: 'tour.date',
+        minWidth: 100,
+        maxWidth: 150,
         field: 'tourDetail.startDate',
         cellRenderer: (params: any) => this.formatter.getDateFormat(params.value),
       },
       {
         headerName: 'capacity',
+        minWidth: 100,
+        maxWidth: 150,
         field: 'capacity',
-      },
-      {
-        headerName: 'price',
-        field: 'basePrice',
-        cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
       },
       {
         headerName: 'hotel',
         field: 'tourDetail.placeId',
+        minWidth: 100,
+        maxWidth: 150,
         cellRenderer: (params: any) => this.places[params.value],
+      }, {
+        headerName: 'price',
+        field: 'basePrice',
+        cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
       },
     ];
 
@@ -105,6 +117,10 @@ export class TourGridService {
     });
   }
 
+  refresh() {
+    this.gridApi.refreshView();
+  }
+
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.reloadData();
@@ -114,11 +130,10 @@ export class TourGridService {
   setInitialLayout(api) {
     api.sizeColumnsToFit();
     setTimeout(function () {
-      let rowCount = 0;
       api.forEachNode(function (node) {
-        node.setExpanded(rowCount++ === 1);
+        node.setExpanded();
       });
-    }, 500);
+    }, 100);
   }
 
   reloadData() {

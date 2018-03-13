@@ -1,12 +1,14 @@
 <mat-card [stretch]="true" [thickShadow]="true">
   <mat-card-content>
-    <ag-grid-angular #agGrid
-                     id="cell-detail"
-                     [gridOptions]="gridOptions"
-                     [columnDefs]="columnDefs"
-                     [rowData]="rowData"
-                     (gridReady)="params.detailGridOptions.onGridReady($event,params)"
-                     [enableRtl]="true">
-    </ag-grid-angular>
+    <div style="width: 90vw;">
+      <ag-grid-angular (gridSizeChanged)="refreshView()" #agGrid
+                       id="cell-detail"
+                       [gridOptions]="gridOptions"
+                       [columnDefs]="columnDefs"
+                       [rowData]="rowData"
+                       (gridReady)="params.detailGridOptions.onGridReady($event,params)"
+                       [enableRtl]="true">
+      </ag-grid-angular>
+    </div>
   </mat-card-content>
 </mat-card>

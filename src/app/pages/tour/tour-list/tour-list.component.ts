@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-
+import { Component, ViewChild } from '@angular/core';
+import { AgGridNg2 } from 'ag-grid-angular';
 import { TourService } from '../../../@core/data/tour.service';
 import { TourUpsertComponent } from '../tour-upsert/tour-upsert.component';
 import { ReagentUpsertComponent } from '../reagent-upsert.component';
@@ -15,8 +15,8 @@ import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
   styleUrls: ['./tour-list.component.scss']
 })
 export class TourListComponent {
-
   source: any;
+  @ViewChild('tourGrid') tourGrid: AgGridNg2;
 
   constructor(private tourService: TourService,
               private formFactory: FormFactory,
@@ -24,15 +24,20 @@ export class TourListComponent {
               public tourGridService: TourGridService) {
   }
 
+  refresh(){
+    this.tourGrid.api.sizeColumnsToFit();
+    this.tourGrid.api.refreshHeader();
+    this.tourGrid.api.refreshRows([]);
+  }
   upsert() {
     const ref = this.dialogService.open(TourUpsertComponent, this.formFactory.createTourForm());
     ref.afterClosed().subscribe(data => this.tourGridService.reloadData());
   }
 
   bockUpsert() {
-    var blockUpsertForm = this.formFactory.createReserveBlockForm();
-    blockUpsertForm.model.parentId = "c17496cf-7a71-451f-91da-1d10b165be13";
-    const ref = this.dialogService.open(BlockUpsertComponent , blockUpsertForm );
+    const blockUpsertForm = this.formFactory.createReserveBlockForm();
+    blockUpsertForm.model.parentId = 'c17496cf-7a71-451f-91da-1d10b165be13';
+    const ref = this.dialogService.open(BlockUpsertComponent, blockUpsertForm);
     ref.afterClosed().subscribe(data => this.tourGridService.reloadData());
   }
 

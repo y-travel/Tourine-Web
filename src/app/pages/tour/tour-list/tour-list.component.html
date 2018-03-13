@@ -1,17 +1,19 @@
-<button (click)="upsert()" >{{"tour.upsert"|translate}}</button>
-<button (click)="bockUpsert()" >{{"block.upsert"|translate}}</button>
-<button (click)="reagentUpsert()" >{{"reagent.upsert"|translate}}</button>
-<button (click)="userUpsert()" >{{"user.upsert"|translate}}</button>
-<mat-card [stretch]="true">
-  <ag-grid-angular #agGrid [style.height.px]="500" class="ag-theme-material"
-                   [columnDefs]="tourGridService.columnDefs"
-                   [masterDetail]="true"
-                   rowSelection="multiple"
-                   [gridOptions]="tourGridService.gridOptions"
-                   [detailCellRenderer]="tourGridService.detailCellRenderer"
-                   [frameworkComponents]="tourGridService.frameworkComponents"
-                   [detailCellRendererParams]="tourGridService.detailCellRendererParams"
-                   (gridReady)="tourGridService.onGridReady($event)"
-                   [enableRtl]="true">
-  </ag-grid-angular>
+<button (click)="upsert()">{{"tour.upsert"|translate}}</button>
+<button (click)="bockUpsert()">{{"block.upsert"|translate}}</button>
+<button (click)="reagentUpsert()">{{"reagent.upsert"|translate}}</button>
+<button (click)="userUpsert()">{{"user.upsert"|translate}}</button>
+<mat-card [stretch]="true" >
+  <div style="width:95vw" >  <!--@TODO use @media!-->
+    <ag-grid-angular (gridSizeChanged)="refresh()" #tourGrid style="width:100%;height:500px" [style.height.px]="500" class="ag-theme-material"
+                     [columnDefs]="tourGridService.columnDefs"
+                     [masterDetail]="true"
+                     rowSelection="multiple"
+                     [gridOptions]="tourGridService.gridOptions"
+                     [detailCellRenderer]="tourGridService.detailCellRenderer"
+                     [frameworkComponents]="tourGridService.frameworkComponents"
+                     [detailCellRendererParams]="tourGridService.detailCellRendererParams"
+                     (gridReady)="tourGridService.onGridReady($event)"
+                     [enableRtl]="true">
+    </ag-grid-angular>
+  </div>
 </mat-card>

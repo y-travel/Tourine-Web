@@ -3,7 +3,7 @@ import { Directive, ElementRef, HostBinding, Input, OnChanges, SimpleChanges, Te
 @Directive({
   selector: 'mat-card'
 })
-export class MatCardDirective implements OnChanges {
+export class MatCardDirective {
   @HostBinding('class.card-stretch') @Input() stretch: boolean;
   @HostBinding('class.card-shadow-thick') @Input() thickShadow: boolean;
 }

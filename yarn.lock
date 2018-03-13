@@ -596,11 +596,11 @@ ag-grid-angular@^16.0.0:
   version "16.0.0"
   resolved "https://registry.yarnpkg.com/ag-grid-angular/-/ag-grid-angular-16.0.0.tgz#de14f659c2da7f4e548a26953970133e1c97a125"
 
-ag-grid-enterprise@^16.0.1:
+ag-grid-enterprise@^16.0.0:
   version "16.0.1"
   resolved "https://registry.yarnpkg.com/ag-grid-enterprise/-/ag-grid-enterprise-16.0.1.tgz#b3621f88955340a3ca3b0446ed220046fff2c391"
 
-ag-grid@^16.0.1:
+ag-grid@^16.0.0:
   version "16.0.1"
   resolved "https://registry.yarnpkg.com/ag-grid/-/ag-grid-16.0.1.tgz#f9b5562fff6c70b38a20ffb1708800006c902c1a"
 
