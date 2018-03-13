@@ -1,17 +1,15 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 
-import { FormService } from "../../../@core/data/form.service";
-import { Coupon, Person, Agency } from "../../../@core/data/models/client.model";
-import { ModalInterface } from "../../../@theme/components/modal.interface";
-import { MAT_DIALOG_DATA, MatDialogRef, MatStepper, MatSelect } from "@angular/material";
-import { DialogService } from "../../../@core/utils/dialog.service";
-import { FormFactory } from "../../../@core/data/models/form-factory";
-import { CouponService } from "../../../@core/data/coupon.service";
-import { AgencyService } from "../../../@core/data/agency.service";
-import { Observable } from "rxjs/Rx";
-import { TourService } from "../../../@core/data/tour.service";
+import { FormService } from '../../../@core/data/form.service';
+import { Agency, Person } from '../../../@core/data/models/client.model';
+import { ModalInterface } from '../../../@theme/components/modal.interface';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSelect, MatStepper } from '@angular/material';
+import { DialogService } from '../../../@core/utils/dialog.service';
+import { FormFactory } from '../../../@core/data/models/form-factory';
+import { AgencyService } from '../../../@core/data/agency.service';
+import { Observable } from 'rxjs/Rx';
 import { AgencyUpsertComponent } from '../agency-upsert/agency-upsert.component';
-import { Block, Tour } from '../../../@core/data/models';
+import { Block } from '../../../@core/data/models';
 
 @Component({
   selector: 'app-block-upsert',
@@ -20,17 +18,17 @@ import { Block, Tour } from '../../../@core/data/models';
 })
 export class BlockUpsertComponent implements OnInit, ModalInterface {
 
-  freeSpace = "";
+  freeSpace: number;
   person: FormService<Person>;
   agencyListForm: FormService<Agency>;
   agencies: Observable<Agency[]>;
-  newBlock: Block = <Block>{ capacity: 0, id: null };
+  newBlock: Block = <Block>{capacity: 0, id: null};
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
-    public dialogInstance: MatDialogRef<ModalInterface>,
-    private dialogService: DialogService,
-    public formFactory: FormFactory,
-    public service: AgencyService) {
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              public formFactory: FormFactory,
+              public service: AgencyService) {
     this.init();
   }
 
@@ -38,10 +36,10 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
     this.person = this.formFactory.createPersonForm();
     this.agencyListForm = this.formFactory.createAgenciesForm();
     this.agencies = this.service.getList();
-    this.service.getTourFreeSpace(this.data.model).subscribe(x => this.freeSpace = x);
-    
+    this.service.getTourFreeSpace(this.data.model).subscribe(x => this.freeSpace = +x);
+
   }
- 
+
   save() {
     //@TODO Impl. validation
     const model = this.data.model;
@@ -58,17 +56,17 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
       if (this.data.form.valid) {
         if (this.newBlock.id == null)
           this.service.reserveBlock(this.data.model).subscribe(x => {
-            stepper.next(); 
+            stepper.next();
             this.data.model.id = x.id;
             //@TODO : save returned dto to model to can update when back to step 2
             this.newBlock.capacity = x.capacity;
             this.newBlock.id = x.id;
             this.newBlock.agencyId = x.agencyId;
             //-----
-          }); 
-        else {   
+          });
+        else {
           this.service.UpdateReservedBlock(this.data.model).subscribe(x => {
-            stepper.next(); 
+            stepper.next();
             this.newBlock.capacity = x.capacity;
             this.newBlock.id = x.id;
             this.newBlock.agencyId = x.agencyId;
@@ -81,17 +79,16 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
     else
       stepper.next();
   }
- 
+
   previous(stepper: MatStepper) {
     stepper.previous();
   }
 
   ngOnInit() {
   }
- 
+
   selectedItem(agencyId: MatSelect, stepper: MatStepper) {
     this.data.model.agencyId = agencyId.value;
     stepper.next();
   }
 }
-  

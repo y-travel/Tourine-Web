@@ -7,12 +7,13 @@
     {
       "name": "trn",
       "root": "src",
-      "outDir": "dist",
+      "outDir": "dist/prod",
       "assets": [
         "assets",
         "favicon.ico",
         "favicon.png"
       ],
+      "baseHref":"/app/",
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",

@@ -1,6 +1,7 @@
 {
   "build.prod": [
     "build.ng",
+    "clean.sync",
     "copy.to.sync"
   ],
   "serve.dev": [

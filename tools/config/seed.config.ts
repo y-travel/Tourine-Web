@@ -125,7 +125,7 @@ export class SeedConfig {
    * which can be overriden by the `--base` flag when running `npm start`.
    * @type {string}
    */
-  APP_BASE = argv['base'] || '/';
+  APP_BASE = argv['base'] || '/app/';
   /**
    * The directory where the bootstrap file is located.
    * The default directory is `app`.

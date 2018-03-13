@@ -11,8 +11,8 @@ import { changeFileManager } from '../utils/code_change_tools';
 export = () => {
   console.log(`current sync path is${Config.SyncPath}`);
   return gulp.src([
-    join(Config.DIST_DIR, '**'),
-    '!' + join(Config.DIST_DIR, '**', '*.js.map'),
+    join(Config.APP_DEST, '**'),
+    '!' + join(Config.APP_DEST, '**', '*.js.map'),
     ...changeFileManager.lastChangedFiles,
   ])
     .pipe(gulp.dest(Config.SyncPath));

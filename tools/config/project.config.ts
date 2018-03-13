@@ -1,16 +1,15 @@
 import { join } from 'path';
 
-import { SeedConfig } from './seed.config';
+import { BUILD_TYPES, SeedConfig } from './seed.config';
 
 export class ProjectConfig extends SeedConfig {
 
   PROJECT_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks');
- //@TODO get path from environment var
-  SyncPath = `${this.APP_SRC}/../.sync/website/`;
+  SyncPath = join(process.env.SyncBuildPath, 'app');
+  isDevelopment = () => this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT;
 
   constructor() {
     super();
-    this.APP_BASE = "/app/";
+    this.APP_BASE = '/app/';
   }
-
 }

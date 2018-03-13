@@ -9,5 +9,5 @@ function reportError(message: string) {
 //@TODO ugly
 export = () => {
   const {spawnSync} = require('child_process');
-  spawnSync('ng.cmd', ['build', '--aot', `--base-href ${Config.APP_BASE}`, '--no-sourcemap', '--prod'], {stdio: 'inherit'});
+  spawnSync('ng.cmd', ['build', '--aot', `--base-href ${Config.APP_BASE}`, '--no-sourcemap', !Config.isDevelopment() ? '--prod' : ''], {stdio: 'inherit'});
 };
