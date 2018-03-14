@@ -10,6 +10,10 @@ import { TourGridService } from './tour-grid.service';
 import { TrnAgGridModule } from '../../shared/trn-ag-grid/trn-ag-grid.module';
 import { AgencyUpsertComponent } from './agency-upsert/agency-upsert.component';
 import { BlockUpsertComponent } from './block-upsert/block-upsert.component';
+import { PassengerUpsertComponent } from './passenger-upsert/passenger-upsert.component';
+import { PassengerGridService } from './passenger-grid.service';
+import { PersonUpsertComponent } from './person-upsert/person-upsert.component';
+import { PersonService } from './person.service';
 
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,
@@ -17,9 +21,11 @@ const ENTRY_COMPONENTS = [
   EditPasswordComponent,
   AgencyUpsertComponent,
   BlockUpsertComponent,
+  PassengerUpsertComponent,
+  PersonUpsertComponent,
 ];
 
-@NgModule({
+@NgModule({ 
   imports: [
     ...COMMON_MODULES,
     TourRoutingModule,
@@ -28,8 +34,10 @@ const ENTRY_COMPONENTS = [
   declarations: [
     ...ENTRY_COMPONENTS,
     ...ROUTED_COMPONENTS,
+    PassengerUpsertComponent,
+    PersonUpsertComponent,
   ],
-  providers: [DialogService, TourGridService],
+  providers: [DialogService, TourGridService, PassengerGridService,PersonService],
   entryComponents: ENTRY_COMPONENTS
 })
 export class TourModule {

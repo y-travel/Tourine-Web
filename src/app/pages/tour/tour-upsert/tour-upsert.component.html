@@ -32,11 +32,11 @@
         </mat-select>
       </mat-form-field>
     </div>
-
+ 
     <div fxLayout="row" fxLayoutAlign="space-between">
       <mat-card fxLayout="column" fxFlex>
         <div fxLayout="row" fxLayoutAlign="space-between">
-          <mat-form-field fxFlex>
+          <mat-form-field fxFlex> 
             <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour.date" formControlName="startDate">
             <mat-datepicker-toggle utc="true" #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
             <mat-datepicker #tourDate disabled="false"></mat-datepicker>
@@ -67,8 +67,8 @@
           </mat-form-field>
         </div>
       </mat-card>
-      <mat-card fxLayout="column" fxFlex="40">
-        <mat-form-field fxFlex>
+      <mat-card fxLayout="column" fxFlex="40" formArrayName="options">
+        <mat-form-field fxFlex formGroupName="0">
           <input matInput mask="number" placeholder="busPrice" formControlName="busPrice">
           <mat-icon matSuffix>airport_shuttle</mat-icon>
           <mat-hint align="end" translate>tomanFormat</mat-hint>

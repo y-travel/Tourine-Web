@@ -1,0 +1,63 @@
+<div mat-dialog-title class="modal-header">
+  <div class="modal-title">
+    {{"person.upsert"|translate}}
+  </div>
+</div>
+<div class="modal-body" dir="rtl" [style.width.px]="450" autoTranslate>
+  <!--width set for IE-->
+  <form [formGroup]="data.form">
+    <div fxLayout="row" fxflex>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="person.nc" formControlName="nationalCode" #natCode (focusout)="findPerson(natCode)">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="person.mobileNumber" formControlName="mobileNumber">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxflex>
+      <trn-slider fxFlex trueText="male" falseText="female" formControlName="gender"></trn-slider>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="person.name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="person.family" formControlName="family">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="person.englishName" formControlName="englishName">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="person.englishFamily" formControlName="englishFamily">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+        <input matInput (click)="passExpDate._open($event)" [matDatepicker]="passExpireDate" placeholder="passport.expireDate" formControlName="passportExpireDate">
+        <mat-datepicker-toggle utc="true" #passExpDate matSuffix [for]="passExpireDate"></mat-datepicker-toggle>
+        <mat-datepicker #passExpireDate disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="passport.number" formControlName="passportNo">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+        <input matInput (click)="bithDate._open($event)" [matDatepicker]="personBirthDate" placeholder="person.birthDate" formControlName="birthDate">
+        <mat-datepicker-toggle utc="true" #bithDate matSuffix [for]="personBirthDate"></mat-datepicker-toggle>
+        <mat-datepicker #personBirthDate disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput (click)="visaExpDate._open($event)" [matDatepicker]="visaExpireDate" placeholder="person.visaExpireDate"
+          formControlName="visaExpirDate">
+        <mat-datepicker-toggle utc="true" #visaExpDate matSuffix [for]="visaExpireDate"></mat-datepicker-toggle>
+        <mat-datepicker #visaExpireDate disabled="false"></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<mat-dialog-actions>
+  <button fxFlex mat-raised-button color="primary" (click)="close()">{{"save"|translate}}</button>
+</mat-dialog-actions>

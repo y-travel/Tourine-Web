@@ -8,7 +8,7 @@
     "start:aot": "ng serve --aot ",
     "build.watch": "npm run build -- --watch",
     "build": "rimraf dist && ng build ",
-    "build:prod": "npm run build -- --prod",
+    "build:prod": "npm run build -- --prod", 
     "build:prod:aot": "npm run build:prod -- --aot",
     "copy.to.sync.folder": "gulp copy.to.sync --client ..",
     "gulpBuild": "gulp build.prod --client .. --color --env-config prod --build-type prod",

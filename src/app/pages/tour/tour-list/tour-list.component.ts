@@ -8,6 +8,7 @@ import { DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { TourGridService } from '../tour-grid.service';
 import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
+import { PersonUpsertComponent } from '../person-upsert/person-upsert.component';
 
 @Component({
   selector: 'tour-list',
@@ -43,6 +44,13 @@ export class TourListComponent {
 
   reagentUpsert() {
     this.dialogService.open(ReagentUpsertComponent, this.formFactory.createReagentForm());
+  }
+
+  personUpsert() {
+    const inst = this.dialogService.open(PersonUpsertComponent, this.formFactory.createPersonForm());
+    inst.afterClosed().subscribe(x => {
+      console.log(x)
+    });
   }
 
   userUpsert() {

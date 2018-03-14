@@ -1,33 +1,40 @@
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService } from '../form.service';
-import { Coupon, Person, EditPassword, Reagent, Tour, User, TourDetail, Agency, PersonAgency , Block } from './client.model';
+import { Coupon, Person, EditPassword, Reagent, Tour, User, TourDetail, Agency, PersonAgency, Block } from './client.model';
+import { OptionType } from '.';
 
 @Injectable()
 export class FormFactory {
 
   createTourForm(model: Tour = new Tour()): FormService<Tour> {
+
     const form = new FormBuilder().group({
       status: [model.status],
       basePrice: [model.basePrice],
       capacity: [model.capacity, [Validators.required, Validators.min(1)]],
+      infantPrice: [0, Validators.min(1)],
+      options: new FormBuilder().array([this.optionsInit]),
       tourDetail: new FormBuilder().group({
         startDate: [new Date(), Validators.required],
         leaderId: [undefined],
         duration: [0, Validators.required],
         destinationId: [0, Validators.required],
         placeId: ['', Validators.required],
-        busPrice: [0],
-        roomPrice: [0],
-        foodPrice: [0],
         isFlight: [true],
-        infantPrice: [0, Validators.min(1)],
       }),
     });
     return new FormService(Tour, form);
   }
-
+  optionsInit(): FormGroup {
+    return new FormBuilder().group({
+      optionType: [undefined, Validators.required],
+      price: [undefined, Validators.required],
+      optionStatus: [undefined, Validators.required],
+      tourId: [undefined, Validators.required]
+    })
+  }
   createAddAgencyForm(model: PersonAgency = new PersonAgency()): FormService<PersonAgency> {
     const form = new FormBuilder().group({
       agency: new FormBuilder().group({
@@ -62,33 +69,37 @@ export class FormFactory {
 
   createReserveBlockForm(model: Block = new Block()): FormService<Block> {
     const form = new FormBuilder().group({
-      capacity: [model.capacity ? model.capacity : undefined , [Validators.required, Validators.min(1)]],
-      infantPrice: [model.infantPrice ? model.infantPrice : undefined , Validators.required],
-      busPrice: [model.busPrice ? model.busPrice : undefined , Validators.required],
-      roomPrice: [model.roomPrice ? model.roomPrice : undefined , Validators.required],
-      foodPrice: [model.foodPrice ? model.foodPrice : undefined , Validators.required],
-      basePrice: [model.tourPrice ? model.tourPrice : undefined , Validators.required],
+      capacity: [model.capacity ? model.capacity : undefined, [Validators.required, Validators.min(1)]],
+      infantPrice: [model.infantPrice ? model.infantPrice : undefined, Validators.required],
+      busPrice: [model.busPrice ? model.busPrice : undefined, Validators.required],
+      roomPrice: [model.roomPrice ? model.roomPrice : undefined, Validators.required],
+      foodPrice: [model.foodPrice ? model.foodPrice : undefined, Validators.required],
+      basePrice: [model.tourPrice ? model.tourPrice : undefined, Validators.required],
     });
     return new FormService(Block, form);
   }
 
   createPersonForm(model: Person = new Person()): FormService<Person> {
     const form = new FormBuilder().group({
+      id: [model.id],
       name: [model.name, Validators.required],
       family: [model.family, Validators.required],
       mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
       nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(10)]],
-      fatherName: [model.fatherName, Validators.required],
+      englishName: [undefined, Validators.required],
+      englishFamily: [undefined, Validators.required],
       birthDate: [model.birthDate, Validators.required],
-      passportExpireDate: [model.passportExpireDate, Validators.required],
-      passportNo: [model.passportNo, Validators.required]
+      passportExpireDate: [model.passportExpireDate],
+      passportNo: [model.passportNo],
+      visaExpirDate: undefined,
+      gender: [model.gender],
     });
     return new FormService(Person, form);
   }
 
   createAgenciesForm(model: Agency = new Agency()): FormService<Agency> {
     const form = new FormBuilder().group({
-      id: [model.id,Validators.required],
+      id: [model.id, Validators.required],
       name: [model.name]
     });
     return new FormService(Agency, form);
