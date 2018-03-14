@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start:hmr": "ng serve --hmr ",
+    "start:hmr": "ng serve --hmr --base-href /",
     "start:aot": "ng serve --aot ",
     "build.watch": "npm run build -- --watch",
     "build": "rimraf dist && ng build ",
