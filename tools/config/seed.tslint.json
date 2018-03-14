@@ -76,7 +76,11 @@
       "check-separator",
       "check-type"
     ],
-
+    "import-blacklist": [
+      true,
+      "rxjs",
+      "rxjs/Observable"
+    ],
     "angular-whitespace": [true, "check-semicolon", "check-interpolation"],
     "no-output-on-prefix": true,
     "banana-in-box": true,
