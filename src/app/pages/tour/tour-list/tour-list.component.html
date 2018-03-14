@@ -2,10 +2,13 @@
 <button (click)="bockUpsert()">{{"block.upsert"|translate}}</button>
 <button (click)="reagentUpsert()">{{"reagent.upsert"|translate}}</button>
 <button (click)="userUpsert()">{{"user.upsert"|translate}}</button>
-<mat-card [stretch]="true" >
-  <div style="width:95vw" >  <!--@TODO use @media!-->
+<mat-card [stretch]="true">
+  <div style="width:95vw">  <!--@TODO use @media!-->
     <ag-grid-angular (gridSizeChanged)="refresh()" #tourGrid style="width:100%;height:500px" [style.height.px]="500" class="ag-theme-material"
                      [columnDefs]="tourGridService.columnDefs"
+                     [rowDragManaged]="true"
+                     [enableSorting]="true"
+                     [icons]="tourGridService.icons"
                      [masterDetail]="true"
                      rowSelection="multiple"
                      [gridOptions]="tourGridService.gridOptions"

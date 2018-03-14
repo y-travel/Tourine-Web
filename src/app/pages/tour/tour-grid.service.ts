@@ -7,7 +7,7 @@ import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-h
 import { Dictionary, Place } from '../../@core/data/models';
 import { FormatterService } from '../../@core/utils/formatter.service';
 import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
-import { Agency } from '../../@core/data/models/client.model';
+import { Agency, Tour } from '../../@core/data/models/client.model';
 import { AgGridNg2 } from 'ag-grid-angular';
 
 @Injectable()
@@ -22,6 +22,8 @@ export class TourGridService {
   agencies: Dictionary<string> = {};
   gridApi: any;
   grid: AgGridNg2;
+  rows: Tour[];
+  icons: any[];
 
   constructor(private tourService: TourService,
               private translateService: TranslateService,
@@ -43,16 +45,34 @@ export class TourGridService {
     };
     this.columnDefs = [
       {
+        headerName: '',
+        maxWidth: 25,
+        minWidth: 25,
+        checkboxSelection: true,
+      }, {
+        headerName: '',
+        valueGetter: (params) => ' ',
+        maxWidth: 25,
+        minWidth: 25,
+        cellRenderer: 'agGroupCellRenderer',
+      }, {
+        headerName: 'row',
+        field: 'code',
+        minWidth: 50,
+        maxWidth: 50,
+        cellRenderer: (params: any) => {
+          return `${this.rows.findIndex(tour => tour.code === params.value) + 1}`;
+        },
+      }, {
         headerName: 'tour.code',
         field: 'code',
-        width: 250,
-        cellRenderer: 'agGroupCellRenderer',
-        checkboxSelection: true,
+        minWidth: 150,
+        maxWidth: 200,
       },
       {
         headerName: 'tour.date',
-        minWidth: 100,
-        maxWidth: 150,
+        minWidth: 150,
+        maxWidth: 200,
         field: 'tourDetail.startDate',
         cellRenderer: (params: any) => this.formatter.getDateFormat(params.value),
       },
@@ -93,6 +113,7 @@ export class TourGridService {
           {
             headerName: 'price',
             field: 'basePrice',
+            cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
           },
         ],
         onGridReady: (detailParams: any, parentParams: any = null) => {
@@ -102,6 +123,10 @@ export class TourGridService {
           });
         },
       },
+    };
+    this.icons = {
+      groupLoading:
+        '<img src="https://raw.githubusercontent.com/ag-grid/ag-grid-docs/master/src/javascript-grid-enterprise-model/spinner.gif" style="width:22px;height:22px;">'
     };
   }
 
@@ -138,7 +163,8 @@ export class TourGridService {
 
   reloadData() {
     this.tourService.getList().subscribe(tours => {
-      this.gridApi.setRowData(tours);
+      this.rows = tours;
+      this.gridApi.setRowData(this.rows);
     });
   }
 }

@@ -49,7 +49,7 @@
   "mobileNumber": "شماره همراه",
   "msg": {
     "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
-    "blockReservation" : "تعداد {{capacity}}  نفر با موفقیت رزور شد"
+    "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزور شد"
   },
   "name": "نام",
   "nationalCode": "کد ملی",
@@ -83,6 +83,7 @@
   "rial": "ریال",
   "rialFormat": "(ریال)",
   "roomPrice": "قیمت اتاق",
+  "row": "ردیف",
   "save": "ثبت",
   "second": "دوم",
   "selectPerson": "انتخاب فرد",
