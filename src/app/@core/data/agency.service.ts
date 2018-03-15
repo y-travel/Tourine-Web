@@ -4,7 +4,7 @@ import { Agency, PersonAgency } from './models/client.model';
 import { Serializable } from '../utils/serializable';
 import { GetAgencies, CreateAgency, FindPersonFromNc, UpdatePerson } from './models/server.dtos';
 import { Observable } from 'rxjs/Rx';
-import { Person, GetTourFreeSpace, Block, Tour, ReserveBlock, UpdateTour, UpdateBlock, GetPersons, AddNewPerson } from './models';
+import { Person, GetTourFreeSpace, Block, Tour, ReserveBlock, UpdateTour, UpdateBlock } from './models';
 
 @Injectable()
 export class AgencyService {
@@ -39,7 +39,7 @@ export class AgencyService {
 
   UpdateReservedBlock(model: Block) : Observable<Tour>{
     const query = new UpdateBlock();
-    Serializable.fromJSON(query, model);
+    Serializable.fromJSON(query, model); 
     return this.apiService.send(query);
   }
 }

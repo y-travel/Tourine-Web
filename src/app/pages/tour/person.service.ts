@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Person, AddNewPerson , UpdatePerson , FindPersonFromNc} from '../../@core/data/models';
 import { ApiService } from '../../@core/data/api.service';
-
+import { Person, FindPersonFromNc , UpdatePerson, AddNewPerson  } from '../../@core/data/models';
 
 @Injectable()
 export class PersonService {

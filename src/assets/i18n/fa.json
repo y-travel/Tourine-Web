@@ -48,8 +48,8 @@
   "male": "مرد",
   "mobileNumber": "شماره همراه",
   "msg": {
-    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
-    "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزور شد"
+    "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزور شد",
+    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
   },
   "name": "نام",
   "nationalCode": "کد ملی",
@@ -60,15 +60,21 @@
   "optional": "اختیاری",
   "passenger": "مسافر",
   "passport": {
-    "expireDate": "تاریخ انقضاء پاسپورت",
+    "expireDate": "تاریخ اعتبار پاسپورت",
     "number": "شماره پاسپورت"
   },
   "password": "کلمه عبور",
   "person": {
+    "birthDate": "تاریخ تولد",
+    "englishFamily": "نام خانوادگی انگلیسی",
+    "englishName": "نام انگلیسی",
     "family": "نام خانوادگی",
     "mobileNumber": "شماره همراه",
     "name": "نام",
-    "socialNumber": "شماره شبکه اجتماعی"
+    "nc": "کد ملی",
+    "socialNumber": "شماره شبکه اجتماعی",
+    "upsert": "ثبت شخص",
+    "visaExpireDate": "تاریخ اعتبار ویزا"
   },
   "phone": "تلفن",
   "pleaseSelect": "لطفاً انتخاب کنید",

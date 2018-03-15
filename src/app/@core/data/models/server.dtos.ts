@@ -463,8 +463,27 @@ export class CreatePerson implements IReturn<Person> {
 }
 
 @Route("/persons/", "PUT")
-export class UpdatePerson {
+export class UpdatePerson implements IReturn<Person> {
+  
   person: Person;
+  createResponse(): Person {
+    return new Person();
+  }
+  getTypeName(): string {
+    return "UpdatePerson";
+  }
+}
+
+@Route("/persons/", "POST")
+export class AddNewPerson implements IReturn<Person> {
+  
+  person: Person;
+  createResponse(): Person {
+    return new Person();
+  }
+  getTypeName(): string {
+    return "AddNewPerson";
+  }
 }
 
 @Route("/persons/", "GET")
@@ -683,10 +702,10 @@ export class GetTourFreeSpace implements IReturn<string> {
   }
 }
 
-@Route("/tour/{parentId}/reserve/{agencyId}","POST")
+@Route("/tour/{parentId}/reserve/{agencyId}", "POST")
 export class ReserveBlock implements IReturn<Tour> {
   parentId: string;
-  agencyId : string;
+  agencyId: string;
 
   createResponse(): Tour {
     return new Tour();
@@ -697,10 +716,10 @@ export class ReserveBlock implements IReturn<Tour> {
   }
 }
 
-@Route("/tour/{tourId}/reserve/{agencyId}","PUT")
+@Route("/tour/{tourId}/reserve/{agencyId}", "PUT")
 export class UpdateBlock implements IReturn<Tour> {
   tourId: string;
-  agencyId : string;  
+  agencyId: string;
 
   createResponse(): Tour {
     return new Tour();

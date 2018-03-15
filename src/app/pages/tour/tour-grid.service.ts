@@ -23,11 +23,11 @@ export class TourGridService {
   gridApi: any;
   grid: AgGridNg2;
   rows: Tour[];
-  icons: any[];
+  icons: any;
 
   constructor(private tourService: TourService,
-              private translateService: TranslateService,
-              private formatter: FormatterService) {
+    private translateService: TranslateService,
+    private formatter: FormatterService) {
     this.init();
   }
 
@@ -51,7 +51,7 @@ export class TourGridService {
         checkboxSelection: true,
       }, {
         headerName: '',
-        valueGetter: (params) => ' ',
+        valueGetter: (params: any) => ' ',
         maxWidth: 25,
         minWidth: 25,
         cellRenderer: 'agGroupCellRenderer',
@@ -96,7 +96,7 @@ export class TourGridService {
     ];
 
     this.detailCellRenderer = 'cellDetail';
-    this.frameworkComponents = {cellDetail: CellDetailComponent};
+    this.frameworkComponents = { cellDetail: CellDetailComponent };
     this.detailCellRendererParams = {
       detailGridOptions: {
         columnDefs: [
