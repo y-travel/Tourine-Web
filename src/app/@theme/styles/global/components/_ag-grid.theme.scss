@@ -2,7 +2,7 @@
 @import "../../core/functions";
 
 $icons-path: "~ag-grid/src/styles/icons/";
-
+$grid-size: 4px;
 @import "~ag-grid/src/styles/ag-grid";
 @import "~ag-grid/src/styles/ag-theme-material";
 
@@ -10,7 +10,10 @@ $icons-path: "~ag-grid/src/styles/icons/";
   $params: map_merge($params, (
     grid-size: $grid-size,
     icon-size: $icon-size,
+    row-height:trn-theme(grid-row-height),
+    header-height:row-height,
     font-family: trn-theme(font-main),
+    cell-horizontal-padding:4px,
     font-size: $font-size,
     font-weight: $font-weight,
     foreground-color:trn-theme(color-fg-text),
@@ -30,5 +33,9 @@ $icons-path: "~ag-grid/src/styles/icons/";
     .ag-header-cell {
       text-align: center;
     }
+    .ag-header-container {
+      background-color: trn-theme(grid-header-color);
+    }
+
   }
 }

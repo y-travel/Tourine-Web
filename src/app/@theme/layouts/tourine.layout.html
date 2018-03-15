@@ -13,13 +13,16 @@
           </div>
         </mat-toolbar>
       </div>
-      <div class="sidebar-article">
-        <ng-content select="router-outlet"></ng-content>
+      <div class="sidebar-article" fxLayout="row" fxLayoutAlign="center center">
+
+        <div id="article" >
+          <ng-content select="router-outlet"></ng-content>
+        </div>
       </div>
       <ng-content select="trn-menu"></ng-content>
     </trn-sidebar>
   </div>
-  <div *ngSwitchCase="'layout2'" [style.height.px]="600" fxLayout="row" fxLayoutAlign="center center" >
+  <div *ngSwitchCase="'layout2'" [style.height.px]="600" fxLayout="row" fxLayoutAlign="center center">
     <ng-content selected="layout2-content"></ng-content>
   </div>
 </trn-layout>

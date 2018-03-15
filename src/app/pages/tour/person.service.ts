@@ -6,9 +6,10 @@ import { Person, FindPersonFromNc , UpdatePerson, AddNewPerson  } from '../../@c
 @Injectable()
 export class PersonService {
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {
+  }
 
-  GetPerson(nationalCode: string) : Observable<Person>{
+  GetPerson(nationalCode: string): Observable<Person> {
     const query = new FindPersonFromNc();
     query.nationalCode = nationalCode;
     return this.apiService.send(query);
@@ -26,4 +27,3 @@ export class PersonService {
     return this.apiService.send(dto);
   }
 }
-  

@@ -9,7 +9,7 @@ $dark-accent-palette: $mat-amber;
 $dark-warning-palette: $mat-deep-orange;
 
 $theme-default: (
-  material:(),//@todo should be set from material.theme
+  material:(), //@todo should be set from material.theme
   is-dark:false,
   font-main: one-iransans,
   font-secondary: font-main,
@@ -37,16 +37,18 @@ $theme-default: (
   font-size: 1rem,
   font-size-sm: 0.875rem,
   font-size-xs: 0.75rem,
+  grid-row-height:35px,
+  grid-header-color:map_get($mat-grey,200),
   color-accent-palette:$accent-palette,
   color-accent:map_get($accent-palette, 500),
   color-bg: #ffffff,
   color-bg-active: #e9edf2,
   color-disabled: rgba(255, 255, 255, 0.4),
-  color-card-bg:map_get($mat-grey,A100),//@todo set from material
+  color-card-bg:map_get($mat-grey, A100), //@todo set from material
   color-fg: #a4abb3,
   color-fg-heading: #2a2a2a,
   color-fg-text: #4b4b4b,
-  color-icon-text: map_get($mat-grey,200),
+  color-icon-text: map_get($mat-grey, 200),
   color-fg-highlight: #40dc7e,
   color-gray: rgba(81, 113, 165, 0.15),
   color-info: #4ca6ff,
@@ -90,12 +92,12 @@ $theme-dark: map_merge($theme-default, (
   color-accent: map_get($dark-accent-palette, 500),
   color-bg: #3d3780,
   color-bg-active: #494299,
-  color-card-bg:map_get($mat-grey,800),
+  color-card-bg:map_get($mat-grey, 800),
   color-disabled: rgba(255, 255, 255, 0.4),
   color-fg: #a1a1e5,
   color-fg-heading: #ffffff,
   color-fg-text: #d1d1ff,
-  color-icon-text: map_get($mat-grey,800),
+  color-icon-text: map_get($mat-grey, 800),
   color-fg-highlight: #00f9a6,
   color-gray: rgba(81, 113, 165, 0.15),
   color-info: #0088ff,

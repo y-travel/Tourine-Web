@@ -5,6 +5,17 @@
   top: 0;
   left: 0;
   width: 100%;
+  #article {
+    //@TODO define breakpoints
+    @media (max-width: 1000px) {
+      width: 900px;
+      height: 300px;
+    }
+    @media (min-width: 1001px) {
+      width: 1200px;
+      height: 500px;
+    }
+  }
 }
 
 

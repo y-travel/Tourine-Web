@@ -23,11 +23,12 @@ export class TourGridService {
   gridApi: any;
   grid: AgGridNg2;
   rows: Tour[];
+  blocks: Tour[];
   icons: any;
 
   constructor(private tourService: TourService,
-    private translateService: TranslateService,
-    private formatter: FormatterService) {
+              private translateService: TranslateService,
+              private formatter: FormatterService) {
     this.init();
   }
 
@@ -52,16 +53,16 @@ export class TourGridService {
       }, {
         headerName: '',
         valueGetter: (params: any) => ' ',
-        maxWidth: 25,
-        minWidth: 25,
+        maxWidth: 40,
+        minWidth: 40,
         cellRenderer: 'agGroupCellRenderer',
       }, {
         headerName: 'row',
-        field: 'code',
+        field: 'id',
         minWidth: 50,
         maxWidth: 50,
         cellRenderer: (params: any) => {
-          return `${this.rows.findIndex(tour => tour.code === params.value) + 1}`;
+          return `${this.rows.findIndex(tour => tour.id === params.value) + 1}`;
         },
       }, {
         headerName: 'tour.code',
@@ -96,10 +97,19 @@ export class TourGridService {
     ];
 
     this.detailCellRenderer = 'cellDetail';
-    this.frameworkComponents = { cellDetail: CellDetailComponent };
+    this.frameworkComponents = {cellDetail: CellDetailComponent};
     this.detailCellRendererParams = {
       detailGridOptions: {
         columnDefs: [
+          {
+            headerName: 'row',
+            field: 'id',
+            minWidth: 50,
+            maxWidth: 50,
+            cellRenderer: (params: any) => {
+              return `${this.blocks.findIndex(tour => tour.id === params.value) + 1}`;
+            },
+          },
           {
             headerName: 'agencyName',
             field: 'agencyId',
@@ -118,15 +128,16 @@ export class TourGridService {
         ],
         onGridReady: (detailParams: any, parentParams: any = null) => {
           this.tourService.getBlocks(parentParams.data.id).subscribe(blocks => {
-            detailParams.api.setRowData(blocks);
+            this.blocks = blocks;
+            detailParams.api.setRowData(this.blocks);
             detailParams.api.sizeColumnsToFit();
           });
         },
       },
     };
     this.icons = {
-      groupLoading:
-        '<img src="https://raw.githubusercontent.com/ag-grid/ag-grid-docs/master/src/javascript-grid-enterprise-model/spinner.gif" style="width:22px;height:22px;">'
+      groupExpanded: '<i class="material-icons">keyboard_arrow_down</mat-icon>',
+      groupContracted: '<i class="material-icons">keyboard_arrow_left</i>',
     };
   }
 
