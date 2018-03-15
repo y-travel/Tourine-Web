@@ -1,4 +1,4 @@
-import { HttpMethod, TourStatus } from './enums';
+import { HttpMethod, TourStatus, OptionType } from './enums';
 
 export interface IModel {
   isNew(): boolean;
@@ -117,12 +117,27 @@ export class Person extends Model {
   fatherName = '';
   birthDate: Date;
   passportExpireDate: Date;
+  visaExpireDate: Date;
   passportNo = 0;
   gender = true;
   personType = 0;
   socialNumber = '';
-  isUnder5 = false;
+  isUnder5 = true;
   isInfant = false;
+}
+export class PersonIncome {
+  optionType: OptionType = OptionType.Empty;
+  //temp
+  receivedMoney: number;
+  incomeStatus: number;
+  currencyFactor: number;
+}
+export class TeamMember {
+  personId: string = undefined;
+  person: Person = undefined;
+  personIncomes: PersonIncome[] = [];
+  visaDelivered: boolean = undefined;
+  passportDelivered: boolean = undefined;
 }
 
 export enum Role {

@@ -13,7 +13,7 @@ $grid-size: 4px;
     row-height:trn-theme(grid-row-height),
     header-height:row-height,
     font-family: trn-theme(font-main),
-    cell-horizontal-padding:4px,
+    cell-horizontal-padding:2px,
     font-size: $font-size,
     font-weight: $font-weight,
     foreground-color:trn-theme(color-fg-text),
@@ -36,6 +36,9 @@ $grid-size: 4px;
     .ag-header-container {
       background-color: trn-theme(grid-header-color);
     }
-
+    .ag-header-group-text {
+      width: 100%;
+      text-align: center;
+    }
   }
 }

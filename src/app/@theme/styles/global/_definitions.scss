@@ -3,6 +3,9 @@
     margin: 20px;
     padding: 0;
     direction: rtl;
+    .mat-card-footer{
+      margin: 0;
+    }
   }
   .card-shadow-thick {
     box-shadow: 5px 5px 20px trn-theme(shadow-color) !important;//cos mat-card class is over it

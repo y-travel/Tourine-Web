@@ -174,10 +174,10 @@ export class TourGridService {
     this.setInitialLayout(this.gridApi);
   }
 
-  setInitialLayout(api) {
+  setInitialLayout(api:any) {
     api.sizeColumnsToFit();
     setTimeout(function () {
-      api.forEachNode(function (node) {
+      api.forEachNode(function (node:any) {
         node.setExpanded();
       });
     }, 100);

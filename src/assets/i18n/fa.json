@@ -16,7 +16,8 @@
   "allPriceIsPerOne": "قیمت های وارد شده به ازای هر نفر می باشد",
   "birthDate": "تاریخ تولد",
   "block": {
-    "upsert": "رزرو تور"
+    "save": "ذخیره تور",
+    "upsert": "ثبت تور"
   },
   "busPrice": "قیمت اتوبوس",
   "buyer": "خریدار",
@@ -26,11 +27,11 @@
     "upsert": "ثبت کوپن"
   },
   "dayFormat": "(روز)",
+  "delete": "حذف",
   "destination": "مقصد",
-  "delete":"حذف",
   "dollar": "دلار",
   "duration": "مدت زمان",
-  "edit":"ویرایش",
+  "edit": "ویرایش",
   "email": "رایانامه",
   "emptyCount": "ظرفیت خالی {{value}} نفر",
   "family": "نام خانوادگی",
@@ -44,8 +45,8 @@
   "ground": "زمینی",
   "homePage": "صفحه اصلی",
   "hotel": "هتل",
-  "infantCount": "تعداد کودک",
-  "infantPrice": "قیمت کودک",
+  "infantCount": "تعداد اینفنت",
+  "infantPrice": "قیمت اینفنت",
   "leader": "سرگروه",
   "male": "مرد",
   "mobileNumber": "شماره همراه",
@@ -60,10 +61,12 @@
   "offValue": "تخفیف",
   "oldPassword": "کلمه عبور فعلی",
   "optional": "اختیاری",
-  "passenger": "مسافر",
-  "passengerAdd": "ثبت مسافر",
+  "passenger": {
+    "*": "مسافر",
+    "upsert": "ثبت مشخصات مسافران"
+  },
   "passport": {
-    "expireDate": "تاریخ اعتبار پاسپورت",
+    "expireDate": "اعتبار پاسپورت",
     "number": "شماره پاسپورت"
   },
   "password": "کلمه عبور",
@@ -71,13 +74,23 @@
     "birthDate": "تاریخ تولد",
     "englishFamily": "نام خانوادگی انگلیسی",
     "englishName": "نام انگلیسی",
+    "engllishNameAndFamily": "(لاتین) نام و نام خانوادگی",
     "family": "نام خانوادگی",
+    "gender": "جنسیت",
     "mobileNumber": "شماره همراه",
     "name": "نام",
+    "nameAndFamily": "نام و نام خانوادگی",
     "nc": "کد ملی",
+    "passport": "پاسپورت",
+    "passportDelivered": "تحویل پاسپورت",
     "socialNumber": "شماره شبکه اجتماعی",
     "upsert": "ثبت شخص",
-    "visaExpireDate": "تاریخ اعتبار ویزا"
+    "visa": "ویزا",
+    "visaDelivered": "تحویل ویزا",
+    "visaExpireDate": "اعتبار ویزا",
+    "foodOption":"خدمات غذا",
+    "busOption":"خدمات اتوبوس",
+    "roomOption":"خدمات اتاق"
   },
   "phone": "تلفن",
   "pleaseSelect": "لطفاً انتخاب کنید",
@@ -100,6 +113,7 @@
   "third": "سوم",
   "toman": "تومان",
   "tomanFormat": "(تومان)",
+  "total": "جمع کل",
   "tour": {
     "code": "کد تور",
     "date": "تاریخ اجرا",

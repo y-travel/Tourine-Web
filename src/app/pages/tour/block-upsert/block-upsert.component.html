@@ -5,7 +5,7 @@
 </div>
 <div class="modal-body" dir="rtl" [style.width.px]="500" [style.height.px]="300" autoTranslate>
   <!--width set for IE-->
-  <mat-horizontal-stepper #stepper [linear]="true">
+  <mat-horizontal-stepper #stepper [linear]="true"> 
     <mat-step [stepControl]="agencyListForm.form" label="{{'steps'|translate:({value:'first'|translate})}}">
       <form [formGroup]="agencyListForm.form">
         <div fxLayout="row">
@@ -76,14 +76,14 @@
     </mat-step>
 
     <mat-step [stepControl]="person.form" label="{{'steps'|translate:({value:'third'|translate})}}">
-      <form [formGroup]="person.form">
+      <form >
         <div fxLayout="row">
           <br> {{"msg.blockReservation"|translate:({capacity:newBlock.capacity})}}
           <br>
           <br> {{"addPassengerMessage"|translate}}
         </div>
         <mat-dialog-actions>
-          <button mat-raised-button color="primary" fxFlex type="button">{{"add"|translate}}
+          <button mat-raised-button color="primary" fxFlex type="button" (click)="addPassengers()">{{"add"|translate}}
             <mat-icon class="icon-text-color">add</mat-icon>
           </button>
         </mat-dialog-actions>

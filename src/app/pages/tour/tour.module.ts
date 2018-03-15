@@ -11,7 +11,7 @@ import { AgencyUpsertComponent } from './agency-upsert/agency-upsert.component';
 import { BlockUpsertComponent } from './block-upsert/block-upsert.component';
 import { PassengerUpsertComponent } from './passenger-upsert/passenger-upsert.component';
 import { PassengerGridService } from './passenger-grid.service';
-import { PersonUpsertComponent } from './person-upsert/person-upsert.component';
+import { TeamMemberUpsertComponent } from './team-member-upsert/team-member-upsert.component';
 import { PersonService } from './person.service';
 
 const ENTRY_COMPONENTS = [
@@ -20,7 +20,7 @@ const ENTRY_COMPONENTS = [
   AgencyUpsertComponent,
   BlockUpsertComponent,
   PassengerUpsertComponent,
-  PersonUpsertComponent,
+  TeamMemberUpsertComponent,
 ];
 
 @NgModule({
@@ -33,7 +33,7 @@ const ENTRY_COMPONENTS = [
     ...ENTRY_COMPONENTS,
     ...ROUTED_COMPONENTS,
     PassengerUpsertComponent,
-    PersonUpsertComponent,
+    TeamMemberUpsertComponent,
   ],
   providers: [DialogService, TourGridService, PassengerGridService, PersonService],
   entryComponents: ENTRY_COMPONENTS

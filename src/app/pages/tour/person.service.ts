@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ApiService } from '../../@core/data/api.service';
-import { Person, FindPersonFromNc , UpdatePerson, AddNewPerson  } from '../../@core/data/models';
+import { Person, FindPersonFromNc , UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency  } from '../../@core/data/models';
+import { Serializable } from '../../@core/utils/serializable';
 
 @Injectable()
 export class PersonService {
@@ -25,5 +26,27 @@ export class PersonService {
     const dto = new AddNewPerson();
     dto.person = model;
     return this.apiService.send(dto);
+  }
+
+  getPerson(model: Person): Observable<Person[]> {
+    const dto = new GetPersons();
+    Serializable.fromJSON(dto, model);
+    return this.apiService.getEntities(dto);
+  }
+
+  
+  getPersons(): Observable<Person[]> {
+    const dto = new GetPersons();
+    return this.apiService.getEntities(dto);
+  }
+
+  getLeaders(): Observable<Person[]> {
+    const dto = new GetLeaders();
+    return this.apiService.getEntities(dto);
+  }
+
+  getAgency(): Observable<Agency[]> {
+    const dto = new GetAgencies();
+    return this.apiService.getEntities(dto);
   }
 }

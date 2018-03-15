@@ -10,6 +10,7 @@ import { AgencyService } from '../../../@core/data/agency.service';
 import { Observable } from 'rxjs/Rx';
 import { AgencyUpsertComponent } from '../agency-upsert/agency-upsert.component';
 import { Block } from '../../../@core/data/models';
+import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
 
 @Component({
   selector: 'app-block-upsert',
@@ -22,13 +23,13 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
   person: FormService<Person>;
   agencyListForm: FormService<Agency>;
   agencies: Observable<Agency[]>;
-  newBlock: Block = <Block>{capacity: 0, id: null};
+  newBlock: Block = <Block>{ capacity: 0, id: null };
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
-              public dialogInstance: MatDialogRef<ModalInterface>,
-              private dialogService: DialogService,
-              public formFactory: FormFactory,
-              public service: AgencyService) {
+    public dialogInstance: MatDialogRef<ModalInterface>,
+    private dialogService: DialogService,
+    public formFactory: FormFactory,
+    public service: AgencyService) {
     this.init();
   }
 
@@ -36,7 +37,9 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
     this.person = this.formFactory.createPersonForm();
     this.agencyListForm = this.formFactory.createAgenciesForm();
     this.agencies = this.service.getList();
-    this.service.getTourFreeSpace(this.data.model).subscribe(x => this.freeSpace = +x);
+    this.service.getTourFreeSpace(this.data.form.value.id).subscribe(x => {
+      this.freeSpace = +x
+    });
 
   }
 
@@ -90,5 +93,9 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
   selectedItem(agencyId: MatSelect, stepper: MatStepper) {
     this.data.model.agencyId = agencyId.value;
     stepper.next();
+  }
+
+  addPassengers() {
+    this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm());
   }
 }

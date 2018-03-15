@@ -7,7 +7,7 @@ import { DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { TourGridService } from '../tour-grid.service';
 import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
-import { PersonUpsertComponent } from '../person-upsert/person-upsert.component';
+import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { Block, Tour } from '../../../@core/data/models/client.model';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
@@ -89,12 +89,15 @@ export class TourListComponent {
 
   //@region test upsert
   personUpsert(person) {
-    const inst = this.dialogService.openPopup(PersonUpsertComponent, this.formFactory.createPersonForm());
+    const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createPersonForm());
+    
     inst.afterClosed().subscribe(x => {
       console.log(x);
     });
   }
-
+  addPassengers(){
+    this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm());
+  }
   userUpsert() {
     this.dialogService.openPopup(EditPasswordComponent, this.formFactory.createEditPasswordForm());
   }

@@ -13,7 +13,7 @@ export class CellHeaderComponent implements IHeaderAngularComp {
   constructor() {
   }
 
-  agInit(params: IHeaderParams): void {
+  agInit(params: any): void {
     this.params = params;
   }
 }

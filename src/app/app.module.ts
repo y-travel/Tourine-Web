@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { HttpInterceptorService } from "./@core/data/http-interceptor.service";
+import { MatInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +18,7 @@ import { HttpInterceptorService } from "./@core/data/http-interceptor.service";
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    MatInputModule,
 
     ThemeModule.forRoot(),
     CoreModule.forRoot(),

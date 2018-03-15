@@ -49,10 +49,4 @@ export class TourService {
     const dto = new GetAgencies();
     return this.apiService.getEntities(dto);
   }
-
-  getPersons(model: Person): Observable<Person[]> {
-    const dto = new GetPersons();
-    Serializable.fromJSON(dto, model);
-    return this.apiService.getEntities(dto);
-  }
 }

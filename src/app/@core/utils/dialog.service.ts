@@ -18,7 +18,7 @@ export class DialogService {
     height: '',
     minWidth: '',
     minHeight: '',
-    maxWidth: defaultDialogConfig.maxWidth,
+    maxWidth: 1200,
     maxHeight: '',
     position: {
       top: '',

@@ -24,10 +24,10 @@ export class AgencyService {
     return this.apiService.send(dto);
   }
 
-  getTourFreeSpace(model: Block) : Observable<string> {
+  getTourFreeSpace(id: string) : Observable<string> {
     const query = new GetTourFreeSpace();
-    query.tourId = model.parentId;
-    Serializable.fromJSON(query, model);
+    query.tourId = id;
+    //Serializable.fromJSON(query, model);
     return this.apiService.send(query);
   }
 

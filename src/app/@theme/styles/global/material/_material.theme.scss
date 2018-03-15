@@ -74,6 +74,17 @@
   .ag-row-hover .mat-toolbar[data-visibility='autoHide'] {
     visibility: visible !important;
   }
+
+  .fab-grid {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-top: -70px;
+    position: absolute;
+    left: 0;
+  }
+  
+
 }
 
 @mixin trn-material-theme() {
