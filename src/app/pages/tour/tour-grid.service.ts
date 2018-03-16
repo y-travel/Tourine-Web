@@ -63,9 +63,7 @@ export class TourGridService {
         field: 'id',
         minWidth: 50,
         maxWidth: 50,
-        cellRenderer: (params: any) => {
-          return `${this.rows.findIndex(tour => tour.id === params.value) + 1}`;
-        },
+        cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
       }, {
         headerName: 'tour.code',
         field: 'code',
@@ -114,9 +112,7 @@ export class TourGridService {
             field: 'id',
             minWidth: 50,
             maxWidth: 50,
-            cellRenderer: (params: any) => {
-              return `${this.blocks.findIndex(tour => tour.id === params.value) + 1}`;
-            },
+            cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
           },
           {
             headerName: 'agencyName',
@@ -148,6 +144,7 @@ export class TourGridService {
           });
         },
       },
+      frameworkComponents: {cellToolbar: CellToolbarComponent},
     };
     this.icons = {
       groupExpanded: '<i class="material-icons">keyboard_arrow_down</mat-icon>',
