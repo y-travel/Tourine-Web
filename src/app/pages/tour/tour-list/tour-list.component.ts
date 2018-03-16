@@ -34,10 +34,16 @@ export class TourListComponent {
     },
     <ToolbarItem>{
       icon: 'group_add',
-      title: 'passengerAdd',
+      title: 'passenger.upsert',
       color: '#4caf50',
       command: (tourBlock: any) => this.passengerUpsert(tourBlock),
     },
+    <ToolbarItem>{
+      icon: 'work',
+      title: 'tour.reserve',
+      color: '#4caf50',
+      command: (tourBlock: any) => this.blockUpsert(tourBlock),
+    }
   ];
 
   @ViewChild('tourGrid') tourGrid: AgGridNg2;
