@@ -47,7 +47,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
   }
 
   agencyUpsert() {
-    const ref = this.dialogService.open(AgencyUpsertComponent, this.formFactory.createAddAgencyForm());
+    const ref = this.dialogService.openPopup(AgencyUpsertComponent, this.formFactory.createAddAgencyForm());
     ref.afterClosed().subscribe(data => this.agencies = this.service.getList());
   }
 

@@ -14,7 +14,6 @@ import { CellToolbarComponent, ToolbarItem } from '../../shared/trn-ag-grid/cell
 @Injectable()
 export class TourGridService {
   gridOptions: GridOptions;
-  rowData: any[];
   columnDefs: any[];
   frameworkComponents: any;
   detailCellRenderer: any;

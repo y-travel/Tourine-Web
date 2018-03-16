@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { ROUTED_COMPONENTS, TourRoutingModule } from './tour-routing.module';
 import { TourUpsertComponent } from './tour-upsert/tour-upsert.component';
-import { ReagentUpsertComponent } from './reagent-upsert.component';
 import { EditPasswordComponent } from './edit-password.component';
 import { DialogService } from '../../@core/utils/dialog.service';
 import { COMMON_MODULES } from '../default';
@@ -17,7 +16,6 @@ import { PersonService } from './person.service';
 
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,
-  ReagentUpsertComponent,
   EditPasswordComponent,
   AgencyUpsertComponent,
   BlockUpsertComponent,
@@ -25,7 +23,7 @@ const ENTRY_COMPONENTS = [
   PersonUpsertComponent,
 ];
 
-@NgModule({ 
+@NgModule({
   imports: [
     ...COMMON_MODULES,
     TourRoutingModule,
@@ -37,7 +35,7 @@ const ENTRY_COMPONENTS = [
     PassengerUpsertComponent,
     PersonUpsertComponent,
   ],
-  providers: [DialogService, TourGridService, PassengerGridService,PersonService],
+  providers: [DialogService, TourGridService, PassengerGridService, PersonService],
   entryComponents: ENTRY_COMPONENTS
 })
 export class TourModule {

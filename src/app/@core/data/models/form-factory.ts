@@ -1,9 +1,8 @@
-import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService } from '../form.service';
-import { Coupon, Person, EditPassword, Reagent, Tour, User, TourDetail, Agency, PersonAgency, Block } from './client.model';
-import { OptionType } from '.';
+import { Agency, Block, EditPassword, Person, PersonAgency, Reagent, Tour, User } from './client.model';
 
 @Injectable()
 export class FormFactory {
@@ -27,14 +26,7 @@ export class FormFactory {
     });
     return new FormService(Tour, form);
   }
-  optionsInit(): FormGroup {
-    return new FormBuilder().group({
-      optionType: [undefined, Validators.required],
-      price: [undefined, Validators.required],
-      optionStatus: [undefined, Validators.required],
-      tourId: [undefined, Validators.required]
-    })
-  }
+
   createAddAgencyForm(model: PersonAgency = new PersonAgency()): FormService<PersonAgency> {
     const form = new FormBuilder().group({
       agency: new FormBuilder().group({
@@ -50,21 +42,6 @@ export class FormFactory {
       }),
     });
     return new FormService(PersonAgency, form);
-  }
-
-  createBlockUpsertForm(model: Coupon = new Coupon()): FormService<Coupon> {
-    const form = new FormBuilder().group({
-      reagentId: [model.reagentId, Validators.required],
-      passengers: [model.passengers, Validators.required],
-      adultCount: [model.adultCount, [Validators.required, Validators.min(1)]],
-      adultPrice: [model.adultPrice],
-      infantCount: [model.infantCount],
-      infantPrice: [model.infantPrice],
-      busPrice: [model.busPrice],
-      roomPrice: [model.roomPrice],
-      foodPrice: [model.foodPrice],
-    });
-    return new FormService(Coupon, form);
   }
 
   createReserveBlockForm(model: Block = new Block()): FormService<Block> {
@@ -132,5 +109,14 @@ export class FormFactory {
       password: [model.password, Validators.required]
     });
     return new FormService(User, form);
+  }
+
+  private optionsInit(): FormGroup {
+    return new FormBuilder().group({
+      optionType: [undefined, Validators.required],
+      price: [undefined, Validators.required],
+      optionStatus: [undefined, Validators.required],
+      tourId: [undefined, Validators.required]
+    });
   }
 }

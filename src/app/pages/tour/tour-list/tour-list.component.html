@@ -1,9 +1,3 @@
-<button (click)="upsert()">{{"tour.upsert"|translate}}</button>
-<button (click)="bockUpsert()">{{"block.upsert"|translate}}</button>
-<button (click)="personUpsert()">{{"person.upsert"|translate}}</button>
-<button (click)="reagentUpsert()">{{"reagent.upsert"|translate}}</button>
-<button (click)="userUpsert()">{{"user.upsert"|translate}}</button>
-
 <mat-card [stretch]="true" style="height: 100%">
     <!--@TODO globalize height-->
     <ag-grid-angular (gridSizeChanged)="refresh()" #tourGrid style="width:100%;height:100%;" class="ag-theme-material"
