@@ -20,7 +20,7 @@ import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.c
 export class TourListComponent {
   source: any;
   //@TODO get colors from global variables
-  tourItems: ToolbarItem[] = [
+  sharedItems: ToolbarItem[] = [
     <ToolbarItem>{
       icon: 'delete',
       title: 'delete',
@@ -38,6 +38,8 @@ export class TourListComponent {
       color: '#4caf50',
       command: (tourBlock: any) => this.passengerUpsert(tourBlock),
     },
+  ];
+  tourItems = [
     <ToolbarItem>{
       icon: 'work',
       title: 'tour.reserve',
@@ -45,7 +47,7 @@ export class TourListComponent {
       command: (tourBlock: any) => this.blockUpsert(tourBlock),
     }
   ];
-
+  blockItems = [];
   @ViewChild('tourGrid') tourGrid: AgGridNg2;
 
   reloadTourList = () => this.tourGridService.reloadData();
@@ -54,7 +56,8 @@ export class TourListComponent {
               private formFactory: FormFactory,
               public dialogService: DialogService,
               public tourGridService: TourGridService) {
-    this.tourGridService.toolbarItems.push(...this.tourItems);
+    this.tourGridService.toolbarTourItems.push(...this.sharedItems, ...this.tourItems);
+    this.tourGridService.toolbarBlockItems.push(...this.sharedItems, ...this.blockItems);
   }
 
   refresh() {

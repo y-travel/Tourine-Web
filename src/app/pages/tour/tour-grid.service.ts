@@ -25,7 +25,8 @@ export class TourGridService {
   rows: Tour[];
   blocks: Tour[];
   icons: any;
-  toolbarItems: ToolbarItem[] = [];
+  toolbarTourItems: ToolbarItem[] = [];
+  toolbarBlockItems: ToolbarItem[] = [];
 
   constructor(private tourService: TourService,
               private translateService: TranslateService,
@@ -98,7 +99,7 @@ export class TourGridService {
       {
         cellRenderer: 'cellToolbar',
         cellRendererParams: {
-          items: this.toolbarItems,
+          items: this.toolbarTourItems,
         },
       },
     ];
@@ -131,6 +132,12 @@ export class TourGridService {
             headerName: 'price',
             field: 'basePrice',
             cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
+          },
+          {
+            cellRenderer: 'cellToolbar',
+            cellRendererParams: {
+              items: this.toolbarBlockItems,
+            },
           },
         ],
         onGridReady: (detailParams: any, parentParams: any = null) => {
