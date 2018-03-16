@@ -1,6 +1,6 @@
 @import "../../styles/install";
 $breakpoint-screen-xs:600px;
-@include nb_install-component() {
+@include trn-install-component() {
   mat-sidenav {
     width: 250px;
   }

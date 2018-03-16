@@ -33,7 +33,7 @@ export class CellDetailComponent implements ICellRendererAngularComp, AfterViewI
   }
 
   refresh(params: any): boolean {
-    return false;
+    return true;
   }
 
   agInit(params: ICellRendererParams | IDetailCellRendererParams | any): void {

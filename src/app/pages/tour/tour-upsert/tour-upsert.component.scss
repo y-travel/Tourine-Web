@@ -1,6 +1,6 @@
 @import '../../../@theme/styles/install';
 
-@include nb-install-component() {
+@include trn-install-component() {
   .menu-icon{
     font-size: trn-theme(menu-icon-font-size);
   }

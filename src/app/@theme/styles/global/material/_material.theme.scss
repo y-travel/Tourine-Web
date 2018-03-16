@@ -52,6 +52,14 @@
   mat-card {
     margin: 20px;
   }
+  .mat-mini-fab {
+    width: 30px;
+    height: 30px;
+    .mat-icon {
+      font-size: 22px;
+      line-height: 1px;
+    }
+  }
 }
 
 @mixin trn-material-theme() {

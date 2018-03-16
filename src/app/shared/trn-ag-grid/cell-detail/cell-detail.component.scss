@@ -1,6 +1,6 @@
 @import "../../../@theme/styles/install";
 
-@include nb-install-component() {
+@include trn-install-component() {
   #cell-detail {
     box-sizing: border-box;
     display: block;

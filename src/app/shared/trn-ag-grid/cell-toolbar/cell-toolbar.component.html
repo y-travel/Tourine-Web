@@ -1,0 +1,6 @@
+<mat-toolbar dir="ltr" data-visibility="autoHide">
+  <button matTooltip="{{item.title|translate}}" mat-mini-fab class="toolbar-item" *ngFor="let item of params.items"
+          [style.color]="item.color" (click)="doCommand(item)">
+    <mat-icon>{{item.icon}}</mat-icon>
+  </button>
+</mat-toolbar>

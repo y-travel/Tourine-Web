@@ -9,6 +9,7 @@ import { FormatterService } from '../../@core/utils/formatter.service';
 import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
 import { Agency, Tour } from '../../@core/data/models/client.model';
 import { AgGridNg2 } from 'ag-grid-angular';
+import { CellToolbarComponent, ToolbarItem } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 
 @Injectable()
 export class TourGridService {
@@ -25,6 +26,7 @@ export class TourGridService {
   rows: Tour[];
   blocks: Tour[];
   icons: any;
+  toolbarItems: ToolbarItem[] = [];
 
   constructor(private tourService: TourService,
               private translateService: TranslateService,
@@ -94,10 +96,16 @@ export class TourGridService {
         field: 'basePrice',
         cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
       },
+      {
+        cellRenderer: 'cellToolbar',
+        cellRendererParams: {
+          items: this.toolbarItems,
+        },
+      },
     ];
 
     this.detailCellRenderer = 'cellDetail';
-    this.frameworkComponents = {cellDetail: CellDetailComponent};
+    this.frameworkComponents = {cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent};
     this.detailCellRendererParams = {
       detailGridOptions: {
         columnDefs: [
@@ -177,5 +185,10 @@ export class TourGridService {
       this.rows = tours;
       this.gridApi.setRowData(this.rows);
     });
+  }
+
+  addToolbar() {
+    this.columnDefs.push();
+    this.gridApi.refreshHeader();
   }
 }

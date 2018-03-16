@@ -9,6 +9,7 @@ import { FormFactory } from '../../../@core/data/models/form-factory';
 import { TourGridService } from '../tour-grid.service';
 import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
 import { PersonUpsertComponent } from '../person-upsert/person-upsert.component';
+import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 
 @Component({
   selector: 'tour-list',
@@ -23,13 +24,13 @@ export class TourListComponent {
               private formFactory: FormFactory,
               public dialogService: DialogService,
               public tourGridService: TourGridService) {
+    this.tourGridService.toolbarItems.push(...tourItems);
   }
 
-  refresh(){
+  refresh() {
     this.tourGrid.api.sizeColumnsToFit();
-    this.tourGrid.api.refreshHeader();
-    this.tourGrid.api.refreshRows([]);
   }
+
   upsert() {
     const ref = this.dialogService.open(TourUpsertComponent, this.formFactory.createTourForm());
     ref.afterClosed().subscribe(data => this.tourGridService.reloadData());
@@ -49,7 +50,7 @@ export class TourListComponent {
   personUpsert() {
     const inst = this.dialogService.open(PersonUpsertComponent, this.formFactory.createPersonForm());
     inst.afterClosed().subscribe(x => {
-      console.log(x)
+      console.log(x);
     });
   }
 
@@ -57,3 +58,29 @@ export class TourListComponent {
     this.dialogService.open(EditPasswordComponent, this.formFactory.createEditPasswordForm());
   }
 }
+
+//@TODO get colors from global variables
+const tourItems: ToolbarItem[] = [
+  <ToolbarItem>{
+    icon: 'delete',
+    title: 'delete',
+    color: '#f44336',
+    command: (data) => {
+      console.log(data);
+    },
+  }, <ToolbarItem>{
+    icon: 'mode_edit',
+    title: 'edit',
+    color: '#03a9f4',
+    command: (data) => {
+    },
+  },
+  <ToolbarItem>{
+    icon: 'group_add',
+    title: 'passengerAdd',
+    color: '#4caf50',
+    command: (data) => {
+      console.log(data);
+    },
+  },
+];

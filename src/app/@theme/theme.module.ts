@@ -9,23 +9,19 @@ import {
   MatDatepickerModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule, MatListModule,
+  MatInputModule,
+  MatListModule,
   MatNativeDateModule,
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
   MatStepperModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import {
-  SearchInputComponent,
-  ThemeSwitcherComponent,
-  TrnDropdownComponent,
-  TrnHeaderComponent,
-  TrnSliderComponent,
-} from './components';
+import { SearchInputComponent, ThemeSwitcherComponent, TrnDropdownComponent, TrnHeaderComponent, TrnSliderComponent, } from './components';
 import { AutoTranslateDirective, TrnButtonDirective, TrnInputDirective } from './directives';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { TourineLayoutComponent } from './layouts';
@@ -57,6 +53,7 @@ const MAT_MODULES = [
   MatToolbarModule,
   MatSidenavModule,
   MatListModule,
+  MatTooltipModule,
 ];
 
 const OTHER_MODULES = [

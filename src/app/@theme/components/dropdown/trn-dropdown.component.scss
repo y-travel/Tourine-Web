@@ -1,6 +1,6 @@
 @import "../../styles/install";
 
-@include nb-install-component() {
+@include trn-install-component() {
   .form-control {
     padding: 0;
     height: 35px;
