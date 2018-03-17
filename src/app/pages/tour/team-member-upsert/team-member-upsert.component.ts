@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Person, FormFactory, TeamMember } from '../../../@core/data/models';
+import { Person, FormFactory, TeamMember, OptionType } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { AgencyService } from '../../../@core/data/agency.service';
@@ -15,6 +15,8 @@ import { PersonService } from '../person.service';
 })
 
 export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
+
+  optionType = OptionType;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<TeamMember>,
     public dialogInstance: MatDialogRef<ModalInterface>,

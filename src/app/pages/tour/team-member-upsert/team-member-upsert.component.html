@@ -78,22 +78,16 @@
         </div>
         <hr noshade size="1">
 
-        <!-- <form [formGroup]="teamMember.form">
+        <div>
           <div fxLayout="row">
-            <div fxFlex>
-              <mat-checkbox [disabled]="!data.model.isUnder5" formControlName="foodOption">{{"person.foodOption"|translate}}
-              </mat-checkbox>
-            </div>
-            <div fxFlex>
-              <mat-checkbox [disabled]="!data.model.isUnder5"  formControlName="busOption">{{"person.busOption"|translate}}
-              </mat-checkbox>
-            </div>
-            <div fxFlex>
-              <mat-checkbox [disabled]="!data.model.isUnder5"  formControlName="roomOption">{{"person.roomOption"|translate}}
-              </mat-checkbox>
+            <div fxFlex *ngFor="let option of data.form.controls.personIncomes.controls;let i=index">
+              <div>
+                <mat-checkbox [disabled]="!data.model.person.isUnder5" [formControl]="option.get('optionType')">{{"optionType."optionType[data.model.personIncomes[i].optionType]|translate}}
+                </mat-checkbox>
+              </div>
             </div>
           </div>
-        </form> -->
+        </div>
         <hr noshade size="1">
         <div fxLayout="row">
           <p>

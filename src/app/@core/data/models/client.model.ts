@@ -126,7 +126,8 @@ export class Person extends Model {
   isInfant = false;
 }
 export class PersonIncome {
-  optionType: OptionType = OptionType.Empty;
+  constructor(
+    public optionType: OptionType = OptionType.Empty, ) { }
   //temp
   receivedMoney: number;
   incomeStatus: number;
@@ -134,8 +135,12 @@ export class PersonIncome {
 }
 export class TeamMember {
   personId: string = undefined;
-  person: Person = undefined;
-  personIncomes: PersonIncome[] = [];
+  person: Person = new Person();
+  personIncomes: PersonIncome[] = [
+    new PersonIncome(OptionType.Food),
+    new PersonIncome(OptionType.Bus),
+    new PersonIncome(OptionType.Room),
+  ];//@TODO check ugly
   visaDelivered: boolean = undefined;
   passportDelivered: boolean = undefined;
 }

@@ -60,6 +60,11 @@
   "none": "هیچکدام",
   "offValue": "تخفیف",
   "oldPassword": "کلمه عبور فعلی",
+  "optionType": {
+    "Bus": "اتوبوس",
+    "Food": "غذا",
+    "Room": "اتاق"
+  },
   "optional": "اختیاری",
   "passenger": {
     "*": "مسافر",
@@ -72,10 +77,12 @@
   "password": "کلمه عبور",
   "person": {
     "birthDate": "تاریخ تولد",
+    "busOption": "خدمات اتوبوس",
     "englishFamily": "نام خانوادگی انگلیسی",
     "englishName": "نام انگلیسی",
     "engllishNameAndFamily": "(لاتین) نام و نام خانوادگی",
     "family": "نام خانوادگی",
+    "foodOption": "خدمات غذا",
     "gender": "جنسیت",
     "mobileNumber": "شماره همراه",
     "name": "نام",
@@ -83,14 +90,12 @@
     "nc": "کد ملی",
     "passport": "پاسپورت",
     "passportDelivered": "تحویل پاسپورت",
+    "roomOption": "خدمات اتاق",
     "socialNumber": "شماره شبکه اجتماعی",
     "upsert": "ثبت شخص",
     "visa": "ویزا",
     "visaDelivered": "تحویل ویزا",
-    "visaExpireDate": "اعتبار ویزا",
-    "foodOption":"خدمات غذا",
-    "busOption":"خدمات اتوبوس",
-    "roomOption":"خدمات اتاق"
+    "visaExpireDate": "اعتبار ویزا"
   },
   "phone": "تلفن",
   "pleaseSelect": "لطفاً انتخاب کنید",

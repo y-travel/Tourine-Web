@@ -2,7 +2,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService } from '../form.service';
-import { Agency, Block, EditPassword, Person, PersonAgency, Reagent, Tour, User } from './client.model';
+import { Agency, Block, EditPassword, Person, PersonAgency, Reagent, Tour, User, PersonIncome } from './client.model';
 import { TeamMember } from '.';
 
 @Injectable()
@@ -81,7 +81,7 @@ export class FormFactory {
     const form = new FormBuilder().group({
       personId: [model.personId, Validators.required],
       person: this.createPersonForm(model.person ? model.person : new Person()).form,
-      personIncomes: new FormBuilder().array([this.passengerOptionsInit]),
+      personIncomes: new FormBuilder().array(model.personIncomes.map(this.createPersonIncome)),
       visaDelivered: [model.visaDelivered,],
       passportDelivered: [model.passportDelivered],
     });
@@ -137,6 +137,15 @@ export class FormFactory {
     return new FormService(User, form);
   }
 
+  createPersonIncome(model: PersonIncome = new PersonIncome()): FormGroup {
+    return new FormBuilder().group({
+      optionType: [model.optionType, Validators.required],
+      receivedMoney: [model.receivedMoney],
+      incomeStatus: [model.incomeStatus],
+      currencyFactor: model.currencyFactor,
+    });
+  }
+
   private optionsInit(): FormGroup {
     return new FormBuilder().group({
       optionType: [undefined, Validators.required],
@@ -146,12 +155,4 @@ export class FormFactory {
     });
   }
 
-  private passengerOptionsInit(): FormGroup {
-    return new FormBuilder().group({
-      optionType: [undefined, Validators.required],
-      receivedMoney: [undefined],
-      incomeStatus: [undefined],
-      currencyFactor: 1,
-    });
-  }
 }
