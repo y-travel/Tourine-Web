@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from "rxjs/Rx";
 
 import { ApiService } from "../data/api.service";
 import { Authenticate, Person, User } from "../data/models";
-import { Utils } from "./utils";
+import { AppUtils, UTILS } from "./app-utils";
 import { Serializable } from "./serializable";
 
 @Injectable()
@@ -11,14 +11,14 @@ export class AuthService {
 
   person: Person;
 
-  constructor(private apiService: ApiService, private utils: Utils) {
+  constructor(private apiService: ApiService, @Inject(UTILS) private utils: AppUtils) {
   }
 
   isAuthenticated() {
     return !this.utils.isNullorUndefined(this.person);
   }
 
-//@TODO Person info should be impl.
+  //@TODO Person info should be impl.
   authenticate(user: User): Observable<any> {
     const auth = new Authenticate();
     auth.userName = user.username;

@@ -10,7 +10,7 @@ import { DialogService } from './utils/dialog.service';
 import { MatDialogModule } from '@angular/material';
 import { AuthService } from './utils/auth.service';
 import { APP_CONFIG, APP_CONFIG_INSTANCE } from './utils/app.config';
-import { Utils } from './utils/utils';
+import { AppUtils, UTILS, UTILS_INSTANCE } from './utils/app-utils';
 import { FormatterService } from './utils/formatter.service';
 
 const CORE_PROVIDERS = [
@@ -19,10 +19,10 @@ const CORE_PROVIDERS = [
   ThemeService,
   SpinnerService,
   DialogService,
-  Utils,
   AuthService,
   FormatterService,
-  {provide: APP_CONFIG, useValue: APP_CONFIG_INSTANCE},
+  { provide: UTILS, useValue: UTILS_INSTANCE },
+  { provide: APP_CONFIG, useValue: APP_CONFIG_INSTANCE },
 ];
 
 @NgModule({

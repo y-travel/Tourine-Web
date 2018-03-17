@@ -7,6 +7,7 @@ import { DialogService } from '../../../@core/utils/dialog.service';
 import { AgencyService } from '../../../@core/data/agency.service';
 import { Observable } from 'rxjs/Rx';
 import { PersonService } from '../person.service';
+import { UTILS, AppUtils } from '../../../@core/utils';
 
 @Component({
   selector: 'app-team-member-upsert',
@@ -16,13 +17,25 @@ import { PersonService } from '../person.service';
 
 export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
 
-  optionType = OptionType;
+  get option(){
+    return true;
+  }
+
+  set option(value){
+    
+  }
+
+  optionTypes() {
+    return new Array(...this.utils.getEnumNames(OptionType)).filter(x => x !== OptionType[OptionType.Empty]);;
+  }
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<TeamMember>,
     public dialogInstance: MatDialogRef<ModalInterface>,
     private dialogService: DialogService,
     public formFactory: FormFactory,
-    public service: PersonService) {
+    public service: PersonService,
+    @Inject(UTILS) public utils: AppUtils, ) {
   }
 
   ngOnInit() {

@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Rx";
 import { Serializable } from "../utils/serializable";
 import { IReturn } from "./models/index";
 import { APP_CONFIG, AppConfig } from "../utils/app.config";
-import { Utils } from "../utils";
+import { AppUtils, UTILS } from "../utils";
 import { HttpHeaders } from "@angular/common/http";
 import { QueryResponse } from "./models/server.dtos";
 
@@ -13,7 +13,7 @@ import { QueryResponse } from "./models/server.dtos";
 export class ApiService {
   private headers: HttpHeaders;
 
-  constructor(public dataService: DataService, @Inject(APP_CONFIG) config: AppConfig, private utils: Utils) {
+  constructor(public dataService: DataService, @Inject(APP_CONFIG) config: AppConfig,@Inject(UTILS) private utils: AppUtils) {
     dataService.baseAddress = config.ApiUrl + "json/reply/";
     this.headers = new HttpHeaders({
       "Content-Type": "application/json",
