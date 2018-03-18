@@ -49,7 +49,7 @@ export class PassengerUpsertComponent implements OnInit {
   }
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember()) {
-    const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm());
+    const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
     inst.afterClosed().subscribe(x => {
       if (x != null) {
         this.passengerGridService.reloadData(x);

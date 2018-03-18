@@ -1,13 +1,14 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Person, FormFactory, TeamMember, OptionType } from '../../../@core/data/models';
+import { MAT_DIALOG_DATA, MatDialogRef, MatCheckboxChange } from '@angular/material';
+import { Person, FormFactory, TeamMember, OptionType, PersonIncome } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { AgencyService } from '../../../@core/data/agency.service';
 import { Observable } from 'rxjs/Rx';
 import { PersonService } from '../person.service';
 import { UTILS, AppUtils } from '../../../@core/utils';
+import { IncomeStatus } from '../../../@core/data/models/enums';
 
 @Component({
   selector: 'app-team-member-upsert',
@@ -17,12 +18,15 @@ import { UTILS, AppUtils } from '../../../@core/utils';
 
 export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
 
-  get option(){
-    return true;
-  }
+  // //@TODO: ugly
+  optionList: boolean[] = [];
 
-  set option(value){
-    
+  checkChanged(ev: MatCheckboxChange, optionName: string) {
+    var enumValue: OptionType = OptionType[optionName];
+    this.data.model.personIncomes.forEach(income => {
+      if (income.optionType === enumValue)
+        income.reserved = ev.checked;
+    });
   }
 
   optionTypes() {
@@ -36,6 +40,9 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
     public formFactory: FormFactory,
     public service: PersonService,
     @Inject(UTILS) public utils: AppUtils, ) {
+    data.model.personIncomes.forEach(element => {
+      this.optionList.push(element.reserved);
+    });
   }
 
   ngOnInit() {
@@ -43,7 +50,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
 
   findPerson(natCode: any) {
     this.service.GetPerson(natCode.value).subscribe(
-      person => this.data.updateForm(Object.assign(new TeamMember(), { person: person })),
+      person => this.data.updateForm(Object.assign(new TeamMember(), { person: person, personId: person.id })),
       () => {
         let teamMember = new TeamMember();
         //we use Object.assign cos last data remained in form by using dynamic cast.
@@ -54,13 +61,26 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
   }
 
   close() {
+    console.log(this.optionList);
+    
     if (this.data.model.person.id != "")
-      this.service.UpdatePerson(this.data.model.person).subscribe(x => console.log(x));
+      this.service.UpdatePerson(this.data.model.person).subscribe(x => {
+        this.data.model.person = x,
+          this.data.model.personId = x.id,
+          this.dialogInstance.close(this.data.model)
+      });
     else
-      this.service.AddPerson(this.data.model.person).subscribe(x => console.log(x));
-    this.dialogInstance.close(this.data.model);
-  }
+      this.service.AddPerson(this.data.model.person).subscribe(x => {
+        this.data.model.person = x,
+          this.data.model.personId = x.id,
+          this.dialogInstance.close(this.data.model)
+      });
 
+  }
+gen(m:any){
+  console.log(m);
+  
+}
   age(bDay: Date) {
     var now = new Date()
     var born = new Date(bDay);

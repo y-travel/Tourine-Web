@@ -18,7 +18,7 @@
             </mat-form-field>
           </div>
           <div fxLayout="row" fxflex>
-            <trn-slider fxFlex trueText="male" falseText="female" formControlName="gender"></trn-slider>
+            <trn-slider fxFlex trueText="male" (change)="gen($event)" falseText="female" formControlName="gender"></trn-slider>
           </div>
           <div fxLayout="row">
             <mat-form-field fxFlex>
@@ -80,9 +80,10 @@
 
         <div>
           <div fxLayout="row">
-            <div fxFlex *ngFor="let optionName of optionTypes();let i=index">
+            <div fxFlex *ngFor="let optionName of optionTypes();let i=index;">
               <div>
-                <mat-checkbox [disabled]="!data.model.person.isUnder5" [(ngModel)]="option" [ngModelOptions]="{standalone: true}" >{{"optionType."+optionName|translate}}
+                <mat-checkbox name="optionName" [disabled]="!data.model.person.isUnder5" [ngModelOptions]="{standalone: true}" 
+                (change)="checkChanged($event,optionName)" [(ngModel)]="optionList[i]">{{"optionType."+optionName|translate}}
                 </mat-checkbox>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import { Agency, IReturn, IReturnVoid, Tour, User, Person, Role, Destination, Place, IPost, TourDetail, Route,TeamMember,PersonIncome } from './client.model';
-import {OptionType} from './enums';
+import {OptionType , IncomeStatus} from './enums';
 
 export class QueryBase {
   // @DataMember(Order=1)
@@ -71,11 +71,6 @@ export class TourOption {
   price: number;
   optionStatus: OptionStatus;
   tourId: string;
-}
-
-export enum IncomeStatus {
-  Settled = 1,
-  Unsettled = 2,
 }
 
 export class Team {

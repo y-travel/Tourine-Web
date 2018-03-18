@@ -7,7 +7,7 @@ import { TourService } from '../../@core/data/tour.service';
 import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-header.component';
 import { FormatterService } from '../../@core/utils/formatter.service';
 import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
-import { Person, Agency,OptionType,TeamMember } from '../../@core/data/models';
+import { Person, Agency, OptionType, TeamMember } from '../../@core/data/models';
 import { PersonService } from './person.service';
 import { ToolbarItem, CellToolbarComponent } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 
@@ -15,7 +15,7 @@ import { ToolbarItem, CellToolbarComponent } from '../../shared/trn-ag-grid/cell
 export class PassengerGridService {
     gridOptions: GridOptions;
     gridColumnApi: any;
-    rows: any[];
+    rows: TeamMember[];
 
     columnDefs: any[];
     toolbarTourItems: ToolbarItem[] = [];
@@ -41,11 +41,11 @@ export class PassengerGridService {
         this.columnDefs = [
             {
                 headerName: 'row',
-                field: 'id',
+                field: 'personId',
                 minWidth: 30,
                 maxWidth: 30,
                 cellRenderer: (params: any) => {
-                    return `${this.rows.findIndex(person => person.id === params.value) + 1}`;
+                    return `${this.rows.findIndex(tm => tm.personId === params.value) + 1}`;
                 },
             },
             {
@@ -121,33 +121,30 @@ export class PassengerGridService {
                         headerName: '',
                         minWidth: 30,
                         maxWidth: 30,
-                        field: '',
                         headerComponentParams: { matIcon: "restaurant" },
-                        editable: true,
                         cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food)? 'checked' : ''} />`;
+                            return `<input type='checkbox' ${params.data.personIncomes.find(x => x.optionType === OptionType.Food).reserved ? 'checked' : ''} 
+                            ${params.data.person.isUnder5 ? '' : ' disabled '} />`;
                         }
                     }, {
                         headerName: '',
                         minWidth: 30,
                         maxWidth: 30,
-                        field: 'optionInfo.',
                         headerComponentParams: { matIcon: "hotel" },
                         cellEditor: 'popupSelect',
-                        editable: true,
                         cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room)? 'checked' : ''} />`;
+                            return `<input type='checkbox' ${params.data.personIncomes.find(x => x.optionType === OptionType.Room).reserved ? 'checked' : ''} 
+                            ${params.data.person.isUnder5 ? '' : ' disabled '} />`;
                         }
                     }, {
                         headerName: '',
                         minWidth: 30,
                         maxWidth: 30,
-                        field: 'optionInfo.',
                         headerComponentParams: { matIcon: "directions_bus" },
-                        editable: true,
                         cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus)? 'checked' : ''} />`;
-                        }
+                            return `<input type='checkbox' ${params.data.personIncomes.find(x => x.optionType === OptionType.Bus).reserved ? 'checked' : ''} 
+                            ${params.data.person.isUnder5 ? '' : ' disabled '}/>`;
+                        } 
                     },
                 ]
             },
@@ -178,7 +175,7 @@ export class PassengerGridService {
     onGridReady(params: any) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
-        //this.fill();
+        // this.fill();
         this.setInitialLayout(this.gridApi);
     }
 
@@ -201,20 +198,22 @@ export class PassengerGridService {
         this.gridApi.refreshView();
     }
 
-    reloadData(model: any) {
-        if (this.rows.findIndex(p => p.id === model.person.id) == -1) {
-            this.rows.push({ person: model.person, optionInfo: model.teamMember });
-            this.gridApi.setRowData(this.rows);
-        }
+    reloadData(model: TeamMember) {
+        var index = this.rows.findIndex(p => p.personId === model.personId)
+        if (index == -1)
+            this.rows.push(model);
+        else if (index < this.rows.length)
+            this.rows[index] = model
+        this.gridApi.setRowData(this.rows);
     }
 
-    fill() {
-        this.personService.getPersons().subscribe(tours => {
-            this.rows = tours;
-            this.gridApi.setRowData(this.rows);
-        });
-
-    }
+    // fill() {
+    //     this.personService.getPersons().subscribe(members => {
+    //         this.rows = members;
+    //         this.gridApi.setRowData(this.rows);
+    //     });
+    // 
+    // }
 
     remove(item: any) {
         var index = this.rows.indexOf(item);

@@ -8,3 +8,8 @@ export enum OptionType {
     Bus = 2,
     Food = 4,
 }
+
+export enum IncomeStatus {
+    Settled = 1,
+    Unsettled = 2,
+  }

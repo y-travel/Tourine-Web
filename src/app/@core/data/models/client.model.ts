@@ -1,4 +1,5 @@
 import { HttpMethod, TourStatus, OptionType } from './enums';
+import { IncomeStatus } from '.';
 
 export interface IModel {
   isNew(): boolean;
@@ -124,22 +125,26 @@ export class Person extends Model {
   socialNumber = '';
   isUnder5 = true;
   isInfant = false;
+  englishFamily = '';
+  englishName = '';
 }
 export class PersonIncome {
   constructor(
-    public optionType: OptionType = OptionType.Empty, ) { }
+    public optionType: OptionType = OptionType.Empty,
+    public reserved: boolean = true,
+  ) { }
   //temp
   receivedMoney: number;
-  incomeStatus: number;
+  incomeStatus: IncomeStatus;
   currencyFactor: number;
 }
 export class TeamMember {
   personId: string = undefined;
   person: Person = new Person();
   personIncomes: PersonIncome[] = [
-    new PersonIncome(OptionType.Food),
-    new PersonIncome(OptionType.Bus),
     new PersonIncome(OptionType.Room),
+    new PersonIncome(OptionType.Bus),
+    new PersonIncome(OptionType.Food),
   ];//@TODO check ugly
   visaDelivered: boolean = undefined;
   passportDelivered: boolean = undefined;
