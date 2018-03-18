@@ -8,6 +8,7 @@ import { FormFactory } from '../../../@core/data/models/form-factory';
 import { Block, Person, TeamMember } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
+import { PersonService } from '../person.service';
 
 @Component({
   selector: 'app-passenger-upsert',
@@ -35,7 +36,8 @@ export class PassengerUpsertComponent implements OnInit {
     public dialogInstance: MatDialogRef<ModalInterface>,
     private dialogService: DialogService,
     public formFactory: FormFactory,
-    public passengerGridService: PassengerGridService) {
+    public passengerGridService: PassengerGridService,
+    public service: PersonService, ) {
 
     this.passengerGridService.toolbarTourItems.push(...this.sharedItems);
   }
@@ -49,16 +51,23 @@ export class PassengerUpsertComponent implements OnInit {
   }
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember()) {
-    const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
-    inst.afterClosed().subscribe(x => {
-      if (x != null) {
-        this.passengerGridService.reloadData(x);
-        console.log(x)
-      }
-    });
+    if (this.data.model.capacity <= this.passengerGridService.rows.length) {
+      console.log(this.data.model.capacity + "/" + this.passengerGridService.rows.length);
+    } else {
+      const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
+      inst.afterClosed().subscribe(x => {
+        if (x != null) {
+          this.passengerGridService.reloadData(x);
+        }
+      });
+    }
   }
 
-  save() {
-    this.dialogInstance.close();
+  save() {//@TODO : get From this.data.model.id
+    if (this.passengerGridService.rows.length == 0)
+      this.dialogInstance.close()
+    else
+      this.service.addTeam(this.passengerGridService.rows, "c17496cf-7a71-451f-91da-1d10b165be13").subscribe(x => this.dialogInstance.close());
+
   }
 }

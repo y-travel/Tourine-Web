@@ -121,15 +121,6 @@ export class PassengerGridService {
                         headerName: '',
                         minWidth: 30,
                         maxWidth: 30,
-                        headerComponentParams: { matIcon: "restaurant" },
-                        cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.personIncomes.find(x => x.optionType === OptionType.Food).reserved ? 'checked' : ''} 
-                            ${params.data.person.isUnder5 ? '' : ' disabled '} />`;
-                        }
-                    }, {
-                        headerName: '',
-                        minWidth: 30,
-                        maxWidth: 30,
                         headerComponentParams: { matIcon: "hotel" },
                         cellEditor: 'popupSelect',
                         cellRenderer: params => {
@@ -144,8 +135,17 @@ export class PassengerGridService {
                         cellRenderer: params => {
                             return `<input type='checkbox' ${params.data.personIncomes.find(x => x.optionType === OptionType.Bus).reserved ? 'checked' : ''} 
                             ${params.data.person.isUnder5 ? '' : ' disabled '}/>`;
-                        } 
-                    },
+                        }
+                    }, {
+                        headerName: '',
+                        minWidth: 30,
+                        maxWidth: 30,
+                        headerComponentParams: { matIcon: "restaurant" },
+                        cellRenderer: params => {
+                            return `<input type='checkbox' ${params.data.personIncomes.find(x => x.optionType === OptionType.Food).reserved ? 'checked' : ''} 
+                            ${params.data.person.isUnder5 ? '' : ' disabled '} />`;
+                        }
+                    }
                 ]
             },
             {

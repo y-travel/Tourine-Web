@@ -70,7 +70,7 @@ export class FormFactory {
       birthDate: [model.birthDate, Validators.required],
       passportExpireDate: [model.passportExpireDate],
       passportNo: [model.passportNo],
-      visaExpirDate: undefined,
+      visaExpireDate: [model.visaExpireDate],
       gender: [model.gender],
       isUnder5: [model.isUnder5],//@TODO: must calculate in client 
     });

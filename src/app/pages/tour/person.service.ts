@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ApiService } from '../../@core/data/api.service';
-import { Person, FindPersonFromNc , UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency  } from '../../@core/data/models';
+import { Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, CreateTeam, TeamMember } from '../../@core/data/models';
 import { Serializable } from '../../@core/utils/serializable';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class PersonService {
     return this.apiService.send(query);
   }
 
-  UpdatePerson(model : Person) {
+  UpdatePerson(model: Person) {
     const dto = new UpdatePerson();
     dto.person = model;
     return this.apiService.send(dto);
@@ -34,7 +34,7 @@ export class PersonService {
     return this.apiService.getEntities(dto);
   }
 
-  
+
   getPersons(): Observable<Person[]> {
     const dto = new GetPersons();
     return this.apiService.getEntities(dto);
@@ -48,5 +48,13 @@ export class PersonService {
   getAgency(): Observable<Agency[]> {
     const dto = new GetAgencies();
     return this.apiService.getEntities(dto);
+  }
+
+  addTeam(model: TeamMember[],id:string): Observable<void> {
+    const dto = new CreateTeam();
+    dto.tourId = id;//@TODO
+    dto.buyer = model[0];
+    dto.passengers = model.slice(1, model.length)
+    return this.apiService.send(dto);
   }
 }

@@ -352,10 +352,16 @@ export class UpdateTourDetail {
 }
 
 @Route("/tours/{TourId}/teams", "POST")
-export class CreateTeam {
+export class CreateTeam implements IReturnVoid{
   tourId: string;
   buyer: TeamMember;
   passengers: TeamMember[];
+  createResponse(): void {
+  }
+  // @DataContract
+  getTypeName(): string {
+    return("CreateTeam");
+  }
 }
 
 @Route("/team", "PUT")

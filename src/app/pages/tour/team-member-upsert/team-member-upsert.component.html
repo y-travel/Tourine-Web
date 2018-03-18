@@ -52,7 +52,8 @@
             <input matInput="number" placeholder="passport.number" formControlName="passportNo">
           </mat-form-field>
           <mat-form-field fxFlex>
-            <input matInput (click)="passExpDate._open($event)" [matDatepicker]="passExpireDate" placeholder="passport.expireDate" formControlName="passportExpireDate">
+            <input matInput (click)="passExpDate._open($event)" [matDatepicker]="passExpireDate" placeholder="passport.expireDate" 
+            formControlName="passportExpireDate">
             <mat-datepicker-toggle utc="true" #passExpDate matSuffix [for]="passExpireDate"></mat-datepicker-toggle>
             <mat-datepicker #passExpireDate disabled="false"></mat-datepicker>
           </mat-form-field>
@@ -60,7 +61,7 @@
         <div fxLayout="row">
           <mat-form-field fxFlex>
             <input matInput (click)="visaExpDate._open($event)" [matDatepicker]="visaExpireDate" placeholder="person.visaExpireDate"
-              formControlName="visaExpirDate">
+              formControlName="visaExpireDate">
             <mat-datepicker-toggle utc="true" #visaExpDate matSuffix [for]="visaExpireDate"></mat-datepicker-toggle>
             <mat-datepicker #visaExpireDate disabled="false"></mat-datepicker>
           </mat-form-field>
