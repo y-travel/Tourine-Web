@@ -32,6 +32,8 @@ export class PassengerUpsertComponent implements OnInit {
     },
   ];
 
+  tourFreeSpace:number = 0 ;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
     public dialogInstance: MatDialogRef<ModalInterface>,
     private dialogService: DialogService,
@@ -40,6 +42,7 @@ export class PassengerUpsertComponent implements OnInit {
     public service: PersonService, ) {
 
     this.passengerGridService.toolbarTourItems.push(...this.sharedItems);
+    this.service.getTourFreeSpace(this.data.model.id).subscribe(x=> this.tourFreeSpace = +x);
   }
 
 
@@ -51,17 +54,16 @@ export class PassengerUpsertComponent implements OnInit {
   }
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
-    if (this.data.model.capacity <= this.passengerGridService.rows.length && isAdd) {
+    if (this.tourFreeSpace <= this.passengerGridService.rows.length && isAdd) {
       console.log(this.data.model.capacity + "/" + this.passengerGridService.rows.length);//@TODO: show toast
     } else {
       const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
       inst.afterClosed().subscribe(x => {
-        if (x != null && isAdd) {
+        if (x == null)
+          return;
+        if (isAdd || (!isAdd && teamMember.person.id == x.person.id)) {
           this.passengerGridService.addItem(x);
-        } 
-        // else if (x != null && !isAdd) {
-        //   this.passengerGridService.editItem(teamMember,x);
-        // }
+        }//@TODO: update to a new person 
       });
     }
   }

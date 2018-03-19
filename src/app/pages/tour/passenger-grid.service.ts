@@ -44,7 +44,7 @@ export class PassengerGridService {
                 field: 'personId',
                 minWidth: 30,
                 maxWidth: 30,
-                cellRenderer: (params: any) => (params.node.rowIndex+1).toString(),
+                cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
             },
             {
                 headerName: 'person.nc',
@@ -86,12 +86,12 @@ export class PassengerGridService {
                 field: 'person.birthDate',
                 cellRenderer: (params: any) => this.formatter.getDateFormat(params.value),
             }, {
-                headerName: 'person.passport',
-                minWidth: 60,
-                maxWidth: 60,
-                valueGetter: (params: any) => {
-                    return params.data.person.passportDelivered == true ? 'دارد' : 'ندارد';
-                }
+                headerName: 'person.passportDelivered',
+                minWidth: 100,
+                maxWidth: 100,
+                cellRenderer: params => {
+                    return `<input type='checkbox' ${params.data.passportDelivered ? 'checked' : ''} disabled  />`;
+                },
             },
             {
                 headerName: 'passport.expireDate',
@@ -110,7 +110,12 @@ export class PassengerGridService {
                 minWidth: 80,
                 maxWidth: 80,
                 field: 'person.visaExpireDate',
-                cellRenderer: (params: any) => this.formatter.getDateFormat(params.value),
+                cellRenderer: (params: any) => {
+                    if (params.data.haveVisa)
+                        return this.formatter.getDateFormat(params.value);
+                    else
+                        return "----";
+                },
             },
             {
                 headerName: "خدمات",
@@ -122,8 +127,7 @@ export class PassengerGridService {
                         headerComponentParams: { matIcon: "hotel" },
                         cellEditor: 'popupSelect',
                         cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} 
-                            ${params.data.person.isUnder5 ? '' : ' disabled '} />`;
+                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`;
                         }
                     }, {
                         headerName: '',
@@ -131,8 +135,7 @@ export class PassengerGridService {
                         maxWidth: 30,
                         headerComponentParams: { matIcon: "directions_bus" },
                         cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} 
-                            ${params.data.person.isUnder5 ? '' : ' disabled '}/>`;
+                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`;
                         }
                     }, {
                         headerName: '',
@@ -140,8 +143,7 @@ export class PassengerGridService {
                         maxWidth: 30,
                         headerComponentParams: { matIcon: "restaurant" },
                         cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} 
-                            ${params.data.person.isUnder5 ? '' : ' disabled '} />`;
+                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`;
                         }
                     }
                 ]

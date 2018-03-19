@@ -146,7 +146,7 @@ export class TeamMember {
     new PersonIncome(OptionType.Bus),
     new PersonIncome(OptionType.Food),
   ];//@TODO check ugly
-  visaDelivered: boolean = undefined;
+  haveVisa: boolean = true;
   passportDelivered: boolean = undefined;
 }
 

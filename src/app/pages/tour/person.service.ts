@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ApiService } from '../../@core/data/api.service';
-import { Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, CreateTeam, TeamMember } from '../../@core/data/models';
+import { Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, CreateTeam, TeamMember, GetTourFreeSpace } from '../../@core/data/models';
 import { Serializable } from '../../@core/utils/serializable';
 
 @Injectable()
@@ -56,5 +56,12 @@ export class PersonService {
     dto.buyer = model[0];
     dto.passengers = model.slice(1, model.length)
     return this.apiService.send(dto);
+  }
+
+  //@TODO: ugly
+  getTourFreeSpace(id: string) : Observable<string> {
+    const query = new GetTourFreeSpace();
+    query.tourId = id;
+    return this.apiService.send(query);
   }
 }

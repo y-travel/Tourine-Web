@@ -64,7 +64,7 @@ export class FormFactory {
       name: [model.name, Validators.required],
       family: [model.family, Validators.required],
       mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
-      nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(10)]],
+      nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(1)]],//@TODO: must be lenght of 10
       englishName: [model.englishName, Validators.required],
       englishFamily: [model.englishFamily, Validators.required],
       birthDate: [model.birthDate, Validators.required],
@@ -82,7 +82,7 @@ export class FormFactory {
       personId: [model.personId, Validators.required],
       person: this.createPersonForm(model.person ? model.person : new Person()).form,
       personIncomes: new FormBuilder().array(model.personIncomes.map(this.createPersonIncome)),
-      visaDelivered: [model.visaDelivered,],
+      haveVisa: [model.haveVisa],
       passportDelivered: [model.passportDelivered],
     });
     return new FormService(TeamMember, form);
