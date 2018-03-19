@@ -139,6 +139,7 @@ export class FormFactory {
 
   createPersonIncome(model: PersonIncome = new PersonIncome()): FormGroup {
     return new FormBuilder().group({
+      reserved: [model.reserved],
       optionType: [model.optionType, Validators.required],
       receivedMoney: [model.receivedMoney],
       incomeStatus: [model.incomeStatus],

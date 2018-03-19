@@ -28,7 +28,7 @@ export class PassengerUpsertComponent implements OnInit {
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (teamMember) => { this.teamMemberUpsert(teamMember) },
+      command: (teamMember) => { this.teamMemberUpsert(teamMember, false/*edit*/) },
     },
   ];
 
@@ -50,24 +50,26 @@ export class PassengerUpsertComponent implements OnInit {
     this.passengerGridService.remove(teamMember);
   }
 
-  teamMemberUpsert(teamMember: TeamMember = new TeamMember()) {
-    if (this.data.model.capacity <= this.passengerGridService.rows.length) {
-      console.log(this.data.model.capacity + "/" + this.passengerGridService.rows.length);
+  teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
+    if (this.data.model.capacity <= this.passengerGridService.rows.length && isAdd) {
+      console.log(this.data.model.capacity + "/" + this.passengerGridService.rows.length);//@TODO: show toast
     } else {
       const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
       inst.afterClosed().subscribe(x => {
-        if (x != null) {
-          this.passengerGridService.reloadData(x);
-        }
+        if (x != null && isAdd) {
+          this.passengerGridService.addItem(x);
+        } 
+        // else if (x != null && !isAdd) {
+        //   this.passengerGridService.editItem(teamMember,x);
+        // }
       });
     }
   }
 
-  save() {//@TODO : get From this.data.model.id
+  save() {
     if (this.passengerGridService.rows.length == 0)
       this.dialogInstance.close()
     else
-      this.service.addTeam(this.passengerGridService.rows, "c17496cf-7a71-451f-91da-1d10b165be13").subscribe(x => this.dialogInstance.close());
-
+      this.service.addTeam(this.passengerGridService.rows, this.data.model.id).subscribe(x => this.dialogInstance.close());
   }
 }

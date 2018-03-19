@@ -13,6 +13,7 @@ export class FormService<T> implements OnDestroy {
   }
 
   init() {
+    this.onValueChanges(this.form.value);
     this.subsciptionList.push(
       this.form.valueChanges.subscribe(data => this.onValueChanges(data))
     );

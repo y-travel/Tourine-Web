@@ -59,9 +59,13 @@
           </mat-form-field>
         </div>
         <div fxLayout="row">
-          <mat-form-field fxFlex>
+            <div fxFlex="20">
+                <mat-checkbox (change)="visaDelivered($event)" #havVisa [formControl]="data.form.get('visaDelivered')">{{"person.visaDelivered"|translate}}
+                </mat-checkbox>
+              </div>
+          <mat-form-field fxFlex="60">
             <input matInput (click)="visaExpDate._open($event)" [matDatepicker]="visaExpireDate" placeholder="person.visaExpireDate"
-              formControlName="visaExpireDate">
+              formControlName="visaExpireDate" [disabled]="havVisa.checked" >
             <mat-datepicker-toggle utc="true" #visaExpDate matSuffix [for]="visaExpireDate"></mat-datepicker-toggle>
             <mat-datepicker #visaExpireDate disabled="false"></mat-datepicker>
           </mat-form-field>
@@ -72,10 +76,6 @@
             <mat-checkbox (change)="passDelivered($event)" [formControl]="data.form.get('passportDelivered')">{{"person.passportDelivered"|translate}}
             </mat-checkbox>
           </div>
-          <div fxFlex>
-            <mat-checkbox (change)="visaDelivered($event)" [formControl]="data.form.get('visaDelivered')">{{"person.visaDelivered"|translate}}
-            </mat-checkbox>
-          </div>
         </div>
         <hr noshade size="1">
 
@@ -83,8 +83,8 @@
           <div fxLayout="row">
             <div fxFlex *ngFor="let optionName of optionTypes();let i=index;">
               <div>
-                <mat-checkbox name="optionName" [disabled]="!data.model.person.isUnder5" [ngModelOptions]="{standalone: true}" 
-                (change)="checkChanged($event,optionName)" [(ngModel)]="optionList[i]">{{"optionType."+optionName|translate}}
+                <mat-checkbox name="optionName" [disabled]="!data.model.person.isUnder5"  
+                (change)="checkChanged($event,optionType[optionName])" [checked]="getOptionValue(optionType[optionName])">{{"optionType."+optionName|translate}}
                 </mat-checkbox>
               </div>
             </div>

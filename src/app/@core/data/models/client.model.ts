@@ -131,9 +131,9 @@ export class Person extends Model {
 export class PersonIncome {
   constructor(
     public optionType: OptionType = OptionType.Empty,
-    public reserved: boolean = true,
-  ) { }
+    ) { }
   //temp
+  public reserved: boolean = true;
   receivedMoney: number;
   incomeStatus: IncomeStatus;
   currencyFactor: number;
