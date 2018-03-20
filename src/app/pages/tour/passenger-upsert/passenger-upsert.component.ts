@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, Input } from '@angular/core';
 import { DialogService } from '../../../@core/utils/dialog.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatInput } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { PassengerGridService } from '../passenger-grid.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
-import { Block, Person, TeamMember } from '../../../@core/data/models';
+import { Block, Person, TeamMember, OptionType } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../person.service';
@@ -32,7 +32,13 @@ export class PassengerUpsertComponent implements OnInit {
     },
   ];
 
-  tourFreeSpace:number = 0 ;
+  tourFreeSpace: number = 0;
+
+  private totalPrice: number;
+
+  public infantCount: number = 0;
+  public adultCount: number = 0;
+  public noneOptionCount: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
     public dialogInstance: MatDialogRef<ModalInterface>,
@@ -41,16 +47,27 @@ export class PassengerUpsertComponent implements OnInit {
     public passengerGridService: PassengerGridService,
     public service: PersonService, ) {
 
-    this.passengerGridService.toolbarTourItems.push(...this.sharedItems);
-    this.service.getTourFreeSpace(this.data.model.id).subscribe(x=> this.tourFreeSpace = +x);
+    this.init();
   }
 
 
   ngOnInit() {
   }
 
+  init() {
+    this.passengerGridService.toolbarTourItems.push(...this.sharedItems);
+    this.service.getTourFreeSpace(this.data.model.id).subscribe(x => this.tourFreeSpace = +x);
+    this.service.getTourOptions(this.data.model.id).subscribe(x => {
+      this.data.model.foodPrice = x.find(y => y.optionType === OptionType.Food).price;
+      this.data.model.roomPrice = x.find(y => y.optionType === OptionType.Room).price;
+      this.data.model.busPrice = x.find(y => y.optionType === OptionType.Bus).price;
+    });
+
+  }
+
   teamMemberDelete(teamMember: TeamMember) {
     this.passengerGridService.remove(teamMember);
+    this.totalPrice = this.getTotal(this.passengerGridService.rows);
   }
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
@@ -64,6 +81,7 @@ export class PassengerUpsertComponent implements OnInit {
         if (isAdd || (!isAdd && teamMember.person.id == x.person.id)) {
           this.passengerGridService.addItem(x);
         }//@TODO: update to a new person 
+        this.totalPrice = this.getTotal(this.passengerGridService.rows);
       });
     }
   }
@@ -73,5 +91,44 @@ export class PassengerUpsertComponent implements OnInit {
       this.dialogInstance.close()
     else
       this.service.addTeam(this.passengerGridService.rows, this.data.model.id).subscribe(x => this.dialogInstance.close());
+  }
+
+  onPriceChange() {
+    this.totalPrice = this.getTotal(this.passengerGridService.rows);
+  }
+
+  getTotal(members: TeamMember[]): number {
+
+    var total: number = 0;
+    this.infantCount = 0;
+    this.noneOptionCount = 0;
+    this.adultCount = 0;
+
+    var noneOptionFoodCount = 0;
+    var noneOptionRoomCount = 0;
+    var noneOptionBusCount = 0;
+
+    members.forEach(person => {
+
+      if (person.person.isInfant)
+        this.infantCount++;
+      else if (person.person.isUnder5)
+        this.noneOptionCount++;
+      else
+        this.adultCount++;
+
+      person.personIncomes.some(x => x.optionType == OptionType.Food) ? noneOptionFoodCount : noneOptionFoodCount++;
+      person.personIncomes.some(x => x.optionType == OptionType.Room) ? noneOptionRoomCount : noneOptionRoomCount++;
+      person.personIncomes.some(x => x.optionType == OptionType.Bus) ? noneOptionBusCount : noneOptionBusCount++;
+    });
+
+    total += this.adultCount * this.data.model.basePrice;
+    total += this.infantCount * this.data.model.infantPrice;
+    total += this.noneOptionCount * this.data.model.basePrice;
+
+    total -= noneOptionFoodCount * this.data.model.foodPrice;
+    total -= noneOptionRoomCount * this.data.model.roomPrice;
+    total -= noneOptionBusCount * this.data.model.busPrice;
+    return total;
   }
 }

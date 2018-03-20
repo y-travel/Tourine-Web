@@ -84,10 +84,10 @@
           <div fxLayout="row">
             <div fxFlex *ngFor="let optionName of optionTypes();let i=index;">
               <div>
-                <mat-checkbox name="optionName" [disabled]="!data.model.person.isUnder5" (change)="checkChanged($event,optionType[optionName])"
+                <mat-checkbox name="optionName" [disabled]="!data.model.person.isUnder5 || data.model.person.isInfant" (change)="checkChanged($event,optionType[optionName])"
                   [checked]="getOptionValue(optionType[optionName])">{{"optionType."+optionName|translate}}
                 </mat-checkbox>
-              </div>
+              </div> 
             </div>
           </div>
         </div>

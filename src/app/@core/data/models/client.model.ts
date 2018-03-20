@@ -22,7 +22,8 @@ export class Place extends Model {
 
 export class Tour extends Model {
   capacity: number;
-  basePrice: number;
+  infantPrice: number = undefined;
+  basePrice: number = undefined;
   parentId: string;
   parent: Tour;
   code: string;
@@ -96,7 +97,7 @@ export class Block extends Model {
   busPrice: number = undefined;
   roomPrice: number = undefined;
   foodPrice: number = undefined;
-  tourPrice: number = undefined;
+  basePrice: number = undefined;
 }
 
 export class EditPassword extends Model {
@@ -131,10 +132,10 @@ export class Person extends Model {
   gender = true;
   personType = 0;
   socialNumber = '';
-  isUnder5 = true;
+  isUnder5 = false;
   isInfant = false;
-  englishFamily = '';
-  englishName = '';
+  englishFamily = 'name';
+  englishName = 'family';
 }
 
 export class PersonIncome {
@@ -172,7 +173,6 @@ export class User extends Model {
   password = '';
   // @References(typeof(Person))
   PersonId: string;
-
   Person: Person;
   Role: Role;
 }

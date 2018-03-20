@@ -37,7 +37,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
     this.person = this.formFactory.createPersonForm();
     this.agencyListForm = this.formFactory.createAgenciesForm();
     this.agencies = this.service.getList();
-    this.service.getTourFreeSpace(this.data.form.value.id).subscribe(x => {
+    this.service.getTourFreeSpace(this.data.model.id).subscribe(x => {
       this.freeSpace = +x
     });
 
@@ -61,6 +61,8 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
           this.service.reserveBlock(this.data.model).subscribe(x => {
             stepper.next();
             this.data.model.id = x.id;
+            this.data.model.parentId = x.parentId;
+            this.data.updateForm(this.data.model);
             //@TODO : save returned dto to model to can update when back to step 2
             this.newBlock.capacity = x.capacity;
             this.newBlock.id = x.id;
@@ -96,6 +98,6 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
   }
 
   addPassengers() {
-    this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm());
+    this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(this.data.model));
   }
 }

@@ -24,22 +24,24 @@ export class AgencyService {
     return this.apiService.send(dto);
   }
 
-  getTourFreeSpace(id: string) : Observable<string> {
+  getTourFreeSpace(id: string): Observable<string> {
     const query = new GetTourFreeSpace();
     query.tourId = id;
     //Serializable.fromJSON(query, model);
     return this.apiService.send(query);
   }
 
-  reserveBlock(model: Block) : Observable<Tour> {
+  reserveBlock(model: Block): Observable<Tour> {
     const query = new ReserveBlock();
+    model.parentId = model.id;
+    model.id = undefined;
     Serializable.fromJSON(query, model);
     return this.apiService.send(query);
   }
 
-  UpdateReservedBlock(model: Block) : Observable<Tour>{
+  UpdateReservedBlock(model: Block): Observable<Tour> {
     const query = new UpdateBlock();
-    Serializable.fromJSON(query, model); 
+    Serializable.fromJSON(query, model);
     return this.apiService.send(query);
   }
 }

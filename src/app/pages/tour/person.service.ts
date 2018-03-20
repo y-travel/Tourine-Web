@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ApiService } from '../../@core/data/api.service';
-import { Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, CreateTeam, TeamMember, GetTourFreeSpace } from '../../@core/data/models';
+import { Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, CreateTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions } from '../../@core/data/models';
 import { Serializable } from '../../@core/utils/serializable';
 
 @Injectable()
@@ -50,7 +50,7 @@ export class PersonService {
     return this.apiService.getEntities(dto);
   }
 
-  addTeam(model: TeamMember[],id:string): Observable<void> {
+  addTeam(model: TeamMember[], id: string): Observable<void> {
     const dto = new CreateTeam();
     dto.tourId = id;//@TODO
     dto.buyer = model[0];
@@ -59,9 +59,16 @@ export class PersonService {
   }
 
   //@TODO: ugly
-  getTourFreeSpace(id: string) : Observable<string> {
+  getTourFreeSpace(id: string): Observable<string> {
     const query = new GetTourFreeSpace();
     query.tourId = id;
     return this.apiService.send(query);
+  }
+
+  getTourOptions(id: string): Observable<TourOption[]> {
+
+    const query = new GetTourOptions();
+    query.tourId = id;
+    return this.apiService.getEntities(query);
   }
 }

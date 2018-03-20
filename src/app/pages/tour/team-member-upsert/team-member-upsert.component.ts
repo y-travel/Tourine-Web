@@ -78,10 +78,13 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
     var now = new Date()
     var born = new Date(bDay);
     var age = Math.floor((now.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
-    if (age < 5)
+
+    if (age < 2)
+      this.data.model.person.isInfant = true;
+    else if (age < 5){
       this.data.model.person.isUnder5 = true;
-    else
-      this.data.model.person.isUnder5 = false;
+      this.data.model.person.isInfant = false;
+    }
 
     this.data.updateForm(this.data.model);
   }

@@ -52,7 +52,7 @@ export class FormFactory {
       busPrice: [model.busPrice ? model.busPrice : undefined, Validators.required],
       roomPrice: [model.roomPrice ? model.roomPrice : undefined, Validators.required],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined, Validators.required],
-      basePrice: [model.tourPrice ? model.tourPrice : undefined, Validators.required],
+      basePrice: [model.basePrice ? model.basePrice : undefined, Validators.required],
     });
     return new FormService(Block, form);
   }
@@ -71,7 +71,8 @@ export class FormFactory {
       passportNo: [model.passportNo],
       visaExpireDate: [model.visaExpireDate],
       gender: [model.gender],
-      isUnder5: [model.isUnder5], //@TODO: must calculate in client
+      isUnder5: [model.isUnder5], //@TODO: must calculate in client 
+      isInfant: [model.isInfant],
     });
     return new FormService(Person, form);
   }
@@ -95,7 +96,7 @@ export class FormFactory {
       busPrice: [model.busPrice ? model.busPrice : undefined, Validators.required],
       roomPrice: [model.roomPrice ? model.roomPrice : undefined, Validators.required],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined, Validators.required],
-      basePrice: [model.tourPrice ? model.tourPrice : undefined, Validators.required],
+      basePrice: [model.basePrice ? model.basePrice : undefined, Validators.required],
     });
     return new FormService(Block, form);
   }
