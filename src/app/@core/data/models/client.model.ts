@@ -1,5 +1,4 @@
-import { HttpMethod, TourStatus, OptionType } from './enums';
-import { IncomeStatus } from '.';
+import { HttpMethod, IncomeStatus, OptionStatus, OptionType, TourStatus } from './enums';
 
 export interface IModel {
   isNew(): boolean;
@@ -28,10 +27,19 @@ export class Tour extends Model {
   parent: Tour;
   code: string;
   status: TourStatus;
+  options: TourOption[];
   tourDetailId: string;
   tourDetail: TourDetail;
   agencyId: string;
   agency: Agency;
+}
+
+export class TourOption {
+  id: string;
+  optionType: OptionType;
+  price: number;
+  optionStatus: OptionStatus;
+  tourId: string;
 }
 
 export class TourDetail extends Model {
@@ -128,16 +136,18 @@ export class Person extends Model {
   englishFamily = '';
   englishName = '';
 }
+
 export class PersonIncome {
-  constructor(
-    public optionType: OptionType = OptionType.Empty,
-    ) { }
   //temp
-  public reserved: boolean = true;
+  reserved = true;
   receivedMoney: number;
   incomeStatus: IncomeStatus;
   currencyFactor: number;
+
+  constructor(public optionType: OptionType = OptionType.Empty,) {
+  }
 }
+
 export class TeamMember {
   personId: string = undefined;
   person: Person = new Person();
@@ -145,8 +155,9 @@ export class TeamMember {
     new PersonIncome(OptionType.Room),
     new PersonIncome(OptionType.Bus),
     new PersonIncome(OptionType.Food),
-  ];//@TODO check ugly
-  haveVisa: boolean = true;
+  ]; //@TODO check ugly
+  visaDelivered: boolean = undefined;
+  haveVisa: boolean = undefined;
   passportDelivered: boolean = undefined;
 }
 
@@ -183,6 +194,33 @@ export interface IReturnVoid extends IReturn<void> {
 
 export interface IPost {
 
+}
+
+export class QueryBase {
+  // @DataMember(Order=1)
+  skip: number;
+
+  // @DataMember(Order=2)
+  take: number;
+
+  // @DataMember(Order=3)
+  orderBy: string;
+
+  // @DataMember(Order=4)
+  orderByDesc: string;
+
+  // @DataMember(Order=5)
+  include: string;
+
+  // @DataMember(Order=6)
+  fields: string;
+
+  // @DataMember(Order=7)
+  meta: { [index: string]: string; };
+}
+
+
+export class QueryDb<T> extends QueryBase {
 }
 
 export function Route(path: string, type: HttpMethod = 'GET') {

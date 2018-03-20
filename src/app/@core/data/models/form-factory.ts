@@ -2,8 +2,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService } from '../form.service';
-import { Agency, Block, EditPassword, Person, PersonAgency, Reagent, Tour, User, PersonIncome } from './client.model';
-import { TeamMember } from '.';
+import { Agency, Block, EditPassword, Person, PersonAgency, Reagent, Tour, User, PersonIncome, TeamMember } from './client.model';
 
 @Injectable()
 export class FormFactory {
@@ -72,7 +71,7 @@ export class FormFactory {
       passportNo: [model.passportNo],
       visaExpireDate: [model.visaExpireDate],
       gender: [model.gender],
-      isUnder5: [model.isUnder5],//@TODO: must calculate in client 
+      isUnder5: [model.isUnder5], //@TODO: must calculate in client
     });
     return new FormService(Person, form);
   }
