@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DialogService } from '../../../@core/utils/dialog.service';
-import { MAT_DIALOG_DATA, MatDialogRef, MatInput } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { PassengerGridService } from '../passenger-grid.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
-import { Block, Person, TeamMember, OptionType } from '../../../@core/data/models';
+import { Block, OptionType, TeamMember } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../person.service';
@@ -23,29 +23,33 @@ export class PassengerUpsertComponent implements OnInit {
       icon: 'delete',
       title: 'delete',
       color: '#f44336',
-      command: (teamMember) => { this.teamMemberDelete(teamMember) },
+      command: (teamMember) => {
+        this.teamMemberDelete(teamMember)
+      },
     }, <ToolbarItem>{
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (teamMember) => { this.teamMemberUpsert(teamMember, false/*edit*/) },
+      command: (teamMember) => {
+        this.teamMemberUpsert(teamMember, false/*edit*/)
+      },
     },
   ];
 
   tourFreeSpace: number = 0;
 
-  private totalPrice: number;
+  totalPrice: number;
 
-  public infantCount: number = 0;
-  public adultCount: number = 0;
-  public noneOptionCount: number = 0;
+  infantCount: number = 0;
+  adultCount: number = 0;
+  noneOptionCount: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
-    public dialogInstance: MatDialogRef<ModalInterface>,
-    private dialogService: DialogService,
-    public formFactory: FormFactory,
-    public passengerGridService: PassengerGridService,
-    public service: PersonService, ) {
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              public formFactory: FormFactory,
+              public passengerGridService: PassengerGridService,
+              public service: PersonService,) {
 
     this.init();
   }
@@ -72,7 +76,7 @@ export class PassengerUpsertComponent implements OnInit {
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
     if (this.tourFreeSpace <= this.passengerGridService.rows.length && isAdd) {
-      console.log(this.data.model.capacity + "/" + this.passengerGridService.rows.length);//@TODO: show toast
+      console.log(this.data.model.capacity + '/' + this.passengerGridService.rows.length);//@TODO: show toast
     } else {
       const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
       inst.afterClosed().subscribe(x => {
@@ -80,7 +84,7 @@ export class PassengerUpsertComponent implements OnInit {
           return;
         if (isAdd || (!isAdd && teamMember.person.id == x.person.id)) {
           this.passengerGridService.addItem(x);
-        }//@TODO: update to a new person 
+        }//@TODO: update to a new person
         this.totalPrice = this.getTotal(this.passengerGridService.rows);
       });
     }

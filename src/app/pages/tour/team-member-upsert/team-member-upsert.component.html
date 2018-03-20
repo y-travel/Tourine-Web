@@ -18,7 +18,7 @@
             </mat-form-field>
           </div>
           <div fxLayout="row" fxflex>
-            <trn-slider fxFlex trueText="male" (change)="gen($event)" falseText="female" formControlName="gender"></trn-slider>
+            <trn-slider fxFlex trueText="male" falseText="female" formControlName="gender"></trn-slider>
           </div>
           <div fxLayout="row">
             <mat-form-field fxFlex>
@@ -78,7 +78,7 @@
             </mat-checkbox>
           </div>
         </div>
-  
+
         <br>
         <div>
           <div fxLayout="row">
@@ -87,11 +87,11 @@
                 <mat-checkbox name="optionName" [disabled]="!data.model.person.isUnder5 || data.model.person.isInfant" (change)="checkChanged($event,optionType[optionName])"
                   [checked]="getOptionValue(optionType[optionName])">{{"optionType."+optionName|translate}}
                 </mat-checkbox>
-              </div> 
+              </div>
             </div>
           </div>
         </div>
-  
+
         <br>
         <div fxLayout="row">
           <p>

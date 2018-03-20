@@ -8,7 +8,7 @@ import { IHeaderParams } from 'ag-grid';
   styleUrls: ['cell-header.component.scss']
 })
 export class CellHeaderComponent implements IHeaderAngularComp {
-  params: IHeaderParams;
+  params: any;
 
   constructor() {
   }
