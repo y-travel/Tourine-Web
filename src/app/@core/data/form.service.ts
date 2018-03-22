@@ -1,6 +1,6 @@
-import { OnDestroy } from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { Serializable, TypeConstructor } from "../utils/serializable";
+import { OnDestroy } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
+import { Serializable, TypeConstructor } from '../utils/serializable';
 
 export class FormService<T> implements OnDestroy {
   subsciptionList = [];
@@ -26,6 +26,21 @@ export class FormService<T> implements OnDestroy {
   ngOnDestroy() {
     while (this.subsciptionList.length > 0)
       this.subsciptionList.pop().unsubscribe();
+  }
+
+  markTouch(control: AbstractControl = this.form) {
+    control.markAsTouched({onlySelf: true});
+  }
+
+  markAllFieldAsTouch(controls = this.form.controls) {
+    if (!controls)
+      return;
+    Object.keys(controls).forEach(x => {
+      this.markTouch(controls[x]);
+      const formGroup = <FormGroup>controls[x];
+      if (formGroup && formGroup.controls)
+        this.markAllFieldAsTouch(formGroup.controls);
+    });
   }
 
   private onValueChanges(data: any) {

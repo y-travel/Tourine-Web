@@ -23,24 +23,30 @@ export class Place extends Model {
 export class Tour extends Model {
   capacity: number;
   infantPrice: number = undefined;
-  basePrice: number = undefined;
+  basePrice: number;
   parentId: string;
   parent: Tour;
   code: string;
   status: TourStatus;
-  options: TourOption[];
+  options: TourOption[] = [
+    new TourOption(OptionType.Food,OptionStatus.Unlimited),
+    new TourOption(OptionType.Bus),
+    new TourOption(OptionType.Room),
+  ];
   tourDetailId: string;
-  tourDetail: TourDetail;
+  tourDetail: TourDetail = new TourDetail();
   agencyId: string;
   agency: Agency;
 }
 
-export class TourOption {
-  id: string;
-  optionType: OptionType;
+export class TourOption extends Model {
   price: number;
-  optionStatus: OptionStatus;
   tourId: string;
+
+  constructor(public optionType = OptionType.Empty,
+              public optionStatus: OptionStatus = OptionStatus.Limited) {
+    super();
+  }
 }
 
 export class TourDetail extends Model {
@@ -50,7 +56,7 @@ export class TourDetail extends Model {
   startDate: string;
   placeId: string;
   place: Place;
-  isFlight: boolean;
+  isFlight = true;
   infantPrice: number;
   busPrice: number;
   roomPrice: number;
@@ -173,6 +179,7 @@ export class User extends Model {
   password = '';
   // @References(typeof(Person))
   PersonId: string;
+
   Person: Person;
   Role: Role;
 }

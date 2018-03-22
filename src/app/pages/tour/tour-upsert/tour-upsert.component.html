@@ -3,9 +3,10 @@
     {{"tour.upsert"|translate}}
   </div>
 </div>
-<div class="right modal-body" dir="rtl" [style.width.px]="700" autoTranslate>
+<div class="right modal-body" dir="rtl" style="min-width: 700px" autoTranslate>
   <!--width set for IE-->
-  <form [formGroup]="data.form.get('tourDetail')">
+  <form [formGroup]="data.form">
+    <ng-container formGroupName="tourDetail">
     <div fxLayout="row">
       <trn-slider fxFlex trueText="dollar" falseText="rial"></trn-slider>
       <div fxFlex="80" fxLayoutAlign="end center">
@@ -32,26 +33,26 @@
         </mat-select>
       </mat-form-field>
     </div>
- 
+    </ng-container>
     <div fxLayout="row" fxLayoutAlign="space-between">
       <mat-card fxLayout="column" fxFlex>
-        <div fxLayout="row" fxLayoutAlign="space-between">
-          <mat-form-field fxFlex> 
+        <div fxLayout="row" fxLayoutAlign="space-between" formGroupName="tourDetail">
+          <mat-form-field fxFlex>
             <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour.date" formControlName="startDate">
             <mat-datepicker-toggle utc="true" #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
             <mat-datepicker #tourDate disabled="false"></mat-datepicker>
           </mat-form-field>
-          <mat-form-field fxFlex>
-            <input matInput placeholder="duration" maxlength="3" pattern="[0-9]{3}" formControlName="duration">
+          <mat-form-field fxFlex >
+            <input matInput placeholder="duration" maxlength="3" formControlName="duration">
             <mat-hint align="end" translate>dayFormat</mat-hint>
           </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
-            <input matInput placeholder="adult.count" [formControl]="data.form.get('capacity')">
+            <input matInput placeholder="adult.count" formControlName="capacity">
           </mat-form-field>
           <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="adult.minPrice" [formControl]="data.form.get('basePrice')">
+            <input matInput mask="number" placeholder="adult.minPrice" formControlName="basePrice">
             <mat-hint align="end" translate>tomanFormat</mat-hint>
           </mat-form-field>
         </div>
@@ -60,7 +61,7 @@
             <input matInput mask="number" placeholder="infantPrice" formControlName="infantPrice">
             <mat-hint align="end" translate>tomanFormat</mat-hint>
           </mat-form-field>
-          <mat-form-field fxFlex>
+          <mat-form-field fxFlex formGroupName="tourDetail">
             <mat-select placeholder="hotel" formControlName="placeId">
               <mat-option *ngFor="let item of places|async" [value]="item.id">{{item.name}}</mat-option>
             </mat-select>
@@ -68,20 +69,10 @@
         </div>
       </mat-card>
       <mat-card fxLayout="column" fxFlex="40" formArrayName="options">
-        <mat-form-field fxFlex formGroupName="0">
-          <input matInput mask="number" placeholder="busPrice" formControlName="busPrice">
-          <mat-icon matSuffix>airport_shuttle</mat-icon>
-          <mat-hint align="end" translate>tomanFormat</mat-hint>
-        </mat-form-field>
-        <mat-form-field fxFlex>
-          <input matInput mask="number" placeholder="roomPrice" formControlName="roomPrice">
-          <mat-icon matSuffix> airline_seat_individual_suite</mat-icon>
-          <mat-hint align="end" translate>tomanFormat</mat-hint>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput mask="number" placeholder="foodPrice" formControlName="foodPrice">
-          <mat-icon matSuffix>room_service</mat-icon>
-          <mat-hint align="end" translate>tomanFormat</mat-hint>
+        <mat-form-field fxFlex *ngFor="let formGroup of data.form.get('options').controls;let i=index" [formGroupName]="i">
+            <input matInput mask="number" placeholder="{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}" formControlName="price">
+            <mat-icon matSuffix>{{utils.mapOptionTypeToIcon(formGroup.value.optionType)}}</mat-icon>
+            <mat-hint align="end" translate>tomanFormat</mat-hint>
         </mat-form-field>
       </mat-card>
     </div>

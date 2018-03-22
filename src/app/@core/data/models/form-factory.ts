@@ -2,7 +2,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService } from '../form.service';
-import { Agency, Block, EditPassword, Person, PersonAgency, Reagent, Tour, User, PersonIncome, TeamMember } from './client.model';
+import { Agency, Block, EditPassword, Person, PersonAgency, PersonIncome, Reagent, TeamMember, Tour, TourDetail, TourOption, User } from './client.model';
 
 @Injectable()
 export class FormFactory {
@@ -14,17 +14,33 @@ export class FormFactory {
       basePrice: [model.basePrice],
       capacity: [model.capacity, [Validators.required, Validators.min(1)]],
       infantPrice: [0, Validators.min(1)],
-      options: new FormBuilder().array([this.optionsInit]),
-      tourDetail: new FormBuilder().group({
-        startDate: [new Date(), Validators.required],
-        leaderId: [undefined],
-        duration: [0, Validators.required],
-        destinationId: [0, Validators.required],
-        placeId: ['', Validators.required],
-        isFlight: [true],
-      }),
+      options: new FormBuilder().array(
+        (model.options ? model.options : new Tour().options)
+          .map(x => this.createTourOptionForm(model.id, x)) //@TODO find a good solution for initializing options
+      ),
+      tourDetail: this.createTourDetailForm(model.tourDetail ? model.tourDetail : undefined),
     });
     return new FormService(Tour, form);
+  }
+
+  createTourOptionForm(tourId: string, model: TourOption = new TourOption()): FormGroup {
+    return new FormBuilder().group({
+      optionType: [model.optionType, Validators.required],
+      price: [model.price, Validators.required],
+      optionStatus: [model.optionStatus, Validators.required],
+      tourId: [tourId, Validators.required],
+    });
+  }
+
+  createTourDetailForm(model: TourDetail = new TourDetail()): FormGroup {
+    return new FormBuilder().group({
+      startDate: [model.startDate, Validators.required],
+      leaderId: [model.leaderId],
+      duration: [model.duration, Validators.required],
+      destinationId: [model.destinationId, Validators.required],
+      placeId: [model.placeId, Validators.required],
+      isFlight: [model.isFlight],
+    });
   }
 
   createAddAgencyForm(model: PersonAgency = new PersonAgency()): FormService<PersonAgency> {
@@ -63,7 +79,7 @@ export class FormFactory {
       name: [model.name, Validators.required],
       family: [model.family, Validators.required],
       mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
-      nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(1)]],//@TODO: must be lenght of 10
+      nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(1)]], //@TODO: must be lenght of 10
       englishName: [model.englishName, Validators.required],
       englishFamily: [model.englishFamily, Validators.required],
       birthDate: [model.birthDate, Validators.required],
@@ -71,7 +87,7 @@ export class FormFactory {
       passportNo: [model.passportNo],
       visaExpireDate: [model.visaExpireDate],
       gender: [model.gender],
-      isUnder5: [model.isUnder5], //@TODO: must calculate in client 
+      isUnder5: [model.isUnder5], //@TODO: must calculate in client
       isInfant: [model.isInfant],
     });
     return new FormService(Person, form);
@@ -100,6 +116,7 @@ export class FormFactory {
     });
     return new FormService(Block, form);
   }
+
   createAgenciesForm(model: Agency = new Agency()): FormService<Agency> {
     const form = new FormBuilder().group({
       id: [model.id, Validators.required],
@@ -146,15 +163,6 @@ export class FormFactory {
       currencyFactor: model.currencyFactor,
     });
   }
-
-  private optionsInit(): FormGroup {
-    return new FormBuilder().group({
-      optionType: [undefined, Validators.required],
-      price: [undefined, Validators.required],
-      optionStatus: [undefined, Validators.required],
-      tourId: [undefined, Validators.required]
-    });
-  } 
 
   createBlockListForm(model: Block = new Block()): FormService<Block> {
     const form = new FormBuilder().group({

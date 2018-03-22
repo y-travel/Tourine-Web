@@ -10,7 +10,7 @@ import { DialogService } from './utils/dialog.service';
 import { MatDialogModule } from '@angular/material';
 import { AuthService } from './utils/auth.service';
 import { APP_CONFIG, APP_CONFIG_INSTANCE } from './utils/app.config';
-import { AppUtils, UTILS, UTILS_INSTANCE } from './utils/app-utils';
+import { UTILS, UTILS_INSTANCE } from './utils/app-utils';
 import { FormatterService } from './utils/formatter.service';
 
 const CORE_PROVIDERS = [
@@ -21,8 +21,8 @@ const CORE_PROVIDERS = [
   DialogService,
   AuthService,
   FormatterService,
-  { provide: UTILS, useValue: UTILS_INSTANCE },
-  { provide: APP_CONFIG, useValue: APP_CONFIG_INSTANCE },
+  {provide: UTILS, useValue: UTILS_INSTANCE},
+  {provide: APP_CONFIG, useValue: APP_CONFIG_INSTANCE},
 ];
 
 @NgModule({
@@ -33,10 +33,6 @@ const CORE_PROVIDERS = [
   declarations: [],
 })
 export class CoreModule {
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    throwIfAlreadyLoaded(parentModule, 'CoreModule');
-  }
-
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: CoreModule,
@@ -44,5 +40,9 @@ export class CoreModule {
         ...CORE_PROVIDERS,
       ],
     };
+  }
+
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 }
