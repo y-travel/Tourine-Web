@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ApiService } from '../../@core/data/api.service';
-import { Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, CreateTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions } from '../../@core/data/models';
+import { Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, CreateTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, Team, DeleteTeam } from '../../@core/data/models';
 import { Serializable } from '../../@core/utils/serializable';
 
 @Injectable()
@@ -66,9 +66,20 @@ export class PersonService {
   }
 
   getTourOptions(id: string): Observable<TourOption[]> {
-
     const query = new GetTourOptions();
     query.tourId = id;
     return this.apiService.getEntities(query);
+  }
+
+  getTourTeams(id: string): Observable<Team[]> {
+    const query = new GetTourTeams();
+    query.tourId = id;
+    return this.apiService.getEntities(query);
+  }
+
+  deleteTeam(model: Team) {
+    const query = new DeleteTeam();
+    query.teamId = model.id;
+    return this.apiService.send(query);
   }
 }

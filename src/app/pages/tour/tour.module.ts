@@ -13,6 +13,8 @@ import { PassengerUpsertComponent } from './passenger-upsert/passenger-upsert.co
 import { PassengerGridService } from './passenger-grid.service';
 import { TeamMemberUpsertComponent } from './team-member-upsert/team-member-upsert.component';
 import { PersonService } from './person.service';
+import { BlockListComponent } from './block-list/block-list.component';
+import { BlocksGridService } from './blocks-grid.service';
 
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,
@@ -21,6 +23,7 @@ const ENTRY_COMPONENTS = [
   BlockUpsertComponent,
   PassengerUpsertComponent,
   TeamMemberUpsertComponent,
+  BlockListComponent,
 ];
 
 @NgModule({
@@ -34,8 +37,9 @@ const ENTRY_COMPONENTS = [
     ...ROUTED_COMPONENTS,
     PassengerUpsertComponent,
     TeamMemberUpsertComponent,
+    BlockListComponent,
   ],
-  providers: [DialogService, TourGridService, PassengerGridService, PersonService],
+  providers: [DialogService, TourGridService, PassengerGridService, PersonService,BlocksGridService],
   entryComponents: ENTRY_COMPONENTS
 })
 export class TourModule {

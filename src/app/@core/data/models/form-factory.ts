@@ -154,6 +154,14 @@ export class FormFactory {
       optionStatus: [undefined, Validators.required],
       tourId: [undefined, Validators.required]
     });
-  }
+  } 
 
+  createBlockListForm(model: Block = new Block()): FormService<Block> {
+    const form = new FormBuilder().group({
+      id : [model.id],
+      agencyId: [model.agencyId],
+      parentId: [model.parentId]
+    });
+    return new FormService(Block, form);
+  }
 }

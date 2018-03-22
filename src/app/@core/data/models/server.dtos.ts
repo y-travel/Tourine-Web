@@ -718,3 +718,28 @@ export class GetTourOptions extends QueryDb<TourOption> implements IReturn<Query
     return 'GetTourOptions';
   }
 }
+
+@Route('/tours/{TourId}/teams')
+export class GetTourTeams extends QueryDb<Team> implements IReturn<QueryResponse<Team>> {
+  tourId: string;
+
+  createResponse() {
+    return new QueryResponse<Team>();
+  }
+
+  getTypeName() {
+    return 'GetTourTeams';
+  }
+}
+
+@Route('/tours/teams/{TeamId}','DELETE')
+export class DeleteTeam implements IReturnVoid {
+  teamId: string;
+
+  createResponse() : void {
+  }
+
+  getTypeName() {
+    return 'DeleteTeam';
+  }
+}

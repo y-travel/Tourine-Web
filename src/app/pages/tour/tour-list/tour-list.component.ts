@@ -11,6 +11,7 @@ import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-ups
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { Block, Tour } from '../../../@core/data/models/client.model';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
+import { BlockListComponent } from '../block-list/block-list.component';
 
 @Component({
   selector: 'tour-list',
@@ -47,7 +48,13 @@ export class TourListComponent {
       command: (tourBlock: any) => this.blockUpsert(tourBlock),
     }
   ];
-  blockItems = [];
+  blockItems = [<ToolbarItem>{
+    icon: 'list',
+    title: 'block.buyerList',
+    color: '#E040FB',
+    command: (block: any) => this.blockList(block),
+  }];
+  
   @ViewChild('tourGrid') tourGrid: AgGridNg2;
 
   reloadTourList = () => this.tourGridService.reloadData();
@@ -98,9 +105,13 @@ export class TourListComponent {
   addPassengers(){
     this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm());
   }
+
   userUpsert() {
     this.dialogService.openPopup(EditPasswordComponent, this.formFactory.createEditPasswordForm());
   }
 
+  blockList(block = new Block()) {
+    this.dialogService.openPopup(BlockListComponent, this.formFactory.createBlockListForm(block));
+  }
   //@end-region
 }
