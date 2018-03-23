@@ -4,7 +4,7 @@ import { Agency, PersonAgency } from './models/client.model';
 import { Serializable } from '../utils/serializable';
 import { GetAgencies, CreateAgency, FindPersonFromNc, UpdatePerson } from './models/server.dtos';
 import { Observable } from 'rxjs/Rx';
-import { Person, GetTourFreeSpace, Block, Tour, ReserveBlock, UpdateTour, UpdateBlock } from './models';
+import { Person, GetTourFreeSpace, Block, Tour, ReserveBlock, UpsertTour, UpdateBlock } from './models';
 
 @Injectable()
 export class AgencyService {

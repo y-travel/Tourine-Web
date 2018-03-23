@@ -1,5 +1,18 @@
 import {
-  Agency, Destination, IPost, IReturn, IReturnVoid, Person, Place, QueryDb, Role, Route, TeamMember, Tour, TourDetail, TourOption,
+  Agency,
+  Destination,
+  IPost,
+  IReturn,
+  IReturnVoid,
+  Person,
+  Place,
+  QueryDb,
+  Role,
+  Route,
+  TeamMember,
+  Tour,
+  TourDetail,
+  TourOption,
   User
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
@@ -187,12 +200,9 @@ export class GetTours extends QueryDb<Tour> implements IReturn<QueryResponse<Tou
   }
 }
 
-/**
- * ww
- */
-@Route('/tours/', 'POST')
-// @Api(BodyParameter=2, Description="ww", IsRequired=true)
-export class CreateTour implements IReturn<Tour> {
+@Route('/tours/{Id}', 'POST')
+export class UpsertTour implements IReturn<Tour> {
+  id: string;
   capacity: number;
   basePrice: number;
   infantPrice: number;
@@ -204,25 +214,20 @@ export class CreateTour implements IReturn<Tour> {
   }
 
   getTypeName() {
-    return 'CreateTour';
+    return 'UpsertTour';
   }
 }
 
-@Route('/tours/{TourId}', 'PUT')
-export class UpdateTour implements IReturn<Tour> {
-  tourId: string;
-  capacity: number;
-  basePrice: number;
-  infantPrice: number;
-  options: TourOption[];
-  tourDetail: TourDetail;
+@Route('/tours/{Id}', 'DELETE')
+export class DeleteTour implements IReturnVoid {
+  id = '';
 
-  createResponse() {
-    return new Tour();
+  createResponse(): void {
+    return undefined;
   }
 
-  getTypeName() {
-    return 'UpdateTour';
+  getTypeName(): string {
+    return 'DeleteTour';
   }
 }
 
@@ -291,11 +296,6 @@ export class UpdateBlock implements IReturn<Tour> {
   getTypeName() {
     return 'UpdateBlock';
   }
-}
-
-@Route('/tours/{TourId}', 'DELETE')
-export class DeleteTour {
-  tourId: string;
 }
 
 @Route('/tourDetail/{ID}', 'GET')
@@ -732,11 +732,11 @@ export class GetTourTeams extends QueryDb<Team> implements IReturn<QueryResponse
   }
 }
 
-@Route('/tours/teams/{TeamId}','DELETE')
+@Route('/tours/teams/{TeamId}', 'DELETE')
 export class DeleteTeam implements IReturnVoid {
   teamId: string;
 
-  createResponse() : void {
+  createResponse(): void {
   }
 
   getTypeName() {

@@ -39,7 +39,7 @@ export class TourUpsertComponent implements ModalInterface {
   }
 
   initOptions() {
-
+    this.service.getOptions(this.data.model).subscribe(options => this.data.updateForm({options: options}));
   }
 
   save() {
@@ -47,8 +47,7 @@ export class TourUpsertComponent implements ModalInterface {
       this.data.markAllFieldAsTouch();
       return;
     }
-
-    this.service.addTour(this.data.model).subscribe(tour => {
+    this.service.upsertTour(this.data.model).subscribe(tour => {
       this.dialogInstance.close(this.data.model);
     });
   }

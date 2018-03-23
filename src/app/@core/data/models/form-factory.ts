@@ -10,10 +10,13 @@ export class FormFactory {
   createTourForm(model: Tour = new Tour()): FormService<Tour> {
 
     const form = new FormBuilder().group({
+      id: [model.id],
+      parentId: [model.parentId],
+      agencyId: [model.agencyId],
       status: [model.status],
       basePrice: [model.basePrice],
       capacity: [model.capacity, [Validators.required, Validators.min(1)]],
-      infantPrice: [0, Validators.min(1)],
+      infantPrice: [model.infantPrice, Validators.min(1)],
       options: new FormBuilder().array(
         (model.options ? model.options : new Tour().options)
           .map(x => this.createTourOptionForm(model.id, x)) //@TODO find a good solution for initializing options
@@ -25,15 +28,17 @@ export class FormFactory {
 
   createTourOptionForm(tourId: string, model: TourOption = new TourOption()): FormGroup {
     return new FormBuilder().group({
+      id: [model.id],
+      tourId: [tourId],
       optionType: [model.optionType, Validators.required],
       price: [model.price, Validators.required],
       optionStatus: [model.optionStatus, Validators.required],
-      tourId: [tourId, Validators.required],
     });
   }
 
   createTourDetailForm(model: TourDetail = new TourDetail()): FormGroup {
     return new FormBuilder().group({
+      id: [model.id],
       startDate: [model.startDate, Validators.required],
       leaderId: [model.leaderId],
       duration: [model.duration, Validators.required],
@@ -166,7 +171,7 @@ export class FormFactory {
 
   createBlockListForm(model: Block = new Block()): FormService<Block> {
     const form = new FormBuilder().group({
-      id : [model.id],
+      id: [model.id],
       agencyId: [model.agencyId],
       parentId: [model.parentId]
     });

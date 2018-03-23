@@ -29,7 +29,7 @@ export class Tour extends Model {
   code: string;
   status: TourStatus;
   options: TourOption[] = [
-    new TourOption(OptionType.Food,OptionStatus.Unlimited),
+    new TourOption(OptionType.Food, OptionStatus.Unlimited),
     new TourOption(OptionType.Bus),
     new TourOption(OptionType.Room),
   ];

@@ -11,7 +11,7 @@ export interface ComponentType<T> {
 export class Serializable {
 
     static fromJSONToArray<T>(model: TypeConstructor<T>, arrayJson: any[], checkItem = false): Array<T> {
-        let array = new Array<T>();
+        const array = new Array<T>();
         for (const item of arrayJson) {
             array.push(this.fromJSON(new model(), item, checkItem));
         }
@@ -19,7 +19,7 @@ export class Serializable {
     }
 
     static fromJSON<T>(model: T, json, checkItem = false): T {
-        for (let propName in json)
+        for (const propName in json)
             if (!checkItem || (model.hasOwnProperty(propName) && Object.getOwnPropertyDescriptor(model, propName)))
                 model[propName] = json[propName];
         return model;

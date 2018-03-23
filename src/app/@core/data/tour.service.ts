@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Destination, Place, Tour, Person, Agency } from './models/client.model';
+import { Agency, Destination, Person, Place, Tour } from './models/client.model';
 import { Serializable } from '../utils/serializable';
-import { CreateTour, GetDestinations, GetPlaces, GetTours, GetLeaders, GetBlocks, GetAgencies, GetPersons } from './models/server.dtos';
+import { DeleteTour, GetAgencies, GetBlocks, GetDestinations, GetLeaders, GetPlaces, GetTourOptions, GetTours, UpsertTour } from './models/server.dtos';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class TourService {
 
   data = new Array<Tour>();
+  //@TODO Optimize json
+
+  upsertTour = (model: Tour): Observable<Tour> => this.apiService.send(Serializable.fromJSON(new UpsertTour(), model));
+
+  deleteTour = (model: Tour): Observable<void> => this.apiService.send(Serializable.fromJSON(new DeleteTour(), model));
 
   constructor(private apiService: ApiService) {
   }
@@ -39,14 +44,14 @@ export class TourService {
     return this.apiService.getEntities(query);
   }
 
-  addTour(model: Tour): Observable<Tour> {
-    const dto = new CreateTour();
-    Serializable.fromJSON(dto, model);
-    return this.apiService.send(dto);
-  }
-
   getAgencies(): Observable<Agency[]> {
     const dto = new GetAgencies();
+    return this.apiService.getEntities(dto);
+  }
+
+  getOptions(model: Tour) {
+    const dto = new GetTourOptions();
+    dto.tourId = model.id;
     return this.apiService.getEntities(dto);
   }
 }
