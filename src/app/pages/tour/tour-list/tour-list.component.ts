@@ -20,6 +20,7 @@ import { BlockListComponent } from '../block-list/block-list.component';
 })
 export class TourListComponent {
   source: any;
+  //@TODO use index to arrange items
   //@TODO get colors from global variables
   sharedItems: ToolbarItem[] = [
     <ToolbarItem>{
@@ -27,11 +28,6 @@ export class TourListComponent {
       title: 'delete',
       color: '#f44336',
       command: (tourBlock: any) => this.tourDelete(tourBlock),
-    }, <ToolbarItem>{
-      icon: 'mode_edit',
-      title: 'edit',
-      color: '#03a9f4',
-      command: (tourBlock: any) => this.tourUpsert(tourBlock),
     },
     <ToolbarItem>{
       icon: 'group_add',
@@ -42,19 +38,31 @@ export class TourListComponent {
   ];
   tourItems = [
     <ToolbarItem>{
+      icon: 'mode_edit',
+      title: 'edit',
+      color: '#03a9f4',
+      command: (tour: any) => this.tourUpsert(tour),
+    },
+    <ToolbarItem>{
       icon: 'work',
       title: 'tour.reserve',
       color: '#4caf50',
-      command: (tourBlock: any) => this.blockUpsert(tourBlock),
+      command: (tour: any) => this.blockUpsert(tour),
     }
   ];
-  blockItems = [<ToolbarItem>{
-    icon: 'list',
-    title: 'block.buyerList',
-    color: '#E040FB',
-    command: (block: any) => this.blockList(block),
-  }];
-  
+  blockItems = [
+    <ToolbarItem>{
+      icon: 'mode_edit',
+      title: 'edit',
+      color: '#03a9f4',
+      command: (block: any) => this.blockUpsert(block),
+    }, <ToolbarItem>{
+      icon: 'list',
+      title: 'block.buyerList',
+      color: '#E040FB',
+      command: (block: any) => this.blockList(block),
+    }];
+
   @ViewChild('tourGrid') tourGrid: AgGridNg2;
 
   reloadTourList = () => this.tourGridService.reloadData();
@@ -97,12 +105,13 @@ export class TourListComponent {
   //@region test upsert
   personUpsert(person) {
     const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createPersonForm());
-    
+
     inst.afterClosed().subscribe(x => {
       console.log(x);
     });
   }
-  addPassengers(){
+
+  addPassengers() {
     this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm());
   }
 
@@ -113,5 +122,6 @@ export class TourListComponent {
   blockList(block = new Block()) {
     this.dialogService.openPopup(BlockListComponent, this.formFactory.createBlockListForm(block));
   }
+
   //@end-region
 }
