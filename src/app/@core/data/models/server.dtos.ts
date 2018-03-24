@@ -13,7 +13,9 @@ import {
   Tour,
   TourDetail,
   TourOption,
-  User
+  Block,
+  User,
+  TeamPassenger
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
 
@@ -50,26 +52,12 @@ export class ResponseStatus {
   meta: { [index: string]: string; };
 }
 
-export class Team {
-  id: string;
-  // @References(typeof(Tour))
-  tourId: string;
-
-  tour: Tour;
-  count: number;
-  submitDate: string;
-  // @References(typeof(Person))
-  buyerId: string;
-
-  buyer: Person;
-}
-
 export class TeamPerson {
   id: string;
   // @References(typeof(Team))
   teamId: string;
 
-  team: Team;
+  team: Block;
   // @References(typeof(Person))
   personId: string;
 
@@ -316,24 +304,28 @@ export class UpdateTourDetail {
   tourDetail: TourDetail;
 }
 
-@Route('/tours/{TourId}/teams', 'POST')
-export class CreateTeam implements IReturnVoid {
+@Route('/tours/{TourId}/teams/{TeamId}', 'POST')
+export class UpsertTeam implements IReturnVoid {
   tourId: string;
+  teamId: string;
   buyer: TeamMember;
   passengers: TeamMember[];
+  infantPrice: number;
+  basePrice: number;
+  totalPrice: number;
 
   createResponse(): void {
   }
 
   // @DataContract
   getTypeName(): string {
-    return ('CreateTeam');
+    return ('UpsertTeam');
   }
 }
 
 @Route('/team', 'PUT')
 export class UpdateTeam {
-  team: Team;
+  team: Block;
 }
 
 @Route('/places')
@@ -367,12 +359,12 @@ export class ChangePersonsTeam {
   teamPerson: TeamPerson;
 }
 
-@Route('/team/{TeamId}/persons/', 'GET')
-export class GetPersonsOfTeam extends QueryDb<Person> implements IReturn<QueryResponse<Person>> {
+@Route('/teams/{TeamId}/persons/', 'GET')
+export class GetPersonsOfTeam implements IReturn<TeamPassenger> {
   teamId: string;
 
   createResponse() {
-    return new QueryResponse<Person>();
+    return new TeamPassenger();
   }
 
   getTypeName() {
@@ -466,13 +458,13 @@ export class GetLeaders extends QueryDb<Person> implements IReturn<QueryResponse
 }
 
 @Route('/persons/register')
-export class RegisterPerson implements IReturn<Team> {
+export class RegisterPerson implements IReturn<Block> {
   tourId: string;
   buyerId: string;
   passengersId: string[];
 
   createResponse() {
-    return new Team();
+    return new Block();
   }
 
   getTypeName() {
@@ -641,7 +633,7 @@ export class FindAgency extends QueryDb<Agency> implements IReturn<QueryResponse
   }
 }
 
-@Route('/auth')
+@Route('/auth', 'POST')
 export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
   // @DataMember(Order=1)
   provider: string;
@@ -720,11 +712,11 @@ export class GetTourOptions extends QueryDb<TourOption> implements IReturn<Query
 }
 
 @Route('/tours/{TourId}/teams')
-export class GetTourTeams extends QueryDb<Team> implements IReturn<QueryResponse<Team>> {
+export class GetTourTeams extends QueryDb<Block> implements IReturn<QueryResponse<Block>> {
   tourId: string;
 
   createResponse() {
-    return new QueryResponse<Team>();
+    return new QueryResponse<Block>();
   }
 
   getTypeName() {

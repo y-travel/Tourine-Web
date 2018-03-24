@@ -74,6 +74,7 @@ export class FormFactory {
       roomPrice: [model.roomPrice ? model.roomPrice : undefined, Validators.required],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined, Validators.required],
       basePrice: [model.basePrice ? model.basePrice : undefined, Validators.required],
+      totalPrice:[model.totalPrice ? model.totalPrice : 0]
     });
     return new FormService(Block, form);
   }
@@ -100,7 +101,7 @@ export class FormFactory {
 
   createTeamMemberForm(model: TeamMember = new TeamMember()): FormService<TeamMember> {
     const form = new FormBuilder().group({
-      personId: [model.personId, Validators.required],
+      personId: [model.personId],
       person: this.createPersonForm(model.person ? model.person : new Person()).form,
       personIncomes: new FormBuilder().array(model.personIncomes.map(this.createPersonIncome)),
       haveVisa: [model.haveVisa],
@@ -118,9 +119,10 @@ export class FormFactory {
       roomPrice: [model.roomPrice ? model.roomPrice : undefined, Validators.required],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined, Validators.required],
       basePrice: [model.basePrice ? model.basePrice : undefined, Validators.required],
+      totalPrice: [model.totalPrice ? model.totalPrice :0 , Validators.required],
     });
     return new FormService(Block, form);
-  }
+  }  
 
   createAgenciesForm(model: Agency = new Agency()): FormService<Agency> {
     const form = new FormBuilder().group({
@@ -169,11 +171,17 @@ export class FormFactory {
     });
   }
 
-  createBlockListForm(model: Block = new Block()): FormService<Block> {
+  createTeamListForm(model: Block = new Block()): FormService<Block> {
     const form = new FormBuilder().group({
       id: [model.id],
       agencyId: [model.agencyId],
-      parentId: [model.parentId]
+      parentId: [model.parentId],
+      infantPrice:[model.infantPrice],
+      basePrice:[model.basePrice],
+
+      foodPrice:[model.foodPrice],
+      roomPrice:[model.roomPrice],
+      busPrice:[model.busPrice],
     });
     return new FormService(Block, form);
   }

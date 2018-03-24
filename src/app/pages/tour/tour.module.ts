@@ -39,7 +39,7 @@ const ENTRY_COMPONENTS = [
     TeamMemberUpsertComponent,
     BlockListComponent,
   ],
-  providers: [DialogService, TourGridService, PassengerGridService, PersonService,BlocksGridService],
+  providers: [DialogService, TourGridService, PassengerGridService, PersonService],
   entryComponents: ENTRY_COMPONENTS
 })
 export class TourModule {

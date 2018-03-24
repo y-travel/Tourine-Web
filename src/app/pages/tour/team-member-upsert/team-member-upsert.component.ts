@@ -38,7 +38,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
   }
 
   optionTypes() {
-    return new Array(...this.utils.getEnumNames(OptionType)).filter(x => x !== OptionType[OptionType.Empty]);;
+    return new Array(...this.utils.getEnumNames(OptionType)).filter(x => x !== OptionType[OptionType.Empty]);
   }
 
   ngOnInit() {
@@ -46,11 +46,16 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
 
   findPerson(natCode: any) {
     this.service.GetPerson(natCode.value).subscribe(
-      person => this.data.updateForm(Object.assign(new TeamMember(), { person: person, personId: person.id })),
+      person => {
+        let team = new TeamMember();
+        if (person.isInfant)
+          team.personIncomes.forEach(x => x.optionType = OptionType.Empty);
+        this.data.updateForm(Object.assign(team, { person: person, personId: person.id }))
+      },
       () => {
         let teamMember = new TeamMember();
         //we use Object.assign cos last data remained in form by using dynamic cast.
-        teamMember.person = new Person()
+        teamMember.person = new Person();
         teamMember.person.nationalCode = this.data.model.person.nationalCode;
         this.data.updateForm(teamMember);
       });
@@ -79,9 +84,11 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
     var born = new Date(bDay);
     var age = Math.floor((now.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
 
-    if (age < 2)
+    if (age < 2) {
       this.data.model.person.isInfant = true;
-    else if (age < 5){
+      this.data.model.personIncomes[0].optionType = OptionType.Empty;
+    }
+    else if (age < 5) {
       this.data.model.person.isUnder5 = true;
       this.data.model.person.isInfant = false;
     }
@@ -90,6 +97,6 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
   }
 
   getOptionValue(type: OptionType) {
-    return this.data.model.personIncomes.some(x => x.optionType === type);
+    return this.data.form.value.personIncomes.some(x => x.optionType === type);
   }
 }

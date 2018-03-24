@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ApiService } from '../../@core/data/api.service';
-import { Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, CreateTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, Team, DeleteTeam } from '../../@core/data/models';
+import { Block , Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger } from '../../@core/data/models';
 import { Serializable } from '../../@core/utils/serializable';
 
 @Injectable()
@@ -50,11 +50,15 @@ export class PersonService {
     return this.apiService.getEntities(dto);
   }
 
-  addTeam(model: TeamMember[], id: string): Observable<void> {
-    const dto = new CreateTeam();
-    dto.tourId = id;//@TODO
+  upsertTeam(model: TeamMember[], blockModel: Block, teamId: string = undefined): Observable<void> {
+    const dto = new UpsertTeam();
+    dto.tourId = blockModel.id;//@TODO
     dto.buyer = model[0];
+    dto.teamId = teamId ? teamId : undefined;
     dto.passengers = model.slice(1, model.length)
+    dto.infantPrice = blockModel.infantPrice;
+    dto.basePrice = blockModel.basePrice;
+    dto.totalPrice = blockModel.totalPrice;
     return this.apiService.send(dto);
   }
 
@@ -71,15 +75,21 @@ export class PersonService {
     return this.apiService.getEntities(query);
   }
 
-  getTourTeams(id: string): Observable<Team[]> {
+  getTourTeams(id: string): Observable<Block[]> {
     const query = new GetTourTeams();
     query.tourId = id;
     return this.apiService.getEntities(query);
   }
 
-  deleteTeam(model: Team) {
+  deleteTeam(model: Block) {
     const query = new DeleteTeam();
     query.teamId = model.id;
     return this.apiService.send(query);
+  }
+
+  getTeamMembers(id: string): Observable<TeamPassenger> {
+    const query = new GetPersonsOfTeam();
+    query.teamId = id;
+    return this.apiService.get(query);
   }
 }

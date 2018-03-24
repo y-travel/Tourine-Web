@@ -44,7 +44,7 @@ export class TourOption extends Model {
   tourId: string;
 
   constructor(public optionType = OptionType.Empty,
-              public optionStatus: OptionStatus = OptionStatus.Limited) {
+    public optionStatus: OptionStatus = OptionStatus.Limited) {
     super();
   }
 }
@@ -104,6 +104,7 @@ export class Block extends Model {
   roomPrice: number = undefined;
   foodPrice: number = undefined;
   basePrice: number = undefined;
+  totalPrice: number = undefined;
 }
 
 export class EditPassword extends Model {
@@ -140,8 +141,8 @@ export class Person extends Model {
   socialNumber = '';
   isUnder5 = false;
   isInfant = false;
-  englishFamily = 'name';
-  englishName = 'family';
+  englishFamily = '';
+  englishName = '';
 }
 
 export class PersonIncome {
@@ -151,20 +152,21 @@ export class PersonIncome {
   incomeStatus: IncomeStatus;
   currencyFactor: number;
 
-  constructor(public optionType: OptionType = OptionType.Empty,) {
+  constructor(public optionType: OptionType = OptionType.Empty, ) {
   }
 }
 
 export class TeamMember {
   personId: string = undefined;
   person: Person = new Person();
-  personIncomes: PersonIncome[] = [
-    new PersonIncome(OptionType.Room),
-    new PersonIncome(OptionType.Bus),
-    new PersonIncome(OptionType.Food),
-  ]; //@TODO check ugly
-  visaDelivered: boolean = undefined;
-  haveVisa: boolean = undefined;
+  personIncomes: PersonIncome[] = this.person && this.person.isInfant
+    ? null
+    : [
+      new PersonIncome(OptionType.Room),
+      new PersonIncome(OptionType.Bus),
+      new PersonIncome(OptionType.Food),
+    ]; //@TODO check ugly
+  haveVisa: boolean = true;
   passportDelivered: boolean = undefined;
 }
 
@@ -182,6 +184,11 @@ export class User extends Model {
 
   Person: Person;
   Role: Role;
+}
+
+export class TeamPassenger {
+  buyer: TeamMember;
+  passengers: TeamMember[];
 }
 
 

@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToolbarItem, CellToolbarComponent } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-header.component';
 import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
-import { Person, Team, Block } from '../../@core/data/models';
+import { Person, Block } from '../../@core/data/models';
 import { PersonService } from './person.service';
 import { FormatterService } from '../../@core/utils/formatter.service';
 
@@ -16,7 +16,7 @@ export class BlocksGridService {
   frameworkComponents: any;
   gridApi: any;
   grid: AgGridNg2;
-  rows: Team[];
+  rows: Block[];
   icons: any;
   model: Block;
   toolbarBlockItems: ToolbarItem[] = [];
@@ -80,7 +80,7 @@ export class BlocksGridService {
 
   onGridReady(params: any) {
     this.gridApi = params.api;
-  this.setInitialLayout(this.gridApi);
+    this.setInitialLayout(this.gridApi);
     this.loadData(this.model.id);
   }
 
@@ -107,7 +107,7 @@ export class BlocksGridService {
   }
 
   remove(item: any) {
-    var index = this.rows.indexOf(item); 
+    var index = this.rows.indexOf(item);
     if (index <= -1)
       return;
     this.rows.splice(index, 1);

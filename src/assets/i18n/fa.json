@@ -23,6 +23,7 @@
   "buyer": "خریدار",
   "capacity": "ظرفیت",
   "close": "بستن",
+  "count": "تعداد",
   "coupon": {
     "upsert": "ثبت کوپن"
   },
@@ -66,13 +67,16 @@
     "Room": "اتاق"
   },
   "optional": "اختیاری",
+  "options": "خدمات",
   "passenger": {
     "*": "مسافر",
     "upsert": "ثبت مشخصات مسافران"
   },
   "passport": {
-    "expireDate": "اعتبار پاسپورت",
-    "number": "شماره پاسپورت"
+    "*": "پاسپورت",
+    "delivered": "تحویل",
+    "expireDate": "اعتبار",
+    "number": "شماره"
   },
   "password": "کلمه عبور",
   "person": {
@@ -116,8 +120,15 @@
   "second": "دوم",
   "selectPerson": "انتخاب فرد",
   "steps": "گام {{value}}",
+  "submitDate": "تاریخ رزور",
+  "team": {
+    "*": "گروه",
+    "list": "لیست گروه ها"
+  },
   "third": "سوم",
   "toman": "تومان",
+  "passportexpireDate" : "اعتبارپاسپورت",
+  "passportnumber":"شماره پاسپورت",
   "tomanFormat": "(تومان)",
   "total": "جمع کل",
   "tour": {

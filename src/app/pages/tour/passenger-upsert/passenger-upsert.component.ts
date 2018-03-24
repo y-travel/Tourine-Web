@@ -37,12 +37,12 @@ export class PassengerUpsertComponent implements OnInit {
   ];
 
   tourFreeSpace: number = 0;
-
   totalPrice: number;
-
   infantCount: number = 0;
   adultCount: number = 0;
   noneOptionCount: number = 0;
+  public rows: any[];
+  public teamId: string = undefined;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
               public dialogInstance: MatDialogRef<ModalInterface>,
@@ -66,17 +66,17 @@ export class PassengerUpsertComponent implements OnInit {
       this.data.model.roomPrice = x.find(y => y.optionType === OptionType.Room).price;
       this.data.model.busPrice = x.find(y => y.optionType === OptionType.Bus).price;
     });
-
   }
 
   teamMemberDelete(teamMember: TeamMember) {
     this.passengerGridService.remove(teamMember);
-    this.totalPrice = this.getTotal(this.passengerGridService.rows);
+    this.updateTotalPrice();
   }
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
     if (this.tourFreeSpace <= this.passengerGridService.rows.length && isAdd) {
-      console.log(this.data.model.capacity + '/' + this.passengerGridService.rows.length);//@TODO: show toast
+      console.log(this.data.model.capacity + '/' + this.passengerGridService.rows.length);
+      //@TODO: show toast
     } else {
       const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
       inst.afterClosed().subscribe(x => {
@@ -84,8 +84,9 @@ export class PassengerUpsertComponent implements OnInit {
           return;
         if (isAdd || (!isAdd && teamMember.person.id == x.person.id)) {
           this.passengerGridService.addItem(x);
-        }//@TODO: update to a new person
-        this.totalPrice = this.getTotal(this.passengerGridService.rows);
+        }
+        //@TODO: update to a new person
+        this.updateTotalPrice();
       });
     }
   }
@@ -94,11 +95,11 @@ export class PassengerUpsertComponent implements OnInit {
     if (this.passengerGridService.rows.length == 0)
       this.dialogInstance.close()
     else
-      this.service.addTeam(this.passengerGridService.rows, this.data.model.id).subscribe(x => this.dialogInstance.close());
+      this.service.upsertTeam(this.passengerGridService.rows, this.data.model , this.teamId).subscribe(x => this.dialogInstance.close());
   }
 
   onPriceChange() {
-    this.totalPrice = this.getTotal(this.passengerGridService.rows);
+    this.updateTotalPrice();
   }
 
   getTotal(members: TeamMember[]): number {
@@ -134,5 +135,14 @@ export class PassengerUpsertComponent implements OnInit {
     total -= noneOptionRoomCount * this.data.model.roomPrice;
     total -= noneOptionBusCount * this.data.model.busPrice;
     return total;
+  }
+
+  updateTotalPrice(){
+    this.data.model.totalPrice = this.getTotal(this.passengerGridService.rows);
+    this.data.updateForm();
+  }
+
+  updateCount(){
+    this.getTotal(this.passengerGridService.rows);
   }
 }

@@ -56,13 +56,13 @@ export class TourListComponent {
       title: 'edit',
       color: '#03a9f4',
       command: (block: any) => this.blockUpsert(block),
-    }, <ToolbarItem>{
-      icon: 'list',
-      title: 'block.buyerList',
-      color: '#E040FB',
-      command: (block: any) => this.blockList(block),
-    }];
-
+   },<ToolbarItem>{
+    icon: 'list',
+    title: 'team.list',
+    color: '#E040FB',
+    command: (block: any) => this.teamList(block),
+  }];
+  
   @ViewChild('tourGrid') tourGrid: AgGridNg2;
 
   reloadTourList = () => this.tourGridService.reloadData();
@@ -96,16 +96,14 @@ export class TourListComponent {
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }
 
-  passengerUpsert(test = new Block()) {
-    //@TODO implement
-    const ref = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createReserveBlockForm(test));
+  passengerUpsert(block = new Block()) {
+    const ref = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(block));
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }
 
   //@region test upsert
   personUpsert(person) {
     const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createPersonForm());
-
     inst.afterClosed().subscribe(x => {
       console.log(x);
     });
@@ -119,8 +117,8 @@ export class TourListComponent {
     this.dialogService.openPopup(EditPasswordComponent, this.formFactory.createEditPasswordForm());
   }
 
-  blockList(block = new Block()) {
-    this.dialogService.openPopup(BlockListComponent, this.formFactory.createBlockListForm(block));
+  teamList(block = new Block()) {
+    this.dialogService.openPopup(BlockListComponent, this.formFactory.createTeamListForm(block));
   }
 
   //@end-region
