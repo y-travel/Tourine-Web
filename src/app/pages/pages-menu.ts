@@ -16,5 +16,17 @@ export const MENU_ITEMS = [
         icon: "view_list"
       }
     ]
+  },
+  {
+    title: "persons",
+    icon: "traffic",
+    link: "/pages/person",
+    children: [
+      {
+        title: "person",
+        link: "/pages/person",
+        icon: "traffic"
+      }
+    ]
   }
 ];

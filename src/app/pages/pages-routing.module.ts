@@ -21,6 +21,10 @@ const routes: Routes = [{
       path: "tour",
       loadChildren: "./tour/tour.module#TourModule",
     },
+    {
+      path: "person",
+      loadChildren: "./person/person.module#PersonModule",
+    },
   ],
 }];
 
