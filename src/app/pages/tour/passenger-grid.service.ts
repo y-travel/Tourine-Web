@@ -156,7 +156,7 @@ export class PassengerGridService {
                 cellRenderer: 'cellToolbar',
                 cellRendererParams: {
                     items: this.toolbarTourItems,
-                },
+                }, 
             },
 
         ];

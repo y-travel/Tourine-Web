@@ -54,7 +54,6 @@
   "hotel": "هتل",
   "infantCount": "تعداد اینفنت",
   "infantPrice": "قیمت اینفنت",
-  "leader": "سرگروه",
   "male": "مرد",
   "mobileNumber": "شماره همراه",
   "msg": {
@@ -79,11 +78,18 @@
     "upsert": "ثبت مشخصات مسافران"
   },
   "passport": {
-    "*": "پاسپورت",
+    "*": "گذرنامه",
     "delivered": "تحویل",
     "expireDate": "اعتبار",
     "number": "شماره"
   },
+  "passportExpireDate": "اعتبار گذرنامه",
+  "passportNumber": "شماره گذرنامه",
+  "leader":{
+    "*":"راهنمای تور",
+    "add":"افزودن راهنمای تور"
+  },
+  "personel":"پرسنل",
   "password": "کلمه عبور",
   "person": {
     "birthDate": "تاریخ تولد",
@@ -99,8 +105,8 @@
     "name": "نام",
     "nameAndFamily": "نام و نام خانوادگی",
     "nc": "کد ملی",
-    "passport": "پاسپورت",
-    "passportDelivered": "تحویل پاسپورت",
+    "passport": "گذرنامه",
+    "passportDelivered": "تحویل گذرنامه",
     "roomOption": "خدمات اتاق",
     "socialNumber": "شماره شبکه اجتماعی",
     "upsert": "ثبت شخص",

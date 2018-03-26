@@ -386,6 +386,30 @@ export class AddNewPerson implements IReturn<Person> {
   }
 }
 
+@Route('/persons/leaders', 'POST')
+export class UpsertLeader implements IReturn<Person> {
+  person: Person;
+  createResponse() {
+    return new Person();
+  }
+
+  getTypeName() {
+    return 'UpsertLeader';
+  }
+}
+
+@Route('/persons/leaders/{Id}', 'DELETE')
+export class DeleteLeader implements IReturnVoid {
+  id : string;
+
+  createResponse() :void{
+  }
+
+  getTypeName() {
+    return 'DeleteLeader';
+  }
+}
+
 @Route('/persons/', 'PUT')
 export class UpdatePerson implements IReturn<Person> {
   person: Person;

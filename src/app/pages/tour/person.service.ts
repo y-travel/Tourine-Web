@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { ApiService } from '../../@core/data/api.service';
-import { Block , Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger } from '../../@core/data/models';
-import { Serializable } from '../../@core/utils/serializable';
+import { ApiService } from './api.service';
+import { Block , Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger, UpsertLeader, DeleteLeader } from './models';
+import { Serializable } from '../utils/serializable';
 
 @Injectable()
 export class PersonService {
@@ -24,6 +24,12 @@ export class PersonService {
 
   AddPerson(model: Person) {
     const dto = new AddNewPerson();
+    dto.person = model;
+    return this.apiService.send(dto);
+  }
+
+  upsertLeader(model: Person):Observable<Person> {
+    const dto = new UpsertLeader();
     dto.person = model;
     return this.apiService.send(dto);
   }
@@ -91,5 +97,11 @@ export class PersonService {
     const query = new GetPersonsOfTeam();
     query.teamId = id;
     return this.apiService.get(query);
+  }
+
+  deleteLeader(id: string){
+    const query = new DeleteLeader();
+    query.id = id;
+    return this.apiService.send(query);
   }
 }

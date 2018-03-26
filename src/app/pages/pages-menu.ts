@@ -18,14 +18,14 @@ export const MENU_ITEMS = [
     ]
   },
   {
-    title: "persons",
-    icon: "traffic",
-    link: "/pages/person",
+    title: "personel",
+    icon: "account_circle",
+    link: "/pages/person/leader/list",
     children: [
       {
-        title: "person",
-        link: "/pages/person",
-        icon: "traffic"
+        title: "personel",
+        link: "/pages/person/leader/list",
+        icon: "account_circle"
       }
     ]
   }
