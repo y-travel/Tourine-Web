@@ -4,7 +4,7 @@
   </div>
 </div>
 <div class="right modal-body" dir="rtl" [style.width.px]="1000" [style.height.px]="450" autoTranslate>
-  <form [formGroup]="data.form">
+  <form [formGroup]="data.form" (keydown.enter)="$event.preventDefault()">
     <div>
       <mat-card [stretch]="true">
         <ag-grid-angular #agGrid style="height:330px" class="ag-theme-material" [columnDefs]="passengerGridService.columnDefs" [gridOptions]="passengerGridService.gridOptions"
