@@ -6,8 +6,8 @@ import { ToolbarItem, CellToolbarComponent } from '../../shared/trn-ag-grid/cell
 import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-header.component';
 import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
 import { Person, Block } from '../../@core/data/models';
-import { PersonService } from './person.service';
 import { FormatterService } from '../../@core/utils/formatter.service';
+import { PersonService } from '../../@core/data/person.service';
 
 @Injectable()
 export class BlocksGridService {

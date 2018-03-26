@@ -6,9 +6,9 @@ import { FormService } from '../../../@core/data/form.service';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { AgencyService } from '../../../@core/data/agency.service';
 import { Observable } from 'rxjs/Rx';
-import { PersonService } from '../person.service';
 import { UTILS, AppUtils } from '../../../@core/utils';
 import { IncomeStatus } from '../../../@core/data/models/enums';
+import { PersonService } from '../../../@core/data/person.service';
 
 @Component({
   selector: 'app-team-member-upsert',

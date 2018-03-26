@@ -12,9 +12,9 @@ import { BlockUpsertComponent } from './block-upsert/block-upsert.component';
 import { PassengerUpsertComponent } from './passenger-upsert/passenger-upsert.component';
 import { PassengerGridService } from './passenger-grid.service';
 import { TeamMemberUpsertComponent } from './team-member-upsert/team-member-upsert.component';
-import { PersonService } from './person.service';
 import { BlockListComponent } from './block-list/block-list.component';
 import { BlocksGridService } from './blocks-grid.service';
+import { PersonService } from '../../@core/data/person.service';
 
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,

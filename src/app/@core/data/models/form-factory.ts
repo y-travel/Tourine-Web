@@ -74,9 +74,27 @@ export class FormFactory {
       roomPrice: [model.roomPrice ? model.roomPrice : undefined, Validators.required],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined, Validators.required],
       basePrice: [model.basePrice ? model.basePrice : undefined, Validators.required],
-      totalPrice:[model.totalPrice ? model.totalPrice : 0]
+      totalPrice: [model.totalPrice ? model.totalPrice : 0]
     });
     return new FormService(Block, form);
+  }
+
+  createAddLeaderForm(model: Person = new Person()): FormService<Person> {
+    const form = new FormBuilder().group({
+      id: [model.id ? model.id : "0"],
+      name: [model.name],
+      family: [model.family],
+      englishName: [model.englishName],
+      englishFamily: [model.englishFamily],
+      nationalCode: [model.nationalCode],
+      gender: [model.gender],
+      mobileNumber: [model.mobileNumber],
+      birthDate: [model.birthDate],
+      passportExpireDate: [model.passportExpireDate],
+      passportNo: [model.passportNo],
+      socialNumber: [model.socialNumber],
+    });
+    return new FormService(Person, form);
   }
 
   createPersonForm(model: Person = new Person()): FormService<Person> {
@@ -119,10 +137,10 @@ export class FormFactory {
       roomPrice: [model.roomPrice ? model.roomPrice : undefined, Validators.required],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined, Validators.required],
       basePrice: [model.basePrice ? model.basePrice : undefined, Validators.required],
-      totalPrice: [model.totalPrice ? model.totalPrice :0 , Validators.required],
+      totalPrice: [model.totalPrice ? model.totalPrice : 0, Validators.required],
     });
     return new FormService(Block, form);
-  }  
+  }
 
   createAgenciesForm(model: Agency = new Agency()): FormService<Agency> {
     const form = new FormBuilder().group({
@@ -176,12 +194,12 @@ export class FormFactory {
       id: [model.id],
       agencyId: [model.agencyId],
       parentId: [model.parentId],
-      infantPrice:[model.infantPrice],
-      basePrice:[model.basePrice],
+      infantPrice: [model.infantPrice],
+      basePrice: [model.basePrice],
 
-      foodPrice:[model.foodPrice],
-      roomPrice:[model.roomPrice],
-      busPrice:[model.busPrice],
+      foodPrice: [model.foodPrice],
+      roomPrice: [model.roomPrice],
+      busPrice: [model.busPrice],
     });
     return new FormService(Block, form);
   }

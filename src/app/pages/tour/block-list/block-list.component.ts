@@ -7,8 +7,8 @@ import { DialogService } from '../../../@core/utils/dialog.service';
 import { BlocksGridService } from '../blocks-grid.service';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
-import { PersonService } from '../person.service';
 import { PassengerGridService } from '../passenger-grid.service';
+import { PersonService } from '../../../@core/data/person.service';
 
 @Component({
   selector: 'app-block-list',

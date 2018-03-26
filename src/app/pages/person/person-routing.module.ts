@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     component: PersonComponent,
     children: [
-{
+      {
         path: 'leader/list',
         component: LeaderListComponent,
       },
@@ -25,6 +25,6 @@ export class PersonRoutingModule {
 }
 
 export const routedComponents = [
-  
+
   LeaderListComponent,
 ];

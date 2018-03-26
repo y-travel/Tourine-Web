@@ -8,7 +8,7 @@ import { FormFactory } from '../../../@core/data/models/form-factory';
 import { Block, OptionType, TeamMember } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
-import { PersonService } from '../person.service';
+import { PersonService } from '../../../@core/data/person.service';
 
 @Component({
   selector: 'app-passenger-upsert',

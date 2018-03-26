@@ -5,9 +5,9 @@ import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-h
 import { FormatterService } from '../../@core/utils/formatter.service';
 import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
 import { OptionType, Person, TeamMember } from '../../@core/data/models';
-import { PersonService } from './person.service';
 import { CellToolbarComponent, ToolbarItem } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { AppUtils, UTILS } from '../../@core/utils/app-utils';
+import { PersonService } from '../../@core/data/person.service';
 
 @Injectable()
 export class PassengerGridService {
