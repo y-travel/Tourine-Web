@@ -19,21 +19,21 @@
     "save": "ذخیره تور",
     "upsert": "ثبت تور"
   },
-  "busPrice": "قیمت اتوبوس",
+  "busPrice": "قیمت صندلی",
   "buyer": {
     "names": "نام خریداران"
   },
   "capacity": {
     "*": "ظرفیت",
-    "all":"کل",
-    "registered":"ثبت شده"
+    "all": "کل",
+    "registered": "ثبت شده"
   },
   "close": "بستن",
   "count": "تعداد",
   "coupon": {
     "upsert": "ثبت کوپن"
   },
-  "dayFormat": "(روز)",
+  "nightFormat": "(شب)",
   "delete": "حذف",
   "destination": "مقصد",
   "dollar": "دلار",
@@ -67,9 +67,9 @@
   "offValue": "تخفیف",
   "oldPassword": "کلمه عبور فعلی",
   "optionType": {
-    "Bus": "اتوبوس",
+    "Bus": "صندلی",
     "Food": "غذا",
-    "Room": "اتاق"
+    "Room": "تخت"
   },
   "optional": "اختیاری",
   "options": "خدمات",
@@ -93,12 +93,10 @@
   "password": "کلمه عبور",
   "person": {
     "birthDate": "تاریخ تولد",
-    "busOption": "خدمات اتوبوس",
     "englishFamily": "نام خانوادگی انگلیسی",
     "englishName": "نام انگلیسی",
     "engllishNameAndFamily": "(لاتین) نام و نام خانوادگی",
     "family": "نام خانوادگی",
-    "foodOption": "خدمات غذا",
     "gender": "جنسیت",
     "haveVisa": "ویزا دارد",
     "mobileNumber": "شماره همراه",
@@ -107,7 +105,6 @@
     "nc": "کد ملی",
     "passport": "گذرنامه",
     "passportDelivered": "تحویل گذرنامه",
-    "roomOption": "خدمات اتاق",
     "socialNumber": "شماره شبکه اجتماعی",
     "upsert": "ثبت شخص",
     "visa": "ویزا",
@@ -117,16 +114,17 @@
   "phone": "تلفن",
   "pleaseSelect": "لطفاً انتخاب کنید",
   "previousStep": "مرحله قبل",
-  "price": "قیمت",
+  "price": {
+    "*": "قیمت",
+    "ir": "ریال",
+    "irFormated": "(ریال)"
+  },
   "rePassword": "تکرار کلمه عبور",
   "reagent": {
     "name": "نام معرف",
     "upsert": "ثبت معرف"
   },
-  "reagent_": "معرف",
-  "rial": "ریال",
-  "rialFormat": "(ریال)",
-  "roomPrice": "قیمت اتاق",
+  "roomPrice": "قیمت تخت",
   "row": "ردیف",
   "save": "ثبت",
   "second": "دوم",
@@ -138,20 +136,17 @@
     "list": "لیست گروه ها"
   },
   "third": "سوم",
-  "toman": "تومان",
   "passportexpireDate": "اعتبارپاسپورت",
   "passportnumber": "شماره پاسپورت",
-  "tomanFormat": "(تومان)",
   "total": "جمع کل",
   "tour": {
     "code": "کد تور",
     "date": "تاریخ اجرا",
     "list": "لیست تورها",
     "reserve": "رزرو تور",
-    "upsert": "ثبت تور"
+    "upsert": "ثبت تور",
+    "price":"قیمت تور"
   },
-  "tourPrice": "قیمت تور",
-  "tour_": "تور",
   "user": {
     "upsert": "ثبت کاربر"
   },

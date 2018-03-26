@@ -5,7 +5,7 @@
 </div>
 <div class="modal-body" dir="rtl" [style.width.px]="500" [style.height.px]="300" autoTranslate>
   <!--width set for IE-->
-  <mat-horizontal-stepper #stepper [linear]="true"> 
+  <mat-horizontal-stepper #stepper [linear]="true">
     <mat-step [stepControl]="agencyListForm.form" label="{{'steps'|translate:({value:'first'|translate})}}">
       <form [formGroup]="agencyListForm.form">
         <div fxLayout="row">
@@ -38,21 +38,21 @@
           <mat-form-field fxFlex="50">
             <input matInput mask="number" placeholder="busPrice" formControlName="busPrice">
             <mat-icon matSuffix>airport_shuttle</mat-icon>
-            <mat-hint align="end" translate>rialFormat</mat-hint>
+            <mat-hint align="end" translate>price.irFormated</mat-hint>
           </mat-form-field>
         </div>
 
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="tourPrice" formControlName="basePrice">
+            <input matInput mask="number" placeholder="tour.price" formControlName="basePrice">
             <mat-icon matSuffix> landscape</mat-icon>
-            <mat-hint align="end" translate>rialFormat</mat-hint>
+            <mat-hint align="end" translate>price.irFormated</mat-hint>
           </mat-form-field>
 
           <mat-form-field fxFlex>
             <input matInput mask="number" placeholder="roomPrice" formControlName="roomPrice">
             <mat-icon matSuffix> airline_seat_individual_suite</mat-icon>
-            <mat-hint align="end" translate>rialFormat</mat-hint>
+            <mat-hint align="end" translate>price.irFormated</mat-hint>
           </mat-form-field>
         </div>
 
@@ -61,13 +61,13 @@
           <mat-form-field fxFlex>
             <input matInput mask="number" placeholder="infantPrice" formControlName="infantPrice">
             <mat-icon matSuffix>child_care</mat-icon>
-            <mat-hint align="end" translate>rialFormat</mat-hint>
+            <mat-hint align="end" translate>price.irFormated</mat-hint>
           </mat-form-field>
 
           <mat-form-field fxFlex>
             <input matInput mask="number" placeholder="foodPrice" formControlName="foodPrice">
             <mat-icon matSuffix>room_service</mat-icon>
-            <mat-hint align="end" translate>rialFormat</mat-hint>
+            <mat-hint align="end" translate>price.irFormated</mat-hint>
           </mat-form-field>
 
         </div>

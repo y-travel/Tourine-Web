@@ -90,7 +90,7 @@ export class TourGridService {
         maxWidth: 150,
         cellRenderer: (params: any) => this.places[params.value],
       }, {
-        headerName: 'price',
+        headerName: 'price.*',
         field: 'basePrice',
         cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
       },
@@ -133,7 +133,7 @@ export class TourGridService {
             ],
           },
           {
-            headerName: 'price',
+            headerName: 'price.*',
             field: 'basePrice',
             cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
           },
