@@ -62,7 +62,7 @@ export class TourListComponent {
     color: '#E040FB',
     command: (block: any) => this.teamList(block),
   }];
-  
+
   @ViewChild('tourGrid') tourGrid: AgGridNg2;
 
   reloadTourList = () => this.tourGridService.reloadData();
@@ -101,25 +101,11 @@ export class TourListComponent {
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }
 
-  //@region test upsert
-  personUpsert(person) {
-    const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createPersonForm());
-    inst.afterClosed().subscribe(x => {
-      console.log(x);
-    });
-  }
-
-  addPassengers() {
-    this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm());
-  }
-
-  userUpsert() {
-    this.dialogService.openPopup(EditPasswordComponent, this.formFactory.createEditPasswordForm());
-  }
-
   teamList(block = new Block()) {
     this.dialogService.openPopup(BlockListComponent, this.formFactory.createTeamListForm(block));
   }
 
-  //@end-region
+  rowselected(event){
+    console.log(event);
+  }
 }

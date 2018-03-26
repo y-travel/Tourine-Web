@@ -78,7 +78,7 @@ export class TourGridService {
         cellRenderer: (params: any) => this.formatter.getDateFormat(params.value),
       },
       {
-        headerName: 'capacity',
+        headerName: 'capacity.*',
         minWidth: 100,
         maxWidth: 150,
         field: 'capacity',
@@ -115,14 +115,22 @@ export class TourGridService {
             cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
           },
           {
-            headerName: 'agencyName',
+
+            headerName: 'buyer.names',
             field: 'agencyId',
-            headerComponentFactory: <{ new(): CellHeaderComponent }>CellHeaderComponent,
             cellRenderer: (params: any) => this.agencies[params.value],
           },
           {
-            headerName: 'capacity',
-            field: 'capacity',
+            headerName: 'capacity.*',
+            children: [
+              {
+                headerName: 'capacity.all',
+                field: 'capacity',
+              }, {
+                headerName: 'capacity.registered',
+                field: 'capacity',
+              },
+            ],
           },
           {
             headerName: 'price',
@@ -174,10 +182,10 @@ export class TourGridService {
     this.setInitialLayout(this.gridApi);
   }
 
-  setInitialLayout(api:any) {
+  setInitialLayout(api: any) {
     api.sizeColumnsToFit();
     setTimeout(function () {
-      api.forEachNode(function (node:any) {
+      api.forEachNode(function (node: any) {
         node.setExpanded();
       });
     }, 100);

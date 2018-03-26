@@ -20,8 +20,14 @@
     "upsert": "ثبت تور"
   },
   "busPrice": "قیمت اتوبوس",
-  "buyer": "خریدار",
-  "capacity": "ظرفیت",
+  "buyer": {
+    "names": "نام خریداران"
+  },
+  "capacity": {
+    "*": "ظرفیت",
+    "all":"کل",
+    "registered":"ثبت شده"
+  },
   "close": "بستن",
   "count": "تعداد",
   "coupon": {
@@ -127,8 +133,8 @@
   },
   "third": "سوم",
   "toman": "تومان",
-  "passportexpireDate" : "اعتبارپاسپورت",
-  "passportnumber":"شماره پاسپورت",
+  "passportexpireDate": "اعتبارپاسپورت",
+  "passportnumber": "شماره پاسپورت",
   "tomanFormat": "(تومان)",
   "total": "جمع کل",
   "tour": {

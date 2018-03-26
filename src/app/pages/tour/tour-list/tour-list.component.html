@@ -16,5 +16,10 @@
                      [detailCellRendererParams]="tourGridService.detailCellRendererParams"
                      (gridReady)="tourGridService.onGridReady($event)"
                      [enableRtl]="true">
+
     </ag-grid-angular>
+  <button mat-fab class="pull-right fab-grid" (click)="tourUpsert()">
+    <mat-icon>add</mat-icon>
+  </button>
 </mat-card>
+

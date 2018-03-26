@@ -69,7 +69,7 @@
         </div>
       </mat-card>
       <mat-card fxLayout="column" fxFlex="40" formArrayName="options">
-        <mat-form-field fxFlex *ngFor="let formGroup of data.form.get('options').controls;let i=index" [formGroupName]="i">
+        <mat-form-field fxFlex *ngFor="let formGroup of data.form.get('options')['controls'];let i=index" [formGroupName]="i">
             <input matInput mask="number" placeholder="{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}" formControlName="price">
             <mat-icon matSuffix>{{utils.mapOptionTypeToIcon(formGroup.value.optionType)}}</mat-icon>
             <mat-hint align="end" translate>tomanFormat</mat-hint>
