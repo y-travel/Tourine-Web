@@ -11,9 +11,9 @@ export class TourService {
   data = new Array<Tour>();
   //@TODO Optimize json
 
-  upsertTour = (model: Tour): Observable<Tour> => this.apiService.send(Serializable.fromJSON(new UpsertTour(), model));
+  upsertTour = (model: Tour): Observable<Tour> => this.apiService.send(Serializable.fromJSONToType( UpsertTour, model));
 
-  deleteTour = (model: Tour): Observable<void> => this.apiService.send(Serializable.fromJSON(new DeleteTour(), model));
+  deleteTour = (model: Tour): Observable<void> => this.apiService.send(Serializable.fromJSONToType(DeleteTour, model));
 
   constructor(private apiService: ApiService) {
   }

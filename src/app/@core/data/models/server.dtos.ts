@@ -1,5 +1,6 @@
 import {
   Agency,
+  Block,
   Destination,
   IPost,
   IReturn,
@@ -10,12 +11,11 @@ import {
   Role,
   Route,
   TeamMember,
+  TeamPassenger,
   Tour,
   TourDetail,
   TourOption,
-  Block,
-  User,
-  TeamPassenger
+  User
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
 
@@ -190,12 +190,12 @@ export class GetTours extends QueryDb<Tour> implements IReturn<QueryResponse<Tou
 
 @Route('/tours/{Id}', 'POST')
 export class UpsertTour implements IReturn<Tour> {
-  id: string;
-  capacity: number;
-  basePrice: number;
-  infantPrice: number;
-  options: TourOption[];
-  tourDetail: TourDetail;
+  id = '';
+  capacity: number = undefined;
+  basePrice: number = undefined;
+  infantPrice: number = undefined;
+  options: TourOption[] = [];
+  tourDetail: TourDetail = undefined;
 
   createResponse() {
     return new Tour();
@@ -389,6 +389,7 @@ export class AddNewPerson implements IReturn<Person> {
 @Route('/persons/leaders', 'POST')
 export class UpsertLeader implements IReturn<Person> {
   person: Person;
+
   createResponse() {
     return new Person();
   }
@@ -400,9 +401,9 @@ export class UpsertLeader implements IReturn<Person> {
 
 @Route('/persons/leaders/{Id}', 'DELETE')
 export class DeleteLeader implements IReturnVoid {
-  id : string;
+  id: string;
 
-  createResponse() :void{
+  createResponse(): void {
   }
 
   getTypeName() {
