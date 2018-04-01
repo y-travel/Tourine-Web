@@ -8,6 +8,7 @@ import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { PassengerGridService } from '../passenger-grid.service';
 import { TourPassengersGridService } from './tour-passengers-grid.service';
+import { PassengerReplacementComponent } from '../passenger-replacement/passenger-replacement.component';
 
 @Component({
   selector: 'app-tour-passengers',
@@ -26,5 +27,9 @@ export class TourPassengersComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  passengerReplacement(){
+    this.dialogService.openPopup(PassengerReplacementComponent, this.formFactory.createTourForm(this.data.model));
   }
 }

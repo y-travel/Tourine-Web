@@ -40,92 +40,32 @@ export class TourPassengersGridService {
         this.columnDefs = [ 
             {
                 headerName: '',
-                maxWidth: 25,
-                minWidth: 25,
+                maxWidth: 50,
+                minWidth: 50,
                 checkboxSelection: true,
                 
             },
             {
                 headerName: 'row',
                 field: 'personId',
-                minWidth: 30,
-                maxWidth: 30,
+                minWidth: 50,
+                maxWidth: 50,
                 cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
             },
             {
-                headerName: 'person.nc',
-                minWidth: 95,
-                maxWidth: 95,
-                field: 'person.nationalCode',
-                cellRenderer: 'agGroupCellRenderer',
-            },
-            {
                 headerName: "person.nameAndFamily",
-                children: [
-                    {
-                        headerName: "فارسی",
-                        valueGetter: (params: any) => {
-                            return params.data.person.name + ' ' + params.data.person.family
-                        },
-                    },
-                    {
-                        headerName: "English",
-                        valueGetter: (params: any) => {
-                            return params.data.person.englishName + ' ' + params.data.person.englishFamily
-                        },
-                    },
-                ]
+                valueGetter: (params: any) => {
+                    return params.data.person.name + ' ' + params.data.person.family
+                },
             },
             {
                 headerName: 'person.gender',
-                minWidth: 50,
-                maxWidth: 50,
+                minWidth: 100,
+                maxWidth: 100,
                 valueGetter: (params: any) => {
                     return params.data.person.gender == 1 ? 'مرد' : 'زن';
                 },
                 cellRenderer: 'agGroupCellRenderer',
-            },
-            {
-                headerName: 'person.birthDate',
-                minWidth: 80,
-                maxWidth: 80,
-                field: 'person.birthDate',
-                cellRenderer: (params: any) => this.formatter.getDateFormat(params.value),
-            }, {
-                headerName: 'passport.*',
-                children: [//@TODO generate iterative
-                    {
-                        headerName: 'passport.delivered',
-                        minWidth: 30,
-                        maxWidth: 30,
-                        cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.passportDelivered ? 'checked' : ''} disabled  />`;
-                        }
-                    }, {
-                        headerName: 'passport.expireDate',
-                        minWidth: 70,
-                        maxWidth: 70,
-                        field: 'person.passportExpireDate',
-                        cellRenderer: (params: any) => this.formatter.getDateFormat(params.value),
-                    },
-                    {
-                        headerName: 'passport.number',
-                        field: 'person.passportNo',
-                        minWidth: 90,
-                        maxWidth: 90,
-                    }
-                ],
-            }, {
-                headerName: 'person.visaExpireDate',
-                minWidth: 80,
-                maxWidth: 80,
-                field: 'person.visaExpireDate',
-                cellRenderer: (params: any) => {
-                    if (params.data.haveVisa)
-                    return this.formatter.getDateFormat(params.value);
-                    else
-                        return " - ";
-                },
             },
             {
                 headerName: "options",

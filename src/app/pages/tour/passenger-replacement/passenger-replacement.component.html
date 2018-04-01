@@ -1,0 +1,36 @@
+<div mat-dialog-title class="modal-header">
+  <div class="modal-title">
+    {{"person.replacement"|translate}}
+  </div>
+</div>
+<div class="modal-body" dir="rtl" [style.width.px]="700" [style.height.px]="400" autoTranslate>
+  <form>
+    <mat-horizontal-stepper #stepper [linear]="false">
+      <mat-step label="{{'steps'|translate:({value:'first'|translate})}}" [style.height.px]="400">
+        <mat-form-field class="example-full-width">
+          <input matInput="search-local" placeholder="search" #searchContent (keyup)="onFilterTextBoxChanged(searchContent)" >
+        </mat-form-field>
+        <div [style.height.px]="200">
+          <ag-grid-angular style="width:100%;height:100%;" class="ag-theme-material" [columnDefs]="tourGridService.columnDefs" [enableSorting]="true"
+            [rowHeight]="35" [headerHeight]="35" [icons]="tourGridService.icons" [gridOptions]="tourGridService.gridOptions"
+            [frameworkComponents]="tourGridService.frameworkComponents" (gridReady)="tourGridService.onGridReady($event)" [enableRtl]="true">ّ
+          </ag-grid-angular>
+        </div>
+      </mat-step>
+      <mat-step label="{{'steps'|translate:({value:'second'|translate})}}">
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+  <!--width set for IE-->
+</div>
+<div fxLayout="row" align="end">
+  <button class="pull-left" mat-mini-fab color="primary" (click)="stepper.next()" [disabled]="stepper.selectedIndex==1">
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+  <button class="pull-right" mat-mini-fab color="primary" (click)="stepper.previous()" [disabled]='stepper.selectedIndex==0'>
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+</div>
+<mat-dialog-actions>
+  <button fxFlex mat-raised-button color="primary" (click)="close()">{{"save"|translate}}</button>
+</mat-dialog-actions>
