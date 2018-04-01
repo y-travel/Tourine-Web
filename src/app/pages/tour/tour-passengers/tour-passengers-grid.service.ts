@@ -1,23 +1,23 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { GridOptions } from 'ag-grid';
+import { TeamMember, Person, OptionType } from '../../../@core/data/models';
+import { ToolbarItem, CellToolbarComponent } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
+import { PersonService } from '../../../@core/data/person.service';
 import { TranslateService } from '@ngx-translate/core';
-import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-header.component';
-import { FormatterService } from '../../@core/utils/formatter.service';
-import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
-import { OptionType, Person, TeamMember } from '../../@core/data/models';
-import { CellToolbarComponent, ToolbarItem } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
-import { AppUtils, UTILS } from '../../@core/utils/app-utils';
-import { PersonService } from '../../@core/data/person.service';
+import { FormatterService } from '../../../@core/utils/formatter.service';
+import { AppUtils, UTILS } from '../../../@core/utils';
+import { CellHeaderComponent } from '../../../shared/trn-ag-grid/cell-header/cell-header.component';
+import { CellDetailComponent } from '../../../shared/trn-ag-grid/cell-detail/cell-detail.component';
 
 @Injectable()
-export class PassengerGridService {
+export class TourPassengersGridService {
     gridOptions: GridOptions;
     gridColumnApi: any;
     rows: TeamMember[];
 
     columnDefs: any[];
     toolbarTourItems: ToolbarItem[] = [];
-    frameworkComponents: any;
+    frameworkComponents: any; 
     detailCellRenderer: any;
     detailCellRendererParams: any;
     gridApi: any;
@@ -37,7 +37,14 @@ export class PassengerGridService {
             },
         };
 
-        this.columnDefs = [
+        this.columnDefs = [ 
+            {
+                headerName: '',
+                maxWidth: 25,
+                minWidth: 25,
+                checkboxSelection: true,
+                
+            },
             {
                 headerName: 'row',
                 field: 'personId',
@@ -115,7 +122,7 @@ export class PassengerGridService {
                 field: 'person.visaExpireDate',
                 cellRenderer: (params: any) => {
                     if (params.data.haveVisa)
-                        return this.formatter.getDateFormat(params.value);
+                    return this.formatter.getDateFormat(params.value);
                     else
                         return " - ";
                 },
@@ -156,7 +163,7 @@ export class PassengerGridService {
                 cellRenderer: 'cellToolbar',
                 cellRendererParams: {
                     items: this.toolbarTourItems,
-                },
+                }, 
             },
 
         ];
@@ -215,7 +222,7 @@ export class PassengerGridService {
         this.gridApi.setRowData(this.rows);
     }
 
-    remove(item: any) {
+    remove(item: any) { 
         var index = this.rows.indexOf(item);
         if (index <= -1)
             return;

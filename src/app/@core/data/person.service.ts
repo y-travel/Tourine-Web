@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ApiService } from './api.service';
-import { Block , Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger, UpsertLeader, DeleteLeader } from './models';
+import { Block , Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger, UpsertLeader, DeleteLeader, GetPersonsOfTour } from './models';
 import { Serializable } from '../utils/serializable';
 
 @Injectable()
@@ -96,6 +96,12 @@ export class PersonService {
   getTeamMembers(id: string): Observable<TeamPassenger> {
     const query = new GetPersonsOfTeam();
     query.teamId = id;
+    return this.apiService.get(query);
+  }
+
+  getTourMembers(id: string): Observable<TeamPassenger> {
+    const query = new GetPersonsOfTour();
+    query.tourId = id;
     return this.apiService.get(query);
   }
 

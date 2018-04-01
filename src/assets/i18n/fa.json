@@ -33,7 +33,6 @@
   "coupon": {
     "upsert": "ثبت کوپن"
   },
-  "nightFormat": "(شب)",
   "delete": "حذف",
   "destination": "مقصد",
   "dollar": "دلار",
@@ -54,6 +53,10 @@
   "hotel": "هتل",
   "infantCount": "تعداد اینفنت",
   "infantPrice": "قیمت اینفنت",
+  "leader": {
+    "*": "راهنمای تور",
+    "add": "افزودن راهنمای تور"
+  },
   "male": "مرد",
   "mobileNumber": "شماره همراه",
   "msg": {
@@ -63,6 +66,7 @@
   "name": "نام",
   "nationalCode": "کد ملی",
   "nextStep": "مرحله بعد",
+  "nightFormat": "(شب)",
   "none": "هیچکدام",
   "offValue": "تخفیف",
   "oldPassword": "کلمه عبور فعلی",
@@ -85,11 +89,8 @@
   },
   "passportExpireDate": "اعتبار گذرنامه",
   "passportNumber": "شماره گذرنامه",
-  "leader":{
-    "*":"راهنمای تور",
-    "add":"افزودن راهنمای تور"
-  },
-  "personel":"پرسنل",
+  "passportexpireDate": "اعتبارپاسپورت",
+  "passportnumber": "شماره پاسپورت",
   "password": "کلمه عبور",
   "person": {
     "birthDate": "تاریخ تولد",
@@ -111,6 +112,7 @@
     "visaDelivered": "تحویل ویزا",
     "visaExpireDate": "اعتبار ویزا"
   },
+  "personel": "پرسنل",
   "phone": "تلفن",
   "pleaseSelect": "لطفاً انتخاب کنید",
   "previousStep": "مرحله قبل",
@@ -136,16 +138,15 @@
     "list": "لیست گروه ها"
   },
   "third": "سوم",
-  "passportexpireDate": "اعتبارپاسپورت",
-  "passportnumber": "شماره پاسپورت",
   "total": "جمع کل",
   "tour": {
     "code": "کد تور",
     "date": "تاریخ اجرا",
     "list": "لیست تورها",
+    "passengers": "مسافرین تور",
+    "price": "قیمت تور",
     "reserve": "رزرو تور",
-    "upsert": "ثبت تور",
-    "price":"قیمت تور"
+    "upsert": "ثبت تور"
   },
   "user": {
     "upsert": "ثبت کاربر"

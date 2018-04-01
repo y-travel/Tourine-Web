@@ -15,6 +15,8 @@ import { TeamMemberUpsertComponent } from './team-member-upsert/team-member-upse
 import { BlockListComponent } from './block-list/block-list.component';
 import { BlocksGridService } from './blocks-grid.service';
 import { PersonService } from '../../@core/data/person.service';
+import { TourPassengersComponent } from './tour-passengers/tour-passengers.component';
+import { TourPassengersGridService } from './tour-passengers/tour-passengers-grid.service';
 
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,
@@ -24,6 +26,7 @@ const ENTRY_COMPONENTS = [
   PassengerUpsertComponent,
   TeamMemberUpsertComponent,
   BlockListComponent,
+  TourPassengersComponent,
 ];
 
 @NgModule({
@@ -38,8 +41,9 @@ const ENTRY_COMPONENTS = [
     PassengerUpsertComponent,
     TeamMemberUpsertComponent,
     BlockListComponent,
+    TourPassengersComponent,
   ],
-  providers: [DialogService, TourGridService, PassengerGridService, PersonService],
+  providers: [DialogService, TourGridService, PassengerGridService, PersonService, TourPassengersGridService],
   entryComponents: ENTRY_COMPONENTS
 })
 export class TourModule {

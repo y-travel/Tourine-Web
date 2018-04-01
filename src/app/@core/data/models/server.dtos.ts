@@ -373,6 +373,19 @@ export class GetPersonsOfTeam implements IReturn<TeamPassenger> {
 }
 
 
+@Route('/tour/{TourId}/persons/', 'GET')
+export class GetPersonsOfTour implements IReturn<TeamPassenger> {
+  tourId: string;
+
+  createResponse() {
+    return new TeamPassenger();
+  }
+
+  getTypeName() {
+    return 'GetPersonsOfTour';
+  }
+}
+
 @Route('/persons/', 'POST')
 export class AddNewPerson implements IReturn<Person> {
   person: Person;

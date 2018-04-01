@@ -6,10 +6,14 @@ import { DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { TourGridService } from '../tour-grid.service';
 import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
+import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { Block, Tour } from '../../../@core/data/models/client.model';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
 import { BlockListComponent } from '../block-list/block-list.component';
+import { TourPassengersComponent } from '../tour-passengers/tour-passengers.component';
+import { PersonService } from '../../../@core/data/person.service';
+import { TeamMember } from '../../../@core/data/models';
 
 @Component({
   selector: 'tour-list',
@@ -17,6 +21,7 @@ import { BlockListComponent } from '../block-list/block-list.component';
   styleUrls: ['./tour-list.component.scss']
 })
 export class TourListComponent {
+
   source: any;
   //@TODO use index to arrange items
   //@TODO get colors from global variables
@@ -46,6 +51,12 @@ export class TourListComponent {
       title: 'tour.reserve',
       color: '#4caf50',
       command: (tour: any) => this.blockUpsert(tour),
+    },
+    <ToolbarItem>{
+      icon: 'list',
+      title: 'tour.passengers',
+      color: '#E040FB',
+      command: (tour: any) => this.tourPassengers(tour),
     }
   ];
   blockItems = [
@@ -66,9 +77,11 @@ export class TourListComponent {
   reloadTourList = () => this.tourGridService.reloadData();
 
   constructor(private tourService: TourService,
-              private formFactory: FormFactory,
-              public dialogService: DialogService,
-              public tourGridService: TourGridService) {
+    private personService: PersonService,
+    private formFactory: FormFactory,
+    public dialogService: DialogService,
+    public tourGridService: TourGridService) {
+
     this.tourGridService.toolbarTourItems.push(...this.sharedItems, ...this.tourItems);
     this.tourGridService.toolbarBlockItems.push(...this.sharedItems, ...this.blockItems);
   }
@@ -102,7 +115,18 @@ export class TourListComponent {
     this.dialogService.openPopup(BlockListComponent, this.formFactory.createTeamListForm(block));
   }
 
-  rowselected(event) {
+  tourPassengers(tour: Tour = new Tour()) {
+    var form = this.formFactory.createTourPassengerForm(tour);
+    var rows = this.personService.getTourMembers(tour.id).subscribe(x => {
+      const ref = this.dialogService.openPopup(TourPassengersComponent, form);
+      var list: TeamMember[] = x.passengers;
+      list.unshift(x.buyer); 
+      list.push(x.buyer);
+      (<any>ref.componentInstance).passengerGridService.setRow(list);
+    });
+  }
+
+  rowselected(event: any) {
     console.log(event);
   }
 }

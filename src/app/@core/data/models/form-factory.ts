@@ -203,4 +203,22 @@ export class FormFactory {
     });
     return new FormService(Block, form);
   }
+
+  createTourPassengerForm(model: Tour = new Tour()){
+    const form = new FormBuilder().group({
+      id: [model.id],
+      // parentId: [model.parentId],
+      // agencyId: [model.agencyId],
+      // status: [model.status],
+      // basePrice: [model.basePrice],
+      // capacity: [model.capacity, [Validators.required, Validators.min(1)]],
+      // infantPrice: [model.infantPrice, Validators.min(1)],
+      // options: new FormBuilder().array(
+      //   (model.options ? model.options : new Tour().options)
+      //     .map(x => this.createTourOptionForm(model.id, x)) //@TODO find a good solution for initializing options
+      // ),
+      // tourDetail: this.createTourDetailForm(model.tourDetail ? model.tourDetail : undefined),
+    });
+    return new FormService(Tour, form);
+  }
 }
