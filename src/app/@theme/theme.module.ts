@@ -18,6 +18,7 @@ import {
   MatStepperModule,
   MatToolbarModule,
   MatTooltipModule,
+  MatChipsModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -54,6 +55,7 @@ const MAT_MODULES = [
   MatSidenavModule,
   MatListModule,
   MatTooltipModule,
+  MatChipsModule,
 ];
 
 const OTHER_MODULES = [

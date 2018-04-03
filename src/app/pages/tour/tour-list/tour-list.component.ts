@@ -120,8 +120,6 @@ export class TourListComponent {
     var rows = this.personService.getTourMembers(tour.id).subscribe(x => {
       const ref = this.dialogService.openPopup(TourPassengersComponent, form);
       var list: TeamMember[] = x.passengers;
-      list.unshift(x.buyer); 
-      list.push(x.buyer);
       (<any>ref.componentInstance).passengerGridService.setRow(list);
     });
   }

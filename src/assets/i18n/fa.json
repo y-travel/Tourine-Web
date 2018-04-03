@@ -35,6 +35,8 @@
   },
   "delete": "حذف",
   "destination": "مقصد",
+  "destinationTour": "تور مقصد",
+  "destinationTourFilter": "فیلتر تور مقصد",
   "dollar": "دلار",
   "duration": "مدت زمان",
   "edit": "ویرایش",
@@ -81,6 +83,7 @@
     "*": "مسافر",
     "upsert": "ثبت مشخصات مسافران"
   },
+  "passengerReplacementSuccessfull": "جابجایی با موفیت انجام شد",
   "passport": {
     "*": "گذرنامه",
     "delivered": "تحویل",
@@ -127,6 +130,7 @@
     "name": "نام معرف",
     "upsert": "ثبت معرف"
   },
+  "replacedPassenger": "مسافرین جابجا شده عبارتند از:",
   "roomPrice": "قیمت تخت",
   "row": "ردیف",
   "save": "ثبت",

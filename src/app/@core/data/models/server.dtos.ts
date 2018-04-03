@@ -12,6 +12,7 @@ import {
   Route,
   TeamMember,
   TeamPassenger,
+  TourPassenger,
   Tour,
   TourDetail,
   TourOption,
@@ -374,11 +375,11 @@ export class GetPersonsOfTeam implements IReturn<TeamPassenger> {
 
 
 @Route('/tour/{TourId}/persons/', 'GET')
-export class GetPersonsOfTour implements IReturn<TeamPassenger> {
+export class GetPersonsOfTour implements IReturn<TourPassenger> {
   tourId: string;
 
   createResponse() {
-    return new TeamPassenger();
+    return new TourPassenger();
   }
 
   getTypeName() {

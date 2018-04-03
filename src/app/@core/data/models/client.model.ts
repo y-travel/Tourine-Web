@@ -192,6 +192,11 @@ export class TeamPassenger {
 }
 
 
+export class TourPassenger {
+  leader: Person;
+  passengers: TeamMember[];
+}
+
 //@TODO replace with a good class
 export interface Dictionary<T> {
   [index: string]: T;

@@ -7,12 +7,16 @@
   <form [formGroup]="data.form" (keydown.enter)="$event.preventDefault()">
     <div>
       <mat-card [stretch]="true">
-        <ag-grid-angular #agGrid style="height:330px" class="ag-theme-material" [columnDefs]="passengerGridService.columnDefs" [gridOptions]="passengerGridService.gridOptions"
-          [frameworkComponents]="passengerGridService.frameworkComponents" (gridReady)="passengerGridService.onGridReady($event)"
+        <ag-grid-angular #agGrid style="height:330px" class="ag-theme-material" 
+        [columnDefs]="passengerGridService.columnDefs" 
+        [gridOptions]="passengerGridService.gridOptions"
+          [frameworkComponents]="passengerGridService.frameworkComponents" 
+          (gridReady)="passengerGridService.onGridReady($event)"
+          (selectionChanged)="onSelectionChanged($event)"
           [enableRtl]="true" rowHeight="35" headerHeight="35" rowSelection="multiple">
         </ag-grid-angular>
         <div dir="ltr">
-          <button class="pull-right fab-grid" mat-fab color="accent" (click)="passengerReplacement()">
+          <button class="pull-right fab-grid" mat-fab color="accent" disabled (click)="passengerReplacement()" #passengerReplacementFab>
             <mat-icon class="icon-text-color">swap_horiz</mat-icon>
           </button>
         </div>
