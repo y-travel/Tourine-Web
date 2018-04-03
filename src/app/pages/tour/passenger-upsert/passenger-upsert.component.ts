@@ -45,11 +45,11 @@ export class PassengerUpsertComponent implements OnInit {
   public teamId: string = undefined;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
-              public dialogInstance: MatDialogRef<ModalInterface>,
-              private dialogService: DialogService,
-              public formFactory: FormFactory,
-              public passengerGridService: PassengerGridService,
-              public service: PersonService,) {
+    public dialogInstance: MatDialogRef<ModalInterface>,
+    private dialogService: DialogService,
+    public formFactory: FormFactory,
+    public passengerGridService: PassengerGridService,
+    public service: PersonService, ) {
 
     this.init();
   }
@@ -95,7 +95,7 @@ export class PassengerUpsertComponent implements OnInit {
     if (this.passengerGridService.rows.length == 0)
       this.dialogInstance.close()
     else
-      this.service.upsertTeam(this.passengerGridService.rows, this.data.model , this.teamId).subscribe(x => this.dialogInstance.close());
+      this.service.upsertTeam(this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x => this.dialogInstance.close());
   }
 
   onPriceChange() {
@@ -122,9 +122,11 @@ export class PassengerUpsertComponent implements OnInit {
       else
         this.adultCount++;
 
-      person.personIncomes.some(x => x.optionType == OptionType.Food) ? noneOptionFoodCount : noneOptionFoodCount++;
-      person.personIncomes.some(x => x.optionType == OptionType.Room) ? noneOptionRoomCount : noneOptionRoomCount++;
-      person.personIncomes.some(x => x.optionType == OptionType.Bus) ? noneOptionBusCount : noneOptionBusCount++;
+      if (!person.person.isInfant) {
+        person.personIncomes.some(x => x.optionType == OptionType.Food) ? noneOptionFoodCount : noneOptionFoodCount++;
+        person.personIncomes.some(x => x.optionType == OptionType.Room) ? noneOptionRoomCount : noneOptionRoomCount++;
+        person.personIncomes.some(x => x.optionType == OptionType.Bus) ? noneOptionBusCount : noneOptionBusCount++;
+      }
     });
 
     total += this.adultCount * this.data.model.basePrice;
@@ -137,12 +139,12 @@ export class PassengerUpsertComponent implements OnInit {
     return total;
   }
 
-  updateTotalPrice(){
+  updateTotalPrice() {
     this.data.model.totalPrice = this.getTotal(this.passengerGridService.rows);
     this.data.updateForm();
   }
 
-  updateCount(){
+  updateCount() {
     this.getTotal(this.passengerGridService.rows);
   }
 }
