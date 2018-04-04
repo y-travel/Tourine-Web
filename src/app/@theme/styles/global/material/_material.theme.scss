@@ -88,7 +88,10 @@
     position: absolute;
     left: 0;
   }
-
+//disable wizard header selection
+  .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+  }
 
 }
 
