@@ -7,12 +7,12 @@
   <form [formGroup]="data.form" (keydown.enter)="$event.preventDefault()">
     <div>
       <mat-card [stretch]="true">
-        <ag-grid-angular #agGrid style="height:330px" class="ag-theme-material" 
-        [columnDefs]="passengerGridService.columnDefs" 
+        <ag-grid-angular #agGrid style="height:330px" class="ag-theme-material"
+        [columnDefs]="passengerGridService.columnDefs"
         [gridOptions]="passengerGridService.gridOptions"
-          [frameworkComponents]="passengerGridService.frameworkComponents" 
+          [frameworkComponents]="passengerGridService.frameworkComponents"
           (gridReady)="passengerGridService.onGridReady($event)"
-          (selectionChanged)="onSelectionChanged($event)"
+          (selectionChanged)="onSelectionChanged()"
           [enableRtl]="true" rowHeight="35" headerHeight="35" rowSelection="multiple">
         </ag-grid-angular>
         <div dir="ltr">
