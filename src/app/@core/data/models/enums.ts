@@ -18,3 +18,5 @@ export enum OptionStatus {
   Limited = 1,
   Unlimited = 2,
 }
+
+export enum DialogMode {Create = 1, Edit = 2, View = 3}

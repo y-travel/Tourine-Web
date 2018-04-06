@@ -1,14 +1,12 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
-import { MAT_DIALOG_DATA, MatDialogRef, MatCheckboxChange } from '@angular/material';
-import { Person, FormFactory, TeamMember, OptionType, PersonIncome } from '../../../@core/data/models';
+import { MAT_DIALOG_DATA, MatCheckboxChange, MatDialogRef } from '@angular/material';
+import { FormFactory, OptionType, Person, PersonIncome, TeamMember } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
-import { DialogService } from '../../../@core/utils/dialog.service';
-import { AgencyService } from '../../../@core/data/agency.service';
-import { Observable } from 'rxjs/Rx';
-import { UTILS, AppUtils } from '../../../@core/utils';
-import { IncomeStatus } from '../../../@core/data/models/enums';
+import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
+import { AppUtils, UTILS } from '../../../@core/utils';
 import { PersonService } from '../../../@core/data/person.service';
+import { DialogMode } from '../../../@core/data/models/enums';
 
 @Component({
   selector: 'app-team-member-upsert',
@@ -16,17 +14,20 @@ import { PersonService } from '../../../@core/data/person.service';
   styleUrls: ['./team-member-upsert.component.scss']
 })
 
-export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
-
+export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog {
+  dialogMode: DialogMode;
   optionType = OptionType;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<TeamMember>,
-    public dialogInstance: MatDialogRef<ModalInterface>,
-    private dialogService: DialogService,
-    public formFactory: FormFactory,
-    public service: PersonService,
-    @Inject(UTILS) public utils: AppUtils, ) {
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              public formFactory: FormFactory,
+              public service: PersonService,
+              @Inject(UTILS) public utils: AppUtils,) {
 
+  }
+
+  initDialog() {
   }
 
   checkChanged(ev: MatCheckboxChange, type: OptionType) {
@@ -50,7 +51,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
         let team = new TeamMember();
         if (person.isInfant)
           team.personIncomes.forEach(x => x.optionType = OptionType.Empty);
-        this.data.updateForm(Object.assign(team, { person: person, personId: person.id }))
+        this.data.updateForm(Object.assign(team, {person: person, personId: person.id}))
       },
       () => {
         let teamMember = new TeamMember();
@@ -63,7 +64,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface {
 
   close() {
     if (this.data.form.valid) {
-      if (this.data.model.person.id != "")
+      if (this.data.model.person.id != '')
         this.service.UpdatePerson(this.data.model.person).subscribe(x => {
           this.data.model.person = x,
             this.data.model.personId = x.id,

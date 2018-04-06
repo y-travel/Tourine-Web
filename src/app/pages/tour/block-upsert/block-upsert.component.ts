@@ -1,51 +1,48 @@
 import { Component, Inject, OnInit } from '@angular/core';
-
-import { FormService } from '../../../@core/data/form.service';
-import { Agency, Person } from '../../../@core/data/models/client.model';
+import { Agency } from '../../../@core/data/models/client.model';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSelect, MatStepper } from '@angular/material';
-import { DialogService } from '../../../@core/utils/dialog.service';
+import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { AgencyService } from '../../../@core/data/agency.service';
 import { Observable } from 'rxjs/Rx';
 import { AgencyUpsertComponent } from '../agency-upsert/agency-upsert.component';
 import { Block } from '../../../@core/data/models';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
+import { BlockUpsertViewModel } from './block-upsert.view-model';
+import { DialogMode } from '../../../@core/data/models/enums';
 
 @Component({
   selector: 'app-block-upsert',
   templateUrl: './block-upsert.component.html',
-  styleUrls: ['./block-upsert.component.scss']
+  styleUrls: ['./block-upsert.component.scss'],
+  providers: [BlockUpsertViewModel],
 })
-export class BlockUpsertComponent implements OnInit, ModalInterface {
-
+export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
+  dialogMode: DialogMode;
   freeSpace: number;
-  person: FormService<Person>;
-  agencyListForm: FormService<Agency>;
   agencies: Observable<Agency[]>;
-  newBlock: Block = <Block>{ capacity: 0, id: null };
+  newBlock: Block = <Block>{capacity: 0, id: null};
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
-    public dialogInstance: MatDialogRef<ModalInterface>,
-    private dialogService: DialogService,
-    public formFactory: FormFactory,
-    public service: AgencyService) {
-    this.init();
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+              public vModel: BlockUpsertViewModel,
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              public formFactory: FormFactory,
+              public service: AgencyService) {
   }
 
-  init() {
-    this.person = this.formFactory.createPersonForm();
-    this.agencyListForm = this.formFactory.createAgenciesForm();
+  initDialog() {
+    this.vModel.init(this.data, this.dialogMode === DialogMode.Edit);
     this.agencies = this.service.getList();
-    this.service.getTourFreeSpace(this.data.model.id).subscribe(x => {
-      this.freeSpace = +x
+    this.service.getTourFreeSpace(this.vModel.model.id).subscribe(x => {
+      this.freeSpace = +x;
     });
-
   }
 
   save() {
     //@TODO Impl. validation
-    const model = this.data.model;
+    const model = this.vModel.model;
     this.dialogInstance.close(model);
   }
 
@@ -55,14 +52,14 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
   }
 
   next(stepper: MatStepper) {
-    if (stepper.selectedIndex == 1) {
-      if (this.data.form.valid) {
+    if (stepper.selectedIndex === 1) {
+      if (this.vModel.form.valid) {
         if (this.newBlock.id == null)
-          this.service.reserveBlock(this.data.model).subscribe(x => {
+          this.service.reserveBlock(this.vModel.model).subscribe(x => {
             stepper.next();
-            this.data.model.id = x.id;
-            this.data.model.parentId = x.parentId;
-            this.data.updateForm(this.data.model);
+            this.vModel.model.id = x.id;
+            this.vModel.model.parentId = x.parentId;
+            this.vModel.updateForm(this.vModel.model);
             //@TODO : save returned dto to model to can update when back to step 2
             this.newBlock.capacity = x.capacity;
             this.newBlock.id = x.id;
@@ -70,7 +67,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
             //-----
           });
         else {
-          this.service.UpdateReservedBlock(this.data.model).subscribe(x => {
+          this.service.UpdateReservedBlock(this.vModel.model).subscribe(x => {
             stepper.next();
             this.newBlock.capacity = x.capacity;
             this.newBlock.id = x.id;
@@ -93,11 +90,10 @@ export class BlockUpsertComponent implements OnInit, ModalInterface {
   }
 
   selectedItem(agencyId: MatSelect, stepper: MatStepper) {
-    this.data.model.agencyId = agencyId.value;
     stepper.next();
   }
 
   addPassengers() {
-    this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(this.data.model));
+    this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(this.vModel.model));
   }
 }

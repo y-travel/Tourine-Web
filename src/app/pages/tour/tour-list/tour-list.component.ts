@@ -6,7 +6,6 @@ import { DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { TourGridService } from '../tour-grid.service';
 import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
-import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { Block, Tour } from '../../../@core/data/models/client.model';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
@@ -14,6 +13,7 @@ import { BlockListComponent } from '../block-list/block-list.component';
 import { TourPassengersComponent } from '../tour-passengers/tour-passengers.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { TeamMember } from '../../../@core/data/models';
+import { DialogMode } from '../../../@core/data/models/enums';
 
 @Component({
   selector: 'tour-list',
@@ -64,7 +64,7 @@ export class TourListComponent {
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (block: any) => this.blockUpsert(block),
+      command: (block: any) => this.blockUpsert(block,true),
     }, <ToolbarItem>{
       icon: 'list',
       title: 'team.list',
@@ -77,10 +77,10 @@ export class TourListComponent {
   reloadTourList = () => this.tourGridService.reloadData();
 
   constructor(private tourService: TourService,
-    private personService: PersonService,
-    private formFactory: FormFactory,
-    public dialogService: DialogService,
-    public tourGridService: TourGridService) {
+              private personService: PersonService,
+              private formFactory: FormFactory,
+              public dialogService: DialogService,
+              public tourGridService: TourGridService) {
 
     this.tourGridService.toolbarTourItems.push(...this.sharedItems, ...this.tourItems);
     this.tourGridService.toolbarBlockItems.push(...this.sharedItems, ...this.blockItems);
@@ -101,8 +101,8 @@ export class TourListComponent {
     this.tourService.deleteTour(tour).subscribe(() => this.reloadTourList());
   }
 
-  blockUpsert(block = new Block()) {
-    const ref = this.dialogService.openPopup(BlockUpsertComponent, this.formFactory.createReserveBlockForm(block));
+  blockUpsert(block = new Block(), isEdit = false) {
+    const ref = this.dialogService.openPopup(BlockUpsertComponent, block, isEdit ? DialogMode.Edit : DialogMode.Create);
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }
 

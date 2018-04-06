@@ -13,7 +13,6 @@ import { PassengerUpsertComponent } from './passenger-upsert/passenger-upsert.co
 import { PassengerGridService } from './passenger-grid.service';
 import { TeamMemberUpsertComponent } from './team-member-upsert/team-member-upsert.component';
 import { BlockListComponent } from './block-list/block-list.component';
-import { BlocksGridService } from './blocks-grid.service';
 import { PersonService } from '../../@core/data/person.service';
 import { TourPassengersComponent } from './tour-passengers/tour-passengers.component';
 import { TourPassengersGridService } from './tour-passengers/tour-passengers-grid.service';

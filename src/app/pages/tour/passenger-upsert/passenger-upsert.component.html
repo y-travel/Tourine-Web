@@ -1,6 +1,6 @@
 <div mat-dialog-title class="modal-header">
   <div class="modal-title">
-    {{"passenger.upsert"|translate}}
+   {{ "passenger.upsert"|translate }}}
   </div>
 </div>
 <div class="right modal-body" dir="rtl" [style.width.px]="1000" [style.height.px]="450" autoTranslate>
@@ -21,9 +21,9 @@
 
     <mat-card [stretch]="true">
       <div fxLayout="row">
-        <label fxFlex>تعداد بزرگسال: {{adultCount}}</label>
-        <label fxFlex>تعداد بدون خدمات: {{noneOptionCount}}</label>
-        <label fxFlex>تعداد اینفنت: {{infantCount}}</label>
+        <label fxFlex>تعداد بزرگسال: {{ adultCount }}</label>
+        <label fxFlex>تعداد بدون خدمات: {{ noneOptionCount }}</label>
+        <label fxFlex>تعداد اینفنت: {{ infantCount }}</label>
       </div>
       <div fxLayout="row">
         <div fxFlex="2"></div>
@@ -49,5 +49,5 @@
 </div>
 
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" fxFlex (click)="save()">{{"block.save"|translate}}</button>
+  <button mat-raised-button color="primary" fxFlex (click)="save()">{{ "block.save"|translate }}</button>
 </mat-dialog-actions>

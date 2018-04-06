@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { DialogService } from '../../../@core/utils/dialog.service';
+import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
@@ -9,6 +9,7 @@ import { Block, OptionType, TeamMember } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
+import { DialogMode } from '../../../@core/data/models/enums';
 
 @Component({
   selector: 'app-passenger-upsert',
@@ -16,46 +17,49 @@ import { PersonService } from '../../../@core/data/person.service';
   styleUrls: ['./passenger-upsert.component.scss'],
   providers: [PassengerGridService]
 })
-export class PassengerUpsertComponent implements OnInit {
+export class PassengerUpsertComponent implements OnInit, Dialog {
+
+  dialogMode: DialogMode;
 
   sharedItems: ToolbarItem[] = [
     <ToolbarItem>{
       icon: 'delete',
       title: 'delete',
       color: '#f44336',
-      command: (teamMember) => {
-        this.teamMemberDelete(teamMember)
-      },
+      command: (teamMember) => this.teamMemberDelete(teamMember),
     }, <ToolbarItem>{
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
       command: (teamMember) => {
-        this.teamMemberUpsert(teamMember, false/*edit*/)
+        this.teamMemberUpsert(teamMember, false/*edit*/);
       },
     },
   ];
 
-  tourFreeSpace: number = 0;
+  tourFreeSpace = 0;
   totalPrice: number;
-  infantCount: number = 0;
-  adultCount: number = 0;
-  noneOptionCount: number = 0;
+  infantCount = 0;
+  adultCount = 0;
+  noneOptionCount = 0;
   public rows: any[];
   public teamId: string = undefined;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
-    public dialogInstance: MatDialogRef<ModalInterface>,
-    private dialogService: DialogService,
-    public formFactory: FormFactory,
-    public passengerGridService: PassengerGridService,
-    public service: PersonService, ) {
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              public formFactory: FormFactory,
+              public passengerGridService: PassengerGridService,
+              public service: PersonService,) {
 
     this.init();
   }
 
 
   ngOnInit() {
+  }
+
+  initDialog() {
   }
 
   init() {
@@ -82,7 +86,7 @@ export class PassengerUpsertComponent implements OnInit {
       inst.afterClosed().subscribe(x => {
         if (x == null)
           return;
-        if (isAdd || (!isAdd && teamMember.person.id == x.person.id)) {
+        if (isAdd || (!isAdd && teamMember.person.id === x.person.id)) {
           this.passengerGridService.addItem(x);
         }
         //@TODO: update to a new person
@@ -92,8 +96,8 @@ export class PassengerUpsertComponent implements OnInit {
   }
 
   save() {
-    if (this.passengerGridService.rows.length == 0)
-      this.dialogInstance.close()
+    if (this.passengerGridService.rows.length === 0)
+      this.dialogInstance.close();
     else
       this.service.upsertTeam(this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x => this.dialogInstance.close());
   }
@@ -104,14 +108,14 @@ export class PassengerUpsertComponent implements OnInit {
 
   getTotal(members: TeamMember[]): number {
 
-    var total: number = 0;
+    let total = 0;
     this.infantCount = 0;
     this.noneOptionCount = 0;
     this.adultCount = 0;
 
-    var noneOptionFoodCount = 0;
-    var noneOptionRoomCount = 0;
-    var noneOptionBusCount = 0;
+    let noneOptionFoodCount = 0;
+    let noneOptionRoomCount = 0;
+    let noneOptionBusCount = 0;
 
     members.forEach(person => {
 
@@ -123,9 +127,9 @@ export class PassengerUpsertComponent implements OnInit {
         this.adultCount++;
 
       if (!person.person.isInfant) {
-        person.personIncomes.some(x => x.optionType == OptionType.Food) ? noneOptionFoodCount : noneOptionFoodCount++;
-        person.personIncomes.some(x => x.optionType == OptionType.Room) ? noneOptionRoomCount : noneOptionRoomCount++;
-        person.personIncomes.some(x => x.optionType == OptionType.Bus) ? noneOptionBusCount : noneOptionBusCount++;
+        noneOptionFoodCount += person.personIncomes.some(x => x.optionType === OptionType.Food) ? 0 : 1;
+        noneOptionRoomCount += person.personIncomes.some(x => x.optionType === OptionType.Room) ? 0 : 1;
+        noneOptionBusCount += person.personIncomes.some(x => x.optionType === OptionType.Bus) ? 0 : 1;
       }
     });
 
@@ -141,7 +145,7 @@ export class PassengerUpsertComponent implements OnInit {
 
   updateTotalPrice() {
     this.data.model.totalPrice = this.getTotal(this.passengerGridService.rows);
-    this.data.updateForm();
+    this.data.updateForm(this.data.model);
   }
 
   updateCount() {

@@ -8,15 +8,17 @@ import { TourService } from '../../../@core/data/tour.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { Destination, Person, Place } from '../../../@core/data/models/client.model';
-import { OptionType } from '../../../@core/data/models/enums';
+import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
+import { Dialog } from '../../../@core/utils/dialog.service';
 
 @Component({
   selector: 'tour-upsert',
   templateUrl: './tour-upsert.component.html',
   styleUrls: ['./tour-upsert.component.scss'],
 })
-export class TourUpsertComponent implements ModalInterface {
+export class TourUpsertComponent implements ModalInterface, Dialog {
+  dialogMode: DialogMode;
   form: FormService<Tour>;
   destinations: Observable<Destination[]>;
   places: Observable<Place[]>;
@@ -29,6 +31,9 @@ export class TourUpsertComponent implements ModalInterface {
               private translateService: TranslateService,
               @Inject(UTILS) public utils: AppUtils,) {
     this.initData();
+  }
+
+  initDialog() {
   }
 
   initData() {

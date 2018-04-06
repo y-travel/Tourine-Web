@@ -3,37 +3,32 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ComponentType } from './serializable';
 import { FormService } from '../data/form.service';
 import { ModalInterface } from '../../@theme/components/modal.interface';
+import { DialogMode } from '../data/models/enums';
 
-const defaultDialogConfig = new MatDialogConfig();
+class TrnDialogConfig<T> extends MatDialogConfig<T> {
+  constructor(data: T, public dialogMode: DialogMode) {
+    super();
+    this.data = data;
+    this.maxWidth = 1200;
+  }
+}
+
+export interface Dialog {
+  dialogMode: DialogMode;
+  initDialog();
+}
 
 @Injectable()
 export class DialogService {
 
-  config = <MatDialogConfig<FormService<any>>>{
-    disableClose: false,
-    panelClass: 'custom-overlay-pane-class',
-    hasBackdrop: true,
-    backdropClass: '',
-    width: '',
-    height: '',
-    minWidth: '',
-    minHeight: '',
-    maxWidth: 1200,
-    maxHeight: '',
-    position: {
-      top: '',
-      bottom: '',
-      left: '',
-      right: ''
-    }
-  };
-
   constructor(private dialog: MatDialog) {
   }
 
-  openPopup<T>(type: ComponentType<T>, data: FormService<any>): MatDialogRef<ModalInterface> {
-    this.config.data = data;
-    return this.dialog.open(type, this.config);
+  openPopup<T extends Dialog>(type: ComponentType<T>, data: FormService<T> | any, dialogMode = DialogMode.Create): MatDialogRef<ModalInterface> {
+    const dialogRef = this.dialog.open(type, new TrnDialogConfig(data, dialogMode));
+    dialogRef.componentInstance.dialogMode = dialogMode;
+    dialogRef.componentInstance.initDialog();
+    return dialogRef;
   }
 
   openDialog() {

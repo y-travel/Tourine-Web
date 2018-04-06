@@ -6,8 +6,8 @@
 <div class="modal-body" dir="rtl" [style.width.px]="500" [style.height.px]="300" autoTranslate>
   <!--width set for IE-->
   <mat-horizontal-stepper #stepper [linear]="true">
-    <mat-step [stepControl]="agencyListForm.form" label="{{'steps'|translate:({value:'first'|translate})}}">
-      <form [formGroup]="agencyListForm.form">
+    <mat-step  label="{{'steps'|translate:({value:'first'|translate})}}">
+      <form [formGroup]="vModel.form">
         <div fxLayout="row">
           <br> {{"addAgencyMessage"|translate}}
           <br>
@@ -15,7 +15,7 @@
         </div>
         <div fxLayout="row">
           <mat-form-field>
-            <mat-select placeholder="agency.name" formControlName="id" (selectionChange)="selectedItem($event,stepper)">
+            <mat-select placeholder="agency.name" formControlName="agencyId" (selectionChange)="selectedItem($event,stepper)">
               <mat-option *ngFor="let item of agencies | async" [value]="item.id">{{item.name}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -26,8 +26,8 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'second'|translate})}}">
-      <form [formGroup]="data.form">
+    <mat-step [stepControl]="vModel.form" label="{{'steps'|translate:({value:'second'|translate})}}">
+      <form [formGroup]="vModel.form">
 
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex="40">
@@ -75,7 +75,7 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="person.form" label="{{'steps'|translate:({value:'third'|translate})}}">
+    <mat-step  label="{{'steps'|translate:({value:'third'|translate})}}">
       <form >
         <div fxLayout="row">
           <br> {{"msg.blockReservation"|translate:({capacity:newBlock.capacity})}}

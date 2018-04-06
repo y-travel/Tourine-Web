@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
-import { FormService } from '../form.service';
+import { FormService, NewFormService } from '../form.service';
 import { Agency, Block, EditPassword, Person, PersonAgency, PersonIncome, Reagent, TeamMember, Tour, TourDetail, TourOption, User } from './client.model';
 
 @Injectable()
@@ -65,23 +65,9 @@ export class FormFactory {
     return new FormService(PersonAgency, form);
   }
 
-  createReserveBlockForm(model: Block = new Block()): FormService<Block> {
-    const form = new FormBuilder().group({
-      id: [model.id],
-      capacity: [model.capacity ? model.capacity : undefined, [Validators.required, Validators.min(1)]],
-      infantPrice: [model.infantPrice ? model.infantPrice : undefined, Validators.required],
-      busPrice: [model.busPrice ? model.busPrice : undefined, Validators.required],
-      roomPrice: [model.roomPrice ? model.roomPrice : undefined, Validators.required],
-      foodPrice: [model.foodPrice ? model.foodPrice : undefined, Validators.required],
-      basePrice: [model.basePrice ? model.basePrice : undefined, Validators.required],
-      totalPrice: [model.totalPrice ? model.totalPrice : 0]
-    });
-    return new FormService(Block, form);
-  }
-
   createAddLeaderForm(model: Person = new Person()): FormService<Person> {
     const form = new FormBuilder().group({
-      id: [model.id ? model.id : "0"],
+      id: [model.id ? model.id : '0'],
       name: [model.name],
       family: [model.family],
       englishName: [model.englishName],
@@ -140,14 +126,6 @@ export class FormFactory {
       totalPrice: [model.totalPrice ? model.totalPrice : 0, Validators.required],
     });
     return new FormService(Block, form);
-  }
-
-  createAgenciesForm(model: Agency = new Agency()): FormService<Agency> {
-    const form = new FormBuilder().group({
-      id: [model.id, Validators.required],
-      name: [model.name]
-    });
-    return new FormService(Agency, form);
   }
 
   createReagentForm(model: Reagent = new Reagent()): FormService<Reagent> {
@@ -221,4 +199,5 @@ export class FormFactory {
     });
     return new FormService(Tour, form);
   }
+
 }

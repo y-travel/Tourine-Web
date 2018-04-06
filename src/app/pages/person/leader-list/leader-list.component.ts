@@ -52,14 +52,14 @@ export class LeaderListComponent implements OnInit {
   leaderEdit(person: Person = new Person()) {
     const inst = this.dialogService.openPopup(LeaderUpsertComponent, this.formFactory.createAddLeaderForm(person));
     inst.afterClosed().subscribe(() => {
-      this.leaderGridService.loadData()
+      this.leaderGridService.loadData();
     });
   }
 
   leaderUpsert(person: Person = new Person()) {
     const inst = this.dialogService.openPopup(LeaderUpsertComponent, this.formFactory.createAddLeaderForm(person));
     inst.afterClosed().subscribe(() => {
-      this.leaderGridService.loadData()
+      this.leaderGridService.loadData();
     });
   }
 
