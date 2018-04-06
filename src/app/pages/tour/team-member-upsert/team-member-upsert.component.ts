@@ -6,7 +6,7 @@ import { FormService } from '../../../@core/data/form.service';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
 import { AppUtils, UTILS } from '../../../@core/utils';
 import { PersonService } from '../../../@core/data/person.service';
-import { DialogMode } from '../../../@core/data/models/enums';
+import { DialogMode, PersonType } from '../../../@core/data/models/enums';
 
 @Component({
   selector: 'app-team-member-upsert',
@@ -51,6 +51,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
         let team = new TeamMember();
         if (person.isInfant)
           team.personIncomes.forEach(x => x.optionType = OptionType.Empty);
+          person.type |= PersonType.Passenger;
         this.data.updateForm(Object.assign(team, {person: person, personId: person.id}))
       },
       () => {

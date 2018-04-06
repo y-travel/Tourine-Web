@@ -20,3 +20,10 @@ export enum OptionStatus {
 }
 
 export enum DialogMode {Create = 1, Edit = 2, View = 3}
+
+
+export enum PersonType {
+  Passenger = 1,
+  Customer = 2,
+  Leader = 4,
+}

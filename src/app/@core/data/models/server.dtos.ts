@@ -65,12 +65,7 @@ export class TeamPerson {
   person: Person;
 }
 
-// @Flags()
-export enum PersonType {
-  Passenger = 1,
-  Customer = 2,
-  Leader = 4,
-}
+
 
 // @DataContract
 export class QueryResponse<T> {
@@ -321,6 +316,25 @@ export class UpsertTeam implements IReturnVoid {
   // @DataContract
   getTypeName(): string {
     return ('UpsertTeam');
+  }
+}
+
+@Route('/tours/{TourId}/passengers/toTour/{DestTourId}', 'POST')
+export class PassengerReplacement implements IReturnVoid {
+  tuorId: string;
+  destTourId: string;
+  buyerId: string;
+  InfantPrice: number;
+  BasePrice: number;
+  TotalPrice: number;
+  Passengers: string[]
+
+  createResponse(): void {
+  }
+
+  // @DataContract
+  getTypeName(): string {
+    return ('PassengerReplacement');
   }
 }
 

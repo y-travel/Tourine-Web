@@ -137,7 +137,7 @@ export class Person extends Model {
   visaExpireDate: Date;
   passportNo = 0;
   gender = true;
-  personType = 0;
+  type = 0;
   socialNumber = '';
   isUnder5 = false;
   isInfant = false;
