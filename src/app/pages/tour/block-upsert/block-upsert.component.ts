@@ -7,10 +7,10 @@ import { FormFactory } from '../../../@core/data/models/form-factory';
 import { AgencyService } from '../../../@core/data/agency.service';
 import { Observable } from 'rxjs/Rx';
 import { AgencyUpsertComponent } from '../agency-upsert/agency-upsert.component';
-import { Block } from '../../../@core/data/models';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
 import { BlockUpsertViewModel } from './block-upsert.view-model';
 import { DialogMode } from '../../../@core/data/models/enums';
+import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 
 @Component({
   selector: 'app-block-upsert',
@@ -22,9 +22,10 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
   dialogMode: DialogMode;
   freeSpace: number;
   agencies: Observable<Agency[]>;
-  newBlock: Block = <Block>{capacity: 0, id: null};
+  isNewBlock = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+              @Inject(UTILS) private utils: AppUtils,
               public vModel: BlockUpsertViewModel,
               public dialogInstance: MatDialogRef<ModalInterface>,
               private dialogService: DialogService,
@@ -33,17 +34,12 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
   }
 
   initDialog() {
-    this.vModel.init(this.data, this.dialogMode === DialogMode.Edit);
+    this.isNewBlock = this.dialogMode === DialogMode.Create;
+    this.vModel.init(this.data, !this.isNewBlock);
     this.agencies = this.service.getList();
     this.service.getTourFreeSpace(this.vModel.model.id).subscribe(x => {
       this.freeSpace = +x;
     });
-  }
-
-  save() {
-    //@TODO Impl. validation
-    const model = this.vModel.model;
-    this.dialogInstance.close(model);
   }
 
   agencyUpsert() {
@@ -51,35 +47,19 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
     ref.afterClosed().subscribe(data => this.agencies = this.service.getList());
   }
 
-  next(stepper: MatStepper) {
-    if (stepper.selectedIndex === 1) {
-      if (this.vModel.form.valid) {
-        if (this.newBlock.id == null)
-          this.service.reserveBlock(this.vModel.model).subscribe(x => {
-            stepper.next();
-            this.vModel.model.id = x.id;
-            this.vModel.model.parentId = x.parentId;
-            this.vModel.updateForm(this.vModel.model);
-            //@TODO : save returned dto to model to can update when back to step 2
-            this.newBlock.capacity = x.capacity;
-            this.newBlock.id = x.id;
-            this.newBlock.agencyId = x.agencyId;
-            //-----
-          });
-        else {
-          this.service.UpdateReservedBlock(this.vModel.model).subscribe(x => {
-            stepper.next();
-            this.newBlock.capacity = x.capacity;
-            this.newBlock.id = x.id;
-            this.newBlock.agencyId = x.agencyId;
-          });
-        }
-      }
-      else
-        stepper.next();
-    }
-    else
+  async next(stepper: MatStepper) {
+    if (!this.vModel.isValid(stepper.selectedIndex))
+      return;
+    if (stepper.selectedIndex !== 1) {
       stepper.next();
+      return;
+    }
+    const newBlock = this.isNewBlock
+      ? await this.service.reserveBlock(this.vModel.model).first().toPromise()
+      : await this.service.UpdateReservedBlock(this.vModel.model).first().toPromise();
+    this.isNewBlock = this.utils.isNullorUndefined(newBlock);
+    stepper.next();
+    this.vModel.updateForm(newBlock);
   }
 
   previous(stepper: MatStepper) {

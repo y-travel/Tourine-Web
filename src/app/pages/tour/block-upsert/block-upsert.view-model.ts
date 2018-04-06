@@ -31,9 +31,23 @@ export class BlockUpsertViewModel {
     this.form.updateForm(model);
   }
 
+  isValid(step?: number) {
+    switch (step) {
+      case 0: {
+        const agencyIdControl = this.form.controls['agencyId'];
+        this.form.markTouch(agencyIdControl);
+        return agencyIdControl.valid;
+      }
+      default: {
+        return this.form.validate();
+      }
+    }
+  }
+
   private createBlockForm(model: Block = new Block()): NewFormService<Block> {
     const form = new FormBuilder().group({
       id: [model.id],
+      parentId: [model.parentId],
       agencyId: [model.agencyId, Validators.required],
       capacity: [model.capacity ? model.capacity : undefined, [Validators.required, Validators.min(1)]],
       infantPrice: [model.infantPrice ? model.infantPrice : undefined, Validators.required],
