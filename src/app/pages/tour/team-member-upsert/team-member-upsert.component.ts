@@ -19,11 +19,11 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
   optionType = OptionType;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<TeamMember>,
-              public dialogInstance: MatDialogRef<ModalInterface>,
-              private dialogService: DialogService,
-              public formFactory: FormFactory,
-              public service: PersonService,
-              @Inject(UTILS) public utils: AppUtils,) {
+    public dialogInstance: MatDialogRef<ModalInterface>,
+    private dialogService: DialogService,
+    public formFactory: FormFactory,
+    public service: PersonService,
+    @Inject(UTILS) public utils: AppUtils, ) {
 
   }
 
@@ -35,7 +35,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
     if (index < 0)
       this.data.model.personIncomes.push(new PersonIncome(type));
     else
-      this.data.model.personIncomes.splice(index, 1);
+      this.data.model.personIncomes[index].optionType = OptionType.Empty;
   }
 
   optionTypes() {
@@ -51,8 +51,8 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
         let team = new TeamMember();
         if (person.isInfant)
           team.personIncomes.forEach(x => x.optionType = OptionType.Empty);
-          person.type |= PersonType.Passenger;
-        this.data.updateForm(Object.assign(team, {person: person, personId: person.id}))
+        person.type |= PersonType.Passenger;
+        this.data.updateForm(Object.assign(team, { person: person, personId: person.id }))
       },
       () => {
         let teamMember = new TeamMember();
@@ -88,11 +88,24 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
 
     if (age < 2) {
       this.data.model.person.isInfant = true;
-      this.data.model.personIncomes[0].optionType = OptionType.Empty;
+      this.data.model.person.isUnder5 = false;
+      this.data.model.personIncomes.forEach(element => element.optionType = OptionType.Empty);
     }
     else if (age < 5) {
       this.data.model.person.isUnder5 = true;
       this.data.model.person.isInfant = false;
+      //@TODO: ughly
+      this.data.model.personIncomes[0].optionType = OptionType.Bus;
+      this.data.model.personIncomes[1].optionType = OptionType.Room;
+      this.data.model.personIncomes[2].optionType = OptionType.Food;
+    }
+    else {
+      //@TODO: ughly
+      this.data.model.person.isUnder5 = false;
+      this.data.model.person.isInfant = false;
+      this.data.model.personIncomes[0].optionType = OptionType.Bus;
+      this.data.model.personIncomes[1].optionType = OptionType.Room;
+      this.data.model.personIncomes[2].optionType = OptionType.Food;
     }
 
     this.data.updateForm(this.data.model);
