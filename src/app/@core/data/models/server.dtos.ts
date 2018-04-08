@@ -662,8 +662,10 @@ export class UpdateAgency {
   agency: Agency;
 }
 
-@Route('/agencies', 'GET')
+@Route('/agencies/{IsAll}', 'GET')
 export class GetAgencies extends QueryDb<Agency> implements IReturn<QueryResponse<Agency>> {
+  isAll:boolean = true;
+  
   createResponse() {
     return new QueryResponse<Agency>();
   }

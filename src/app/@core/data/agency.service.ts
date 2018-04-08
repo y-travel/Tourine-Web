@@ -14,6 +14,7 @@ export class AgencyService {
 
   getList(): Observable<Agency[]> {
     const query = new GetAgencies();
+    query.isAll = false;
     return this.apiService.getEntities(query);
   }
 
