@@ -25,7 +25,7 @@
           <ag-grid-angular style="width:100%;height:100%;" class="ag-theme-material" [columnDefs]="tourGridService.columnDefs" [enableSorting]="true"
             [rowHeight]="35" [headerHeight]="35" [icons]="tourGridService.icons" [gridOptions]="tourGridService.gridOptions"
             (selectionChanged)="onSelectionChanged()" [frameworkComponents]="tourGridService.frameworkComponents" rowSelection="single"
-            (gridReady)="tourGridService.onGridReady($event)" [enableRtl]="true">ّ
+            (gridReady)="onGridReady($event)" [enableRtl]="true">ّ
           </ag-grid-angular>
         </div>
       </mat-step>
@@ -60,5 +60,5 @@
   </button>
 </div>
 <mat-dialog-actions>
-  <button fxFlex mat-raised-button color="primary" >{{"save"|translate}}</button>
+  <button fxFlex mat-raised-button color="primary" (click)="save()">{{"save"|translate}}</button>
 </mat-dialog-actions>

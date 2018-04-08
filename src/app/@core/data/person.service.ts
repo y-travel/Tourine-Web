@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ApiService } from './api.service';
-import { Block , Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger, UpsertLeader, DeleteLeader, GetPersonsOfTour, TourPassenger } from './models';
+import { Block , Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger, UpsertLeader, DeleteLeader, GetPersonsOfTour, TourPassenger, PassengerReplacement } from './models';
 import { Serializable } from '../utils/serializable';
 
 @Injectable()
@@ -109,5 +109,18 @@ export class PersonService {
     const query = new DeleteLeader();
     query.id = id;
     return this.apiService.send(query);
+  }
+
+  passengerReplacement(tourId:string,destId:string,buyerId:string,passengers:string[],infantPrice:number,basePrice:number,totalPrice:number){
+    const dto = new PassengerReplacement();
+    //@TODO: ughly
+    dto.tuorId = tourId;
+    dto.destTourId = destId;
+    dto.buyerId = buyerId;
+    dto.Passengers = passengers;
+    dto.InfantPrice = infantPrice;
+    dto.BasePrice = basePrice;
+    dto.TotalPrice = totalPrice;
+    return this.apiService.send(dto);
   }
 }

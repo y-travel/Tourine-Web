@@ -74,7 +74,7 @@ export class PassengerReplacementTourGridService {
         maxWidth: 100,
         field: 'tourDetail.startDate',
         getQuickFilterText: (params: any) => {
-          var str =  this.formatter.getDateFormat(params.value);
+          var str = this.formatter.getDateFormat(params.value);
           return str;
         },
         valueFormatter: (params: any) => this.formatter.getDateFormat(params.value),
@@ -126,7 +126,6 @@ export class PassengerReplacementTourGridService {
 
   onGridReady(params: any) {
     this.gridApi = params.api;
-    this.reloadData();
     this.setInitialLayout(this.gridApi);
   }
 
@@ -139,10 +138,11 @@ export class PassengerReplacementTourGridService {
     }, 100);
   }
 
-  reloadData() {
+  getTourExcludedSource(sourceTourId: string) {
     this.tourService.getList().subscribe(tours => {
-      this.rows = tours;
+      this.rows = tours.filter(x => x.id != sourceTourId);
       this.gridApi.setRowData(this.rows);
     });
   }
+
 }
