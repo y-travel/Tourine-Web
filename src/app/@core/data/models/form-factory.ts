@@ -72,12 +72,12 @@ export class FormFactory {
       family: [model.family, [Validators.required, Validators.minLength(1)]],
       englishName: [model.englishName, [Validators.required, Validators.minLength(1)]],
       englishFamily: [model.englishFamily, [Validators.required, Validators.minLength(1)]],
-      nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(1)]],//@TODO: min length must be 10
+      nationalCode: [model.nationalCode ? model.nationalCode : undefined, [Validators.required, Validators.minLength(1)]],//@TODO: min length must be 10
       gender: [model.gender],
       mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
-      birthDate: [model.birthDate,Validators.required],
+      birthDate: [model.birthDate, Validators.required],
       passportExpireDate: [model.passportExpireDate],
-      passportNo: [model.passportNo],
+      passportNo: [model.passportNo ? model.passportNo : undefined],
       socialNumber: [model.socialNumber],
     });
     return new FormService(Person, form);
@@ -183,7 +183,7 @@ export class FormFactory {
     return new FormService(Block, form);
   }
 
-  createTourPassengerForm(model: Tour = new Tour()){
+  createTourPassengerForm(model: Tour = new Tour()) {
     const form = new FormBuilder().group({
       id: [model.id],
     });

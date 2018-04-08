@@ -3,7 +3,7 @@
     {{"leader.add"|translate}}
   </div>
 </div>
-<div class="modal-body" dir="rtl" [style.width.px]="500" [style.height.px]="350" autoTranslate>
+<div class="modal-body" dir="rtl" [style.width.px]="500" [style.height.px]="300" autoTranslate>
   <form [formGroup]="data.form">
     <div fxLayout="row" layout-align="space-between center" >
       <mat-form-field fxFlex="50">
@@ -36,22 +36,24 @@
       </mat-form-field>
     </div>
     <div fxLayout="row">
+
       <mat-form-field fxFlex>
         <input matInput (click)="bithDate._open($event)" [matDatepicker]="personBirthDate" placeholder="person.birthDate" formControlName="birthDate">
         <mat-datepicker-toggle utc="true" #bithDate matSuffix [for]="personBirthDate"></mat-datepicker-toggle>
         <mat-datepicker #personBirthDate disabled="false" (selectedChanged)="age($event)"></mat-datepicker>
       </mat-form-field>
-    </div>
-    <div fxLayout="row">
-      <mat-form-field fxFlex>
+
+      <mat-form-field fxFlex="25">
         <input matInput placeholder="passportNumber" formControlName="passportNo">
       </mat-form-field>
-      <mat-form-field fxFlex>
+
+      <mat-form-field fxFlex="25">
         <input matInput (click)="passExpDate._open($event)" [matDatepicker]="passportExpDate" placeholder="passportExpireDate"
           formControlName="passportExpireDate">
         <mat-datepicker-toggle utc="true" #passExpDate matSuffix [for]="passportExpDate"></mat-datepicker-toggle>
         <mat-datepicker #passportExpDate disabled="false"></mat-datepicker>
       </mat-form-field>
+
     </div>
   </form>
   <!--width set for IE-->
