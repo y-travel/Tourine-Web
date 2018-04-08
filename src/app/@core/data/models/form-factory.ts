@@ -68,14 +68,14 @@ export class FormFactory {
   createAddLeaderForm(model: Person = new Person()): FormService<Person> {
     const form = new FormBuilder().group({
       id: [model.id ? model.id : '0'],
-      name: [model.name],
-      family: [model.family],
-      englishName: [model.englishName],
-      englishFamily: [model.englishFamily],
-      nationalCode: [model.nationalCode],
+      name: [model.name, [Validators.required, Validators.minLength(1)]],
+      family: [model.family, [Validators.required, Validators.minLength(1)]],
+      englishName: [model.englishName, [Validators.required, Validators.minLength(1)]],
+      englishFamily: [model.englishFamily, [Validators.required, Validators.minLength(1)]],
+      nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(1)]],//@TODO: min length must be 10
       gender: [model.gender],
-      mobileNumber: [model.mobileNumber],
-      birthDate: [model.birthDate],
+      mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
+      birthDate: [model.birthDate,Validators.required],
       passportExpireDate: [model.passportExpireDate],
       passportNo: [model.passportNo],
       socialNumber: [model.socialNumber],

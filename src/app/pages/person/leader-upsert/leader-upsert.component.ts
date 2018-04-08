@@ -17,10 +17,10 @@ export class LeaderUpsertComponent implements OnInit, Dialog {
   dialogMode: DialogMode;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Person>,
-              public formFactory: FormFactory,
-              public dialogInstance: MatDialogRef<ModalInterface>,
-              public service: PersonService,
-              @Inject(UTILS) public utils: AppUtils,) {
+    public formFactory: FormFactory,
+    public dialogInstance: MatDialogRef<ModalInterface>,
+    public service: PersonService,
+    @Inject(UTILS) public utils: AppUtils, ) {
   }
 
   // data = this.formFactory.createAddLeaderForm();
@@ -52,8 +52,8 @@ export class LeaderUpsertComponent implements OnInit, Dialog {
       this.service.upsertLeader(this.data.model).subscribe(x => {
         this.dialogInstance.close();
       });
-    }
-
+    } else
+      this.data.markAllFieldAsTouch();
   }
 
   age(bDay: Date) {
@@ -63,6 +63,7 @@ export class LeaderUpsertComponent implements OnInit, Dialog {
 
     if (age < 2) {
       this.data.model.isInfant = true;
+      this.data.model.isUnder5 = false;
     }
     else if (age < 5) {
       this.data.model.isUnder5 = true;
