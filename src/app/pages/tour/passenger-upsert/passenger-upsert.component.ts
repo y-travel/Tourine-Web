@@ -97,9 +97,9 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
 
   save() {
     if (this.passengerGridService.rows.length === 0)
-      this.dialogInstance.close();
+      this.dialogInstance.close(this.passengerGridService.rows.length);
     else
-      this.service.upsertTeam(this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x => this.dialogInstance.close());
+      this.service.upsertTeam(this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x => this.dialogInstance.close(this.passengerGridService.rows.length));
   }
 
   onPriceChange() {

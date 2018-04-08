@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Agency } from '../../../@core/data/models/client.model';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
-import { MAT_DIALOG_DATA, MatDialogRef, MatSelect, MatStepper } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSelect, MatStepper, MatButton } from '@angular/material';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { AgencyService } from '../../../@core/data/agency.service';
@@ -22,14 +22,15 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
   dialogMode: DialogMode;
   freeSpace: number;
   agencies: Observable<Agency[]>;
-  newBlock: Block = <Block>{capacity: 0, id: null};
+  newBlock: Block = <Block>{ capacity: 0, id: null };
+  @ViewChild('addPassengerBtn') addPassengerBtn: MatButton;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              public vModel: BlockUpsertViewModel,
-              public dialogInstance: MatDialogRef<ModalInterface>,
-              private dialogService: DialogService,
-              public formFactory: FormFactory,
-              public service: AgencyService) {
+    public vModel: BlockUpsertViewModel,
+    public dialogInstance: MatDialogRef<ModalInterface>,
+    private dialogService: DialogService,
+    public formFactory: FormFactory,
+    public service: AgencyService) {
   }
 
   initDialog() {
@@ -94,6 +95,12 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
   }
 
   addPassengers() {
-    this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(this.vModel.model));
+    const ref = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(this.vModel.model));
+    ref.afterClosed().subscribe(x => {
+      if (x > 0) {
+        this.addPassengerBtn.disabled = true;
+      } else
+        this.addPassengerBtn.disabled = false
+    });
   }
 }
