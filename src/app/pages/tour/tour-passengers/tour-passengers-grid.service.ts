@@ -55,17 +55,8 @@ export class TourPassengersGridService {
             {
                 headerName: "person.nameAndFamily",
                 valueGetter: (params: any) => {
-                    return params.data.person.name + ' ' + params.data.person.family
+                    return params.data.person.gender == 1 ? 'آقای ' + params.data.person.name + ' ' + params.data.person.family : 'خانم ' + params.data.person.name + ' ' + params.data.person.family ; 
                 },
-            },
-            {
-                headerName: 'person.gender',
-                minWidth: 100,
-                maxWidth: 100,
-                valueGetter: (params: any) => {
-                    return params.data.person.gender == 1 ? 'مرد' : 'زن';
-                },
-                cellRenderer: 'agGroupCellRenderer',
             },
             {
                 headerName: "options",
