@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { PersonService } from '../../../@core/data/person.service';
-import { FormFactory, Tour } from '../../../@core/data/models';
+import { FormFactory, Tour, TeamMember } from '../../../@core/data/models';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
@@ -19,11 +19,11 @@ export class TourPassengersComponent implements OnInit, Dialog {
   @ViewChild('passengerReplacementFab') passengerReplacementFab: MatButton;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
-              public dialogInstance: MatDialogRef<ModalInterface>,
-              private dialogService: DialogService,
-              public formFactory: FormFactory,
-              public passengerGridService: TourPassengersGridService,
-              public personService: PersonService) {
+    public dialogInstance: MatDialogRef<ModalInterface>,
+    private dialogService: DialogService,
+    public formFactory: FormFactory,
+    public passengerGridService: TourPassengersGridService,
+    public personService: PersonService) {
 
   }
 
@@ -35,8 +35,14 @@ export class TourPassengersComponent implements OnInit, Dialog {
   }
 
   passengerReplacement() {
-    const ref = this.dialogService.openPopup(PassengerReplacementComponent, this.formFactory.createTourForm(this.data.model));
-    (<any>ref.componentInstance).selectedPassengers = this.passengerGridService.gridApi.getSelectedRows();
+    let selectedPassengrs: TeamMember[] = this.passengerGridService.gridApi.getSelectedRows();
+    if (selectedPassengrs.length > 0 &&
+      selectedPassengrs.length == selectedPassengrs.filter(x => x.tourId == selectedPassengrs[0].tourId).length) {
+      const ref = this.dialogService.openPopup(PassengerReplacementComponent, this.formFactory.createTourForm(this.data.model));
+      (<any>ref.componentInstance).selectedPassengers = selectedPassengrs;
+    } else {
+      console.log('not same agency selected');
+    }
   }
 
   onSelectionChanged() {
