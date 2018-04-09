@@ -168,6 +168,7 @@ export class TeamMember {
     ]; //@TODO check ugly
   haveVisa: boolean = true;
   passportDelivered: boolean = undefined;
+  tourId: string = undefined;
 }
 
 export enum Role {

@@ -28,6 +28,7 @@ export class TourPassengersComponent implements OnInit, Dialog {
   }
 
   initDialog() {
+    this.passengerGridService.loadTourAgency(this.data.model.id);
   }
 
   ngOnInit() {

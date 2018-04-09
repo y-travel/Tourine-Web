@@ -16,7 +16,8 @@ import {
   Tour,
   TourDetail,
   TourOption,
-  User
+  User,
+  Dictionary
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
 
@@ -662,10 +663,25 @@ export class UpdateAgency {
   agency: Agency;
 }
 
+@Route('/tours/{TourId}/agencies/{LoadChilds}')
+export class GetTourAgency implements IReturn<Array<Tour>>
+{
+  tourId: string;
+  loadChild: boolean = false;
+
+  createResponse() {
+    return new Array<Tour>();
+  }
+
+  getTypeName(): string {
+    return 'GetTourAgency';
+  }
+}
+
 @Route('/agencies/{IsAll}', 'GET')
 export class GetAgencies extends QueryDb<Agency> implements IReturn<QueryResponse<Agency>> {
-  isAll:boolean = true;
-  
+  isAll: boolean = true;
+
   createResponse() {
     return new QueryResponse<Agency>();
   }

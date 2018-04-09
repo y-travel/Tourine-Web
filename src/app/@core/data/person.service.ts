@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { ApiService } from './api.service';
-import { Block , Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger, UpsertLeader, DeleteLeader, GetPersonsOfTour, TourPassenger, PassengerReplacement } from './models';
+import { Block, Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger, UpsertLeader, DeleteLeader, GetPersonsOfTour, TourPassenger, PassengerReplacement, Tour, GetTourAgency } from './models';
 import { Serializable } from '../utils/serializable';
 
 @Injectable()
@@ -28,7 +28,7 @@ export class PersonService {
     return this.apiService.send(dto);
   }
 
-  upsertLeader(model: Person):Observable<Person> {
+  upsertLeader(model: Person): Observable<Person> {
     const dto = new UpsertLeader();
     dto.person = model;
     return this.apiService.send(dto);
@@ -40,6 +40,12 @@ export class PersonService {
     return this.apiService.getEntities(dto);
   }
 
+  getTourAgency(tourId: string): Observable<Tour[]> {
+    const query = new GetTourAgency();
+    query.tourId = tourId;
+    query.loadChild = true;
+    return this.apiService.get(query);
+  }
 
   getPersons(): Observable<Person[]> {
     const dto = new GetPersons();
@@ -105,13 +111,13 @@ export class PersonService {
     return this.apiService.get(query);
   }
 
-  deleteLeader(id: string){
+  deleteLeader(id: string) {
     const query = new DeleteLeader();
     query.id = id;
     return this.apiService.send(query);
   }
 
-  passengerReplacement(tourId:string,destId:string,buyerId:string,passengers:string[],infantPrice:number,basePrice:number,totalPrice:number){
+  passengerReplacement(tourId: string, destId: string, buyerId: string, passengers: string[], infantPrice: number, basePrice: number, totalPrice: number) {
     const dto = new PassengerReplacement();
     //@TODO: ughly
     dto.tuorId = tourId;

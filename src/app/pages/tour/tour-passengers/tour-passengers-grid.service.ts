@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { GridOptions } from 'ag-grid';
-import { TeamMember, Person, OptionType } from '../../../@core/data/models';
+import { TeamMember, Person, OptionType, Tour, Dictionary } from '../../../@core/data/models';
 import { ToolbarItem, CellToolbarComponent } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,9 +15,11 @@ export class TourPassengersGridService {
     gridColumnApi: any;
     rows: TeamMember[];
 
+    tourAgency: Dictionary<string> = {};
+
     columnDefs: any[];
     toolbarTourItems: ToolbarItem[] = [];
-    frameworkComponents: any; 
+    frameworkComponents: any;
     detailCellRenderer: any;
     detailCellRendererParams: any;
     gridApi: any;
@@ -37,13 +39,13 @@ export class TourPassengersGridService {
             },
         };
 
-        this.columnDefs = [ 
+        this.columnDefs = [
             {
                 headerName: '',
                 maxWidth: 50,
                 minWidth: 50,
                 checkboxSelection: true,
-                
+
             },
             {
                 headerName: 'row',
@@ -55,8 +57,13 @@ export class TourPassengersGridService {
             {
                 headerName: "person.nameAndFamily",
                 valueGetter: (params: any) => {
-                    return params.data.person.gender == 1 ? 'آقای ' + params.data.person.name + ' ' + params.data.person.family : 'خانم ' + params.data.person.name + ' ' + params.data.person.family ; 
+                    return params.data.person.gender == 1 ? 'آقای ' + params.data.person.name + ' ' + params.data.person.family : 'خانم ' + params.data.person.name + ' ' + params.data.person.family;
                 },
+            },
+            {
+                headerName: 'agency.*',
+                field: 'tourId',
+                cellRenderer: (params: any) => this.tourAgency[params.value],
             },
             {
                 headerName: "options",
@@ -94,7 +101,7 @@ export class TourPassengersGridService {
                 cellRenderer: 'cellToolbar',
                 cellRendererParams: {
                     items: this.toolbarTourItems,
-                }, 
+                },
             },
 
         ];
@@ -153,7 +160,7 @@ export class TourPassengersGridService {
         this.gridApi.setRowData(this.rows);
     }
 
-    remove(item: any) { 
+    remove(item: any) {
         var index = this.rows.indexOf(item);
         if (index <= -1)
             return;
@@ -163,5 +170,11 @@ export class TourPassengersGridService {
 
     setRow(row: TeamMember[]) {
         this.rows = row;
+    }
+
+    loadTourAgency(tourId: string) {
+        this.personService.getTourAgency(tourId).subscribe((tours: Tour[]) => {
+            tours.forEach(t => this.tourAgency[t.id] = t.agency.name);
+        });
     }
 }
