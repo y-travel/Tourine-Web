@@ -49,9 +49,9 @@ export class TourService {
     return this.apiService.getEntities(dto);
   }
 
-  getOptions(model: Tour): Observable<TourOption[]> {
+  getOptions(tourId: string): Observable<TourOption[]> {
     const dto = new GetTourOptions();
-    dto.tourId = model.id;
+    dto.tourId = tourId;
     return this.apiService.getEntities(dto);
   }
 }

@@ -40,10 +40,9 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
   initDialog() {
     this.isNewBlock = this.dialogMode === DialogMode.Create;
     this.vModel.init(this.data.tourId, this.data.block, !this.isNewBlock);
-    if (!this.isNewBlock)
-      this.tourService
-        .getOptions(this.vModel.model)
-        .subscribe(x => this.vModel.form.updateForm({options: x}));
+    this.tourService
+      .getOptions(this.isNewBlock ? this.vModel.tourId : this.vModel.model.id)
+      .subscribe(x => this.vModel.form.updateForm({options: x}));
     this.agencies = this.service.getList();
     this.service.getTourFreeSpace(this.vModel.tourId).subscribe(x => {
       this.freeSpace = +x;
