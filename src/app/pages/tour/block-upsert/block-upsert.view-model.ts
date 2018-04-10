@@ -1,30 +1,33 @@
 import { Injectable } from '@angular/core';
-import { Agency, Block } from '../../../@core/data/models/client.model';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Tour } from '../../../@core/data/models/client.model';
 import { NewFormService } from '../../../@core/data/form.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
-import { FormBuilder, Validators } from '@angular/forms';
-
-class ModelType {
-  block = new Block();
-  agency = new Agency();
-}
 
 @Injectable()
 export class BlockUpsertViewModel {
-  type: { block: Block };
-  form: NewFormService<Block>;
+  form: NewFormService<Tour>;
+  tourId: string;
 
   constructor(private formFactory: FormFactory) {
   }
 
-  get model(): Block {
-    return <Block>this.form.value;
+  get model(): Tour {
+    return <Tour>this.form.value;
   }
 
-  init(block?: Block, isEdit = false) {
-    if (!isEdit)
-      block.agencyId = '';
-    this.form = this.createBlockForm(block);
+  init(tourId: string, tour: Tour, isEdit = false) {
+    this.tourId = tourId;
+    if (!isEdit) {
+      const tmp = new Tour();
+      //initial block
+      tmp.parentId = this.tourId;
+      tmp.capacity = 1;
+      tmp.basePrice = tour.basePrice;
+      tmp.infantPrice = tour.infantPrice;
+      tour = tmp;
+    }
+    this.form = this.createBlockForm(tour);
   }
 
   updateForm(model?: any) {
@@ -44,20 +47,22 @@ export class BlockUpsertViewModel {
     }
   }
 
-  private createBlockForm(model: Block = new Block()): NewFormService<Block> {
+//@TODO 1: to be merge with tour
+  private createBlockForm(model: Tour = new Tour()): NewFormService<Tour> {
     const form = new FormBuilder().group({
       id: [model.id],
       parentId: [model.parentId],
       agencyId: [model.agencyId, Validators.required],
       capacity: [model.capacity ? model.capacity : undefined, [Validators.required, Validators.min(1)]],
       infantPrice: [model.infantPrice ? model.infantPrice : undefined, Validators.required],
-      busPrice: [model.busPrice ? model.busPrice : undefined, Validators.required],
-      roomPrice: [model.roomPrice ? model.roomPrice : undefined, Validators.required],
-      foodPrice: [model.foodPrice ? model.foodPrice : undefined, Validators.required],
       basePrice: [model.basePrice ? model.basePrice : undefined, Validators.required],
-      totalPrice: [model.totalPrice ? model.totalPrice : 0]
+      options: new FormBuilder().array(
+        (model.options ? model.options : new Tour().options)
+          .map(x => this.formFactory.createTourOptionForm(model.id, x)) //@TODO find a good solution for initializing options
+      ),
+      isBlock: true,
     });
-    return new NewFormService(Block, form);
+    return new NewFormService(Tour, form);
   }
 
 }

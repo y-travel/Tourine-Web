@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Agency, Destination, Person, Place, Tour } from './models/client.model';
+import { Agency, Destination, Person, Place, Tour, TourOption } from './models/client.model';
 import { Serializable } from '../utils/serializable';
 import { DeleteTour, GetAgencies, GetBlocks, GetDestinations, GetLeaders, GetPlaces, GetTourOptions, GetTours, UpsertTour } from './models/server.dtos';
 import { Observable } from 'rxjs/Rx';
@@ -11,7 +11,7 @@ export class TourService {
   data = new Array<Tour>();
   //@TODO Optimize json
 
-  upsertTour = (model: Tour): Observable<Tour> => this.apiService.send(Serializable.fromJSONToType( UpsertTour, model));
+  upsertTour = (model: Tour): Observable<Tour> => this.apiService.send(Serializable.fromJSONToType(UpsertTour, model));
 
   deleteTour = (model: Tour): Observable<void> => this.apiService.send(Serializable.fromJSONToType(DeleteTour, model));
 
@@ -49,7 +49,7 @@ export class TourService {
     return this.apiService.getEntities(dto);
   }
 
-  getOptions(model: Tour) {
+  getOptions(model: Tour): Observable<TourOption[]> {
     const dto = new GetTourOptions();
     dto.tourId = model.id;
     return this.apiService.getEntities(dto);

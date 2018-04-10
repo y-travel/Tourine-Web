@@ -1,22 +1,22 @@
 <div mat-dialog-title class="modal-header">
   <div class="modal-title">
-    {{"tour.reserve"|translate}}
+    {{ "tour.reserve"|translate }}
   </div>
 </div>
 <div class="modal-body" dir="rtl" [style.width.px]="500" [style.height.px]="300" autoTranslate>
   <!--width set for IE-->
   <mat-horizontal-stepper #stepper [linear]="true">
-    <mat-step  label="{{'steps'|translate:({value:'first'|translate})}}">
+    <mat-step label="{{'steps'|translate:({value:'first'|translate})}}">
       <form [formGroup]="vModel.form">
         <div fxLayout="row">
-          <br> {{"addAgencyMessage"|translate}}
+          <br> {{ "addAgencyMessage"|translate }}
           <br>
           <br>
         </div>
         <div fxLayout="row">
           <mat-form-field>
             <mat-select placeholder="agency.name" formControlName="agencyId" (selectionChange)="selectedItem($event,stepper)">
-              <mat-option *ngFor="let item of agencies | async" [value]="item.id">{{item.name}}</mat-option>
+              <mat-option *ngFor="let item of agencies | async" [value]="item.id">{{ item.name }}</mat-option>
             </mat-select>
           </mat-form-field>
           <button mat-mini-fab color="accent" (click)="agencyUpsert()">
@@ -28,62 +28,46 @@
 
     <mat-step [stepControl]="vModel.form" label="{{'steps'|translate:({value:'second'|translate})}}">
       <form [formGroup]="vModel.form">
+        <div fxLayout="row" fxFlex>
+          <div fxLayout="column" fxFlex >
+            <mat-form-field fxFlex="40">
+              <input matInput mask="number" #adultCount placeholder="adultCount" formControlName="capacity">
+              <mat-hint align="end">{{ "emptyCount"|translate:({value:(freeSpace-adultCount.value)}) }}</mat-hint>
+            </mat-form-field>
 
-        <div fxLayout="row" fxLayoutAlign="space-between">
-          <mat-form-field fxFlex="40">
-            <input matInput mask="number" #adultCount placeholder="adultCount" formControlName="capacity">
-            <mat-hint align="end" >{{"emptyCount"|translate:({value:(freeSpace-adultCount.value)}) }}</mat-hint>
-          </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput mask="number" placeholder="tour.price" formControlName="basePrice">
+              <mat-icon matSuffix> landscape</mat-icon>
+              <mat-hint align="end" translate>price.irFormated</mat-hint>
+            </mat-form-field>
 
-          <mat-form-field fxFlex="50">
-            <input matInput mask="number" placeholder="busPrice" formControlName="busPrice">
-            <mat-icon matSuffix>airport_shuttle</mat-icon>
-            <mat-hint align="end" translate>price.irFormated</mat-hint>
-          </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput mask="number" placeholder="infantPrice" formControlName="infantPrice">
+              <mat-icon matSuffix>child_care</mat-icon>
+              <mat-hint align="end" translate>price.irFormated</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="column" fxFlex formArrayName="options">
+            <mat-form-field fxFlex *ngFor="let formGroup of vModel.form.get('options')['controls'];let i=index" [formGroupName]="i">
+              <input matInput mask="number" placeholder="{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}" formControlName="price">
+              <mat-icon matSuffix>{{ utils.mapOptionTypeToIcon(formGroup.value.optionType) }}</mat-icon>
+              <mat-hint align="end" translate>price.irFormated</mat-hint>
+            </mat-form-field>
+          </div>
         </div>
-
-        <div fxLayout="row" fxLayoutAlign="space-between">
-          <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="tour.price" formControlName="basePrice">
-            <mat-icon matSuffix> landscape</mat-icon>
-            <mat-hint align="end" translate>price.irFormated</mat-hint>
-          </mat-form-field>
-
-          <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="roomPrice" formControlName="roomPrice">
-            <mat-icon matSuffix> airline_seat_individual_suite</mat-icon>
-            <mat-hint align="end" translate>price.irFormated</mat-hint>
-          </mat-form-field>
-        </div>
-
-        <div fxLayout="row" fxLayoutAlign="space-between">
-
-          <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="infantPrice" formControlName="infantPrice">
-            <mat-icon matSuffix>child_care</mat-icon>
-            <mat-hint align="end" translate>price.irFormated</mat-hint>
-          </mat-form-field>
-
-          <mat-form-field fxFlex>
-            <input matInput mask="number" placeholder="foodPrice" formControlName="foodPrice">
-            <mat-icon matSuffix>room_service</mat-icon>
-            <mat-hint align="end" translate>price.irFormated</mat-hint>
-          </mat-form-field>
-
-        </div>
-
       </form>
     </mat-step>
 
-    <mat-step  label="{{'steps'|translate:({value:'third'|translate})}}">
-      <form >
+    <mat-step label="{{'steps'|translate:({value:'third'|translate})}}">
+      <form>
         <div fxLayout="row">
-          <br> {{"msg.blockReservation"|translate:({capacity:vModel.model.capacity})}}
+          <br> {{ "msg.blockReservation"|translate:({capacity:vModel.model.capacity}) }}
           <br>
-          <br> {{"addPassengerMessage"|translate}}
+          <br> {{ "addPassengerMessage"|translate }}
         </div>
         <mat-dialog-actions>
-          <button mat-raised-button color="primary" fxFlex type="button" (click)="addPassengers()">{{"add"|translate}}
+          <button mat-raised-button color="primary" fxFlex type="button" (click)="addPassengers()">{{ "add"|translate }}
             <mat-icon class="icon-text-color">add</mat-icon>
           </button>
         </mat-dialog-actions>
@@ -100,9 +84,9 @@
     <mat-icon>navigate_next</mat-icon>
   </button>
   <label fxFlex [hidden]='stepper.selectedIndex!=1'>
-    {{"allPriceIsPerOne"|translate}}
+    {{ "allPriceIsPerOne"|translate }}
   </label>
 </div>
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" fxFlex type="button" mat-dialog-close>{{"close"|translate}}</button>
+  <button mat-raised-button color="primary" fxFlex type="button" mat-dialog-close>{{ "close"|translate }}</button>
 </mat-dialog-actions>

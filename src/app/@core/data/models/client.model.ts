@@ -37,6 +37,7 @@ export class Tour extends Model {
   tourDetail: TourDetail = new TourDetail();
   agencyId: string;
   agency: Agency;
+  isBlock: boolean;
 }
 
 export class TourOption extends Model {
@@ -44,7 +45,7 @@ export class TourOption extends Model {
   tourId: string;
 
   constructor(public optionType = OptionType.Empty,
-    public optionStatus: OptionStatus = OptionStatus.Limited) {
+              public optionStatus: OptionStatus = OptionStatus.Limited) {
     super();
   }
 }
@@ -152,7 +153,7 @@ export class PersonIncome {
   incomeStatus: IncomeStatus;
   currencyFactor: number;
 
-  constructor(public optionType: OptionType = OptionType.Empty, ) {
+  constructor(public optionType: OptionType = OptionType.Empty,) {
   }
 }
 

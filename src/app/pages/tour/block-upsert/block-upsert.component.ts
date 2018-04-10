@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Agency } from '../../../@core/data/models/client.model';
+import { Agency, Block } from '../../../@core/data/models/client.model';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSelect, MatStepper } from '@angular/material';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
@@ -9,8 +9,10 @@ import { Observable } from 'rxjs/Rx';
 import { AgencyUpsertComponent } from '../agency-upsert/agency-upsert.component';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
 import { BlockUpsertViewModel } from './block-upsert.view-model';
-import { DialogMode } from '../../../@core/data/models/enums';
+import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
+import { TourService } from '../../../@core/data/tour.service';
+import { Serializable } from '../../../@core/utils/serializable';
 
 @Component({
   selector: 'app-block-upsert',
@@ -23,21 +25,27 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
   freeSpace: number;
   agencies: Observable<Agency[]>;
   isNewBlock = false;
+  optionType = OptionType;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               @Inject(UTILS) private utils: AppUtils,
               public vModel: BlockUpsertViewModel,
               public dialogInstance: MatDialogRef<ModalInterface>,
               private dialogService: DialogService,
+              private tourService: TourService,
               public formFactory: FormFactory,
               public service: AgencyService) {
   }
 
   initDialog() {
     this.isNewBlock = this.dialogMode === DialogMode.Create;
-    this.vModel.init(this.data, !this.isNewBlock);
+    this.vModel.init(this.data.tourId, this.data.block, !this.isNewBlock);
+    if (!this.isNewBlock)
+      this.tourService
+        .getOptions(this.vModel.model)
+        .subscribe(x => this.vModel.form.updateForm({options: x}));
     this.agencies = this.service.getList();
-    this.service.getTourFreeSpace(this.vModel.model.id).subscribe(x => {
+    this.service.getTourFreeSpace(this.vModel.tourId).subscribe(x => {
       this.freeSpace = +x;
     });
   }
@@ -54,9 +62,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
       stepper.next();
       return;
     }
-    const newBlock = this.isNewBlock
-      ? await this.service.reserveBlock(this.vModel.model).first().toPromise()
-      : await this.service.UpdateReservedBlock(this.vModel.model).first().toPromise();
+    const newBlock = await this.tourService.upsertTour(this.vModel.model).first().toPromise();
     this.isNewBlock = this.utils.isNullorUndefined(newBlock);
     stepper.next();
     this.vModel.updateForm(newBlock);
@@ -74,6 +80,8 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
   }
 
   addPassengers() {
-    this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(this.vModel.model));
+    //@TODO tmp
+    const tmpBlock = Serializable.fromJSON(new Block(), this.vModel.model);
+    this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(tmpBlock));
   }
 }
