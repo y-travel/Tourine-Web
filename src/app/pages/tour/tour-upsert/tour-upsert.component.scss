@@ -1,0 +1,8 @@
+@import '../../../@theme/styles/install';
+
+@include trn-install-component() {
+  .menu-icon{
+    font-size: trn-theme(menu-icon-font-size);
+  }
+}
+

@@ -1,75 +1,57 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from "./api.service";
-import { Tour } from "./models/client.model";
-import { Serializable } from "../utils/serializable";
+import { ApiService } from './api.service';
+import { Agency, Destination, Person, Place, Tour, TourOption } from './models/client.model';
+import { Serializable } from '../utils/serializable';
+import { DeleteTour, GetAgencies, GetBlocks, GetDestinations, GetLeaders, GetPlaces, GetTourOptions, GetTours, UpsertTour } from './models/server.dtos';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class TourService {
 
   data = new Array<Tour>();
+  //@TODO Optimize json
+
+  upsertTour = (model: Tour): Observable<Tour> => this.apiService.send(Serializable.fromJSONToType(UpsertTour, model));
+
+  deleteTour = (model: Tour): Observable<void> => this.apiService.send(Serializable.fromJSONToType(DeleteTour, model));
 
   constructor(private apiService: ApiService) {
-    this.fillData();
   }
 
-  getList() {
-    // let getTour = new GetTours();
-    // getTour.Code = "1";
-    // this.apiService.getEntities(getTour).subscribe(res => {
-    //   console.log(res);
-    // });
-    return this.data;
+  getPlaces(): Observable<Place[]> {
+    const dto = new GetPlaces();
+    return this.apiService.getEntities(dto);
   }
 
-  addTour(model: Tour) {
-    this.data.push(model);
+  getDistinations(): Observable<Destination[]> {
+    const dto = new GetDestinations();
+    return this.apiService.getEntities(dto);
   }
 
-  private fillData() {
-    this.data = Serializable.fromJSONToArray(Tour, [
-        {
-          id: 1,
-          destinationId: 1,
-          duration: 7,
-          adultCount: 3,
-          adultMinPrice: 1000000,
-          busPrice: 120000,
-          roomPrice: 300000,
-          foodPrice: 150000,
-          capacity:100,
-          infantPrice: 120000,
-          date: Date.now(),
-          placeId: 1
-        },
-        {
-          id: 2,
-          destinationId: 1,
-          duration: 7,
-          adultCount: 3,
-          adultMinPrice: 1000000,
-          busPrice: 120000,
-          roomPrice: 300000,
-          foodPrice: 150000,
-          infantPrice: 120000,
-          capacity:100,
-          date: Date.now(),
-          placeId: 2
-        },
-        {
-          id: 3,
-          destinationId: 2,
-          duration: 7,
-          adultCount: 3,
-          adultMinPrice: 1000000,
-          busPrice: 120000,
-          roomPrice: 300000,
-          foodPrice: 150000,
-          infantPrice: 120000,
-          date: Date.now(),
-          capacity:100,
-          placeId: 3
-        }
-      ]
-    );
+  getLeaders(): Observable<Person[]> {
+    const dto = new GetLeaders();
+    return this.apiService.getEntities(dto);
+  }
+
+  getList(): Observable<Tour[]> {
+    const query = new GetTours();
+    return this.apiService.getEntities(query);
+  }
+
+  getBlocks(tourId: string): Observable<Tour[]> {
+    const query = new GetBlocks();
+    query.tourId = tourId;
+    return this.apiService.getEntities(query);
+  }
+
+  getAgencies(): Observable<Agency[]> {
+    const dto = new GetAgencies();
+    return this.apiService.getEntities(dto);
+  }
+
+  getOptions(tourId: string): Observable<TourOption[]> {
+    const dto = new GetTourOptions();
+    dto.tourId = tourId;
+    return this.apiService.getEntities(dto);
   }
 }

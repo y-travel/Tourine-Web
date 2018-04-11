@@ -7,7 +7,10 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2015"],
+    "lib": [
+      "es2015",
+      "dom"
+    ],
     "sourceMap": true,
     "pretty": true,
     "allowUnreachableCode": false,
@@ -26,17 +29,12 @@
   },
   "files": [
     "gulpfile.ts",
-    "tools/manual_typings/seed/autoprefixer.d.ts",
-    "tools/manual_typings/seed/cssnano.d.ts",
-    "tools/manual_typings/seed/express-history-api-fallback.d.ts",
-    "tools/manual_typings/seed/istream.d.ts",
-    "tools/manual_typings/seed/karma.d.ts",
-    "tools/manual_typings/seed/merge-stream.d.ts",
-    "tools/manual_typings/seed/open.d.ts",
-    "tools/manual_typings/seed/operators.d.ts",
-    "tools/manual_typings/seed/slash.d.ts",
-    "tools/manual_typings/seed/systemjs-builder.d.ts",
-    "tools/manual_typings/seed/tildify.d.ts"
+    "tools/manual_typings/karma.d.ts",
+    "tools/manual_typings/merge-stream.d.ts",
+    "tools/manual_typings/tildify.d.ts",
+    "tools/manual_typings/istream.d.ts",
+    "tools/manual_typings/open.d.ts",
+    "tools/manual_typings/operators.d.ts"
   ],
   "exclude": [
     "node_modules",

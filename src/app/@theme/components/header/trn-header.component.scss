@@ -1,0 +1,19 @@
+@import '../../styles/install';
+
+@include trn-install-component() {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  .logo {
+    padding: 0 trn-theme(padding);
+    font-size: 1.75rem;
+    font-weight: trn-theme(font-weight-bolder);
+    border-left: 1px solid trn-theme(separator);
+    white-space: nowrap;
+
+    span {
+      font-weight: trn-theme(font-weight-normal);
+    }
+  }
+}
+

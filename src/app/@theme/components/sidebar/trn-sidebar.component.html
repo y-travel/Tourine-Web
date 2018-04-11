@@ -1,0 +1,18 @@
+<mat-sidenav-container fxFlexFill><!--we forced to define it inside sidebar-->
+  <mat-sidenav mode="push" position="right"
+               [fixedInViewport]="true"
+               class="mat-elevation-z2">
+    <ng-content select=".sidebar-header"></ng-content>
+    <ng-content></ng-content>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div fxLayout="column" fxFlexFill>
+      <ng-content select=".sidebar-main-header"></ng-content>
+      <div class="content">
+        <div fxLayout="column" fxFlex>
+          <ng-content select=".sidebar-article"></ng-content>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

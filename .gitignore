@@ -55,5 +55,11 @@ gulpfile.js.map
 
 # OS X trash files
 .DS_Store
-src/client/app/shared/config/env.config.js
-src/client/app/shared/config/env.config.js.map
+src/**/*.js
+src/**/*.js.map
+
+tools/env/env-config.interface.d.ts
+tools/env/env-config.interface.ngsummary.json
+tools/manual_typings/project/sample.package.ngsummary.json
+#ignore workspace folders
+.*

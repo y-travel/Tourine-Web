@@ -1,0 +1,83 @@
+<div mat-dialog-title class="modal-header">
+  <div class="modal-title">
+    {{"tour.upsert"|translate}}
+  </div>
+</div>
+<div class="right modal-body" dir="rtl" style="min-width: 700px" autoTranslate>
+  <!--width set for IE-->
+  <form [formGroup]="data.form">
+    <ng-container formGroupName="tourDetail">
+    <div fxLayout="row">
+      <trn-slider fxFlex trueText="dollar" falseText="price.ir"></trn-slider>
+      <div fxFlex="80" fxLayoutAlign="end center">
+        <i class="material-icons">flight</i>
+        <trn-slider formControlName="isFlight" falseText="ground" trueText="flight"></trn-slider>
+        <i class="material-icons">directions_bus</i>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start">
+      <mat-form-field>
+        <mat-select placeholder="destination" formControlName="destinationId">
+          <mat-option>{{"none"|translate}}</mat-option>
+          <mat-option *ngFor="let item of destinations | async" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="leader.*" formControlName="leaderId" fxLayoutGap="100px">
+          <mat-option>{{"none"|translate}}</mat-option>
+          <mat-option *ngFor="let leader of leaders | async" [value]="leader.id">
+            {{leader.name + ' ' + leader.family}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    </ng-container>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <mat-card fxLayout="column" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="space-between" formGroupName="tourDetail">
+          <mat-form-field fxFlex>
+            <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour.date" formControlName="startDate">
+            <mat-datepicker-toggle utc="true" #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
+            <mat-datepicker #tourDate disabled="false"></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field fxFlex >
+            <input matInput placeholder="duration" maxlength="3" formControlName="duration">
+            <mat-hint align="end" translate>nightFormat</mat-hint>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field fxFlex>
+            <input matInput placeholder="capacity.*" formControlName="capacity">
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input matInput mask="number" placeholder="tour.price" formControlName="basePrice">
+            <mat-hint align="end" translate>price.irFormated</mat-hint>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field fxFlex>
+            <input matInput mask="number" placeholder="infantPrice" formControlName="infantPrice">
+            <mat-hint align="end" translate>price.irFormated</mat-hint>
+          </mat-form-field>
+          <mat-form-field fxFlex formGroupName="tourDetail">
+            <mat-select placeholder="hotel" formControlName="placeId">
+              <mat-option *ngFor="let item of places|async" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card>
+      <mat-card fxLayout="column" fxFlex="40" formArrayName="options">
+        <mat-form-field fxFlex *ngFor="let formGroup of data.form.get('options')['controls'];let i=index" [formGroupName]="i">
+            <input matInput mask="number" placeholder="{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}" formControlName="price">
+            <mat-icon matSuffix>{{utils.mapOptionTypeToIcon(formGroup.value.optionType)}}</mat-icon>
+            <mat-hint align="end" translate>price.irFormated</mat-hint>
+        </mat-form-field>
+      </mat-card>
+    </div>
+  </form>
+</div>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" fxFlex (click)="save()">{{"save"|translate}}</button>
+</mat-dialog-actions>

@@ -1,5 +1,4 @@
 import { join } from 'path';
-import * as slash from 'slash';
 import { argv } from 'yargs';
 
 import {
@@ -15,7 +14,7 @@ import {
  * make your migration to newer versions of the seed harder.
  *
  * Your application-specific configurations should be
- * in project.config.ts. If you need to change any tasks
+ * in base.config.ts. If you need to change any tasks
  * from "./tasks" overwrite them by creating a task with the
  * same name in "./projects". For further information take a
  * look at the documentation:
@@ -65,7 +64,7 @@ export class SeedConfig {
   PORT = argv['port'] || 5555;
 
   /**
-   * The root folder of the project (up two levels from the current directory).
+   * The root folder of the base (up two levels from the current directory).
    */
   PROJECT_ROOT = join(__dirname, '../..');
 
@@ -126,25 +125,7 @@ export class SeedConfig {
    * which can be overriden by the `--base` flag when running `npm start`.
    * @type {string}
    */
-  APP_BASE = argv['base'] || '/';
-
-  /**
-   * The base path of node modules.
-   * @type {string}
-   */
-  NPM_BASE = slash(join('.', this.APP_BASE, 'node_modules/'));
-
-  /**
-   * The build interval which will force the TypeScript compiler to perform a typed compile run.
-   * Between the typed runs, a typeless compile is run, which is typically much faster.
-   * For example, if set to 5, the initial compile will be typed, followed by 5 typeless runs,
-   * then another typed run, and so on.
-   * If a compile error is encountered, the build will use typed compilation until the error is resolved.
-   * The default value is `0`, meaning typed compilation will always be performed.
-   * @type {number}
-   */
-  TYPED_COMPILE_INTERVAL = 0;
-
+  APP_BASE = argv['base'] || '/app/';
   /**
    * The directory where the bootstrap file is located.
    * The default directory is `app`.
@@ -191,7 +172,7 @@ export class SeedConfig {
   APP_SRC = `src/${this.APP_CLIENT}`;
 
   /**
-   * The name of the TypeScript project file
+   * The name of the TypeScript base file
    * @type {string}
    */
   APP_PROJECTNAME = 'tsconfig.json';
@@ -224,11 +205,6 @@ export class SeedConfig {
    * @type {string}
    */
   TOOLS_DIR = 'tools';
-
-  /**
-   * The directory of the tasks provided by the seed.
-   */
-  SEED_TASKS_DIR = join(process.cwd(), this.TOOLS_DIR, 'tasks', 'seed');
 
   /**
    * Seed tasks which are composition of other tasks.
@@ -472,154 +448,7 @@ export class SeedConfig {
     );
   }
 
-  /**
-   * The configuration of SystemJS for the `dev` environment.
-   * @type {any}
-   */
-  SYSTEM_CONFIG_DEV: any = {
-    paths: {
-      [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
-      '@angular/animations':
-        'node_modules/@angular/animations/bundles/animations.umd.js',
-      '@angular/platform-browser/animations':
-        'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
-      '@angular/common': 'node_modules/@angular/common/bundles/common.umd.js',
-      '@angular/common/http': 'node_modules/@angular/common/bundles/common-http.umd.js',
-      '@angular/compiler':
-        'node_modules/@angular/compiler/bundles/compiler.umd.js',
-      '@angular/core': 'node_modules/@angular/core/bundles/core.umd.js',
-      '@angular/forms': 'node_modules/@angular/forms/bundles/forms.umd.js',
-      '@angular/http': 'node_modules/@angular/http/bundles/http.umd.js',
-      '@angular/platform-browser':
-        'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
-      '@angular/platform-browser-dynamic':
-        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
-      '@angular/router': 'node_modules/@angular/router/bundles/router.umd.js',
-      '@angular/animations/browser':
-        'node_modules/@angular/animations/bundles/animations-browser.umd.js',
-      'tslib': 'node_modules/tslib/tslib.js',
 
-      '@angular/common/testing':
-        'node_modules/@angular/common/bundles/common-testing.umd.js',
-      '@angular/compiler/testing':
-        'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
-      '@angular/core/testing':
-        'node_modules/@angular/core/bundles/core-testing.umd.js',
-      '@angular/http/testing':
-        'node_modules/@angular/http/bundles/http-testing.umd.js',
-      '@angular/platform-browser/testing':
-        'node_modules/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
-      '@angular/platform-browser-dynamic/testing':
-        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
-      '@angular/router/testing':
-        'node_modules/@angular/router/bundles/router-testing.umd.js',
-
-      'app/': `${this.APP_BASE}app/`,
-      // For test config
-      'dist/dev/': '/base/dist/dev/',
-      '': 'node_modules/',
-    },
-    packages: {
-      [this.BOOTSTRAP_DIR]: {
-        defaultExtension: 'js'
-      }
-    }
-  };
-
-  /**
-   * The configuration of SystemJS of the application.
-   * Per default, the configuration of the `dev` environment will be used.
-   * @type {any}
-   */
-  SYSTEM_CONFIG: any = this.SYSTEM_CONFIG_DEV;
-
-  /**
-   * The system builder configuration of the application.
-   * @type {any}
-   */
-  SYSTEM_BUILDER_CONFIG: any = {
-    defaultJSExtensions: true,
-    base: this.PROJECT_ROOT,
-    packageConfigPaths: [
-      join('node_modules', '*', 'package.json'),
-      join('node_modules', '@angular', '*', 'package.json')
-      // for other modules like @ngx-translate the package.json path needs to updated here
-      // otherwise npm run build.prod would fail
-      // join('node_modules', '@ngx-translate', '*', 'package.json')
-    ],
-    paths: {
-      // Note that for multiple apps this configuration need to be updated
-      // You will have to include entries for each individual application in
-      // `src/client`.
-      [join(this.TMP_DIR, this.BOOTSTRAP_DIR, '*')]: `${this.TMP_DIR}/${this
-        .BOOTSTRAP_DIR}/*`,
-      '@angular/platform-browser/animations':
-        'node_modules/@angular/platform-browser/bundles/platform-browser-animations.umd.js',
-      '@angular/animations/browser':
-        'node_modules/@angular/animations/bundles/animations-browser.umd.js',
-      '@angular/common/http':
-        'node_modules/@angular/common/bundles/common-http.umd.js',
-      'tslib': 'node_modules/tslib/tslib.js',
-      'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
-      'node_modules/*': 'node_modules/*',
-      '*': 'node_modules/*'
-    },
-    packages: {
-      '@angular/animations': {
-        main: 'bundles/animations.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/common': {
-        main: 'bundles/common.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/compiler': {
-        main: 'bundles/compiler.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/core/testing': {
-        main: 'bundles/core-testing.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/core': {
-        main: 'bundles/core.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/forms': {
-        main: 'bundles/forms.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/http': {
-        main: 'bundles/http.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/platform-browser': {
-        main: 'bundles/platform-browser.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/platform-browser-dynamic': {
-        main: 'bundles/platform-browser-dynamic.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/router': {
-        main: 'bundles/router.umd.js',
-        defaultExtension: 'js'
-      },
-      '@angular/service-worker': {
-        main: 'bundles/service-worker.umd.js',
-        defaultExtension: 'js'
-      },
-      rxjs: {
-        main: 'Rx.js',
-        defaultExtension: 'js'
-      }
-    }
-  };
-
-  /**
-   * The Autoprefixer configuration for the application.
-   * @type {Array}
-   */
   BROWSER_LIST = [
     'ie >= 10',
     'ie_mob >= 10',
@@ -645,7 +474,7 @@ export class SeedConfig {
   PROXY_MIDDLEWARE: any[] = [];
 
   /**
-   * Configurations for NPM module configurations. Add to or override in project.config.ts.
+   * Configurations for NPM module configurations. Add to or override in base.config.ts.
    * @type {any}
    */
   PLUGIN_CONFIGS: any = {};
@@ -684,7 +513,7 @@ export class SeedConfig {
      * Example: `npm start -- --b`
      * @return {any}
      */
-    let defaults = {
+    const defaults = {
       'browser-sync': {
         middleware: [
           require('connect-history-api-fallback')({
@@ -788,34 +617,6 @@ export class SeedConfig {
       : 'css';
   }
 
-  addPackageBundles(pack: ExtendPackages) {
-    if (pack.path) {
-      this.SYSTEM_CONFIG_DEV.paths[pack.name] = pack.path;
-      this.SYSTEM_BUILDER_CONFIG.paths[pack.name] = pack.path;
-    }
-
-    if (pack.packageMeta) {
-      this.SYSTEM_CONFIG_DEV.packages[pack.name] = pack.packageMeta;
-      this.SYSTEM_BUILDER_CONFIG.packages[pack.name] = pack.packageMeta;
-    }
-  }
-
-  addPackagesBundles(packs: ExtendPackages[]) {
-    packs.forEach((pack: ExtendPackages) => {
-      this.addPackageBundles(pack);
-    });
-  }
-
-  /**
- * Convert named rollup array to object
- */
-  getRollupNamedExports() {
-    let namedExports = {};
-    this.ROLLUP_NAMED_EXPORTS.map(namedExport => {
-      namedExports = Object.assign(namedExports, namedExport);
-    });
-    return namedExports;
-  }
 }
 
 /**
@@ -852,7 +653,7 @@ function filterDependency(type: string, d: InjectableDependency): boolean {
  * @return {number} The applications version.
  */
 function appVersion(): number | string {
-  var pkg = require('../../package.json');
+  const pkg = require('../../package.json');
   return pkg.version;
 }
 
@@ -860,9 +661,9 @@ function appVersion(): number | string {
  * Returns the application build type.
  */
 function getBuildType() {
-  let type = (argv['build-type'] || argv['env'] || '').toLowerCase();
-  let base: string[] = argv['_'];
-  let prodKeyword = !!base
+  const type = (argv['build-type'] || argv['env'] || '').toLowerCase();
+  const base: string[] = argv['_'];
+  const prodKeyword = !!base
     .filter(o => o.indexOf(BUILD_TYPES.PRODUCTION) >= 0)
     .pop();
   if ((base && prodKeyword) || type === BUILD_TYPES.PRODUCTION) {
@@ -873,6 +674,6 @@ function getBuildType() {
 }
 
 function getSmeOutFormat() {
-  let format = (argv['sme-out-format'] || '').toUpperCase();
+  const format = (argv['sme-out-format'] || '').toUpperCase();
   return SME_OUTPUT_FORMATS[format] || SME_OUTPUT_FORMATS.HTML;
 }

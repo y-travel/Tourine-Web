@@ -1,32 +1,25 @@
-﻿import { Injectable } from "@angular/core";
+﻿import { Inject, Injectable } from "@angular/core";
 import { DataService } from "./data.service";
-import { Headers, RequestOptions, RequestMethod } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs/Rx";
 //
 import { Serializable } from "../utils/serializable";
-import { QueryResponse, IReturn } from "./models/index";
-import { Configuration } from "../utils/configuration";
-import { Helper } from "../utils";
+import { IReturn } from "./models/index";
+import { APP_CONFIG, AppConfig } from "../utils/app.config";
+import { AppUtils, UTILS } from "../utils";
+import { HttpHeaders } from "@angular/common/http";
+import { QueryResponse } from "./models/server.dtos";
 
 @Injectable()
 export class ApiService {
-  private headers: Headers;
+  private headers: HttpHeaders;
 
-  constructor(public dataService: DataService) {
-    dataService.baseAddress = Configuration.ApiUrl + "json/reply/";
-    this.headers = new Headers();
-    this.headers.append("Content-Type", "application/json");
-    this.headers.append("Accept", "application/json");
+  constructor(public dataService: DataService, @Inject(APP_CONFIG) config: AppConfig,@Inject(UTILS) private utils: AppUtils) {
+    dataService.baseAddress = config.ApiUrl + "json/reply/";
+    this.headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    });
   }
-
-  getEntities<T>(data: IReturn<QueryResponse<T>>): Observable<QueryResponse<T>> {
-
-    return this.internalSend(data);
-  }
-
-  // protected saveEntity<T>(data: IReturn<EntityCreatedResponse<T>>): Observable<EntityCreatedResponse<T>> {
-  //     return this.internalSend(data);
-  // }
 
   get<T>(data: IReturn<T>): Observable<T> {
 
@@ -37,26 +30,23 @@ export class ApiService {
     return this.internalSend(data);
   }
 
+  getEntities<T>(data: IReturn<QueryResponse<T>>): Observable<T[]> {
+    return this.internalSend(data).map(res => res.results);
+  }
+
+  //
+  // protected saveEntity<T>(data: IReturn<EntityCreatedResponse<T>>): Observable<EntityCreatedResponse<T>> {
+  //   return this.internalSend(data);
+  // }
+
   private internalSend<T>(data: IReturn<T>): Observable<T | any> {
-    const httpMethod = Helper.getHttpMethod(data);
-    let requestMethod = RequestMethod.Get;
-    switch (httpMethod) {
-      case "POST":
-        requestMethod = RequestMethod.Post;
-        break;
-      case "PUT":
-        requestMethod = RequestMethod.Put;
-        break;
-    }
-
-
-    return this.dataService.request(requestMethod, data.getTypeName(), Serializable.toJSON(data), new RequestOptions({headers: this.headers})).map(
-      res => {
+    return this.dataService
+      .request(this.utils.getHttpMethod(data), data.getTypeName(), Serializable.toJSON(data), this.headers)
+      .map(res => {
         const type = data.createResponse();
         if (type)
           return Serializable.fromJSON(type, res);
         return res;
       });
   }
-
 }

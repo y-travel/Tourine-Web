@@ -1,0 +1,13 @@
+@import 'global/definitions';
+@import 'global/overrides';
+
+@mixin nb-theme-global() {
+  @include trn-theme-overrides();
+  @include trn-definition();
+}
+
+@mixin nb-install() {
+  @include nb-install-global() {
+    @content;
+  }
+}

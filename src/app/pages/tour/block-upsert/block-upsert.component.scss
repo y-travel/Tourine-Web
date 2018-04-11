@@ -1,0 +1,14 @@
+@import '../../../@theme/styles/install';
+
+@include trn-install-component() {
+  .closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .container {
+    max-height: 170px;
+    overflow-y: scroll;
+    padding: 5px;
+  }
+}

@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -18,5 +17,6 @@
     "plugins": [
       { "name": "tslint-language-service"}
     ]
-  }
+  },
+  "angularCompilerOptions": { "genDir": "../src/assets/i18n" }
 }

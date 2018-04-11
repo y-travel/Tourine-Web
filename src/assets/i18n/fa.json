@@ -1,58 +1,161 @@
 {
-  "buyer":"خریدار",
-  "fellows":"همراهان",
-  "mobileNumber":"شماره موبایل",
-  "passport_": {
-    "number":"شماره پاسپورت",
-    "expireDate":"تاریخ انقضاء پاسپورت"
-  },
-  "birthDate":"تاریخ تولد",
-  "nationalCode":"کد ملی",
-  "fatherName":"نام پدر",
-  "adult_": {
+  "add": "افزودن",
+  "addAgencyMessage": "نام آژانس را از لیست انتخاب نمایید و یا آژانس جدید ایجاد نمایید",
+  "addPassengerMessage": "برای افزودن مسافر به این تور، بر روی گزینه ثبت کلیک نمایید",
+  "adult": {
     "count": "تعداد ظرفیت بزرگسال",
     "minPrice": "حداقل قیمت ثبت نام بزرگسال"
   },
-  "adultCount": "تعداد بزرگسال",
+  "adultCount": "تعداد مسافران",
+  "agency": {
+    "name": "نام آژانس",
+    "phoneNumber": "شماره تلفن آژانس",
+    "upsert": "ثبت آژانس"
+  },
   "agencyName": "نام آژانس",
-  "cellPhone": "همراه",
-  "coupon_": {
-    "upsert": "ثبت کوپن"
-  },
-  "destination": "مقصد",
-  "dollar": "دلار",
-  "duration": "مدت زمان",
-  "email": "رایانامه",
-  "emptyCount": "تعداد خالی",
-  "flight": "هوایی",
-  "family":"نام خانوادگی",
-  "ground": "زمینی",
-  "hotel": "هتل",
-  "infantCount": "تعداد بچه",
-  "infantPrice": "قیمت بچه",
-  "managerName": "نام مدیر",
-  "name": "نام",
-  "offValue": "تخفیف",
-  "passenger": "مسافر",
-  "password": "کلمه عبور",
-  "phone": "تلفن",
-  "pleaseSelect": "لطفاً انتخاب کنید",
-  "reagent": "معرف",
-  "reagent_": {
-    "upsert": "ثبت معرف",
-    "name": "نام معرف"
-  },
-  "rePassword": "تکرار کلمه عبور",
-  "rial": "ریال",
-  "save": "ثبت",
-  "toman": "تومان",
-  "tour": "تور",
-  "tour_": {
-    "date": "تاریخ اجرا",
+  "allPriceIsPerOne": "قیمت های وارد شده به ازای هر نفر می باشد",
+  "birthDate": "تاریخ تولد",
+  "block": {
+    "save": "ذخیره تور",
     "upsert": "ثبت تور"
   },
-  "user_": {
+  "busPrice": "قیمت صندلی",
+  "buyer": {
+    "names": "نام خریداران"
+  },
+  "capacity": {
+    "*": "ظرفیت",
+    "all": "کل",
+    "registered": "ثبت شده"
+  },
+  "close": "بستن",
+  "count": "تعداد",
+  "coupon": {
+    "upsert": "ثبت کوپن"
+  },
+  "delete": "حذف",
+  "destination": "مقصد",
+  "destinationTour": "تور مقصد",
+  "destinationTourFilter": "فیلتر تور مقصد",
+  "dollar": "دلار",
+  "duration": "مدت زمان",
+  "edit": "ویرایش",
+  "email": "رایانامه",
+  "emptyCount": "ظرفیت خالی {{value}} نفر",
+  "family": "نام خانوادگی",
+  "fatherName": "نام پدر",
+  "fellows": "همراهان",
+  "female": "زن",
+  "first": "اول",
+  "flight": "هوایی",
+  "foodPrice": "قیمت غذا",
+  "from": "از",
+  "ground": "زمینی",
+  "homePage": "صفحه اصلی",
+  "hotel": "هتل",
+  "infantCount": "تعداد اینفنت",
+  "infantPrice": "قیمت اینفنت",
+  "leader": {
+    "*": "راهنمای تور",
+    "add": "افزودن راهنمای تور"
+  },
+  "male": "مرد",
+  "mobileNumber": "شماره همراه",
+  "msg": {
+    "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزور شد",
+    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
+  },
+  "name": "نام",
+  "nationalCode": "کد ملی",
+  "nextStep": "مرحله بعد",
+  "nightFormat": "(شب)",
+  "none": "هیچکدام",
+  "offValue": "تخفیف",
+  "oldPassword": "کلمه عبور فعلی",
+  "optionType": {
+    "Bus": "صندلی",
+    "Food": "غذا",
+    "Room": "تخت"
+  },
+  "optional": "اختیاری",
+  "options": "خدمات",
+  "passenger": {
+    "*": "مسافر",
+    "upsert": "ثبت مشخصات مسافران"
+  },
+  "passengerReplacementSuccessfull": "جابجایی با موفیت انجام شد",
+  "passport": {
+    "*": "گذرنامه",
+    "delivered": "تحویل",
+    "expireDate": "اعتبار",
+    "number": "شماره"
+  },
+  "passportExpireDate": "اعتبار گذرنامه",
+  "passportNumber": "شماره گذرنامه",
+  "passportexpireDate": "اعتبارپاسپورت",
+  "passportnumber": "شماره پاسپورت",
+  "password": "کلمه عبور",
+  "person": {
+    "birthDate": "تاریخ تولد",
+    "englishFamily": "نام خانوادگی انگلیسی",
+    "englishName": "نام انگلیسی",
+    "engllishNameAndFamily": "(لاتین) نام و نام خانوادگی",
+    "family": "نام خانوادگی",
+    "gender": "جنسیت",
+    "haveVisa": "ویزا دارد",
+    "mobileNumber": "شماره همراه",
+    "name": "نام",
+    "nameAndFamily": "نام و نام خانوادگی",
+    "nc": "کد ملی",
+    "passport": "گذرنامه",
+    "passportDelivered": "تحویل گذرنامه",
+    "replacement": "جابجایی مسافران",
+    "socialNumber": "شماره شبکه اجتماعی",
+    "upsert": "ثبت شخص",
+    "visa": "ویزا",
+    "visaDelivered": "تحویل ویزا",
+    "visaExpireDate": "اعتبار ویزا"
+  },
+  "personel": "پرسنل",
+  "phone": "تلفن",
+  "pleaseSelect": "لطفاً انتخاب کنید",
+  "previousStep": "مرحله قبل",
+  "price": {
+    "*": "قیمت",
+    "ir": "ریال",
+    "irFormated": "(ریال)"
+  },
+  "rePassword": "تکرار کلمه عبور",
+  "reagent": {
+    "name": "نام معرف",
+    "upsert": "ثبت معرف"
+  },
+  "replacedPassenger": "مسافرین جابجا شده عبارتند از:",
+  "roomPrice": "قیمت تخت",
+  "row": "ردیف",
+  "save": "ثبت",
+  "second": "دوم",
+  "selectPerson": "انتخاب فرد",
+  "steps": "گام {{value}}",
+  "submitDate": "تاریخ رزور",
+  "team": {
+    "*": "گروه",
+    "list": "لیست گروه ها"
+  },
+  "third": "سوم",
+  "total": "جمع کل",
+  "tour": {
+    "code": "کد تور",
+    "date": "تاریخ اجرا",
+    "list": "لیست تورها",
+    "passengers": "مسافرین تور",
+    "price": "قیمت تور",
+    "reserve": "رزرو تور",
+    "upsert": "ثبت تور"
+  },
+  "user": {
     "upsert": "ثبت کاربر"
   },
-  "username": "نام کاربری"
+  "username": "نام کاربری",
+  "withOutPrice": "بدون قیمت"
 }

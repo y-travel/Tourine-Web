@@ -1,8 +1,0 @@
-@import "../../styles/themes";
-
-@include nb-install-component() {
-  .form-control {
-    padding: 0;
-    height: 35px;
-  }
-}

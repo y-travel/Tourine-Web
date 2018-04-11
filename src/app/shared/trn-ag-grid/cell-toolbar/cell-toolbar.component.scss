@@ -1,0 +1,14 @@
+@import "../../../@theme/styles/install";
+
+@include trn-install-component() {
+  .mat-toolbar-single-row {
+    height: 30px;
+    background-color: transparent;
+  }
+  .toolbar-item {
+    margin-right: 5px;
+    background-color: trn-theme(color-bg);
+  }
+
+}
+

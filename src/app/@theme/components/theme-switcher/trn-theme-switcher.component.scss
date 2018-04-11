@@ -1,0 +1,43 @@
+@import '../../styles/install';
+
+@include trn-install-component() {
+  //display: flex;
+  //flex-direction: column;
+  //align-items: center;
+  //width: 50%;
+
+  .theme-switch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin: 0;
+
+
+      &.light {
+        color: trn-theme(color-fg-text);
+        padding-right: 10px;
+      }
+
+      &.cosmic {
+        color: trn-theme(color-fg);
+        padding-left: 10px;
+      }
+
+      @include nb-for-theme(cosmic) {
+        &.light {
+          color: trn-theme(color-fg);
+        }
+
+        &.cosmic {
+          color: trn-theme(color-white);
+        }
+      }
+
+      &:active {
+        opacity: 0.78;
+      }
+
+  }
+
+}

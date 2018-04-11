@@ -1,66 +1,81 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import {
-  NbActionsModule,
-  NbCardModule,
-  NbLayoutModule,
-  NbMenuModule,
-  NbRouteTabsetModule,
-  NbSearchModule,
-  NbSidebarModule,
-  NbTabsetModule,
-  NbThemeModule,
-  NbUserModule,
-  NbCheckboxModule,
-} from '@nebular/theme';
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatCommonModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatStepperModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatChipsModule,
+} from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-import {
-  HeaderComponent,
-  SearchInputComponent,
-  ThemeSwitcherComponent,
-  TrhButtonDirective,
-  TrhInputDirective,
-  FormFieldComponent,
-  TrhDropdownComponent,
-  TrhSliderComponent,
-} from './components';
+import { SearchInputComponent, ThemeSwitcherComponent, TrnDropdownComponent, TrnHeaderComponent, TrnSliderComponent, } from './components';
+import { AutoTranslateDirective, TrnButtonDirective, TrnInputDirective } from './directives';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
-import {
-  TourineLayoutComponent,
-} from './layouts';
-import { DEFAULT_THEME } from './styles/theme.default';
-import { COSMIC_THEME } from './styles/theme.cosmic';
-import { AppTranslationModule } from "../app-translation.module";
+import { TourineLayoutComponent } from './layouts';
+import { AppTranslationModule } from '../app-translation.module';
+import { TrnLayoutComponent } from './components/layout/trn-layout.component';
+import { TrnMenuComponent } from './components/menu/trn-menu.component';
+import { TrnSidebarComponent } from './components/sidebar/trn-sidebar.component';
+import { SidebarService } from './components/sidebar/sidebar.service';
+import { MenuService } from './components/menu/menu.service';
+import { TrnCheckboxComponent } from './components/checkbox/trn-checkbox.component';
+import { DialogService } from '../@core/utils/dialog.service';
+import { MatCardDirective } from './directives/mat-card.directive';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
-const NB_MODULES = [
-  NbCardModule,
-  NbLayoutModule,
-  NbTabsetModule,
-  NbRouteTabsetModule,
-  NbMenuModule,
-  NbUserModule,
-  NbActionsModule,
-  NbSearchModule,
-  NbSidebarModule,
-  NbCheckboxModule,
-  NgbModule,
+const MAT_MODULES = [
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatSlideToggleModule,
+  MatSelectModule,
+  MatCheckboxModule,
+  MatStepperModule,
+  MatIconModule,
+  MatCommonModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatNativeDateModule, //@TODO Should be localize with moment.js
+  MatToolbarModule,
+  MatSidenavModule,
+  MatListModule,
+  MatTooltipModule,
+  MatChipsModule,
 ];
 
+const OTHER_MODULES = [
+  FlexLayoutModule,
+];
 const COMPONENTS = [
   ThemeSwitcherComponent,
-  HeaderComponent,
+  TrnHeaderComponent,
   SearchInputComponent,
   TourineLayoutComponent,
-  TrhInputDirective,
-  TrhButtonDirective,
-  FormFieldComponent,
-  TrhDropdownComponent,
-  TrhSliderComponent,
+  TrnInputDirective,
+  TrnButtonDirective,
+  TrnDropdownComponent,
+  TrnSliderComponent,
+  TrnLayoutComponent,
+  TrnMenuComponent,
+  TrnSidebarComponent,
+  TrnCheckboxComponent,
+  AutoTranslateDirective,
+  MatCardDirective,
 ];
 
 const PIPES = [
@@ -70,27 +85,22 @@ const PIPES = [
   TimingPipe,
 ];
 
-const NB_THEME_PROVIDERS = [
-  ...NbThemeModule.forRoot(
-    {
-      name: 'default',
-    },
-    [DEFAULT_THEME, COSMIC_THEME],
-  ).providers,
-  ...NbSidebarModule.forRoot().providers,
-  ...NbMenuModule.forRoot().providers,
+const THEME_PROVIDERS = [
+  MenuService,
+  SidebarService,
+  DialogService,
 ];
 
 @NgModule({
-  imports: [...BASE_MODULES, ...NB_MODULES, AppTranslationModule],
-  exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
+  imports: [...BASE_MODULES, ...MAT_MODULES, ...OTHER_MODULES, AppTranslationModule],
+  exports: [...BASE_MODULES, ...MAT_MODULES, ...OTHER_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: ThemeModule,
-      providers: [...NB_THEME_PROVIDERS],
+      providers: [...THEME_PROVIDERS],
     };
   }
 }

@@ -1,0 +1,6 @@
+<mat-nav-list>
+  <a *ngFor="let item of items" mat-list-item (click)="navigate(item.link)">
+    <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+    <span mat-line>{{item.title|translate}}</span>
+  </a>
+</mat-nav-list>

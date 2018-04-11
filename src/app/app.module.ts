@@ -1,31 +1,33 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { CoreModule } from './@core/core.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
-import { AppTranslationModule } from "./app-translation.module";
+import { HttpInterceptorService } from "./@core/data/http-interceptor.service";
+import { MatInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpModule,
+    HttpClientModule,
     AppRoutingModule,
+    MatInputModule,
 
-    NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
+    {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: LOCALE_ID, useValue: 'fa-IR'},
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],
 })
 export class AppModule {

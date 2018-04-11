@@ -1,0 +1,44 @@
+@import "../../core/variables";
+@import "../../core/functions";
+
+$icons-path: "~ag-grid/src/styles/icons/";
+$grid-size: 4px;
+@import "~ag-grid/src/styles/ag-grid";
+@import "~ag-grid/src/styles/ag-theme-material";
+
+@mixin trn-ag-grid-theme {
+  $params: map_merge($params, (
+    grid-size: $grid-size,
+    icon-size: $icon-size,
+    row-height:trn-theme(grid-row-height),
+    header-height:row-height,
+    font-family: trn-theme(font-main),
+    cell-horizontal-padding:2px,
+    font-size: $font-size,
+    font-weight: $font-weight,
+    foreground-color:trn-theme(color-fg-text),
+    background-color:trn-theme(color-card-bg),
+    secondary-font-family: trn-theme(font-main),
+    secondary-font-size: $secondary-font-size,
+    secondary-font-weight: $secondary-font-weight,
+    accent-color: $accent-color,
+    primary-color: $primary-color,
+    hover-color: $hover-color,
+    selected-color: $selected-color,
+  ));
+
+  .ag-theme-material {
+    @include ag-grid-theme($params);
+    .ag-cell,
+    .ag-header-cell {
+      text-align: center;
+    }
+    .ag-header-container {
+      background-color: trn-theme(grid-header-color);
+    }
+    .ag-header-group-text {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

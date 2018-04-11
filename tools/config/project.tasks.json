@@ -1,4 +1,16 @@
 {
+  "build.prod": [
+    "build.ng",
+    "clean.sync",
+    "copy.to.sync"
+  ],
+  "serve.dev": [
+    "serve.ng"
+  ],
+  "build.watch": [
+    "watch.sync",
+    "build.ng"
+  ],
   "test": [
     "tslint",
     "build.test",

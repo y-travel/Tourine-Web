@@ -1,0 +1,50 @@
+@import 'install';
+
+@mixin set_defaults {
+  font-family: trn-theme(font-main);
+  font-size: trn-theme(base-font-size);
+
+  .btn-micro {
+    transform: scale(.7);
+    line-height: 0;
+    padding: 3px;
+    border-radius: 100%;
+  }
+  .RightToLeft {
+    direction: rtl;
+  }
+
+  .LeftToRight {
+    direction: ltr;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .modal-footer {
+    @extend .RightToLeft;
+    text-align: center;
+  }
+
+  .modal-body {
+    @extend .RightToLeft;
+  }
+
+  .modal-header {
+    @extend .RightToLeft;
+    height: 20px;
+  }
+
+  .modal-title {
+    width: 100%;
+    text-align: center;
+  }
+  .modal-content{
+    width: fit-content;
+  }
+  .modal-dialog {
+    max-width: 1200px;
+  }
+
+}

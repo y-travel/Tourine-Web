@@ -1,0 +1,18 @@
+<mat-card [stretch]="true" [thickShadow]="true">
+  <mat-card-content>
+    <div style="width: 100%;">
+      <!--@TODO globalize height-->
+      <ag-grid-angular (gridSizeChanged)="refreshView()" #agGrid
+                       id="cell-detail"
+                       [gridOptions]="gridOptions"
+                       [columnDefs]="columnDefs"
+                       [rowHeight]="35"
+                       [headerHeight]="35"
+                       [rowData]="rowData"
+                       (gridReady)="params.detailGridOptions.onGridReady($event,params)"
+                       [frameworkComponents]="params.frameworkComponents"
+                       [enableRtl]="true">
+      </ag-grid-angular>
+    </div>
+  </mat-card-content>
+</mat-card>

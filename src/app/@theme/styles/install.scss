@@ -1,0 +1,7 @@
+@import "all";
+// which themes you what to enable (empty to enable all)
+$nb-enabled-themes: (default, cosmic);
+
+$nb-themes: nb-register-theme($theme-default, default);
+
+$nb-themes: nb-register-theme($theme-dark, cosmic);

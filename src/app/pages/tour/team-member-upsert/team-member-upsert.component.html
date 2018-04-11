@@ -1,0 +1,117 @@
+<div mat-dialog-title class="modal-header">
+  <div class="modal-title">
+    {{"person.upsert"|translate}}
+  </div>
+</div>
+<div class="modal-body" dir="rtl" [style.width.px]="500" [style.height.px]="400" autoTranslate>
+  <form [formGroup]="data.form">
+    <mat-horizontal-stepper #stepper [linear]="true">
+      <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'first'|translate})}}">
+
+        <div formGroupName="person">
+          <div fxLayout="row" fxflex>
+            <mat-form-field fxFlex>
+              <input matInput placeholder="person.nc" formControlName="nationalCode" #natCode (focusout)="findPerson(natCode)">
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput placeholder="person.mobileNumber" formControlName="mobileNumber">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxflex>
+            <trn-slider fxFlex trueText="male" falseText="female" formControlName="gender"></trn-slider>
+          </div>
+          <div fxLayout="row">
+            <mat-form-field fxFlex>
+              <input matInput placeholder="person.name" formControlName="name">
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput placeholder="person.family" formControlName="family">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row">
+            <mat-form-field fxFlex>
+              <input matInput placeholder="person.englishName" formControlName="englishName">
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput placeholder="person.englishFamily" formControlName="englishFamily">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row">
+            <mat-form-field fxFlex>
+              <input matInput (click)="bithDate._open($event)" [matDatepicker]="personBirthDate" placeholder="person.birthDate" formControlName="birthDate">
+              <mat-datepicker-toggle utc="true" #bithDate matSuffix [for]="personBirthDate"></mat-datepicker-toggle>
+              <mat-datepicker #personBirthDate disabled="false" (selectedChanged)="age($event)"></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-step>
+
+      <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'second'|translate})}}" formGroupName="person">
+        <div fxLayout="row">
+          <mat-form-field fxFlex>
+            <input matInput="number" placeholder="passportnumber" formControlName="passportNo">
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input matInput (click)="passExpDate._open($event)" [matDatepicker]="passExpireDate" placeholder="passportexpireDate" formControlName="passportExpireDate">
+            <mat-datepicker-toggle utc="true" #passExpDate matSuffix [for]="passExpireDate"></mat-datepicker-toggle>
+            <mat-datepicker #passExpireDate disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row">
+          <div fxFlex>
+            <mat-checkbox #haveVisa checked="true" [formControl]="data.form.get('haveVisa')">{{"person.haveVisa"|translate}}
+            </mat-checkbox>
+          </div>
+        </div>
+        <div fxLayout="row">
+          <mat-form-field fxFlex>
+            <input matInput (click)="visaExpDate._open($event)" [matDatepicker]="visaExpireDate" placeholder="person.visaExpireDate"
+              formControlName="visaExpireDate" [disabled]="!haveVisa.checked">
+            <mat-datepicker-toggle utc="true" #visaExpDate matSuffix [for]="visaExpireDate"></mat-datepicker-toggle>
+            <mat-datepicker #visaExpireDate disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <br>
+        <div fxLayout="row">
+          <div fxFlex>
+            <mat-checkbox [formControl]="data.form.get('passportDelivered')">{{"person.passportDelivered"|translate}}
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <br>
+        <div>
+          <div fxLayout="row">
+            <div fxFlex *ngFor="let optionName of optionTypes();let i=index;">
+              <div>
+                <mat-checkbox name="optionName" [disabled]="!data.model.person.isUnder5 || data.model.person.isInfant" (change)="checkChanged($event,optionType[optionName])"
+                  [checked]="getOptionValue(optionType[optionName])">{{"optionType."+optionName|translate}}
+                </mat-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+        <div fxLayout="row">
+          <p>
+            خدمات فقط برای افراد بین 2 و 5 سال قابل تغییر می باشد
+          </p>
+        </div>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+  </form>
+  <!--width set for IE-->
+</div>
+<div fxLayout="row" align="end">
+  <button class="pull-left" mat-mini-fab color="primary" (click)="stepper.next()" [disabled]="stepper.selectedIndex==1">
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+  <button class="pull-right" mat-mini-fab color="primary" (click)="stepper.previous()" [disabled]='stepper.selectedIndex==0'>
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+</div>
+<mat-dialog-actions>
+  <button fxFlex mat-raised-button color="primary" (click)="close()">{{"save"|translate}}</button>
+</mat-dialog-actions>

@@ -1,0 +1,7 @@
+@import "../../styles/install";
+
+@include trn-install-component() {
+  :host {
+    direction: rtl;
+  }
+}
