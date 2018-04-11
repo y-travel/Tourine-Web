@@ -57,22 +57,21 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
   oldModel: T;
   onModelChanges = new EventEmitter();
 
-  constructor(model: TypeConstructor<T>, public form: FormGroup) {
+  constructor(model: TypeConstructor<T>, form: FormGroup) {
     super(form.controls);
     this.oldModel = new model();
-    //@TODO fill model from form
     this.init();
   }
 
   init() {
-    this.onValueChanges(this.form.value);
+    this.onValueChanges(this.value);
     this.subsciptionList.push(
-      this.form.valueChanges.subscribe(data => this.onValueChanges(data))
+      this.valueChanges.subscribe(data => this.onValueChanges(data))
     );
   }
 
   updateForm(model: any) {
-    this.form.patchValue(model);
+    this.patchValue(model);
   }
 
   ngOnDestroy() {
@@ -80,11 +79,11 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
       this.subsciptionList.pop().unsubscribe();
   }
 
-  markTouch(control: AbstractControl = this.form) {
+  markTouch(control: AbstractControl = this) {
     control.markAsTouched({onlySelf: true});
   }
 
-  markAllFieldAsTouch(controls = this.form.controls) {
+  markAllFieldAsTouch(controls = this.controls) {
     if (!controls)
       return;
     Object.keys(controls).forEach(x => {
@@ -93,6 +92,13 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
       if (formGroup && formGroup.controls)
         this.markAllFieldAsTouch(formGroup.controls);
     });
+  }
+
+  validate() {
+    if (this.valid)
+      return true;
+    this.markAllFieldAsTouch();
+    return false;
   }
 
   private onValueChanges(data: any) {

@@ -12,10 +12,10 @@ import {
   Route,
   TeamMember,
   TeamPassenger,
-  TourPassenger,
   Tour,
   TourDetail,
   TourOption,
+  TourPassenger,
   User,
   Dictionary
 } from './client.model';
@@ -188,6 +188,9 @@ export class GetTours extends QueryDb<Tour> implements IReturn<QueryResponse<Tou
 @Route('/tours/{Id}', 'POST')
 export class UpsertTour implements IReturn<Tour> {
   id = '';
+  agencyId = '';
+  parentId = '';
+  isBlock = false;
   capacity: number = undefined;
   basePrice: number = undefined;
   infantPrice: number = undefined;
@@ -239,47 +242,6 @@ export class GetTourFreeSpace implements IReturn<string> {
 
   getTypeName() {
     return 'GetTourFreeSpace';
-  }
-}
-
-@Route('/tour/{ParentId}/reserve/{AgencyId}', 'POST')
-export class ReserveBlock implements IReturn<Tour> {
-  parentId: string;
-  agencyId: string;
-  capacity: number;
-  infantPrice: number;
-  busPrice: number;
-  roomPrice: number;
-  foodPrice: number;
-  basePrice: number;
-
-  createResponse() {
-    return new Tour();
-  }
-
-  getTypeName() {
-    return 'ReserveBlock';
-  }
-}
-
-@Route('/tour/{Id}/reserve/{AgencyId}', 'PUT')
-export class UpdateBlock implements IReturn<Tour> {
-  id: string;
-  parentId: string;
-  agencyId: string;
-  capacity: number;
-  infantPrice: number;
-  busPrice: number;
-  roomPrice: number;
-  foodPrice: number;
-  basePrice: number;
-
-  createResponse() {
-    return new Tour();
-  }
-
-  getTypeName() {
-    return 'UpdateBlock';
   }
 }
 

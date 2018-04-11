@@ -64,7 +64,7 @@ export class TourListComponent {
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (block: any) => this.blockUpsert(block,true),
+      command: (block: any) => this.blockUpsert(block, true),
     }, <ToolbarItem>{
       icon: 'list',
       title: 'team.list',
@@ -101,8 +101,8 @@ export class TourListComponent {
     this.tourService.deleteTour(tour).subscribe(() => this.reloadTourList());
   }
 
-  blockUpsert(block = new Block(), isEdit = false) {
-    const ref = this.dialogService.openPopup(BlockUpsertComponent, block, isEdit ? DialogMode.Edit : DialogMode.Create);
+  blockUpsert(block :Block, isEdit = false) {
+      const ref = this.dialogService.openPopup(BlockUpsertComponent, {block: block, tourId:  block.id}, isEdit ? DialogMode.Edit : DialogMode.Create);
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }
 
@@ -116,10 +116,10 @@ export class TourListComponent {
   }
 
   tourPassengers(tour: Tour = new Tour()) {
-    var form = this.formFactory.createTourPassengerForm(tour);
-    var rows = this.personService.getTourMembers(tour.id).subscribe(x => {
+    const form = this.formFactory.createTourPassengerForm(tour);
+    const rows = this.personService.getTourMembers(tour.id).subscribe(x => {
       const ref = this.dialogService.openPopup(TourPassengersComponent, form);
-      var list: TeamMember[] = x.passengers;
+      const list: TeamMember[] = x.passengers;
       (<any>ref.componentInstance).passengerGridService.setRow(list);
     });
   }

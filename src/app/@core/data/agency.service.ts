@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Agency, PersonAgency } from './models/client.model';
 import { Serializable } from '../utils/serializable';
-import { GetAgencies, CreateAgency, FindPersonFromNc, UpdatePerson } from './models/server.dtos';
+import { CreateAgency, GetAgencies } from './models/server.dtos';
 import { Observable } from 'rxjs/Rx';
-import { Person, GetTourFreeSpace, Block, Tour, ReserveBlock, UpsertTour, UpdateBlock } from './models';
+import { GetTourFreeSpace } from './models';
 
 @Injectable()
 export class AgencyService {
@@ -32,17 +32,4 @@ export class AgencyService {
     return this.apiService.send(query);
   }
 
-  reserveBlock(model: Block): Observable<Tour> {
-    const query = new ReserveBlock();
-    model.parentId = model.id;
-    model.id = undefined;
-    Serializable.fromJSON(query, model);
-    return this.apiService.send(query);
-  }
-
-  UpdateReservedBlock(model: Block): Observable<Tour> {
-    const query = new UpdateBlock();
-    Serializable.fromJSON(query, model);
-    return this.apiService.send(query);
-  }
 }

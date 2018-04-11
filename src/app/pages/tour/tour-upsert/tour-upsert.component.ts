@@ -44,7 +44,7 @@ export class TourUpsertComponent implements ModalInterface, Dialog {
   }
 
   initOptions() {
-    this.service.getOptions(this.data.model).subscribe(options => this.data.updateForm({options: options}));
+    this.service.getOptions(this.data.model.id).subscribe(options => this.data.updateForm({options: options}));
   }
 
   save() {
