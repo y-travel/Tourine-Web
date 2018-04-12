@@ -3,13 +3,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Tour } from '../../../@core/data/models/client.model';
 import { NewFormService } from '../../../@core/data/form.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
+import { ValidationService } from '../../../@core/utils/validation.service';
 
 @Injectable()
 export class BlockUpsertViewModel {
   form: NewFormService<Tour>;
   tourId: string;
 
-  constructor(private formFactory: FormFactory) {
+  constructor(private formFactory: FormFactory, private validation: ValidationService) {
   }
 
   get model(): Tour {
@@ -22,7 +23,6 @@ export class BlockUpsertViewModel {
       const tmp = new Tour();
       //initial block
       tmp.parentId = this.tourId;
-      tmp.capacity = 1;
       tmp.basePrice = tour.basePrice;
       tmp.infantPrice = tour.infantPrice;
       tour = tmp;
@@ -62,7 +62,7 @@ export class BlockUpsertViewModel {
       ),
       isBlock: true,
     });
-    return new NewFormService(Tour, form);
+    return new NewFormService(Tour, form, this.validation);
   }
 
 }

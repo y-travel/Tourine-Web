@@ -64,7 +64,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
       return;
     }
     const newBlock = await this.tourService.upsertTour(this.vModel.model).first().toPromise();
-    this.isNewBlock = this.utils.isNullorUndefined(newBlock);
+    this.isNewBlock = this.utils.isNullOrUndefined(newBlock);
     stepper.next();
     this.vModel.updateForm(newBlock);
   }

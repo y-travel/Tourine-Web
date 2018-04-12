@@ -12,6 +12,7 @@ import { AuthService } from './utils/auth.service';
 import { APP_CONFIG, APP_CONFIG_INSTANCE } from './utils/app.config';
 import { UTILS, UTILS_INSTANCE } from './utils/app-utils';
 import { FormatterService } from './utils/formatter.service';
+import { ValidationService } from './utils/validation.service';
 
 const CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
@@ -21,6 +22,7 @@ const CORE_PROVIDERS = [
   DialogService,
   AuthService,
   FormatterService,
+  ValidationService,
   {provide: UTILS, useValue: UTILS_INSTANCE},
   {provide: APP_CONFIG, useValue: APP_CONFIG_INSTANCE},
 ];

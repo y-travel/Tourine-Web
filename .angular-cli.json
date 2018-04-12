@@ -20,6 +20,9 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.ng.json",
       "testTsconfig": "tsconfig.spec.json",
+      "scripts":[
+        "../node_modules/hammerjs/hammer.js"
+      ],
       "styles": [
         "./app/@theme/styles/iranian-sans.scss",
         "./app/@theme/styles/material-icon.scss",

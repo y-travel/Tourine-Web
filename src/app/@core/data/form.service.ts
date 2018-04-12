@@ -1,6 +1,7 @@
 import { EventEmitter, OnDestroy } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { Serializable, TypeConstructor } from '../utils/serializable';
+import { ValidationService } from '../utils/validation.service';
 
 /**
  * @deprecated use NewFormService instead
@@ -57,7 +58,7 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
   oldModel: T;
   onModelChanges = new EventEmitter();
 
-  constructor(model: TypeConstructor<T>, form: FormGroup) {
+  constructor(model: TypeConstructor<T>, form: FormGroup, public validation: ValidationService) {
     super(form.controls);
     this.oldModel = new model();
     this.init();
@@ -103,5 +104,6 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
 
   private onValueChanges(data: any) {
     this.onModelChanges.emit(data);
+    this.validation.update(this);
   }
 }

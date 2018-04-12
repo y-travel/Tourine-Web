@@ -44,7 +44,7 @@ export class TourListComponent {
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (tour: any) => this.tourUpsert(tour),
+      command: (tour: any) => this.tourUpsert(tour, true),
     },
     <ToolbarItem>{
       icon: 'work',
@@ -90,8 +90,8 @@ export class TourListComponent {
     this.tourGrid.api.sizeColumnsToFit();
   }
 
-  tourUpsert(tour = new Tour()) {
-    const ref = this.dialogService.openPopup(TourUpsertComponent, this.formFactory.createTourForm(tour));
+  tourUpsert(tour = new Tour(), isEdit = false) {
+    const ref = this.dialogService.openPopup(TourUpsertComponent, tour, isEdit ? DialogMode.Edit : DialogMode.Create);
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }
 
@@ -101,8 +101,8 @@ export class TourListComponent {
     this.tourService.deleteTour(tour).subscribe(() => this.reloadTourList());
   }
 
-  blockUpsert(block :Block, isEdit = false) {
-      const ref = this.dialogService.openPopup(BlockUpsertComponent, {block: block, tourId:  block.id}, isEdit ? DialogMode.Edit : DialogMode.Create);
+  blockUpsert(block: Block, isEdit = false) {
+    const ref = this.dialogService.openPopup(BlockUpsertComponent, {block: block, tourId: block.id}, isEdit ? DialogMode.Edit : DialogMode.Create);
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }
 

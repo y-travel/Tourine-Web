@@ -18,7 +18,7 @@ export class AppUtils {
     return Reflect.get(object, 'httpMethod');
   }
 
-  isNullorUndefined(obj: any) {
+  isNullOrUndefined(obj: any) {
     return obj === undefined || obj === null;
   }
 

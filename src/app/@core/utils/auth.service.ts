@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return !this.utils.isNullorUndefined(this.person);
+    return !this.utils.isNullOrUndefined(this.person);
   }
 
   //@TODO Person info should be impl.

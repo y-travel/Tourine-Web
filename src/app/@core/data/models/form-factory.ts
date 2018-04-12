@@ -2,13 +2,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService, NewFormService } from '../form.service';
-import { Agency, Block, EditPassword, Person, PersonAgency, PersonIncome, Reagent, TeamMember, Tour, TourDetail, TourOption, User } from './client.model';
+import { Block, EditPassword, Person, PersonAgency, PersonIncome, Reagent, TeamMember, Tour, TourDetail, TourOption, User } from './client.model';
+import { ValidationService } from '../../utils/validation.service';
 
 @Injectable()
 export class FormFactory {
 
-  createTourForm(model: Tour = new Tour()): FormService<Tour> {
+  constructor(private validation: ValidationService) {
+  }
 
+  createTourForm(model: Tour = new Tour()): NewFormService<Tour> {
     const form = new FormBuilder().group({
       id: [model.id],
       parentId: [model.parentId],
@@ -23,7 +26,7 @@ export class FormFactory {
       ),
       tourDetail: this.createTourDetailForm(model.tourDetail ? model.tourDetail : undefined),
     });
-    return new FormService(Tour, form);
+    return new NewFormService(Tour, form, this.validation);
   }
 
   createTourOptionForm(tourId: string, model: TourOption = new TourOption()): FormGroup {

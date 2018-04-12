@@ -1,9 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 //
-import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
-import { Tour } from '../../../@core/data/models';
 import { TourService } from '../../../@core/data/tour.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
@@ -11,29 +9,32 @@ import { Destination, Person, Place } from '../../../@core/data/models/client.mo
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { Dialog } from '../../../@core/utils/dialog.service';
+import { TourUpsertViewModel } from './tour-upsert.view-model';
 
 @Component({
   selector: 'tour-upsert',
-  templateUrl: './tour-upsert.component.html',
+  templateUrl: './tour-upsert.component.gen.html',
   styleUrls: ['./tour-upsert.component.scss'],
+  providers: [TourUpsertViewModel],
 })
 export class TourUpsertComponent implements ModalInterface, Dialog {
   dialogMode: DialogMode;
-  form: FormService<Tour>;
   destinations: Observable<Destination[]>;
   places: Observable<Place[]>;
   leaders: Observable<Person[]>;
   optionType = OptionType;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               public dialogInstance: MatDialogRef<ModalInterface>,
               public service: TourService,
               private translateService: TranslateService,
+              public vModel: TourUpsertViewModel,
               @Inject(UTILS) public utils: AppUtils,) {
-    this.initData();
   }
 
   initDialog() {
+    this.vModel.init(this.data);
+    this.initData();
   }
 
   initData() {
@@ -44,16 +45,17 @@ export class TourUpsertComponent implements ModalInterface, Dialog {
   }
 
   initOptions() {
-    this.service.getOptions(this.data.model.id).subscribe(options => this.data.updateForm({options: options}));
+    if (this.dialogMode === DialogMode.Edit)
+      this.service.getOptions(this.vModel.model.id).subscribe(options => this.vModel.form.updateForm({options: options}));
   }
 
   save() {
-    if (this.data.form.invalid) {
-      this.data.markAllFieldAsTouch();
+    if (this.vModel.form.invalid) {
+      this.vModel.form.markAllFieldAsTouch();
       return;
     }
-    this.service.upsertTour(this.data.model).subscribe(tour => {
-      this.dialogInstance.close(this.data.model);
+    this.service.upsertTour(this.vModel.model).subscribe(tour => {
+      this.dialogInstance.close(this.vModel.model);
     });
   }
 
