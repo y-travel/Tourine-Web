@@ -39,7 +39,6 @@ ts-node
 .typingsrc
 
 #IDE configuration files
-.idea
 *.iml
 
 /tools/**/*.js
@@ -63,3 +62,4 @@ tools/env/env-config.interface.ngsummary.json
 tools/manual_typings/project/sample.package.ngsummary.json
 #ignore workspace folders
 .*
+!.idea
