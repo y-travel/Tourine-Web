@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Observable } from "rxjs/Rx";
 
 import { ApiService } from "../data/api.service";
-import { Authenticate, Person, User } from "../data/models";
+import { Authenticate, Person, User, Agency } from "../data/models";
 import { AppUtils, UTILS } from "./app-utils";
 import { Serializable } from "./serializable";
 
@@ -10,6 +10,7 @@ import { Serializable } from "./serializable";
 export class AuthService {
 
   person: Person;
+  agency: Agency;
 
   constructor(private apiService: ApiService, @Inject(UTILS) private utils: AppUtils) {
   }
@@ -28,6 +29,7 @@ export class AuthService {
     auth.provider = "credentials";
     return this.apiService.send(auth).map(res => {
       this.person = Serializable.fromJSONToType(Person, res);
+      this.agency = Serializable.fromJSONToType(Agency,res);
       return this.isAuthenticated();
     });
   }

@@ -29,12 +29,67 @@
           </ag-grid-angular>
         </div>
       </mat-step>
+
       <mat-step label="{{'steps'|translate:({value:'second'|translate})}}">
-        <div fxLayout="row">
-          <h1 fxFlex >{{"passengerReplacementSuccessfull"|translate}}</h1>
-        </div>
+
+        <form [formGroup]="replacementResultForm.form">
+
+          <!-- <mat-card>
+            <div fxLayout="row">
+              <mat-form-field fxFlex formGroupName="agency">
+                <input matInput placeholder="agency.name" formControlNamme="name" disabled>
+              </mat-form-field>
+
+              <mat-form-field fxFlex>
+                <input matInput placeholder="tour.price" formControlName="basePrice">
+                <mat-hint align="end" translate>price.irFormated</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field fxFlex>
+                <input matInput placeholder="infantPrice" formControlName="infantPrice">
+                <mat-hint align="end" translate>price.irFormated</mat-hint>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row">
+
+              <mat-form-field fxFlex>
+                <input matInput placeholder="foodPrice" formControlName="foodPrice">
+                <mat-hint align="end" translate>price.irFormated</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field fxFlex>
+                <input matInput placeholder="busPrice" translate="yes" formControlName="busPrice">
+                <mat-hint align="end" translate>price.irFormated</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field fxFlex>
+                <input matInput placeholder="roomPrice" formControlName="roomPrice">
+                <mat-hint align="end" translate>price.irFormated</mat-hint>
+              </mat-form-field>
+            </div>
+
+          </mat-card> -->
+          <div formArrayName="teams" class="teamCard">
+            <mat-card *ngFor="let team of replacementResultForm.form.get('teams')['controls'];trackBy: trackByFn;let i=index">
+              <div fxLayout="row" [formGroupName]="i">
+                <mat-form-field fxFlex>
+                  <input matInput placeholder="buyer.name" formControlName="count" disabled>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                  <input matInput placeholder="tour.price" formControlName="basePrice">
+                  <mat-hint align="end" translate>price.irFormated</mat-hint>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                  <input matInput placeholder="infantPrice" formControlName="infantPrice">
+                  <mat-hint align="end" translate>price.irFormated</mat-hint>
+                </mat-form-field>
+              </div>
+            </mat-card>
+          </div>
+        </form>
         <br>
-        <div fxLayout="row">
+        <!-- <div fxLayout="row">
           <h3 fxFlex>{{"replacedPassenger"|translate}}</h3>
         </div>
         <div fxLayout="row">
@@ -45,7 +100,7 @@
               </mat-chip>
             </mat-chip-list>
           </mat-form-field>
-        </div>
+        </div> -->
       </mat-step>
     </mat-horizontal-stepper>
   </form>

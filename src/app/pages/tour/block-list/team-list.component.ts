@@ -60,7 +60,6 @@ export class TeamListComponent implements OnInit, Dialog {
     const rows = this.personService.getTeamMembers(team.id).subscribe(x => {
       const ref = this.dialogService.openPopup(PassengerUpsertComponent, form);
       const list: TeamMember[] = x.passengers;
-      list.unshift(x.buyer);
       (<any>ref.componentInstance).passengerGridService.setRow(list);
       (<any>ref.componentInstance).updateCount();
       (<any>ref.componentInstance).teamId = team.id; //for upsert-> edit

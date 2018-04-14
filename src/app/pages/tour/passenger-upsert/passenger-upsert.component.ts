@@ -78,7 +78,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   }
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
-    if (this.tourFreeSpace <= this.passengerGridService.rows.length && isAdd) {
+    if (this.tourFreeSpace <= 0 && isAdd) {
       console.log(this.data.model.capacity + '/' + this.passengerGridService.rows.length);
       //@TODO: show toast
     } else {
@@ -88,6 +88,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
           return;
         if (isAdd || (!isAdd && teamMember.person.id === x.person.id)) {
           this.passengerGridService.addItem(x);
+          this.tourFreeSpace--;
         }
         //@TODO: update to a new person
         this.updateTotalPrice();

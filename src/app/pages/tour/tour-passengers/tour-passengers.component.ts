@@ -41,9 +41,9 @@ export class TourPassengersComponent implements OnInit, Dialog {
       selectedPassengrs.length === selectedPassengrs.filter(x => x.tourId === selectedPassengrs[0].tourId).length) {
       const ref = this.dialogService.openPopup(PassengerReplacementComponent, this.formFactory.createTourForm(this.data.model));
       (<any>ref.componentInstance).selectedPassengers = selectedPassengrs;
-    } else {
+      (<any>ref.componentInstance).selectedAgency = this.passengerGridService.tourAgency[selectedPassengrs[0].tourId];
+    } else
       console.log('not same agency selected');
-    }
   }
 
   onSelectionChanged() {

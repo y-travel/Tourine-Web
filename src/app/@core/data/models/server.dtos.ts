@@ -17,7 +17,8 @@ import {
   TourOption,
   TourPassenger,
   User,
-  Dictionary
+  Dictionary,
+  TourTeammember
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
 
@@ -282,22 +283,20 @@ export class UpsertTeam implements IReturnVoid {
   }
 }
 
-@Route('/tours/{TourId}/passengers/toTour/{DestTourId}', 'POST')
-export class PassengerReplacement implements IReturnVoid {
-  tuorId: string;
+@Route('/tours/{TourId}/passengers/toTour/{DestTourId}/{AgencyId}', 'POST')
+export class PassengerReplacement implements IReturn<TourTeammember> {
+  tourId: string;
   destTourId: string;
-  buyerId: string;
-  InfantPrice: number;
-  BasePrice: number;
-  TotalPrice: number;
-  Passengers: string[]
+  agencyId: string;
+  passengers: TeamMember[]
 
-  createResponse(): void {
+  createResponse() {
+    return new TourTeammember();
   }
 
   // @DataContract
   getTypeName(): string {
-    return ('PassengerReplacement');
+    return 'PassengerReplacement';
   }
 }
 

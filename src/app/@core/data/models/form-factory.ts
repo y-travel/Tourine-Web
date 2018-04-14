@@ -2,7 +2,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService, NewFormService } from '../form.service';
-import { Block, EditPassword, Person, PersonAgency, PersonIncome, Reagent, TeamMember, Tour, TourDetail, TourOption, User } from './client.model';
+import { Agency, Block, EditPassword, Person, PersonAgency, PersonIncome, Reagent, TeamMember, Tour, TourDetail, TourOption, User, TourTeammember, Team } from './client.model';
 import { ValidationService } from '../../utils/validation.service';
 
 @Injectable()
@@ -66,6 +66,14 @@ export class FormFactory {
       }),
     });
     return new FormService(PersonAgency, form);
+  }
+
+  createAgencyForm(model: Agency = new Agency()): FormService<Agency> {
+    const form = new FormBuilder().group({
+      id: [model.id ? model.id : undefined],
+      name: [model.name ? model.name : undefined]
+    });
+    return new FormService(Agency, form);
   }
 
   createAddLeaderForm(model: Person = new Person()): FormService<Person> {
@@ -193,4 +201,30 @@ export class FormFactory {
     return new FormService(Tour, form);
   }
 
+  createReplacementResultForm(model: TourTeammember = new TourTeammember()): FormService<TourTeammember> {
+    const form = new FormBuilder().group({
+      tourId: [model.tourId ? model.tourId : undefined],
+      basePrice: [model.basePrice ? model.basePrice : undefined],
+      busPrice: [model.busPrice ? model.busPrice : undefined],
+      infantPrice: [model.infantPrice ? model.infantPrice : undefined],
+      roomPrice: [model.roomPrice ? model.roomPrice : undefined],
+      foodPrice: [model.foodPrice ? model.foodPrice : undefined],
+      agency: this.createAgencyForm(model.agency ? model.agency : undefined).form,
+      teams: new FormBuilder().array(model.teams ? model.teams.map(this.createTeamForm) : [])
+    });
+    return new FormService(TourTeammember, form);
+  }
+
+  createTeamForm(model: Team = new Team()): FormGroup {
+    const form = new FormBuilder().group({
+      id: [model.id ? model.id : undefined],
+      basePrice: [model.basePrice ? model.basePrice : undefined],
+      infantPrice: [model.infantPrice ? model.infantPrice : undefined],
+      totalPrice: [model.totalPrice ? model.totalPrice : undefined],
+      // buyer: [model.buyer.name ? model.buyer.name : undefined],
+      count: [model.count ? model.count : undefined],
+      // buyer: this.createPersonForm(model.buyer ? model.buyer : undefined).form,
+    });
+    return form;
+  }
 }

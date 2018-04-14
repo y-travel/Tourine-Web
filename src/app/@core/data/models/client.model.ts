@@ -170,6 +170,7 @@ export class TeamMember {
   haveVisa: boolean = true;
   passportDelivered: boolean = undefined;
   tourId: string = undefined;
+  teamId: string = undefined;
 }
 
 export enum Role {
@@ -203,7 +204,27 @@ export class TourPassenger {
 export interface Dictionary<T> {
   [index: string]: T;
 }
+export class Team extends Model {
+  tourId: string;
+  count: number;
+  buyerId: string;
+  buyer: Person;
+  infantPrice: number;
+  basePrice: number;
+  totalPrice: number;
+  buyerIsPassenger: boolean;
+}
 
+export class TourTeammember {
+  tourId: string;
+  basePrice: number;
+  infantPrice: number;
+  foodPrice: number;
+  roomPrice: number;
+  busPrice: number;
+  agency: Agency;
+  teams: Team[];
+}
 export interface IReturn<T> {
   createResponse(): T;
 
