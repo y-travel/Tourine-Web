@@ -1,7 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { GridOptions } from 'ag-grid';
-import { TeamMember, Person, OptionType, Tour, Dictionary } from '../../../@core/data/models';
-import { ToolbarItem, CellToolbarComponent } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
+import { Dictionary, OptionType, Person, TeamMember, Tour } from '../../../@core/data/models';
+import { CellToolbarComponent, ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormatterService } from '../../../@core/utils/formatter.service';
@@ -11,170 +11,173 @@ import { CellDetailComponent } from '../../../shared/trn-ag-grid/cell-detail/cel
 
 @Injectable()
 export class TourPassengersGridService {
-    gridOptions: GridOptions;
-    gridColumnApi: any;
-    rows: TeamMember[];
+  gridOptions: GridOptions;
+  gridColumnApi: any;
+  rows: TeamMember[];
 
-    tourAgency: Dictionary<string> = {};
+  tourAgency: Dictionary<string> = {};
 
-    columnDefs: any[];
-    toolbarTourItems: ToolbarItem[] = [];
-    frameworkComponents: any;
-    detailCellRenderer: any;
-    detailCellRendererParams: any;
-    gridApi: any;
+  columnDefs: any[];
+  toolbarTourItems: ToolbarItem[] = [];
+  frameworkComponents: any;
+  detailCellRenderer: any;
+  detailCellRendererParams: any;
+  gridApi: any;
 
-    constructor(public personService: PersonService,
-        private translate: TranslateService,
-        private formatter: FormatterService,
-        @Inject(UTILS) private utils: AppUtils, ) {
-        this.init();
-    }
+  constructor(public personService: PersonService,
+              private translate: TranslateService,
+              private formatter: FormatterService,
+              @Inject(UTILS) private utils: AppUtils, ) {
+    this.init();
+  }
 
-    init() {
-        this.rows = [];
-        this.gridOptions = {
-            defaultColDef: {
-                headerComponentFramework: <{ new(): CellHeaderComponent }>CellHeaderComponent,
-            },
-        };
+  init() {
+    this.rows = [];
+    this.gridOptions = {
+      defaultColDef: {
+        headerComponentFramework: <{ new(): CellHeaderComponent }>CellHeaderComponent,
+      },
+    };
 
-        this.columnDefs = [
-            {
-                headerName: '',
-                maxWidth: 50,
-                minWidth: 50,
-                checkboxSelection: true,
+    this.columnDefs = [
+      {
+        headerName: '',
+        maxWidth: 50,
+        minWidth: 50,
+        checkboxSelection: true,
 
-            },
-            {
-                headerName: 'row',
-                field: 'personId',
-                minWidth: 50,
-                maxWidth: 50,
-                cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
-            },
-            {
-                headerName: "person.nameAndFamily",
-                valueGetter: (params: any) => {
-                    return params.data.person.gender == 1 ? 'آقای ' + params.data.person.name + ' ' + params.data.person.family : 'خانم ' + params.data.person.name + ' ' + params.data.person.family;
-                },
-            },
-            {
-                headerName: 'agency.*',
-                field: 'tourId',
-                cellRenderer: (params: any) => this.tourAgency[params.value],
-            },
-            {
-                headerName: "options",
-                children: [//@TODO generate iterative
-                    {
-                        headerName: '',
-                        minWidth: 30,
-                        maxWidth: 30,
-                        headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room) },
-                        cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`;
-                        }
-                    }, {
-                        headerName: '',
-                        minWidth: 30,
-                        maxWidth: 30,
-                        headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus) },
-                        cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`;
-                        }
-                    }, {
-                        headerName: '',
-                        minWidth: 30,
-                        maxWidth: 30,
-                        headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food) },
-                        cellRenderer: params => {
-                            return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`;
-                        }
-                    }
-                ]
-            },
-            {
-                minWidth: 90,
-                maxWidth: 90,
-                cellRenderer: 'cellToolbar',
-                cellRendererParams: {
-                    items: this.toolbarTourItems,
-                },
-            },
+      },
+      {
+        headerName: 'row',
+        field: 'personId',
+        minWidth: 50,
+        maxWidth: 50,
+        cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
+      },
+      {
+        headerName: 'person.nameAndFamily',
+        valueGetter: (params: any) => {
+          return params.data.person.gender == 1 ? 'آقای ' + params.data.person.name + ' ' + params.data.person.family : 'خانم ' + params.data.person.name + ' ' + params.data.person.family;
+        },
+      },
+      {
+        headerName: 'agency.*',
+        field: 'tourId',
+        cellRenderer: (params: any) => this.tourAgency[params.value],
+      },
+      {
+        headerName: 'options',
+        headerGroupComponent: 'cellHeader',
+        children: [//@TODO generate iterative
+          {
+            headerName: '',
+            minWidth: 30,
+            maxWidth: 30,
+            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room)},
+            cellRenderer: params => {
+              return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`;
+            }
+          }, {
+            headerName: '',
+            minWidth: 30,
+            maxWidth: 30,
+            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus)},
+            cellRenderer: params => {
+              return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`;
+            }
+          }, {
+            headerName: '',
+            minWidth: 30,
+            maxWidth: 30,
+            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food)},
+            cellRenderer: params => {
+              return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`;
+            }
+          }
+        ]
+      },
+      {
+        minWidth: 90,
+        maxWidth: 90,
+        cellRenderer: 'cellToolbar',
+        cellRendererParams: {
+          items: this.toolbarTourItems,
+        },
+      },
 
-        ];
+    ];
 
-        this.detailCellRenderer = 'cellDetail';
-        this.frameworkComponents = {
-            cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent
-        };
+    this.detailCellRenderer = 'cellDetail';
+    this.frameworkComponents = {
+      cellDetail: CellDetailComponent,
+      cellToolbar: CellToolbarComponent,
+      cellHeader: CellHeaderComponent,
+    };
 
-    }
+  }
 
-    getPerson(model: Person) {
-        this.personService.getPerson(model).subscribe((persons: Person[]) => {
-            console.log(persons)
-        });
-    }
+  getPerson(model: Person) {
+    this.personService.getPerson(model).subscribe((persons: Person[]) => {
+      console.log(persons);
+    });
+  }
 
-    onGridReady(params: any) {
-        this.gridApi = params.api;
-        this.gridColumnApi = params.columnApi;
-        this.gridApi.setRowData(this.rows);
-        this.setInitialLayout(this.gridApi);
-    }
+  onGridReady(params: any) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    this.gridApi.setRowData(this.rows);
+    this.setInitialLayout(this.gridApi);
+  }
 
-    setInitialLayout(api: any) {
-        api.sizeColumnsToFit();
-        setTimeout(function () {
-            let rowCount = 0;
-            api.forEachNode(function (node: any) {
-                node.setExpanded(rowCount++ === 1);
-            });
-        }, 500);
-    }
+  setInitialLayout(api: any) {
+    api.sizeColumnsToFit();
+    setTimeout(function () {
+      let rowCount = 0;
+      api.forEachNode(function (node: any) {
+        node.setExpanded(rowCount++ === 1);
+      });
+    }, 500);
+  }
 
-    onAddRow() {
-        var newItem: any;
-        var res = this.gridApi.updateRowData({ add: [newItem] });
-    }
+  onAddRow() {
+    let newItem: any;
+    const res = this.gridApi.updateRowData({add: [newItem]});
+  }
 
-    refresh() {
-        this.gridApi.refreshView();
-    }
+  refresh() {
+    this.gridApi.refreshView();
+  }
 
-    addItem(model: TeamMember) {
-        var index = this.rows.findIndex(p => p.personId === model.personId)
-        if (index == -1)
-            this.rows.push(model);
-        else if (index < this.rows.length)
-            this.rows[index] = model
-        this.gridApi.setRowData(this.rows);
-    }
+  addItem(model: TeamMember) {
+    const index = this.rows.findIndex(p => p.personId === model.personId);
+    if (index === -1)
+      this.rows.push(model);
+    else if (index < this.rows.length)
+      this.rows[index] = model;
+    this.gridApi.setRowData(this.rows);
+  }
 
-    editItem(oldModel: TeamMember, newModel: TeamMember) {
-        var index = this.rows.findIndex(p => p.personId === oldModel.personId)
-        this.rows[index] = newModel;
-        this.gridApi.setRowData(this.rows);
-    }
+  editItem(oldModel: TeamMember, newModel: TeamMember) {
+    const index = this.rows.findIndex(p => p.personId === oldModel.personId);
+    this.rows[index] = newModel;
+    this.gridApi.setRowData(this.rows);
+  }
 
-    remove(item: any) {
-        var index = this.rows.indexOf(item);
-        if (index <= -1)
-            return;
-        this.rows.splice(index, 1);
-        this.gridApi.setRowData(this.rows);
-    }
+  remove(item: any) {
+    const index = this.rows.indexOf(item);
+    if (index <= -1)
+      return;
+    this.rows.splice(index, 1);
+    this.gridApi.setRowData(this.rows);
+  }
 
-    setRow(row: TeamMember[]) {
-        this.rows = row;
-    }
+  setRow(row: TeamMember[]) {
+    this.rows = row;
+  }
 
-    loadTourAgency(tourId: string) {
-        this.personService.getTourAgency(tourId).subscribe((tours: Tour[]) => {
-            tours.forEach(t => this.tourAgency[t.id] = t.agency.name);
-        });
-    }
+  loadTourAgency(tourId: string) {
+    this.personService.getTourAgency(tourId).subscribe((tours: Tour[]) => {
+      tours.forEach(t => this.tourAgency[t.id] = t.agency.name);
+    });
+  }
 }

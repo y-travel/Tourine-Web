@@ -29,8 +29,8 @@ export class TourGridService {
   toolbarBlockItems: ToolbarItem[] = [];
 
   constructor(private tourService: TourService,
-    private translateService: TranslateService,
-    private formatter: FormatterService) {
+              private translateService: TranslateService,
+              private formatter: FormatterService) {
     this.init();
   }
 
@@ -98,7 +98,7 @@ export class TourGridService {
     ];
 
     this.detailCellRenderer = 'cellDetail';
-    this.frameworkComponents = { cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent };
+    this.frameworkComponents = {cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent};
     this.detailCellRendererParams = {
       detailGridOptions: {
         columnDefs: [
@@ -117,6 +117,7 @@ export class TourGridService {
           },
           {
             headerName: 'capacity.*',
+            headerGroupComponent: 'cellHeader',
             children: [
               {
                 headerName: 'capacity.all',
@@ -147,7 +148,7 @@ export class TourGridService {
           });
         },
       },
-      frameworkComponents: { cellToolbar: CellToolbarComponent },
+      frameworkComponents: {cellToolbar: CellToolbarComponent, cellHeader: CellHeaderComponent},
     };
     this.icons = {
       groupExpanded: '<i class="material-icons">keyboard_arrow_down</mat-icon>',

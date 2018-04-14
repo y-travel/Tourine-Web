@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GridOptions } from 'ag-grid';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { Person } from '../../@core/data/models';
-import { ToolbarItem, CellToolbarComponent } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
+import { CellToolbarComponent, ToolbarItem } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { TranslateService } from '@ngx-translate/core';
 import { PersonService } from '../../@core/data/person.service';
 import { FormatterService } from '../../@core/utils/formatter.service';
@@ -21,8 +21,8 @@ export class LeaderGridService {
   model: Person;
 
   constructor(private translateService: TranslateService,
-    public personService: PersonService,
-    private formatter: FormatterService) {
+              public personService: PersonService,
+              private formatter: FormatterService) {
     this.init();
   }
 
@@ -47,19 +47,16 @@ export class LeaderGridService {
         cellRenderer: 'agGroupCellRenderer',
       },
       {
-        headerName: "person.nameAndFamily",
+        headerName: 'person.nameAndFamily',
+        headerGroupComponent: 'cellHeader',
         children: [
           {
-            headerName: "فارسی",
-            valueGetter: (params: any) => {
-              return params.data.name + ' ' + params.data.family
-            },
+            headerName: 'فارسی',
+            valueGetter: (params: any) => params.data.name + ' ' + params.data.family,
           },
           {
-            headerName: "English",
-            valueGetter: (params: any) => {
-              return params.data.englishName + ' ' + params.data.englishFamily
-            },
+            headerName: 'English',
+            valueGetter: (params: any) => params.data.englishName + ' ' + params.data.englishFamily,
           },
         ]
       },
@@ -68,7 +65,7 @@ export class LeaderGridService {
         minWidth: 50,
         maxWidth: 50,
         valueGetter: (params: any) => {
-          return params.data.gender == 1 ? 'مرد' : 'زن';
+          return params.data.gender === 1 ? 'مرد' : 'زن';
         },
         cellRenderer: 'agGroupCellRenderer',
       },
@@ -80,6 +77,7 @@ export class LeaderGridService {
         cellRenderer: (params: any) => this.formatter.getDateFormat(params.value),
       }, {
         headerName: 'passport.*',
+        headerGroupComponent: 'cellHeader',
         children: [//@TODO generate iterative
           {
             headerName: 'passport.expireDate',
@@ -107,9 +105,10 @@ export class LeaderGridService {
     ];
 
     this.frameworkComponents = {
-       cellToolbar: CellToolbarComponent
-  };
-  };
+      cellToolbar: CellToolbarComponent,
+      cellHeader: CellHeaderComponent,
+    };
+  }
 
   refresh() {
     this.gridApi.refreshView();
@@ -137,14 +136,14 @@ export class LeaderGridService {
 
   loadData() {
     this.personService.getLeaders().subscribe(x => {
-      this.rows = x,
-        this.gridApi.setRowData(this.rows)
-    }
+        this.rows = x,
+          this.gridApi.setRowData(this.rows);
+      }
     );
   }
 
   remove(item: any) {
-    var index = this.rows.indexOf(item);
+    let index = this.rows.indexOf(item);
     if (index <= -1)
       return;
     this.rows.splice(index, 1);
