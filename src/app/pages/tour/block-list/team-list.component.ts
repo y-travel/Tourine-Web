@@ -4,7 +4,7 @@ import { FormService } from '../../../@core/data/form.service';
 import { Block, FormFactory, TeamMember } from '../../../@core/data/models';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
-import { BlocksGridService } from '../blocks-grid.service';
+import { TeamGridService } from '../team-grid.service';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
 import { PersonService } from '../../../@core/data/person.service';
@@ -14,9 +14,9 @@ import { DialogMode } from '../../../@core/data/models/enums';
   selector: 'app-block-list',
   templateUrl: './block-list.component.html',
   styleUrls: ['./block-list.component.scss'],
-  providers: [BlocksGridService]
+  providers: [TeamGridService],
 })
-export class BlockListComponent implements OnInit, Dialog {
+export class TeamListComponent implements OnInit, Dialog {
   dialogMode: DialogMode;
   teamsItem: ToolbarItem[] = [
     <ToolbarItem>{
@@ -36,11 +36,11 @@ export class BlockListComponent implements OnInit, Dialog {
               public dialogInstance: MatDialogRef<ModalInterface>,
               private dialogService: DialogService,
               public formFactory: FormFactory,
-              public blocksGridService: BlocksGridService,
+              public teamGridService: TeamGridService,
               public personService: PersonService) {
 
-    this.blocksGridService.toolbarBlockItems.push(...this.teamsItem);
-    this.blocksGridService.model = this.data.model;
+    this.teamGridService.initToolbar(this.teamsItem);
+    this.teamGridService.model = this.data.model;
   }
 
   initDialog() {
@@ -56,10 +56,10 @@ export class BlockListComponent implements OnInit, Dialog {
     this.data.model.basePrice = team.basePrice;
     this.data.model.totalPrice = team.totalPrice;
 
-    var form = this.formFactory.createAddPassengersForm(this.data.model);
-    var rows = this.personService.getTeamMembers(team.id).subscribe(x => {
+    const form = this.formFactory.createAddPassengersForm(this.data.model);
+    const rows = this.personService.getTeamMembers(team.id).subscribe(x => {
       const ref = this.dialogService.openPopup(PassengerUpsertComponent, form);
-      var list: TeamMember[] = x.passengers;
+      const list: TeamMember[] = x.passengers;
       list.unshift(x.buyer);
       (<any>ref.componentInstance).passengerGridService.setRow(list);
       (<any>ref.componentInstance).updateCount();
@@ -70,6 +70,6 @@ export class BlockListComponent implements OnInit, Dialog {
   }
 
   teamDelete(team = new Block) {
-    this.personService.deleteTeam(team).subscribe(x => this.blocksGridService.remove(team));
+    this.personService.deleteTeam(team).subscribe(x => this.teamGridService.remove(team));
   }
 }

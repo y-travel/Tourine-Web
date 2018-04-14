@@ -12,7 +12,7 @@ import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-h
 export class LeaderGridService {
   gridOptions: GridOptions;
   columnDefs: any[];
-  leaderToolbar: ToolbarItem[] = [];
+  toolbarItems: ToolbarItem[] = [];
   frameworkComponents: any;
   gridApi: any;
   grid: AgGridNg2;
@@ -99,7 +99,7 @@ export class LeaderGridService {
         maxWidth: 90,
         cellRenderer: 'cellToolbar',
         cellRendererParams: {
-          items: this.leaderToolbar,
+          items: this.toolbarItems,
         },
       },
     ];
@@ -129,9 +129,8 @@ export class LeaderGridService {
     }, 100);
   }
 
-  addToolbar() {
-    this.columnDefs.push();
-    this.gridApi.refreshHeader();
+  initToolbar(items: ToolbarItem[]) {
+    this.toolbarItems.push(...items);
   }
 
   loadData() {

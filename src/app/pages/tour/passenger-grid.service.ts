@@ -191,12 +191,6 @@ export class PassengerGridService {
     this.gridApi.setRowData(this.rows);
   }
 
-  editItem(oldModel: TeamMember, newModel: TeamMember) {
-    const index = this.rows.findIndex(p => p.personId === oldModel.personId);
-    this.rows[index] = newModel;
-    this.gridApi.setRowData(this.rows);
-  }
-
   remove(item: any) {
     const index = this.rows.indexOf(item);
     if (index <= -1)
@@ -207,5 +201,9 @@ export class PassengerGridService {
 
   setRow(row: TeamMember[]) {
     this.rows = row;
+  }
+
+  initToolbar(items: ToolbarItem[]) {
+    this.toolbarTourItems.push(...items);
   }
 }

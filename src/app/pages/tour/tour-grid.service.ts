@@ -194,8 +194,8 @@ export class TourGridService {
     });
   }
 
-  addToolbar() {
-    this.columnDefs.push();
-    this.gridApi.refreshHeader();
+  initToolbar(sharedItems: ToolbarItem[], tourItems: ToolbarItem[], blockItems: ToolbarItem[]) {
+    this.toolbarTourItems.push(...sharedItems, ...tourItems);
+    this.toolbarBlockItems.push(...sharedItems, ...blockItems);
   }
 }

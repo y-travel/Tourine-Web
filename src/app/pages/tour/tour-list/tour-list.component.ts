@@ -9,7 +9,7 @@ import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { Block, Tour } from '../../../@core/data/models/client.model';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
-import { BlockListComponent } from '../block-list/block-list.component';
+import { TeamListComponent } from '../block-list/team-list.component';
 import { TourPassengersComponent } from '../tour-passengers/tour-passengers.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { TeamMember } from '../../../@core/data/models';
@@ -18,7 +18,8 @@ import { DialogMode } from '../../../@core/data/models/enums';
 @Component({
   selector: 'tour-list',
   templateUrl: './tour-list.component.html',
-  styleUrls: ['./tour-list.component.scss']
+  styleUrls: ['./tour-list.component.scss'],
+  providers: [TourGridService],
 })
 export class TourListComponent {
 
@@ -82,8 +83,7 @@ export class TourListComponent {
               public dialogService: DialogService,
               public tourGridService: TourGridService) {
 
-    this.tourGridService.toolbarTourItems.push(...this.sharedItems, ...this.tourItems);
-    this.tourGridService.toolbarBlockItems.push(...this.sharedItems, ...this.blockItems);
+    this.tourGridService.initToolbar(this.sharedItems, this.tourItems, this.blockItems);
   }
 
   refresh() {
@@ -112,7 +112,7 @@ export class TourListComponent {
   }
 
   teamList(block = new Block()) {
-    this.dialogService.openPopup(BlockListComponent, this.formFactory.createTeamListForm(block));
+    this.dialogService.openPopup(TeamListComponent, this.formFactory.createTeamListForm(block));
   }
 
   tourPassengers(tour: Tour = new Tour()) {
@@ -122,9 +122,5 @@ export class TourListComponent {
       const list: TeamMember[] = x.passengers;
       (<any>ref.componentInstance).passengerGridService.setRow(list);
     });
-  }
-
-  rowselected(event: any) {
-    console.log(event);
   }
 }

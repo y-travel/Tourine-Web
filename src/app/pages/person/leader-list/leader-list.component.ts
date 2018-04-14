@@ -10,11 +10,10 @@ import { LeaderUpsertComponent } from '../leader-upsert/leader-upsert.component'
 @Component({
   selector: 'app-leader-list',
   templateUrl: './leader-list.component.html',
-  styleUrls: ['./leader-list.component.scss']
+  styleUrls: ['./leader-list.component.scss'],
+  providers: [LeaderGridService],
 })
 export class LeaderListComponent implements OnInit {
-
-
   leaderItems: ToolbarItem[] = [
     <ToolbarItem>{
       icon: 'delete',
@@ -31,13 +30,12 @@ export class LeaderListComponent implements OnInit {
 
   @ViewChild('leaderGrid') leaderGrid: AgGridNg2;
 
-  constructor(
-    public formFactory: FormFactory,
-    public leaderGridService: LeaderGridService,
-    public personService: PersonService,
-    public dialogService: DialogService, ) {
+  constructor(public formFactory: FormFactory,
+              public leaderGridService: LeaderGridService,
+              public personService: PersonService,
+              public dialogService: DialogService,) {
 
-    this.leaderGridService.leaderToolbar.push(...this.leaderItems);
+    this.leaderGridService.initToolbar(this.leaderItems);
   }
 
   ngOnInit() {

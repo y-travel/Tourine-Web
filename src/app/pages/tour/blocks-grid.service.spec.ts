@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { BlocksGridService } from './blocks-grid.service';
+import { TeamGridService } from './team-grid.service';
 
-describe('BlocksGridService', () => {
+describe('TeamGridService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [BlocksGridService]
+      providers: [TeamGridService]
     });
   });
 
-  it('should be created', inject([BlocksGridService], (service: BlocksGridService) => {
+  it('should be created', inject([TeamGridService], (service: TeamGridService) => {
     expect(service).toBeTruthy();
   }));
 });

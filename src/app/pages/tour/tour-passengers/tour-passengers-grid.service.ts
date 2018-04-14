@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { GridOptions } from 'ag-grid';
-import { Dictionary, OptionType, Person, TeamMember, Tour } from '../../../@core/data/models';
+
+import { Dictionary, OptionType, TeamMember, Tour } from '../../../@core/data/models';
 import { CellToolbarComponent, ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,7 +28,7 @@ export class TourPassengersGridService {
   constructor(public personService: PersonService,
               private translate: TranslateService,
               private formatter: FormatterService,
-              @Inject(UTILS) private utils: AppUtils, ) {
+              @Inject(UTILS) private utils: AppUtils,) {
     this.init();
   }
 
@@ -56,9 +57,9 @@ export class TourPassengersGridService {
       },
       {
         headerName: 'person.nameAndFamily',
-        valueGetter: (params: any) => {
-          return params.data.person.gender == 1 ? 'آقای ' + params.data.person.name + ' ' + params.data.person.family : 'خانم ' + params.data.person.name + ' ' + params.data.person.family;
-        },
+        valueGetter: (params: any) => params.data.person.gender === 1
+          ? 'آقای ' + params.data.person.name + ' ' + params.data.person.family
+          : 'خانم ' + params.data.person.name + ' ' + params.data.person.family,
       },
       {
         headerName: 'agency.*',
@@ -74,25 +75,19 @@ export class TourPassengersGridService {
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room)},
-            cellRenderer: params => {
-              return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`;
-            }
+            cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus)},
-            cellRenderer: params => {
-              return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`;
-            }
+            cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food)},
-            cellRenderer: params => {
-              return `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`;
-            }
+            cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`
           }
         ]
       },
@@ -116,12 +111,6 @@ export class TourPassengersGridService {
 
   }
 
-  getPerson(model: Person) {
-    this.personService.getPerson(model).subscribe((persons: Person[]) => {
-      console.log(persons);
-    });
-  }
-
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -139,28 +128,8 @@ export class TourPassengersGridService {
     }, 500);
   }
 
-  onAddRow() {
-    let newItem: any;
-    const res = this.gridApi.updateRowData({add: [newItem]});
-  }
-
   refresh() {
     this.gridApi.refreshView();
-  }
-
-  addItem(model: TeamMember) {
-    const index = this.rows.findIndex(p => p.personId === model.personId);
-    if (index === -1)
-      this.rows.push(model);
-    else if (index < this.rows.length)
-      this.rows[index] = model;
-    this.gridApi.setRowData(this.rows);
-  }
-
-  editItem(oldModel: TeamMember, newModel: TeamMember) {
-    const index = this.rows.findIndex(p => p.personId === oldModel.personId);
-    this.rows[index] = newModel;
-    this.gridApi.setRowData(this.rows);
   }
 
   remove(item: any) {
@@ -169,10 +138,6 @@ export class TourPassengersGridService {
       return;
     this.rows.splice(index, 1);
     this.gridApi.setRowData(this.rows);
-  }
-
-  setRow(row: TeamMember[]) {
-    this.rows = row;
   }
 
   loadTourAgency(tourId: string) {

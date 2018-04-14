@@ -21,7 +21,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
 
   dialogMode: DialogMode;
 
-  sharedItems: ToolbarItem[] = [
+  toolbarItems: ToolbarItem[] = [
     <ToolbarItem>{
       icon: 'delete',
       title: 'delete',
@@ -63,7 +63,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   }
 
   init() {
-    this.passengerGridService.toolbarTourItems.push(...this.sharedItems);
+    this.passengerGridService.initToolbar(this.toolbarItems);
     this.service.getTourFreeSpace(this.data.model.id).subscribe(x => this.tourFreeSpace = +x);
     this.service.getTourOptions(this.data.model.id).subscribe(x => {
       this.data.model.foodPrice = x.find(y => y.optionType === OptionType.Food).price;
