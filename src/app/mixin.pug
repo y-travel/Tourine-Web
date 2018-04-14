@@ -1,0 +1,11 @@
+mixin matField(formControlName,placeholder,validationFormGroup='',subText = '',icon ='', fieldAttributes ={})
+  mat-form-field(fxFlex)&attributes(fieldAttributes)
+    input(matInput , placeholder= placeholder, formControlName= formControlName)&attributes(attributes)
+    if icon
+      mat-icon(matSuffix)=icon
+    if subText
+      mat-hint(align='end', translate)=subText
+    if validationFormGroup
+      mat-error(translate)="{{"+ validationFormGroup +".get('"+formControlName+"').errorMessage}}"
+
+

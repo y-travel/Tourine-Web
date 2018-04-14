@@ -1,7 +1,4 @@
-mixin matField(formControlName,placeholder)
-  mat-form-field(fxFlex)
-    input(matInput , placeholder= placeholder, formControlName= formControlName)
-
+include ../../../mixin
 // don't edit this html file
 .modal-header(mat-dialog-title)
   .modal-title
@@ -22,6 +19,7 @@ mixin matField(formControlName,placeholder)
             mat-option {{ "none"|translate }}
             mat-option(*ngFor='let item of destinations | async', [value]='item.id')
               | {{ item.name }}
+          mat-error(translate) {{vModel.form.get('tourDetail').get('destinationId').errorMessage}}
         mat-form-field
           mat-select(placeholder='leader.*', formControlName='leaderId', fxLayoutGap='100px')
             mat-option {{ "none"|translate }}
@@ -34,25 +32,25 @@ mixin matField(formControlName,placeholder)
             input(matInput , (click)='tourDateToggle._open($event)', [matDatepicker]='tourDate', placeholder='tour.date', formControlName='startDate')
             mat-datepicker-toggle(utc='true', #tourDateToggle, matSuffix, [for]='tourDate')
             mat-datepicker(#tourDate, disabled='false')
-          mat-form-field(fxFlex)
-            input(matInput , placeholder='duration', maxlength='3', formControlName='duration')
-            mat-hint(align='end', translate) nightFormat
+            mat-error(translate) {{vModel.form.get('tourDetail').get('startDate').errorMessage}}
+          +matField('duration','duration',"vModel.form.get('tourDetail')",'nightFormat')(maxLength ='3',mask='number')
         div(fxLayout='row', fxLayoutAlign='space-between')
-          +matField('capacity','capacity.*')
-          mat-form-field(fxFlex)
-            input(matInput, mask='number', placeholder='tour.price', formControlName='basePrice')
-            mat-hint(align='end', translate) price.irFormated
+          +matField('capacity','capacity.*','vModel.form')(mask='number')
+          +matField('basePrice','tour.price','vModel.form','price.irFormated')(mask='number')
         div(fxLayout='row', fxLayoutAlign='space-between')
-          mat-form-field(fxFlex)
-            input(matInput, mask='number', placeholder='infantPrice', formControlName='infantPrice')
-            mat-hint(align='end', translate) price.irFormated
+          +matField('infantPrice','infantPrice','vModel.form','price.irFormated')(mask='number')
           mat-form-field(fxFlex, formGroupName='tourDetail')
             mat-select(placeholder='hotel', formControlName='placeId')
               mat-option(*ngFor='let item of places|async', [value]='item.id') {{ item.name }}
+            mat-error(translate) {{vModel.form.get('tourDetail').get('placeId').errorMessage}}
       mat-card(fxLayout='column', fxFlex='40', formArrayName='options')
-        mat-form-field(fxFlex, *ngFor="let formGroup of vModel.form.get('options')['controls'];let i=index", [formGroupName]='i')
-          input(matInput, mask='number', placeholder="{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}", formControlName='price')
-          mat-icon(matSuffix) {{ utils.mapOptionTypeToIcon(formGroup.value.optionType) }}
-          mat-hint(align='end', translate) price.irFormated
+        +matField(
+        'price',
+        "{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}",
+        'vModel.form.get(\'options\').get(i.toString())',
+        'price.irFormated',
+        '{{ utils.mapOptionTypeToIcon(formGroup.value.optionType) }}',
+        {'*ngFor':"let formGroup of vModel.form.get('options')['controls'];let i=index", '[formGroupName]':'i'}
+        )(mask='number')
 mat-dialog-actions
   button(mat-raised-button, color='primary', fxFlex, (click)='save()') {{ "save"|translate }}

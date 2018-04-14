@@ -15,6 +15,7 @@ export class ValidationService {
 
     for (const controlName in form.controls) {
       const control = form.controls[controlName];
+      this.update(<any>control, newErrors);
       const errorName = (control.errors) ? Object.keys(control.errors)[0] : null;
       if (errorName) {
         let errorMessage = this.translate.instant(ValidationMessage[errorName]);
@@ -49,6 +50,8 @@ export class ValidationService {
 }
 
 export const ValidationMessage: Dictionary<string> = {
+  min: 'validation.min',
+  max: 'validation.max',
   minlength: 'validation.minlength',
   maxlength: 'validation.maxlength',
   required: 'validation.required',
