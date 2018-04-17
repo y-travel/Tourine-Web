@@ -1,13 +1,32 @@
-import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService, NewFormService } from '../form.service';
-import { Agency, Block, EditPassword, Person, PersonAgency, PersonIncome, Reagent, TeamMember, Tour, TourDetail, TourOption, User, TourTeammember, Team } from './client.model';
+import {
+  Agency,
+  Block,
+  EditPassword,
+  Person,
+  PersonAgency,
+  PersonIncome,
+  Reagent,
+  Team,
+  TeamMember,
+  Tour,
+  TourDetail,
+  TourOption,
+  TourTeammember,
+  User
+} from './client.model';
+import { ValidationService } from '../../utils/validation.service';
 
 @Injectable()
 export class FormFactory {
 
-  createTourForm(model: Tour = new Tour()): FormService<Tour> {
+  constructor(public validation: ValidationService) {
+  }
+
+  createTourForm(model: Tour = new Tour()): NewFormService<Tour> {
 
     const form = new FormBuilder().group({
       id: [model.id],
@@ -23,7 +42,7 @@ export class FormFactory {
       ),
       tourDetail: this.createTourDetailForm(model.tourDetail ? model.tourDetail : undefined),
     });
-    return new FormService(Tour, form);
+    return new NewFormService(Tour, form, this.validation);
   }
 
   createTourOptionForm(tourId: string, model: TourOption = new TourOption()): FormGroup {
@@ -206,7 +225,7 @@ export class FormFactory {
       infantPrice: [model.infantPrice ? model.infantPrice : undefined],
       roomPrice: [model.roomPrice ? model.roomPrice : undefined],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined],
-      agency: new FormControl({ value: model.agency ? model.agency.name : '', disabled: true }),
+      agency: new FormControl({value: model.agency ? model.agency.name : '', disabled: true}),
     });
     return new FormService(TourTeammember, form);
   }
@@ -224,7 +243,7 @@ export class FormFactory {
       basePrice: [model.basePrice ? model.basePrice : undefined],
       infantPrice: [model.infantPrice ? model.infantPrice : undefined],
       totalPrice: [model.totalPrice ? model.totalPrice : undefined],
-      buyer: new FormControl({ value: model.buyer.name + ' ' + model.buyer.family, disabled: true }),
+      buyer: new FormControl({value: model.buyer.name + ' ' + model.buyer.family, disabled: true}),
       count: [model.count ? model.count : undefined],
     });
     return form;
