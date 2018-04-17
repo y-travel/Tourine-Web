@@ -45,7 +45,7 @@ export class TourOption extends Model {
   tourId: string;
 
   constructor(public optionType = OptionType.Empty,
-              public optionStatus: OptionStatus = OptionStatus.Limited) {
+    public optionStatus: OptionStatus = OptionStatus.Limited) {
     super();
   }
 }
@@ -98,6 +98,7 @@ export class Coupon extends Model {
 
 export class Block extends Model {
   agencyId: string = undefined;
+  agency: Agency;
   parentId: string = undefined;
   capacity: number = undefined;
   infantPrice: number = undefined;
@@ -153,7 +154,7 @@ export class PersonIncome {
   incomeStatus: IncomeStatus;
   currencyFactor: number;
 
-  constructor(public optionType: OptionType = OptionType.Empty,) {
+  constructor(public optionType: OptionType = OptionType.Empty, ) {
   }
 }
 
@@ -216,13 +217,14 @@ export class Team extends Model {
 }
 
 export class TourTeammember {
+  isTeam: boolean;
   tourId: string;
   basePrice: number;
   infantPrice: number;
   foodPrice: number;
   roomPrice: number;
   busPrice: number;
-  agency: Agency;
+  agencyName: string;
   teams: Team[];
 }
 export interface IReturn<T> {

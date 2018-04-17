@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatInput, MatButton, MatStepper } from '@angular/material';
-import { Tour, FormFactory, TeamMember, DialogMode, Agency, TourTeammember, Team, Person } from '../../../@core/data/models';
+import { Tour, FormFactory, TeamMember, DialogMode, Agency, TourTeammember, Team, Person, Block, OptionType } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { DialogService, Dialog } from '../../../@core/utils/dialog.service';
@@ -17,13 +17,16 @@ import { FormArray, FormGroup } from '@angular/forms';
   styleUrls: ['./passenger-replacement.component.scss']
 })
 export class PassengerReplacementComponent implements OnInit, Dialog {
-  replacementResultForm: FormService<TourTeammember>;
+  replacementTourResultForm: FormService<any>;
+  replacementTeamResultForm: FormService<Team>;
   dialogMode: DialogMode;
   selectedPassengers: TeamMember[];
   selectedAgency: Agency;
   destinationTourId: string;
-  buyerId: string;
-  t: TourTeammember = new TourTeammember();
+  showTour: boolean = undefined;
+
+  optionType = OptionType;
+
   @ViewChild('nextButton') nextButton: MatButton;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
@@ -33,20 +36,8 @@ export class PassengerReplacementComponent implements OnInit, Dialog {
     public service: PersonService,
     public tourGridService: PassengerReplacementTourGridService,
     @Inject(UTILS) public utils: AppUtils, ) {
-    var tt = new Team();
-    let p = new Person();
-    p.name = 'dd';
-    tt.buyer = p;
-
-    tt.id = '';
-    tt.infantPrice = 1;
-    tt.basePrice = 2;
-    tt.count = 3;
-    this.t.teams = [];
-    this.t.teams.push(tt);
-    this.t.basePrice = 1000;
-    this.t.infantPrice = 2000;
-    this.replacementResultForm = this.formFactory.createReplacementResultForm(this.t);
+    this.replacementTourResultForm = this.formFactory.createReplacementTourResultForm();
+    this.replacementTeamResultForm = this.formFactory.createReplacementTeamResultForm([]);
   }
 
   initDialog() {
@@ -70,8 +61,8 @@ export class PassengerReplacementComponent implements OnInit, Dialog {
   }
 
   nextStep(stepper: MatStepper) {
-    this.save(stepper);
-    if (stepper.selectedIndex == 1)
+    this.replacePassenger(stepper);
+    if (stepper.selectedIndex == 0)
       this.nextButton.disabled = true;
     else
       this.nextButton.disabled = false;
@@ -85,22 +76,26 @@ export class PassengerReplacementComponent implements OnInit, Dialog {
       this.nextButton.disabled = true;
   }
 
-  save(stepper: MatStepper) {
+
+  replacePassenger(stepper: MatStepper) {
     this.service.passengerReplacement(this.data.model.id, this.destinationTourId, this.selectedPassengers, this.selectedAgency.id)
       .subscribe(x => {
-        this.replacementResultForm.updateForm(x);
-        // (<FormArray>this.replacementResultForm.form.get('teams')).controls.push(...x.teams.map((y) => <FormGroup>this.formFactory.createTeamForm(y)));
-        this.replacementResultForm.form.controls.teams.setValue(x.teams.map(x => { x.id, x.basePrice, x.infantPrice, x.totalPrice, x.count, x.buyer }));
+        // x.isTeam ?
+          this.replacementTeamResultForm = this.formFactory.createReplacementTeamResultForm(x.teams) ;
+          this.replacementTourResultForm = this.formFactory.createReplacementTourResultForm(x);
+        this.showTour = x.isTeam;
         stepper.next();
-      }, y => console.log(y));
+      });
+  }
+
+  updateReplacement() {
+    //  !this.showTour? 
+    this.service.updateTourPrice(this.replacementTourResultForm.model).subscribe(x => this.dialogInstance.close(),y=> this.dialogInstance.close());
+    // this.service.updateTeamList(this.replacementTeamResultForm.model).subscribe(x => this.dialogInstance.close());
   }
 
   onGridReady(params: any) {
     this.tourGridService.onGridReady(params);
     this.tourGridService.getTourExcludedSource(this.data.model.id);
-  }
-
-  trackByFn(index: any, item: any) {
-    return index; // or item.id
   }
 }

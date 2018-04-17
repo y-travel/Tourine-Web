@@ -151,7 +151,7 @@ export class TourPassengersGridService {
 
   loadTourAgency(tourId: string) {
     this.personService.getTourAgency(tourId).subscribe((tours: Tour[]) => {
-      tours.forEach(t => this.tourAgency[t.id] = t.agency.name);
+      tours.forEach(t => this.tourAgency[t.id] = t.agency);
     });
   }
 }

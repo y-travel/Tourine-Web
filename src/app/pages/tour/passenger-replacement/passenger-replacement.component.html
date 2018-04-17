@@ -18,7 +18,7 @@
         </div>
         <div fxLayout="row">
           <mat-form-field class="example-full-width" fxFlex>
-            <input matInput="search-local" placeholder="destinationTourFilter" #searchContent (keyup)="onFilterTextBoxChanged(searchContent)">
+            <input matInput="search-local" placeholder="{{'destinationTourFilter'|translate}}" #searchContent (keyup)="onFilterTextBoxChanged(searchContent)">
           </mat-form-field>
         </div>
         <div fxLayout="row" [style.height.px]="200">
@@ -29,59 +29,59 @@
           </ag-grid-angular>
         </div>
       </mat-step>
-
       <mat-step label="{{'steps'|translate:({value:'second'|translate})}}">
-
-        <form [formGroup]="replacementResultForm.form">
-
-          <!-- <mat-card>
+        <form [formGroup]="replacementTourResultForm.form" *ngIf="showTour" autoTranslate>
+          <mat-card>
             <div fxLayout="row">
-              <mat-form-field fxFlex formGroupName="agency">
-                <input matInput placeholder="agency.name" formControlNamme="name" disabled>
+              <mat-form-field fxFlex="30">
+                <input matInput placeholder="{{'agency.name'|translate}}" formControlName="agency">
               </mat-form-field>
-
-              <mat-form-field fxFlex>
-                <input matInput placeholder="tour.price" formControlName="basePrice">
+              <mat-form-field fxFlex="30">
+                <input matInput placeholder="{{'tour.price'|translate}}" formControlName="basePrice">
+                <mat-icon matSuffix> landscape</mat-icon>
                 <mat-hint align="end" translate>price.irFormated</mat-hint>
               </mat-form-field>
-
-              <mat-form-field fxFlex>
-                <input matInput placeholder="infantPrice" formControlName="infantPrice">
+              <mat-form-field fxFlex="30">
+                <input matInput placeholder="{{'infantPrice'|translate}}" formControlName="infantPrice">
+                <mat-icon matSuffix>child_care</mat-icon>
                 <mat-hint align="end" translate>price.irFormated</mat-hint>
               </mat-form-field>
             </div>
-
+            <br>
             <div fxLayout="row">
-
-              <mat-form-field fxFlex>
-                <input matInput placeholder="foodPrice" formControlName="foodPrice">
+              <mat-form-field fxFlex="30">
+                <input matInput placeholder="{{'foodPrice'|translate}}" formControlName="foodPrice">
+                <mat-icon matSuffix>{{ utils.mapOptionTypeToIcon(optionType.Food) }}</mat-icon>
                 <mat-hint align="end" translate>price.irFormated</mat-hint>
               </mat-form-field>
-
-              <mat-form-field fxFlex>
-                <input matInput placeholder="busPrice" translate="yes" formControlName="busPrice">
+              <mat-form-field fxFlex="30">
+                <input matInput placeholder="{{'busPrice'|translate}}" formControlName="busPrice">
+                <mat-icon matSuffix>{{ utils.mapOptionTypeToIcon(optionType.Bus) }}</mat-icon>
                 <mat-hint align="end" translate>price.irFormated</mat-hint>
               </mat-form-field>
-
-              <mat-form-field fxFlex>
-                <input matInput placeholder="roomPrice" formControlName="roomPrice">
+              <mat-form-field fxFlex="30">
+                <input matInput placeholder="{{'roomPrice'|translate}}" formControlName="roomPrice">
+                <mat-icon matSuffix>{{ utils.mapOptionTypeToIcon(optionType.Room) }}</mat-icon>
                 <mat-hint align="end" translate>price.irFormated</mat-hint>
               </mat-form-field>
             </div>
-
-          </mat-card> -->
+          </mat-card>
+        </form>
+        <form [formGroup]="replacementTeamResultForm.form" *ngIf="!showTour">
           <div formArrayName="teams" class="teamCard">
-            <mat-card *ngFor="let team of replacementResultForm.form.get('teams')['controls'];trackBy: trackByFn;let i=index">
+            <mat-card *ngFor="let team of replacementTeamResultForm.form.get('teams')['controls'];let i=index">
               <div fxLayout="row" [formGroupName]="i">
-                <mat-form-field fxFlex>
-                  <input matInput placeholder="buyer.name" formControlName="count" disabled>
+                <mat-form-field fxFlex="30">
+                  <input matInput placeholder="{{'buyer.name'|translate}}" formControlName="buyer">
                 </mat-form-field>
-                <mat-form-field fxFlex>
-                  <input matInput placeholder="tour.price" formControlName="basePrice">
+                <mat-form-field fxFlex="30">
+                  <input matInput placeholder="{{'tour.price'|translate}}" formControlName="basePrice">
+                  <mat-icon matSuffix> landscape</mat-icon>
                   <mat-hint align="end" translate>price.irFormated</mat-hint>
                 </mat-form-field>
-                <mat-form-field fxFlex>
-                  <input matInput placeholder="infantPrice" formControlName="infantPrice">
+                <mat-form-field fxFlex="30">
+                  <input matInput placeholder="{{'infantPrice'|translate}}" formControlName="infantPrice">
+                  <mat-icon matSuffix>child_care</mat-icon>
                   <mat-hint align="end" translate>price.irFormated</mat-hint>
                 </mat-form-field>
               </div>
@@ -89,18 +89,6 @@
           </div>
         </form>
         <br>
-        <!-- <div fxLayout="row">
-          <h3 fxFlex>{{"replacedPassenger"|translate}}</h3>
-        </div>
-        <div fxLayout="row">
-          <mat-form-field fxFlex>
-            <mat-chip-list>
-              <mat-chip *ngFor="let passenger of selectedPassengers">
-                {{passenger.person.name}} {{passenger.person.family}}
-              </mat-chip>
-            </mat-chip-list>
-          </mat-form-field>
-        </div> -->
       </mat-step>
     </mat-horizontal-stepper>
   </form>
@@ -115,5 +103,5 @@
   </button>
 </div>
 <mat-dialog-actions>
-  <button fxFlex mat-raised-button color="primary" (click)="save()">{{"save"|translate}}</button>
+  <button fxFlex mat-raised-button color="primary" (click)="updateReplacement()">{{"save"|translate}}</button>
 </mat-dialog-actions>

@@ -18,7 +18,8 @@ import {
   TourPassenger,
   User,
   Dictionary,
-  TourTeammember
+  TourTeammember,
+  Team
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
 
@@ -765,5 +766,36 @@ export class DeleteTeam implements IReturnVoid {
 
   getTypeName() {
     return 'DeleteTeam';
+  }
+}
+
+@Route('/tours/teams/list', 'PUT')
+export class UpdateTeamList implements IReturnVoid {
+
+  teams: Team[];
+
+  createResponse(): void {
+  }
+
+  getTypeName() {
+    return 'UpdateTeamList';
+  }
+}
+
+@Route('/tours/{TourId}/UpdatePrice', 'PUT')
+export class UpdateTourPrice implements IReturnVoid {
+
+  tourId: string;
+  infantPrice: number;
+  basePrice: number;
+  busPrice: number;
+  foodPrice: number;
+  roomPrice: number;
+
+  createResponse(): void {
+  }
+
+  getTypeName() {
+    return 'UpdateTourPrice';
   }
 }

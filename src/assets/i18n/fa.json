@@ -22,6 +22,7 @@
   },
   "busPrice": "قیمت صندلی",
   "buyer": {
+    "name": "نام خریدار",
     "names": "نام خریداران"
   },
   "capacity": {
@@ -158,16 +159,5 @@
     "upsert": "ثبت کاربر"
   },
   "username": "نام کاربری",
-  "validation":{
-    "min":"حداقل {{min}} باشد",
-    "max":"حداکثر {{max}} باشد",
-    "minlength":"باید بیشتر از {{requiredLength}} حرف باشد",
-    "maxlength":"باید کمتر از {{requiredLength}} حرف باشد",
-    "required": "الزامی",
-    "pattern": "خطا در نوشتار",
-    "greaterthan": "باید بزرگتر از {{requiredValue}} حرف باشد",
-    "countbiggerthan": "تعداد باید بیش از {{requiredValue}} عدد باشد",
-    "areequal": "باید برابر با {{requiredField}} باشد"
-  },
   "withOutPrice": "بدون قیمت"
 }

@@ -1,17 +1,14 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
 //
 import { FormService, NewFormService } from '../form.service';
 import { Agency, Block, EditPassword, Person, PersonAgency, PersonIncome, Reagent, TeamMember, Tour, TourDetail, TourOption, User, TourTeammember, Team } from './client.model';
-import { ValidationService } from '../../utils/validation.service';
 
 @Injectable()
 export class FormFactory {
 
-  constructor(private validation: ValidationService) {
-  }
+  createTourForm(model: Tour = new Tour()): FormService<Tour> {
 
-  createTourForm(model: Tour = new Tour()): NewFormService<Tour> {
     const form = new FormBuilder().group({
       id: [model.id],
       parentId: [model.parentId],
@@ -26,7 +23,7 @@ export class FormFactory {
       ),
       tourDetail: this.createTourDetailForm(model.tourDetail ? model.tourDetail : undefined),
     });
-    return new NewFormService(Tour, form, this.validation);
+    return new FormService(Tour, form);
   }
 
   createTourOptionForm(tourId: string, model: TourOption = new TourOption()): FormGroup {
@@ -201,18 +198,36 @@ export class FormFactory {
     return new FormService(Tour, form);
   }
 
-  createReplacementResultForm(model: TourTeammember = new TourTeammember()): FormService<TourTeammember> {
+  createReplacementTourResultForm(model: any = new Block()): FormService<any> {
     const form = new FormBuilder().group({
-      tourId: [model.tourId ? model.tourId : undefined],
+      id: [model.id ? model.id : undefined],
       basePrice: [model.basePrice ? model.basePrice : undefined],
       busPrice: [model.busPrice ? model.busPrice : undefined],
       infantPrice: [model.infantPrice ? model.infantPrice : undefined],
       roomPrice: [model.roomPrice ? model.roomPrice : undefined],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined],
-      agency: this.createAgencyForm(model.agency ? model.agency : undefined).form,
-      teams: new FormBuilder().array(model.teams ? model.teams.map(this.createTeamForm) : [])
+      agency: new FormControl({ value: model.agency ? model.agency.name : '', disabled: true }),
     });
     return new FormService(TourTeammember, form);
+  }
+
+  createReplacementTeamResultForm(model: Team[]): FormService<Team> {
+    const form = new FormBuilder().group({
+      teams: new FormBuilder().array(model ? model.map(x => this.createReplacementTeamForm(x)) : []),
+    });
+    return new FormService(Team, form);
+  }
+
+  createReplacementTeamForm(model: Team = new Team()): FormGroup {
+    const form = new FormBuilder().group({
+      id: [model.id ? model.id : undefined],
+      basePrice: [model.basePrice ? model.basePrice : undefined],
+      infantPrice: [model.infantPrice ? model.infantPrice : undefined],
+      totalPrice: [model.totalPrice ? model.totalPrice : undefined],
+      buyer: new FormControl({ value: model.buyer.name + ' ' + model.buyer.family, disabled: true }),
+      count: [model.count ? model.count : undefined],
+    });
+    return form;
   }
 
   createTeamForm(model: Team = new Team()): FormGroup {
