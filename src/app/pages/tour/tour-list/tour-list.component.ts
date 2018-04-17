@@ -120,6 +120,7 @@ export class TourListComponent {
     const rows = this.personService.getTourMembers(tour.id).subscribe(x => {
       const ref = this.dialogService.openPopup(TourPassengersComponent, form);
       const list: TeamMember[] = x.passengers;
+      (<any>ref.componentInstance).passengerGridService.selectedTourId = tour.id;
       (<any>ref.componentInstance).passengerGridService.setRow(list);
     });
   }

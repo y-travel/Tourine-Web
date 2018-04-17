@@ -15,7 +15,8 @@ export class TourPassengersGridService {
   gridColumnApi: any;
   rows: TeamMember[];
 
-    tourAgency: Dictionary<Agency> = {};
+  selectedTourId: string;
+  tourAgency: Dictionary<Agency> = {};
 
   columnDefs: any[];
   toolbarTourItems: ToolbarItem[] = [];
@@ -25,13 +26,14 @@ export class TourPassengersGridService {
   gridApi: any;
 
   constructor(public personService: PersonService,
-              private translate: TranslateService,
-              private formatter: FormatterService,
-              @Inject(UTILS) private utils: AppUtils,) {
+    private translate: TranslateService,
+    private formatter: FormatterService,
+    @Inject(UTILS) private utils: AppUtils, ) {
     this.init();
   }
 
   init() {
+    this.loadTourAgency(this.selectedTourId);
     this.rows = [];
     this.gridOptions = {
       defaultColDef: {
@@ -56,14 +58,14 @@ export class TourPassengersGridService {
       },
       {
         headerName: 'person.nameAndFamily',
-        valueGetter: (params: any) => params.data.person.gender === 1
+        valueGetter: (params: any) => params.data.person.gender == true
           ? 'آقای ' + params.data.person.name + ' ' + params.data.person.family
           : 'خانم ' + params.data.person.name + ' ' + params.data.person.family,
       },
       {
         headerName: 'agency.*',
         field: 'tourId',
-        cellRenderer: (params: any) => this.tourAgency[params.value],
+        cellRenderer: (params: any) => this.tourAgency[params.value].name,
       },
       {
         headerName: 'options',
@@ -73,19 +75,19 @@ export class TourPassengersGridService {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room)},
+            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room) },
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus)},
+            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus) },
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food)},
+            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food) },
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`
           }
         ]
@@ -110,11 +112,11 @@ export class TourPassengersGridService {
 
   }
 
-    getPerson(model: Person) {
-        this.personService.getPerson(model).subscribe((persons: Person[]) => {
-            console.log(persons)
-        });
-    }
+  getPerson(model: Person) {
+    this.personService.getPerson(model).subscribe((persons: Person[]) => {
+      console.log(persons)
+    });
+  }
 
   onGridReady(params: any) {
     this.gridApi = params.api;
@@ -145,9 +147,9 @@ export class TourPassengersGridService {
     this.gridApi.setRowData(this.rows);
   }
 
-    setRow(row: TeamMember[]) {
-        this.rows = row;
-    }
+  setRow(row: TeamMember[]) {
+    this.rows = row;
+  }
 
   loadTourAgency(tourId: string) {
     this.personService.getTourAgency(tourId).subscribe((tours: Tour[]) => {
