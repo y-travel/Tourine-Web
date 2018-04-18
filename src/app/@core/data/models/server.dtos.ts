@@ -769,8 +769,10 @@ export class DeleteTeam implements IReturnVoid {
   }
 }
 
-@Route('/tours/teams/list', 'PUT')
-export class UpdateTeamList implements IReturnVoid {
+@Route('/tours/{OldTourId}/teams/list', 'PUT')
+export class PassengerReplacementTeamAccomplish implements IReturnVoid {
+
+  oldTourId: string;
 
   teams: Team[];
 
@@ -778,13 +780,14 @@ export class UpdateTeamList implements IReturnVoid {
   }
 
   getTypeName() {
-    return 'UpdateTeamList';
+    return 'PassengerReplacementTeamAccomplish';
   }
 }
 
-@Route('/tours/{TourId}/UpdatePrice', 'PUT')
-export class UpdateTourPrice implements IReturnVoid {
+@Route('/tours/{TourId}/{oldTourId}/accomplish', 'PUT')
+export class PassengerReplacementTourAccomplish implements IReturnVoid {
 
+  oldTourId: string;
   tourId: string;
   infantPrice: number;
   basePrice: number;
@@ -796,6 +799,6 @@ export class UpdateTourPrice implements IReturnVoid {
   }
 
   getTypeName() {
-    return 'UpdateTourPrice';
+    return 'PassengerReplacementTourAccomplish';
   }
 }

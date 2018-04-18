@@ -22,12 +22,14 @@ export class PassengerReplacementComponent implements OnInit, Dialog {
   dialogMode: DialogMode;
   selectedPassengers: TeamMember[];
   selectedAgency: Agency;
+  selectedTourId: string;
   destinationTourId: string;
   showTour: boolean = undefined;
 
   optionType = OptionType;
 
   @ViewChild('nextButton') nextButton: MatButton;
+  @ViewChild('submit') submitBtn: MatButton;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
     public dialogInstance: MatDialogRef<ModalInterface>,
@@ -41,6 +43,7 @@ export class PassengerReplacementComponent implements OnInit, Dialog {
   }
 
   initDialog() {
+    this.submitBtn.disabled = true;
   }
 
   ngOnInit() {
@@ -62,36 +65,44 @@ export class PassengerReplacementComponent implements OnInit, Dialog {
 
   nextStep(stepper: MatStepper) {
     this.replacePassenger(stepper);
-    if (stepper.selectedIndex == 0)
+    if (stepper.selectedIndex == 0) {
       this.nextButton.disabled = true;
-    else
+      this.submitBtn.disabled = false;
+    }
+    else {
       this.nextButton.disabled = false;
+      this.submitBtn.disabled = true;
+    }
   }
 
   previousStep(stepper: MatStepper) {
     stepper.previous();
-    if (stepper.selectedIndex == 0)
+    if (stepper.selectedIndex == 0) {
       this.nextButton.disabled = false;
-    else
+      this.submitBtn.disabled = true;
+    }
+    else {
       this.nextButton.disabled = true;
+      this.submitBtn.disabled = false;
+    }
   }
 
 
   replacePassenger(stepper: MatStepper) {
     this.service.passengerReplacement(this.data.model.id, this.destinationTourId, this.selectedPassengers, this.selectedAgency.id)
       .subscribe(x => {
-        // x.isTeam ?
-          this.replacementTeamResultForm = this.formFactory.createReplacementTeamResultForm(x.teams) ;
+        x.isTeam ?
+          this.replacementTeamResultForm = this.formFactory.createReplacementTeamResultForm(x.teams) :
           this.replacementTourResultForm = this.formFactory.createReplacementTourResultForm(x);
-        this.showTour = x.isTeam;
+        this.showTour = !x.isTeam;
         stepper.next();
       });
   }
 
   updateReplacement() {
-    //  !this.showTour? 
-    this.service.updateTourPrice(this.replacementTourResultForm.model).subscribe(x => this.dialogInstance.close(),y=> this.dialogInstance.close());
-    // this.service.updateTeamList(this.replacementTeamResultForm.model).subscribe(x => this.dialogInstance.close());
+    this.showTour ?
+      this.service.tourAccomplish(this.replacementTourResultForm.model, this.selectedTourId).subscribe(x => this.dialogInstance.close(true)) :
+      this.service.teamAccomplish(this.replacementTeamResultForm.model, this.selectedTourId).subscribe(x => this.dialogInstance.close(true));
   }
 
   onGridReady(params: any) {

@@ -16,7 +16,8 @@ import {
   TourDetail,
   TourOption,
   TourTeammember,
-  User
+  User,
+  Model
 } from './client.model';
 import { ValidationService } from '../../utils/validation.service';
 
@@ -225,7 +226,7 @@ export class FormFactory {
       infantPrice: [model.infantPrice ? model.infantPrice : undefined],
       roomPrice: [model.roomPrice ? model.roomPrice : undefined],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined],
-      agency: new FormControl({value: model.agency ? model.agency.name : '', disabled: true}),
+      agency: new FormControl({ value: model.agency ? model.agency.name : '', disabled: true }),
     });
     return new FormService(TourTeammember, form);
   }
@@ -240,10 +241,13 @@ export class FormFactory {
   createReplacementTeamForm(model: Team = new Team()): FormGroup {
     const form = new FormBuilder().group({
       id: [model.id ? model.id : undefined],
+      tourId: [model.tourId ? model.tourId : undefined],
       basePrice: [model.basePrice ? model.basePrice : undefined],
       infantPrice: [model.infantPrice ? model.infantPrice : undefined],
       totalPrice: [model.totalPrice ? model.totalPrice : undefined],
-      buyer: new FormControl({value: model.buyer.name + ' ' + model.buyer.family, disabled: true}),
+      buyer: new FormControl({ value: model.buyer.name + ' ' + model.buyer.family, disabled: true }),
+      buyerId: [model.buyerId ? model.buyerId : undefined],
+      buyerIsPassenger: [model.buyerIsPassenger ? model.buyerIsPassenger : undefined],
       count: [model.count ? model.count : undefined],
     });
     return form;
@@ -260,5 +264,13 @@ export class FormFactory {
       // buyer: this.createPersonForm(model.buyer ? model.buyer : undefined).form,
     });
     return form;
+  }
+
+  createSimpleTourForm(model: Tour = new Tour()): FormService<Tour> {
+
+    const form = new FormBuilder().group({
+      id: [model.id],
+    });
+    return new FormService(Tour, form);
   }
 }

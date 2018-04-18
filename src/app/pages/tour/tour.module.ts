@@ -14,6 +14,7 @@ import { TeamListComponent } from './block-list/team-list.component';
 import { PersonService } from '../../@core/data/person.service';
 import { TourPassengersComponent } from './tour-passengers/tour-passengers.component';
 import { PassengerReplacementComponent } from './passenger-replacement/passenger-replacement.component';
+import { PassengerReplacementTourGridService } from './passenger-replacement/passenger-replacement-tour-grid.service';
 
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,
@@ -42,7 +43,7 @@ const ENTRY_COMPONENTS = [
     TourPassengersComponent,
     PassengerReplacementComponent,
   ],
-  providers: [DialogService, PersonService,],
+  providers: [DialogService, PersonService,PassengerReplacementTourGridService],
   entryComponents: ENTRY_COMPONENTS
 })
 export class TourModule {

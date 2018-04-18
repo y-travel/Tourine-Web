@@ -22,6 +22,7 @@ import { Serializable } from '../../../@core/utils/serializable';
 })
 export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
   dialogMode: DialogMode;
+  DialogMode = DialogMode;
   freeSpace: number;
   agencies: Observable<Agency[]>;
   isNewBlock = false;
@@ -30,13 +31,13 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              @Inject(UTILS) private utils: AppUtils,
-              public vModel: BlockUpsertViewModel,
-              public dialogInstance: MatDialogRef<ModalInterface>,
-              private dialogService: DialogService,
-              private tourService: TourService,
-              public formFactory: FormFactory,
-              public service: AgencyService) {
+    @Inject(UTILS) private utils: AppUtils,
+    public vModel: BlockUpsertViewModel,
+    public dialogInstance: MatDialogRef<ModalInterface>,
+    private dialogService: DialogService,
+    private tourService: TourService,
+    public formFactory: FormFactory,
+    public service: AgencyService) {
   }
 
   initDialog() {
@@ -44,7 +45,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
     this.vModel.init(this.data.tourId, this.data.block, !this.isNewBlock);
     this.tourService
       .getOptions(this.isNewBlock ? this.vModel.tourId : this.vModel.model.id)
-      .subscribe(x => this.vModel.form.updateForm({options: x}));
+      .subscribe(x => this.vModel.form.updateForm({ options: x }));
     this.agencies = this.service.getList();
     this.service.getTourFreeSpace(this.vModel.tourId).subscribe(x => {
       this.freeSpace = +x;

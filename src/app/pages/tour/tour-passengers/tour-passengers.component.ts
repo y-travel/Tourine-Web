@@ -20,11 +20,11 @@ export class TourPassengersComponent implements OnInit, Dialog {
   @ViewChild('passengerReplacementFab') passengerReplacementFab: MatButton;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
-              public dialogInstance: MatDialogRef<ModalInterface>,
-              private dialogService: DialogService,
-              public formFactory: FormFactory,
-              public passengerGridService: TourPassengersGridService,
-              public personService: PersonService) {
+    public dialogInstance: MatDialogRef<ModalInterface>,
+    private dialogService: DialogService,
+    public formFactory: FormFactory,
+    public passengerGridService: TourPassengersGridService,
+    public personService: PersonService) {
 
   }
 
@@ -39,9 +39,11 @@ export class TourPassengersComponent implements OnInit, Dialog {
     const selectedPassengrs: TeamMember[] = this.passengerGridService.gridApi.getSelectedRows();
     if (selectedPassengrs.length > 0 &&
       selectedPassengrs.length === selectedPassengrs.filter(x => x.tourId === selectedPassengrs[0].tourId).length) {
-      const ref = this.dialogService.openPopup(PassengerReplacementComponent, this.formFactory.createTourForm(this.data.model));
+      const ref = this.dialogService.openPopup(PassengerReplacementComponent, this.formFactory.createSimpleTourForm(this.data.model));
+      (<any>ref.componentInstance).selectedTourId = selectedPassengrs[0].tourId;
       (<any>ref.componentInstance).selectedPassengers = selectedPassengrs;
       (<any>ref.componentInstance).selectedAgency = this.passengerGridService.tourAgency[selectedPassengrs[0].tourId];
+      ref.afterClosed().subscribe(x => { if (x) this.dialogInstance.close(); });
     } else
       console.log('not same agency selected');
   }

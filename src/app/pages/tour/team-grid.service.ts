@@ -22,8 +22,8 @@ export class TeamGridService {
   toolbarBlockItems: ToolbarItem[] = [];
 
   constructor(private translateService: TranslateService,
-              public personService: PersonService,
-              private formatter: FormatterService) {
+    public personService: PersonService,
+    private formatter: FormatterService) {
     this.init();
   }
 
@@ -71,7 +71,7 @@ export class TeamGridService {
         },
       },
     ];
-    this.frameworkComponents = {cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent};
+    this.frameworkComponents = { cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent };
   }
 
   refresh() {
@@ -98,7 +98,7 @@ export class TeamGridService {
   }
 
   loadData(id: string) {
-    this.personService.getTourTeams(id).subscribe(this.setRows);
+    this.personService.getTourTeams(id).subscribe(x => this.setRows(x));
   }
 
   setRows(items: any[]) {

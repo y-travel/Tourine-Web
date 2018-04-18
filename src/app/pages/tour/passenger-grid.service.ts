@@ -71,7 +71,7 @@ export class PassengerGridService {
         headerName: 'person.gender',
         minWidth: 50,
         maxWidth: 50,
-        valueGetter: (params: any) => params.data.person.gender === 1 ? 'مرد' : 'زن',
+        valueGetter: (params: any) => params.data.person.gender === true ? 'مرد' : 'زن',
         cellRenderer: 'agGroupCellRenderer',
       },
       {
