@@ -5,6 +5,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatChipsModule,
   MatCommonModule,
   MatDatepickerModule,
   MatFormFieldModule,
@@ -18,23 +19,25 @@ import {
   MatStepperModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatChipsModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { SearchInputComponent, ThemeSwitcherComponent, TrnDropdownComponent, TrnHeaderComponent, TrnSliderComponent, } from './components';
+import {
+  MenuService,
+  SidebarService,
+  ThemeSwitcherComponent,
+  TrnHeaderComponent,
+  TrnLayoutComponent,
+  TrnMenuComponent,
+  TrnSidebarComponent,
+  TrnSliderComponent,
+} from './components';
 import { AutoTranslateDirective, TrnButtonDirective, TrnInputDirective } from './directives';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { TourineLayoutComponent } from './layouts';
 import { AppTranslationModule } from '../app-translation.module';
-import { TrnLayoutComponent } from './components/layout/trn-layout.component';
-import { TrnMenuComponent } from './components/menu/trn-menu.component';
-import { TrnSidebarComponent } from './components/sidebar/trn-sidebar.component';
-import { SidebarService } from './components/sidebar/sidebar.service';
-import { MenuService } from './components/menu/menu.service';
-import { TrnCheckboxComponent } from './components/checkbox/trn-checkbox.component';
 import { DialogService } from '../@core/utils/dialog.service';
 import { MatCardDirective } from './directives/mat-card.directive';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -61,21 +64,20 @@ const MAT_MODULES = [
 const OTHER_MODULES = [
   FlexLayoutModule,
 ];
+
 const COMPONENTS = [
   ThemeSwitcherComponent,
   TrnHeaderComponent,
-  SearchInputComponent,
   TourineLayoutComponent,
   TrnInputDirective,
   TrnButtonDirective,
-  TrnDropdownComponent,
   TrnSliderComponent,
   TrnLayoutComponent,
   TrnMenuComponent,
   TrnSidebarComponent,
-  TrnCheckboxComponent,
   AutoTranslateDirective,
   MatCardDirective,
+  DialogComponent
 ];
 
 const PIPES = [
@@ -94,7 +96,7 @@ const THEME_PROVIDERS = [
 @NgModule({
   imports: [...BASE_MODULES, ...MAT_MODULES, ...OTHER_MODULES, AppTranslationModule],
   exports: [...BASE_MODULES, ...MAT_MODULES, ...OTHER_MODULES, ...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES],
+  declarations: [...COMPONENTS, ...PIPES,],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {
