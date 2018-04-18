@@ -124,7 +124,8 @@ export class TourGridService {
                 field: 'capacity',
               }, {
                 headerName: 'capacity.registered',
-                field: 'capacity',
+                field: 'freeSpace',
+                valueGetter: (params:any) => params.data.capacity - params.data.freeSpace
               },
             ],
           },
