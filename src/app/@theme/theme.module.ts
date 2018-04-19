@@ -32,12 +32,11 @@ import {
   TrnSidebarComponent,
   TrnSliderComponent,
 } from './components';
-import { AutoTranslateDirective, TrnButtonDirective, TrnInputDirective } from './directives';
+import { AutoTranslateDirective, DialogDirective, MatCardDirective, TrnButtonDirective, TrnInputDirective } from './directives';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { TourineLayoutComponent } from './layouts';
 import { AppTranslationModule } from '../app-translation.module';
 import { DialogService } from '../@core/utils/dialog.service';
-import { MatCardDirective } from './directives/mat-card.directive';
 import { DialogComponent } from './components/dialog/dialog.component';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
@@ -79,7 +78,8 @@ const COMPONENTS = [
   TrnSidebarComponent,
   AutoTranslateDirective,
   MatCardDirective,
-  DialogComponent
+  DialogComponent,
+  DialogDirective,
 ];
 
 const PIPES = [

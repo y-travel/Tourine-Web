@@ -15,6 +15,7 @@
   },
   "agencyName": "نام آژانس",
   "allPriceIsPerOne": "قیمت های وارد شده به ازای هر نفر می باشد",
+  "apply":"تایید",
   "birthDate": "تاریخ تولد",
   "block": {
     "save": "ذخیره تور",
