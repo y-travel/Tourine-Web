@@ -114,8 +114,8 @@ export class FormFactory {
   createPersonForm(model: Person = new Person()): FormService<Person> {
     const form = new FormBuilder().group({
       id: [model.id],
-      name: [model.name, Validators.required],
-      family: [model.family, Validators.required],
+      name: [model.name ? model.name : '', Validators.required],
+      family: [model.family ? model.family : '', Validators.required],
       mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
       nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(1)]], //@TODO: must be lenght of 10
       englishName: [model.englishName, Validators.required],
@@ -134,11 +134,11 @@ export class FormFactory {
 
   createTeamMemberForm(model: TeamMember = new TeamMember()): FormService<TeamMember> {
     const form = new FormBuilder().group({
-      personId: [model.personId],
+      personId: [model.personId ? model.personId : ''],
       person: this.createPersonForm(model.person ? model.person : new Person()).form,
       personIncomes: new FormBuilder().array(model.personIncomes.map(this.createPersonIncome)),
-      haveVisa: [model.haveVisa],
-      passportDelivered: [model.passportDelivered],
+      haveVisa: [model.haveVisa ? model.haveVisa : ''],
+      passportDelivered: [model.passportDelivered ? model.passportDelivered : ''],
     });
     return new FormService(TeamMember, form);
   }

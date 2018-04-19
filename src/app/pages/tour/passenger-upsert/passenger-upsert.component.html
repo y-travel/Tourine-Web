@@ -1,53 +1,106 @@
 <div mat-dialog-title class="modal-header">
   <div class="modal-title">
-   {{ "passenger.upsert"|translate }}
+    {{ "passenger.upsert"|translate }}
   </div>
 </div>
 <div class="right modal-body" dir="rtl" [style.width.px]="1000" [style.height.px]="450" autoTranslate>
-  <form [formGroup]="data.form" (keydown.enter)="$event.preventDefault()">
-    <div>
-      <mat-card [stretch]="true">
-        <ag-grid-angular #agGrid style="height:330px" class="ag-theme-material" [columnDefs]="passengerGridService.columnDefs" [gridOptions]="passengerGridService.gridOptions"
-          [frameworkComponents]="passengerGridService.frameworkComponents" (gridReady)="passengerGridService.onGridReady($event)"
-          [enableRtl]="true" rowHeight="35" headerHeight="35">
-        </ag-grid-angular>
-        <div dir="ltr">
-          <button class="pull-right fab-grid" mat-fab color="accent" (click)="teamMemberUpsert()">
-            <mat-icon class="icon-text-color">add</mat-icon>
-          </button>
+  <mat-horizontal-stepper #stepper [linear]="true">
+    <mat-step [stepControl]="buyerForm.form" label="{{'steps'|translate:({value:'first'|translate})}}">
+      <form [formGroup]="buyerForm.form" (keydown.enter)="$event.preventDefault()">
+        <mat-card [stretch]="true">
+          <div formGroupName="person">
+            <div fxLayout="row" fxflex>
+              <mat-form-field fxFlex>
+                <input matInput placeholder="person.nc" formControlName="nationalCode" #natCode (focusout)="findPerson(natCode)" >
+              </mat-form-field>
+              <mat-form-field fxFlex>
+                <input matInput placeholder="person.mobileNumber" formControlName="mobileNumber" >
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxflex>
+              <trn-slider fxFlex trueText="male" falseText="female" formControlName="gender" ></trn-slider>
+            </div>
+            <div fxLayout="row">
+              <mat-form-field fxFlex>
+                <input matInput placeholder="person.name" formControlName="name" >
+              </mat-form-field>
+              <mat-form-field fxFlex>
+                <input matInput placeholder="person.family" formControlName="family" >
+              </mat-form-field>
+            </div>
+            <div fxLayout="row">
+              <mat-form-field fxFlex>
+                <input matInput placeholder="person.englishName" formControlName="englishName" >
+              </mat-form-field>
+              <mat-form-field fxFlex>
+                <input matInput placeholder="person.englishFamily" formControlName="englishFamily" >
+              </mat-form-field>
+            </div>
+            <div fxLayout="row">
+              <mat-form-field fxFlex>
+                <input matInput (click)="bithDate._open($event)" [matDatepicker]="personBirthDate" placeholder="person.birthDate" formControlName="birthDate">
+                <mat-datepicker-toggle utc="true" #bithDate matSuffix [for]="personBirthDate"></mat-datepicker-toggle>
+                <mat-datepicker #personBirthDate disabled="false" (selectedChanged)="age($event)" ></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </mat-card>
+        <mat-card [stretch]="true" class="card-stretch">
+          <div fxLayout="row" layout-align="space-between center">
+            <mat-form-field fxFlex="30">
+              <input matInput mask="number" placeholder="tour.price" [formControl]="data.form.get('basePrice')" (input)="onPriceChange()">
+              <span matPrefix align="end">$&nbsp;</span>
+              <mat-hint align="end" translate>price.irFormated</mat-hint>
+            </mat-form-field>
+            <div fxFlex="2"></div>
+            <mat-form-field fxFlex="30">
+              <input matInput mask="number" placeholder="infantPrice" [formControl]="data.form.get('infantPrice')" (input)="onPriceChange()">
+              <span matPrefix align="end">$&nbsp;</span>
+              <mat-hint align="end" translate>price.irFormated</mat-hint>
+            </mat-form-field>
+          </div>
+        </mat-card>
+      </form>
+    </mat-step>
+
+    <mat-step label="{{'steps'|translate:({value:'second'|translate})}}">
+      <form [formGroup]="data.form" (keydown.enter)="$event.preventDefault()">
+        <div>
+          <mat-card [stretch]="true">
+            <ag-grid-angular #agGrid style="height:280px" class="ag-theme-material" [columnDefs]="passengerGridService.columnDefs" [gridOptions]="passengerGridService.gridOptions"
+              [frameworkComponents]="passengerGridService.frameworkComponents" (gridReady)="passengerGridService.onGridReady($event)"
+              [enableRtl]="true" rowHeight="35" headerHeight="35">
+            </ag-grid-angular>
+            <div dir="ltr">
+              <button class="pull-right fab-grid" mat-fab color="accent" (click)="teamMemberUpsert()">
+                <mat-icon class="icon-text-color">add</mat-icon>
+              </button>
+            </div>
+          </mat-card>
         </div>
-      </mat-card>
-    </div>
 
-    <mat-card [stretch]="true">
-      <div fxLayout="row">
-        <label fxFlex>تعداد بزرگسال: {{ adultCount }}</label>
-        <label fxFlex>تعداد بدون خدمات: {{ noneOptionCount }}</label>
-        <label fxFlex>تعداد اینفنت: {{ infantCount }}</label>
-      </div>
-      <div fxLayout="row">
-        <div fxFlex="2"></div>
-        <mat-form-field fxFlex="20">
-          <input matInput mask="number" placeholder="tour.price" formControlName="basePrice" (input)="onPriceChange()">
-          <mat-hint align="end" translate>price.irFormated</mat-hint>
-        </mat-form-field>
-        <div fxFlex="2"></div>
-        <mat-form-field fxFlex="20">
-          <input matInput mask="number" placeholder="infantPrice" formControlName="infantPrice" (input)="onPriceChange()">
-          <mat-hint align="end" translate>price.irFormated</mat-hint>
-        </mat-form-field>
-        <div fxFlex="35"></div>
-        <mat-form-field fxFlex="20">
-          <input matInput mask="number" placeholder="total" formControlName="totalPrice">
-          <mat-hint align="end" translate>price.irFormated</mat-hint>
-        </mat-form-field>
-        <div fxFlex="2"></div>
-        <br>
-      </div>
-    </mat-card>
-  </form>
+        <mat-card [stretch]="true">
+          <div fxLayout="row" layout-align="space-between center">
+            <label fxFlex>{{'adultCountLbl'|translate}} : {{ adultCount }}</label>
+            <label fxFlex>{{'nonOptionCountLbl'|translate}} : {{ noneOptionCount }}</label>
+            <label fxFlex>{{'infantCount'|translate}} : {{ infantCount }}</label>
+            <label fxFlex>{{'total'|translate}} : {{data.form.value.totalPrice}} {{'price.irFormated'|translate}}</label>
+          </div>
+        </mat-card>
+
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>
-
+<div fxLayout="row" align="end">
+  <button class="pull-left" mat-mini-fab color="primary" #nextButton (click)="nextStep(stepper)" [disabled]="stepper.selectedIndex==1">
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+  <button class="pull-right" mat-mini-fab color="primary" (click)="previousStep(stepper)" [disabled]='stepper.selectedIndex==0'>
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+</div>
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" fxFlex (click)="save()">{{ "block.save"|translate }}</button>
+  <button mat-raised-button color="primary" fxFlex (click)="save()" #submit>{{ "block.save"|translate }}</button>
 </mat-dialog-actions>

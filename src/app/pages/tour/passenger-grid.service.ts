@@ -24,9 +24,9 @@ export class PassengerGridService {
   gridApi: any;
 
   constructor(public personService: PersonService,
-              private translate: TranslateService,
-              private formatter: FormatterService,
-              @Inject(UTILS) private utils: AppUtils,) {
+    private translate: TranslateService,
+    private formatter: FormatterService,
+    @Inject(UTILS) private utils: AppUtils, ) {
     this.init();
   }
 
@@ -55,24 +55,12 @@ export class PassengerGridService {
       },
       {
         headerName: 'person.nameAndFamily',
-        headerGroupComponent: 'cellHeader',
-        children: [
-          {
-            headerName: 'فارسی',
-            valueGetter: (params: any) => params.data.person.name + ' ' + params.data.person.family,
-          },
-          {
-            headerName: 'English',
-            valueGetter: (params: any) => params.data.person.englishName + ' ' + params.data.person.englishFamily,
-          },
-        ]
-      },
-      {
-        headerName: 'person.gender',
-        minWidth: 50,
-        maxWidth: 50,
-        valueGetter: (params: any) => params.data.person.gender === true ? 'مرد' : 'زن',
-        cellRenderer: 'agGroupCellRenderer',
+        valueGetter: (params: any) => ' ' + params.data.person.name + ' ' + params.data.person.family,
+        valueFormatter: (params: any) => {
+          return params.data.person.gender ?
+            this.translate.instant('maleTitle') + params.value :
+            this.translate.instant('femaleTitle') + params.value;
+        }
       },
       {
         headerName: 'person.birthDate',
@@ -99,6 +87,7 @@ export class PassengerGridService {
           {
             headerName: 'passport.number',
             field: 'person.passportNo',
+            hide: true,
             minWidth: 90,
             maxWidth: 90,
           }
@@ -118,19 +107,19 @@ export class PassengerGridService {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room)},
+            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room) },
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus)},
+            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus) },
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food)},
+            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food) },
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`
           }
         ]

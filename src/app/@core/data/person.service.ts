@@ -62,12 +62,12 @@ export class PersonService {
     return this.apiService.getEntities(dto);
   }
 
-  upsertTeam(model: TeamMember[], blockModel: Block, teamId: string = undefined): Observable<void> {
+  upsertTeam(buyer: TeamMember, model: TeamMember[], blockModel: Block, teamId: string = undefined): Observable<void> {
     const dto = new UpsertTeam();
     dto.tourId = blockModel.id;//@TODO
-    dto.buyer = model[0];
+    dto.buyer = buyer;
     dto.teamId = teamId ? teamId : undefined;
-    dto.passengers = model.slice(1, model.length)
+    dto.passengers = model;
     dto.infantPrice = blockModel.infantPrice;
     dto.basePrice = blockModel.basePrice;
     dto.totalPrice = blockModel.totalPrice;

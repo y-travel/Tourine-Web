@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatStepper, MatButton } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { PassengerGridService } from '../passenger-grid.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
-import { Block, OptionType, TeamMember } from '../../../@core/data/models';
+import { Block, OptionType, TeamMember, Person } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
@@ -20,6 +20,10 @@ import { DialogMode } from '../../../@core/data/models/enums';
 export class PassengerUpsertComponent implements OnInit, Dialog {
 
   dialogMode: DialogMode;
+
+  @ViewChild('nextButton') nextButton: MatButton;
+  @ViewChild('submit') submit: MatButton;
+  disablingItems = ['person.name', 'person.family', 'person.mobileNumber', 'person.gender', 'person.englishName', 'person.englishFamily', 'person.birthDate'];
 
   toolbarItems: ToolbarItem[] = [
     <ToolbarItem>{
@@ -44,22 +48,29 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   noneOptionCount = 0;
   public rows: any[];
   public teamId: string = undefined;
+  public isEditable: boolean = true;
+  public buyer = new TeamMember();
+  public buyerForm: FormService<TeamMember>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
-              public dialogInstance: MatDialogRef<ModalInterface>,
-              private dialogService: DialogService,
-              public formFactory: FormFactory,
-              public passengerGridService: PassengerGridService,
-              public service: PersonService,) {
+    public dialogInstance: MatDialogRef<ModalInterface>,
+    private dialogService: DialogService,
+    public formFactory: FormFactory,
+    public passengerGridService: PassengerGridService,
+    public service: PersonService, ) {
 
     this.init();
   }
 
 
   ngOnInit() {
+    this.buyerForm = this.formFactory.createTeamMemberForm(this.buyer);
+    this.buyerForm.disableControl(true, this.disablingItems);
+    this.updateSubmitStatus();
   }
 
   initDialog() {
+    this.submit.disabled = true;
   }
 
   init() {
@@ -75,6 +86,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   teamMemberDelete(teamMember: TeamMember) {
     this.passengerGridService.remove(teamMember);
     this.updateTotalPrice();
+    this.updateSubmitStatus();
   }
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
@@ -88,6 +100,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
           return;
         if (isAdd || (!isAdd && teamMember.person.id === x.person.id)) {
           this.passengerGridService.addItem(x);
+          this.updateSubmitStatus();
           this.tourFreeSpace--;
         }
         //@TODO: update to a new person
@@ -96,11 +109,65 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
     }
   }
 
+  updateSubmitStatus() {
+    this.submit.disabled = this.passengerGridService.rows.length > 0 ? false : true;
+  }
+
+  findPerson(natCode: any) {
+    this.service.GetPerson(natCode.value).subscribe(
+      person => {
+        person.isEditable = false;
+        let team = new TeamMember();
+        team.person = person
+        this.buyerForm.updateForm(team);
+        this.buyerForm.disableControl(true, this.disablingItems);
+      },
+      () => {
+        let teamMember = new TeamMember();
+        //we use Object.assign cos last data remained in form by using dynamic cast.
+        teamMember.person = new Person();
+        teamMember.person.isEditable = true;
+        teamMember.person.nationalCode = this.buyerForm.model.person.nationalCode;
+        this.buyerForm.updateForm(teamMember);
+        this.buyerForm.disableControl(false, this.disablingItems);
+      });
+  }
+
+  nextStep(stepper: MatStepper) {
+    if (stepper.selectedIndex == 0) {
+      if (this.buyerForm.model.person.id == '')
+        this.service.AddPerson(this.buyerForm.model.person).subscribe(x => {
+          this.buyerForm.model.person = x;
+          this.buyerForm.updateForm()
+          this.nextButton.disabled = false;
+          stepper.next();
+        });
+      else {
+        this.nextButton.disabled = false;
+        stepper.next();
+      }
+    }
+    else {
+      this.nextButton.disabled = true;
+      stepper.next();
+    }
+  }
+
+  previousStep(stepper: MatStepper) {
+    stepper.previous();
+    if (stepper.selectedIndex == 0) {
+      this.nextButton.disabled = false;
+    }
+    else {
+      this.nextButton.disabled = true;
+    }
+  }
+
   save() {
     if (this.passengerGridService.rows.length === 0)
       this.dialogInstance.close(this.passengerGridService.rows.length);
     else
-      this.service.upsertTeam(this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x => this.dialogInstance.close(this.passengerGridService.rows.length));
+      this.service.upsertTeam(this.buyerForm.model, this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x => this.dialogInstance.close(this.passengerGridService.rows.length));
   }
 
   onPriceChange() {

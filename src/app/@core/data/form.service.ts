@@ -1,5 +1,5 @@
 import { EventEmitter, OnDestroy } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, FormControl, Form, FormArray } from '@angular/forms';
 import { Serializable, TypeConstructor } from '../utils/serializable';
 import { ValidationService } from '../utils/validation.service';
 
@@ -34,7 +34,7 @@ export class FormService<T> implements OnDestroy {
   }
 
   markTouch(control: AbstractControl = this.form) {
-    control.markAsTouched({onlySelf: true});
+    control.markAsTouched({ onlySelf: true });
   }
 
   markAllFieldAsTouch(controls = this.form.controls) {
@@ -51,6 +51,19 @@ export class FormService<T> implements OnDestroy {
   private onValueChanges(data: any) {
     Serializable.fromJSON(this.model, data);
   }
+
+  disableControl(disable: boolean, fields: string[]) {
+    fields.forEach(x => {
+      let subForm = x.split('.');
+      let target: any;
+      target = this.form.controls[subForm.shift()];
+      subForm.forEach(y => {
+        target = target.controls[y];
+      })
+      disable ? target.disable() : target.enable();
+    });
+  }
+
 }
 
 export class NewFormService<T> extends FormGroup implements OnDestroy {
@@ -81,7 +94,7 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
   }
 
   markTouch(control: AbstractControl = this) {
-    control.markAsTouched({onlySelf: true});
+    control.markAsTouched({ onlySelf: true });
   }
 
   markAllFieldAsTouch(controls = this.controls) {

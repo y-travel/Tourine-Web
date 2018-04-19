@@ -38,6 +38,7 @@ export class Tour extends Model {
   agencyId: string;
   agency: Agency;
   isBlock: boolean;
+  freeSpace: number;
 }
 
 export class TourOption extends Model {
@@ -107,6 +108,7 @@ export class Block extends Model {
   foodPrice: number = undefined;
   basePrice: number = undefined;
   totalPrice: number = undefined;
+  freeSpace: number= undefined;
 }
 
 export class EditPassword extends Model {
@@ -129,6 +131,7 @@ export class Reagent extends Model {
 }
 
 export class Person extends Model {
+  isEditable = true;
   name = '';
   family = '';
   mobileNumber = '';

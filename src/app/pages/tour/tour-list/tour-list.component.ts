@@ -79,10 +79,10 @@ export class TourListComponent {
   reloadTourList = () => this.tourGridService.reloadData();
 
   constructor(private tourService: TourService,
-              private personService: PersonService,
-              private formFactory: FormFactory,
-              public dialogService: DialogService,
-              public tourGridService: TourGridService) {
+    private personService: PersonService,
+    private formFactory: FormFactory,
+    public dialogService: DialogService,
+    public tourGridService: TourGridService) {
 
     this.tourGridService.initToolbar(this.sharedItems, this.tourItems, this.blockItems);
   }
@@ -106,13 +106,15 @@ export class TourListComponent {
   }
 
   blockUpsert(block: Block, isEdit = false) {
-    const ref = this.dialogService.openPopup(BlockUpsertComponent, {block: block, tourId: block.id}, isEdit ? DialogMode.Edit : DialogMode.Create);
+    const ref = this.dialogService.openPopup(BlockUpsertComponent, { block: block, tourId: block.id }, isEdit ? DialogMode.Edit : DialogMode.Create);
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }
 
   passengerUpsert(block = new Block()) {
-    const ref = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(block));
-    ref.afterClosed().subscribe(() => this.reloadTourList());
+    if (block.freeSpace > 0) {
+      const ref = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(block));
+      ref.afterClosed().subscribe(() => this.reloadTourList());
+    }
   }
 
   teamList(block = new Block()) {
