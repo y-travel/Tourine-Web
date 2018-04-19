@@ -15,6 +15,7 @@ import { TourPassengersComponent } from '../tour-passengers/tour-passengers.comp
 import { PersonService } from '../../../@core/data/person.service';
 import { TeamMember } from '../../../@core/data/models';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
+import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
   selector: 'tour-list',
@@ -32,6 +33,7 @@ export class TourListComponent {
       icon: 'delete',
       title: 'delete',
       color: '#f44336',
+      alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
       command: (tourBlock: any) => this.tourDelete(tourBlock),
     },
     <ToolbarItem>{
@@ -99,10 +101,7 @@ export class TourListComponent {
   tourDelete(tour: any) {
     if (!tour)
       return;
-    this.dialogService.openDialog('msg.delete', 'delete', DialogButtonType.Negative).afterClosed().subscribe(x => {
-      if (!x) return;
-      this.tourService.deleteTour(tour).subscribe(() => this.reloadTourList());
-    });
+    this.tourService.deleteTour(tour).subscribe(() => this.reloadTourList());
   }
 
   blockUpsert(block: Block, isEdit = false) {

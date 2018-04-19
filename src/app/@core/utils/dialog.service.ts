@@ -33,8 +33,8 @@ export class DialogService {
     return dialogRef;
   }
 
-  openDialog(content: string, applyText = 'ok', dialogButtonType = DialogButtonType.Positive) {
-    const dialogConfig = new TrnDialogConfig(new AlertDialogData(content, 'cancel', applyText, dialogButtonType));
+  openDialog(content: string, applyText?: string, dialogButtonType?: DialogButtonType, cancelText?: string) {
+    const dialogConfig = new TrnDialogConfig(new AlertDialogData(content, cancelText, applyText, dialogButtonType));
     dialogConfig.role = 'alertdialog';
     dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);

@@ -8,7 +8,6 @@ import { CellHeaderComponent } from './cell-header/cell-header.component';
 import { CellDetailComponent } from './cell-detail/cell-detail.component';
 import { ThemeModule } from '../../@theme/theme.module';
 import { CellToolbarComponent } from './cell-toolbar/cell-toolbar.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 
 const COMPONENTS = [
   CellHeaderComponent,
@@ -26,7 +25,7 @@ const GRID_MODULE = AgGridModule.withComponents([
     ThemeModule,
     GRID_MODULE,
   ],
-  declarations: [...COMPONENTS, CellToolbarComponent, ToolbarComponent]
+  declarations: [...COMPONENTS, CellToolbarComponent,]
 })
 export class TrnAgGridModule {
   static withAgModule(): ModuleWithProviders[] {

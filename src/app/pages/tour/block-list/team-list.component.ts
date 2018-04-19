@@ -8,7 +8,8 @@ import { TeamGridService } from '../team-grid.service';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
 import { PersonService } from '../../../@core/data/person.service';
-import { DialogMode } from '../../../@core/data/models/enums';
+import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
+import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-block-list',
@@ -23,6 +24,7 @@ export class TeamListComponent implements OnInit, Dialog {
       icon: 'delete',
       title: 'delete',
       color: '#f44336',
+      alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
       command: (team: any) => this.teamDelete(team),
     }, <ToolbarItem>{
       icon: 'mode_edit',

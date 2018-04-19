@@ -9,7 +9,8 @@ import { Block, OptionType, TeamMember, Person } from '../../../@core/data/model
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
-import { DialogMode } from '../../../@core/data/models/enums';
+import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
+import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-passenger-upsert',
@@ -30,6 +31,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
       icon: 'delete',
       title: 'delete',
       color: '#f44336',
+      alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
       command: (teamMember) => this.teamMemberDelete(teamMember),
     }, <ToolbarItem>{
       icon: 'mode_edit',

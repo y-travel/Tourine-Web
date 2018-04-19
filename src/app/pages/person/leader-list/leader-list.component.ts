@@ -6,6 +6,8 @@ import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolb
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { LeaderUpsertComponent } from '../leader-upsert/leader-upsert.component';
+import { DialogButtonType } from '../../../@core/data/models/enums';
+import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-leader-list',
@@ -19,6 +21,7 @@ export class LeaderListComponent implements OnInit {
       icon: 'delete',
       title: 'delete',
       color: '#f44336',
+      alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
       command: (leader: Person) => this.leaderDelete(leader),
     }, <ToolbarItem>{
       icon: 'mode_edit',

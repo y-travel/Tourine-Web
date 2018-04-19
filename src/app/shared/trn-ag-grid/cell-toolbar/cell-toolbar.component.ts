@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
   selector: 'app-cell-toolbar',
@@ -35,6 +36,7 @@ export class ToolbarItem {
   color = '';
   command: (data) => void;
   commandParams = [];
+  alertData: AlertDialogData;
 }
 
 declare type VisibilityType = 'autoHide' | 'hidden' | 'show';

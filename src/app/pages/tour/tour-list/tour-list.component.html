@@ -17,7 +17,7 @@
                      [enableRtl]="true">
 
     </ag-grid-angular>
-  <button mat-fab class="pull-right fab-grid" [appDialog]="{content:'hello',cancelText:'cancel',applyText:'apply',dialogButtonType:0}" (confirmClick)="tourUpsert()">
+  <button mat-fab class="pull-right fab-grid" (click)="tourUpsert()">
     <mat-icon>add</mat-icon>
   </button>
 </mat-card>

@@ -50,8 +50,9 @@ export class DialogButton {
 //@TODO we should get decision between using dialogType or dialogButtonType
 export class AlertDialogData {
   constructor(public content: string,
-              public cancelText: string,
-              public applyText: string,
-              public applyButtonType: DialogButtonType) {
+              public cancelText = 'cancel',
+              public applyText = 'apply',
+              public applyButtonType = DialogButtonType.Positive) {
+    console.log(this.cancelText);
   }
 }
