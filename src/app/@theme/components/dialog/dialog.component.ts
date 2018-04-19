@@ -53,6 +53,5 @@ export class AlertDialogData {
               public cancelText = 'cancel',
               public applyText = 'apply',
               public applyButtonType = DialogButtonType.Positive) {
-    console.log(this.cancelText);
   }
 }
