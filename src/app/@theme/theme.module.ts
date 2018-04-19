@@ -8,6 +8,7 @@ import {
   MatChipsModule,
   MatCommonModule,
   MatDatepickerModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -43,6 +44,7 @@ const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const MAT_MODULES = [
   MatFormFieldModule,
+  MatDialogModule,
   MatInputModule,
   MatButtonModule,
   MatSlideToggleModule,
@@ -97,6 +99,7 @@ const THEME_PROVIDERS = [
   imports: [...BASE_MODULES, ...MAT_MODULES, ...OTHER_MODULES, AppTranslationModule],
   exports: [...BASE_MODULES, ...MAT_MODULES, ...OTHER_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES,],
+  entryComponents: [DialogComponent],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {

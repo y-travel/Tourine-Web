@@ -1,0 +1,11 @@
+<div id="content" *ngIf="data.content">
+  <span [innerHtml]="data.content|translate"></span>
+</div>
+<mat-dialog-actions >
+  <button mat-button id="dialog-button" *ngFor="let button of buttons" (click)="close(button)"
+          [ngClass]="{'positive-color':button.type===enums.DialogButtonType.Positive,
+        'negative-color':button.type===enums.DialogButtonType.Negative,
+        'neutral-color':button.type===enums.DialogButtonType.Neutral}">
+    {{button.content|translate}}
+  </button>
+</mat-dialog-actions>

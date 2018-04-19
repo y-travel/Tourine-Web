@@ -1,0 +1,29 @@
+
+@import "../../styles/install";
+//
+@include trn-install-component() {
+
+  .negative-color {
+    color: map_get($mat-red, 500);
+  }
+
+  .negative-color:hover {
+    background-color: map_get($mat-red, 100);
+  }
+
+  .neutral-color {
+    color: map_get($mat-grey, 500);
+  }
+
+  .neutral-color:hover {
+    background-color: map_get($mat-grey, 300);
+  }
+
+  .positive-color {
+    color: map_get($mat-light-blue, 500);
+  }
+
+  .positive-color:hover {
+    background-color: map_get($mat-light-blue, 100);
+  }
+}

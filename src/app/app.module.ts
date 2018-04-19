@@ -19,7 +19,6 @@ import { MatInputModule } from '@angular/material';
     HttpClientModule,
     AppRoutingModule,
     MatInputModule,
-
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
   ],

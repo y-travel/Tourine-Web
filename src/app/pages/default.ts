@@ -7,7 +7,6 @@ import { ToasterModule } from "angular2-toaster";
 
 export const COMMON_MODULES = [
   ThemeModule,
-  MatDialogModule,
   ToasterModule,
   AppTranslationModule,
   FormsModule,

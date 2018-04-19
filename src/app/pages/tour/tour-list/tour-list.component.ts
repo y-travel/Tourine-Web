@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AgGridNg2 } from 'ag-grid-angular';
+
 import { TourService } from '../../../@core/data/tour.service';
 import { TourUpsertComponent } from '../tour-upsert/tour-upsert.component';
 import { DialogService } from '../../../@core/utils/dialog.service';
@@ -13,7 +14,7 @@ import { TeamListComponent } from '../block-list/team-list.component';
 import { TourPassengersComponent } from '../tour-passengers/tour-passengers.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { TeamMember } from '../../../@core/data/models';
-import { DialogMode } from '../../../@core/data/models/enums';
+import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 
 @Component({
   selector: 'tour-list',
@@ -98,7 +99,10 @@ export class TourListComponent {
   tourDelete(tour: any) {
     if (!tour)
       return;
-    this.tourService.deleteTour(tour).subscribe(() => this.reloadTourList());
+    this.dialogService.openDialog('msg.delete', 'delete', DialogButtonType.Negative).afterClosed().subscribe(x => {
+      if (!x) return;
+      this.tourService.deleteTour(tour).subscribe(() => this.reloadTourList());
+    });
   }
 
   blockUpsert(block: Block, isEdit = false) {

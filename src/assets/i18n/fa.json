@@ -30,6 +30,7 @@
     "all": "کل",
     "registered": "ثبت شده"
   },
+  "cancel":"انصراف",
   "close": "بستن",
   "count": "تعداد",
   "coupon": {
@@ -65,7 +66,8 @@
   "mobileNumber": "شماره همراه",
   "msg": {
     "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزور شد",
-    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
+    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
+    "delete":"در صورت حذف اطلاعات غیر قابل بازگشت میباشد"
   },
   "name": "نام",
   "nationalCode": "کد ملی",

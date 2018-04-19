@@ -7,12 +7,12 @@ import { AnalyticsService } from './utils/analytics.service';
 import { ThemeService } from './utils/theme.service';
 import { SpinnerService } from './utils/spinner.service';
 import { DialogService } from './utils/dialog.service';
-import { MatDialogModule } from '@angular/material';
 import { AuthService } from './utils/auth.service';
 import { APP_CONFIG, APP_CONFIG_INSTANCE } from './utils/app.config';
 import { UTILS, UTILS_INSTANCE } from './utils/app-utils';
 import { FormatterService } from './utils/formatter.service';
 import { ValidationService } from './utils/validation.service';
+import { ENUMS, ENUMS_INSTANCE } from './data/models/enums';
 
 const CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
@@ -25,16 +25,20 @@ const CORE_PROVIDERS = [
   ValidationService,
   {provide: UTILS, useValue: UTILS_INSTANCE},
   {provide: APP_CONFIG, useValue: APP_CONFIG_INSTANCE},
+  {provide: ENUMS, useValue: ENUMS_INSTANCE},
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    MatDialogModule,
   ],
   declarations: [],
 })
 export class CoreModule {
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
+  }
+
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: CoreModule,
@@ -42,9 +46,5 @@ export class CoreModule {
         ...CORE_PROVIDERS,
       ],
     };
-  }
-
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 }

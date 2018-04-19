@@ -260,11 +260,6 @@ export class GetTourDetail implements IReturn<TourDetail> {
   }
 }
 
-@Route('/tourDetail', 'PUT')
-export class UpdateTourDetail {
-  tourDetail: TourDetail;
-}
-
 @Route('/tours/{TourId}/teams/{TeamId}', 'POST')
 export class UpsertTeam implements IReturnVoid {
   tourId: string;
