@@ -19,7 +19,7 @@
             <mat-option>{{ "none"|translate }}</mat-option>
             <mat-option *ngFor="let item of destinations | async" [value]="item.id">{{ item.name }}</mat-option>
           </mat-select>
-          <mat-error translate>{{vModel.form.get('tourDetail').get('destinationId').errorMessage}}</mat-error>
+          <mat-error translate>{{vModel.form.get('tourDetail').get('destinationId')['errorMessage']}}</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-select placeholder="leader.*" formControlName="leaderId" fxLayoutGap="100px">
@@ -36,36 +36,36 @@
             <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour.date" formControlName="startDate">
             <mat-datepicker-toggle utc="true" #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
             <mat-datepicker #tourDate disabled="false"></mat-datepicker>
-            <mat-error translate>{{vModel.form.get('tourDetail').get('startDate').errorMessage}}</mat-error>
+            <mat-error translate>{{vModel.form.get('tourDetail').get('startDate')['errorMessage']}}</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex>
             <input matInput placeholder="duration" formControlName="duration" maxLength="3" mask="number">
             <mat-hint align="end" translate>nightFormat</mat-hint>
-            <mat-error translate>{{vModel.form.get('tourDetail').get('duration').errorMessage}}</mat-error>
+            <mat-error translate>{{vModel.form.get('tourDetail').get('duration')['errorMessage']}}</mat-error>
           </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
             <input matInput placeholder="capacity.*" formControlName="capacity" mask="number">
-            <mat-error translate>{{vModel.form.get('capacity').errorMessage}}</mat-error>
+            <mat-error translate>{{vModel.form.get('capacity')['errorMessage']}}</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex>
             <input matInput placeholder="tour.price" formControlName="basePrice" mask="number">
             <mat-hint align="end" translate>price.irFormated</mat-hint>
-            <mat-error translate>{{vModel.form.get('basePrice').errorMessage}}</mat-error>
+            <mat-error translate>{{vModel.form.get('basePrice')['errorMessage']}}</mat-error>
           </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <mat-form-field fxFlex>
             <input matInput placeholder="infantPrice" formControlName="infantPrice" mask="number">
             <mat-hint align="end" translate>price.irFormated</mat-hint>
-            <mat-error translate>{{vModel.form.get('infantPrice').errorMessage}}</mat-error>
+            <mat-error translate>{{vModel.form.get('infantPrice')['errorMessage']}}</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex formGroupName="tourDetail">
             <mat-select placeholder="hotel" formControlName="placeId">
               <mat-option *ngFor="let item of places|async" [value]="item.id">{{ item.name }}</mat-option>
             </mat-select>
-            <mat-error translate>{{vModel.form.get('tourDetail').get('placeId').errorMessage}}</mat-error>
+            <mat-error translate>{{vModel.form.get('tourDetail').get('placeId')['errorMessage']}}</mat-error>
           </mat-form-field>
         </div>
       </mat-card>
@@ -74,7 +74,7 @@
           <input matInput placeholder="{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}" formControlName="price" mask="number">
           <mat-icon matSuffix>{{ utils.mapOptionTypeToIcon(formGroup.value.optionType) }}</mat-icon>
           <mat-hint align="end" translate>price.irFormated</mat-hint>
-          <mat-error translate>{{vModel.form.get('options').get(i.toString()).get('price').errorMessage}}</mat-error>
+          <mat-error translate>{{vModel.form.get('options').get(i.toString()).get('price')['errorMessage']}}</mat-error>
         </mat-form-field>
       </mat-card>
     </div>

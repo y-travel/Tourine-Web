@@ -40,7 +40,7 @@
               <mat-form-field fxFlex>
                 <input matInput (click)="bithDate._open($event)" [matDatepicker]="personBirthDate" placeholder="person.birthDate" formControlName="birthDate">
                 <mat-datepicker-toggle utc="true" #bithDate matSuffix [for]="personBirthDate"></mat-datepicker-toggle>
-                <mat-datepicker #personBirthDate disabled="false" (selectedChanged)="age($event)" ></mat-datepicker>
+                <mat-datepicker #personBirthDate disabled="false" ></mat-datepicker>
               </mat-form-field>
             </div>
           </div>

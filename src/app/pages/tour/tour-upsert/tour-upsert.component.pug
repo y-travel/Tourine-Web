@@ -19,7 +19,7 @@ include ../../../mixin
             mat-option {{ "none"|translate }}
             mat-option(*ngFor='let item of destinations | async', [value]='item.id')
               | {{ item.name }}
-          mat-error(translate) {{vModel.form.get('tourDetail').get('destinationId').errorMessage}}
+          mat-error(translate) {{vModel.form.get('tourDetail').get('destinationId')['errorMessage']}}
         mat-form-field
           mat-select(placeholder='leader.*', formControlName='leaderId', fxLayoutGap='100px')
             mat-option {{ "none"|translate }}
@@ -32,7 +32,7 @@ include ../../../mixin
             input(matInput , (click)='tourDateToggle._open($event)', [matDatepicker]='tourDate', placeholder='tour.date', formControlName='startDate')
             mat-datepicker-toggle(utc='true', #tourDateToggle, matSuffix, [for]='tourDate')
             mat-datepicker(#tourDate, disabled='false')
-            mat-error(translate) {{vModel.form.get('tourDetail').get('startDate').errorMessage}}
+            mat-error(translate) {{vModel.form.get('tourDetail').get('startDate')['errorMessage']}}
           +matField('duration','duration',"vModel.form.get('tourDetail')",'nightFormat')(maxLength ='3',mask='number')
         div(fxLayout='row', fxLayoutAlign='space-between')
           +matField('capacity','capacity.*','vModel.form')(mask='number')
@@ -42,7 +42,7 @@ include ../../../mixin
           mat-form-field(fxFlex, formGroupName='tourDetail')
             mat-select(placeholder='hotel', formControlName='placeId')
               mat-option(*ngFor='let item of places|async', [value]='item.id') {{ item.name }}
-            mat-error(translate) {{vModel.form.get('tourDetail').get('placeId').errorMessage}}
+            mat-error(translate) {{vModel.form.get('tourDetail').get('placeId')['errorMessage']}}
       mat-card(fxLayout='column', fxFlex='40', formArrayName='options')
         +matField(
         'price',
