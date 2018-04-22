@@ -29,8 +29,8 @@ export class TourGridService {
   toolbarBlockItems: ToolbarItem[] = [];
 
   constructor(private tourService: TourService,
-              private translateService: TranslateService,
-              private formatter: FormatterService) {
+    private translateService: TranslateService,
+    private formatter: FormatterService) {
     this.init();
   }
 
@@ -98,7 +98,7 @@ export class TourGridService {
     ];
 
     this.detailCellRenderer = 'cellDetail';
-    this.frameworkComponents = {cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent};
+    this.frameworkComponents = { cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent };
     this.detailCellRendererParams = {
       detailGridOptions: {
         columnDefs: [
@@ -125,7 +125,7 @@ export class TourGridService {
               }, {
                 headerName: 'capacity.registered',
                 field: 'freeSpace',
-                valueGetter: (params:any) => params.data.capacity - params.data.freeSpace
+                valueGetter: (params: any) => params.data.capacity - params.data.freeSpace
               },
             ],
           },
@@ -149,7 +149,7 @@ export class TourGridService {
           });
         },
       },
-      frameworkComponents: {cellToolbar: CellToolbarComponent, cellHeader: CellHeaderComponent},
+      frameworkComponents: { cellToolbar: CellToolbarComponent, cellHeader: CellHeaderComponent },
     };
     this.icons = {
       groupExpanded: '<i class="material-icons">keyboard_arrow_down</mat-icon>',
@@ -196,7 +196,7 @@ export class TourGridService {
   }
 
   initToolbar(sharedItems: ToolbarItem[], tourItems: ToolbarItem[], blockItems: ToolbarItem[]) {
-    this.toolbarTourItems.push(...sharedItems, ...tourItems);
-    this.toolbarBlockItems.push(...sharedItems, ...blockItems);
+    this.toolbarTourItems.push(...tourItems, ...sharedItems);
+    this.toolbarBlockItems.push(...blockItems, ...sharedItems);
   }
 }

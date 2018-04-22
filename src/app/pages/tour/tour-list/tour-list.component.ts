@@ -8,7 +8,7 @@ import { FormFactory } from '../../../@core/data/models/form-factory';
 import { TourGridService } from '../tour-grid.service';
 import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
-import { Block, Tour } from '../../../@core/data/models/client.model';
+import { Block, Tour, Agency } from '../../../@core/data/models/client.model';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
 import { TeamListComponent } from '../block-list/team-list.component';
 import { TourPassengersComponent } from '../tour-passengers/tour-passengers.component';
@@ -25,10 +25,22 @@ import { AlertDialogData } from '../../../@theme/components/dialog/dialog.compon
 })
 export class TourListComponent {
 
+  //@TODO: should get from auth
+  agency = Object.assign(new Agency() , { id: '5d0fd1903c6a45d99987f698b700cd43'});
+
   source: any;
   //@TODO use index to arrange items
   //@TODO get colors from global variables
   sharedItems: ToolbarItem[] = [
+    <ToolbarItem>{
+      icon: 'group_add',
+      title: 'passenger.upsert',
+      color: '#4caf50',
+      command: (tourBlock: any) => this.passengerUpsert(tourBlock),
+      disablity: (tour: any) => tour.freeSpace <= 0,
+    },
+  ];
+  tourItems = [
     <ToolbarItem>{
       icon: 'delete',
       title: 'delete',
@@ -36,14 +48,6 @@ export class TourListComponent {
       alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
       command: (tourBlock: any) => this.tourDelete(tourBlock),
     },
-    <ToolbarItem>{
-      icon: 'group_add',
-      title: 'passenger.upsert',
-      color: '#4caf50',
-      command: (tourBlock: any) => this.passengerUpsert(tourBlock),
-    },
-  ];
-  tourItems = [
     <ToolbarItem>{
       icon: 'mode_edit',
       title: 'edit',
@@ -55,26 +59,42 @@ export class TourListComponent {
       title: 'tour.reserve',
       color: '#4caf50',
       command: (tour: any) => this.blockUpsert(tour),
+      disablity: (tour: any) => tour.freeSpace <= 0,
     },
     <ToolbarItem>{
       icon: 'list',
       title: 'tour.passengers',
       color: '#E040FB',
       command: (tour: any) => this.tourPassengers(tour),
-    }
+    },
   ];
   blockItems = [
+    <ToolbarItem>{
+      icon: 'delete',
+      title: 'delete',
+      color: '#f44336',
+      alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
+      command: (tourBlock: any) => this.tourDelete(tourBlock),
+      visibility: (tour: Tour) => {
+        return tour.agencyId !== this.agency.id;
+      },
+    },
     <ToolbarItem>{
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
       command: (block: any) => this.blockUpsert(block, true),
-    }, <ToolbarItem>{
+      visibility: (tour: Tour) => {
+        return tour.agencyId !== this.agency.id;
+      },
+    },
+    <ToolbarItem>{
       icon: 'list',
       title: 'team.list',
       color: '#E040FB',
       command: (block: any) => this.teamList(block),
-    }];
+    },
+  ];
 
   @ViewChild('tourGrid') tourGrid: AgGridNg2;
 
