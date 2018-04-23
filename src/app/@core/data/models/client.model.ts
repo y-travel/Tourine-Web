@@ -230,6 +230,13 @@ export class TourTeammember {
   agencyName: string;
   teams: Team[];
 }
+
+export class  Ticket {
+  tour: Tour;
+  leader: Person;
+  passengers: Person[];
+}
+
 export interface IReturn<T> {
   createResponse(): T;
 

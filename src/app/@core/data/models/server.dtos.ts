@@ -19,7 +19,7 @@ import {
   User,
   Dictionary,
   TourTeammember,
-  Team
+  Team, Ticket
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
 
@@ -67,7 +67,6 @@ export class TeamPerson {
 
   person: Person;
 }
-
 
 
 // @DataContract
@@ -301,7 +300,7 @@ export class UpdateTeam {
   team: Block;
 }
 
-@Route('/places')
+@Route('/destinationList')
 export class GetPlaces extends QueryDb<Place> implements IReturn<QueryResponse<Place>> {
   createResponse() {
     return new QueryResponse<Place>();
@@ -621,8 +620,7 @@ export class UpdateAgency {
 }
 
 @Route('/tours/{TourId}/agencies/{LoadChilds}')
-export class GetTourAgency implements IReturn<Array<Tour>>
-{
+export class GetTourAgency implements IReturn<Array<Tour>> {
   tourId: string;
   loadChild: boolean = false;
 
@@ -795,5 +793,19 @@ export class PassengerReplacementTourAccomplish implements IReturnVoid {
 
   getTypeName() {
     return 'PassengerReplacementTourAccomplish';
+  }
+}
+
+@Route('/tours/{TourId}/tickets', 'GET')
+export class GetTourTicket implements IReturn<Ticket> {
+
+  tourId: string;
+
+  createResponse() {
+    return new Ticket();
+  }
+
+  getTypeName() {
+    return 'GetTourTicket';
   }
 }

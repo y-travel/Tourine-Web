@@ -3,6 +3,7 @@
   "addAgencyMessage": "نام آژانس را از لیست انتخاب نمایید و یا آژانس جدید ایجاد نمایید",
   "addPassengerMessage": "برای افزودن مسافر به این تور، بر روی گزینه ثبت کلیک نمایید",
   "adult": {
+    "*":"بزرگسال",
     "count": "تعداد ظرفیت بزرگسال",
     "minPrice": "حداقل قیمت ثبت نام بزرگسال"
   },
@@ -16,7 +17,8 @@
   },
   "agencyName": "نام آژانس",
   "allPriceIsPerOne": "قیمت های وارد شده به ازای هر نفر می باشد",
-  "apply":"تایید",
+  "apply": "تایید",
+  "bedCount":"تعداد تخت",
   "birthDate": "تاریخ تولد",
   "block": {
     "save": "ذخیره تور",
@@ -27,12 +29,12 @@
     "name": "نام خریدار",
     "names": "نام خریداران"
   },
+  "cancel": "انصراف",
   "capacity": {
     "*": "ظرفیت",
     "all": "کل",
     "registered": "ثبت شده"
   },
-  "cancel":"انصراف",
   "close": "بستن",
   "count": "تعداد",
   "coupon": {
@@ -59,6 +61,7 @@
   "ground": "زمینی",
   "homePage": "صفحه اصلی",
   "hotel": "هتل",
+  "infant":"اینفنت",
   "infantCount": "تعداد اینفنت",
   "infantPrice": "قیمت اینفنت",
   "leader": {
@@ -70,8 +73,8 @@
   "mobileNumber": "شماره همراه",
   "msg": {
     "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزور شد",
-    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
-    "delete":"در صورت حذف اطلاعات غیر قابل بازگشت میباشد"
+    "delete": "در صورت حذف اطلاعات غیر قابل بازگشت میباشد",
+    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
   },
   "name": "نام",
   "nationalCode": "کد ملی",
@@ -90,6 +93,7 @@
   "options": "خدمات",
   "passenger": {
     "*": "مسافر",
+    "count":"تعداد مسافرین",
     "upsert": "ثبت مشخصات مسافران"
   },
   "passengerReplacementSuccessfull": "جابجایی با موفیت انجام شد",
@@ -108,7 +112,7 @@
     "birthDate": "تاریخ تولد",
     "englishFamily": "نام خانوادگی انگلیسی",
     "englishName": "نام انگلیسی",
-    "engllishNameAndFamily": "(لاتین) نام و نام خانوادگی",
+    "englishNameAndFamily": "نام و نام خانوادگی(لاتین)",
     "family": "نام خانوادگی",
     "gender": "جنسیت",
     "haveVisa": "ویزا دارد",
@@ -140,6 +144,13 @@
     "upsert": "ثبت معرف"
   },
   "replacedPassenger": "مسافرین جابجا شده عبارتند از:",
+  "reports": {
+    "*": "گزارشات",
+    "buyer": "خریداران",
+    "ticket": "بلیط",
+    "tour": "تور",
+    "visa": "ویزا"
+  },
   "roomPrice": "قیمت تخت",
   "row": "ردیف",
   "save": "ثبت",
@@ -152,6 +163,10 @@
     "list": "لیست گروه ها"
   },
   "third": "سوم",
+  "ticket":{
+    "infantCount":"تعداد بلیط اینفنت",
+    "adultCount":"تعداد بلیط بزرگسال"
+  },
   "total": "جمع کل",
   "tour": {
     "code": "کد تور",
@@ -160,7 +175,11 @@
     "passengers": "مسافرین تور",
     "price": "قیمت تور",
     "reserve": "رزرو تور",
-    "upsert": "ثبت تور"
+    "upsert": "ثبت تور",
+    "leader": "مدیرگروه",
+    "startDate":"تاریخ حرکت",
+    "endDate":"تاریخ بازگشت",
+    "destination":"مقصد"
   },
   "user": {
     "upsert": "ثبت کاربر"

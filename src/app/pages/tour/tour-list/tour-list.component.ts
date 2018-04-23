@@ -16,6 +16,7 @@ import { PersonService } from '../../../@core/data/person.service';
 import { TeamMember } from '../../../@core/data/models';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
+import { TourReportsComponent } from '../tour-reports/tour-reports.component';
 
 @Component({
   selector: 'tour-list',
@@ -26,7 +27,7 @@ import { AlertDialogData } from '../../../@theme/components/dialog/dialog.compon
 export class TourListComponent {
 
   //@TODO: should get from auth
-  agency = Object.assign(new Agency() , { id: '5d0fd1903c6a45d99987f698b700cd43'});
+  agency = Object.assign(new Agency(), { id: '5d0fd1903c6a45d99987f698b700cd43' });
 
   source: any;
   //@TODO use index to arrange items
@@ -66,6 +67,12 @@ export class TourListComponent {
       title: 'tour.passengers',
       color: '#E040FB',
       command: (tour: any) => this.tourPassengers(tour),
+    },
+    <ToolbarItem>{
+      icon: 'pageview',
+      title: 'reports.*',
+      color: '#FF8F00',
+      command: (tour: any) => this.tourReports(tour),
     },
   ];
   blockItems = [
@@ -122,6 +129,10 @@ export class TourListComponent {
     if (!tour)
       return;
     this.tourService.deleteTour(tour).subscribe(() => this.reloadTourList());
+  }
+
+  tourReports(tour: Tour = new Tour()) {
+    const ref = this.dialogService.openPopup(TourReportsComponent, this.formFactory.createTourForm(tour));
   }
 
   blockUpsert(block: Block, isEdit = false) {

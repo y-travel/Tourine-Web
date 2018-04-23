@@ -15,6 +15,8 @@ import { PersonService } from '../../@core/data/person.service';
 import { TourPassengersComponent } from './tour-passengers/tour-passengers.component';
 import { PassengerReplacementComponent } from './passenger-replacement/passenger-replacement.component';
 import { PassengerReplacementTourGridService } from './passenger-replacement/passenger-replacement-tour-grid.service';
+import { TourReportsComponent } from './tour-reports/tour-reports.component';
+import { TourReportGridService } from './tour-reports/tour-reports.service';
 
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,
@@ -26,6 +28,7 @@ const ENTRY_COMPONENTS = [
   TeamListComponent,
   TourPassengersComponent,
   PassengerReplacementComponent,
+  TourReportsComponent,
 ];
 
 @NgModule({
@@ -42,8 +45,9 @@ const ENTRY_COMPONENTS = [
     TeamListComponent,
     TourPassengersComponent,
     PassengerReplacementComponent,
+    TourReportsComponent,
   ],
-  providers: [DialogService, PersonService,PassengerReplacementTourGridService],
+  providers: [DialogService, PersonService,PassengerReplacementTourGridService,TourReportGridService],
   entryComponents: ENTRY_COMPONENTS
 })
 export class TourModule {
