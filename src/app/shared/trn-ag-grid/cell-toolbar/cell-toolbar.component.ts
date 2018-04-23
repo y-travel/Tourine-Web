@@ -43,7 +43,7 @@ export class ToolbarItem {
   icon = 'border_clear';
   title = '';
   color = '';
-  command: (data : any) => void;
+  command: (data : any, items?) => void;
   commandParams = [];
   disablity: (data : any) => boolean;
   visibility: (data : any) => boolean;
