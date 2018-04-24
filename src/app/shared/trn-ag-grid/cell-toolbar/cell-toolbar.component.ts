@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
-import { Data } from '@angular/router';
 
 @Component({
   selector: 'app-cell-toolbar',
@@ -25,12 +24,12 @@ export class CellToolbarComponent implements ICellRendererAngularComp {
     item.command(this.params.data, ...item.commandParams);
   }
 
-  disablityFunction(item: any){
-    return item.disablity? item.disablity(this.params.data) : false;
+  disablityFunction(item: any) {
+    return item.disablity ? item.disablity(this.params.data) : false;
   }
 
-  visibilityFunction(item: any){
-    return item.visibility? item.visibility(this.params.data) : true;
+  visibilityFunction(item: any) {
+    return item.visibility ? item.visibility(this.params.data) : true;
   }
 }
 
@@ -43,10 +42,10 @@ export class ToolbarItem {
   icon = 'border_clear';
   title = '';
   color = '';
-  command: (data : any, items?) => void;
+  command: (data: any, items?) => void;
   commandParams = [];
-  disablity: (data : any) => boolean;
-  visibility: (data : any) => boolean;
+  disablity: (data: any) => boolean;
+  visibility: (data: any) => boolean;
   alertData: AlertDialogData;
 }
 
