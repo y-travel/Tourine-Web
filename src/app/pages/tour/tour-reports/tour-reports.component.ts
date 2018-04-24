@@ -61,9 +61,9 @@ export class TourReportsComponent implements ModalInterface, Dialog {
       this.startDate = this.formatter.getDateFormat(x.tour.tourDetail.startDate);
       this.destination = this.destinationList[x.tour.tourDetail.destinationId];
 
-      var date = new Date(x.tour.tourDetail.startDate);
+      var date = new Date(Date.parse(x.tour.tourDetail.startDate));
       date.setDate(date.getDate() + x.tour.tourDetail.duration);
-      this.endDate = this.formatter.getDateFormat(date);
+      this.endDate = this.formatter.getDateFormat(date.toISOString());
     })
   }
 

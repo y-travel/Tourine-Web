@@ -63,7 +63,7 @@
           </mat-form-field>
           <mat-form-field fxFlex formGroupName="tourDetail">
             <mat-select placeholder="hotel" formControlName="placeId">
-              <mat-option *ngFor="let item of destinationList|async" [value]="item.id">{{ item.name }}</mat-option>
+              <mat-option *ngFor="let item of places|async" [value]="item.id">{{ item.name }}</mat-option>
             </mat-select>
             <mat-error translate>{{vModel.form.get('tourDetail').get('placeId')['errorMessage']}}</mat-error>
           </mat-form-field>

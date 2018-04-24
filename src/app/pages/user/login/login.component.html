@@ -3,15 +3,15 @@
     <mat-card>
       <mat-card-content fxLayout="column">
         <mat-form-field fxFlex>
-          <input matInput placeholder="username" formControlName="username" autofocus>
+          <input matInput placeholder="{{'username'|translate}}" formControlName="username" autofocus>
         </mat-form-field>
         <mat-form-field fxFlex>
-          <input matInput placeholder="password" formControlName="password" type="password">
+          <input matInput placeholder="{{'password'|translate}}" formControlName="password" type="password">
         </mat-form-field>
         <!--@Todo impl. validation error message style-->
         <label [style.color]="'red'" [style.font-size]="'x-small'">{{errorMessage|translate}}</label>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions >
         <button class="card-footer" mat-raised-button color="primary" fxFlex (click)="login()">{{"save"|translate}}</button>
       </mat-card-actions>
     </mat-card>
