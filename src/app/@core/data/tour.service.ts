@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Agency, Destination, Person, Place, Ticket, Tour, TourOption } from './models/client.model';
+import { Agency, Destination, Person, Place, TourPassengers, Tour, TourOption } from './models/client.model';
 import { Serializable } from '../utils/serializable';
 import {
-  DeleteTour, GetAgencies, GetBlocks, GetDestinations, GetLeaders, GetPlaces, GetTourOptions, GetTours, GetTourTicket,
+  DeleteTour, GetAgencies, GetBlocks, GetDestinations, GetLeaders, GetPlaces, GetTourOptions, GetTours, GetTourTicket, GetTourVisa,
   UpsertTour
 } from './models/server.dtos';
 import { Observable } from 'rxjs/Rx';
@@ -58,9 +58,16 @@ export class TourService {
     return this.apiService.getEntities(dto);
   }
 
-  getTickets(tourId: string):Observable<Ticket>{
+  getTickets(tourId: string): Observable<TourPassengers> {
     const query = new GetTourTicket();
     query.tourId = tourId;
+    return this.apiService.get(query);
+  }
+
+  getVisa(tourId: string, have: boolean = true): Observable<TourPassengers> {
+    const query = new GetTourVisa();
+    query.tourId = tourId;
+    query.have = have;
     return this.apiService.get(query);
   }
 }

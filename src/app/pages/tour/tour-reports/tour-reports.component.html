@@ -3,92 +3,126 @@
     {{ "reports.*"|translate }}
   </div>
 </div>
-<div class="right modal-body" dir="rtl" [style.width.px]="1000" [style.height.px]="500" autoTranslate>
+<div class="right modal-body" dir="rtl" [style.width.px]="1000" [style.height.px]="500">
 
-  <mat-tab-group (selectedTabChange)="tabChange($event)">
+  <mat-tab-group (selectedTabChange)="mainTab($event)">
 
     <mat-tab label="{{'reports.ticket'|translate}}">
-
-      <mat-card>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-
-          <div fxLayout="column">
-            <div fxLayout="row">
-              <label>{{'ticket.adultCount'|translate}} : </label>
-              <label>{{adultCount}}</label>
-            </div>
-            <div fxLayout="row">
-              <label>{{'ticket.infantCount'|translate}} : </label>
-              <label>{{infantCount}}</label>
-            </div>
-          </div>
-
-          <div fxLayout="column">
-            <div fxLayout="row">
-              <label>{{'tour.startDate'|translate}} : </label>
-              <label>{{startDate}}</label>
-            </div>
-            <div fxLayout="row">
-              <label>{{'tour.endDate'|translate}} : </label>
-              <label>{{endDate}}</label>
-            </div>
-          </div>
-
-          <div fxLayout="column">
-            <div fxLayout="row">
-              <label>{{'tour.destination'|translate}} : </label>
-              <label>{{destination}}</label>
-            </div>
-            <div fxLayout="row">
-              <label>&nbsp;</label>
-            </div>
-          </div>
-
-        </div>
-      </mat-card>
-
-      <mat-card [stretch]="true">
-        <mat-tab-group (selectedTabChange)="tabChange($event)">
-          <mat-tab label="{{'adult.*'|translate}}">
-          </mat-tab>
-
-          <mat-tab label="{{'infant'|translate}}">
-          </mat-tab>
-        </mat-tab-group>
-        <ng-template [ngTemplateOutlet]="templateContent">
-        </ng-template>
-      </mat-card>
     </mat-tab>
 
     <mat-tab label="{{'reports.visa'|translate}}">
-      <h1>Some tab content</h1>
-      <p>...</p>
     </mat-tab>
 
     <mat-tab label="{{'reports.buyer'|translate}}">
-      <h1>Some tab content</h1>
-      <p>...</p>
     </mat-tab>
 
     <mat-tab label="{{'reports.tour'|translate}}">
-      <h1>Some tab content</h1>
-      <p>...</p>
     </mat-tab>
 
   </mat-tab-group>
+
+
+  <div [ngSwitch]="selectedTab">
+    <div *ngSwitchCase="'ticket'">
+      <ng-template *ngTemplateOutlet="tickeTemplate"></ng-template>
+    </div>
+    <div *ngSwitchCase="'visa'">
+      <ng-template *ngTemplateOutlet="visaTemplate"></ng-template>
+    </div>
+  </div>
+
 </div>
 <mat-dialog-actions>
   <button mat-raised-button color="primary" fxFlex matDialogClose>{{ "close"|translate }}</button>
 </mat-dialog-actions>
 
-<ng-template #templateContent>
+
+<ng-template #reportGridTemplate let-tabIndex="tab">
+  <ag-grid-angular #agGrid style="height:300px" class="ag-theme-material"
+                   [columnDefs]="reportGridService.ticketColumnDef"
+                   [gridOptions]="reportGridService.gridOptions"
+                   [frameworkComponents]="reportGridService.frameworkComponents"
+                   (gridReady)="onGridReady($event,tabIndex)"
+                   [enableRtl]="true" rowHeight="35" headerHeight="35">
+  </ag-grid-angular>
+</ng-template>
+
+<ng-template #tickeTemplate>
   <div>
-    <ag-grid-angular #agGrid style="height:250px" class="ag-theme-material"
-                     [columnDefs]="reportGridService.columnDefs"
-                     [gridOptions]="reportGridService.gridOptions"
-                     [frameworkComponents]="reportGridService.frameworkComponents"
-                     (gridReady)="onGridReady($event)"
-                     [enableRtl]="true" rowHeight="35" headerHeight="35">
-    </ag-grid-angular>
+    <mat-card  [stretch]="true">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+
+        <div fxLayout="column">
+          <div fxLayout="row">
+            <label>{{'ticket.adultCount'|translate}} : </label>
+            <label>{{adultCount}}</label>
+          </div>
+          <div fxLayout="row">
+            <label>{{'ticket.infantCount'|translate}} : </label>
+            <label>{{infantCount}}</label>
+          </div>
+        </div>
+
+        <div fxLayout="column">
+          <div fxLayout="row">
+            <label>{{'tour.startDate'|translate}} : </label>
+            <label>{{startDate}}</label>
+          </div>
+          <div fxLayout="row">
+            <label>{{'tour.endDate'|translate}} : </label>
+            <label>{{endDate}}</label>
+          </div>
+        </div>
+
+        <div fxLayout="column">
+          <div fxLayout="row">
+            <label>{{'tour.destination'|translate}} : </label>
+            <label>{{destination}}</label>
+          </div>
+          <div fxLayout="row">
+            <label>&nbsp;</label>
+          </div>
+        </div>
+
+      </div>
+    </mat-card>
+    <mat-card [stretch]="true">
+      <mat-tab-group (selectedTabChange)="ticketTab($event)">
+        <mat-tab label="{{'adult.*'|translate}}">
+        </mat-tab>
+        <mat-tab label="{{'infant'|translate}}">
+        </mat-tab>
+      </mat-tab-group>
+      <ng-template *ngTemplateOutlet="reportGridTemplate; context:{tab:'ticket'}"></ng-template>
+    </mat-card>
+  </div>
+</ng-template>
+
+<ng-template #visaTemplate>
+  <div>
+    <mat-card [stretch]="true">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+
+        <div fxLayout="column">
+          <div fxLayout="row">
+            <label>{{'person.numberOfHaveVisa'|translate}} : </label>
+            <label>{{tourPassengersHaveVisa?tourPassengersHaveVisa.length:0}}</label>
+          </div>
+          <div fxLayout="row">
+            <label>{{'person.numberOfEmmisionableVisa'|translate}} : </label>
+            <label>{{tourPassengersNoVisa?tourPassengersNoVisa.length:0}}</label>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card [stretch]="true">
+      <mat-tab-group (selectedTabChange)="visaTab($event)">
+        <mat-tab label="{{'person.haveVisa'|translate}}">
+        </mat-tab>
+        <mat-tab label="{{'person.emissionVisa'|translate}}">
+        </mat-tab>
+      </mat-tab-group>
+      <ng-template *ngTemplateOutlet="reportGridTemplate; context:{tab:'visa'}"></ng-template>
+    </mat-card>
   </div>
 </ng-template>

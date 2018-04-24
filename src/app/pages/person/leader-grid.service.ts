@@ -65,7 +65,7 @@ export class LeaderGridService {
         minWidth: 50,
         maxWidth: 50,
         valueGetter: (params: any) => {
-          return params.data.gender === 1 ? 'مرد' : 'زن';
+          return params.data.gender === true ? 'مرد' : 'زن';
         },
         cellRenderer: 'agGroupCellRenderer',
       },

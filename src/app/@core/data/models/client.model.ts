@@ -231,7 +231,7 @@ export class TourTeammember {
   teams: Team[];
 }
 
-export class  Ticket {
+export class  TourPassengers {
   tour: Tour;
   leader: Person;
   passengers: Person[];

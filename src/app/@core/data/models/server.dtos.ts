@@ -19,7 +19,7 @@ import {
   User,
   Dictionary,
   TourTeammember,
-  Team, Ticket
+  Team, TourPassengers,
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
 
@@ -797,15 +797,30 @@ export class PassengerReplacementTourAccomplish implements IReturnVoid {
 }
 
 @Route('/tours/{TourId}/tickets', 'GET')
-export class GetTourTicket implements IReturn<Ticket> {
+export class GetTourTicket implements IReturn<TourPassengers> {
 
   tourId: string;
 
   createResponse() {
-    return new Ticket();
+    return new TourPassengers();
   }
 
   getTypeName() {
     return 'GetTourTicket';
+  }
+}
+
+@Route('/tours/{TourId}/visa/{Have}', 'GET')
+export class GetTourVisa implements IReturn<TourPassengers> {
+
+  tourId: string;
+  have: boolean = true;
+
+  createResponse() {
+    return new TourPassengers();
+  }
+
+  getTypeName() {
+    return 'GetTourVisa';
   }
 }

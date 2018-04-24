@@ -6,9 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormatterService } from '../../../@core/utils/formatter.service';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { CellHeaderComponent } from '../../../shared/trn-ag-grid/cell-header/cell-header.component';
-import { Person, Ticket } from '../../../@core/data/models/client.model';
-
-declare type ReportTab = 'ticket' | 'visa' | 'buyer' | 'tour';
+import { Agency, Dictionary, Person, Tour, TourPassengers } from '../../../@core/data/models/client.model';
 
 @Injectable()
 export class TourReportGridService {
@@ -17,9 +15,11 @@ export class TourReportGridService {
   gridColumnApi: any;
   rows: Person[];
   selectedTourId: string;
-  columnDefs: any[];
+  ticketColumnDef: any[];
+  visaColumnDef: any[];
   frameworkComponents: any;
   gridApi: any;
+  tourAgency: Dictionary<string> = {};
 
   constructor(public personService: PersonService,
               public tourservice: TourService,
@@ -30,11 +30,10 @@ export class TourReportGridService {
   }
 
   init() {
-    this.changeColumn('ticket')
+    this.changeColumn();
   }
 
-  changeColumn(tab: ReportTab) {
-
+  changeColumn() {
     this.rows = [];
     this.gridOptions = {
       defaultColDef: {
@@ -42,7 +41,7 @@ export class TourReportGridService {
       },
     };
 
-    this.columnDefs = [
+    this.ticketColumnDef = [
       {
         headerName: 'row',
         minWidth: 50,
@@ -82,6 +81,33 @@ export class TourReportGridService {
       },
     ];
 
+    this.visaColumnDef = [
+      {
+        headerName: 'row',
+        minWidth: 50,
+        maxWidth: 50,
+        cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
+      },
+      {
+        headerName: 'person.nameAndFamily',
+        maxWidth: 300,
+        valueGetter: (params: any) => ' ' + params.data.person.name + ' ' + params.data.person.family,
+        valueFormatter: (params: any) => {
+          return params.data.person.gender ?
+            this.translate.instant('maleTitle') + params.value :
+            this.translate.instant('femaleTitle') + params.value;
+        }
+      },
+      {
+        headerName: 'agency.*',
+        valueGetter: (params: any) => this.tourAgency[params.data.tourId],
+        minWidth: 120,
+        maxWidth: 120,
+      },
+      {
+        headerName: '',
+      },
+    ];
     this.frameworkComponents = {
       cellHeader: CellHeaderComponent,
     };
@@ -108,5 +134,12 @@ export class TourReportGridService {
     this.rows = row;
     this.gridApi.setRowData(this.rows);
   }
+
+  loadTourAgency(tourId: string) {
+    this.personService.getTourAgency(tourId).subscribe((tours: Tour[]) => {
+      tours.forEach(t => this.tourAgency[t.id] = t.agency.name);
+    });
+  }
+
 }
 
