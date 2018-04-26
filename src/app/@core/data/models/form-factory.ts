@@ -16,8 +16,7 @@ import {
   TourDetail,
   TourOption,
   TourTeammember,
-  User,
-  Model
+  User
 } from './client.model';
 import { ValidationService } from '../../utils/validation.service';
 
@@ -226,7 +225,7 @@ export class FormFactory {
       infantPrice: [model.infantPrice ? model.infantPrice : undefined],
       roomPrice: [model.roomPrice ? model.roomPrice : undefined],
       foodPrice: [model.foodPrice ? model.foodPrice : undefined],
-      agency: new FormControl({ value: model.agency ? model.agency.name : '', disabled: true }),
+      agency: new FormControl({value: model.agency ? model.agency.name : '', disabled: true}),
     });
     return new FormService(TourTeammember, form);
   }
@@ -245,7 +244,7 @@ export class FormFactory {
       basePrice: [model.basePrice ? model.basePrice : undefined],
       infantPrice: [model.infantPrice ? model.infantPrice : undefined],
       totalPrice: [model.totalPrice ? model.totalPrice : undefined],
-      buyer: new FormControl({ value: model.buyer.name + ' ' + model.buyer.family, disabled: true }),
+      buyer: new FormControl({value: model.buyer.name + ' ' + model.buyer.family, disabled: true}),
       buyerId: [model.buyerId ? model.buyerId : undefined],
       buyerIsPassenger: [model.buyerIsPassenger ? model.buyerIsPassenger : undefined],
       count: [model.count ? model.count : undefined],

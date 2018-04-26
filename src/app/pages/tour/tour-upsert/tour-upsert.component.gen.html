@@ -32,14 +32,14 @@
     <div fxLayout="row" fxLayoutAlign="space-between">
       <mat-card fxLayout="column" fxFlex>
         <div fxLayout="row" fxLayoutAlign="space-between" formGroupName="tourDetail">
-          <mat-form-field fxFlex>
-            <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour.date" formControlName="startDate">
+          <mat-form-field fxFlex (click)="tourDate.open()">
+            <input matInput [matDatepicker]="tourDate" placeholder="tour.date" formControlName="startDate" readonly>
             <mat-datepicker-toggle utc="true" #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
-            <mat-datepicker #tourDate></mat-datepicker>
+            <mat-datepicker #tourDate disabled="false" [touchUi]="true" (closed)="utils.setDelayFocus(duration)"></mat-datepicker>
             <mat-error translate>{{vModel.form.get('tourDetail').get('startDate')['errorMessage']}}</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex>
-            <input matInput placeholder="duration" formControlName="duration" maxLength="3" mask="number">
+            <input matInput placeholder="duration" formControlName="duration" maxLength="3" mask="number" #duration tabindex="0">
             <mat-hint align="end" translate>nightFormat</mat-hint>
             <mat-error translate>{{vModel.form.get('tourDetail').get('duration')['errorMessage']}}</mat-error>
           </mat-form-field>

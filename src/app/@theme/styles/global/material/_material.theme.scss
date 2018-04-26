@@ -42,6 +42,7 @@
   input {
     &[matInput][mask="number"] {
       direction: ltr;
+      text-align: left;
     }
   }
 
@@ -91,6 +92,7 @@
 //disable wizard header selection
   .mat-horizontal-stepper-header{
     pointer-events: none !important;
+    height: 35px;
   }
 
 }

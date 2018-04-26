@@ -9,7 +9,7 @@
     "build.watch": "npm run build -- --watch",
     "build": "rimraf dist && ng build ",
     "build:prod": "npm run build -- --prod",
-    "build:prod:aot": "npm run build:prod -- --aot",
+    "build:prod:aot": "npm run build:prod -- --aot --prod",
     "copy.to.sync.folder": "gulp copy.to.sync --client ..",
     "gulpBuild": "gulp build.prod --client .. --color --env-config prod --build-type prod",
     "gulp": "gulp",

@@ -36,6 +36,10 @@ export class AppUtils {
         return 'restaurant';
     }
   }
+
+  setDelayFocus(control, timeout = 400) {
+    setTimeout(() => control.focus(), timeout);
+  }
 }
 
 export const UTILS = new InjectionToken<AppUtils>('app-utils');
