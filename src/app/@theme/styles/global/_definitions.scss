@@ -13,4 +13,20 @@
   .pull-right{float:right}
   .pull-left{float:left}
 
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background: #eee;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #03a9f4;
+  }
+
 }

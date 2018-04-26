@@ -31,7 +31,7 @@ include ../../../mixin
           mat-form-field(fxFlex)
             input(matInput , (click)='tourDateToggle._open($event)', [matDatepicker]='tourDate', placeholder='tour.date', formControlName='startDate')
             mat-datepicker-toggle(utc='true', #tourDateToggle, matSuffix, [for]='tourDate')
-            mat-datepicker(#tourDate, disabled='false')
+            mat-datepicker(#tourDate)
             mat-error(translate) {{vModel.form.get('tourDetail').get('startDate')['errorMessage']}}
           +matField('duration','duration',"vModel.form.get('tourDetail')",'nightFormat')(maxLength ='3',mask='number')
         div(fxLayout='row', fxLayoutAlign='space-between')

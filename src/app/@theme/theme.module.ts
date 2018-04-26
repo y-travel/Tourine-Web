@@ -2,6 +2,9 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
@@ -13,14 +16,13 @@ import {
   MatIconModule,
   MatInputModule,
   MatListModule,
-  MatNativeDateModule,
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
   MatStepperModule,
+  MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTabsModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
@@ -39,6 +41,8 @@ import { TourineLayoutComponent } from './layouts';
 import { AppTranslationModule } from '../app-translation.module';
 import { DialogService } from '../@core/utils/dialog.service';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { JalaliMomentDateAdapter } from '../@core/utils/date/jalali-moment-date-adapter';
+import { JALALI_MOMENT_FORMATS } from '../@core/utils/date/jalali-moment-format';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -55,7 +59,8 @@ const MAT_MODULES = [
   MatCommonModule,
   MatCardModule,
   MatDatepickerModule,
-  MatNativeDateModule, //@TODO Should be localize with moment.js
+  // MatNativeDateModule, //@TODO Should be localize with moment.js
+  // MatMomentDateModule,
   MatToolbarModule,
   MatSidenavModule,
   MatListModule,
@@ -95,6 +100,9 @@ const THEME_PROVIDERS = [
   MenuService,
   SidebarService,
   DialogService,
+  {provide: MAT_DATE_LOCALE, useValue: 'fa'},
+  {provide: DateAdapter, useClass: JalaliMomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+  {provide: MAT_DATE_FORMATS, useValue: JALALI_MOMENT_FORMATS},
 ];
 
 @NgModule({
@@ -111,3 +119,5 @@ export class ThemeModule {
     };
   }
 }
+
+

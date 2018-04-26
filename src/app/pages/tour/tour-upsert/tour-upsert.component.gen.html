@@ -35,7 +35,7 @@
           <mat-form-field fxFlex>
             <input matInput (click)="tourDateToggle._open($event)" [matDatepicker]="tourDate" placeholder="tour.date" formControlName="startDate">
             <mat-datepicker-toggle utc="true" #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
-            <mat-datepicker #tourDate disabled="false"></mat-datepicker>
+            <mat-datepicker #tourDate></mat-datepicker>
             <mat-error translate>{{vModel.form.get('tourDetail').get('startDate')['errorMessage']}}</mat-error>
           </mat-form-field>
           <mat-form-field fxFlex>
