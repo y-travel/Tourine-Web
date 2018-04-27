@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar, MatSnackBarRef } from '@angular/material';
 import { ComponentType } from './serializable';
 import { FormService } from '../data/form.service';
 import { ModalInterface } from '../../@theme/components/modal.interface';
 import { DialogButtonType, DialogMode } from '../data/models/enums';
 import { AlertDialogData, DialogComponent } from '../../@theme/components/dialog/dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 class TrnDialogConfig<T> extends MatDialogConfig<T> {
   constructor(data: T, public dialogMode?: DialogMode) {
@@ -23,7 +24,7 @@ export interface Dialog {
 @Injectable()
 export class DialogService {
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private translate: TranslateService) {
   }
 
   openPopup<T extends Dialog>(type: ComponentType<T>, data: FormService<T> | any, dialogMode = DialogMode.Create): MatDialogRef<ModalInterface> {
@@ -39,5 +40,9 @@ export class DialogService {
     dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
     return dialogRef;
+  }
+
+  showSnack(message: string, actionText = 'read', longDuration = true): MatSnackBarRef<any> {
+    return this.snackBar.open(this.translate.instant(message), this.translate.instant(actionText), {duration: longDuration ? 10000 : 5000});
   }
 }

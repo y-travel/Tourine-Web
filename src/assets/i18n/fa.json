@@ -75,7 +75,9 @@
   "msg": {
     "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزور شد",
     "delete": "در صورت حذف اطلاعات غیر قابل بازگشت میباشد",
-    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
+    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
+    "thereIsNoFreeSpace": "ظرفیت خالی وجود ندارد",
+    "connectionError":"خطا در برقراری ارتباط با سرور"
   },
   "name": "نام",
   "nationalCode": "کد ملی",
@@ -145,6 +147,7 @@
     "irFormated": "(ریال)"
   },
   "rePassword": "تکرار کلمه عبور",
+  "read": "خواندم",
   "reagent": {
     "name": "نام معرف",
     "upsert": "ثبت معرف"

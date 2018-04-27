@@ -83,10 +83,10 @@
 
         <mat-card>
           <div fxLayout="row" layout-align="space-between center">
-            <label fxFlex>{{'adultCountLbl'|translate}} : {{ adultCount }}</label>
-            <label fxFlex>{{'nonOptionCountLbl'|translate}} : {{ noneOptionCount }}</label>
-            <label fxFlex>{{'infantCount'|translate}} : {{ infantCount }}</label>
-            <label fxFlex>{{'total'|translate}} : {{data.form.value.totalPrice}} {{'price.irFormated'|translate}}</label>
+            <label fxFlex>{{ 'adultCountLbl'|translate }} : {{ adultCount }}</label>
+            <label fxFlex>{{ 'nonOptionCountLbl'|translate }} : {{ noneOptionCount }}</label>
+            <label fxFlex>{{ 'infantCount'|translate }} : {{ infantCount }}</label>
+            <label fxFlex>{{ 'total'|translate }} : {{ data.form.value.totalPrice }} {{ 'price.irFormated'|translate }}</label>
           </div>
         </mat-card>
 

@@ -18,7 +18,7 @@ import {
   MatListModule,
   MatSelectModule,
   MatSidenavModule,
-  MatSlideToggleModule,
+  MatSlideToggleModule, MatSnackBarModule,
   MatStepperModule,
   MatTabsModule,
   MatToolbarModule,
@@ -59,14 +59,13 @@ const MAT_MODULES = [
   MatCommonModule,
   MatCardModule,
   MatDatepickerModule,
-  // MatNativeDateModule, //@TODO Should be localize with moment.js
-  // MatMomentDateModule,
   MatToolbarModule,
   MatSidenavModule,
   MatListModule,
   MatTooltipModule,
   MatChipsModule,
   MatTabsModule,
+  MatSnackBarModule,
 ];
 
 const OTHER_MODULES = [
@@ -119,5 +118,3 @@ export class ThemeModule {
     };
   }
 }
-
-

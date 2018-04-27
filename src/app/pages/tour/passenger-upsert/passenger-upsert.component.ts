@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
-import { MAT_DIALOG_DATA, MatDialogRef, MatStepper, MatButton } from '@angular/material';
+import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatStepper } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { PassengerGridService } from '../passenger-grid.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
-import { Block, OptionType, TeamMember, Person } from '../../../@core/data/models';
+import { Block, OptionType, Person, TeamMember } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
@@ -50,7 +50,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   noneOptionCount = 0;
   public rows: any[];
   public teamId: string = undefined;
-  public isEditable: boolean = true;
+  public isEditable = true;
   public buyer = new TeamMember();
   public buyerForm: FormService<TeamMember>;
 
@@ -94,22 +94,21 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
     if (this.tourFreeSpace <= 0 && isAdd) {
-      console.log(this.data.model.capacity + '/' + this.passengerGridService.rows.length);
-      //@TODO: show toast
-    } else {
-      const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
-      inst.afterClosed().subscribe(x => {
-        if (x == null)
-          return;
-        if (isAdd || (!isAdd && teamMember.person.id === x.person.id)) {
-          this.passengerGridService.addItem(x);
-          this.updateSubmitStatus();
-          this.tourFreeSpace--;
-        }
-        //@TODO: update to a new person
-        this.updateTotalPrice();
-      });
+      this.dialogService.openDialog('msg.thereIsNoFreeSpace', null);
+      return;
     }
+    const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
+    inst.afterClosed().subscribe(x => {
+      if (x == null)
+        return;
+      if (isAdd || (!isAdd && teamMember.person.id === x.person.id)) {
+        this.passengerGridService.addItem(x);
+        this.updateSubmitStatus();
+        this.tourFreeSpace--;
+      }
+      //@TODO: update to a new person
+      this.updateTotalPrice();
+    });
   }
 
   updateSubmitStatus() {
@@ -120,13 +119,13 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
     this.service.GetPerson(natCode.value).subscribe(
       person => {
         person.isEditable = false;
-        let team = new TeamMember();
-        team.person = person
+        const team = new TeamMember();
+        team.person = person;
         this.buyerForm.updateForm(team);
         this.buyerForm.disableControl(true, this.disablingItems);
       },
       () => {
-        let teamMember = new TeamMember();
+        const teamMember = new TeamMember();
         //we use Object.assign cos last data remained in form by using dynamic cast.
         teamMember.person = new Person();
         teamMember.person.isEditable = true;
@@ -138,10 +137,10 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
 
   nextStep(stepper: MatStepper) {
     if (stepper.selectedIndex == 0) {
-      if (this.buyerForm.model.person.id == '')
+      if (this.buyerForm.model.person.id === '')
         this.service.AddPerson(this.buyerForm.model.person).subscribe(x => {
           this.buyerForm.model.person = x;
-          this.buyerForm.updateForm()
+          this.buyerForm.updateForm();
           this.nextButton.disabled = false;
           stepper.next();
         });

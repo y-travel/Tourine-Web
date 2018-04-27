@@ -2,27 +2,27 @@ import { Component, ElementRef, Input, OnDestroy, Renderer2 } from '@angular/cor
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/delay';
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { StateService } from '../../@core/data/state.service';
-import { SidebarService } from "../components/sidebar/sidebar.service";
-import { ThemeService } from "../../@core/utils/theme.service";
-import { MenuService } from "../components/menu/menu.service";
-import { SpinnerService } from "../../@core/utils/spinner.service";
+import { SidebarService } from '../components/sidebar/sidebar.service';
+import { ThemeService } from '../../@core/utils/theme.service';
+import { MenuService } from '../components/menu/menu.service';
+import { SpinnerService } from '../../@core/utils/spinner.service';
 
-declare type LayoutType = "layout1" | "layout2";
+declare type LayoutType = 'layout1' | 'layout2';
 
 // TODO: move layouts into the framework
 @Component({
   selector: 'tourine-layout',
-  templateUrl: "tourine.layout.html",
+  templateUrl: 'tourine.layout.html',
   styleUrls: ['tourine.layout.scss'],
 })
 export class TourineLayoutComponent implements OnDestroy {
 
   layout: any = {};
   sidebar: any = {};
-  @Input() layoutType: LayoutType = "layout1";
+  @Input() layoutType: LayoutType = 'layout1';
 
   protected afterViewInit$ = new BehaviorSubject(null);
   protected layoutState$: Subscription;

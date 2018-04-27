@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Rx';
 import { Destination, Person, Place } from '../../../@core/data/models/client.model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
-import { Dialog } from '../../../@core/utils/dialog.service';
+import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
 import { TourUpsertViewModel } from './tour-upsert.view-model';
 
 @Component({
@@ -27,7 +27,6 @@ export class TourUpsertComponent implements ModalInterface, Dialog {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               public dialogInstance: MatDialogRef<ModalInterface>,
               public service: TourService,
-              private translateService: TranslateService,
               public vModel: TourUpsertViewModel,
               @Inject(UTILS) public utils: AppUtils,) {
   }

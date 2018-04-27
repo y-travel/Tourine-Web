@@ -13,6 +13,8 @@ import { UTILS, UTILS_INSTANCE } from './utils/app-utils';
 import { FormatterService } from './utils/formatter.service';
 import { ValidationService } from './utils/validation.service';
 import { ENUMS, ENUMS_INSTANCE } from './data/models/enums';
+import { ExceptionModule } from './exception.module';
+import { LOGGER, LOGGER_INSTANCE } from './utils/logger.service';
 
 const CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
@@ -26,11 +28,13 @@ const CORE_PROVIDERS = [
   {provide: UTILS, useValue: UTILS_INSTANCE},
   {provide: APP_CONFIG, useValue: APP_CONFIG_INSTANCE},
   {provide: ENUMS, useValue: ENUMS_INSTANCE},
+  {provide: LOGGER, useValue: LOGGER_INSTANCE},
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    ExceptionModule,
   ],
   declarations: [],
 })
