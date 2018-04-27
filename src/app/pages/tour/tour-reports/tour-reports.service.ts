@@ -6,17 +6,20 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormatterService } from '../../../@core/utils/formatter.service';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { CellHeaderComponent } from '../../../shared/trn-ag-grid/cell-header/cell-header.component';
-import { Agency, Dictionary, Person, Tour, TourPassengers } from '../../../@core/data/models/client.model';
+import { Agency, Dictionary, Person, TeamMember, Tour, TourPassengers } from '../../../@core/data/models/client.model';
+import { OptionType } from '../../../@core/data/models/enums';
+import { xdescribe } from 'selenium-webdriver/testing';
 
 @Injectable()
 export class TourReportGridService {
 
   gridOptions: GridOptions;
   gridColumnApi: any;
-  rows: Person[];
+  rows: TeamMember[];
   selectedTourId: string;
   ticketColumnDef: any[];
   visaColumnDef: any[];
+  tourColumnDef: any[];
   frameworkComponents: any;
   gridApi: any;
   tourAgency: Dictionary<string> = {};
@@ -30,10 +33,6 @@ export class TourReportGridService {
   }
 
   init() {
-    this.changeColumn();
-  }
-
-  changeColumn() {
     this.rows = [];
     this.gridOptions = {
       defaultColDef: {
@@ -51,9 +50,9 @@ export class TourReportGridService {
       {
         headerName: 'person.nameAndFamily',
         maxWidth: 300,
-        valueGetter: (params: any) => ' ' + params.data.name + ' ' + params.data.family,
+        valueGetter: (params: any) => ' ' + params.data.person.name + ' ' + params.data.person.family,
         valueFormatter: (params: any) => {
-          return params.data.gender ?
+          return params.data.person.gender ?
             this.translate.instant('maleTitle') + params.value :
             this.translate.instant('femaleTitle') + params.value;
         }
@@ -61,18 +60,18 @@ export class TourReportGridService {
       {
         headerName: 'person.englishNameAndFamily',
         maxWidth: 300,
-        valueGetter: (params: any) => ' ' + params.data.englishName + ' ' + params.data.englishFamily,
+        valueGetter: (params: any) => ' ' + params.data.person.englishName + ' ' + params.data.person.englishFamily,
       },
       {
         headerName: 'passportNumber',
-        field: 'passportNo',
+        field: 'person.passportNo',
         minWidth: 120,
         maxWidth: 120,
       },
 
       {
         headerName: '',
-        field: 'isInfant',
+        field: 'person.isInfant',
         minWidth: 1,
         maxWidth: 1,
       },
@@ -108,6 +107,41 @@ export class TourReportGridService {
         headerName: '',
       },
     ];
+
+    this.tourColumnDef = [
+      {
+        headerName: 'row',
+        minWidth: 50,
+        maxWidth: 50,
+        cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
+      },
+      {
+        headerName: 'person.nameAndFamily',
+        maxWidth: 300,
+        valueGetter: (params: any) => ' ' + params.data.person.name + ' ' + params.data.person.family,
+        valueFormatter: (params: any) => {
+          return params.data.person.gender ?
+            this.translate.instant('maleTitle') + params.value :
+            this.translate.instant('femaleTitle') + params.value;
+        }
+      },
+      {
+        headerName: 'options',
+        valueGetter: (params: any) => {
+          if (params.data.person.isInfant)
+            return this.translate.instant('infant');
+          if (params.data.person.isUnder5)
+            return this.getOptions(params.data);
+          return this.translate.instant('adult.*');
+        },
+        minWidth: 300,
+        maxWidth: 300,
+      },
+      {
+        headerName: '',
+      },
+    ];
+
     this.frameworkComponents = {
       cellHeader: CellHeaderComponent,
     };
@@ -141,5 +175,17 @@ export class TourReportGridService {
     });
   }
 
+  getOptions(params: any) {
+    if (params.personIncomes.length === 0)
+      return this.translate.instant('noneOptions');
+    let templateStr = '';
+    let rev = Array(...this.utils.getEnumNames(OptionType)).filter(x => x !== OptionType[OptionType.Empty]);
+    rev = rev.filter(x => !params.personIncomes.some(z => OptionType[z.optionType] === x));
+    if (rev.length === 0 )
+      return this.translate.instant('haveAllOptions');
+    rev = rev.map(x => 'optionType.' + x);
+    rev.forEach(x => templateStr += this.translate.instant(x) + '،');
+    return this.translate.instant('nonePrefix') + ' ' + templateStr.slice(0, templateStr.length - 1);
+  }
 }
 

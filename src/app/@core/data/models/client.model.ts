@@ -200,6 +200,7 @@ export class TeamPassenger {
 
 
 export class TourPassenger {
+  tour: Tour;
   leader: Person;
   passengers: TeamMember[];
 }

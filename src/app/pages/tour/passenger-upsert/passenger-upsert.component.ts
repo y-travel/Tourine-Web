@@ -55,11 +55,11 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   public buyerForm: FormService<TeamMember>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
-    public dialogInstance: MatDialogRef<ModalInterface>,
-    private dialogService: DialogService,
-    public formFactory: FormFactory,
-    public passengerGridService: PassengerGridService,
-    public service: PersonService, ) {
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              public formFactory: FormFactory,
+              public passengerGridService: PassengerGridService,
+              public service: PersonService,) {
 
     this.init();
   }
@@ -87,6 +87,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
 
   teamMemberDelete(teamMember: TeamMember) {
     this.passengerGridService.remove(teamMember);
+    this.tourFreeSpace++;
     this.updateTotalPrice();
     this.updateSubmitStatus();
   }

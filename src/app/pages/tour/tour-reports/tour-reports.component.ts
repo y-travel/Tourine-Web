@@ -5,7 +5,7 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { TourService } from '../../../@core/data/tour.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabChangeEvent } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
-import { Destination, Dictionary, Person, Place, TeamMember, Tour } from '../../../@core/data/models/client.model';
+import { Destination, Dictionary, Person, Place, TeamMember, Tour, TourPassenger } from '../../../@core/data/models/client.model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { Dialog } from '../../../@core/utils/dialog.service';
@@ -22,16 +22,20 @@ import { PersonService } from '../../../@core/data/person.service';
 export class TourReportsComponent implements ModalInterface, Dialog {
 
   dialogMode: DialogMode;
-  tourPassengers: any[];
-  tourPassengersHaveVisa: TeamMember[];
-  tourPassengersNoVisa: TeamMember[];
+  tourMembers: TeamMember[];
   destinationList: Dictionary<string> = {};
   selectedTab: ReportTab = 'ticket';
+
   adultCount = 0;
   infantCount = 0;
+  bedCount = 0;
   startDate = '';
   endDate = '';
   destination = '';
+  tourCode = '';
+  leader: Person;
+  haveVisaCount = 0;
+  noHaveVisaCount = 0;
 
   initDialog() {
   }
@@ -57,27 +61,21 @@ export class TourReportsComponent implements ModalInterface, Dialog {
 
     if (tab === 'ticket') {
       this.reportGridService.gridApi.setColumnDefs(this.reportGridService.ticketColumnDef);
-      this.tourSerivce.getTickets(this.data.value.id).subscribe(x => {
-        this.tourPassengers = x.passengers;
-        this.tourPassengers.unshift(x.leader);
-        this.reportGridService.setRow(this.tourPassengers.filter(x => x.isInfant === false));
 
-        this.adultCount = this.tourPassengers.filter(x => x.isInfant === false).length;
-        this.infantCount = this.tourPassengers.filter(x => x.isInfant === true).length;
-        this.startDate = this.formatter.getDateFormat(x.tour.tourDetail.startDate);
-        this.destination = this.destinationList[x.tour.tourDetail.destinationId];
-
-        var date = new Date(Date.parse(x.tour.tourDetail.startDate));
-        date.setDate(date.getDate() + x.tour.tourDetail.duration);
-        this.endDate = this.formatter.getDateFormat(date.toISOString());
-      })
+      this.personService.getTourMembers(this.data.value.id).subscribe(x => {
+        this.tourMembers = x.passengers;
+        let leader = new TeamMember();
+        this.leader = x.leader;
+        this.tourMembers.unshift(Object.assign(leader, {person: x.leader}));
+        this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === false));
+        this.setTourCards(x);
+      });
     } else if (tab === 'visa') {
       this.reportGridService.gridApi.setColumnDefs(this.reportGridService.visaColumnDef);
-      this.personService.getTourMembers(this.data.value.id).subscribe(x => {
-        this.tourPassengersHaveVisa = x.passengers.filter(x => x.haveVisa === true);
-        this.tourPassengersNoVisa = x.passengers.filter(x => x.haveVisa === false);
-        this.reportGridService.setRow(this.tourPassengersHaveVisa);
-      });
+      this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa && x.person.id !== this.leader.id));
+    } else if (tab === 'tour') {
+      this.reportGridService.gridApi.setColumnDefs(this.reportGridService.tourColumnDef);
+      this.reportGridService.setRow(this.tourMembers);
     }
     this.reportGridService.refresh();
   }
@@ -85,29 +83,31 @@ export class TourReportsComponent implements ModalInterface, Dialog {
   mainTab(event: MatTabChangeEvent) {
     if (event.index == 0) {
       this.selectedTab = 'ticket';
-      this.reportGridService.setRow(this.tourPassengers.filter(x => x.isInfant === false));
-    }
-    if (event.index == 1) {
+      this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === false));
+    } else if (event.index == 1) {
       this.selectedTab = 'visa';
-      this.reportGridService.setRow(this.tourPassengersHaveVisa);
+      this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === true && x.person.id !== this.leader.id));
+    } else if (event.index == 3) {
+      this.selectedTab = 'tour';
+      this.reportGridService.setRow(this.tourMembers);
     }
     this.reportGridService.refresh();
   }
 
   ticketTab(event: MatTabChangeEvent) {
     if (event.index == 0)
-      this.reportGridService.setRow(this.tourPassengers.filter(x => x.isInfant === false));
+      this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === false));
     if (event.index == 1)
-      this.reportGridService.setRow(this.tourPassengers.filter(x => x.isInfant === true));
+      this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === true));
 
     this.reportGridService.refresh();
   }
 
   visaTab(event: MatTabChangeEvent) {
     if (event.index == 0)
-      this.reportGridService.setRow(this.tourPassengersHaveVisa);
+      this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === true && x.person.id !== this.leader.id));
     if (event.index == 1)
-      this.reportGridService.setRow(this.tourPassengersNoVisa);
+      this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === false && x.person.id !== this.leader.id));
 
     this.reportGridService.refresh();
   }
@@ -115,6 +115,23 @@ export class TourReportsComponent implements ModalInterface, Dialog {
   loadDestination() {
     this.tourSerivce.getDistinations().subscribe((dests: Destination[]) => {
       dests.forEach(des => this.destinationList[des.id] = des.name);
+    });
+  }
+
+  setTourCards(members: TourPassenger) {
+    this.adultCount = this.tourMembers.filter(x => x.person.isInfant === false).length;
+    this.infantCount = this.tourMembers.filter(x => x.person.isInfant === true).length;
+    this.startDate = this.formatter.getDateFormat(members.tour.tourDetail.startDate);
+    this.destination = this.destinationList[members.tour.tourDetail.destinationId];
+    this.tourCode = members.tour.code;
+    var date = new Date(Date.parse(members.tour.tourDetail.startDate));
+    date.setDate(date.getDate() + members.tour.tourDetail.duration);
+    this.endDate = this.formatter.getDateFormat(date.toISOString());
+    this.noHaveVisaCount = this.tourMembers.filter(x => x.haveVisa === false && x.person.id !== this.leader.id).length;
+    this.haveVisaCount = this.tourMembers.filter(x => x.haveVisa === true && x.person.id !== this.leader.id).length;
+    this.bedCount = 0;
+    this.tourMembers.forEach(x => {
+      return this.bedCount += x.personIncomes.some(y => y.optionType === OptionType.Room) ? 1 : 0;
     });
   }
 }

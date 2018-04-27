@@ -3,7 +3,7 @@
   "addAgencyMessage": "نام آژانس را از لیست انتخاب نمایید و یا آژانس جدید ایجاد نمایید",
   "addPassengerMessage": "برای افزودن مسافر به این تور، بر روی گزینه ثبت کلیک نمایید",
   "adult": {
-    "*":"بزرگسال",
+    "*": "بزرگسال",
     "count": "تعداد ظرفیت بزرگسال",
     "minPrice": "حداقل قیمت ثبت نام بزرگسال"
   },
@@ -18,7 +18,7 @@
   "agencyName": "نام آژانس",
   "allPriceIsPerOne": "قیمت های وارد شده به ازای هر نفر می باشد",
   "apply": "تایید",
-  "bedCount":"تعداد تخت",
+  "bedCount": "تعداد تخت",
   "birthDate": "تاریخ تولد",
   "block": {
     "save": "ذخیره تور",
@@ -61,7 +61,8 @@
   "ground": "زمینی",
   "homePage": "صفحه اصلی",
   "hotel": "هتل",
-  "infant":"اینفنت",
+  "haveAllOptions": "دارای تمامی خدمات",
+  "infant": "اینفنت",
   "infantCount": "تعداد اینفنت",
   "infantPrice": "قیمت اینفنت",
   "leader": {
@@ -81,6 +82,7 @@
   "nextStep": "مرحله بعد",
   "nightFormat": "(شب)",
   "nonOptionCountLbl": "تعداد بدون خدمات",
+  "nonePrefix": "بدون",
   "none": "هیچکدام",
   "offValue": "تخفیف",
   "oldPassword": "کلمه عبور فعلی",
@@ -91,9 +93,10 @@
   },
   "optional": "اختیاری",
   "options": "خدمات",
+  "noneOptions": "بدون خدمات",
   "passenger": {
     "*": "مسافر",
-    "count":"تعداد مسافرین",
+    "count": "تعداد مسافرین",
     "upsert": "ثبت مشخصات مسافران"
   },
   "passengerReplacementSuccessfull": "جابجایی با موفیت انجام شد",
@@ -116,9 +119,9 @@
     "family": "نام خانوادگی",
     "gender": "جنسیت",
     "haveVisa": "ویزا دارد",
-    "numberOfHaveVisa":"تعداد مسافرین دارای ویزا",
-    "numberOfEmmisionableVisa":"تعداد ویزاهای قابل دریافت",
-    "emissionVisa":"صدور ویزا",
+    "numberOfHaveVisa": "تعداد مسافرین دارای ویزا",
+    "numberOfEmmisionableVisa": "تعداد ویزاهای قابل دریافت",
+    "emissionVisa": "صدور ویزا",
     "mobileNumber": "شماره همراه",
     "name": "نام",
     "nameAndFamily": "نام و نام خانوادگی",
@@ -166,9 +169,9 @@
     "list": "لیست گروه ها"
   },
   "third": "سوم",
-  "ticket":{
-    "infantCount":"تعداد بلیط اینفنت",
-    "adultCount":"تعداد بلیط بزرگسال"
+  "ticket": {
+    "infantCount": "تعداد بلیط اینفنت",
+    "adultCount": "تعداد بلیط بزرگسال"
   },
   "total": "جمع کل",
   "tour": {
@@ -180,19 +183,19 @@
     "reserve": "رزرو تور",
     "upsert": "ثبت تور",
     "leader": "مدیرگروه",
-    "startDate":"تاریخ حرکت",
-    "endDate":"تاریخ بازگشت",
-    "destination":"مقصد"
+    "startDate": "تاریخ حرکت",
+    "endDate": "تاریخ بازگشت",
+    "destination": "مقصد"
   },
   "user": {
     "upsert": "ثبت کاربر"
   },
   "username": "نام کاربری",
-  "validation":{
-    "min":"حداقل {{min}} باشد",
-    "max":"حداکثر {{max}} باشد",
-    "minlength":"باید بیشتر از {{requiredLength}} حرف باشد",
-    "maxlength":"باید کمتر از {{requiredLength}} حرف باشد",
+  "validation": {
+    "min": "حداقل {{min}} باشد",
+    "max": "حداکثر {{max}} باشد",
+    "minlength": "باید بیشتر از {{requiredLength}} حرف باشد",
+    "maxlength": "باید کمتر از {{requiredLength}} حرف باشد",
     "required": "الزامی",
     "pattern": "خطا در نوشتار",
     "greaterthan": "باید بزرگتر از {{requiredValue}} حرف باشد",

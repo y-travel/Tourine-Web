@@ -29,6 +29,9 @@
     <div *ngSwitchCase="'visa'">
       <ng-template *ngTemplateOutlet="visaTemplate"></ng-template>
     </div>
+    <div *ngSwitchCase="'tour'">
+      <ng-template *ngTemplateOutlet="tourTemplate"></ng-template>
+    </div>
   </div>
 
 </div>
@@ -49,7 +52,7 @@
 
 <ng-template #tickeTemplate>
   <div>
-    <mat-card  [stretch]="true">
+    <mat-card >
       <div fxLayout="row" fxLayoutAlign="space-between center">
 
         <div fxLayout="column">
@@ -100,17 +103,17 @@
 
 <ng-template #visaTemplate>
   <div>
-    <mat-card [stretch]="true">
+    <mat-card >
       <div fxLayout="row" fxLayoutAlign="space-between center">
 
         <div fxLayout="column">
           <div fxLayout="row">
             <label>{{'person.numberOfHaveVisa'|translate}} : </label>
-            <label>{{tourPassengersHaveVisa?tourPassengersHaveVisa.length:0}}</label>
+            <label>{{haveVisaCount}}</label>
           </div>
           <div fxLayout="row">
             <label>{{'person.numberOfEmmisionableVisa'|translate}} : </label>
-            <label>{{tourPassengersNoVisa?tourPassengersNoVisa.length:0}}</label>
+            <label>{{noHaveVisaCount}}</label>
           </div>
         </div>
       </div>
@@ -123,6 +126,51 @@
         </mat-tab>
       </mat-tab-group>
       <ng-template *ngTemplateOutlet="reportGridTemplate; context:{tab:'visa'}"></ng-template>
+    </mat-card>
+  </div>
+</ng-template>
+
+<ng-template #tourTemplate>
+  <div>
+    <mat-card>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="column">
+          <div fxLayout="row">
+            <label>{{'tour.date'|translate}} : </label>
+            <label>{{startDate}}</label>
+          </div>
+          <div fxLayout="row">
+            <label>{{'tour.code'|translate}} : </label>
+            <label>{{tourCode}}</label>
+          </div>
+        </div>
+        <div fxLayout="column">
+          <div fxLayout="row">
+            <label>{{'tour.leader'|translate}} : </label>
+            <label>{{leader.name + ' ' + leader.family}}</label>
+          </div>
+          <div fxLayout="row">
+            <label>{{'passenger.count'|translate}} : </label>
+            <label>{{adultCount+infantCount}}</label>
+          </div>
+        </div>
+        <div fxLayout="column">
+          <div fxLayout="row">
+            <label>{{'infantCount'|translate}} : </label>
+            <label>{{infantCount}}</label>
+          </div>
+          <div fxLayout="row">
+            <div fxLayout="row">
+              <label>{{'bedCount'|translate}} : </label>
+              <label>{{bedCount}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </mat-card>
+    <mat-card [stretch]="true">
+      <ng-template *ngTemplateOutlet="reportGridTemplate; context:{tab:'tour'}"></ng-template>
     </mat-card>
   </div>
 </ng-template>
