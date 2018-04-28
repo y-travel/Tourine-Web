@@ -33,7 +33,9 @@
   "capacity": {
     "*": "ظرفیت",
     "all": "کل",
-    "registered": "ثبت شده"
+    "noName": "بدون اسم",
+    "remained": "مانده",
+    "reserved":"رزرو شده"
   },
   "close": "بستن",
   "count": "تعداد",
