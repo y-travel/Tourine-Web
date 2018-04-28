@@ -64,9 +64,10 @@ export class TourReportsComponent implements ModalInterface, Dialog {
 
       this.personService.getTourMembers(this.data.value.id).subscribe(x => {
         this.tourMembers = x.passengers;
-        let leader = new TeamMember();
-        this.leader = x.leader;
-        this.tourMembers.unshift(Object.assign(leader, {person: x.leader}));
+        const leader = new TeamMember();
+        this.leader = x.leader ? x.leader : new Person();
+        if (x.leader)
+          this.tourMembers.unshift(Object.assign(leader, {person: x.leader}));
         this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === false));
         this.setTourCards(x);
       });
@@ -81,13 +82,13 @@ export class TourReportsComponent implements ModalInterface, Dialog {
   }
 
   mainTab(event: MatTabChangeEvent) {
-    if (event.index == 0) {
+    if (event.index === 0) {
       this.selectedTab = 'ticket';
       this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === false));
-    } else if (event.index == 1) {
+    } else if (event.index === 1) {
       this.selectedTab = 'visa';
       this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === true && x.person.id !== this.leader.id));
-    } else if (event.index == 3) {
+    } else if (event.index === 3) {
       this.selectedTab = 'tour';
       this.reportGridService.setRow(this.tourMembers);
     }
@@ -95,18 +96,18 @@ export class TourReportsComponent implements ModalInterface, Dialog {
   }
 
   ticketTab(event: MatTabChangeEvent) {
-    if (event.index == 0)
+    if (event.index === 0)
       this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === false));
-    if (event.index == 1)
+    if (event.index === 1)
       this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === true));
 
     this.reportGridService.refresh();
   }
 
   visaTab(event: MatTabChangeEvent) {
-    if (event.index == 0)
+    if (event.index === 0)
       this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === true && x.person.id !== this.leader.id));
-    if (event.index == 1)
+    if (event.index === 1)
       this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === false && x.person.id !== this.leader.id));
 
     this.reportGridService.refresh();
@@ -124,7 +125,7 @@ export class TourReportsComponent implements ModalInterface, Dialog {
     this.startDate = this.formatter.getDateFormat(members.tour.tourDetail.startDate);
     this.destination = this.destinationList[members.tour.tourDetail.destinationId];
     this.tourCode = members.tour.code;
-    var date = new Date(Date.parse(members.tour.tourDetail.startDate));
+    const date = new Date(Date.parse(members.tour.tourDetail.startDate));
     date.setDate(date.getDate() + members.tour.tourDetail.duration);
     this.endDate = this.formatter.getDateFormat(date.toISOString());
     this.noHaveVisaCount = this.tourMembers.filter(x => x.haveVisa === false && x.person.id !== this.leader.id).length;
