@@ -47,7 +47,12 @@ const ENTRY_COMPONENTS = [
     PassengerReplacementComponent,
     TourReportsComponent,
   ],
-  providers: [DialogService, PersonService,PassengerReplacementTourGridService,TourReportGridService],
+  providers: [
+    DialogService,
+    PersonService,
+    PassengerReplacementTourGridService,
+    TourReportGridService,
+  ],
   entryComponents: ENTRY_COMPONENTS
 })
 export class TourModule {

@@ -11,7 +11,7 @@ export class RouterGuard implements CanActivate, CanActivateChild, CanLoad {
   checkLogin(url: string) {
     if (this.authService.isAuthenticated())
       return true;
-    return true; //@TODO temporary
+    return false;
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

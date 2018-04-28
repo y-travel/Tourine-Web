@@ -1,6 +1,6 @@
 import { AfterContentInit, ContentChildren, Directive, QueryList } from '@angular/core';
-import { MatFormFieldControl } from "@angular/material";
-import { TranslateService } from "@ngx-translate/core";
+import { MatFormFieldControl } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
 
 @Directive({
   selector: '[autoTranslate]',
@@ -15,6 +15,8 @@ export class AutoTranslateDirective implements AfterContentInit {
   ngAfterContentInit(): void {
     if (this.inputs)
       this.inputs.forEach(item => {
+        if (!item.placeholder || typeof item.placeholder !== 'string')
+          return;
         (<any>item).placeholder = this.translateService.instant(item.placeholder);
       });
   }

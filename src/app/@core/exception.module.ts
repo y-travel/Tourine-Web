@@ -60,11 +60,13 @@ export class TrnHttpException {
   userVisible = false;
 
   constructor(error: any, public statusCode: number) {
-    if (error.responseStatus) {
+    if (error && error.responseStatus) {
       this.responseStatus = error.responseStatus;
       this.message = `${this.responseStatus.errorCode}:${this.responseStatus.message}`;
       this.errorCode = this.responseStatus.errorCode;
-    }
+    } else
+      this.message = this.statusCode.toString();
+
     if (statusCode === 0 || statusCode >= 500) {
       this.userVisible = true;
       this.message = 'msg.connectionError';

@@ -17,7 +17,6 @@ class TrnDialogConfig<T> extends MatDialogConfig<T> {
 
 export interface Dialog {
   dialogMode: DialogMode;
-
   initDialog();
 }
 
@@ -43,6 +42,8 @@ export class DialogService {
   }
 
   showSnack(message: string, actionText = 'read', longDuration = true): MatSnackBarRef<any> {
+    if (!message)
+      throw new Error('message should not be null');
     return this.snackBar.open(this.translate.instant(message), this.translate.instant(actionText), {duration: longDuration ? 10000 : 5000});
   }
 }

@@ -2,7 +2,7 @@ export const MENU_ITEMS = [
   {
     title: "homePage",
     icon: 'home',
-    link: '/pages/dashboard',
+    link: '/pages/tour/list',
     home: true,
   },
   {
