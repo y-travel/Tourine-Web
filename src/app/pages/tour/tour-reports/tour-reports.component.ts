@@ -5,7 +5,7 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { TourService } from '../../../@core/data/tour.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabChangeEvent } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
-import { Destination, Dictionary, Person, Place, TeamMember, Tour, TourPassenger } from '../../../@core/data/models/client.model';
+import { Destination, Dictionary, Person, Place, TeamMember, Tour, TourBuyer, TourPassenger } from '../../../@core/data/models/client.model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { Dialog } from '../../../@core/utils/dialog.service';
@@ -23,6 +23,7 @@ export class TourReportsComponent implements ModalInterface, Dialog {
 
   dialogMode: DialogMode;
   tourMembers: TeamMember[];
+  tourBuyers: TourBuyer[];
   destinationList: Dictionary<string> = {};
   selectedTab: ReportTab = 'ticket';
 
@@ -58,10 +59,8 @@ export class TourReportsComponent implements ModalInterface, Dialog {
   onGridReady(event: any, tab: ReportTab) {
 
     this.reportGridService.onGridReady(event);
-
     if (tab === 'ticket') {
       this.reportGridService.gridApi.setColumnDefs(this.reportGridService.ticketColumnDef);
-
       this.personService.getTourMembers(this.data.value.id).subscribe(x => {
         this.tourMembers = x.passengers;
         const leader = new TeamMember();
@@ -77,22 +76,27 @@ export class TourReportsComponent implements ModalInterface, Dialog {
     } else if (tab === 'tour') {
       this.reportGridService.gridApi.setColumnDefs(this.reportGridService.tourColumnDef);
       this.reportGridService.setRow(this.tourMembers);
+    } else if (tab === 'buyer') {
+      this.reportGridService.gridApi.setColumnDefs(this.reportGridService.buyerColumnDef);
+      this.tourSerivce.getTourBuyers(this.data.value.id).subscribe(x => {
+        this.tourBuyers = x;
+        this.reportGridService.setRow(this.tourBuyers);
+      });
     }
+
     this.reportGridService.refresh();
   }
 
   mainTab(event: MatTabChangeEvent) {
     if (event.index === 0) {
       this.selectedTab = 'ticket';
-      this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === false));
     } else if (event.index === 1) {
       this.selectedTab = 'visa';
-      this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === true && x.person.id !== this.leader.id));
+    } else if (event.index === 2) {
+      this.selectedTab = 'buyer';
     } else if (event.index === 3) {
       this.selectedTab = 'tour';
-      this.reportGridService.setRow(this.tourMembers);
     }
-    this.reportGridService.refresh();
   }
 
   ticketTab(event: MatTabChangeEvent) {
@@ -136,6 +140,5 @@ export class TourReportsComponent implements ModalInterface, Dialog {
     });
   }
 }
-
 
 declare type ReportTab = 'ticket' | 'visa' | 'buyer' | 'tour';

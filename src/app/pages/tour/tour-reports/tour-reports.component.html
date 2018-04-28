@@ -32,6 +32,9 @@
     <div *ngSwitchCase="'tour'">
       <ng-template *ngTemplateOutlet="tourTemplate"></ng-template>
     </div>
+    <div *ngSwitchCase="'buyer'">
+      <ng-template *ngTemplateOutlet="buyerTemplate"></ng-template>
+    </div>
   </div>
 
 </div>
@@ -171,6 +174,14 @@
     </mat-card>
     <mat-card [stretch]="true">
       <ng-template *ngTemplateOutlet="reportGridTemplate; context:{tab:'tour'}"></ng-template>
+    </mat-card>
+  </div>
+</ng-template>
+
+<ng-template #buyerTemplate>
+  <div>
+    <mat-card [stretch]="true">
+      <ng-template *ngTemplateOutlet="reportGridTemplate; context:{tab:'buyer'}"></ng-template>
     </mat-card>
   </div>
 </ng-template>

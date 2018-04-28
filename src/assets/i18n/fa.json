@@ -63,7 +63,7 @@
   "ground": "زمینی",
   "homePage": "صفحه اصلی",
   "hotel": "هتل",
-  "haveAllOptions": "دارای تمامی خدمات",
+  "haveAllOptions": "خدمات کامل",
   "infant": "اینفنت",
   "infantCount": "تعداد اینفنت",
   "infantPrice": "قیمت اینفنت",
@@ -75,7 +75,7 @@
   "maleTitle": "آقای",
   "mobileNumber": "شماره همراه",
   "msg": {
-    "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزور شد",
+    "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزرو شد",
     "delete": "در صورت حذف اطلاعات غیر قابل بازگشت میباشد",
     "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
     "thereIsNoFreeSpace": "ظرفیت خالی وجود ندارد",

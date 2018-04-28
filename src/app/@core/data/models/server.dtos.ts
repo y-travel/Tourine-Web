@@ -19,7 +19,7 @@ import {
   User,
   Dictionary,
   TourTeammember,
-  Team, TourPassengers,
+  Team, TourPassengers, TourBuyer,
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
 
@@ -822,5 +822,19 @@ export class GetTourVisa implements IReturn<TourPassengers> {
 
   getTypeName() {
     return 'GetTourVisa';
+  }
+}
+
+@Route('/tours/{TourId}/buyers', 'GET')
+export class GetTourBuyers implements IReturn<Array<TourBuyer>> {
+
+  tourId: string;
+
+  createResponse() {
+    return new Array<TourBuyer>();
+  }
+
+  getTypeName() {
+    return 'GetTourBuyers';
   }
 }

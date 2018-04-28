@@ -1,4 +1,5 @@
 import { HttpMethod, IncomeStatus, OptionStatus, OptionType, TourStatus } from './enums';
+import { booleanLiteral } from 'babel-types';
 
 export interface IModel {
   isNew(): boolean;
@@ -46,7 +47,7 @@ export class TourOption extends Model {
   tourId: string;
 
   constructor(public optionType = OptionType.Empty,
-    public optionStatus: OptionStatus = OptionStatus.Limited) {
+              public optionStatus: OptionStatus = OptionStatus.Limited) {
     super();
   }
 }
@@ -108,7 +109,7 @@ export class Block extends Model {
   foodPrice: number = undefined;
   basePrice: number = undefined;
   totalPrice: number = undefined;
-  freeSpace: number= undefined;
+  freeSpace: number = undefined;
 }
 
 export class EditPassword extends Model {
@@ -157,7 +158,7 @@ export class PersonIncome {
   incomeStatus: IncomeStatus;
   currencyFactor: number;
 
-  constructor(public optionType: OptionType = OptionType.Empty, ) {
+  constructor(public optionType: OptionType = OptionType.Empty,) {
   }
 }
 
@@ -209,6 +210,7 @@ export class TourPassenger {
 export interface Dictionary<T> {
   [index: string]: T;
 }
+
 export class Team extends Model {
   tourId: string;
   count: number;
@@ -232,10 +234,21 @@ export class TourTeammember {
   teams: Team[];
 }
 
-export class  TourPassengers {
+export class TourPassengers {
   tour: Tour;
   leader: Person;
   passengers: Person[];
+}
+
+export class TourBuyer {
+  id: string;
+  isAgency: boolean;
+  title: string;
+  prefix: string;
+  phone: string;
+  count: number;
+  price: number;
+  gender: boolean;
 }
 
 export interface IReturn<T> {

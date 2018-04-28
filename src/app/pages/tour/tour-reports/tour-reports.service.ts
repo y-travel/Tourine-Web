@@ -6,9 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormatterService } from '../../../@core/utils/formatter.service';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { CellHeaderComponent } from '../../../shared/trn-ag-grid/cell-header/cell-header.component';
-import { Agency, Dictionary, Person, TeamMember, Tour, TourPassengers } from '../../../@core/data/models/client.model';
+import { Dictionary, TeamMember, Tour } from '../../../@core/data/models/client.model';
 import { OptionType } from '../../../@core/data/models/enums';
-import { xdescribe } from 'selenium-webdriver/testing';
 
 @Injectable()
 export class TourReportGridService {
@@ -20,6 +19,7 @@ export class TourReportGridService {
   ticketColumnDef: any[];
   visaColumnDef: any[];
   tourColumnDef: any[];
+  buyerColumnDef: any[];
   frameworkComponents: any;
   gridApi: any;
   tourAgency: Dictionary<string> = {};
@@ -40,6 +40,13 @@ export class TourReportGridService {
       },
     };
 
+    this.colDef();
+    this.frameworkComponents = {
+      cellHeader: CellHeaderComponent,
+    };
+  }
+
+  colDef() {
     this.ticketColumnDef = [
       {
         headerName: 'row',
@@ -50,7 +57,7 @@ export class TourReportGridService {
       {
         headerName: 'person.nameAndFamily',
         maxWidth: 300,
-        valueGetter: (params: any) => ' ' + params.data.person.name + ' ' + params.data.person.family,
+        valueGetter: (params: any) => params.data.person ? ' ' + params.data.person.name + ' ' + params.data.person.family : '',
         valueFormatter: (params: any) => {
           return params.data.person.gender ?
             this.translate.instant('maleTitle') + params.value :
@@ -142,16 +149,52 @@ export class TourReportGridService {
       },
     ];
 
-    this.frameworkComponents = {
-      cellHeader: CellHeaderComponent,
-    };
-
+    this.buyerColumnDef = [
+      {
+        headerName: 'row',
+        minWidth: 50,
+        maxWidth: 50,
+        cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
+      },
+      {
+        headerName: 'person.nameAndFamily',
+        maxWidth: 300,
+        valueGetter: (params: any) => ' ' + params.data.title,
+        valueFormatter: (params: any) => {
+          if (params.data.isAgency)
+            return this.translate.instant('agency.*') + params.value;
+          return params.data.gender ?
+            this.translate.instant('maleTitle') + params.value :
+            this.translate.instant('femaleTitle') + params.value;
+        }
+      },
+      {
+        headerName: 'phone',
+        field: 'phone',
+        minWidth: 100,
+        maxWidth: 100,
+      },
+      {
+        headerName: 'count',
+        field: 'count',
+        minWidth: 100,
+        maxWidth: 100,
+      },
+      {
+        headerName: 'total',
+        field: 'price',
+        minWidth: 100,
+        maxWidth: 100,
+      },
+      {
+        headerName: '',
+      },
+    ];
   }
 
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.gridApi.setRowData(this.rows);
     this.setInitialLayout(this.gridApi);
   }
 
@@ -181,11 +224,10 @@ export class TourReportGridService {
     let templateStr = '';
     let rev = Array(...this.utils.getEnumNames(OptionType)).filter(x => x !== OptionType[OptionType.Empty]);
     rev = rev.filter(x => !params.personIncomes.some(z => OptionType[z.optionType] === x));
-    if (rev.length === 0 )
+    if (rev.length === 0)
       return this.translate.instant('haveAllOptions');
     rev = rev.map(x => 'optionType.' + x);
     rev.forEach(x => templateStr += this.translate.instant(x) + '،');
     return this.translate.instant('nonePrefix') + ' ' + templateStr.slice(0, templateStr.length - 1);
   }
 }
-
