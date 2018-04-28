@@ -2,7 +2,7 @@ export const MENU_ITEMS = [
   {
     title: "homePage",
     icon: 'home',
-    link: '/dashboard',
+    link: '/pages/dashboard',
     home: true,
   },
   {
