@@ -24,7 +24,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
 
   @ViewChild('nextButton') nextButton: MatButton;
   @ViewChild('submit') submit: MatButton;
-  disablingItems = ['person.name', 'person.family', 'person.mobileNumber', 'person.gender', 'person.englishName', 'person.englishFamily', 'person.birthDate'];
+  disablingItems = ['name', 'family', 'mobileNumber', 'gender', 'englishName', 'englishFamily', 'birthDate'];
 
   toolbarItems: ToolbarItem[] = [
     <ToolbarItem>{
@@ -51,22 +51,22 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   public rows: any[];
   public teamId: string = undefined;
   public isEditable = true;
-  public buyer = new TeamMember();
-  public buyerForm: FormService<TeamMember>;
+  public buyer = new Person();
+  public buyerForm: FormService<Person>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
               public dialogInstance: MatDialogRef<ModalInterface>,
               private dialogService: DialogService,
               public formFactory: FormFactory,
               public passengerGridService: PassengerGridService,
-              public service: PersonService,) {
+              public service: PersonService) {
 
     this.init();
   }
 
 
   ngOnInit() {
-    this.buyerForm = this.formFactory.createTeamMemberForm(this.buyer);
+    this.buyerForm = this.formFactory.createPersonForm(this.buyer);
     this.buyerForm.disableControl(true, this.disablingItems);
     this.updateSubmitStatus();
   }
@@ -118,35 +118,50 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   findPerson(natCode: any) {
     this.service.GetPerson(natCode.value).subscribe(
       person => {
-        person.isEditable = false;
-        const team = new TeamMember();
-        team.person = person;
-        this.buyerForm.updateForm(team);
+        this.buyerForm.updateForm(person);
         this.buyerForm.disableControl(true, this.disablingItems);
       },
       () => {
-        const teamMember = new TeamMember();
         //we use Object.assign cos last data remained in form by using dynamic cast.
-        teamMember.person = new Person();
-        teamMember.person.isEditable = true;
-        teamMember.person.nationalCode = this.buyerForm.model.person.nationalCode;
-        this.buyerForm.updateForm(teamMember);
+        const person = new Person();
+        person.nationalCode = this.buyerForm.model.nationalCode;
+        this.buyerForm.updateForm(person);
         this.buyerForm.disableControl(false, this.disablingItems);
       });
   }
 
   nextStep(stepper: MatStepper) {
-    if (stepper.selectedIndex == 0) {
-      if (this.buyerForm.model.person.id === '')
-        this.service.AddPerson(this.buyerForm.model.person).subscribe(x => {
-          this.buyerForm.model.person = x;
-          this.buyerForm.updateForm();
-          this.nextButton.disabled = false;
+    console.log('ttt')
+    if (stepper.selectedIndex === 0) {
+      if (this.buyerForm.model.id === '') {
+        if (!this.buyerForm.form.valid)
           stepper.next();
-        });
+        else
+          this.service.AddPerson(this.buyerForm.model).subscribe(x => {
+            this.buyerForm.model = x;
+            this.buyerForm.updateForm();
+            this.buyerForm.disableControl(false, this.disablingItems);
+            this.nextButton.disabled = false;
+
+            if (x.isInfant)
+              this.dialogService.openDialog('msg.buyeCannotBeInfant', null);
+            if (x.isUnder5)
+              this.dialogService.openDialog('msg.buyerCannotBeUnder5', null);
+            else
+              stepper.next();
+          });
+      }
       else {
-        this.nextButton.disabled = false;
-        stepper.next();
+        if (this.buyerForm.model.isInfant)
+          this.dialogService.openDialog('msg.buyeCannotBeInfant', null);
+        else if (this.buyerForm.model.isUnder5)
+          this.dialogService.openDialog('msg.buyerCannotBeUnder5', null);
+        else {
+          if (this.buyerForm.form.valid) {
+            this.nextButton.disabled = false;
+            stepper.next();
+          }
+        }
       }
     }
     else {
@@ -157,7 +172,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
 
   previousStep(stepper: MatStepper) {
     stepper.previous();
-    if (stepper.selectedIndex == 0) {
+    if (stepper.selectedIndex === 0) {
       this.nextButton.disabled = false;
     }
     else {
@@ -169,7 +184,10 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
     if (this.passengerGridService.rows.length === 0)
       this.dialogInstance.close(this.passengerGridService.rows.length);
     else
-      this.service.upsertTeam(this.buyerForm.model, this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x => this.dialogInstance.close(this.passengerGridService.rows.length));
+      this.service.upsertTeam(this.buyerForm.model, this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x =>
+      {
+        this.dialogInstance.close(this.passengerGridService.rows.length);
+      });
   }
 
   onPriceChange() {

@@ -9,7 +9,7 @@
       <form [formGroup]="buyerForm.form" (keydown.enter)="$event.preventDefault()">
         <div fxLayout="row" fxLayoutAlign="space-around start">
           <mat-card fxLayout="column" fxFlex>
-            <div formGroupName="person">
+            <div>
               <div fxLayout="row" fxFlex>
                 <mat-form-field fxFlex>
                   <input matInput placeholder="person.nc" formControlName="nationalCode" #natCode (focusout)="findPerson(natCode)">

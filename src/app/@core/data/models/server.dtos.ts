@@ -263,7 +263,7 @@ export class GetTourDetail implements IReturn<TourDetail> {
 export class UpsertTeam implements IReturnVoid {
   tourId: string;
   teamId: string;
-  buyer: TeamMember;
+  buyer: Person;
   passengers: TeamMember[];
   infantPrice: number;
   basePrice: number;

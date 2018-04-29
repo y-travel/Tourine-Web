@@ -10,6 +10,7 @@ import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.c
 import { PersonService } from '../../../@core/data/person.service';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
+import { Person } from '../../../@core/data/models/client.model';
 
 @Component({
   selector: 'app-block-list',
@@ -63,8 +64,8 @@ export class TeamListComponent implements OnInit, Dialog {
     const rows = this.personService.getTeamMembers(team.id).subscribe(x => {
       const ref = this.dialogService.openPopup(PassengerUpsertComponent, form);
       const list: TeamMember[] = x.passengers;
-      let buyer = new TeamMember();
-      buyer.person = team.buyer;
+      let buyer = new Person();
+      buyer = team.buyer;
       (<any>ref.componentInstance).passengerGridService.setRow(list);
       (<any>ref.componentInstance).updateCount();
       (<any>ref.componentInstance).buyer = buyer;

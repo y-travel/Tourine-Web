@@ -48,7 +48,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
   findPerson(natCode: any) {
     this.service.GetPerson(natCode.value).subscribe(
       person => {
-        let team = new TeamMember();
+        const team = new TeamMember();
         if (person.isInfant)
           team.personIncomes.forEach(x => x.optionType = OptionType.Empty);
         person.type |= PersonType.Passenger;

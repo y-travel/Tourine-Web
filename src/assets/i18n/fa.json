@@ -79,7 +79,9 @@
     "delete": "در صورت حذف اطلاعات غیر قابل بازگشت میباشد",
     "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
     "thereIsNoFreeSpace": "ظرفیت خالی وجود ندارد",
-    "connectionError":"خطا در برقراری ارتباط با سرور"
+    "connectionError":"خطا در برقراری ارتباط با سرور",
+    "buyeCannotBeInfant": "خریدار نمی تواند اینفنت باشد",
+    "buyerCannotBeUnder5": "خریدار نمی تواند زیر 5 سال باشد"
   },
   "name": "نام",
   "nationalCode": "کد ملی",
