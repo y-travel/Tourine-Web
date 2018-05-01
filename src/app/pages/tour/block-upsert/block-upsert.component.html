@@ -49,7 +49,7 @@
           </div>
 
           <div fxLayout="column" fxFlex formArrayName="options">
-            <mat-form-field fxFlex *ngFor="let formGroup of vModel.form.get('options')['controls'];let i=index" [formGroupName]="i">
+            <mat-form-field fxFlex *ngFor="let formGroup of vModel.form.get('options')['controls']; let i=index" [formGroupName]="i">
               <input matInput mask="number" placeholder="{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}" formControlName="price">
               <mat-icon matSuffix>{{ utils.mapOptionTypeToIcon(formGroup.value.optionType) }}</mat-icon>
               <mat-hint align="end" translate>price.irFormated</mat-hint>
@@ -67,7 +67,7 @@
           <br> {{ "addPassengerMessage"|translate }}
         </div>
         <mat-dialog-actions>
-          <button mat-raised-button color="primary" fxFlex type="button" (click)="addPassengers()" [disabled]="dialogMode!==DialogMode.Create" #addPassengerBtn >{{"add"|translate}}
+          <button mat-raised-button color="primary" fxFlex type="button" (click)="addPassengers()" [disabled]="dialogMode!==DialogMode.Create" #addPassengerBtn >{{ "add"|translate }}
             <mat-icon class="icon-text-color">add</mat-icon>
           </button>
         </mat-dialog-actions>

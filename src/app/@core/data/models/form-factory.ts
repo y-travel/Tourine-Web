@@ -9,13 +9,12 @@ import {
   Person,
   PersonAgency,
   PersonIncome,
-  Reagent,
   Team,
   TeamMember,
   Tour,
   TourDetail,
   TourOption,
-  TourTeammember,
+  TourTeamMember,
   User
 } from './client.model';
 import { ValidationService } from '../../utils/validation.service';
@@ -156,18 +155,6 @@ export class FormFactory {
     return new FormService(Block, form);
   }
 
-  createReagentForm(model: Reagent = new Reagent()): FormService<Reagent> {
-    const form = new FormBuilder().group({
-      name: [model.name],
-      family: [model.family, Validators.required],
-      agencyName: [model.agencyName],
-      mobileNumber: [model.mobileNumber],
-      phone: [model.phone],
-      email: [model.email],
-    });
-    return new FormService(Reagent, form);
-  }
-
   createEditPasswordForm(model: EditPassword = new EditPassword()): FormService<EditPassword> {
     const form = new FormBuilder().group({
       oldPassword: [model.oldPassword, Validators.required],
@@ -227,7 +214,7 @@ export class FormFactory {
       foodPrice: [model.foodPrice ? model.foodPrice : undefined],
       agency: new FormControl({value: model.agency ? model.agency.name : '', disabled: true}),
     });
-    return new FormService(TourTeammember, form);
+    return new FormService(TourTeamMember, form);
   }
 
   createReplacementTeamResultForm(model: Team[]): FormService<Team> {

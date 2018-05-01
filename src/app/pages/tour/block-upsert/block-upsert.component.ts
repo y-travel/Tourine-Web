@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Agency, Block } from '../../../@core/data/models/client.model';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
-import { MAT_DIALOG_DATA, MatDialogRef, MatSelect, MatStepper, MatButton } from '@angular/material';
+import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatSelect, MatStepper } from '@angular/material';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { AgencyService } from '../../../@core/data/agency.service';
@@ -31,13 +31,13 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    @Inject(UTILS) private utils: AppUtils,
-    public vModel: BlockUpsertViewModel,
-    public dialogInstance: MatDialogRef<ModalInterface>,
-    private dialogService: DialogService,
-    private tourService: TourService,
-    public formFactory: FormFactory,
-    public service: AgencyService) {
+              @Inject(UTILS) private utils: AppUtils,
+              public vModel: BlockUpsertViewModel,
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              private tourService: TourService,
+              public formFactory: FormFactory,
+              public service: AgencyService) {
   }
 
   initDialog() {
@@ -45,7 +45,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
     this.vModel.init(this.data.tourId, this.data.block, !this.isNewBlock);
     this.tourService
       .getOptions(this.isNewBlock ? this.vModel.tourId : this.vModel.model.id)
-      .subscribe(x => this.vModel.form.updateForm({ options: x }));
+      .subscribe(x => this.vModel.form.updateForm({options: x}));
     this.agencies = this.service.getList();
     this.service.getTourFreeSpace(this.vModel.tourId).subscribe(x => {
       this.freeSpace = +x;
@@ -64,7 +64,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
       stepper.next();
       return;
     }
-    const newBlock = await this.tourService.upsertTour(this.vModel.model).first().toPromise();
+    const newBlock = await this.tourService.upsertTour(this.vModel.model).first().toPromise().catch(x => undefined);
     this.isNewBlock = this.utils.isNullOrUndefined(newBlock);
     stepper.next();
     this.vModel.updateForm(newBlock);
@@ -89,7 +89,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
       if (x > 0) {
         this.addPassengerBtn.disabled = true;
       } else
-        this.addPassengerBtn.disabled = false
+        this.addPassengerBtn.disabled = false;
     });
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatInput, MatButton, MatStepper } from '@angular/material';
-import { Tour, FormFactory, TeamMember, DialogMode, Agency, TourTeammember, Team, Person, Block, OptionType } from '../../../@core/data/models';
+import { Tour, FormFactory, TeamMember, DialogMode, Agency, TourTeamMember, Team, Person, Block, OptionType } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { DialogService, Dialog } from '../../../@core/utils/dialog.service';

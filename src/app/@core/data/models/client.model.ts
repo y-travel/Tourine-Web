@@ -74,28 +74,9 @@ export class Agency extends Model {
   phoneNumber: string;
 }
 
-export class AgencyInfo extends Model {
-  name: string;
-  phoneNumber: string;
-  person: Person;
-}
-
 export class PersonAgency {
   agency: Agency;
   person: Person;
-}
-
-export class Coupon extends Model {
-  reagentId: number = undefined;
-  reagent: Person = undefined;
-  passengers: Person[] = [];
-  adultCount: number = undefined;
-  adultPrice: number = undefined;
-  infantCount: number = undefined;
-  infantPrice: number = undefined;
-  busPrice: number = undefined;
-  roomPrice: number = undefined;
-  foodPrice: number = undefined;
 }
 
 export class Block extends Model {
@@ -116,19 +97,6 @@ export class EditPassword extends Model {
   oldPassword: string = undefined;
   password: string = undefined;
   rePassword: string = undefined;
-}
-
-export class Reagent extends Model {
-  name: string = undefined;
-  family: string = undefined;
-  agencyName: string = undefined;
-  mobileNumber: string = undefined;
-  phone: string = undefined;
-  email: string = undefined;
-
-  get title(): string {
-    return `${this.name} ${this.family}`;
-  }
 }
 
 export class Person extends Model {
@@ -172,7 +140,7 @@ export class TeamMember {
       new PersonIncome(OptionType.Bus),
       new PersonIncome(OptionType.Food),
     ]; //@TODO check ugly
-  haveVisa: boolean = true;
+  haveVisa = true;
   passportDelivered: boolean = undefined;
   tourId: string = undefined;
   teamId: string = undefined;
@@ -222,7 +190,7 @@ export class Team extends Model {
   buyerIsPassenger: boolean;
 }
 
-export class TourTeammember {
+export class TourTeamMember {
   isTeam: boolean;
   tourId: string;
   basePrice: number;
