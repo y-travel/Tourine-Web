@@ -1,5 +1,4 @@
-import { HttpMethod, IncomeStatus, OptionStatus, OptionType, TourStatus } from './enums';
-import { booleanLiteral } from 'babel-types';
+import { HttpMethod, IncomeStatus, OptionStatus, OptionType, PersonType, TourStatus } from './enums';
 
 export interface IModel {
   isNew(): boolean;
@@ -99,24 +98,23 @@ export class EditPassword extends Model {
   rePassword: string = undefined;
 }
 
-export class Person extends Model {
-  isEditable = true;
-  name = '';
-  family = '';
-  mobileNumber = '';
-  nationalCode = '';
-  fatherName = '';
+export interface Person extends Model {
+  name: string ;
+  family: string;
+  mobileNumber: string;
+  nationalCode: string;
+  fatherName: string;
   birthDate: Date;
   passportExpireDate: Date;
   visaExpireDate: Date;
-  passportNo = 0;
-  gender = true;
-  type = 0;
-  socialNumber = '';
-  isUnder5 = false;
-  isInfant = false;
-  englishFamily = '';
-  englishName = '';
+  passportNo: number;
+  gender: boolean;
+  type: PersonType;
+  socialNumber: string;
+  isUnder5: boolean;
+  isInfant: boolean;
+  englishFamily: string;
+  englishName: string;
 }
 
 export class PersonIncome {

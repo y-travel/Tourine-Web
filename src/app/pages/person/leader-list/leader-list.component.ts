@@ -5,7 +5,7 @@ import { PersonService } from '../../../@core/data/person.service';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { AgGridNg2 } from 'ag-grid-angular';
-import { LeaderUpsertComponent } from '../leader-upsert/leader-upsert.component';
+import { PersonUpsertComponent } from '../leader-upsert/person-upsert.component';
 import { DialogButtonType } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
@@ -27,7 +27,7 @@ export class LeaderListComponent implements OnInit {
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (leader: Person) => this.leaderEdit(leader),
+      command: (leader: Person) => this.leaderUpsert(leader),
     },
   ];
 
@@ -50,15 +50,8 @@ export class LeaderListComponent implements OnInit {
     );
   }
 
-  leaderEdit(person: Person = new Person()) {
-    const inst = this.dialogService.openPopup(LeaderUpsertComponent, this.formFactory.createAddLeaderForm(person));
-    inst.afterClosed().subscribe(() => {
-      this.leaderGridService.loadData();
-    });
-  }
-
-  leaderUpsert(person: Person = new Person()) {
-    const inst = this.dialogService.openPopup(LeaderUpsertComponent, this.formFactory.createAddLeaderForm(person));
+  leaderUpsert(person = <Person> {}) {
+    const inst = this.dialogService.openPopup(PersonUpsertComponent, this.formFactory.createAddLeaderForm(person));
     inst.afterClosed().subscribe(() => {
       this.leaderGridService.loadData();
     });

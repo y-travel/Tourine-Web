@@ -5,11 +5,11 @@ import { COMMON_MODULES } from '../default';
 import { TrnAgGridModule } from '../../shared/trn-ag-grid/trn-ag-grid.module';
 import { PersonService } from '../../@core/data/person.service';
 import { DialogService } from '../../@core/utils/dialog.service';
-import { LeaderUpsertComponent } from './leader-upsert/leader-upsert.component';
+import { PersonUpsertComponent } from './leader-upsert/person-upsert.component';
 
 const COMPONENTS = [
   PersonComponent,
-  LeaderUpsertComponent,
+  PersonUpsertComponent,
 ];
 
 @NgModule({
