@@ -63,3 +63,4 @@ tools/manual_typings/project/sample.package.ngsummary.json
 #ignore workspace folders
 .*
 !.idea
+*.gen.html

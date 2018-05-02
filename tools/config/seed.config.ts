@@ -138,7 +138,7 @@ export class SeedConfig {
    * The default directory is `client`.
    * @type {string}
    */
-  APP_CLIENT = argv['client'] || 'client';
+  APP_CLIENT = argv['client'] || '';
 
   /**
    * The bootstrap file to be used to boot the application.

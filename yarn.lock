@@ -477,6 +477,10 @@
   version "8.10.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.9.tgz#b507a74a7d3eddc74a17dc35fd40d8f45dde0d6c"
 
+"@types/pug@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@types/pug/-/pug-2.0.4.tgz#8772fcd0418e3cd2cc171555d73007415051f4b2"
+
 "@types/q@^0.0.32":
   version "0.0.32"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-0.0.32.tgz#bd284e57c84f1325da702babfc82a5328190c0c5"
@@ -4115,6 +4119,17 @@ gulp-protractor@^4.1.0:
     gulp-util ">=2.2.14 <4.0.0"
     protractor "^5"
 
+gulp-pug@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/gulp-pug/-/gulp-pug-4.0.1.tgz#5c5bb38303a5a565add8b200e292b4a076cf2efa"
+  dependencies:
+    "@types/pug" "^2.0.4"
+    fancy-log "^1.3.2"
+    plugin-error "^1.0.1"
+    pug "^2.0.3"
+    replace-ext "^1.0.0"
+    through2 "^2.0.3"
+
 gulp-rename@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/gulp-rename/-/gulp-rename-1.2.2.tgz#3ad4428763f05e2764dec1c67d868db275687817"
@@ -6909,7 +6924,7 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-plugin-error@1.0.1:
+plugin-error@1.0.1, plugin-error@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/plugin-error/-/plugin-error-1.0.1.tgz#77016bd8919d0ac377fdcdd0322328953ca5781c"
   dependencies:
@@ -7469,7 +7484,7 @@ pug-walk@^1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/pug-walk/-/pug-walk-1.1.7.tgz#c00d5c5128bac5806bec15d2b7e7cdabe42531f3"
 
-pug@^2.0.0-alpha7:
+pug@^2.0.0-alpha7, pug@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/pug/-/pug-2.0.3.tgz#71cba82537c95a5eab7ed04696e4221f53aa878e"
   dependencies:
@@ -9510,10 +9525,6 @@ typescript@^2.3.3, typescript@^2.4.2:
 typescript@~2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
-
-typescript@~2.7.0.rc:
-  version "2.7.0-rc"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.0-rc.tgz#bf86a065a3a0be1e072c3fb7d64e8976f33b8365"
 
 ua-parser-js@0.7.12:
   version "0.7.12"

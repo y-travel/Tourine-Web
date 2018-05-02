@@ -1,10 +1,16 @@
 {
-  "build.prod": [
-    "build.ng",
+  "build.sync": [
+    "build.prod",
     "clean.sync",
     "copy.to.sync"
   ],
+  "build.prod": [
+    "clean.all",
+    "build.pug",
+    "build.ng"
+  ],
   "serve.dev": [
+    "build.pug",
     "serve.ng"
   ],
   "build.watch": [
