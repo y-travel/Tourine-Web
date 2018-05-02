@@ -64,7 +64,7 @@ export class TourReportsComponent implements ModalInterface, Dialog {
       this.personService.getTourMembers(this.data.value.id).subscribe(x => {
         this.tourMembers = x.passengers;
         const leader = new TeamMember();
-        this.leader = x.leader ? x.leader : new Person();
+        this.leader = x.leader || <Person>{};
         if (x.leader)
           this.tourMembers.unshift(Object.assign(leader, {person: x.leader}));
         this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === false));

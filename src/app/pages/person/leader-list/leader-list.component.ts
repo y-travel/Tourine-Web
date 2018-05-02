@@ -5,8 +5,8 @@ import { PersonService } from '../../../@core/data/person.service';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { AgGridNg2 } from 'ag-grid-angular';
-import { PersonUpsertComponent } from '../leader-upsert/person-upsert.component';
-import { DialogButtonType } from '../../../@core/data/models/enums';
+import { PersonUpsertComponent } from '../person-upsert/person-upsert.component';
+import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
@@ -22,12 +22,12 @@ export class LeaderListComponent implements OnInit {
       title: 'delete',
       color: '#f44336',
       alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
-      command: (leader: Person) => this.leaderDelete(leader),
+      command: (leader: Person) => this.personDelete(leader),
     }, <ToolbarItem>{
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (leader: Person) => this.leaderUpsert(leader),
+      command: (leader: Person) => this.personUpsert(leader, true),
     },
   ];
 
@@ -36,7 +36,7 @@ export class LeaderListComponent implements OnInit {
   constructor(public formFactory: FormFactory,
               public leaderGridService: LeaderGridService,
               public personService: PersonService,
-              public dialogService: DialogService,) {
+              public dialogService: DialogService, ) {
 
     this.leaderGridService.initToolbar(this.leaderItems);
   }
@@ -44,14 +44,14 @@ export class LeaderListComponent implements OnInit {
   ngOnInit() {
   }
 
-  leaderDelete(leader: Person) {
-    this.personService.deleteLeader(leader.id).subscribe(() =>
+  personDelete(person: Person) {
+    this.personService.deleteLeader(person.id).subscribe(() =>
       this.leaderGridService.loadData()
     );
   }
 
-  leaderUpsert(person = <Person> {}) {
-    const inst = this.dialogService.openPopup(PersonUpsertComponent, this.formFactory.createAddLeaderForm(person));
+  personUpsert(person = <Person> {}, isEdit = false) {
+    const inst = this.dialogService.openPopup(PersonUpsertComponent, person, isEdit ? DialogMode.Edit : DialogMode.Create);
     inst.afterClosed().subscribe(() => {
       this.leaderGridService.loadData();
     });

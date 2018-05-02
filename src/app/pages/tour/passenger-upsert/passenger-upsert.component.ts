@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatStepper } from '@angular/material';
-import { FormService } from '../../../@core/data/form.service';
+import { FormService, NewFormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { PassengerGridService } from '../passenger-grid.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
@@ -51,8 +51,8 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   public rows: any[];
   public teamId: string = undefined;
   public isEditable = true;
-  public buyer = new Person();
-  public buyerForm: FormService<Person>;
+  public buyer = <Person>{};
+  public buyerForm: NewFormService<Person>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
               public dialogInstance: MatDialogRef<ModalInterface>,
@@ -123,8 +123,8 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
       },
       () => {
         //we use Object.assign cos last data remained in form by using dynamic cast.
-        const person = new Person();
-        person.nationalCode = this.buyerForm.model.nationalCode;
+        const person = <Person>{};
+        person.nationalCode = this.buyerForm.value.nationalCode;
         this.buyerForm.updateForm(person);
         this.buyerForm.disableControl(false, this.disablingItems);
       });
@@ -133,13 +133,12 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   nextStep(stepper: MatStepper) {
     console.log('ttt')
     if (stepper.selectedIndex === 0) {
-      if (this.buyerForm.model.id === '') {
-        if (!this.buyerForm.form.valid)
+      if (this.buyerForm.value.id === '') {
+        if (!this.buyerForm.valid)
           stepper.next();
         else
-          this.service.AddPerson(this.buyerForm.model).subscribe(x => {
-            this.buyerForm.model = x;
-            this.buyerForm.updateForm();
+          this.service.AddPerson(this.buyerForm.value).subscribe(x => {
+            this.buyerForm.updateForm(x);
             this.buyerForm.disableControl(false, this.disablingItems);
             this.nextButton.disabled = false;
 
@@ -152,12 +151,12 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
           });
       }
       else {
-        if (this.buyerForm.model.isInfant)
+        if (this.buyerForm.value.isInfant)
           this.dialogService.openDialog('msg.buyeCannotBeInfant', null);
-        else if (this.buyerForm.model.isUnder5)
+        else if (this.buyerForm.value.isUnder5)
           this.dialogService.openDialog('msg.buyerCannotBeUnder5', null);
         else {
-          if (this.buyerForm.form.valid) {
+          if (this.buyerForm.valid) {
             this.nextButton.disabled = false;
             stepper.next();
           }
@@ -184,7 +183,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
     if (this.passengerGridService.rows.length === 0)
       this.dialogInstance.close(this.passengerGridService.rows.length);
     else
-      this.service.upsertTeam(this.buyerForm.model, this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x =>
+      this.service.upsertTeam(this.buyerForm.value, this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x =>
       {
         this.dialogInstance.close(this.passengerGridService.rows.length);
       });

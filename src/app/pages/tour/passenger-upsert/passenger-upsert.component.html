@@ -5,8 +5,8 @@
 </div>
 <div class="right modal-body" dir="rtl" [style.width.px]="1000" [style.height.px]="435" autoTranslate>
   <mat-horizontal-stepper #stepper [linear]="true">
-    <mat-step [stepControl]="buyerForm.form" label="{{'steps'|translate:({value:'first'|translate})}}">
-      <form [formGroup]="buyerForm.form" (keydown.enter)="$event.preventDefault()">
+    <mat-step [stepControl]="buyerForm" label="{{'steps'|translate:({value:'first'|translate})}}">
+      <form [formGroup]="buyerForm" (keydown.enter)="$event.preventDefault()">
         <div fxLayout="row" fxLayoutAlign="space-around start">
           <mat-card fxLayout="column" fxFlex>
             <div>

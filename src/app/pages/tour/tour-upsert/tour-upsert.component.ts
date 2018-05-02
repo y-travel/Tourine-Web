@@ -5,7 +5,7 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { TourService } from '../../../@core/data/tour.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
-import { Destination, Person, Place } from '../../../@core/data/models/client.model';
+import { Destination, Person, Place, Tour } from '../../../@core/data/models/client.model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
@@ -45,7 +45,7 @@ export class TourUpsertComponent implements ModalInterface, Dialog {
 
   initOptions() {
     if (this.dialogMode === DialogMode.Edit)
-      this.service.getOptions(this.vModel.model.id).subscribe(options => this.vModel.form.updateForm({options: options}));
+      this.service.getOptions(this.vModel.model.id).subscribe(options => this.vModel.form.updateForm(<Tour>{options: options}));
   }
 
   save() {

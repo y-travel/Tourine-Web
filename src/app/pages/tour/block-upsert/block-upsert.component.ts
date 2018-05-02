@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { Agency, Block } from '../../../@core/data/models/client.model';
+import { Agency, Block, Tour } from '../../../@core/data/models/client.model';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatSelect, MatStepper } from '@angular/material';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
@@ -45,7 +45,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
     this.vModel.init(this.data.tourId, this.data.block, !this.isNewBlock);
     this.tourService
       .getOptions(this.isNewBlock ? this.vModel.tourId : this.vModel.model.id)
-      .subscribe(x => this.vModel.form.updateForm({options: x}));
+      .subscribe(x => this.vModel.form.updateForm(<Tour>{options: x}));
     this.agencies = this.service.getList();
     this.service.getTourFreeSpace(this.vModel.tourId).subscribe(x => {
       this.freeSpace = +x;

@@ -31,7 +31,8 @@ export class AuthService {
     auth.useTokenCookie = true;
     auth.provider = 'credentials';
     return this.apiService.send(auth).map(res => {
-      this.person = Serializable.fromJSONToType(Person, res);
+      this.person = Object.assign(<Person>{}, res);
+
       this.agency = Serializable.fromJSONToType(Agency, res);
       return this.isAuthenticated();
     });

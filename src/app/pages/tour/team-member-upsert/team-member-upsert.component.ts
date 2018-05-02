@@ -57,7 +57,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
       () => {
         let teamMember = new TeamMember();
         //we use Object.assign cos last data remained in form by using dynamic cast.
-        teamMember.person = new Person();
+        teamMember.person = <Person>{};
         teamMember.person.nationalCode = this.data.model.person.nationalCode;
         this.data.updateForm(teamMember);
       });

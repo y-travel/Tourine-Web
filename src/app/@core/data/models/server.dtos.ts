@@ -10,16 +10,17 @@ import {
   QueryDb,
   Role,
   Route,
+  Team,
   TeamMember,
   TeamPassenger,
   Tour,
+  TourBuyer,
   TourDetail,
   TourOption,
   TourPassenger,
-  User,
-  Dictionary,
+  TourPassengers,
   TourTeamMember,
-  Team, TourPassengers, TourBuyer,
+  User,
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
 
@@ -363,7 +364,7 @@ export class AddNewPerson implements IReturn<Person> {
   person: Person;
 
   createResponse() {
-    return new Person();
+    return <Person>{};
   }
 
   getTypeName() {
@@ -376,7 +377,7 @@ export class UpsertLeader implements IReturn<Person> {
   person: Person;
 
   createResponse() {
-    return new Person();
+    return <Person>{};
   }
 
   getTypeName() {
@@ -401,7 +402,7 @@ export class UpdatePerson implements IReturn<Person> {
   person: Person;
 
   createResponse() {
-    return new Person();
+    return <Person>{};
   }
 
   getTypeName() {
@@ -433,7 +434,7 @@ export class FindPersonFromNc implements IReturn<Person> {
   nationalCode: string;
 
   createResponse() {
-    return new Person();
+    return <Person>{};
   }
 
   getTypeName() {
@@ -485,7 +486,7 @@ export class RegisterPerson implements IReturn<Block> {
 @Route('/persons/current', 'GET')
 export class GetCurrentPerson implements IReturn<Person> {
   createResponse() {
-    return new Person();
+    return <Person>{};
   }
 
   getTypeName() {

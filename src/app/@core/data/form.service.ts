@@ -1,5 +1,5 @@
 import { EventEmitter, OnDestroy } from '@angular/core';
-import { AbstractControl, FormGroup, FormControl, Form, FormArray } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { Serializable, TypeConstructor } from '../utils/serializable';
 import { ValidationService } from '../utils/validation.service';
 
@@ -34,7 +34,7 @@ export class FormService<T> implements OnDestroy {
   }
 
   markTouch(control: AbstractControl = this.form) {
-    control.markAsTouched({ onlySelf: true });
+    control.markAsTouched({onlySelf: true});
   }
 
   markAllFieldAsTouch(controls = this.form.controls) {
@@ -48,20 +48,20 @@ export class FormService<T> implements OnDestroy {
     });
   }
 
-  private onValueChanges(data: any) {
-    Serializable.fromJSON(this.model, data);
-  }
-
   disableControl(disable: boolean, fields: string[]) {
     fields.forEach(x => {
-      let subForm = x.split('.');
+      const subForm = x.split('.');
       let target: any;
       target = this.form.controls[subForm.shift()];
       subForm.forEach(y => {
         target = target.controls[y];
-      })
+      });
       disable ? target.disable() : target.enable();
     });
+  }
+
+  private onValueChanges(data: any) {
+    Serializable.fromJSON(this.model, data);
   }
 
 }
@@ -71,9 +71,9 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
   oldModel: T;
   onModelChanges = new EventEmitter();
 
-  constructor(model: TypeConstructor<T>, form: FormGroup, public validation: ValidationService) {
+  constructor(form: FormGroup, public validation: ValidationService) {
     super(form.controls);
-    this.oldModel = new model();
+    this.takeSnapshot();
     this.init();
   }
 
@@ -84,7 +84,15 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
     );
   }
 
-  updateForm(model: any) {
+  takeSnapshot() {
+    this.oldModel = Object.assign(<T>{}, this.value);
+  }
+
+  restoreSnapshot(mergeObject?: T) {
+    this.updateForm(Object.assign(this.oldModel, mergeObject));
+  }
+
+  updateForm(model: T) {
     this.patchValue(model);
   }
 
@@ -94,7 +102,7 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
   }
 
   markTouch(control: AbstractControl = this) {
-    control.markAsTouched({ onlySelf: true });
+    control.markAsTouched({onlySelf: true});
   }
 
   markAllFieldAsTouch(controls = this.controls) {
@@ -113,6 +121,18 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
       return true;
     this.markAllFieldAsTouch();
     return false;
+  }
+
+  disableControl(disable: boolean, fields: string[]) {
+    fields.forEach(x => {
+      const subForm = x.split('.');
+      let target: any;
+      target = this.controls[subForm.shift()];
+      subForm.forEach(y => {
+        target = target.controls[y];
+      });
+      disable ? target.disable() : target.enable();
+    });
   }
 
   private onValueChanges(data: any) {

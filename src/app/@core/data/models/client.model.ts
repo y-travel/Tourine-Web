@@ -1,4 +1,5 @@
 import { HttpMethod, IncomeStatus, OptionStatus, OptionType, PersonType, TourStatus } from './enums';
+import { NewFormService } from '../form.service';
 
 export interface IModel {
   isNew(): boolean;
@@ -10,6 +11,12 @@ export class Model implements IModel {
   isNew(): boolean {
     return !this.id;
   }
+}
+
+export interface IViewModel<T> {
+  form: NewFormService<T>;
+
+  init(model?: T, ...params);
 }
 
 export class Destination extends Model {
@@ -130,7 +137,7 @@ export class PersonIncome {
 
 export class TeamMember {
   personId: string = undefined;
-  person: Person = new Person();
+  person: Person = <Person>{};
   personIncomes: PersonIncome[] = this.person && this.person.isInfant
     ? null
     : [

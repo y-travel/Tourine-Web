@@ -62,7 +62,7 @@ export class BlockUpsertViewModel {
       ),
       isBlock: true,
     });
-    return new NewFormService(Tour, form, this.validation);
+    return new NewFormService<Tour>(form, this.validation);
   }
 
 }

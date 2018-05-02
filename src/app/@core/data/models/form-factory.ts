@@ -41,7 +41,7 @@ export class FormFactory {
       ),
       tourDetail: this.createTourDetailForm(model.tourDetail ? model.tourDetail : undefined),
     });
-    return new NewFormService(Tour, form, this.validation);
+    return new NewFormService<Tour>(form, this.validation);
   }
 
   createTourOptionForm(tourId: string, model: TourOption = new TourOption()): FormGroup {
@@ -91,25 +91,7 @@ export class FormFactory {
     return new FormService(Agency, form);
   }
 
-  createAddLeaderForm(model: Person = new Person()): FormService<Person> {
-    const form = new FormBuilder().group({
-      id: [model.id ? model.id : '0'],
-      name: [model.name, [Validators.required, Validators.minLength(1)]],
-      family: [model.family, [Validators.required, Validators.minLength(1)]],
-      englishName: [model.englishName, [Validators.required, Validators.minLength(1)]],
-      englishFamily: [model.englishFamily, [Validators.required, Validators.minLength(1)]],
-      nationalCode: [model.nationalCode ? model.nationalCode : undefined, [Validators.required, Validators.minLength(1)]],//@TODO: min length must be 10
-      gender: [model.gender],
-      mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
-      birthDate: [model.birthDate, Validators.required],
-      passportExpireDate: [model.passportExpireDate],
-      passportNo: [model.passportNo ? model.passportNo : undefined],
-      socialNumber: [model.socialNumber],
-    });
-    return new FormService(Person, form);
-  }
-
-  createPersonForm(model: Person = new Person()): FormService<Person> {
+  createPersonForm(model = <Person>{}): NewFormService<Person> {
     const form = new FormBuilder().group({
       id: [model.id],
       name: [model.name ? model.name : '', Validators.required],
@@ -127,16 +109,16 @@ export class FormFactory {
       isInfant: [model.isInfant],
       type: [model.type],
     });
-    return new FormService(Person, form);
+    return new NewFormService<Person>(form, this.validation);
   }
 
   createTeamMemberForm(model: TeamMember = new TeamMember()): FormService<TeamMember> {
     const form = new FormBuilder().group({
-      personId: [model.personId ? model.personId : ''],
-      person: this.createPersonForm(model.person ? model.person : new Person()).form,
+      personId: [model.personId || ''],
+      person: this.createPersonForm(model.person || undefined),
       personIncomes: new FormBuilder().array(model.personIncomes.map(this.createPersonIncome)),
-      haveVisa: [model.haveVisa ? model.haveVisa : ''],
-      passportDelivered: [model.passportDelivered ? model.passportDelivered : ''],
+      haveVisa: [model.haveVisa || ''],
+      passportDelivered: [model.passportDelivered || ''],
     });
     return new FormService(TeamMember, form);
   }

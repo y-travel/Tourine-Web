@@ -1,15 +1,15 @@
 <div mat-dialog-title class="modal-header">
   <div class="modal-title">
-   {{ {"leader.add"|translat }}}
+   {{ "leader.add"|translate }}
   </div>
 </div>
 <div class="modal-body" dir="rtl" [style.width.px]="500" [style.height.px]="300" autoTranslate>
-  <form [formGroup]="data.form">
+  <form [formGroup]="vModel.form">
     <div fxLayout="row" layout-align="space-between center" >
       <mat-form-field fxFlex="50">
-        <input matInput placeholder="person.nc" formControlName="nationalCode" #natCode (focusout)="findPerson(natCode)">
+        <input matInput placeholder="person.nc" formControlName="nationalCode" #natCode (focusout)="onNationalCodeChanged(natCode)">
       </mat-form-field>
-      <trn-slider fxFlex trueText="male" falseText="female" formControlName="gender" fxLayoutAlign="end center"></trn-slider>
+      <trn-slider fxFlex tabindex="-1" trueText="male" falseText="female" formControlName="gender" fxLayoutAlign="end center"></trn-slider>
     </div>
     <div fxLayout="row">
       <mat-form-field fxFlex>
@@ -40,7 +40,7 @@
       <mat-form-field fxFlex>
         <input matInput (click)="bithDate._open($event)" [matDatepicker]="personBirthDate" placeholder="person.birthDate" formControlName="birthDate">
         <mat-datepicker-toggle utc="true" #bithDate matSuffix [for]="personBirthDate"></mat-datepicker-toggle>
-        <mat-datepicker #personBirthDate disabled="false" (selectedChanged)="age($event)"></mat-datepicker>
+        <mat-datepicker #personBirthDate disabled="false" (selectedChanged)="onBirthDateChanged($event)"></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field fxFlex="25">
