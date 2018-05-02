@@ -11,7 +11,7 @@ import { PersonService } from '../../../@core/data/person.service';
 
 @Component({
   selector: 'app-person-upsert',
-  templateUrl: './person-upsert.component.html',
+  templateUrl: './person-upsert.component.gen.html',
   styleUrls: ['./person-upsert.component.scss'],
   providers: [PersonUpsertViewModel],
 })

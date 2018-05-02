@@ -1,5 +1,4 @@
 
-<!-- don't edit this html file-->
 <div class="modal-header" mat-dialog-title>
   <div class="modal-title">{{ "tour.upsert"|translate }}</div>
 </div>
@@ -34,7 +33,7 @@
         <div fxLayout="row" fxLayoutAlign="space-between" formGroupName="tourDetail">
           <mat-form-field fxFlex (click)="tourDate.open()">
             <input matInput [matDatepicker]="tourDate" placeholder="tour.date" formControlName="startDate" readonly>
-            <mat-datepicker-toggle utc="true" #tourDateToggle matSuffix [for]="tourDate"></mat-datepicker-toggle>
+            <mat-datepicker-toggle utc="true" matSuffix [for]="tourDate"></mat-datepicker-toggle>
             <mat-datepicker #tourDate disabled="false" [touchUi]="true" (closed)="utils.setDelayFocus(duration)"></mat-datepicker>
             <mat-error translate>{{vModel.form.get('tourDetail').get('startDate')['errorMessage']}}</mat-error>
           </mat-form-field>

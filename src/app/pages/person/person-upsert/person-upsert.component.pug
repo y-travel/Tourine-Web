@@ -1,0 +1,31 @@
+include ../../../mixin
+.modal-header(mat-dialog-title)
+  .modal-title
+    | {{ "leader.add"|translate }}
+.modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="300", autoTranslate)
+  form([formGroup]="vModel.form")
+    div(fxLayout="row", layout-align="space-between center")
+      +matField("nationalCode","person.nc","vModel.form","","",{"fxFlex": "50"})((focusout)="onNationalCodeChanged(natCode)" ,#natCode)
+      trn-slider(fxFlex, tabindex="-1", trueText="male", falseText="female", formControlName="gender", fxLayoutAlign="end center")
+    div(fxLayout="row")
+      +matField("mobileNumber","person.mobileNumber","vModel.form")
+      +matField("socialNumber","person.socialNumber","vModel.form")
+    div(fxLayout="row")
+      +matField("name","person.name","vModel.form")
+      +matField("family","person.family","vModel.form")
+    div(fxLayout="row")
+      +matField("englishName","person.englishName","vModel.form")
+      +matField("englishFamily","person.englishFamily","vModel.form")
+    div(fxLayout="row")
+      mat-form-field(fxFlex,(click)="personBirthDate.open($event)")
+        input(matInput, [matDatepicker]="personBirthDate", placeholder="person.birthDate", formControlName="birthDate",readonly)
+        mat-datepicker-toggle(utc="true", matSuffix, [for]="personBirthDate")
+        mat-datepicker(#personBirthDate, disabled="false", (selectedChanged)="onBirthDateChanged($event)" ,startView="multi-year")
+      +matField("passportNo","passportNumber","vModel.form","","",{"fxFlex": "25"})
+      mat-form-field(fxFlex="25" ,(click)="passportExpDate.open($event)")
+        input(matInput, [matDatepicker]="passportExpDate", placeholder="passportExpireDate", formControlName="passportExpireDate",readonly)
+        mat-datepicker-toggle(utc="true",  matSuffix, [for]="passportExpDate")
+        mat-datepicker(#passportExpDate, disabled="false",startView="multi-year")
+  // width set for IE
+mat-dialog-actions
+  button(fxFlex, mat-raised-button, color="primary", (click)="close()") {{ "save"|translate }}
