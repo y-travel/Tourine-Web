@@ -8,13 +8,11 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AutoTranslateDirective implements AfterContentInit {
   @ContentChildren(MatFormFieldControl, {descendants: true}) inputs: QueryList<MatFormFieldControl<any>>;
-  @HostListener('attr.formGroup') formGroup: any;
 
   constructor(private translateService: TranslateService) {
   }
 
   ngAfterContentInit(): void {
-    console.log(this.formGroup);
     if (this.inputs)
       this.inputs.forEach(item => {
         if (!item.placeholder || typeof item.placeholder !== 'string')

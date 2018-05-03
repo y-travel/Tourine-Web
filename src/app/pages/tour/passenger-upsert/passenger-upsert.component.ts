@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatStepper } from '@angular/material';
 import { FormService, NewFormService } from '../../../@core/data/form.service';
@@ -18,7 +18,7 @@ import { AlertDialogData } from '../../../@theme/components/dialog/dialog.compon
   styleUrls: ['./passenger-upsert.component.scss'],
   providers: [PassengerGridService]
 })
-export class PassengerUpsertComponent implements OnInit, Dialog {
+export class PassengerUpsertComponent implements Dialog {
 
   dialogMode: DialogMode;
 
@@ -38,7 +38,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
       title: 'edit',
       color: '#03a9f4',
       command: (teamMember) => {
-        this.teamMemberUpsert(teamMember, false/*edit*/);
+        this.teamMemberUpsert(teamMember, false);
       },
     },
   ];
@@ -60,22 +60,13 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
               public formFactory: FormFactory,
               public passengerGridService: PassengerGridService,
               public service: PersonService) {
-
-    this.init();
-  }
-
-
-  ngOnInit() {
-    this.buyerForm = this.formFactory.createPersonForm(this.buyer);
-    this.buyerForm.disableControl(true, this.disablingItems);
-    this.updateSubmitStatus();
   }
 
   initDialog() {
-    this.submit.disabled = true;
-  }
-
-  init() {
+    this.buyerForm = this.formFactory.createPersonForm(this.buyer);
+    if (this.data.model.parentId)
+      this.data.disableControl(true, ['basePrice', 'infantPrice']);
+    this.buyerForm.disableControl(true, this.disablingItems);
     this.passengerGridService.initToolbar(this.toolbarItems);
     this.service.getTourFreeSpace(this.data.model.id).subscribe(x => this.tourFreeSpace = +x);
     this.service.getTourOptions(this.data.model.id).subscribe(x => {
@@ -89,7 +80,6 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
     this.passengerGridService.remove(teamMember);
     this.tourFreeSpace++;
     this.updateTotalPrice();
-    this.updateSubmitStatus();
   }
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
@@ -103,16 +93,11 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
         return;
       if (isAdd || (!isAdd && teamMember.person.id === x.person.id)) {
         this.passengerGridService.addItem(x);
-        this.updateSubmitStatus();
         this.tourFreeSpace--;
       }
       //@TODO: update to a new person
       this.updateTotalPrice();
     });
-  }
-
-  updateSubmitStatus() {
-    this.submit.disabled = this.passengerGridService.rows.length > 0 ? false : true;
   }
 
   findPerson(natCode: any) {
@@ -131,7 +116,6 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
   }
 
   nextStep(stepper: MatStepper) {
-    console.log('ttt')
     if (stepper.selectedIndex === 0) {
       if (this.buyerForm.value.id === '') {
         if (!this.buyerForm.valid)
@@ -143,7 +127,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
             this.nextButton.disabled = false;
 
             if (x.isInfant)
-              this.dialogService.openDialog('msg.buyeCannotBeInfant', null);
+              this.dialogService.openDialog('msg.buyerCannotBeInfant', null);
             if (x.isUnder5)
               this.dialogService.openDialog('msg.buyerCannotBeUnder5', null);
             else
@@ -152,7 +136,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
       }
       else {
         if (this.buyerForm.value.isInfant)
-          this.dialogService.openDialog('msg.buyeCannotBeInfant', null);
+          this.dialogService.openDialog('msg.buyerCannotBeInfant', null);
         else if (this.buyerForm.value.isUnder5)
           this.dialogService.openDialog('msg.buyerCannotBeUnder5', null);
         else {
@@ -183,8 +167,7 @@ export class PassengerUpsertComponent implements OnInit, Dialog {
     if (this.passengerGridService.rows.length === 0)
       this.dialogInstance.close(this.passengerGridService.rows.length);
     else
-      this.service.upsertTeam(this.buyerForm.value, this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x =>
-      {
+      this.service.upsertTeam(this.buyerForm.value, this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x => {
         this.dialogInstance.close(this.passengerGridService.rows.length);
       });
   }

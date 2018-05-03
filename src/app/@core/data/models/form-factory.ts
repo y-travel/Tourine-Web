@@ -126,6 +126,7 @@ export class FormFactory {
   createAddPassengersForm(model: Block = new Block()): FormService<Block> {
     const form = new FormBuilder().group({
       id: [model.id],
+      parentId: [model.parentId],
       capacity: [model.capacity ? model.capacity : undefined, [Validators.required, Validators.min(1)]],
       infantPrice: [model.infantPrice ? model.infantPrice : undefined, Validators.required],
       busPrice: [model.busPrice ? model.busPrice : undefined, Validators.required],

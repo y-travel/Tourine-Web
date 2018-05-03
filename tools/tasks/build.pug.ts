@@ -6,7 +6,6 @@ const pug = require('gulp-pug');
 const rename = require('gulp-rename');
 
 export = () => {
-  console.log(config.APP_SRC);
   return gulp.src(join(config.APP_SRC, '**/*.pug'))
     .pipe(pug({
       doctype: 'html',

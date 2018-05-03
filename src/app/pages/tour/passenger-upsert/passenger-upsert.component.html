@@ -49,16 +49,16 @@
 
           </mat-card>
           <mat-card class="card-stretch" fxLayout="column" fxFlex="30">
-              <mat-form-field fxFlex>
-                <input matInput mask="number" placeholder="tour.price" [formControl]="data.form.get('basePrice')" (input)="onPriceChange()">
-                <span matPrefix align="end">$&nbsp;</span>
-                <mat-hint align="end" translate>price.irFormated</mat-hint>
-              </mat-form-field>
-              <mat-form-field fxFlex>
-                <input matInput mask="number" placeholder="infantPrice" [formControl]="data.form.get('infantPrice')" (input)="onPriceChange()">
-                <span matPrefix align="end">$&nbsp;</span>
-                <mat-hint align="end" translate>price.irFormated</mat-hint>
-              </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput mask="number" placeholder="tour.price" [formControl]="data.form.get('basePrice')" (input)="onPriceChange()">
+              <span matPrefix align="end">$&nbsp;</span>
+              <mat-hint align="end" translate>price.irFormated</mat-hint>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput mask="number" placeholder="infantPrice" [formControl]="data.form.get('infantPrice')" (input)="onPriceChange()">
+              <span matPrefix align="end">$&nbsp;</span>
+              <mat-hint align="end" translate>price.irFormated</mat-hint>
+            </mat-form-field>
           </mat-card>
         </div>
       </form>
@@ -103,5 +103,7 @@
   </button>
 </div>
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" fxFlex (click)="save()" #submit>{{ "block.save"|translate }}</button>
+  <button mat-raised-button color="primary" fxFlex (click)="save()" [disabled]="passengerGridService.rows&&passengerGridService.rows.length > 0 ? false : true"
+          #submit>{{ "block.save"|translate }}
+  </button>
 </mat-dialog-actions>
