@@ -7,7 +7,8 @@
   "build.prod": [
     "clean.all",
     "build.pug",
-    "build.ng"
+    "build.ng",
+    "move.to.server"
   ],
   "serve.dev": [
     "build.pug",
@@ -16,6 +17,10 @@
   "build.watch": [
     "watch.sync",
     "build.ng"
+  ],
+  "move.to.server":[
+    "clean.server",
+    "copy.to.server"
   ],
   "test": [
     "tslint",
