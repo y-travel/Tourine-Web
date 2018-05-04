@@ -25,7 +25,7 @@ export class CellToolbarComponent implements ICellRendererAngularComp {
   }
 
   disablityFunction(item: any) {
-    return item.disablity ? item.disablity(this.params.data) : false;
+    return item.disability ? item.disability(this.params.data) : false;
   }
 
   visibilityFunction(item: any) {
@@ -44,7 +44,7 @@ export class ToolbarItem {
   color = '';
   command: (data: any, items?) => void;
   commandParams = [];
-  disablity: (data: any) => boolean;
+  disability: (data: any) => boolean;
   visibility: (data: any) => boolean;
   alertData: AlertDialogData;
 }

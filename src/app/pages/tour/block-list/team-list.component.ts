@@ -14,8 +14,8 @@ import { Person } from '../../../@core/data/models/client.model';
 
 @Component({
   selector: 'app-block-list',
-  templateUrl: './block-list.component.html',
-  styleUrls: ['./block-list.component.scss'],
+  templateUrl: './team-list.component.html',
+  styleUrls: ['./team-list.component.scss'],
   providers: [TeamGridService],
 })
 export class TeamListComponent implements OnInit, Dialog {
@@ -53,7 +53,7 @@ export class TeamListComponent implements OnInit, Dialog {
   ngOnInit() {
   }
 
-  passengerUpsert(team : any) {
+  passengerUpsert(team: any) {
     //@TODO: ughly
     //we want show team price instead of tour/block basePrice and infantPrice
     this.data.model.infantPrice = team.infantPrice;
