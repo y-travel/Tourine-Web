@@ -1,16 +1,24 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, RouterStateSnapshot } from "@angular/router";
-import { AuthService } from "./@core/utils/auth.service";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, Router, RouterStateSnapshot } from '@angular/router';
+import { AuthService } from './@core/utils/auth.service';
 
 @Injectable()
 export class RouterGuard implements CanActivate, CanActivateChild, CanLoad {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   checkLogin(url: string) {
     if (this.authService.isAuthenticated())
       return true;
+    else
+      this.authService.authorize()
+        .then(res => {
+          if (res)
+            this.router.navigate([url]); //@TODO should be redirect to last page
+          else
+            this.router.navigate(['/user/login']);
+        });
     return false;
   }
 
@@ -19,7 +27,7 @@ export class RouterGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    return this.canActivate(childRoute, state);
+    return this.checkLogin(state.url);
   }
 
   canLoad(route: Route): boolean {

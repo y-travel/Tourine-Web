@@ -15,8 +15,13 @@
       "dom"
     ],
     "plugins": [
-      { "name": "tslint-language-service"}
+      {
+        "name": "tslint-language-service"
+      }
     ]
   },
-  "angularCompilerOptions": { "genDir": "../src/assets/i18n" }
+  "angularCompilerOptions": {
+    "genDir": "../src/assets/i18n",
+    "fullTemplateTypeCheck": true
+  }
 }

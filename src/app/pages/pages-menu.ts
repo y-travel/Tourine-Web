@@ -18,7 +18,7 @@ export const MENU_ITEMS = [
     ]
   },
   {
-    title: "personel",
+    title: "contactList",
     icon: "account_circle",
     link: "/pages/person/leader/list",
     children: [
