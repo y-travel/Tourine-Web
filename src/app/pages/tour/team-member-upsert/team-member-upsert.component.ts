@@ -19,11 +19,11 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
   optionType = OptionType;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<TeamMember>,
-    public dialogInstance: MatDialogRef<ModalInterface>,
-    private dialogService: DialogService,
-    public formFactory: FormFactory,
-    public service: PersonService,
-    @Inject(UTILS) public utils: AppUtils, ) {
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              public formFactory: FormFactory,
+              public service: PersonService,
+              @Inject(UTILS) public utils: AppUtils) {
 
   }
 
@@ -31,7 +31,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
   }
 
   checkChanged(ev: MatCheckboxChange, type: OptionType) {
-    var index = this.data.model.personIncomes.findIndex(x => x.optionType === type);
+    const index = this.data.model.personIncomes.findIndex(x => x.optionType === type);
     if (index < 0)
       this.data.model.personIncomes.push(new PersonIncome(type));
     else
@@ -52,10 +52,10 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
         if (person.isInfant)
           team.personIncomes.forEach(x => x.optionType = OptionType.Empty);
         person.type |= PersonType.Passenger;
-        this.data.updateForm(Object.assign(team, { person: person, personId: person.id }))
+        this.data.updateForm(Object.assign(team, {person: person, personId: person.id}));
       },
       () => {
-        let teamMember = new TeamMember();
+        const teamMember = new TeamMember();
         //we use Object.assign cos last data remained in form by using dynamic cast.
         teamMember.person = <Person>{};
         teamMember.person.nationalCode = this.data.model.person.nationalCode;
@@ -65,26 +65,26 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
 
   close() {
     if (this.data.form.valid) {
-      if (this.data.model.person.id != '')
+      if (this.data.model.person.id !== null )
         this.service.UpdatePerson(this.data.model.person).subscribe(x => {
-          this.data.model.person = x,
-            this.data.model.personId = x.id,
-            this.dialogInstance.close(this.data.model)
+          this.data.model.person = x;
+          this.data.model.personId = x.id;
+          this.dialogInstance.close(this.data.model);
         });
       else
         this.service.AddPerson(this.data.model.person).subscribe(x => {
-          this.data.model.person = x,
-            this.data.model.personId = x.id,
-            this.dialogInstance.close(this.data.model)
+          this.data.model.person = x;
+          this.data.model.personId = x.id;
+          this.dialogInstance.close(this.data.model);
         });
     }
 
   }
 
   age(bDay: Date) {
-    var now = new Date()
-    var born = new Date(bDay);
-    var age = Math.floor((now.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+    const now = new Date()
+    const born = new Date(bDay);
+    const age = Math.floor((now.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
 
     if (age < 2) {
       this.data.model.person.isInfant = true;

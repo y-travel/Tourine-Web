@@ -100,6 +100,7 @@
   },
   "optional": "اختیاری",
   "options": "خدمات",
+  "optionIsAvailableForUnder5": "   خدمات فقط برای افراد بین 2 و 5 سال قابل تغییر می باشد",
   "noneOptions": "بدون خدمات",
   "passenger": {
     "*": "مسافر",

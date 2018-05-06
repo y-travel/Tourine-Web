@@ -7,7 +7,7 @@
   <form [formGroup]="data.form">
     <mat-horizontal-stepper #stepper [linear]="true">
       <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'first'|translate})}}">
-
+        <br>
         <div formGroupName="person">
           <div fxLayout="row" fxflex>
             <mat-form-field fxFlex>
@@ -47,12 +47,14 @@
       </mat-step>
 
       <mat-step [stepControl]="data.form" label="{{'steps'|translate:({value:'second'|translate})}}" formGroupName="person">
+        <br>
         <div fxLayout="row">
           <mat-form-field fxFlex>
             <input matInput="number" placeholder="passportnumber" formControlName="passportNo">
           </mat-form-field>
           <mat-form-field fxFlex>
-            <input matInput (click)="passExpDate._open($event)" [matDatepicker]="passExpireDate" placeholder="passportexpireDate" formControlName="passportExpireDate">
+            <input matInput (click)="passExpDate._open($event)" [matDatepicker]="passExpireDate" placeholder="passportexpireDate"
+                   formControlName="passportExpireDate">
             <mat-datepicker-toggle utc="true" #passExpDate matSuffix [for]="passExpireDate"></mat-datepicker-toggle>
             <mat-datepicker #passExpireDate disabled="false"></mat-datepicker>
           </mat-form-field>
@@ -66,7 +68,7 @@
         <div fxLayout="row">
           <mat-form-field fxFlex>
             <input matInput (click)="visaExpDate._open($event)" [matDatepicker]="visaExpireDate" placeholder="person.visaExpireDate"
-              formControlName="visaExpireDate" [disabled]="!haveVisa.checked">
+                   formControlName="visaExpireDate" [disabled]="!haveVisa.checked">
             <mat-datepicker-toggle utc="true" #visaExpDate matSuffix [for]="visaExpireDate"></mat-datepicker-toggle>
             <mat-datepicker #visaExpireDate disabled="false"></mat-datepicker>
           </mat-form-field>
@@ -84,8 +86,9 @@
           <div fxLayout="row">
             <div fxFlex *ngFor="let optionName of optionTypes();let i=index;">
               <div>
-                <mat-checkbox name="optionName" [disabled]="!data.model.person.isUnder5 || data.model.person.isInfant" (change)="checkChanged($event,optionType[optionName])"
-                  [checked]="getOptionValue(optionType[optionName])">{{"optionType."+optionName|translate}}
+                <mat-checkbox name="optionName" [disabled]="!data.model.person.isUnder5 || data.model.person.isInfant"
+                              (change)="checkChanged($event,optionType[optionName])"
+                              [checked]="getOptionValue(optionType[optionName])">{{"optionType."+optionName|translate}}
                 </mat-checkbox>
               </div>
             </div>
@@ -95,7 +98,7 @@
         <br>
         <div fxLayout="row">
           <p>
-            خدمات فقط برای افراد بین 2 و 5 سال قابل تغییر می باشد
+            {{"optionIsAvailableForUnder5"| translate}}
           </p>
         </div>
       </mat-step>
