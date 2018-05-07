@@ -8,6 +8,8 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { TourPassengersGridService } from './tour-passengers-grid.service';
 import { PassengerReplacementComponent } from '../passenger-replacement/passenger-replacement.component';
 import { DialogMode } from '../../../@core/data/models/enums';
+import { extractStyleParams } from '@angular/animations/browser/src/util';
+import { noUndefined } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-tour-passengers',
@@ -17,14 +19,15 @@ import { DialogMode } from '../../../@core/data/models/enums';
 })
 export class TourPassengersComponent implements OnInit, Dialog {
   dialogMode: DialogMode;
+  selectedTour = '';
   @ViewChild('passengerReplacementFab') passengerReplacementFab: MatButton;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
-    public dialogInstance: MatDialogRef<ModalInterface>,
-    private dialogService: DialogService,
-    public formFactory: FormFactory,
-    public passengerGridService: TourPassengersGridService,
-    public personService: PersonService) {
+              public dialogInstance: MatDialogRef<ModalInterface>,
+              private dialogService: DialogService,
+              public formFactory: FormFactory,
+              public passengerGridService: TourPassengersGridService,
+              public personService: PersonService) {
 
   }
 
@@ -43,16 +46,27 @@ export class TourPassengersComponent implements OnInit, Dialog {
       (<any>ref.componentInstance).selectedTourId = selectedPassengrs[0].tourId;
       (<any>ref.componentInstance).selectedPassengers = selectedPassengrs;
       (<any>ref.componentInstance).selectedAgency = this.passengerGridService.tourAgency[selectedPassengrs[0].tourId];
-      ref.afterClosed().subscribe(x => { if (x) this.dialogInstance.close(); });
+      ref.afterClosed().subscribe(x => {
+        if (x) this.dialogInstance.close();
+      });
     } else
-      console.log('not same agency selected');
+      this.dialogService.openDialog('msg.allowedPaassengerToReplace', null);
   }
 
   onSelectionChanged() {
     const selectedRows = this.passengerGridService.gridApi.getSelectedRows();
+    this.selectedTour = selectedRows[0].tourId;
     if (selectedRows.length > 0)
       this.passengerReplacementFab.disabled = false;
     else
       this.passengerReplacementFab.disabled = true;
+    this.passengerGridService.refresh();
+  }
+
+  setStyle = (param?: any) => {
+    //@TODO: use theme inst of hard code
+    if (this.selectedTour !== '')
+      return param.data.tourId === this.selectedTour ? {background: '#C5E1A5' } : '';
+    return '';
   }
 }

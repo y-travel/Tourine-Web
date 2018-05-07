@@ -136,7 +136,7 @@ export class TourPassengersGridService {
   }
 
   refresh() {
-    this.gridApi.refreshView();
+    this.gridApi.redrawRows();
   }
 
   remove(item: any) {

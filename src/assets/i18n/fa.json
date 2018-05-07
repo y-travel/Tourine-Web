@@ -82,7 +82,8 @@
     "thereIsNoFreeSpace": "ظرفیت خالی وجود ندارد",
     "connectionError":"خطا در برقراری ارتباط با سرور",
     "buyerCannotBeInfant": "خریدار نمی تواند اینفنت باشد",
-    "buyerCannotBeUnder5": "خریدار نمی تواند زیر 5 سال باشد"
+    "buyerCannotBeUnder5": "خریدار نمی تواند زیر 5 سال باشد",
+    "allowedPaassengerToReplace":"فقط مسافرین مشخص شده را می توانید جابجا کنید"
   },
   "name": "نام",
   "nationalCode": "کد ملی",
