@@ -88,10 +88,10 @@
   <button class="pull-right" mat-mini-fab color="primary" (click)="previous(stepper)" [disabled]='stepper.selectedIndex==0'>
     <mat-icon>navigate_next</mat-icon>
   </button>
-  <label fxFlex [hidden]='stepper.selectedIndex!=1'>
+  <label fxFlex [hidden]='stepper.selectedIndex!==1'>
     {{ "allPriceIsPerOne"|translate }}
   </label>
 </div>
 <mat-dialog-actions>
-  <button mat-raised-button color="primary" fxFlex type="button" mat-dialog-close>{{ "close"|translate }}</button>
+  <button mat-raised-button color="primary" fxFlex type="button" mat-dialog-close [disabled]="stepper.selectedIndex!==2">{{ "close"|translate }}</button>
 </mat-dialog-actions>
