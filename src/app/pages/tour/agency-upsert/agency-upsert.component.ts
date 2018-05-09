@@ -9,7 +9,7 @@ import { DialogMode } from '../../../@core/data/models/enums';
 
 @Component({
   selector: 'app-agency-upsert',
-  templateUrl: './agency-upsert.component.html',
+  templateUrl: './agency-upsert.component.gen.html',
   styleUrls: ['./agency-upsert.component.scss']
 })
 export class AgencyUpsertComponent implements OnInit, Dialog {
