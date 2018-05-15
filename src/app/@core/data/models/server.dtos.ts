@@ -24,6 +24,12 @@ import {
 } from './client.model';
 import { IncomeStatus, OptionType } from './enums';
 
+
+export class HttpResult
+{
+  response: Object;
+}
+
 // @DataContract
 export class ResponseError {
   // @DataMember(Order=1, EmitDefaultValue=false)
@@ -838,4 +844,10 @@ export class GetTourBuyers implements IReturn<Array<TourBuyer>> {
   getTypeName() {
     return 'GetTourBuyers';
   }
+}
+@Route("/download/ticketReportTemplate", "GET")
+export class GetTicketReportTemplate implements IReturn<HttpResult>
+{
+  createResponse() { return new HttpResult(); }
+  getTypeName() { return "GetTicketReportTemplate"; }
 }

@@ -7,7 +7,6 @@ import { Serializable } from '../utils/serializable';
 import { RestError, RestErrorType } from '../utils/rest-error';
 import { HttpMethod } from './models/enums';
 import { APP_CONFIG, AppConfig } from '../utils/app.config';
-import { DialogService } from '../utils/dialog.service';
 
 
 @Injectable()
@@ -20,18 +19,22 @@ export class DataService {
   onComplete = new Subject<HttpResponse<any>>();
   onException = new Subject<any>();
   onRequest = new Subject();
+  headers: HttpHeaders;
+
   private spinnerService: any = {}; //@TODO implement
-  constructor(private http: HttpClient,
-              @Inject(APP_CONFIG) private config: AppConfig,
-              private dialogService: DialogService) {
+  constructor(public http: HttpClient) {
   }
 
-  request(method: HttpMethod, url: string, body?: string, headers?: HttpHeaders): Observable<HttpResponse<any>|any> {
+  request(method: HttpMethod, url: string, body?: string): Observable<HttpResponse<any> | any> {
     url = this.baseAddress + url;
     const httpParams = !this.hasBody(method) ? this.getQueryString(JSON.parse(body)) : undefined;
     // this.spinnerService.start();
     this.onRequest.next();
-    return this.http.request(method, url, {body: body, observe: 'response', headers: headers, params: httpParams, responseType: 'json'})
+    return this.createRequest(method, url, body, httpParams);
+  }
+
+  protected createRequest(method: HttpMethod, url: string, body: string, httpParams: any) {
+    return this.http.request(method, url, {body: body, observe: 'response', headers: this.headers, params: httpParams, responseType: 'json'})
       .map((response: HttpResponse<any>) => {
         return response.body;
       });

@@ -6,21 +6,18 @@ import { Serializable } from '../utils/serializable';
 import { IReturn } from './models/index';
 import { APP_CONFIG, AppConfig } from '../utils/app.config';
 import { AppUtils, UTILS } from '../utils';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { QueryResponse } from './models/server.dtos';
+import { HttpMethod } from './models/enums';
 
 @Injectable()
-export class ApiService extends DataService {
+export class FileService extends DataService {
 
   constructor(@Inject(APP_CONFIG) config: AppConfig,
               @Inject(UTILS) private utils: AppUtils,
               http: HttpClient) {
     super(http);
     this.baseAddress = config.ApiUrl + 'json/reply/';
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    });
   }
 
   get<T>(data: IReturn<T>): Observable<T> {
@@ -28,12 +25,11 @@ export class ApiService extends DataService {
     return this.internalSend(data);
   }
 
-  send<T>(data: IReturn<T>): Observable<T> {
-    return this.internalSend(data);
-  }
-
-  getEntities<T>(data: IReturn<QueryResponse<T>>): Observable<T[]> {
-    return this.internalSend(data).map(res => res.results);
+  protected createRequest(method: HttpMethod, url: string, body: string, httpParams: any) {
+    return this.http.request(method, url, {body: body, observe: 'response', headers: this.headers, params: httpParams, responseType: 'blob'})
+      .map((response: HttpResponse<any>) => {
+        return response.body;
+      });
   }
 
   private internalSend<T>(data: IReturn<T>): Observable<T | any> {

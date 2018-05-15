@@ -17,6 +17,8 @@ import { TeamMember } from '../../../@core/data/models';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { TourReportsComponent } from '../tour-reports/tour-reports.component';
+import { FileService } from '../../../@core/data/file.service';
+import { GetTicketReportTemplate } from '../../../@core/data/models/server.dtos';
 
 @Component({
   selector: 'tour-list',
@@ -111,9 +113,17 @@ export class TourListComponent {
               private personService: PersonService,
               private formFactory: FormFactory,
               public dialogService: DialogService,
-              public tourGridService: TourGridService) {
+              public tourGridService: TourGridService,
+              private fileService: FileService) {
 
     this.tourGridService.initToolbar(this.sharedItems, this.tourItems, this.blockItems);
+  }
+
+  testFile() {
+    let dto = new GetTicketReportTemplate();
+    this.fileService.get(dto).subscribe(x=>{
+      console.log(x);
+    });
   }
 
   refresh() {

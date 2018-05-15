@@ -10,6 +10,7 @@ import { DataService } from './data.service';
 import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
 import { AgencyService } from './agency.service';
+import { FileService } from './file.service';
 
 const SERVICES = [
   UserService,
@@ -17,6 +18,7 @@ const SERVICES = [
   StateService,
   TourService,
   ApiService,
+  FileService,
   DataService,
   FormFactory,
   PlayerService,
