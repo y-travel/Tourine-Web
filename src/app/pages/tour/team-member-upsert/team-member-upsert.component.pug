@@ -1,0 +1,64 @@
+include ../../../mixin
+.modal-header(mat-dialog-title)
+  .modal-title
+    | {{"person.upsert"|translate}}
+.modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="400", autoTranslate)
+  form([formGroup]="data.form.get('person')")
+    mat-horizontal-stepper(#stepper, [linear]="true")
+      mat-step([stepControl]="data.form", label="{{'steps'|translate:({value:'first'|translate})}}")
+        br
+        div
+          div(fxLayout="row", fxFlex)
+            +matField('nationalCode', 'person.nc', 'data.form.get("person")')((focusout)="findPerson(natCode)",#natCode)
+            +matField('mobileNumber', 'person.mobileNumber', 'data.form.get("person")')
+          div(fxLayout="row", fxFlex)
+            trn-slider(fxFlex, trueText="male", falseText="female", formControlName="gender")
+          div(fxLayout="row")
+            +matField('name', 'person.name', 'data.form.get("person")')
+            +matField('family', 'person.family', 'data.form.get("person")')
+          div(fxLayout="row")
+            +matField('englishName', 'person.englishName', 'data.form.get("person")')
+            +matField('englishFamily', 'person.englishFamily', 'data.form.get("person")')
+          div(fxLayout="row")
+            +matField('birthDate', 'person.birthDate', 'data.form.get("person")')((click)="birthDate._open($event)", [matDatepicker]="personBirthDate")
+              mat-datepicker-toggle(utc="true", #birthDate, matSuffix, [for]="personBirthDate")
+              mat-datepicker(#personBirthDate, disabled="false", (selectedChanged)="age($event)")
+      mat-step([stepControl]="data.form", label="{{'steps'|translate:({value:'second'|translate})}}")
+        br
+        div(fxLayout="row")
+          +matField('passportNo', 'passportNumber', 'data.form.get("person")')
+          +matField('passportExpireDate', 'passportExpireDate', 'data.form.get("person")')((click)="passExpDate._open($event)", [matDatepicker]="passExpireDate")
+            mat-datepicker-toggle(utc="true", #passExpDate, matSuffix, [for]="passExpireDate")
+            mat-datepicker(#passExpireDate, disabled="false")
+        div(fxLayout="row")
+          div(fxFlex)
+            mat-checkbox(#haveVisa, checked="true", [formControl]="data.form.get('haveVisa')")
+              | {{"person.haveVisa"|translate}}
+        div(fxLayout="row")
+          +matField('visaExpireDate', 'person.visaExpireDate', 'data.form.get("person")')((click)="visaExpDate._open($event)", [matDatepicker]="visaExpireDate",[disabled]="!haveVisa.checked")
+            mat-datepicker-toggle(utc="true", #visaExpDate, matSuffix, [for]="visaExpireDate")
+            mat-datepicker(#visaExpireDate, disabled="false")
+        br
+        div(fxLayout="row")
+          div(fxFlex)
+            mat-checkbox([formControl]="data.form.get('passportDelivered')")
+              | {{"person.passportDelivered"|translate}}
+        br
+        div
+          div(fxLayout="row")
+            div(fxFlex, *ngFor="let optionName of optionTypes();let i=index;")
+              div
+                mat-checkbox(name="optionName", [disabled]="!data.model.person.isUnder5 || data.model.person.isInfant", (change)="checkChanged($event,optionType[optionName])", [checked]="getOptionValue(optionType[optionName])")
+                  | {{"optionType."+optionName|translate}}
+        br
+        div(fxLayout="row")
+          p
+            | {{"optionIsAvailableForUnder5"| translate}}
+  // width set for IE
+div(fxLayout="row", align="end")
+  button.pull-left(mat-mini-fab, color="primary", (click)="stepper.next()", [disabled]="stepper.selectedIndex==1")
+    mat-icon navigate_before
+  button.pull-right(mat-mini-fab, color="primary", (click)="stepper.previous()", [disabled]="stepper.selectedIndex==0")
+    mat-icon navigate_next
+mat-dialog-actions
+  button(fxFlex, mat-raised-button, color="primary", (click)="close()") {{"save"|translate}}

@@ -26,7 +26,7 @@ export class DataService {
               private dialogService: DialogService) {
   }
 
-  request(method: HttpMethod, url: string, body?: string, headers?: HttpHeaders): Observable<HttpResponse<any>> {
+  request(method: HttpMethod, url: string, body?: string, headers?: HttpHeaders): Observable<HttpResponse<any>|any> {
     url = this.baseAddress + url;
     const httpParams = !this.hasBody(method) ? this.getQueryString(JSON.parse(body)) : undefined;
     // this.spinnerService.start();

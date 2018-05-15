@@ -7,5 +7,5 @@ mixin matField(formControlName,placeholder,validationFormGroup='',subText = '',i
       mat-hint(align='end', translate)=subText
     if validationFormGroup
       mat-error(translate)="{{"+ validationFormGroup +".get('"+formControlName+"')['errorMessage']}}"
-
+    block
 

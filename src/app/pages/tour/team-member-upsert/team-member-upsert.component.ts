@@ -10,7 +10,7 @@ import { DialogMode, PersonType } from '../../../@core/data/models/enums';
 
 @Component({
   selector: 'app-team-member-upsert',
-  templateUrl: './team-member-upsert.component.html',
+  templateUrl: './team-member-upsert.component.gen.html',
   styleUrls: ['./team-member-upsert.component.scss']
 })
 
@@ -82,7 +82,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
   }
 
   age(bDay: Date) {
-    const now = new Date()
+    const now = new Date();
     const born = new Date(bDay);
     const age = Math.floor((now.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
 

@@ -13,7 +13,7 @@ import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-passenger-replacement',
-  templateUrl: './passenger-replacement.component.html',
+  templateUrl: './passenger-replacement.component.gen.html',
   styleUrls: ['./passenger-replacement.component.scss']
 })
 export class PassengerReplacementComponent implements OnInit, Dialog {

@@ -14,10 +14,11 @@ import { Person } from '../../../@core/data/models/client.model';
 
 @Component({
   selector: 'app-block-list',
-  templateUrl: './team-list.component.html',
+  templateUrl: './team-list.component.gen.html',
   styleUrls: ['./team-list.component.scss'],
   providers: [TeamGridService],
 })
+
 export class TeamListComponent implements OnInit, Dialog {
   dialogMode: DialogMode;
   teamsItem: ToolbarItem[] = [

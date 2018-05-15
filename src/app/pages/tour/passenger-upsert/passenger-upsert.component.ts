@@ -14,7 +14,7 @@ import { AlertDialogData } from '../../../@theme/components/dialog/dialog.compon
 
 @Component({
   selector: 'app-passenger-upsert',
-  templateUrl: './passenger-upsert.component.html',
+  templateUrl: './passenger-upsert.component.gen.html',
   styleUrls: ['./passenger-upsert.component.scss'],
   providers: [PassengerGridService]
 })
@@ -117,7 +117,7 @@ export class PassengerUpsertComponent implements Dialog {
 
   nextStep(stepper: MatStepper) {
     if (stepper.selectedIndex === 0) {
-      if (this.buyerForm.value.id === '') {
+      if (this.buyerForm.value.id === null) {
         if (!this.buyerForm.valid)
           stepper.next();
         else

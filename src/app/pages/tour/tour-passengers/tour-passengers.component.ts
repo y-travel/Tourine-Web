@@ -13,7 +13,7 @@ import { noUndefined } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-tour-passengers',
-  templateUrl: './tour-passengers.component.html',
+  templateUrl: './tour-passengers.component.gen.html',
   styleUrls: ['./tour-passengers.component.scss'],
   providers: [TourPassengersGridService],
 })
@@ -55,9 +55,10 @@ export class TourPassengersComponent implements OnInit, Dialog {
 
   onSelectionChanged() {
     const selectedRows = this.passengerGridService.gridApi.getSelectedRows();
-    this.selectedTour = selectedRows[0].tourId;
-    if (selectedRows.length > 0)
+    if (selectedRows.length > 0) {
+      this.selectedTour = selectedRows[0].tourId;
       this.passengerReplacementFab.disabled = false;
+    }
     else
       this.passengerReplacementFab.disabled = true;
     this.passengerGridService.refresh();

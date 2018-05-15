@@ -16,7 +16,7 @@ import { Serializable } from '../../../@core/utils/serializable';
 
 @Component({
   selector: 'app-block-upsert',
-  templateUrl: './block-upsert.component.html',
+  templateUrl: './block-upsert.component.gen.html',
   styleUrls: ['./block-upsert.component.scss'],
   providers: [BlockUpsertViewModel],
 })

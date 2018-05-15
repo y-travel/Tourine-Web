@@ -6,8 +6,8 @@ include ../../../mixin
   // width set for IE
   form([formGroup]="data.form", fxLayout="column")
     div(fxLayout="row", formGroupName="agency")
-      +matField("name","agency.name","data.form")
-      +matField("phoneNumber","agency.phoneNumber","data.form","optional")
+      +matField("name","agency.name","data.form.get(\'agency\')")
+      +matField("phoneNumber","agency.phoneNumber","data.form.get(\'agency\')","optional")
     div(fxLayout="row", formGroupName="person")
       trn-slider(formControlName="gender", falseText="female", trueText="male")
     div(fxLayout="row", formGroupName="person")

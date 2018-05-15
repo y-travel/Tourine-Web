@@ -1,0 +1,60 @@
+include ../../../mixin
+.modal-header(mat-dialog-title)
+  .modal-title
+    | {{ "tour.reserve"|translate }}
+.modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="300", autoTranslate)
+  // width set for IE
+  mat-horizontal-stepper(#stepper, [linear]="true")
+    mat-step(label="{{'steps'|translate:({value:'first'|translate})}}")
+      form([formGroup]="vModel.form")
+        div(fxLayout="row")
+          br
+          |  {{ "addAgencyMessage"|translate }}
+          br
+          br
+        div(fxLayout="row")
+          mat-form-field
+            mat-select(placeholder="agency.name", formControlName="agencyId", (selectionchange)="selectedItem($event,stepper)")
+              mat-option(*ngFor="let item of agencies | async", [value]="item.id") {{ item.name }}
+            mat-error(translate) {{vModel.form.get('agencyId')['errorMessage']}}
+          button(mat-mini-fab, color="accent", (click)="agencyUpsert()")
+            mat-icon.icon-text-color add
+    mat-step([stepControl]="vModel.form", label="{{'steps'|translate:({value:'second'|translate})}}")
+      form([formGroup]="vModel.form")
+        div(fxLayout='row', fxFlex)
+          div(fxLayout='column', fxFlex)
+            +matField('capacity','adultCount', 'vModel.form', 'agencyName' )(mask='number', #adultCount)
+            +matField("basePrice", "tour.price", "vModel.form", "price.irFormated", "landscape")(mask="number")
+            +matField("infantPrice", "infantPrice", "vModel.form", "price.irFormated", "child_care")(mask="number")
+          div(fxLayout="column", fxFlex, formArrayName="options")
+            +matField(
+            'price',
+            "{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}",
+            'vModel.form.get(\'options\').get(i.toString())',
+            'price.irFormated',
+            '{{ utils.mapOptionTypeToIcon(formGroup.value.optionType) }}',
+            {"*ngFor":"let formGroup of vModel.form.get('options')['controls']; let i=index",
+            "[formGroupName]":"i"}
+            )(mask="number")
+    mat-step(label="{{'steps'|translate:({value:'third'|translate})}}")
+      form
+        div(fxLayout="row")
+          br
+          |  {{ "msg.blockReservation"|translate:({capacity:vModel.model.capacity}) }}
+          br
+          br
+          |  {{ "addPassengerMessage"|translate }}
+        mat-dialog-actions
+          button(mat-raised-button, color="primary", fxFlex, type="button", (click)="addPassengers()", [disabled]="dialogMode!==DialogMode.Create", #addPassengerBtn)
+            | {{ "add"|translate }}
+            mat-icon.icon-text-color add
+        br
+div(fxLayout="row", align="end")
+  button.pull-left(mat-mini-fab, color="primary", (click)="next(stepper)", [disabled]="stepper.selectedIndex==2")
+    mat-icon navigate_before
+  button.pull-right(mat-mini-fab, color="primary", (click)="previous(stepper)", [disabled]="stepper.selectedIndex==0")
+    mat-icon navigate_next
+  label(fxFlex, [hidden]="stepper.selectedIndex!==1")
+    | {{ "allPriceIsPerOne"|translate }}
+mat-dialog-actions
+  button(mat-raised-button, color="primary", fxFlex, type="button", mat-dialog-close, [disabled]="stepper.selectedIndex!==2") {{ "close"|translate }}

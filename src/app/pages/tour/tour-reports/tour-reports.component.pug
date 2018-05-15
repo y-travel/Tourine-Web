@@ -1,0 +1,99 @@
+.modal-header(mat-dialog-title)
+  .modal-title
+    | {{ "reports.*"|translate }}
+.right.modal-body(dir="rtl", [style.width.px]="1000", [style.height.px]="500")
+  mat-tab-group((selectedTabChange)="mainTab($event)")
+    mat-tab(label="{{'reports.ticket'|translate}}")
+    mat-tab(label="{{'reports.visa'|translate}}")
+    mat-tab(label="{{'reports.buyer'|translate}}")
+    mat-tab(label="{{'reports.tour'|translate}}")
+  div([ngSwitch]="selectedTab")
+    div(*ngSwitchCase="'ticket'")
+      ng-template(*ngTemplateOutlet="tickeTemplate")
+    div(*ngSwitchCase="'visa'")
+      ng-template(*ngTemplateOutlet="visaTemplate")
+    div(*ngSwitchCase="'tour'")
+      ng-template(*ngTemplateOutlet="tourTemplate")
+    div(*ngSwitchCase="'buyer'")
+      ng-template(*ngTemplateOutlet="buyerTemplate")
+mat-dialog-actions
+  button(mat-raised-button, color="primary", fxFlex, matDialogClose) {{ "close"|translate }}
+ng-template(#reportGridTemplate, let-tabIndex="tab")
+  ag-grid-angular.ag-theme-material(#aggrid, style="height:300px", [columnDefs]="reportGridService.ticketColumnDef", [gridOptions]="reportGridService.gridOptions", [frameworkComponents]="reportGridService.frameworkComponents", (gridReady)="onGridReady($event,tabIndex)", [enableRtl]="true", rowHeight="35", headerHeight="35")
+ng-template(#tickeTemplate)
+  div
+    mat-card
+      div(fxLayout="row", fxLayoutAlign="space-between center")
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'ticket.adultCount'|translate }} :
+            label {{ adultCount }}
+          div(fxLayout="row")
+            label {{ 'ticket.infantCount'|translate }} :
+            label {{ infantCount }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'tour.startDate'|translate }} :
+            label {{ startDate }}
+          div(fxLayout="row")
+            label {{ 'tour.endDate'|translate }} :
+            label {{ endDate }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'tour.destination'|translate }} :
+            label {{ destination }}
+          div(fxLayout="row")
+            label  
+    mat-card([stretch]="true")
+      mat-tab-group((selectedTabChange)="ticketTab($event)")
+        mat-tab(label="{{'adult.*'|translate}}")
+        mat-tab(label="{{'infant'|translate}}")
+      ng-template(*ngTemplateOutlet="reportGridTemplate; context:{tab:'ticket'}")
+ng-template(#visaTemplate)
+  div
+    mat-card
+      div(fxLayout="row", fxLayoutAlign="space-between center")
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'person.numberOfHaveVisa'|translate }} :
+            label {{ haveVisaCount }}
+          div(fxLayout="row")
+            label {{ 'person.numberOfEmmisionableVisa'|translate }} :
+            label {{ noHaveVisaCount }}
+    mat-card([stretch]="true")
+      mat-tab-group((selectedTabChange)="visaTab($event)")
+        mat-tab(label="{{'person.haveVisa'|translate}}")
+        mat-tab(label="{{'person.emissionVisa'|translate}}")
+      ng-template(*ngTemplateOutlet="reportGridTemplate; context:{tab:'visa'}")
+ng-template(#tourTemplate)
+  div
+    mat-card
+      div(fxLayout="row", fxLayoutAlign="space-between center")
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'tour.date'|translate }} :
+            label {{ startDate }}
+          div(fxLayout="row")
+            label {{ 'tour.code'|translate }} :
+            label {{ tourCode }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'tour.leader'|translate }} :
+            label {{ leader.name + ' ' + leader.family }}
+          div(fxLayout="row")
+            label {{ 'passenger.count'|translate }} :
+            label {{ adultCount+infantCount }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'infantCount'|translate }} :
+            label {{ infantCount }}
+          div(fxLayout="row")
+            div(fxLayout="row")
+              label {{ 'bedCount'|translate }} :
+              label {{ bedCount }}
+    mat-card([stretch]="true")
+      ng-template(*ngTemplateOutlet="reportGridTemplate; context:{tab:'tour'}")
+ng-template(#buyerTemplate)
+  div
+    mat-card([stretch]="true")
+      ng-template(*ngTemplateOutlet="reportGridTemplate; context:{tab:'buyer'}")

@@ -20,7 +20,7 @@ import { TourReportsComponent } from '../tour-reports/tour-reports.component';
 
 @Component({
   selector: 'tour-list',
-  templateUrl: './tour-list.component.html',
+  templateUrl: './tour-list.component.gen.html',
   styleUrls: ['./tour-list.component.scss'],
   providers: [TourGridService],
 })

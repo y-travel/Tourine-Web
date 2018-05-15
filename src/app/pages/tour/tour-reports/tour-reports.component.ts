@@ -16,7 +16,7 @@ import { PersonService } from '../../../@core/data/person.service';
 
 @Component({
   selector: 'app-tour-reports',
-  templateUrl: './tour-reports.component.html',
+  templateUrl: './tour-reports.component.gen.html',
   styleUrls: ['./tour-reports.component.scss']
 })
 export class TourReportsComponent implements ModalInterface, Dialog {
