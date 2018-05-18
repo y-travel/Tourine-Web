@@ -121,7 +121,7 @@ export class TourListComponent {
 
   testFile() {
     let dto = new GetTicketReportTemplate();
-    this.fileService.get(dto).subscribe(x=>{
+    this.fileService.get(dto).subscribe(x => {
       console.log(x);
     });
   }
@@ -153,7 +153,7 @@ export class TourListComponent {
   passengerUpsert(block = new Block()) {
     if (block.freeSpace === 0)
       return;
-    const ref = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(block));
+    const ref = this.dialogService.openPopup(PassengerUpsertComponent, {block: block});
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }
 

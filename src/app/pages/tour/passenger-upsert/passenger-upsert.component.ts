@@ -5,12 +5,13 @@ import { FormService, NewFormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { PassengerGridService } from '../passenger-grid.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
-import { Block, OptionType, Person, TeamMember } from '../../../@core/data/models';
+import { OptionType, Person, TeamMember } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
+import { Block } from '../../../@core/data/models/client.model';
 
 @Component({
   selector: 'app-passenger-upsert',
@@ -48,13 +49,13 @@ export class PassengerUpsertComponent implements Dialog {
   infantCount = 0;
   adultCount = 0;
   noneOptionCount = 0;
-  public rows: any[];
-  public teamId: string = undefined;
-  public isEditable = true;
-  public buyer = <Person>{};
-  public buyerForm: NewFormService<Person>;
+  rows: any[];
+  teamId: string = undefined;
+  isEditable = true;
+  buyerForm: NewFormService<Person>;
+  blockForm: FormService<Block>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Block>,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               public dialogInstance: MatDialogRef<ModalInterface>,
               private dialogService: DialogService,
               public formFactory: FormFactory,
@@ -63,16 +64,18 @@ export class PassengerUpsertComponent implements Dialog {
   }
 
   initDialog() {
-    this.buyerForm = this.formFactory.createPersonForm(this.buyer);
-    if (this.data.model.parentId)
-      this.data.disableControl(true, ['basePrice', 'infantPrice']);
+    this.buyerForm = this.formFactory.createPersonForm(this.data.buyer);
+    this.teamId = this.data.teamId;
+    this.blockForm = this.formFactory.createAddPassengersForm(this.data.block);
+    if (this.blockForm.model.parentId)
+      this.blockForm.disableControl(true, ['basePrice', 'infantPrice']);
     this.buyerForm.disableControl(true, this.disablingItems);
     this.passengerGridService.initToolbar(this.toolbarItems);
-    this.service.getTourFreeSpace(this.data.model.id).subscribe(x => this.tourFreeSpace = +x);
-    this.service.getTourOptions(this.data.model.id).subscribe(x => {
-      this.data.model.foodPrice = x.find(y => y.optionType === OptionType.Food).price;
-      this.data.model.roomPrice = x.find(y => y.optionType === OptionType.Room).price;
-      this.data.model.busPrice = x.find(y => y.optionType === OptionType.Bus).price;
+    this.service.getTourFreeSpace(this.blockForm.model.id).subscribe(x => this.tourFreeSpace = +x);
+    this.service.getTourOptions(this.blockForm.model.id).subscribe(x => {
+      this.blockForm.model.foodPrice = x.find(y => y.optionType === OptionType.Food).price;
+      this.blockForm.model.roomPrice = x.find(y => y.optionType === OptionType.Room).price;
+      this.blockForm.model.busPrice = x.find(y => y.optionType === OptionType.Bus).price;
     });
   }
 
@@ -167,7 +170,7 @@ export class PassengerUpsertComponent implements Dialog {
     if (this.passengerGridService.rows.length === 0)
       this.dialogInstance.close(this.passengerGridService.rows.length);
     else
-      this.service.upsertTeam(this.buyerForm.value, this.passengerGridService.rows, this.data.model, this.teamId).subscribe(x => {
+      this.service.upsertTeam(this.buyerForm.value, this.passengerGridService.rows, this.blockForm.model, this.teamId).subscribe(x => {
         this.dialogInstance.close(this.passengerGridService.rows.length);
       });
   }
@@ -203,19 +206,19 @@ export class PassengerUpsertComponent implements Dialog {
       }
     });
 
-    total += this.adultCount * this.data.model.basePrice;
-    total += this.infantCount * this.data.model.infantPrice;
-    total += this.noneOptionCount * this.data.model.basePrice;
+    total += this.adultCount * this.blockForm.model.basePrice;
+    total += this.infantCount * this.blockForm.model.infantPrice;
+    total += this.noneOptionCount * this.blockForm.model.basePrice;
 
-    total -= noneOptionFoodCount * this.data.model.foodPrice;
-    total -= noneOptionRoomCount * this.data.model.roomPrice;
-    total -= noneOptionBusCount * this.data.model.busPrice;
+    total -= noneOptionFoodCount * this.blockForm.model.foodPrice;
+    total -= noneOptionRoomCount * this.blockForm.model.roomPrice;
+    total -= noneOptionBusCount * this.blockForm.model.busPrice;
     return total;
   }
 
   updateTotalPrice() {
-    this.data.model.totalPrice = this.getTotal(this.passengerGridService.rows);
-    this.data.updateForm(this.data.model);
+    this.blockForm.model.totalPrice = this.getTotal(this.passengerGridService.rows);
+    this.blockForm.updateForm(this.blockForm.model);
   }
 
   updateCount() {

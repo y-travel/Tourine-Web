@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
-import { Block, FormFactory, TeamMember } from '../../../@core/data/models';
+import { Block, FormFactory } from '../../../@core/data/models';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
 import { TeamGridService } from '../team-grid.service';
@@ -10,7 +10,6 @@ import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.c
 import { PersonService } from '../../../@core/data/person.service';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
-import { Person } from '../../../@core/data/models/client.model';
 
 @Component({
   selector: 'app-block-list',
@@ -60,17 +59,11 @@ export class TeamListComponent implements OnInit, Dialog {
     this.data.model.infantPrice = team.infantPrice;
     this.data.model.basePrice = team.basePrice;
     this.data.model.totalPrice = team.totalPrice;
-
-    const form = this.formFactory.createAddPassengersForm(this.data.model);
+    const block = this.data.model;
     const rows = this.personService.getTeamMembers(team.id).subscribe(x => {
-      const ref = this.dialogService.openPopup(PassengerUpsertComponent, form);
-      const list: TeamMember[] = x.passengers;
-      let buyer = <Person>{};
-      buyer = team.buyer;
-      (<any>ref.componentInstance).passengerGridService.setRow(list);
+      const ref = this.dialogService.openPopup(PassengerUpsertComponent, {buyer: team.buyer, teamId: team.id, block: block});
+      (<any>ref.componentInstance).passengerGridService.setRow(x.passengers);
       (<any>ref.componentInstance).updateCount();
-      (<any>ref.componentInstance).buyer = buyer;
-      (<any>ref.componentInstance).teamId = team.id; //for upsert-> edit
       ref.afterClosed().subscribe(x => this.dialogInstance.close());
     });
 
