@@ -15,8 +15,7 @@ export class AuthService {
 
   constructor(private apiService: ApiService,
               @Inject(UTILS) private utils: AppUtils,
-              @Inject(APP_CONFIG) private config: AppConfig,) {
-  }
+              @Inject(APP_CONFIG) private config: AppConfig) {}
 
   isAuthenticated() {
     return this.config.isDev() || !this.utils.isNullOrUndefined(this.person);

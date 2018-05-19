@@ -9,6 +9,7 @@
     "build:sync": "gulp build.sync --color --env-config prod --build-type prod",
     "build:prod": "gulp build.prod --color --env-config prod --build-type prod",
     "gulp": "gulp",
+    "test": "ng test",
     "lint": "gulp tslint",
     "postinstall": "gulp print.banner",
     "reinstall": "yarn  --pure-lockfile"
@@ -79,6 +80,13 @@
     "husky": "0.13.3",
     "is-ci": "^1.0.10",
     "isstream": "^0.1.2",
+    "jasmine-core": "~2.8.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~2.0.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "^1.2.1",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
     "lite-server": "^2.3.0",
     "merge-stream": "^1.0.1",
     "minimatch": "^3.0.4",
@@ -125,6 +133,7 @@
     "@angular/service-worker": "^5.0.1",
     "@ngx-translate/core": "^8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
+    "@types/jasmine": "^2.8.7",
     "ag-grid": "^16.0.0",
     "ag-grid-angular": "^16.0.0",
     "ag-grid-enterprise": "^16.0.0",
@@ -137,11 +146,13 @@
     "jalali-moment": "^3.1.1",
     "jquery": "^3.2.1",
     "jszip": "^3.1.4",
+    "protractor": "~5.1.2",
     "material-icons": "^0.1.0",
     "normalize.css": "6.0.0",
     "rxjs": "^5.5.2",
     "tether": "1.4.0",
     "web-animations-js": "2.2.5",
-    "zone.js": "0.8.18"
+    "xlsx": "^0.12.12",
+    "zone.js": "^0.8.19"
   }
 }

@@ -1,8 +1,8 @@
 <mat-toolbar dir="ltr" data-visibility="autoHide">
   <div *ngFor="let item of params.items">
     <button [appDialog]="item.alertData" matTooltip="{{item.title|translate}}" mat-mini-fab class="toolbar-item" *ngIf="visibilityFunction(item)"
-      [style.color]="item.color" [class.disabled]="disablityFunction(item)" (confirmClick)="doCommand(item)" [disabled]="disablityFunction(item)">
-      <mat-icon >{{item.icon}}</mat-icon>
+            [style.color]="item.color" [class.disabled]="disablityFunction(item)" (confirmClick)="doCommand(item)" [disabled]="disablityFunction(item)">
+      <mat-icon>{{item.icon}}</mat-icon>
     </button>
   </div>
 </mat-toolbar>
