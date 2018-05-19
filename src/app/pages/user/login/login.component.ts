@@ -8,7 +8,7 @@ import { SpinnerService } from '../../../@core/utils/spinner.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
+  templateUrl: './login.component.gen.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
