@@ -10,7 +10,7 @@ import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
-  selector: 'app-leader-list',
+  selector: 'trn-leader-list',
   templateUrl: './leader-list.component.html',
   styleUrls: ['./leader-list.component.scss'],
   providers: [LeaderGridService],

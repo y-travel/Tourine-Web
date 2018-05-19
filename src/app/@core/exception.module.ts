@@ -5,11 +5,33 @@ import { APP_CONFIG, AppConfig } from './utils/app.config';
 import { ResponseStatus } from './data/models/server.dtos';
 import { HttpErrorResponse } from '@angular/common/http';
 
+export class TrnHttpException {
+  errorCode: string;
+  message: string;
+  responseStatus: ResponseStatus;
+  userVisible = false;
+
+  constructor(error: any, public statusCode: number) {
+    if (error && error.responseStatus) {
+      this.responseStatus = error.responseStatus;
+      this.message = `${this.responseStatus.errorCode}:${this.responseStatus.message}`;
+      this.errorCode = this.responseStatus.errorCode;
+    } else {
+      this.message = this.statusCode.toString();
+    }
+
+    if (statusCode === 0 || statusCode >= 500) {
+      this.userVisible = true;
+      this.message = 'msg.connectionError';
+    }
+  }
+}
+
 //
 
 @Injectable()
 export class ExceptionHandler implements ErrorHandler {
-  private dialogService: DialogService
+  private dialogService: DialogService;
 
   constructor(@Inject(LOGGER) private loggerService: LoggerService,
               @Inject(APP_CONFIG) private config: AppConfig,
@@ -24,15 +46,18 @@ export class ExceptionHandler implements ErrorHandler {
   }
 
   interceptError(error: any) {
-    if (error.rejection)//check async await exception
+    if (error.rejection) {//check async await exception
       error = error.rejection;
+    }
 
     if (error instanceof HttpErrorResponse) {
       const exception = new TrnHttpException(error.error, error.status);
-      if (this.config.isDev() || exception.userVisible)
+      if (this.config.isDev() || exception.userVisible) {
         this.dialogService.showSnack(exception.message);
-    } else if (this.config.isDev())
+      }
+    } else if (this.config.isDev()) {
       this.dialogService.showSnack(error.toString());
+           }
   }
 
   private findOriginalError(error: any): any {
@@ -51,25 +76,4 @@ export class ExceptionHandler implements ErrorHandler {
 })
 export class ExceptionModule {
 
-}
-
-export class TrnHttpException {
-  errorCode: string;
-  message: string;
-  responseStatus: ResponseStatus;
-  userVisible = false;
-
-  constructor(error: any, public statusCode: number) {
-    if (error && error.responseStatus) {
-      this.responseStatus = error.responseStatus;
-      this.message = `${this.responseStatus.errorCode}:${this.responseStatus.message}`;
-      this.errorCode = this.responseStatus.errorCode;
-    } else
-      this.message = this.statusCode.toString();
-
-    if (statusCode === 0 || statusCode >= 500) {
-      this.userVisible = true;
-      this.message = 'msg.connectionError';
-    }
-  }
 }

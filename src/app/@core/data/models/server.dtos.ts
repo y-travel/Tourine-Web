@@ -2,7 +2,6 @@ import {
   Agency,
   Block,
   Destination,
-  IPost,
   IReturn,
   IReturnVoid,
   Person,
@@ -25,8 +24,7 @@ import {
 import { IncomeStatus, OptionType } from './enums';
 
 
-export class HttpResult
-{
+export class HttpResult {
   response: Object;
 }
 
@@ -290,7 +288,7 @@ export class PassengerReplacement implements IReturn<TourTeamMember> {
   tourId: string;
   destTourId: string;
   agencyId: string;
-  passengers: TeamMember[]
+  passengers: TeamMember[];
 
   createResponse() {
     return new TourTeamMember();
@@ -629,7 +627,7 @@ export class UpdateAgency {
 @Route('/tours/{TourId}/agencies/{LoadChilds}')
 export class GetTourAgency implements IReturn<Array<Tour>> {
   tourId: string;
-  loadChild: boolean = false;
+  loadChild = false;
 
   createResponse() {
     return new Array<Tour>();
@@ -642,7 +640,7 @@ export class GetTourAgency implements IReturn<Array<Tour>> {
 
 @Route('/agencies/{IsAll}', 'GET')
 export class GetAgencies extends QueryDb<Agency> implements IReturn<QueryResponse<Agency>> {
-  isAll: boolean = true;
+  isAll = true;
 
   createResponse() {
     return new QueryResponse<Agency>();
@@ -667,7 +665,7 @@ export class FindAgency extends QueryDb<Agency> implements IReturn<QueryResponse
 }
 
 @Route('/auth', 'POST')
-export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
+export class Authenticate implements IReturn<AuthenticateResponse> {
   // @DataMember(Order=1)
   provider: string;
 
@@ -821,7 +819,7 @@ export class GetTourTicket implements IReturn<TourPassengers> {
 export class GetTourVisa implements IReturn<TourPassengers> {
 
   tourId: string;
-  have: boolean = true;
+  have = true;
 
   createResponse() {
     return new TourPassengers();
@@ -845,9 +843,14 @@ export class GetTourBuyers implements IReturn<Array<TourBuyer>> {
     return 'GetTourBuyers';
   }
 }
-@Route("/download/ticketReportTemplate", "GET")
-export class GetTicketReportTemplate implements IReturn<HttpResult>
-{
-  createResponse() { return new HttpResult(); }
-  getTypeName() { return "GetTicketReportTemplate"; }
+
+@Route('/download/ticketReportTemplate', 'GET')
+export class GetTicketReportTemplate implements IReturn<HttpResult> {
+  createResponse() {
+    return new HttpResult();
+  }
+
+  getTypeName() {
+    return 'GetTicketReportTemplate';
+  }
 }

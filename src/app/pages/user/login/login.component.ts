@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { SpinnerService } from '../../../@core/utils/spinner.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'trn-login',
   templateUrl: './login.component.gen.html',
   styleUrls: ['./login.component.scss']
 })
@@ -27,8 +27,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if (this.formService.form.invalid)
+    if (this.formService.form.invalid) {
       return;
+    }
     this.authService.authorize(this.formService.model)
       .then(() => this.router.navigate(['/pages'])
         , () => this.errorMessage = 'msg.invalidUsernameOrPassword');

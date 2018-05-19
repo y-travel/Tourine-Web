@@ -2,7 +2,7 @@ include ../../../mixin
 .modal-header(mat-dialog-title)
   .modal-title
     | {{"agency.upsert"|translate}}
-.right.modal-body(dir="rtl", [style.width.px]="400", autoTranslate)
+.right.modal-body(dir="rtl", [style.width.px]="400", trnAutoTranslate)
   // width set for IE
   form([formGroup]="data.form", fxLayout="column")
     div(fxLayout="row", formGroupName="agency")

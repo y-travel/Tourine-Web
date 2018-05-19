@@ -5,10 +5,10 @@ import { MENU_ITEMS } from './pages-menu';
 @Component({
   selector: 'trn-pages',
   template: `
-    <tourine-layout>
+    <trn-tourine-layout>
       <trn-menu [items]="menu"></trn-menu>
       <router-outlet></router-outlet>
-    </tourine-layout>
+    </trn-tourine-layout>
   `,
 })
 export class PagesComponent {

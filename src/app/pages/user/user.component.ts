@@ -4,13 +4,13 @@ import { SpinnerService } from '../../@core/utils/spinner.service';
 import { AuthService } from '../../@core/utils/auth.service';
 
 @Component({
-  selector: 'app-user',
+  selector: 'trn-user',
   template: `
-    <tourine-layout layoutType="layout2">
+    <trn-tourine-layout layoutType="layout2">
       <div class="layout2-content">
         <router-outlet></router-outlet>
       </div>
-    </tourine-layout>`,
+    </trn-tourine-layout>`,
 })
 export class UserComponent implements OnInit {
 
@@ -24,10 +24,11 @@ export class UserComponent implements OnInit {
     this.spinnerService.showSpinner();
     this.spinnerService.registerLoader(
       this.authService.authorize().then(res => {
-        if (res)
+        if (res) {
           this.router.navigate(['/pages']);
-        else
+        } else {
           this.router.navigate(['/user/login']);
+        }
       }, () => console.log('failed'))
     );
   }

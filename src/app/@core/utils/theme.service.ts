@@ -1,8 +1,8 @@
-import { Injectable, Type } from "@angular/core";
-import { ReplaySubject } from "rxjs/ReplaySubject";
-import { Subject } from "rxjs/Subject";
-import { Observable } from "rxjs/Rx";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Injectable, Type } from '@angular/core';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ThemeService {
@@ -16,7 +16,7 @@ export class ThemeService {
   private changeWindowWidth$ = new ReplaySubject<number>(2);
 
   constructor() {
-    this.changeTheme("default");//@TODO define in provider
+    this.changeTheme('default'); //@TODO define in provider
   }
 
   changeTheme(name: string): void {

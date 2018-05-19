@@ -2,10 +2,10 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Agency, Block, Tour } from '../../../@core/data/models/client.model';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatSelect, MatStepper } from '@angular/material';
-import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
+import { ModalInterface, DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { AgencyService } from '../../../@core/data/agency.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { AgencyUpsertComponent } from '../agency-upsert/agency-upsert.component';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
 import { BlockUpsertViewModel } from './block-upsert.view-model';
@@ -15,12 +15,12 @@ import { TourService } from '../../../@core/data/tour.service';
 import { Serializable } from '../../../@core/utils/serializable';
 
 @Component({
-  selector: 'app-block-upsert',
+  selector: 'trn-block-upsert',
   templateUrl: './block-upsert.component.gen.html',
   styleUrls: ['./block-upsert.component.scss'],
   providers: [BlockUpsertViewModel],
 })
-export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
+export class BlockUpsertComponent implements OnInit, ModalInterface, ModalInterface {
   dialogMode: DialogMode;
   DialogMode = DialogMode;
   freeSpace: number;
@@ -58,8 +58,9 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
   }
 
   async next(stepper: MatStepper) {
-    if (!this.vModel.isValid(stepper.selectedIndex))
+    if (!this.vModel.isValid(stepper.selectedIndex)) {
       return;
+    }
     if (stepper.selectedIndex !== 1) {
       stepper.next();
       return;
@@ -88,8 +89,9 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, Dialog {
     ref.afterClosed().subscribe(x => {
       if (x > 0) {
         this.addPassengerBtn.disabled = true;
-      } else
+      } else {
         this.addPassengerBtn.disabled = false;
+      }
     });
   }
 }

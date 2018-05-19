@@ -9,16 +9,18 @@ export class RouterGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   checkLogin(url: string) {
-    if (this.authService.isAuthenticated())
+    if (this.authService.isAuthenticated()) {
       return true;
-    else
+    } else {
       this.authService.authorize()
         .then(res => {
-          if (res)
-            this.router.navigate([url]); //@TODO should be redirect to last page
-          else
+          if (res) {
+            this.router.navigate([url]);
+          } else {
             this.router.navigate(['/user/login']);
+          }
         });
+    }
     return false;
   }
 

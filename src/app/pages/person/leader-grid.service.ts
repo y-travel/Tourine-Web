@@ -142,9 +142,10 @@ export class LeaderGridService {
   }
 
   remove(item: any) {
-    let index = this.rows.indexOf(item);
-    if (index <= -1)
+    const index = this.rows.indexOf(item);
+    if (index <= -1) {
       return;
+    }
     this.rows.splice(index, 1);
     this.gridApi.setRowData(this.rows);
   }

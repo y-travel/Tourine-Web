@@ -6,7 +6,7 @@ import {
   DeleteTour, GetAgencies, GetBlocks, GetDestinations, GetLeaders, GetPlaces, GetTourBuyers, GetTourOptions, GetTours, GetTourTicket, GetTourVisa,
   UpsertTour
 } from './models/server.dtos';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class TourService {

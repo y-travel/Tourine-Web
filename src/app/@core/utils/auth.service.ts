@@ -22,9 +22,11 @@ export class AuthService {
   }
 
   async authorize(user?: User) {
-    if (user)
-      if (!await this.authenticate(user))
+    if (user) {
+      if (!await this.authenticate(user)) {
         throw new Error('user not found');
+      }
+    }
 
     const dto = new GetCurrentPerson();
     return await this.apiService.send(dto).map(person => {

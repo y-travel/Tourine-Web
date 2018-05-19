@@ -4,18 +4,18 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormFactory } from '../../../@core/data/models';
 import { AppUtils, UTILS } from '../../../@core/utils';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
-import { Dialog } from '../../../@core/utils/dialog.service';
+import { ModalInterface } from '../../../@core/utils/dialog.service';
 import { DialogMode } from '../../../@core/data/models/enums';
 import { PersonUpsertViewModel } from './person-upsert.view-model';
 import { PersonService } from '../../../@core/data/person.service';
 
 @Component({
-  selector: 'app-person-upsert',
+  selector: 'trn-person-upsert',
   templateUrl: './person-upsert.component.gen.html',
   styleUrls: ['./person-upsert.component.scss'],
   providers: [PersonUpsertViewModel],
 })
-export class PersonUpsertComponent implements Dialog {
+export class PersonUpsertComponent implements ModalInterface {
   dialogMode: DialogMode;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,16 +31,18 @@ export class PersonUpsertComponent implements Dialog {
   }
 
   onNationalCodeChanged(inputBox: any) {
-    if (this.dialogMode !== DialogMode.Create)
+    if (this.dialogMode !== DialogMode.Create) {
       return;
+    }
     this.vModel.findPerson(inputBox.value);
   }
 
   close() {
-    if (this.vModel.isValid())
+    if (this.vModel.isValid()) {
       this.personService.upsertLeader(this.vModel.model).subscribe(x => {
         this.dialogInstance.close();
       });
+    }
   }
 
   onBirthDateChanged(event: Date) {

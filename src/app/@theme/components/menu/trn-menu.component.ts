@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Router } from "@angular/router";
-import { MenuService } from "./menu.service";
+import { Router } from '@angular/router';
+import { MenuService } from './menu.service';
 
 @Component({
   selector: 'trn-menu',
@@ -11,7 +11,7 @@ export class TrnMenuComponent {
 
   @Input() items = [];
 
-  constructor(private router: Router,private menuService:MenuService) {
+  constructor(private router: Router, private menuService: MenuService) {
   }
 
   navigate(link: string) {

@@ -2,7 +2,7 @@ include ../../../mixin
 .modal-header(mat-dialog-title)
   .modal-title
     | {{"person.upsert"|translate}}
-.modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="400", autoTranslate)
+.modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="400", trnAutoTranslate)
   form([formGroup]="data.form.get('person')")
     mat-horizontal-stepper(#stepper, [linear]="true")
       mat-step([stepControl]="data.form", label="{{'steps'|translate:({value:'first'|translate})}}")

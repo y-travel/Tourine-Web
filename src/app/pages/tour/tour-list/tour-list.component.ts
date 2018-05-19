@@ -21,7 +21,7 @@ import { FileService } from '../../../@core/data/file.service';
 import { GetTicketReportTemplate } from '../../../@core/data/models/server.dtos';
 
 @Component({
-  selector: 'tour-list',
+  selector: 'trn-tour-list',
   templateUrl: './tour-list.component.gen.html',
   styleUrls: ['./tour-list.component.scss'],
   providers: [TourGridService],
@@ -120,7 +120,7 @@ export class TourListComponent {
   }
 
   testFile() {
-    let dto = new GetTicketReportTemplate();
+    const dto = new GetTicketReportTemplate();
     this.fileService.get(dto).subscribe(x => {
       console.log(x);
     });
@@ -136,8 +136,9 @@ export class TourListComponent {
   }
 
   tourDelete(tour: any) {
-    if (!tour)
+    if (!tour) {
       return;
+    }
     this.tourService.deleteTour(tour).subscribe(() => this.reloadTourList());
   }
 
@@ -151,8 +152,9 @@ export class TourListComponent {
   }
 
   passengerUpsert(block = new Block()) {
-    if (block.freeSpace === 0)
+    if (block.freeSpace === 0) {
       return;
+    }
     const ref = this.dialogService.openPopup(PassengerUpsertComponent, {block: block});
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }

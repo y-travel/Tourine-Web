@@ -42,7 +42,7 @@ export enum DialogButtonType {
   Neutral = 2,
 }
 
-//cos: we can't access enums inside html files
+// cos: we can't access enums inside html files
 export class EnumsDefinition {
   DialogMode = DialogMode;
   OptionStatus = OptionStatus;

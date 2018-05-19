@@ -1,14 +1,15 @@
-import { Directive, Input } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
-import { MatFormFieldControl } from "@angular/material";
-import { Observable } from "rxjs/Rx";
-import { NgControl } from "@angular/forms";
+/* tslint:disable */
+import { Directive, Input } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { MatFormFieldControl } from '@angular/material';
+import { Observable } from 'rxjs';
+import { NgControl } from '@angular/forms';
 
 @Directive({
-  selector: "input[trnInput]",
+  selector: 'input[trnInput]',
   host: {
-    "class": "form-control mat-input-element",
-    "[placeholder]": "placeholder"
+    'class': 'form-control mat-input-element',
+    '[placeholder]': 'placeholder'
   }
 })
 export class TrnInputDirective implements MatFormFieldControl<any> {
@@ -24,7 +25,7 @@ export class TrnInputDirective implements MatFormFieldControl<any> {
   errorState: boolean;
   controlType: string;
 
-  _placeholder = "";
+  _placeholder = '';
 
   constructor(private translateService: TranslateService) {
   }
@@ -35,8 +36,9 @@ export class TrnInputDirective implements MatFormFieldControl<any> {
   }
 
   set placeholder(value: string) {
-    if (value)
+    if (value) {
       value = this.translateService.instant(value);
+    }
     this._placeholder = value;
   }
 

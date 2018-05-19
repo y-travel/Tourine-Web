@@ -7,7 +7,7 @@ import { CellHeaderComponent } from '../../../shared/trn-ag-grid/cell-header/cel
 import { Dictionary, Place } from '../../../@core/data/models';
 import { FormatterService } from '../../../@core/utils/formatter.service';
 import { CellDetailComponent } from '../../../shared/trn-ag-grid/cell-detail/cell-detail.component';
-import { Agency, Tour, Destination } from '../../../@core/data/models/client.model';
+import { Agency, Destination, Tour } from '../../../@core/data/models/client.model';
 import { AgGridNg2 } from 'ag-grid-angular';
 import { CellToolbarComponent, ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 
@@ -30,8 +30,8 @@ export class PassengerReplacementTourGridService {
   toolbarBlockItems: ToolbarItem[] = [];
 
   constructor(private tourService: TourService,
-    private translateService: TranslateService,
-    private formatter: FormatterService) {
+              private translateService: TranslateService,
+              private formatter: FormatterService) {
     this.init();
   }
 
@@ -73,10 +73,7 @@ export class PassengerReplacementTourGridService {
         minWidth: 100,
         maxWidth: 100,
         field: 'tourDetail.startDate',
-        getQuickFilterText: (params: any) => {
-          var str = this.formatter.getDateFormat(params.value);
-          return str;
-        },
+        getQuickFilterText: (params: any) => this.formatter.getDateFormat(params.value),
         valueFormatter: (params: any) => this.formatter.getDateFormat(params.value),
       },
       {
@@ -99,7 +96,7 @@ export class PassengerReplacementTourGridService {
       },
     ];
 
-    this.frameworkComponents = { cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent };
+    this.frameworkComponents = {cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent};
   }
 
   loadPlaces() {
@@ -140,7 +137,7 @@ export class PassengerReplacementTourGridService {
 
   getTourExcludedSource(sourceTourId: string) {
     this.tourService.getList().subscribe(tours => {
-      this.rows = tours.filter(x => x.id != sourceTourId);
+      this.rows = tours.filter(x => x.id !== sourceTourId);
       this.gridApi.setRowData(this.rows);
     });
   }

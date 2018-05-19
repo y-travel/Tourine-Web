@@ -3,7 +3,7 @@ import { ApiService } from './api.service';
 import { Agency, PersonAgency } from './models/client.model';
 import { Serializable } from '../utils/serializable';
 import { CreateAgency, GetAgencies } from './models/server.dtos';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { GetTourFreeSpace } from './models';
 
 @Injectable()

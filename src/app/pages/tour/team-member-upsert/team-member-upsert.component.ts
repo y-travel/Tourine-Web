@@ -1,20 +1,20 @@
+/* tslint:disable */
 import { Component, Inject, OnInit } from '@angular/core';
-import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { MAT_DIALOG_DATA, MatCheckboxChange, MatDialogRef } from '@angular/material';
 import { FormFactory, OptionType, Person, PersonIncome, TeamMember } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
-import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
+import { DialogService, ModalInterface } from '../../../@core/utils/dialog.service';
 import { AppUtils, UTILS } from '../../../@core/utils';
 import { PersonService } from '../../../@core/data/person.service';
 import { DialogMode, PersonType } from '../../../@core/data/models/enums';
 
 @Component({
-  selector: 'app-team-member-upsert',
+  selector: 'trn-team-member-upsert',
   templateUrl: './team-member-upsert.component.gen.html',
   styleUrls: ['./team-member-upsert.component.scss']
 })
 
-export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog {
+export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalInterface {
   dialogMode: DialogMode;
   optionType = OptionType;
 
@@ -32,10 +32,11 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
 
   checkChanged(ev: MatCheckboxChange, type: OptionType) {
     const index = this.data.model.personIncomes.findIndex(x => x.optionType === type);
-    if (index < 0)
+    if (index < 0) {
       this.data.model.personIncomes.push(new PersonIncome(type));
-    else
+    } else {
       this.data.model.personIncomes[index].optionType = OptionType.Empty;
+    }
   }
 
   optionTypes() {
@@ -49,8 +50,9 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
     this.service.GetPerson(natCode.value).subscribe(
       person => {
         const team = new TeamMember();
-        if (person.isInfant)
+        if (person.isInfant) {
           team.personIncomes.forEach(x => x.optionType = OptionType.Empty);
+        }
         person.type |= PersonType.Passenger;
         this.data.updateForm(Object.assign(team, {person: person, personId: person.id}));
       },
@@ -65,18 +67,19 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
 
   close() {
     if (this.data.form.valid) {
-      if (this.data.model.person.id !== null )
+      if (this.data.model.person.id !== null) {
         this.service.UpdatePerson(this.data.model.person).subscribe(x => {
           this.data.model.person = x;
           this.data.model.personId = x.id;
           this.dialogInstance.close(this.data.model);
         });
-      else
+      } else {
         this.service.AddPerson(this.data.model.person).subscribe(x => {
           this.data.model.person = x;
           this.data.model.personId = x.id;
           this.dialogInstance.close(this.data.model);
         });
+      }
     }
 
   }
@@ -90,16 +93,14 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, Dialog
       this.data.model.person.isInfant = true;
       this.data.model.person.isUnder5 = false;
       this.data.model.personIncomes.forEach(element => element.optionType = OptionType.Empty);
-    }
-    else if (age < 5) {
+    } else if (age < 5) {
       this.data.model.person.isUnder5 = true;
       this.data.model.person.isInfant = false;
       //@TODO: ughly
       this.data.model.personIncomes[0].optionType = OptionType.Bus;
       this.data.model.personIncomes[1].optionType = OptionType.Room;
       this.data.model.personIncomes[2].optionType = OptionType.Food;
-    }
-    else {
+    } else {
       //@TODO: ughly
       this.data.model.person.isUnder5 = false;
       this.data.model.person.isInfant = false;

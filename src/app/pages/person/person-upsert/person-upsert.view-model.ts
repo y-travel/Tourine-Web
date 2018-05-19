@@ -25,8 +25,9 @@ export class PersonUpsertViewModel {
   }
 
   isValid() {
-    if (this.form.valid)
+    if (this.form.valid) {
       return true;
+    }
     this.form.markAllFieldAsTouch();
     return false;
   }

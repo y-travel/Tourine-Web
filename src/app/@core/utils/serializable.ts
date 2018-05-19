@@ -19,9 +19,11 @@ export class Serializable {
   }
 
   static fromJSON<T>(model: T, json, checkItem = false): T {
-    for (const propName in json)
-      if (!checkItem || (model.hasOwnProperty(propName) && Object.getOwnPropertyDescriptor(model, propName)))
+    for (const propName in json) {
+      if (!checkItem || (model.hasOwnProperty(propName) && Object.getOwnPropertyDescriptor(model, propName))) {
         model[propName] = json[propName];
+      }
+    }
     return model;
   }
 

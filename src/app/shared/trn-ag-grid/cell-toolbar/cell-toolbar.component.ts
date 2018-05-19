@@ -3,7 +3,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
-  selector: 'app-cell-toolbar',
+  selector: 'trn-cell-toolbar',
   templateUrl: './cell-toolbar.component.html',
   styleUrls: ['./cell-toolbar.component.scss'],
 })

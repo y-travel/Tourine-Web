@@ -8,7 +8,7 @@ import { CoreModule } from './@core/core.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
-import { HttpInterceptorService } from "./@core/data/http-interceptor.service";
+import { HttpInterceptorService } from './@core/data/http-interceptor.service';
 import { MAT_DATE_LOCALE, MatInputModule } from '@angular/material';
 
 @NgModule({

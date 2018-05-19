@@ -58,7 +58,7 @@ export class TourPassengersGridService {
       },
       {
         headerName: 'person.nameAndFamily',
-        valueGetter: (params: any) => params.data.person.gender == true
+        valueGetter: (params: any) => params.data.person.gender === true
           ? 'آقای ' + params.data.person.name + ' ' + params.data.person.family
           : 'خانم ' + params.data.person.name + ' ' + params.data.person.family,
       },
@@ -114,7 +114,7 @@ export class TourPassengersGridService {
 
   getPerson(model: Person) {
     this.personService.getPerson(model).subscribe((persons: Person[]) => {
-      console.log(persons)
+      console.log(persons);
     });
   }
 
@@ -141,8 +141,9 @@ export class TourPassengersGridService {
 
   remove(item: any) {
     const index = this.rows.indexOf(item);
-    if (index <= -1)
+    if (index <= -1) {
       return;
+    }
     this.rows.splice(index, 1);
     this.gridApi.setRowData(this.rows);
   }

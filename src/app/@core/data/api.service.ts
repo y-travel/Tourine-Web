@@ -1,6 +1,6 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { DataService } from './data.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 //
 import { Serializable } from '../utils/serializable';
 import { IReturn } from './models/index';
@@ -40,8 +40,9 @@ export class ApiService extends DataService {
     return this.request(this.utils.getHttpMethod(data), data.getTypeName(), Serializable.toJSON(data))
       .map(res => {
         const type = data.createResponse();
-        if (type)
+        if (type) {
           return Serializable.fromJSON(type, res);
+        }
         return res;
       });
   }

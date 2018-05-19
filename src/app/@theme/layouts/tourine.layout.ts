@@ -14,7 +14,7 @@ declare type LayoutType = 'layout1' | 'layout2';
 
 // TODO: move layouts into the framework
 @Component({
-  selector: 'tourine-layout',
+  selector: 'trn-tourine-layout',
   templateUrl: 'tourine.layout.html',
   styleUrls: ['tourine.layout.scss'],
 })

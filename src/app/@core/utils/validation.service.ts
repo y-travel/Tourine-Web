@@ -5,6 +5,18 @@ import { AbstractControl, FormGroup, ValidatorFn, Validators } from '@angular/fo
 import { Dictionary, ResponseError } from '../data/models';
 import { AppUtils, UTILS } from './app-utils';
 
+export const ValidationMessage: Dictionary<string> = {
+  min: 'validation.min',
+  max: 'validation.max',
+  minlength: 'validation.minlength',
+  maxlength: 'validation.maxlength',
+  required: 'validation.required',
+  pattern: 'validation.pattern',
+  greaterthan: 'validation.greaterthan',
+  countbiggerthan: 'validation.countbiggerthan',
+  areequal: 'validation.areEqual',
+};
+
 @Injectable()
 export class ValidationService {
 
@@ -22,44 +34,36 @@ export class ValidationService {
 
         Object.keys(control.errors[errorName]).forEach(x => {
           const key = control.errors[errorName][x];
-          if (!this.utils.isNullOrUndefined(key))
+          if (!this.utils.isNullOrUndefined(key)) {
             errorMessage = errorMessage.replace(`{{${x}}}`, this.translate.instant(key.toString()));
+          }
         });
         errorMessage = errorMessage.replace('{{field}}', this.translate.instant(controlName));
         this.setErrorMessage(control, errorMessage);
-      }
-      else
+      } else {
         this.setErrorMessage(control, '');
+      }
     }
 
-    if (newErrors)
+    if (newErrors) {
       for (const error of newErrors) {
         const control = form.controls[error.fieldName];
-        if (control)
+        if (control) {
           this.setErrorMessage(control, error.message);
+        }
       }
+    }
   }
 
   private setErrorMessage(control: AbstractControl, errorMessage: string) {
     const property = Reflect.getOwnPropertyDescriptor(control, 'errorMessage');
-    if (property)
+    if (property) {
       Reflect.set(control, 'errorMessage', errorMessage);
-    else
+    } else {
       Reflect.defineProperty(control, 'errorMessage', {value: errorMessage, writable: true});
+    }
   }
 }
-
-export const ValidationMessage: Dictionary<string> = {
-  min: 'validation.min',
-  max: 'validation.max',
-  minlength: 'validation.minlength',
-  maxlength: 'validation.maxlength',
-  required: 'validation.required',
-  pattern: 'validation.pattern',
-  greaterthan: 'validation.greaterthan',
-  countbiggerthan: 'validation.countbiggerthan',
-  areequal: 'validation.areEqual',
-};
 
 export class CustomValidations {
   static isEmptyInputValue(value: any): boolean {
@@ -83,12 +87,14 @@ export class CustomValidations {
 
   static conditionalRequired(field: AbstractControl, validations: ValidatorFn[]): ValidatorFn {
     return (control: AbstractControl): Dictionary<any> => {
-      if (!Validators.required(field))
+      if (!Validators.required(field)) {
         for (const validator of validations) {
           const res = validator(control);
-          if (res)
+          if (res) {
             return res;
+          }
         }
+      }
       return null;
     };
   }

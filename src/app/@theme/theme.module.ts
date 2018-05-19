@@ -18,7 +18,8 @@ import {
   MatListModule,
   MatSelectModule,
   MatSidenavModule,
-  MatSlideToggleModule, MatSnackBarModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
   MatStepperModule,
   MatTabsModule,
   MatToolbarModule,
@@ -107,7 +108,7 @@ const THEME_PROVIDERS = [
 @NgModule({
   imports: [...BASE_MODULES, ...MAT_MODULES, ...OTHER_MODULES, AppTranslationModule],
   exports: [...BASE_MODULES, ...MAT_MODULES, ...OTHER_MODULES, ...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES,],
+  declarations: [...COMPONENTS, ...PIPES],
   entryComponents: [DialogComponent],
 })
 export class ThemeModule {

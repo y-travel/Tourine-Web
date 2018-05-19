@@ -1,12 +1,11 @@
-﻿import { Inject, Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs/Rx';
+﻿import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 //
 import { ResponseStatus } from '../data/models/index';
 import { Serializable } from '../utils/serializable';
 import { RestError, RestErrorType } from '../utils/rest-error';
 import { HttpMethod } from './models/enums';
-import { APP_CONFIG, AppConfig } from '../utils/app.config';
 
 
 @Injectable()
@@ -21,7 +20,7 @@ export class DataService {
   onRequest = new Subject();
   headers: HttpHeaders;
 
-  private spinnerService: any = {}; //@TODO implement
+  private spinnerService: any = {}; // @TODO implement
   constructor(public http: HttpClient) {
   }
 
@@ -62,17 +61,19 @@ export class DataService {
 
       try {
         const solvedError = error.body;
-        if (solvedError.ResponseStatus)
+        if (solvedError.ResponseStatus) {
           this.setError(solvedError.ResponseStatus);
-        else
+        } else {
           this.setException(solvedError);
+        }
 
       } catch (e) {
         this.setException(error.body);
       }
 
-    } else
+    } else {
       this.setException(error);
+    }
 
   }
 

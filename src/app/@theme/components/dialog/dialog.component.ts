@@ -6,10 +6,9 @@ import { ModalInterface } from '../modal.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'app-dialog',
+  selector: 'trn-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  // encapsulation: ViewEncapsulation.None,
 })
 export class DialogComponent {
   buttons: DialogButton[];
@@ -17,17 +16,19 @@ export class DialogComponent {
   constructor(private translate: TranslateService,
               @Inject(ENUMS) public enums: EnumsDefinition,
               @Inject(MAT_DIALOG_DATA) public data: AlertDialogData,
-              public dialogInstance: MatDialogRef<ModalInterface>,) {
+              public dialogInstance: MatDialogRef<ModalInterface>) {
 
-    if (data.applyButtonType === DialogButtonType.Neutral)
+    if (data.applyButtonType === DialogButtonType.Neutral) {
       throw new Error('Don\'t use neutral for apply button');
+    }
 
-    this.buttons = []
-    if (data.applyText)
+    this.buttons = [];
+    if (data.applyText) {
       this.buttons.push(<DialogButton>{
         content: data.applyText,
         type: data.applyButtonType
       });
+    }
 
     this.buttons.push(<DialogButton>{
       content: data.cancelText,

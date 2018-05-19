@@ -2,7 +2,7 @@ include ../../../mixin
 .modal-header(mat-dialog-title)
   .modal-title
     | {{ "passenger.upsert"|translate }}
-.right.modal-body(dir="rtl", [style.width.px]="1000", [style.height.px]="435", autoTranslate)
+.right.modal-body(dir="rtl", [style.width.px]="1000", [style.height.px]="435", trnAutoTranslate)
   mat-horizontal-stepper(#stepper, [linear]="true")
     mat-step([stepControl]="buyerForm", label="{{'steps'|translate:({value:'first'|translate})}}")
       form([formGroup]="buyerForm", (keydown.enter)="$event.preventDefault()")

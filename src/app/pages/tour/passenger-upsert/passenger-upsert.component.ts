@@ -1,5 +1,5 @@
 import { Component, Inject, ViewChild } from '@angular/core';
-import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
+import { DialogService, ModalInterface } from '../../../@core/utils/dialog.service';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatStepper } from '@angular/material';
 import { FormService, NewFormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
@@ -14,12 +14,12 @@ import { AlertDialogData } from '../../../@theme/components/dialog/dialog.compon
 import { Block } from '../../../@core/data/models/client.model';
 
 @Component({
-  selector: 'app-passenger-upsert',
+  selector: 'trn-passenger-upsert',
   templateUrl: './passenger-upsert.component.gen.html',
   styleUrls: ['./passenger-upsert.component.scss'],
   providers: [PassengerGridService]
 })
-export class PassengerUpsertComponent implements Dialog {
+export class PassengerUpsertComponent implements ModalInterface {
 
   dialogMode: DialogMode;
 
@@ -67,8 +67,9 @@ export class PassengerUpsertComponent implements Dialog {
     this.buyerForm = this.formFactory.createPersonForm(this.data.buyer);
     this.teamId = this.data.teamId;
     this.blockForm = this.formFactory.createAddPassengersForm(this.data.block);
-    if (this.blockForm.model.parentId)
+    if (this.blockForm.model.parentId) {
       this.blockForm.disableControl(true, ['basePrice', 'infantPrice']);
+    }
     this.buyerForm.disableControl(true, this.disablingItems);
     this.passengerGridService.initToolbar(this.toolbarItems);
     this.service.getTourFreeSpace(this.blockForm.model.id).subscribe(x => this.tourFreeSpace = +x);
@@ -92,8 +93,9 @@ export class PassengerUpsertComponent implements Dialog {
     }
     const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
     inst.afterClosed().subscribe(x => {
-      if (x == null)
+      if (x == null) {
         return;
+      }
       if (isAdd || (!isAdd && teamMember.person.id === x.person.id)) {
         this.passengerGridService.addItem(x);
         this.tourFreeSpace--;
@@ -121,36 +123,37 @@ export class PassengerUpsertComponent implements Dialog {
   nextStep(stepper: MatStepper) {
     if (stepper.selectedIndex === 0) {
       if (this.buyerForm.value.id === null) {
-        if (!this.buyerForm.valid)
+        if (!this.buyerForm.valid) {
           stepper.next();
-        else
+        } else {
           this.service.AddPerson(this.buyerForm.value).subscribe(x => {
             this.buyerForm.updateForm(x);
             this.buyerForm.disableControl(false, this.disablingItems);
             this.nextButton.disabled = false;
 
-            if (x.isInfant)
+            if (x.isInfant) {
               this.dialogService.openDialog('msg.buyerCannotBeInfant', null);
-            if (x.isUnder5)
+            }
+            if (x.isUnder5) {
               this.dialogService.openDialog('msg.buyerCannotBeUnder5', null);
-            else
+            } else {
               stepper.next();
+            }
           });
-      }
-      else {
-        if (this.buyerForm.value.isInfant)
+        }
+      } else {
+        if (this.buyerForm.value.isInfant) {
           this.dialogService.openDialog('msg.buyerCannotBeInfant', null);
-        else if (this.buyerForm.value.isUnder5)
+        } else if (this.buyerForm.value.isUnder5) {
           this.dialogService.openDialog('msg.buyerCannotBeUnder5', null);
-        else {
+        } else {
           if (this.buyerForm.valid) {
             this.nextButton.disabled = false;
             stepper.next();
           }
         }
       }
-    }
-    else {
+    } else {
       this.nextButton.disabled = true;
       stepper.next();
     }
@@ -160,19 +163,19 @@ export class PassengerUpsertComponent implements Dialog {
     stepper.previous();
     if (stepper.selectedIndex === 0) {
       this.nextButton.disabled = false;
-    }
-    else {
+    } else {
       this.nextButton.disabled = true;
     }
   }
 
   save() {
-    if (this.passengerGridService.rows.length === 0)
+    if (this.passengerGridService.rows.length === 0) {
       this.dialogInstance.close(this.passengerGridService.rows.length);
-    else
+    } else {
       this.service.upsertTeam(this.buyerForm.value, this.passengerGridService.rows, this.blockForm.model, this.teamId).subscribe(x => {
         this.dialogInstance.close(this.passengerGridService.rows.length);
       });
+    }
   }
 
   onPriceChange() {
@@ -192,12 +195,13 @@ export class PassengerUpsertComponent implements Dialog {
 
     members.forEach(person => {
 
-      if (person.person.isInfant)
+      if (person.person.isInfant) {
         this.infantCount++;
-      else if (person.person.isUnder5)
+      } else if (person.person.isUnder5) {
         this.noneOptionCount++;
-      else
+      } else {
         this.adultCount++;
+      }
 
       if (!person.person.isInfant) {
         noneOptionFoodCount += person.personIncomes.some(x => x.optionType === OptionType.Food) ? 0 : 1;

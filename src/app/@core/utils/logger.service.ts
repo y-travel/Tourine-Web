@@ -12,14 +12,14 @@ export class LoggerService {
     this.originConsoleError = console.error;
     //crack ag-grid license error
     console.error = (message?: any, ...optionalParams: any[]) => {
-      if (typeof message === 'string' && ( message.toLowerCase().includes('license') || message.includes('****')))
+        if (typeof message === 'string' && ( message.toLowerCase().includes('license') || message.includes('****'))) {
         return;
+        }
       this.originConsoleError(message, optionalParams);
     };
   }
 
   logInfo(message) {
-    console.info(message);
   }
 
   logError(message) {

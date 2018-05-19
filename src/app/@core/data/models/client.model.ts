@@ -27,27 +27,6 @@ export class Place extends Model {
   name = '';
 }
 
-export class Tour extends Model {
-  capacity: number;
-  infantPrice: number = undefined;
-  basePrice: number;
-  parentId: string;
-  parent: Tour;
-  code: string;
-  status: TourStatus;
-  options: TourOption[] = [
-    new TourOption(OptionType.Food, OptionStatus.Unlimited),
-    new TourOption(OptionType.Bus),
-    new TourOption(OptionType.Room),
-  ];
-  tourDetailId: string;
-  tourDetail: TourDetail = new TourDetail();
-  agencyId: string;
-  agency: Agency;
-  isBlock: boolean;
-  freeSpace: number;
-}
-
 export class TourOption extends Model {
   price: number;
   tourId: string;
@@ -73,6 +52,27 @@ export class TourDetail extends Model {
   creationDate: string;
   leaderId: string;
   leader: Person;
+}
+
+export class Tour extends Model {
+  capacity: number;
+  infantPrice: number = undefined;
+  basePrice: number;
+  parentId: string;
+  parent: Tour;
+  code: string;
+  status: TourStatus;
+  options: TourOption[] = [
+    new TourOption(OptionType.Food, OptionStatus.Unlimited),
+    new TourOption(OptionType.Bus),
+    new TourOption(OptionType.Room),
+  ];
+  tourDetailId: string;
+  tourDetail: TourDetail = new TourDetail();
+  agencyId: string;
+  agency: Agency;
+  isBlock: boolean;
+  freeSpace: number;
 }
 
 export class Agency extends Model {
@@ -125,13 +125,13 @@ export interface Person extends Model {
 }
 
 export class PersonIncome {
-  //temp
+  // temp
   reserved = true;
   receivedMoney: number;
   incomeStatus: IncomeStatus;
   currencyFactor: number;
 
-  constructor(public optionType: OptionType = OptionType.Empty,) {
+  constructor(public optionType: OptionType = OptionType.Empty) {
   }
 }
 
@@ -144,7 +144,7 @@ export class TeamMember {
       new PersonIncome(OptionType.Room),
       new PersonIncome(OptionType.Bus),
       new PersonIncome(OptionType.Food),
-    ]; //@TODO check ugly
+    ]; // @TODO check ugly
   haveVisa = true;
   passportDelivered: boolean = undefined;
   tourId: string = undefined;
@@ -179,7 +179,7 @@ export class TourPassenger {
   passengers: TeamMember[];
 }
 
-//@TODO replace with a good class
+// @TODO replace with a good class
 export interface Dictionary<T> {
   [index: string]: T;
 }
@@ -233,10 +233,6 @@ export interface IReturn<T> {
 export interface IReturnVoid extends IReturn<void> {
 }
 
-export interface IPost {
-
-}
-
 export class QueryBase {
   // @DataMember(Order=1)
   skip: number;
@@ -264,25 +260,25 @@ export class QueryBase {
 export class QueryDb<T> extends QueryBase {
 }
 
-export function Route(path: string, type: HttpMethod = 'GET') {
+export function Route(originPath: string, type: HttpMethod = 'GET') {
   return (target: any) => {
 
     const original = target;
     const createApiPath = function (path: string, object: any) {
       let newPath = path;
-      for (const field in object) {
+      for (const field in Object.keys(object)) {
         newPath = newPath.replace(`{${field}}`, object[field]);
       }
       return newPath;
     };
     const pathFn = function () {
-      return createApiPath(path, this);
-    }; //by using ()=>{} "this" got a wrong value
+      return createApiPath(originPath, this);
+    }; // by using ()=>{} "this" got a wrong value
     const httpMethodFn = function () {
       return type;
     };
 
-    const wrapper: any = function (...args: any[]) {//if we use (...args)=> or without parameters raise error: <classname> is not a constructor
+    const wrapper: any = function (...args: any[]) {// if we use (...args)=> or without parameters raise error: <classname> is not a constructor
       Reflect.defineProperty(wrapper.prototype,
         'apiPath',
         {

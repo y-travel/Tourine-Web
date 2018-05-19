@@ -24,9 +24,9 @@ export class PassengerGridService {
   gridApi: any;
 
   constructor(public personService: PersonService,
-    private translate: TranslateService,
-    private formatter: FormatterService,
-    @Inject(UTILS) private utils: AppUtils, ) {
+              private translate: TranslateService,
+              private formatter: FormatterService,
+              @Inject(UTILS) private utils: AppUtils) {
     this.init();
   }
 
@@ -107,19 +107,19 @@ export class PassengerGridService {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room) },
+            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room)},
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus) },
+            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus)},
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food) },
+            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food)},
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`
           }
         ]
@@ -173,17 +173,19 @@ export class PassengerGridService {
 
   addItem(model: TeamMember) {
     const index = this.rows.findIndex(p => p.personId === model.personId);
-    if (index === -1)
+    if (index === -1) {
       this.rows.push(model);
-    else if (index < this.rows.length)
+    } else if (index < this.rows.length) {
       this.rows[index] = model;
+    }
     this.gridApi.setRowData(this.rows);
   }
 
   remove(item: any) {
     const index = this.rows.indexOf(item);
-    if (index <= -1)
+    if (index <= -1) {
       return;
+    }
     this.rows.splice(index, 1);
     this.gridApi.setRowData(this.rows);
   }

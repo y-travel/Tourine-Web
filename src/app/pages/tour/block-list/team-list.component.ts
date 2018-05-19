@@ -2,8 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
 import { Block, FormFactory } from '../../../@core/data/models';
-import { ModalInterface } from '../../../@theme/components/modal.interface';
-import { Dialog, DialogService } from '../../../@core/utils/dialog.service';
+import { DialogService, ModalInterface } from '../../../@core/utils/dialog.service';
 import { TeamGridService } from '../team-grid.service';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
@@ -12,13 +11,13 @@ import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
-  selector: 'app-block-list',
+  selector: 'trn-block-list',
   templateUrl: './team-list.component.gen.html',
   styleUrls: ['./team-list.component.scss'],
   providers: [TeamGridService],
 })
 
-export class TeamListComponent implements OnInit, Dialog {
+export class TeamListComponent implements OnInit, ModalInterface {
   dialogMode: DialogMode;
   teamsItem: ToolbarItem[] = [
     <ToolbarItem>{
@@ -64,7 +63,7 @@ export class TeamListComponent implements OnInit, Dialog {
       const ref = this.dialogService.openPopup(PassengerUpsertComponent, {buyer: team.buyer, teamId: team.id, block: block});
       (<any>ref.componentInstance).passengerGridService.setRow(x.passengers);
       (<any>ref.componentInstance).updateCount();
-      ref.afterClosed().subscribe(x => this.dialogInstance.close());
+      ref.afterClosed().subscribe(() => this.dialogInstance.close());
     });
 
   }

@@ -1,7 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
-import { Block, Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger, UpsertLeader, DeleteLeader, GetPersonsOfTour, TourPassenger, PassengerReplacement, Tour, GetTourAgency, TourTeamMember, Team, PassengerReplacementTeamAccomplish, PassengerReplacementTourAccomplish } from './models';
+import {
+  AddNewPerson,
+  Agency,
+  Block,
+  DeleteLeader,
+  DeleteTeam,
+  FindPersonFromNc,
+  GetAgencies,
+  GetLeaders,
+  GetPersons,
+  GetPersonsOfTeam,
+  GetPersonsOfTour,
+  GetTourAgency,
+  GetTourFreeSpace,
+  GetTourOptions,
+  GetTourTeams,
+  PassengerReplacement,
+  PassengerReplacementTeamAccomplish,
+  PassengerReplacementTourAccomplish,
+  Person,
+  TeamMember,
+  TeamPassenger,
+  Tour,
+  TourOption,
+  TourPassenger,
+  TourTeamMember,
+  UpdatePerson,
+  UpsertLeader,
+  UpsertTeam
+} from './models';
 import { Serializable } from '../utils/serializable';
 
 @Injectable()
@@ -62,9 +91,9 @@ export class PersonService {
     return this.apiService.getEntities(dto);
   }
 
-  upsertTeam(buyer: Person, model: TeamMember[], blockModel: Block, teamId: string = undefined): Observable<void> {
+  upsertTeam(buyer: Person, model: TeamMember[], blockModel: Block, teamId?: string): Observable<void> {
     const dto = new UpsertTeam();
-    dto.tourId = blockModel.id;//@TODO
+    dto.tourId = blockModel.id; //@TODO
     dto.buyer = buyer;
     dto.teamId = teamId ? teamId : undefined;
     dto.passengers = model;

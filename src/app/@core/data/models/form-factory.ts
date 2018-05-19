@@ -37,7 +37,7 @@ export class FormFactory {
       infantPrice: [model.infantPrice, Validators.min(1)],
       options: new FormBuilder().array(
         (model.options ? model.options : new Tour().options)
-          .map(x => this.createTourOptionForm(model.id, x)) //@TODO find a good solution for initializing options
+          .map(x => this.createTourOptionForm(model.id, x)) // @TODO find a good solution for initializing options
       ),
       tourDetail: this.createTourDetailForm(model.tourDetail ? model.tourDetail : undefined),
     });

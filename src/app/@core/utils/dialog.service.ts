@@ -15,18 +15,13 @@ class TrnDialogConfig<T> extends MatDialogConfig<T> {
   }
 }
 
-export interface Dialog {
-  dialogMode: DialogMode;
-  initDialog();
-}
-
 @Injectable()
 export class DialogService {
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private translate: TranslateService) {
   }
 
-  openPopup<T extends Dialog>(type: ComponentType<T>, data: FormService<T> | any, dialogMode = DialogMode.Create): MatDialogRef<ModalInterface> {
+  openPopup<T extends ModalInterface>(type: ComponentType<T>, data: FormService<T> | any, dialogMode = DialogMode.Create): MatDialogRef<ModalInterface> {
     const dialogRef = this.dialog.open(type, new TrnDialogConfig(data, dialogMode));
     dialogRef.componentInstance.dialogMode = dialogMode;
     dialogRef.componentInstance.initDialog();
@@ -42,8 +37,9 @@ export class DialogService {
   }
 
   showSnack(message: string, actionText = 'read', longDuration = true): MatSnackBarRef<any> {
-    if (!message)
+    if (!message) {
       throw new Error('message should not be null');
+    }
     return this.snackBar.open(this.translate.instant(message), this.translate.instant(actionText), {duration: longDuration ? 10000 : 5000});
   }
 }

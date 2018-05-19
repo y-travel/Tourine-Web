@@ -1,25 +1,22 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
-import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { TourService } from '../../../@core/data/tour.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabChangeEvent } from '@angular/material';
-import { Observable } from 'rxjs/Rx';
-import { Destination, Dictionary, Person, Place, TeamMember, Tour, TourBuyer, TourPassenger } from '../../../@core/data/models/client.model';
+import { Destination, Dictionary, Person, TeamMember, Tour, TourBuyer, TourPassenger } from '../../../@core/data/models/client.model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
-import { Dialog } from '../../../@core/utils/dialog.service';
+import { ModalInterface } from '../../../@core/utils/dialog.service';
 import { TourReportGridService } from './tour-reports.service';
-import { FormService, NewFormService } from '../../../@core/data/form.service';
+import { NewFormService } from '../../../@core/data/form.service';
 import { FormatterService } from '../../../@core/utils/formatter.service';
 import { PersonService } from '../../../@core/data/person.service';
 
 @Component({
-  selector: 'app-tour-reports',
+  selector: 'trn-tour-reports',
   templateUrl: './tour-reports.component.gen.html',
   styleUrls: ['./tour-reports.component.scss']
 })
-export class TourReportsComponent implements ModalInterface, Dialog {
+export class TourReportsComponent implements ModalInterface, ModalInterface, OnInit {
 
   dialogMode: DialogMode;
   tourMembers: TeamMember[];
@@ -38,9 +35,6 @@ export class TourReportsComponent implements ModalInterface, Dialog {
   haveVisaCount = 0;
   noHaveVisaCount = 0;
 
-  initDialog() {
-  }
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: NewFormService<Tour>,
               public dialogInstance: MatDialogRef<ModalInterface>,
               public tourSerivce: TourService,
@@ -48,7 +42,10 @@ export class TourReportsComponent implements ModalInterface, Dialog {
               public reportGridService: TourReportGridService,
               private translateService: TranslateService,
               private formatter: FormatterService,
-              @Inject(UTILS) public utils: AppUtils,) {
+              @Inject(UTILS) public utils: AppUtils) {
+  }
+
+  initDialog() {
   }
 
   ngOnInit() {
@@ -65,9 +62,10 @@ export class TourReportsComponent implements ModalInterface, Dialog {
         this.tourMembers = x.passengers;
         const leader = new TeamMember();
         this.leader = x.leader || <Person>{};
-        if (x.leader)
+        if (x.leader) {
           this.tourMembers.unshift(Object.assign(leader, {person: x.leader}));
-        this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === false));
+        }
+        this.reportGridService.setRow(this.tourMembers.filter(y => y.person.isInfant === false));
         this.setTourCards(x);
       });
     } else if (tab === 'visa') {
@@ -100,19 +98,23 @@ export class TourReportsComponent implements ModalInterface, Dialog {
   }
 
   ticketTab(event: MatTabChangeEvent) {
-    if (event.index === 0)
+    if (event.index === 0) {
       this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === false));
-    if (event.index === 1)
+    }
+    if (event.index === 1) {
       this.reportGridService.setRow(this.tourMembers.filter(x => x.person.isInfant === true));
+    }
 
     this.reportGridService.refresh();
   }
 
   visaTab(event: MatTabChangeEvent) {
-    if (event.index === 0)
+    if (event.index === 0) {
       this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === true && x.person.id !== this.leader.id));
-    if (event.index === 1)
+    }
+    if (event.index === 1) {
       this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === false && x.person.id !== this.leader.id));
+    }
 
     this.reportGridService.refresh();
   }
