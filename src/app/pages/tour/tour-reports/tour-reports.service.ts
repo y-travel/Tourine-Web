@@ -28,7 +28,7 @@ export class TourReportGridService {
               public tourservice: TourService,
               private translate: TranslateService,
               private formatter: FormatterService,
-              @Inject(UTILS) private utils: AppUtils,) {
+              @Inject(UTILS) private utils: AppUtils, ) {
     this.init();
   }
 
@@ -135,10 +135,12 @@ export class TourReportGridService {
       {
         headerName: 'options',
         valueGetter: (params: any) => {
-          if (params.data.person.isInfant)
+          if (params.data.person.isInfant) {
             return this.translate.instant('infant');
-          if (params.data.person.isUnder5)
+          }
+          if (params.data.person.isUnder5) {
             return this.getOptions(params.data);
+          }
           return this.translate.instant('adult.*');
         },
         minWidth: 300,
@@ -161,8 +163,9 @@ export class TourReportGridService {
         maxWidth: 300,
         valueGetter: (params: any) => ' ' + params.data.title,
         valueFormatter: (params: any) => {
-          if (params.data.isAgency)
+          if (params.data.isAgency) {
             return this.translate.instant('agency.*') + params.value;
+          }
           return params.data.gender ?
             this.translate.instant('maleTitle') + params.value :
             this.translate.instant('femaleTitle') + params.value;
@@ -219,13 +222,15 @@ export class TourReportGridService {
   }
 
   getOptions(params: any) {
-    if (params.personIncomes.length === 0)
+    if (params.personIncomes.length === 0) {
       return this.translate.instant('noneOptions');
+    }
     let templateStr = '';
     let rev = Array(...this.utils.getEnumNames(OptionType)).filter(x => x !== OptionType[OptionType.Empty]);
     rev = rev.filter(x => !params.personIncomes.some(z => OptionType[z.optionType] === x));
-    if (rev.length === 0)
+    if (rev.length === 0) {
       return this.translate.instant('haveAllOptions');
+    }
     rev = rev.map(x => 'optionType.' + x);
     rev.forEach(x => templateStr += this.translate.instant(x) + '،');
     return this.translate.instant('nonePrefix') + ' ' + templateStr.slice(0, templateStr.length - 1);

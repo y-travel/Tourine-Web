@@ -1,45 +1,20 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
     "declaration": false,
-    "removeComments": true,
-    "noLib": false,
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": [
-      "es2015",
-      "dom"
-    ],
-    "sourceMap": true,
-    "pretty": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": true,
+    "target": "es5",
     "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules"
+      "node_modules/@types"
     ],
-    "types": [
-      "node"
+    "lib": [
+      "es2017",
+      "dom"
     ]
-  },
-  "files": [
-    "gulpfile.ts",
-    "tools/manual_typings/karma.d.ts",
-    "tools/manual_typings/merge-stream.d.ts",
-    "tools/manual_typings/tildify.d.ts",
-    "tools/manual_typings/istream.d.ts",
-    "tools/manual_typings/open.d.ts",
-    "tools/manual_typings/operators.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src"
-  ],
-  "compileOnSave": false
+  }
 }

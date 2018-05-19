@@ -1,7 +1,6 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { RouterGuard } from "./app-router-guard";
-import { PersonUpsertComponent } from './pages/person/person-upsert/person-upsert.component';
+import { RouterGuard } from './app-router-guard';
 
 const routes: Routes = [
   {

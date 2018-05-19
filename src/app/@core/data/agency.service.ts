@@ -28,7 +28,7 @@ export class AgencyService {
   getTourFreeSpace(id: string): Observable<string> {
     const query = new GetTourFreeSpace();
     query.tourId = id;
-    //Serializable.fromJSON(query, model);
+    // Serializable.fromJSON(query, model);
     return this.apiService.send(query);
   }
 

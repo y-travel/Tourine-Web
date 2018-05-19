@@ -2,27 +2,17 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
-    "baseUrl": "",
     "module": "commonjs",
     "types": [
       "jasmine",
       "node"
-    ],
-    "experimentalDecorators": true,
-    "paths": {
-      "@angular/*": [
-        "../node_modules/@angular/*"
-      ],
-      "rxjs/*": [
-        "../node_modules/rxjs/*"
-      ]
-    }
+    ]
   },
   "files": [
-    "test.ts"
+    "test.ts",
+    "polyfills.ts"
   ],
   "include": [
-    "app/**/*",
     "**/*.spec.ts",
     "**/*.d.ts"
   ]

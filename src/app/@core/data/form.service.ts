@@ -13,7 +13,7 @@ export class FormService<T> implements OnDestroy {
 
   constructor(model: TypeConstructor<T>, public form: FormGroup) {
     this.model = new model();
-    //@TODO fill model from form
+    // @TODO fill model from form
     this.init();
   }
 
@@ -29,8 +29,9 @@ export class FormService<T> implements OnDestroy {
   }
 
   ngOnDestroy() {
-    while (this.subsciptionList.length > 0)
+    while (this.subsciptionList.length > 0) {
       this.subsciptionList.pop().unsubscribe();
+    }
   }
 
   markTouch(control: AbstractControl = this.form) {
@@ -38,13 +39,15 @@ export class FormService<T> implements OnDestroy {
   }
 
   markAllFieldAsTouch(controls = this.form.controls) {
-    if (!controls)
+    if (!controls) {
       return;
+    }
     Object.keys(controls).forEach(x => {
       this.markTouch(controls[x]);
       const formGroup = <FormGroup>controls[x];
-      if (formGroup && formGroup.controls)
+      if (formGroup && formGroup.controls) {
         this.markAllFieldAsTouch(formGroup.controls);
+      }
     });
   }
 
@@ -97,8 +100,9 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
   }
 
   ngOnDestroy() {
-    while (this.subsciptionList.length > 0)
+    while (this.subsciptionList.length > 0) {
       this.subsciptionList.pop().unsubscribe();
+    }
   }
 
   markTouch(control: AbstractControl = this) {
@@ -106,19 +110,22 @@ export class NewFormService<T> extends FormGroup implements OnDestroy {
   }
 
   markAllFieldAsTouch(controls = this.controls) {
-    if (!controls)
+    if (!controls) {
       return;
+    }
     Object.keys(controls).forEach(x => {
       this.markTouch(controls[x]);
       const formGroup = <FormGroup>controls[x];
-      if (formGroup && formGroup.controls)
+      if (formGroup && formGroup.controls) {
         this.markAllFieldAsTouch(formGroup.controls);
+      }
     });
   }
 
   validate() {
-    if (this.valid)
+    if (this.valid) {
       return true;
+    }
     this.markAllFieldAsTouch();
     return false;
   }
