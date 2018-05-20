@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start:server:dev": "ng serve",
+    "start:server:dev": "gulp serve.dev",
     "start:server:prod": "gulp serve.dev --build-type prod",
     "copy.to.sync.folder": "gulp copy.to.sync --client ..",
     "build:sync": "gulp build.sync --color --env-config prod --build-type prod",
