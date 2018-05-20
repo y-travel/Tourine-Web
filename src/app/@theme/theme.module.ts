@@ -36,7 +36,7 @@ import {
   TrnSidebarComponent,
   TrnSliderComponent,
 } from './components';
-import { AutoTranslateDirective, DialogDirective, MatCardDirective, TrnButtonDirective, TrnInputDirective } from './directives';
+import { AutoTranslateDirective, DialogDirective, MatCardDirective, TrnButtonDirective } from './directives';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { TourineLayoutComponent } from './layouts';
 import { AppTranslationModule } from '../app-translation.module';
@@ -77,7 +77,6 @@ const COMPONENTS = [
   ThemeSwitcherComponent,
   TrnHeaderComponent,
   TourineLayoutComponent,
-  TrnInputDirective,
   TrnButtonDirective,
   TrnSliderComponent,
   TrnLayoutComponent,

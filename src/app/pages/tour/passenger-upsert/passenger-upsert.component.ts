@@ -1,5 +1,5 @@
 import { Component, Inject, ViewChild } from '@angular/core';
-import { DialogService, ModalInterface } from '../../../@core/utils/dialog.service';
+import { DialogService } from '../../../@core/utils/dialog.service';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatStepper } from '@angular/material';
 import { FormService, NewFormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';

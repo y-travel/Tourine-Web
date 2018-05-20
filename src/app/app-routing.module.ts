@@ -8,9 +8,9 @@ const routes: Routes = [
     canLoad: [RouterGuard],
     canActivateChild: [RouterGuard],
     canActivate: [RouterGuard],
-    loadChildren: 'app/pages/pages.module#PagesModule'
+    loadChildren: './pages/pages.module#PagesModule'
   },
-  {path: 'user', loadChildren: 'app/pages/user/user.module#UserModule'},
+  {path: 'user', loadChildren: './pages/user/user.module#UserModule'},
   {path: '', redirectTo: 'user', pathMatch: 'full'},
   {path: '**', redirectTo: 'user'},
 ];

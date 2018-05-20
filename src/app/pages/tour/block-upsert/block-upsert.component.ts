@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Agency, Block, Tour } from '../../../@core/data/models/client.model';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatSelect, MatStepper } from '@angular/material';
-import { ModalInterface, DialogService } from '../../../@core/utils/dialog.service';
+import { DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { AgencyService } from '../../../@core/data/agency.service';
 import { Observable } from 'rxjs';

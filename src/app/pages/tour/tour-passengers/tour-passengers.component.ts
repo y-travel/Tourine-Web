@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { PersonService } from '../../../@core/data/person.service';
 import { FormFactory, TeamMember, Tour } from '../../../@core/data/models';
-import { DialogService, ModalInterface } from '../../../@core/utils/dialog.service';
+import { DialogService } from '../../../@core/utils/dialog.service';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';

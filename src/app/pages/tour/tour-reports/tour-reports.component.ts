@@ -5,11 +5,11 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatTabChangeEvent } from '@angular/mater
 import { Destination, Dictionary, Person, TeamMember, Tour, TourBuyer, TourPassenger } from '../../../@core/data/models/client.model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
-import { ModalInterface } from '../../../@core/utils/dialog.service';
 import { TourReportGridService } from './tour-reports.service';
 import { NewFormService } from '../../../@core/data/form.service';
 import { FormatterService } from '../../../@core/utils/formatter.service';
 import { PersonService } from '../../../@core/data/person.service';
+import { ModalInterface } from '../../../@theme/components/modal.interface';
 
 @Component({
   selector: 'trn-tour-reports',

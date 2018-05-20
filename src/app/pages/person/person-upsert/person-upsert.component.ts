@@ -4,7 +4,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormFactory } from '../../../@core/data/models';
 import { AppUtils, UTILS } from '../../../@core/utils';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
-import { ModalInterface } from '../../../@core/utils/dialog.service';
 import { DialogMode } from '../../../@core/data/models/enums';
 import { PersonUpsertViewModel } from './person-upsert.view-model';
 import { PersonService } from '../../../@core/data/person.service';

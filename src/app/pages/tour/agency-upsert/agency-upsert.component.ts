@@ -2,10 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { PersonAgency } from '../../../@core/data/models/client.model';
 import { FormService } from '../../../@core/data/form.service';
-import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { AgencyService } from '../../../@core/data/agency.service';
-import { ModalInterface } from '../../../@core/utils/dialog.service';
 import { DialogMode } from '../../../@core/data/models/enums';
+import { ModalInterface } from '../../../@theme/components/modal.interface';
 
 @Component({
   selector: 'trn-agency-upsert',

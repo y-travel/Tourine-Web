@@ -2,10 +2,11 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatInput, MatStepper } from '@angular/material';
 import { Agency, DialogMode, FormFactory, OptionType, Team, TeamMember, Tour } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
-import { DialogService, ModalInterface } from '../../../@core/utils/dialog.service';
+import { DialogService } from '../../../@core/utils/dialog.service';
 import { PersonService } from '../../../@core/data/person.service';
 import { AppUtils, UTILS } from '../../../@core/utils';
 import { PassengerReplacementTourGridService } from './passenger-replacement-tour-grid.service';
+import { ModalInterface } from '../../../@theme/components/modal.interface';
 
 @Component({
   selector: 'trn-passenger-replacement',
@@ -33,7 +34,7 @@ export class PassengerReplacementComponent implements OnInit, ModalInterface {
               public formFactory: FormFactory,
               public service: PersonService,
               public tourGridService: PassengerReplacementTourGridService,
-              @Inject(UTILS) public utils: AppUtils,) {
+              @Inject(UTILS) public utils: AppUtils) {
     this.replacementTourResultForm = this.formFactory.createReplacementTourResultForm();
     this.replacementTeamResultForm = this.formFactory.createReplacementTeamResultForm([]);
   }

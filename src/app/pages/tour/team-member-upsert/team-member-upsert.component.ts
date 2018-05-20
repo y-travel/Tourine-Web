@@ -3,10 +3,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatCheckboxChange, MatDialogRef } from '@angular/material';
 import { FormFactory, OptionType, Person, PersonIncome, TeamMember } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
-import { DialogService, ModalInterface } from '../../../@core/utils/dialog.service';
+import { DialogService } from '../../../@core/utils/dialog.service';
 import { AppUtils, UTILS } from '../../../@core/utils';
 import { PersonService } from '../../../@core/data/person.service';
 import { DialogMode, PersonType } from '../../../@core/data/models/enums';
+import { ModalInterface } from '../../../@theme/components/modal.interface';
 
 @Component({
   selector: 'trn-team-member-upsert',

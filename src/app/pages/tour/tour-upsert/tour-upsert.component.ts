@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { Destination, Person, Place, Tour } from '../../../@core/data/models/client.model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
-import { ModalInterface } from '../../../@core/utils/dialog.service';
 import { TourUpsertViewModel } from './tour-upsert.view-model';
+import { ModalInterface } from '../../../@theme/components/modal.interface';
 
 @Component({
   selector: 'trn-tour-upsert',
@@ -15,7 +15,7 @@ import { TourUpsertViewModel } from './tour-upsert.view-model';
   styleUrls: ['./tour-upsert.component.scss'],
   providers: [TourUpsertViewModel],
 })
-export class TourUpsertComponent implements ModalInterface, ModalInterface {
+export class TourUpsertComponent implements ModalInterface {
   dialogMode: DialogMode;
   destinations: Observable<Destination[]>;
   places: Observable<Place[]>;

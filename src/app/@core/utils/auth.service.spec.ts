@@ -1,6 +1,5 @@
 import { AuthService } from './auth.service';
 import { TestBed } from '@angular/core/testing';
-import { expect } from '@angular-devkit/build-optimizer/src/transforms/scrub-file';
 
 describe('Auth Service', () => {
 
