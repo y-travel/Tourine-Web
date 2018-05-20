@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/observable/of';
 
 @Injectable()
 export class StateService {
@@ -24,7 +23,7 @@ export class StateService {
       id: 'center-column',
     },
   ];
-
+  protected layoutState$ = new BehaviorSubject(this.layouts[0]);
   protected sidebars: any = [
     {
       name: 'Left Sidebar',
@@ -38,8 +37,6 @@ export class StateService {
       id: 'right',
     },
   ];
-
-  protected layoutState$ = new BehaviorSubject(this.layouts[0]);
   protected sidebarState$ = new BehaviorSubject(this.sidebars[0]);
 
   setLayoutState(state: any): any {
@@ -47,7 +44,7 @@ export class StateService {
   }
 
   getLayoutStates(): Observable<any[]> {
-    return Observable.of(this.layouts);
+    return observableOf(this.layouts);
   }
 
   onLayoutState(): Observable<any> {
@@ -59,7 +56,7 @@ export class StateService {
   }
 
   getSidebarStates(): Observable<any[]> {
-    return Observable.of(this.sidebars);
+    return observableOf(this.sidebars);
   }
 
   onSidebarState(): Observable<any> {

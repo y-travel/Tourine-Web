@@ -1,6 +1,7 @@
 ﻿import { Inject, Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 //
 import { Serializable } from '../utils/serializable';
 import { IReturn } from './models/index';
@@ -33,17 +34,17 @@ export class ApiService extends DataService {
   }
 
   getEntities<T>(data: IReturn<QueryResponse<T>>): Observable<T[]> {
-    return this.internalSend(data).map(res => res.results);
+    return this.internalSend(data).pipe(map(res => res.results));
   }
 
   private internalSend<T>(data: IReturn<T>): Observable<T | any> {
     return this.request(this.utils.getHttpMethod(data), data.getTypeName(), Serializable.toJSON(data))
-      .map(res => {
+      .pipe(map(res => {
         const type = data.createResponse();
         if (type) {
           return Serializable.fromJSON(type, res);
         }
         return res;
-      });
+      }));
   }
 }

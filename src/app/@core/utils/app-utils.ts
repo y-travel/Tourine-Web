@@ -1,5 +1,6 @@
 ﻿import { InjectionToken } from '@angular/core';
 import { OptionType } from '../data/models/enums';
+import { map } from 'rxjs/operators';
 
 //@TODO change to static injection
 

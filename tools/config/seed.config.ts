@@ -1,12 +1,7 @@
 import { join } from 'path';
 import { argv } from 'yargs';
 
-import {
-  BuildType,
-  ExtendPackages,
-  InjectableDependency,
-  SourceMapExplorerOutputFormat
-} from './seed.config.interfaces';
+import { BuildType, InjectableDependency, SourceMapExplorerOutputFormat } from './seed.config.interfaces';
 
 /************************* DO NOT CHANGE ************************
  *
@@ -113,9 +108,9 @@ export class SeedConfig {
   COVERAGE_PORT = argv['coverage-port'] || 4004;
 
   /**
-  * The path to the coverage output
-  * NB: this must match what is configured in ./karma.conf.js
-  */
+   * The path to the coverage output
+   * NB: this must match what is configured in ./karma.conf.js
+   */
   COVERAGE_DIR = 'coverage_js';
   COVERAGE_TS_DIR = 'coverage';
 
@@ -132,24 +127,39 @@ export class SeedConfig {
    * @type {string}
    */
   BOOTSTRAP_DIR = argv['app'] || 'app';
-
+  /**
+   * The bootstrap file to be used to boot the application.
+   * @type {string}
+   */
+  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/main`;
+  BOOTSTRAP_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
   /**
    * The directory where the client files are located.
    * The default directory is `client`.
    * @type {string}
    */
   APP_CLIENT = argv['client'] || '';
-
   /**
-   * The bootstrap file to be used to boot the application.
+   * The base folder of the applications source files.
    * @type {string}
    */
-  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/main`;
-
-  BOOTSTRAP_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
-
+  APP_SRC = `src/${this.APP_CLIENT}`;
+  /**
+   * The folder of the applications asset files.
+   * @type {string}
+   */
+  ASSETS_SRC = `${this.APP_SRC}/assets`;
+  /**
+   * The folder of the applications css files.
+   * @type {string}
+   */
+  CSS_SRC = `${this.APP_SRC}/css`;
+  /**
+   * The folder of the applications scss files.
+   * @type {string}
+   */
+  SCSS_SRC = `${this.APP_SRC}/scss`;
   NG_FACTORY_FILE = 'main-prod';
-
   BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}/${this
     .NG_FACTORY_FILE}`;
   /**
@@ -158,48 +168,20 @@ export class SeedConfig {
    * @type {string}
    */
   APP_TITLE = 'Welcome to angular-seed!';
-
   /**
    * Tracking ID.
    * @type {string}
    */
   GOOGLE_ANALYTICS_ID = 'UA-XXXXXXXX-X';
-
-  /**
-   * The base folder of the applications source files.
-   * @type {string}
-   */
-  APP_SRC = `src/${this.APP_CLIENT}`;
-
   /**
    * The name of the TypeScript base file
    * @type {string}
    */
   APP_PROJECTNAME = 'tsconfig.json';
-
-  /**
-   * The folder of the applications asset files.
-   * @type {string}
-   */
-  ASSETS_SRC = `${this.APP_SRC}/assets`;
-
-  /**
-   * The folder of the applications css files.
-   * @type {string}
-   */
-  CSS_SRC = `${this.APP_SRC}/css`;
-
   /**
    * The folder of the e2e specs and framework
    */
   E2E_SRC = 'src/e2e';
-
-  /**
-   * The folder of the applications scss files.
-   * @type {string}
-   */
-  SCSS_SRC = `${this.APP_SRC}/scss`;
-
   /**
    * The directory of the applications tools
    * @type {string}
@@ -244,32 +226,13 @@ export class SeedConfig {
    * The folder for built files in the `dev` environment.
    * @type {string}
    */
-  DEV_DEST = `${this.DIST_DIR}/dev`;
+  DEV_DEST = `${this.DIST_DIR}/adminPanel_dev`;
 
   /**
    * The folder for the built files in the `prod` environment.
    * @type {string}
    */
-  PROD_DEST = `${this.DIST_DIR}/prod`;
-
-  /**
-   * The folder for the built files of the e2e-specs.
-   * @type {string}
-   */
-  E2E_DEST = `${this.DIST_DIR}/e2e`;
-
-  /**
-   * The folder for the built translation file.
-   * @type {string}
-   */
-  LOCALE_DEST = `${this.DIST_DIR}/locale`;
-
-  /**
-   * The folder for temporary files.
-   * @type {string}
-   */
-  TMP_DIR = `${this.DIST_DIR}/tmp`;
-
+  PROD_DEST = `${this.DIST_DIR}/adminPanel`;
   /**
    * The folder for the built files, corresponding to the current environment.
    * @type {string}
@@ -277,19 +240,31 @@ export class SeedConfig {
   APP_DEST = this.BUILD_TYPE === BUILD_TYPES.DEVELOPMENT
     ? this.DEV_DEST
     : this.PROD_DEST;
-
   /**
    * The folder for the built CSS files.
    * @type {strings}
    */
   CSS_DEST = `${this.APP_DEST}/css`;
-
   /**
    * The folder for the built JavaScript files.
    * @type {string}
    */
   JS_DEST = `${this.APP_DEST}/js`;
-
+  /**
+   * The folder for the built files of the e2e-specs.
+   * @type {string}
+   */
+  E2E_DEST = `${this.DIST_DIR}/e2e`;
+  /**
+   * The folder for the built translation file.
+   * @type {string}
+   */
+  LOCALE_DEST = `${this.DIST_DIR}/locale`;
+  /**
+   * The folder for temporary files.
+   * @type {string}
+   */
+  TMP_DIR = `${this.DIST_DIR}/tmp`;
   /**
    * The version of the application as defined in the `package.json`.
    */
@@ -332,7 +307,7 @@ export class SeedConfig {
    */
   ENABLE_SCSS = ['true', '1'].indexOf(
     `${process.env.ENABLE_SCSS}`.toLowerCase()
-  ) !== -1 ||
+    ) !== -1 ||
     argv['scss'] ||
     false;
 
@@ -390,14 +365,14 @@ export class SeedConfig {
    * @type {InjectableDependency[]}
    */
   NPM_DEPENDENCIES: InjectableDependency[] = [
-    { src: 'core-js/client/shim.min.js', inject: 'shims' },
-    { src: 'zone.js/dist/zone.js', inject: 'libs' },
+    {src: 'core-js/client/shim.min.js', inject: 'shims'},
+    {src: 'zone.js/dist/zone.js', inject: 'libs'},
     {
       src: 'zone.js/dist/long-stack-trace-zone.js',
       inject: 'libs',
       buildType: BUILD_TYPES.DEVELOPMENT
     },
-    { src: 'intl/dist/Intl.min.js', inject: 'shims' },
+    {src: 'intl/dist/Intl.min.js', inject: 'shims'},
     {
       src: 'systemjs/dist/system.src.js',
       inject: 'shims',
@@ -430,25 +405,11 @@ export class SeedConfig {
   ROLLUP_INCLUDE_DIR: string[] = ['node_modules/**'];
 
   /**
-  * List of named export Object key value pairs
-  * key: dependencie file
-  * value: exported Objects
-  */
-  ROLLUP_NAMED_EXPORTS: any[] = [];
-
-  /**
-   * Returns the array of injectable dependencies (npm dependencies and assets).
-   * @return {InjectableDependency[]} The array of npm dependencies and assets.
+   * List of named export Object key value pairs
+   * key: dependencie file
+   * value: exported Objects
    */
-  get DEPENDENCIES(): InjectableDependency[] {
-    return normalizeDependencies(
-      this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.BUILD_TYPE))
-    ).concat(
-      this._APP_ASSETS.filter(filterDependency.bind(null, this.BUILD_TYPE))
-    );
-  }
-
-
+  ROLLUP_NAMED_EXPORTS: any[] = [];
   BROWSER_LIST = [
     'ie >= 10',
     'ie_mob >= 10',
@@ -460,30 +421,38 @@ export class SeedConfig {
     'android >= 4.4',
     'bb >= 10'
   ];
-
   /**
    * White list for CSS color guard
    * @type {[string, string][]}
    */
   COLOR_GUARD_WHITE_LIST: [string, string][] = [];
-
   /**
-  * Browser-sync middleware configurations array.
-  * @type {Array}
-  */
+   * Browser-sync middleware configurations array.
+   * @type {Array}
+   */
   PROXY_MIDDLEWARE: any[] = [];
-
   /**
    * Configurations for NPM module configurations. Add to or override in base.config.ts.
    * @type {any}
    */
   PLUGIN_CONFIGS: any = {};
-
   /**
    * Generates the query string which should be appended to the end of the URLs in dev mode.
    */
   QUERY_STRING_GENERATOR = () => {
     return Date.now().toString();
+  }
+
+  /**
+   * Returns the array of injectable dependencies (npm dependencies and assets).
+   * @return {InjectableDependency[]} The array of npm dependencies and assets.
+   */
+  get DEPENDENCIES(): InjectableDependency[] {
+    return normalizeDependencies(
+      this.NPM_DEPENDENCIES.filter(filterDependency.bind(null, this.BUILD_TYPE))
+    ).concat(
+      this._APP_ASSETS.filter(filterDependency.bind(null, this.BUILD_TYPE))
+    );
   }
 
   /**
@@ -578,8 +547,8 @@ export class SeedConfig {
       coverageReporter: {
         dir: this.COVERAGE_DIR + '/',
         reporters: [
-          { type: 'json', subdir: '.', file: 'coverage-final.json' },
-          { type: 'html', subdir: '.' }
+          {type: 'json', subdir: '.', file: 'coverage-final.json'},
+          {type: 'html', subdir: '.'}
         ]
       },
       remapIstanbulReporter: {

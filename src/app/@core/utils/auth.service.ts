@@ -6,6 +6,7 @@ import { AppUtils, UTILS } from './app-utils';
 import { APP_CONFIG, AppConfig } from './app.config';
 import { Authenticate, GetCurrentPerson } from '../data/models/server.dtos';
 import { Serializable } from './serializable';
+import { first, map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +16,8 @@ export class AuthService {
 
   constructor(private apiService: ApiService,
               @Inject(UTILS) private utils: AppUtils,
-              @Inject(APP_CONFIG) private config: AppConfig) {}
+              @Inject(APP_CONFIG) private config: AppConfig) {
+  }
 
   isAuthenticated() {
     return this.config.isDev() || !this.utils.isNullOrUndefined(this.person);
@@ -29,10 +31,10 @@ export class AuthService {
     }
 
     const dto = new GetCurrentPerson();
-    return await this.apiService.send(dto).map(person => {
+    return await this.apiService.send(dto).pipe(map(person => {
       this.person = Object.assign(<Person>{}, person);
       return this.isAuthenticated();
-    }).first().toPromise().catch(() => undefined);
+    }), first()).toPromise().catch(() => undefined);
   }
 
   async authenticate(user: User) {
@@ -42,12 +44,12 @@ export class AuthService {
     auth.rememberMe = true;
     auth.useTokenCookie = true;
     auth.provider = 'credentials';
-    const result = await this.apiService.send(auth).map(res => {
+    const result = await this.apiService.send(auth).pipe(map(res => {
       this.person = Object.assign(<Person>{}, res);
 
       this.agency = Serializable.fromJSONToType(Agency, res);
       return this.isAuthenticated();
-    }).first()
+    }), first())
       .toPromise().catch(() => undefined);
     return result;
   }

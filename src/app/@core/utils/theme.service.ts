@@ -1,8 +1,6 @@
 import { Injectable, Type } from '@angular/core';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
+import { share } from 'rxjs/operators';
 
 @Injectable()
 export class ThemeService {
@@ -42,15 +40,15 @@ export class ThemeService {
   }
 
   onThemeChange(): Observable<any> {
-    return this.themeChanges$.publish().refCount();
+    return this.themeChanges$.pipe(share());
   }
 
   onAppendToTop(): Observable<any> {
-    return this.appendToLayoutTop$.publish().refCount();
+    return this.appendToLayoutTop$.pipe(share());
   }
 
   onClearLayoutTop(): Observable<any> {
-    return this.createLayoutTop$.publish().refCount();
+    return this.createLayoutTop$.pipe(share());
   }
 
   appendLayoutClass(className: string) {
@@ -58,7 +56,7 @@ export class ThemeService {
   }
 
   onAppendLayoutClass(): Observable<any> {
-    return this.appendLayoutClass$.publish().refCount();
+    return this.appendLayoutClass$.pipe(share());
   }
 
   removeLayoutClass(className: string) {
@@ -66,6 +64,6 @@ export class ThemeService {
   }
 
   onRemoveLayoutClass(): Observable<any> {
-    return this.removeLayoutClass$.publish().refCount();
+    return this.removeLayoutClass$.pipe(share());
   }
 }

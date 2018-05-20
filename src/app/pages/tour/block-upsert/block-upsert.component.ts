@@ -13,6 +13,7 @@ import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { TourService } from '../../../@core/data/tour.service';
 import { Serializable } from '../../../@core/utils/serializable';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'trn-block-upsert',
@@ -65,7 +66,7 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, ModalInterf
       stepper.next();
       return;
     }
-    const newBlock = await this.tourService.upsertTour(this.vModel.model).first().toPromise().catch(x => undefined);
+    const newBlock = await this.tourService.upsertTour(this.vModel.model).pipe(first()).toPromise().catch(x => undefined);
     this.isNewBlock = this.utils.isNullOrUndefined(newBlock);
     stepper.next();
     this.vModel.updateForm(newBlock);
