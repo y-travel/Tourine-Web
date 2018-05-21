@@ -159,7 +159,7 @@ export class TourReportGridService {
         cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
       },
       {
-        headerName: 'person.nameAndFamily',
+        headerName: 'buyer.*',
         maxWidth: 300,
         valueGetter: (params: any) => ' ' + params.data.title,
         valueFormatter: (params: any) => {
