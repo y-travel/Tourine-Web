@@ -10,6 +10,7 @@ export const ValidationMessage: Dictionary<string> = {
   max: 'validation.max',
   minlength: 'validation.minlength',
   maxlength: 'validation.maxlength',
+  fixlength: 'validation.fixlength',
   required: 'validation.required',
   pattern: 'validation.pattern',
   greaterthan: 'validation.greaterthan',
@@ -117,6 +118,15 @@ export class CustomValidations {
         null : (
           fieldName ? {countbiggerthan: {requiredValue: requiredValue, field: fieldName}}
             : {countbiggerthan: {requiredValue: requiredValue}});
+    };
+  }
+
+  static lengthEqual(requiredValue: number, fieldName?: string): ValidatorFn {
+    return (control: AbstractControl): Dictionary<any> => {
+      return (control.value && control.value.length === requiredValue) ?
+        null : (
+          fieldName ? {fixlength: {requiredLength: requiredValue, field: fieldName}}
+            : {fixlength: {requiredLength: requiredValue}});
     };
   }
 }

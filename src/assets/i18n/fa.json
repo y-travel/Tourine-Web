@@ -205,8 +205,9 @@
   "validation": {
     "min": "حداقل {{min}} باشد",
     "max": "حداکثر {{max}} باشد",
-    "minlength": "باید بیشتر از {{requiredLength}} حرف باشد",
-    "maxlength": "باید کمتر از {{requiredLength}} حرف باشد",
+    "minlength": "باید حداقل {{requiredLength}} حرف باشد",
+    "maxlength": "باید حداکثر {{requiredLength}} حرف باشد",
+    "fixlength": "باید {{requiredLength}} حرف باشد",
     "required": "الزامی",
     "pattern": "خطا در نوشتار",
     "greaterthan": "باید بزرگتر از {{requiredValue}} حرف باشد",

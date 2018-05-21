@@ -17,7 +17,7 @@ import {
   TourTeamMember,
   User
 } from './client.model';
-import { ValidationService } from '../../utils/validation.service';
+import { CustomValidations, ValidationService } from '../../utils/validation.service';
 
 @Injectable()
 export class FormFactory {
@@ -94,10 +94,10 @@ export class FormFactory {
   createPersonForm(model = <Person>{}): NewFormService<Person> {
     const form = new FormBuilder().group({
       id: [model.id],
-      name: [model.name ? model.name : '', Validators.required],
-      family: [model.family ? model.family : '', Validators.required],
-      mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
-      nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(1)]], //@TODO: must be lenght of 10
+      name: [model.name ? model.name : '',  [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      family: [model.family ? model.family : '',  [Validators.required, Validators.minLength(2)]],
+      mobileNumber: [model.mobileNumber, [Validators.required, CustomValidations.lengthEqual(11)]],
+      nationalCode: [model.nationalCode, [Validators.required, CustomValidations.lengthEqual(2)]], //@TODO: must be lenght of 10
       englishName: [model.englishName, Validators.required],
       englishFamily: [model.englishFamily, Validators.required],
       birthDate: [model.birthDate, Validators.required],
