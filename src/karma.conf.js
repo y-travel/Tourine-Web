@@ -20,6 +20,23 @@ module.exports = function (config) {
       reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
+    files: [
+      // RxJs.
+      { pattern: '../node_modules/rxjs/**/*.js', included: false, watched: false },
+      { pattern: '../node_modules/rxjs/**/*.js.map', included: false, watched: false },
+
+      // paths loaded via module imports
+      // Angular itself
+      { pattern: '../node_modules/@angular/**/*.js', included: false, watched: true },
+      { pattern: '../node_modules/@angular/**/*.js.map', included: false, watched: false },
+
+      // Advanced seed
+      { pattern: '../node_modules/lodash/**/*.js', included: false, watched: false },
+      { pattern: '../node_modules/@ngx-translate/**/*.js', included: false, watched: false },
+
+      // suppress annoying 404 warnings for resources, images, etc.
+
+    ],
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,

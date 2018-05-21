@@ -3,6 +3,10 @@
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
     "module": "commonjs",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules"
+    ],
     "types": [
       "jasmine",
       "node"

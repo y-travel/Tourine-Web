@@ -14,6 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/adminPanel",
+            "baseHref": "/app/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -52,8 +53,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "adminPanel:build",
-            "baseHref": "/app/"
+            "browserTarget": "adminPanel:build"
           },
           "configurations": {
             "production": {
