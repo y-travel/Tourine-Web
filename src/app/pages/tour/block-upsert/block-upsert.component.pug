@@ -23,7 +23,7 @@ include ../../../mixin
       form([formGroup]="vModel.form")
         div(fxLayout='row', fxFlex)
           div(fxLayout='column', fxFlex)
-            +matField('capacity','adultCount', 'vModel.form', 'agencyName' )(mask='number', #adultCount)
+            +matField('capacity','adultCount', 'vModel.form', '{{ "emptyCount"|translate:({value:(vModel.parentBlock.freeSpace-adultCount.value)}) }}' )(mask='number', #adultCount)
             +matField("basePrice", "tour.price", "vModel.form", "price.irFormated", "landscape")(mask="number")
             +matField("infantPrice", "infantPrice", "vModel.form", "price.irFormated", "child_care")(mask="number")
           div(fxLayout="column", fxFlex, formArrayName="options")
@@ -33,8 +33,10 @@ include ../../../mixin
             'vModel.form.get(\'options\').get(i.toString())',
             'price.irFormated',
             '{{ utils.mapOptionTypeToIcon(formGroup.value.optionType) }}',
-            {"*ngFor":"let formGroup of vModel.form.get('options')['controls']; let i=index",
-            "[formGroupName]":"i"}
+            {
+              "*ngFor": "let formGroup of vModel.form.get('options')['controls']; let i=index",
+              "[formGroupName]": "i"
+            }
             )(mask="number")
     mat-step(label="{{'steps'|translate:({value:'third'|translate})}}")
       form
