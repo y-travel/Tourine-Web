@@ -51,7 +51,7 @@ export class TourListComponent {
       },
     },
     <ToolbarItem>{
-      icon: 'list',
+      icon: 'attach_money',
       title: 'team.list',
       color: '#E040FB',
       command: (block: any) => this.teamList(block),
@@ -62,6 +62,13 @@ export class TourListComponent {
   source: any;
   //@TODO get colors from global variables
   sharedItems: ToolbarItem[] = [
+    <ToolbarItem>{
+      icon: 'list',
+      title: 'tour.passengers',
+      color: '#E040FB',
+      command: (tour: any) => this.tourPassengers(tour),
+      disability: (tour: Tour) => tour.freeSpace === tour.capacity,
+    },
     <ToolbarItem>{
       icon: 'group_add',
       title: 'passenger.upsert',
@@ -90,13 +97,6 @@ export class TourListComponent {
       color: '#4caf50',
       command: (tour: any) => this.blockUpsert(tour),
       disability: (tour: any) => tour.freeSpace <= 0,
-    },
-    <ToolbarItem>{
-      icon: 'list',
-      title: 'tour.passengers',
-      color: '#E040FB',
-      command: (tour: any) => this.tourPassengers(tour),
-      disability: (tour: Tour) => tour.freeSpace === tour.capacity,
     },
     <ToolbarItem>{
       icon: 'pageview',

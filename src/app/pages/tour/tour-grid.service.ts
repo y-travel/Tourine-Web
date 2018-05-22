@@ -150,6 +150,8 @@ export class TourGridService {
           },
           {
             cellRenderer: 'cellToolbar',
+            minWidth: 200,
+            maxWidth: 200,
             cellRendererParams: {
               items: this.toolbarBlockItems,
             },
