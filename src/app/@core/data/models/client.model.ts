@@ -97,6 +97,7 @@ export class Block extends Model {
   basePrice: number = undefined;
   totalPrice: number = undefined;
   freeSpace: number = undefined;
+  options: TourOption[];
 }
 
 export class EditPassword extends Model {

@@ -45,7 +45,7 @@ export class TourListComponent {
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (block: any) => this.blockUpsert(block, true),
+      command: (block: any) => this.blockUpsert(this.getCurrentTour(), block),
       visibility: (tour: Tour) => {
         return tour.agencyId !== this.agency.id;
       },
@@ -146,8 +146,8 @@ export class TourListComponent {
     const ref = this.dialogService.openPopup(TourReportsComponent, this.formFactory.createTourForm(tour));
   }
 
-  blockUpsert(block: Block, isEdit = false) {
-    const ref = this.dialogService.openPopup(BlockUpsertComponent, {block: block, tourId: block.id}, isEdit ? DialogMode.Edit : DialogMode.Create);
+  blockUpsert(tour: Tour, block?: Block) {
+    const ref = this.dialogService.openPopup(BlockUpsertComponent, {tour: Tour, block: block});
     ref.afterClosed().subscribe(() => this.reloadTourList());
   }
 
@@ -171,5 +171,10 @@ export class TourListComponent {
       const list: TeamMember[] = x.passengers;
       (<any>ref.componentInstance).passengerGridService.setRow(list);
     });
+  }
+
+  getCurrentTour() {
+    // @TODO get tour from grid
+    return new Tour();
   }
 }

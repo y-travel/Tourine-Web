@@ -24,7 +24,6 @@ import { first } from 'rxjs/operators';
 export class BlockUpsertComponent implements OnInit, ModalInterface, ModalInterface {
   dialogMode: DialogMode;
   DialogMode = DialogMode;
-  freeSpace: number;
   agencies: Observable<Agency[]>;
   isNewBlock = false;
   optionType = OptionType;
@@ -42,15 +41,13 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, ModalInterf
   }
 
   initDialog() {
-    this.isNewBlock = this.dialogMode === DialogMode.Create;
-    this.vModel.init(this.data.tourId, this.data.block, !this.isNewBlock);
+    this.vModel.init(this.data.tour, this.data.block);
+    this.isNewBlock = this.vModel.isEdit;
     this.tourService
-      .getOptions(this.isNewBlock ? this.vModel.tourId : this.vModel.model.id)
+      .getOptions(this.isNewBlock ? this.vModel.parentBlock.id : this.vModel.model.id)
       .subscribe(x => this.vModel.form.updateForm(<Tour>{options: x}));
     this.agencies = this.service.getList();
-    this.service.getTourFreeSpace(this.vModel.tourId).subscribe(x => {
-      this.freeSpace = +x;
-    });
+
   }
 
   agencyUpsert() {
