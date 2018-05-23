@@ -107,7 +107,8 @@
   "passenger": {
     "*": "مسافر",
     "count": "تعداد مسافرین",
-    "upsert": "ثبت مشخصات مسافران"
+    "detailUpsert": "ثبت مشخصات مسافران",
+    "upsert": "مشخصات مسافر"
   },
   "passengerReplacementSuccessfull": "جابجایی با موفیت انجام شد",
   "passport": {
@@ -193,6 +194,7 @@
     "price": "قیمت تور",
     "reserve": "رزرو تور",
     "upsert": "ثبت تور",
+    "edit":  "ویرایش تور",
     "leader": "مدیرگروه",
     "startDate": "تاریخ حرکت",
     "endDate": "تاریخ بازگشت",
