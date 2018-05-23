@@ -1,9 +1,10 @@
 include ../../../mixin
 .modal-header(mat-dialog-title)
   .modal-title
-    | {{ "tour.upsert"|translate }}
+    | {{(dialogMode === enums.DialogMode.Edit?"tour.edit" : "tour.upsert") | translate}}
 .right.modal-body(dir='rtl', style='min-width: 700px', trnAutoTranslate)
   // width set for IE
+
   form([formGroup]='vModel.form')
     ng-container(formGroupName='tourDetail')
       div(fxLayout='row')

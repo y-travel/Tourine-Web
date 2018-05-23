@@ -71,7 +71,7 @@ export class TourListComponent {
     },
     <ToolbarItem>{
       icon: 'group_add',
-      title: 'passenger.upsert',
+      title: 'passenger.detailUpsert',
       color: '#4caf50',
       command: (tourBlock: any) => this.passengerUpsert(tourBlock),
       disability: (tour: any) => tour.freeSpace <= 0,

@@ -4,7 +4,7 @@ import { TourService } from '../../../@core/data/tour.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Destination, Person, Place, Tour } from '../../../@core/data/models/client.model';
-import { DialogMode, OptionType } from '../../../@core/data/models/enums';
+import { DialogMode, ENUMS, EnumsDefinition, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { TourUpsertViewModel } from './tour-upsert.view-model';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
@@ -26,7 +26,8 @@ export class TourUpsertComponent implements ModalInterface {
               public dialogInstance: MatDialogRef<ModalInterface>,
               public service: TourService,
               public vModel: TourUpsertViewModel,
-              @Inject(UTILS) public utils: AppUtils) {
+              @Inject(UTILS) public utils: AppUtils,
+              @Inject(ENUMS) public enums: EnumsDefinition) {
   }
 
   initDialog() {
