@@ -21,39 +21,51 @@ include ../../../mixin
         form([formGroup]="replacementTourResultForm.form", *ngIf="showTour", atuoTranslate)
           mat-card
             div(fxLayout="row")
-              +matField('agency', "{{'agency.name'|translate}}", 'replacementTourResultForm.form')
+              +matField(
+              'agency',
+              "{{'agency.name'|translate}}",
+              'replacementTourResultForm.form',
+              '',
+              '',
+              {fxFlex:"30"})
               //@TODO Add fxflex=30 to maField
               +matField(
               'basePrice',
               "{{'tour.price'|translate}}",
               'replacementTourResultForm.form',
               'price.irFormated',
-              'landscape')
+              'landscape',
+              {fxFlex:"30"})
               //@TODO Add fxflex=30 to maField
               +matField(
               'infantPrice',
               "{{'infantPrice'|translate}}",
-              'replacementTourResultForm.form', 'price.irFormared',
-              'child_for')
+              'replacementTourResultForm.form',
+              'price.irFormated',
+              'child_for',
+              {fxFlex:"30"})
             br
             div(fxLayout="row")
               +matField(
               'foodPrice',
               "{{'foodPrice'|translate}}",
               'replacementTourResultForm.form', 'price.irFormated',
-              '{{ utils.mapOptionTypeToIcon(optionType.Food) }}')
+              '{{ utils.mapOptionTypeToIcon(optionType.Food) }}',
+              {fxFlex:"30"})
               +matField(
               'busPrice',
               "{{'busPrice'|translate}}",
               'replacementTourResultForm.form',
-              'price.ifFormated',
-              '{{ utils.mapOptionTypeToIcon(optionType.Bus) }}')
+              'price.irFormated',
+              '{{ utils.mapOptionTypeToIcon(optionType.Bus) }}',
+              {fxFlex:"30"})
               +matField(
               'roomPrice',
               "{{'roomPrice'|translate}}",
               'replacementTourResultForm.form',
               'price.irFormated',
-              "{{ utils.mapOptionTypeToIcon(optionType.Room) }}")
+              "{{ utils.mapOptionTypeToIcon(optionType.Room) }}",
+              {fxFlex:"30"})
         form([formGroup]="replacementTeamResultForm.form", *ngIf="!showTour")
           .teamCard(formArrayName="teams")
             mat-card(*ngFor="let team of replacementTeamResultForm.form.get('teams')['controls'];let i=index")
@@ -64,13 +76,15 @@ include ../../../mixin
                 "{{'tour.price'|translate}}",
                 'replacementTourResultForm.form',
                 'price.irFormated',
-                'landscape',{fxFlex:"30"} )
+                'landscape',
+                {fxFlex:"30"} )
                 +matField(
                 'infantPrice',
                 "{{'infantPrice'|translate}}",
                 'replacementTourResultForm.form',
                 'price.irFormated',
-                'child_care',{fxFlex:"30"} )
+                'child_care',
+                {fxFlex:"30"})
         br
   // width set for IE
 div(fxLayout="row", align="end")
