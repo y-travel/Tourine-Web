@@ -174,7 +174,10 @@
   "save": "ثبت",
   "second": "دوم",
   "selectPerson": "انتخاب فرد",
-  "steps": "گام {{value}}",
+  "steps": {
+    "level":"گام {{value}}",
+    "end": "اتمام"
+  },
   "submitDate": "تاریخ رزرو",
   "team": {
     "*": "گروه",
@@ -198,7 +201,8 @@
     "leader": "مدیرگروه",
     "startDate": "تاریخ حرکت",
     "endDate": "تاریخ بازگشت",
-    "destination": "مقصد"
+    "destination": "مقصد",
+    "information": "اطلاعات تور"
   },
   "user": {
     "upsert": "ثبت کاربر"

@@ -5,7 +5,7 @@ include ../../../mixin
 .modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="300", trnAutoTranslate)
   // width set for IE
   mat-horizontal-stepper(#stepper, [linear]="true")
-    mat-step(label="{{'steps'|translate:({value:'first'|translate})}}")
+    mat-step(label="{{'agency.name'|translate}}")
       form([formGroup]="vModel.form")
         div(fxLayout="row")
           br
@@ -19,7 +19,7 @@ include ../../../mixin
             mat-error(translate) {{vModel.form.get('agencyId')['errorMessage']}}
           button(mat-mini-fab, color="accent", (click)="agencyUpsert()")
             mat-icon.icon-text-color add
-    mat-step([stepControl]="vModel.form", label="{{'steps'|translate:({value:'second'|translate})}}")
+    mat-step([stepControl]="vModel.form", label="{{'tour.information'|translate}}")
       form([formGroup]="vModel.form")
         div(fxLayout='row', fxFlex)
           div(fxLayout='column', fxFlex)
@@ -38,7 +38,7 @@ include ../../../mixin
               "[formGroupName]": "i"
             }
             )(mask="number")
-    mat-step(label="{{'steps'|translate:({value:'third'|translate})}}")
+    mat-step(label="{{'steps.end'|translate}}")
       form
         div(fxLayout="row")
           br

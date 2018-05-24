@@ -4,7 +4,7 @@ include ../../../mixin
     | {{ "passenger.detailUpsert"|translate }}
 .right.modal-body(dir="rtl", [style.width.px]="1000", [style.height.px]="435", trnAutoTranslate)
   mat-horizontal-stepper(#stepper, [linear]="true")
-    mat-step([stepControl]="buyerForm", label="{{'steps'|translate:({value:'first'|translate})}}")
+    mat-step([stepControl]="buyerForm", label="{{'passenger.upsert'|translate}}")
       form([formGroup]="buyerForm", (keydown.enter)="$event.preventDefault()")
         div(fxLayout="row", fxLayoutAlign="space-around start")
           mat-card(fxLayout="column", fxFlex)
@@ -32,7 +32,7 @@ include ../../../mixin
               input(matInput, mask="number", placeholder="infantPrice", [formControl]="blockForm.form.get('infantPrice')", (input)="onPriceChange()")
               span(matPrefix, align="end") $ 
               mat-hint(align="end", translate) price.irFormated
-    mat-step(label="{{'steps'|translate:({value:'second'|translate})}}")
+    mat-step(label="{{'steps.end'|translate}}")
       form([formGroup]="blockForm.form", (keydown.enter)="$event.preventDefault()")
         div
           mat-card([stretch]="true")

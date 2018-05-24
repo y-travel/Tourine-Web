@@ -5,7 +5,7 @@ include ../../../mixin
 .modal-body(dir="rtl", [style.width.px]="700", [style.height.px]="450")
   form
     mat-horizontal-stepper(#stepper, [linear]="false")
-      mat-step(label="{{'steps'|translate:({value:'first'|translate})}}", [style.height.px]="450")
+      mat-step(label="{{'destinationTour'|translate}}", [style.height.px]="450")
         div(fxLayout="row")
           mat-form-field(fxFlex)
             mat-chip-list
@@ -17,7 +17,7 @@ include ../../../mixin
         div(fxLayout="row", [style.height.px]="200")
           ag-grid-angular.ag-theme-material(style="width:100%;height:100%;", [columnDefs]="tourGridService.columnDefs", [enableSorting]="true", [rowHeight]="35", [headerHeight]="35", [icons]="tourGridService.icons", [gridOptions]="tourGridService.gridOptions", (selectionChanged)="onSelectionChanged()", [frameworkComponents]="tourGridService.frameworkComponents", rowSelection="single", (gridReady)="onGridReady($event)", [enableRtl]="true")
             | ّ
-      mat-step(label="{{'steps'|translate:({value:'second'|translate})}}")
+      mat-step(label="{{'steps.end' | translate}}")
         form([formGroup]="replacementTourResultForm.form", *ngIf="showTour", atuoTranslate)
           mat-card
             div(fxLayout="row")
