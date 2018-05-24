@@ -30,14 +30,14 @@
     "name": "نام خریدار",
     "names": "نام خریداران"
   },
-  "contactList":"لیست مخاطبین",
+  "contactList": "لیست مخاطبین",
   "cancel": "انصراف",
   "capacity": {
     "*": "ظرفیت",
     "all": "کل",
     "noName": "بدون اسم",
     "remained": "مانده",
-    "reserved":"رزرو شده"
+    "reserved": "رزرو شده"
   },
   "close": "بستن",
   "count": "تعداد",
@@ -81,10 +81,10 @@
     "delete": "در صورت حذف اطلاعات غیر قابل بازگشت میباشد",
     "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
     "thereIsNoFreeSpace": "ظرفیت خالی وجود ندارد",
-    "connectionError":"خطا در برقراری ارتباط با سرور",
+    "connectionError": "خطا در برقراری ارتباط با سرور",
     "buyerCannotBeInfant": "خریدار نمی تواند اینفنت باشد",
     "buyerCannotBeUnder5": "خریدار نمی تواند زیر 5 سال باشد",
-    "allowedPaassengerToReplace":"فقط مسافرین مشخص شده را می توانید جابجا کنید"
+    "allowedPaassengerToReplace": "فقط مسافرین مشخص شده را می توانید جابجا کنید"
   },
   "name": "نام",
   "nationalCode": "کد ملی",
@@ -144,7 +144,9 @@
     "upsert": "ثبت شخص",
     "visa": "ویزا",
     "visaDelivered": "تحویل ویزا",
-    "visaExpireDate": "اعتبار ویزا"
+    "visaExpireDate": "اعتبار ویزا",
+    "info": "اطلاعات فردی",
+    "extraInfo": "اطلاعات تکمیلی"
   },
   "personel": "پرسنل",
   "phone": "تلفن",
@@ -175,7 +177,7 @@
   "second": "دوم",
   "selectPerson": "انتخاب فرد",
   "steps": {
-    "level":"گام {{value}}",
+    "level": "گام {{value}}",
     "end": "اتمام"
   },
   "submitDate": "تاریخ رزرو",
@@ -197,7 +199,7 @@
     "price": "قیمت تور",
     "reserve": "رزرو تور",
     "upsert": "ثبت تور",
-    "edit":  "ویرایش تور",
+    "edit": "ویرایش تور",
     "leader": "مدیرگروه",
     "startDate": "تاریخ حرکت",
     "endDate": "تاریخ بازگشت",

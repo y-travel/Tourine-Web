@@ -5,7 +5,7 @@ include ../../../mixin
 .modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="400", trnAutoTranslate)
   form([formGroup]="data.form.get('person')")
     mat-horizontal-stepper(#stepper, [linear]="true")
-      mat-step([stepControl]="data.form", label="{{'steps'|translate:({value:'first'|translate})}}")
+      mat-step([stepControl]="data.form", label="{{'person.info'|translate}}")
         br
         div
           div(fxLayout="row", fxFlex)
@@ -23,7 +23,7 @@ include ../../../mixin
             +matField('birthDate', 'person.birthDate', 'data.form.get("person")')((click)="birthDate._open($event)", [matDatepicker]="personBirthDate")
               mat-datepicker-toggle(utc="true", #birthDate, matSuffix, [for]="personBirthDate")
               mat-datepicker(#personBirthDate, disabled="false", (selectedChanged)="age($event)")
-      mat-step([stepControl]="data.form", label="{{'steps'|translate:({value:'second'|translate})}}")
+      mat-step([stepControl]="data.form", label="{{'person.extraInfo'|translate}}")
         br
         div(fxLayout="row")
           +matField('passportNo', 'passportNumber', 'data.form.get("person")')
