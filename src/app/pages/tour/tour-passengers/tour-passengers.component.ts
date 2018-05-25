@@ -57,7 +57,7 @@ export class TourPassengersComponent implements OnInit, ModalInterface {
         }
       });
     } else {
-      this.dialogService.openDialog('msg.allowedPaassengerToReplace', null);
+      this.dialogService.openDialog('msg.allowedPaassengerToReplace');
     }
   }
 

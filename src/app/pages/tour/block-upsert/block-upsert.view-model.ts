@@ -10,6 +10,7 @@ import { AppUtils, UTILS } from '../../../@core/utils';
 export class BlockUpsertViewModel {
   form: NewFormService<Tour>;
   parentBlock: Tour;
+  freeSpace: number;
   isEdit: boolean;
 
   constructor(private formFactory: FormFactory,
@@ -27,6 +28,7 @@ export class BlockUpsertViewModel {
     }
     this.parentBlock = tour;
     this.isEdit = !this.utils.isNullOrUndefined(block);
+    this.freeSpace = this.parentBlock.freeSpace + (this.isEdit ? block.capacity : 0);
     if (!this.isEdit) {
       block = new Block();
       //initial block
@@ -60,7 +62,12 @@ export class BlockUpsertViewModel {
       id: [model.id],
       parentId: [model.parentId],
       agencyId: [model.agencyId, Validators.required],
-      capacity: [model.capacity || undefined, [Validators.required, Validators.min(1), Validators.max(this.parentBlock.freeSpace)]], // @TODO Create maxOrEqual validator
+      capacity: [model.capacity || undefined,
+        [Validators.required,
+          Validators.min(1),
+          Validators.max(this.freeSpace)]
+      ],
+      // @TODO Create maxOrEqual validator
       infantPrice: [model.infantPrice || undefined, Validators.required],
       basePrice: [model.basePrice || undefined, [Validators.required, Validators.min(model.basePrice)]],
       options: new FormBuilder().array(

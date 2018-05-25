@@ -11,7 +11,7 @@ class ValidationServiceStub {
   }
 }
 
-describe('BlockUpsertViewModel', () => {
+fdescribe('BlockUpsertViewModel', () => {
   let vModel: BlockUpsertViewModel;
   const defaultTour: any = {basePrice: 10, capacity: 10, freeSpace: 10};
   beforeEach(() => {
@@ -37,7 +37,7 @@ describe('BlockUpsertViewModel', () => {
     expect(vModel.form.get('basePrice').invalid).toBeTruthy();
   });
 
-  it('مبلغ رزرو باید بیشتر از مبلغ تور باشد.', () => {
+   it('مبلغ رزرو باید بیشتر از مبلغ تور باشد.', () => {
     // create
     vModel.init(<Tour>defaultTour);
     vModel.updateForm(<Tour>{basePrice: 11});

@@ -85,19 +85,11 @@ export class PersonAgency {
   person: Person;
 }
 
-export class Block extends Model {
-  agencyId: string = undefined;
-  agency: Agency;
-  parentId: string = undefined;
-  capacity: number = undefined;
-  infantPrice: number = undefined;
+export class Block extends Tour {
   busPrice: number = undefined;
   roomPrice: number = undefined;
   foodPrice: number = undefined;
-  basePrice: number = undefined;
   totalPrice: number = undefined;
-  freeSpace: number = undefined;
-  options: TourOption[];
 }
 
 export class EditPassword extends Model {

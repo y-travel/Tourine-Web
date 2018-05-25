@@ -14,7 +14,7 @@ include ../../../mixin
           br
         div(fxLayout="row")
           mat-form-field
-            mat-select(placeholder="agency.name", formControlName="agencyId", (selectionchange)="selectedItem($event,stepper)")
+            mat-select(placeholder="agency.name", formControlName="agencyId", (selectionChange)="stepper.next()")
               mat-option(*ngFor="let item of agencies | async", [value]="item.id") {{ item.name }}
             mat-error(translate) {{vModel.form.get('agencyId')['errorMessage']}}
           button(mat-mini-fab, color="accent", (click)="agencyUpsert()")
@@ -23,7 +23,12 @@ include ../../../mixin
       form([formGroup]="vModel.form")
         div(fxLayout='row', fxFlex)
           div(fxLayout='column', fxFlex)
-            +matField('capacity','adultCount', 'vModel.form', '{{ "emptyCount"|translate:({value:(vModel.parentBlock.freeSpace-adultCount.value)}) }}' )(mask='number', #adultCount)
+            +matField(
+            'capacity',
+            'adultCount',
+            'vModel.form',
+            '{{ "emptyCount"|translate:({value:(vModel.freeSpace-adultCount.value)}) }}'
+            )(mask='number', #adultCount)
             +matField("basePrice", "tour.price", "vModel.form", "price.irFormated", "landscape")(mask="number")
             +matField("infantPrice", "infantPrice", "vModel.form", "price.irFormated", "child_care")(mask="number")
           div(fxLayout="column", fxFlex, formArrayName="options")
@@ -54,7 +59,7 @@ include ../../../mixin
 div(fxLayout="row", align="end")
   button.pull-left(mat-mini-fab, color="primary", (click)="next(stepper)", [disabled]="stepper.selectedIndex==2")
     mat-icon navigate_before
-  button.pull-right(mat-mini-fab, color="primary", (click)="previous(stepper)", [disabled]="stepper.selectedIndex==0")
+  button.pull-right(mat-mini-fab, color="primary", (click)="stepper.previous()", [disabled]="stepper.selectedIndex==0")
     mat-icon navigate_next
   label(fxFlex, [hidden]="stepper.selectedIndex!==1")
     | {{ "allPriceIsPerOne"|translate }}

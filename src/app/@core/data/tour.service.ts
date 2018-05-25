@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import { ApiService } from './api.service';
-import { Agency, Destination, Person, Place, TourPassengers, Tour, TourOption, TourBuyer } from './models/client.model';
+import { Agency, Destination, Person, Place, Tour, TourBuyer, TourOption, TourPassengers } from './models/client.model';
 import { Serializable } from '../utils/serializable';
 import {
-  DeleteTour, GetAgencies, GetBlocks, GetDestinations, GetLeaders, GetPlaces, GetTourBuyers, GetTourOptions, GetTours, GetTourTicket, GetTourVisa,
+  DeleteTour,
+  GetAgencies,
+  GetBlocks,
+  GetDestinations,
+  GetLeaders,
+  GetPlaces,
+  GetTourBuyers,
+  GetTourOptions,
+  GetTours,
+  GetTourTicket,
+  GetTourVisa,
   UpsertTour
 } from './models/server.dtos';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class TourService {
@@ -41,10 +53,19 @@ export class TourService {
     return this.apiService.getEntities(query);
   }
 
-  getBlocks(tourId: string): Observable<Tour[]> {
+  getBlocks(tour: Tour): Observable<Tour[]> {
     const query = new GetBlocks();
-    query.tourId = tourId;
-    return this.apiService.getEntities(query);
+    query.tourId = tour.id;
+    return this.apiService.getEntities(query).pipe(map((blocks: Tour[]) => {
+      blocks.forEach(block => {
+        if (tour.id !== block.parentId) {
+          return;
+        }
+        block.parent = tour;
+        block.tourDetail = tour.tourDetail;
+      });
+      return blocks;
+    }));
   }
 
   getAgencies(): Observable<Agency[]> {

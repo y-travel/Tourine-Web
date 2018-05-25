@@ -158,7 +158,7 @@ export class TourGridService {
           },
         ],
         onGridReady: (detailParams: any, parentParams: any = null) => {
-          this.tourService.getBlocks(parentParams.data.id).subscribe(blocks => {
+          this.tourService.getBlocks(parentParams.data).subscribe(blocks => {
             this.blocks = blocks;
             detailParams.api.setRowData(this.blocks);
             detailParams.api.sizeColumnsToFit();

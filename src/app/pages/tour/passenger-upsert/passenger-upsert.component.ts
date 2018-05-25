@@ -88,7 +88,7 @@ export class PassengerUpsertComponent implements ModalInterface {
 
   teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
     if (this.tourFreeSpace <= 0 && isAdd) {
-      this.dialogService.openDialog('msg.thereIsNoFreeSpace', null);
+      this.dialogService.openDialog('msg.thereIsNoFreeSpace');
       return;
     }
     const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
@@ -132,10 +132,10 @@ export class PassengerUpsertComponent implements ModalInterface {
             this.nextButton.disabled = false;
 
             if (x.isInfant) {
-              this.dialogService.openDialog('msg.buyerCannotBeInfant', null);
+              this.dialogService.openDialog('msg.buyerCannotBeInfant');
             }
             if (x.isUnder5) {
-              this.dialogService.openDialog('msg.buyerCannotBeUnder5', null);
+              this.dialogService.openDialog('msg.buyerCannotBeUnder5');
             } else {
               stepper.next();
             }
@@ -143,9 +143,9 @@ export class PassengerUpsertComponent implements ModalInterface {
         }
       } else {
         if (this.buyerForm.value.isInfant) {
-          this.dialogService.openDialog('msg.buyerCannotBeInfant', null);
+          this.dialogService.openDialog('msg.buyerCannotBeInfant');
         } else if (this.buyerForm.value.isUnder5) {
-          this.dialogService.openDialog('msg.buyerCannotBeUnder5', null);
+          this.dialogService.openDialog('msg.buyerCannotBeUnder5');
         } else {
           if (this.buyerForm.valid) {
             this.nextButton.disabled = false;

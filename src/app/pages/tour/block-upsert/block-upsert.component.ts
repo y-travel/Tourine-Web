@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { Agency, Block, Tour } from '../../../@core/data/models/client.model';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
-import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatSelect, MatStepper } from '@angular/material';
+import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatStepper } from '@angular/material';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { AgencyService } from '../../../@core/data/agency.service';
@@ -21,11 +21,10 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./block-upsert.component.scss'],
   providers: [BlockUpsertViewModel],
 })
-export class BlockUpsertComponent implements OnInit, ModalInterface, ModalInterface {
+export class BlockUpsertComponent implements ModalInterface, ModalInterface {
   dialogMode: DialogMode;
   DialogMode = DialogMode;
   agencies: Observable<Agency[]>;
-  isNewBlock = false;
   optionType = OptionType;
   @ViewChild('addPassengerBtn') addPassengerBtn: MatButton;
 
@@ -42,9 +41,8 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, ModalInterf
 
   initDialog() {
     this.vModel.init(this.data.tour, this.data.block);
-    this.isNewBlock = this.vModel.isEdit;
     this.tourService
-      .getOptions(this.isNewBlock ? this.vModel.parentBlock.id : this.vModel.model.id)
+      .getOptions(this.vModel.isEdit ? this.vModel.model.id : this.vModel.parentBlock.id)
       .subscribe(x => this.vModel.form.updateForm(<Tour>{options: x}));
     this.agencies = this.service.getList();
 
@@ -64,20 +62,12 @@ export class BlockUpsertComponent implements OnInit, ModalInterface, ModalInterf
       return;
     }
     const newBlock = await this.tourService.upsertTour(this.vModel.model).pipe(first()).toPromise().catch(x => undefined);
-    this.isNewBlock = this.utils.isNullOrUndefined(newBlock);
+    if (this.utils.isNullOrUndefined(newBlock)) {
+      this.dialogService.openDialog('error');
+      return;
+    }
     stepper.next();
     this.vModel.updateForm(newBlock);
-  }
-
-  previous(stepper: MatStepper) {
-    stepper.previous();
-  }
-
-  ngOnInit() {
-  }
-
-  selectedItem(agencyId: MatSelect, stepper: MatStepper) {
-    stepper.next();
   }
 
   addPassengers() {

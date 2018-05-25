@@ -52,7 +52,7 @@ export class DialogButton {
 export class AlertDialogData {
   constructor(public content: string,
               public cancelText = 'cancel',
-              public applyText = 'apply',
+              public applyText = '',
               public applyButtonType = DialogButtonType.Positive) {
   }
 }
