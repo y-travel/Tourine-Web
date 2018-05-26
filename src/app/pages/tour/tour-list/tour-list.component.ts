@@ -148,7 +148,7 @@ export class TourListComponent {
 
   blockUpsert(tour: Tour, block?: Block, isEdit = false) {
     const ref = this.dialogService.openPopup(BlockUpsertComponent, {tour: tour, block: block}, isEdit ? DialogMode.Edit : DialogMode.Create);
-    ref.afterClosed().subscribe(() => this.reloadTourList());
+    ref.afterClosed().subscribe(() => this.tourGridService.reloadBlocks());
   }
 
   passengerUpsert(block = new Block()) {

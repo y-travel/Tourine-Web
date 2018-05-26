@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GridOptions } from 'ag-grid';
+import { GridApi, GridOptions } from 'ag-grid';
 import { AgGridNg2 } from 'ag-grid-angular';
 
 import { TourService } from '../../@core/data/tour.service';
@@ -24,9 +24,12 @@ export class TourGridService {
   rows: Tour[];
   blocks: Tour[];
   icons: any;
-  private getRowNodeId;
   toolbarTourItems: ToolbarItem[] = [];
   toolbarBlockItems: ToolbarItem[] = [];
+  currentRow: Tour;
+  currentRowDetailApi: GridApi;
+
+  private getRowNodeId;
 
   constructor(private tourService: TourService,
               private formatter: FormatterService) {
@@ -112,7 +115,7 @@ export class TourGridService {
       },
     ];
 
-    this.getRowNodeId = function(data) {
+    this.getRowNodeId = function (data) {
       return data.id;
     };
 
@@ -165,11 +168,9 @@ export class TourGridService {
           },
         ],
         onGridReady: (detailParams: any, parentParams: any = null) => {
-          this.tourService.getBlocks(parentParams.data).subscribe(blocks => {
-            this.blocks = blocks;
-            detailParams.api.setRowData(this.blocks);
-            detailParams.api.sizeColumnsToFit();
-          });
+          this.currentRow = parentParams.data;
+          this.currentRowDetailApi = detailParams.api;
+          this.reloadBlocks();
         },
       },
       frameworkComponents: {cellToolbar: CellToolbarComponent, cellHeader: CellHeaderComponent},
@@ -221,5 +222,13 @@ export class TourGridService {
   initToolbar(sharedItems: ToolbarItem[], tourItems: ToolbarItem[], blockItems: ToolbarItem[]) {
     this.toolbarTourItems.push(...tourItems, ...sharedItems);
     this.toolbarBlockItems.push(...blockItems, ...sharedItems);
+  }
+
+  reloadBlocks(tour = this.currentRow) {
+    this.tourService.getBlocks(tour).subscribe(blocks => {
+      this.blocks = blocks;
+      this.currentRowDetailApi.setRowData(this.blocks);
+      this.currentRowDetailApi.sizeColumnsToFit();
+    });
   }
 }
