@@ -24,6 +24,7 @@ export class TourGridService {
   rows: Tour[];
   blocks: Tour[];
   icons: any;
+  private getRowNodeId;
   toolbarTourItems: ToolbarItem[] = [];
   toolbarBlockItems: ToolbarItem[] = [];
 
@@ -110,6 +111,10 @@ export class TourGridService {
         maxWidth: 250,
       },
     ];
+
+    this.getRowNodeId = function(data) {
+      return data.id;
+    };
 
     this.detailCellRenderer = 'cellDetail';
     this.frameworkComponents = {cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent, cellHeader: CellHeaderComponent};
