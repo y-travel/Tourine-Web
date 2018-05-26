@@ -53,7 +53,6 @@ export class PassengerReplacementTourGridService {
         maxWidth: 25,
         minWidth: 25,
         checkboxSelection: true,
-
       },
       {
         headerName: 'row',
@@ -61,7 +60,6 @@ export class PassengerReplacementTourGridService {
         minWidth: 25,
         maxWidth: 25,
         cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
-        getQuickFilterText: (params: any) => (params.node.rowIndex + 1).toString(),
       }, {
         headerName: 'tour.code',
         field: 'code',
@@ -73,14 +71,23 @@ export class PassengerReplacementTourGridService {
         minWidth: 100,
         maxWidth: 100,
         field: 'tourDetail.startDate',
-        getQuickFilterText: (params: any) => this.formatter.getDateFormat(params.value),
         valueFormatter: (params: any) => this.formatter.getDateFormat(params.value),
       },
       {
         headerName: 'capacity.*',
+        headerGroupComponent: 'cellHeader',
+        children: [
+          {
+            headerName: 'capacity.all',
+            field: 'capacity',
+          },
+          {
+            headerName: 'capacity.remained',
+            field: 'freeSpace',
+          },
+        ],
         minWidth: 100,
         maxWidth: 100,
-        field: 'capacity',
       },
       {
         headerName: 'hotel',
@@ -88,15 +95,19 @@ export class PassengerReplacementTourGridService {
         minWidth: 150,
         maxWidth: 150,
         cellRenderer: (params: any) => this.places[params.value],
-        getQuickFilterText: (params: any) => this.places[params.value],
-      }, {
+      },
+      {
         headerName: 'price.*',
         field: 'basePrice',
         cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
       },
     ];
 
-    this.frameworkComponents = {cellDetail: CellDetailComponent, cellToolbar: CellToolbarComponent};
+    this.frameworkComponents = {
+      cellDetail: CellDetailComponent,
+      cellToolbar: CellToolbarComponent,
+      cellHeader: CellHeaderComponent
+    };
   }
 
   loadPlaces() {

@@ -51,13 +51,15 @@ export class TourGridService {
         maxWidth: 40,
         minWidth: 40,
         cellRenderer: 'agGroupCellRenderer',
-      }, {
+      },
+      {
         headerName: 'row',
         field: 'id',
         minWidth: 50,
         maxWidth: 50,
         cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
-      }, {
+      },
+      {
         headerName: 'tour.code',
         field: 'code',
         minWidth: 150,
@@ -93,7 +95,8 @@ export class TourGridService {
         minWidth: 100,
         maxWidth: 150,
         cellRenderer: (params: any) => this.places[params.value],
-      }, {
+      },
+      {
         headerName: 'price.*',
         field: 'basePrice',
         cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
@@ -139,7 +142,6 @@ export class TourGridService {
               {
                 headerName: 'capacity.noName',
                 field: 'freeSpace',
-                valueGetter: (params: any) => params.data.freeSpace,
               },
             ],
           },

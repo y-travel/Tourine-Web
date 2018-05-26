@@ -19,7 +19,16 @@
 mat-dialog-actions
   button(mat-raised-button, color="primary", fxFlex, matDialogClose) {{ "close"|translate }}
 ng-template(#reportGridTemplate, let-tabIndex="tab")
-  ag-grid-angular.ag-theme-material(#aggrid, style="height:300px", [columnDefs]="reportGridService.ticketColumnDef", [gridOptions]="reportGridService.gridOptions", [frameworkComponents]="reportGridService.frameworkComponents", (gridReady)="onGridReady($event,tabIndex)", [enableRtl]="true", rowHeight="35", headerHeight="35")
+  ag-grid-angular.ag-theme-material(
+    #aggrid,
+    style="height:300px",
+    [columnDefs]="reportGridService.ticketColumnDef",
+    [gridOptions]="reportGridService.gridOptions",
+    [frameworkComponents]="reportGridService.frameworkComponents",
+    (gridReady)="onGridReady($event,tabIndex)",
+    [enableRtl]="true",
+    rowHeight="35",
+    headerHeight="35")
 ng-template(#tickeTemplate)
   div
     mat-card
