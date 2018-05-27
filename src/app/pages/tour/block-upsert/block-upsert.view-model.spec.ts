@@ -37,7 +37,7 @@ fdescribe('BlockUpsertViewModel', () => {
     expect(vModel.form.get('basePrice').invalid).toBeTruthy();
   });
 
-   it('مبلغ رزرو باید بیشتر از مبلغ تور باشد.', () => {
+  it('مبلغ رزرو باید بیشتر از مبلغ تور باشد.', () => {
     // create
     vModel.init(<Tour>defaultTour);
     vModel.updateForm(<Tour>{basePrice: 11});
@@ -56,7 +56,7 @@ fdescribe('BlockUpsertViewModel', () => {
     expect(vModel.form.get('capacity').invalid).toBeTruthy();
     //edit
     vModel.init(<Tour>defaultTour, <Block>defaultTour);
-    vModel.updateForm(<Tour>{capacity: 11});
+    vModel.updateForm(<Tour>{capacity: defaultTour.capacity + defaultTour.freeSpace + 1});
     expect(vModel.form.get('capacity').invalid).toBeTruthy();
   });
 
@@ -66,8 +66,8 @@ fdescribe('BlockUpsertViewModel', () => {
     vModel.updateForm(<Tour>{capacity: 10});
     expect(vModel.form.get('capacity').valid).toBeTruthy();
     //edit
-    vModel.init(<Tour>defaultTour, <Block>defaultTour);
-    vModel.updateForm(<Tour>{capacity: 10});
+    vModel.init(<Tour>defaultTour, <Block>{capacity: defaultTour.capacity, freeSpace: 0});
+    vModel.updateForm(<Tour>{capacity: defaultTour.capacity + defaultTour.freeSpace});
     expect(vModel.form.get('capacity').valid).toBeTruthy();
   });
 
