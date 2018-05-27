@@ -7,11 +7,14 @@ import { PersonService } from '../../../@core/data/person.service';
 import { AppUtils, UTILS } from '../../../@core/utils';
 import { PassengerReplacementTourGridService } from './passenger-replacement-tour-grid.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
+import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
+import { TourUpsertComponent } from '../tour-upsert/tour-upsert.component';
 
 @Component({
   selector: 'trn-passenger-replacement',
   templateUrl: './passenger-replacement.component.gen.html',
-  styleUrls: ['./passenger-replacement.component.scss']
+  styleUrls: ['./passenger-replacement.component.scss'],
+  providers: [PassengerReplacementTourGridService]
 })
 export class PassengerReplacementComponent implements OnInit, ModalInterface {
   replacementTourResultForm: FormService<any>;
@@ -28,6 +31,16 @@ export class PassengerReplacementComponent implements OnInit, ModalInterface {
   @ViewChild('nextButton') nextButton: MatButton;
   @ViewChild('submit') submitBtn: MatButton;
 
+  blockItems = [
+    <ToolbarItem>{
+      icon: 'mode_edit',
+      title: 'edit',
+      color: '#03a9f4',
+      command: (tour: any) => this.tourUpsert(tour, true),
+    }
+  ];
+  reloadTourList = (tourid) => this.tourGridService.getTourExcludedSource(tourid);
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
               public dialogInstance: MatDialogRef<ModalInterface>,
               private dialogService: DialogService,
@@ -37,6 +50,7 @@ export class PassengerReplacementComponent implements OnInit, ModalInterface {
               @Inject(UTILS) public utils: AppUtils) {
     this.replacementTourResultForm = this.formFactory.createReplacementTourResultForm();
     this.replacementTeamResultForm = this.formFactory.createReplacementTeamResultForm([]);
+    this.tourGridService.initToolbar(this.blockItems);
   }
 
   initDialog() {
@@ -82,7 +96,6 @@ export class PassengerReplacementComponent implements OnInit, ModalInterface {
     }
   }
 
-
   replacePassenger(stepper: MatStepper) {
     this.service.passengerReplacement(this.data.model.id, this.destinationTourId, this.selectedPassengers, this.selectedAgency.id)
       .subscribe(x => {
@@ -92,6 +105,11 @@ export class PassengerReplacementComponent implements OnInit, ModalInterface {
         this.showTour = !x.isTeam;
         stepper.next();
       });
+  }
+
+  tourUpsert(tour = new Tour(), isEdit = false) {
+    const ref = this.dialogService.openPopup(TourUpsertComponent, tour, isEdit ? DialogMode.Edit : DialogMode.Create);
+    ref.afterClosed().subscribe(() => this.reloadTourList(this.data.model.id));
   }
 
   updateReplacement() {

@@ -101,6 +101,12 @@ export class PassengerReplacementTourGridService {
         field: 'basePrice',
         cellRenderer: (params: any) => this.formatter.getPriceFormat(params.value),
       },
+      {
+        cellRenderer: 'cellToolbar',
+        cellRendererParams: {
+          items: this.toolbarBlockItems,
+        },
+      },
     ];
 
     this.frameworkComponents = {
@@ -153,4 +159,7 @@ export class PassengerReplacementTourGridService {
     });
   }
 
+  initToolbar(BlockItems: ToolbarItem[]) {
+    this.toolbarBlockItems.push(...BlockItems);
+  }
 }

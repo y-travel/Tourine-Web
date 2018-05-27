@@ -43,6 +43,7 @@ export class TourPassengersComponent implements OnInit, ModalInterface {
   ngOnInit() {
   }
 
+// @TODO pass component parameters as input data
   passengerReplacement() {
     const selectedPassengrs: TeamMember[] = this.passengerGridService.gridApi.getSelectedRows();
     if (selectedPassengrs.length > 0 &&
