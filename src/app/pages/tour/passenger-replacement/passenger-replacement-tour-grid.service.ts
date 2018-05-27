@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { GridOptions } from 'ag-grid';
-import { TranslateService } from '@ngx-translate/core';
+import { AgGridNg2 } from 'ag-grid-angular';
 
 import { TourService } from '../../../@core/data/tour.service';
 import { CellHeaderComponent } from '../../../shared/trn-ag-grid/cell-header/cell-header.component';
 import { Dictionary, Place } from '../../../@core/data/models';
 import { FormatterService } from '../../../@core/utils/formatter.service';
 import { CellDetailComponent } from '../../../shared/trn-ag-grid/cell-detail/cell-detail.component';
-import { Agency, Destination, Tour } from '../../../@core/data/models/client.model';
-import { AgGridNg2 } from 'ag-grid-angular';
+import { Agency, Tour } from '../../../@core/data/models/client.model';
 import { CellToolbarComponent, ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
+import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 
 @Injectable()
 export class PassengerReplacementTourGridService {
@@ -20,17 +20,15 @@ export class PassengerReplacementTourGridService {
   detailCellRendererParams: any;
   places: Dictionary<string> = {};
   agencies: Dictionary<string> = {};
-  dest: Dictionary<string> = {};
   gridApi: any;
   grid: AgGridNg2;
   rows: Tour[];
-  blocks: Tour[];
   icons: any;
-  toolbarTourItems: ToolbarItem[] = [];
   toolbarBlockItems: ToolbarItem[] = [];
+  sourceTourId: string;
 
   constructor(private tourService: TourService,
-              private translateService: TranslateService,
+              @Inject(UTILS) private utils: AppUtils,
               private formatter: FormatterService) {
     this.init();
   }
@@ -128,35 +126,28 @@ export class PassengerReplacementTourGridService {
     });
   }
 
-  loadDest() {
-    this.tourService.getDistinations().subscribe((res: Destination[]) => {
-      res.forEach(d => this.dest[d.id] = d.name);
-    });
-  }
-
   refresh() {
     this.gridApi.refreshView();
   }
 
   onGridReady(params: any) {
     this.gridApi = params.api;
-    this.setInitialLayout(this.gridApi);
+    this.reloadData();
   }
 
-  setInitialLayout(api: any) {
-    api.sizeColumnsToFit();
-    setTimeout(function () {
-      api.forEachNode(function (node: any) {
-        node.setExpanded();
-      });
-    }, 100);
-  }
-
-  getTourExcludedSource(sourceTourId: string) {
+  reloadData() {
+    if (this.utils.isNullOrEmpty(this.sourceTourId)) {
+      throw new Error('Source tour should not be null');
+    }
     this.tourService.getList().subscribe(tours => {
-      this.rows = tours.filter(x => x.id !== sourceTourId);
+      this.rows = tours.filter(x => x.id !== this.sourceTourId);
       this.gridApi.setRowData(this.rows);
+      this.gridApi.sizeColumnsToFit();
     });
+  }
+
+  setSourceTourId(tourId: string) {
+    this.sourceTourId = tourId;
   }
 
   initToolbar(BlockItems: ToolbarItem[]) {

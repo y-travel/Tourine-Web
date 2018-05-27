@@ -15,8 +15,19 @@ include ../../../mixin
           mat-form-field.example-full-width(fxFlex)
             input(matInput="search-local", placeholder="{{'destinationTourFilter'|translate}}", #searchContent, (keyUp)="onFilterTextBoxChanged(searchContent)")
         div(fxLayout="row", [style.height.px]="200")
-          ag-grid-angular.ag-theme-material(style="width:100%;height:100%;", [columnDefs]="tourGridService.columnDefs", [enableSorting]="true", [rowHeight]="35", [headerHeight]="35", [icons]="tourGridService.icons", [gridOptions]="tourGridService.gridOptions", (selectionChanged)="onSelectionChanged()", [frameworkComponents]="tourGridService.frameworkComponents", rowSelection="single", (gridReady)="onGridReady($event)", [enableRtl]="true")
-            | ّ
+          ag-grid-angular.ag-theme-material(
+              style="width:100%;height:100%;",
+              [columnDefs]="tourGridService.columnDefs",
+              [enableSorting]="true",
+              [rowHeight]="35",
+              [headerHeight]="35",
+              [icons]="tourGridService.icons",
+              [gridOptions]="tourGridService.gridOptions",
+              (selectionChanged)="onSelectionChanged()",
+              [frameworkComponents]="tourGridService.frameworkComponents",
+              rowSelection="single",
+              (gridReady)="tourGridService.onGridReady($event)",
+              [enableRtl]="true")
       mat-step(label="{{'steps.end' | translate}}")
         form([formGroup]="replacementTourResultForm.form", *ngIf="showTour", atuoTranslate)
           mat-card
@@ -27,21 +38,21 @@ include ../../../mixin
               'replacementTourResultForm.form',
               '',
               '',
-              {fxFlex:"30"})
+              {fxFlex: "30"})
               +matField(
               'basePrice',
               "{{'tour.price'|translate}}",
               'replacementTourResultForm.form',
               'price.irFormated',
               'landscape',
-              {fxFlex:"30"})
+              {fxFlex: "30"})
               +matField(
               'infantPrice',
               "{{'infantPrice'|translate}}",
               'replacementTourResultForm.form',
               'price.irFormated',
               'child_for',
-              {fxFlex:"30"})
+              {fxFlex: "30"})
             br
             div(fxLayout="row")
               +matField(
@@ -49,40 +60,40 @@ include ../../../mixin
               "{{'foodPrice'|translate}}",
               'replacementTourResultForm.form', 'price.irFormated',
               '{{ utils.mapOptionTypeToIcon(optionType.Food) }}',
-              {fxFlex:"30"})
+              {fxFlex: "30"})
               +matField(
               'busPrice',
               "{{'busPrice'|translate}}",
               'replacementTourResultForm.form',
               'price.irFormated',
               '{{ utils.mapOptionTypeToIcon(optionType.Bus) }}',
-              {fxFlex:"30"})
+              {fxFlex: "30"})
               +matField(
               'roomPrice',
               "{{'roomPrice'|translate}}",
               'replacementTourResultForm.form',
               'price.irFormated',
               "{{ utils.mapOptionTypeToIcon(optionType.Room) }}",
-              {fxFlex:"30"})
+              {fxFlex: "30"})
         form([formGroup]="replacementTeamResultForm.form", *ngIf="!showTour")
           .teamCard(formArrayName="teams")
             mat-card(*ngFor="let team of replacementTeamResultForm.form.get('teams')['controls'];let i=index")
               div(fxLayout="row", [formGroupName]="i")
-                +matField('buyer', "{{'buyer.name'|translate}}", 'team','','',{fxFlex:"30"} )
+                +matField('buyer', "{{'buyer.name'|translate}}", 'team','','',{fxFlex: "30"} )
                 +matField(
                 'basePrice',
                 "{{'tour.price'|translate}}",
                 'replacementTourResultForm.form',
                 'price.irFormated',
                 'landscape',
-                {fxFlex:"30"} )
+                {fxFlex: "30"} )
                 +matField(
                 'infantPrice',
                 "{{'infantPrice'|translate}}",
                 'replacementTourResultForm.form',
                 'price.irFormated',
                 'child_care',
-                {fxFlex:"30"})
+                {fxFlex: "30"})
         br
   // width set for IE
 div(fxLayout="row", align="end")

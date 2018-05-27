@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatInput, MatStepper } from '@angular/material';
 import { Agency, DialogMode, FormFactory, OptionType, Team, TeamMember, Tour } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
@@ -16,13 +16,14 @@ import { TourUpsertComponent } from '../tour-upsert/tour-upsert.component';
   styleUrls: ['./passenger-replacement.component.scss'],
   providers: [PassengerReplacementTourGridService]
 })
-export class PassengerReplacementComponent implements OnInit, ModalInterface {
+export class PassengerReplacementComponent implements ModalInterface {
   replacementTourResultForm: FormService<any>;
   replacementTeamResultForm: FormService<Team>;
   dialogMode: DialogMode;
   selectedPassengers: TeamMember[];
   selectedAgency: Agency;
-  selectedTourId: string;
+  sourceBlockId: string;
+  sourceTourId: string;
   destinationTourId: string;
   showTour: boolean = undefined;
 
@@ -39,25 +40,31 @@ export class PassengerReplacementComponent implements OnInit, ModalInterface {
       command: (tour: any) => this.tourUpsert(tour, true),
     }
   ];
-  reloadTourList = (tourid) => this.tourGridService.getTourExcludedSource(tourid);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Tour>,
+  constructor(@Inject(MAT_DIALOG_DATA) data: any,
               public dialogInstance: MatDialogRef<ModalInterface>,
               private dialogService: DialogService,
               public formFactory: FormFactory,
               public service: PersonService,
               public tourGridService: PassengerReplacementTourGridService,
               @Inject(UTILS) public utils: AppUtils) {
-    this.replacementTourResultForm = this.formFactory.createReplacementTourResultForm();
-    this.replacementTeamResultForm = this.formFactory.createReplacementTeamResultForm([]);
-    this.tourGridService.initToolbar(this.blockItems);
+    this.init(data);
   }
 
   initDialog() {
     this.submitBtn.disabled = true;
   }
 
-  ngOnInit() {
+  init(data: any) {
+    this.sourceTourId = data.sourceTourId;
+    this.sourceBlockId = data.sourceBlockId;
+    this.selectedPassengers = data.selectedPassengers;
+    this.selectedAgency = data.selectedAgency;
+
+    this.replacementTourResultForm = this.formFactory.createReplacementTourResultForm();
+    this.replacementTeamResultForm = this.formFactory.createReplacementTeamResultForm([]);
+    this.tourGridService.setSourceTourId(this.sourceTourId);
+    this.tourGridService.initToolbar(this.blockItems);
   }
 
   onFilterTextBoxChanged(searchContent: MatInput) {
@@ -77,30 +84,21 @@ export class PassengerReplacementComponent implements OnInit, ModalInterface {
     }
   }
 
+  // @TODO pagination should be implement with directive
   nextStep(stepper: MatStepper) {
     this.replacePassenger(stepper);
-    if (stepper.selectedIndex === 0) {
-      this.nextButton.disabled = true;
-      this.submitBtn.disabled = false;
-    } else {
-      this.nextButton.disabled = false;
-      this.submitBtn.disabled = true;
-    }
+    this.nextButton.disabled = stepper.selectedIndex === 0;
+    this.submitBtn.disabled = stepper.selectedIndex !== 0;
   }
 
   previousStep(stepper: MatStepper) {
     stepper.previous();
-    if (stepper.selectedIndex === 0) {
-      this.nextButton.disabled = false;
-      this.submitBtn.disabled = true;
-    } else {
-      this.nextButton.disabled = true;
-      this.submitBtn.disabled = false;
-    }
+    this.nextButton.disabled = stepper.selectedIndex !== 0;
+    this.submitBtn.disabled = stepper.selectedIndex === 0;
   }
 
   replacePassenger(stepper: MatStepper) {
-    this.service.passengerReplacement(this.data.model.id, this.destinationTourId, this.selectedPassengers, this.selectedAgency.id)
+    this.service.passengerReplacement(this.sourceTourId, this.destinationTourId, this.selectedPassengers, this.selectedAgency.id)
       .subscribe(x => {
         x.isTeam ?
           this.replacementTeamResultForm = this.formFactory.createReplacementTeamResultForm(x.teams) :
@@ -112,17 +110,12 @@ export class PassengerReplacementComponent implements OnInit, ModalInterface {
 
   tourUpsert(tour = new Tour(), isEdit = false) {
     const ref = this.dialogService.openPopup(TourUpsertComponent, tour, isEdit ? DialogMode.Edit : DialogMode.Create);
-    ref.afterClosed().subscribe(() => this.reloadTourList(this.data.model.id));
+    ref.afterClosed().subscribe(() => this.tourGridService.reloadData());
   }
 
   updateReplacement() {
     this.showTour ?
-      this.service.tourAccomplish(this.replacementTourResultForm.model, this.selectedTourId).subscribe(x => this.dialogInstance.close(true)) :
-      this.service.teamAccomplish(this.replacementTeamResultForm.model, this.selectedTourId).subscribe(x => this.dialogInstance.close(true));
-  }
-
-  onGridReady(params: any) {
-    this.tourGridService.onGridReady(params);
-    this.tourGridService.getTourExcludedSource(this.data.model.id);
+      this.service.tourAccomplish(this.replacementTourResultForm.model, this.sourceBlockId).subscribe(x => this.dialogInstance.close(true)) :
+      this.service.teamAccomplish(this.replacementTeamResultForm.model, this.sourceBlockId).subscribe(x => this.dialogInstance.close(true));
   }
 }

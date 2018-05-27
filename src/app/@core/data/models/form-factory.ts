@@ -234,12 +234,4 @@ export class FormFactory {
     });
     return form;
   }
-
-  createSimpleTourForm(model: Tour = new Tour()): FormService<Tour> {
-
-    const form = new FormBuilder().group({
-      id: [model.id],
-    });
-    return new FormService(Tour, form);
-  }
 }

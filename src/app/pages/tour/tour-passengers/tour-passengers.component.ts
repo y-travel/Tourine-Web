@@ -43,15 +43,19 @@ export class TourPassengersComponent implements OnInit, ModalInterface {
   ngOnInit() {
   }
 
-// @TODO pass component parameters as input data
+// @TODO Should be refactor
   passengerReplacement() {
     const selectedPassengrs: TeamMember[] = this.passengerGridService.gridApi.getSelectedRows();
     if (selectedPassengrs.length > 0 &&
       selectedPassengrs.length === selectedPassengrs.filter(x => x.tourId === selectedPassengrs[0].tourId).length) {
-      const ref = this.dialogService.openPopup(PassengerReplacementComponent, this.formFactory.createSimpleTourForm(this.data.model));
-      (<any>ref.componentInstance).selectedTourId = selectedPassengrs[0].tourId;
-      (<any>ref.componentInstance).selectedPassengers = selectedPassengrs;
-      (<any>ref.componentInstance).selectedAgency = this.passengerGridService.tourAgency[selectedPassengrs[0].tourId];
+      const ref = this.dialogService.openPopup(
+        PassengerReplacementComponent,
+        {
+          sourceTourId: this.data.model.id,
+          sourceBlockId: selectedPassengrs[0].tourId,
+          selectedPassengers: selectedPassengrs,
+          selectedAgency: this.passengerGridService.tourAgency[selectedPassengrs[0].tourId],
+        });
       ref.afterClosed().subscribe(x => {
         if (x) {
           this.dialogInstance.close();

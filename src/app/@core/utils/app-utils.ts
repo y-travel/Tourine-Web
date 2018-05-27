@@ -1,6 +1,5 @@
 ﻿import { InjectionToken } from '@angular/core';
 import { OptionType } from '../data/models/enums';
-import { map } from 'rxjs/operators';
 
 //@TODO change to static injection
 
@@ -21,6 +20,10 @@ export class AppUtils {
 
   isNullOrUndefined(obj: any) {
     return obj === undefined || obj === null;
+  }
+
+  isNullOrEmpty(str: string) {
+    return str === '' || this.isNullOrUndefined(str);
   }
 
   getEnumNames(item: any): string[] {
