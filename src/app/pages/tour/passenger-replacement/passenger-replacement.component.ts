@@ -66,7 +66,7 @@ export class PassengerReplacementComponent implements OnInit, ModalInterface {
 
   onSelectionChanged() {
     const selectedRows = this.tourGridService.gridApi.getSelectedRows();
-    if (selectedRows.length === 1) {
+    if (selectedRows.length === 1 && selectedRows[0].freeSpace > 0) {
       this.nextButton.disabled = false;
       this.destinationTourId = selectedRows[0].id;
     } else {

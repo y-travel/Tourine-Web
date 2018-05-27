@@ -61,4 +61,4 @@ div(fxLayout="row", align="end")
   button.pull-right(mat-mini-fab, color="primary", (click)="stepper.previous()", [disabled]="stepper.selectedIndex==0")
     mat-icon navigate_next
 mat-dialog-actions
-  button(fxFlex, mat-raised-button, color="primary", (click)="close()") {{"save"|translate}}
+  button(fxFlex, mat-raised-button, color="primary", (click)="close()", [disabled]="stepper.selectedIndex !== 1") {{"save"|translate}}
