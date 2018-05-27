@@ -29,7 +29,7 @@ export class TourGridService {
   currentRow: Tour;
   currentRowDetailApi: GridApi;
 
-  private getRowNodeId;
+  getRowNodeId;
 
   constructor(private tourService: TourService,
               private formatter: FormatterService) {

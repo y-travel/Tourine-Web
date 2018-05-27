@@ -132,7 +132,10 @@ export class TourListComponent {
 
   tourUpsert(tour = new Tour(), isEdit = false) {
     const ref = this.dialogService.openPopup(TourUpsertComponent, tour, isEdit ? DialogMode.Edit : DialogMode.Create);
-    ref.afterClosed().subscribe(() => this.reloadTourList());
+    ref.afterClosed().subscribe(() => {
+      this.reloadTourList();
+      this.tourGridService.reloadBlocks();
+    });
   }
 
   tourDelete(tour: any) {
@@ -156,12 +159,12 @@ export class TourListComponent {
       return;
     }
     const ref = this.dialogService.openPopup(PassengerUpsertComponent, {block: block});
-    ref.afterClosed().subscribe(() => this.reloadTourList());
+    ref.afterClosed().subscribe(() => this.tourGridService.reloadBlocks());
   }
 
   teamList(block = new Block()) {
     const ref = this.dialogService.openPopup(TeamListComponent, this.formFactory.createTeamListForm(block));
-    ref.afterClosed().subscribe(() => this.reloadTourList());
+    ref.afterClosed().subscribe(() => this.tourGridService.reloadBlocks());
   }
 
   tourPassengers(tour: Tour = new Tour()) {
