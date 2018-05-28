@@ -9,3 +9,8 @@ mixin matField(formControlName,placeholder,validationFormGroup='',subText = '',i
       mat-error(translate)="{{"+ validationFormGroup +".get('"+formControlName+"')['errorMessage']}}"
     block
 
+mixin matTitle(title, icon)
+  .modal-header(mat-dialog-title)
+    .modal-title= title
+       button(mat-icon-button mat-dialog-close class="close")
+        mat-icon= icon

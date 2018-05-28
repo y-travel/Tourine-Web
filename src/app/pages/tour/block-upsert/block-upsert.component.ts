@@ -14,6 +14,7 @@ import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { TourService } from '../../../@core/data/tour.service';
 import { Serializable } from '../../../@core/utils/serializable';
 import { first } from 'rxjs/operators';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'trn-block-upsert',
@@ -27,6 +28,7 @@ export class BlockUpsertComponent implements ModalInterface, ModalInterface {
   agencies: Observable<Agency[]>;
   optionType = OptionType;
   @ViewChild('addPassengerBtn') addPassengerBtn: MatButton;
+  formGroup: any;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,

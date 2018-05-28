@@ -1,7 +1,5 @@
 include ../../../mixin
-.modal-header(mat-dialog-title)
-  .modal-title
-    | {{(dialogMode === enums.DialogMode.Edit?"tour.edit" : "tour.upsert") | translate}}
++matTitle('{{(dialogMode === enums.DialogMode.Edit?"tour.edit" : "tour.upsert") | translate}}','close')
 .right.modal-body(dir='rtl', style='min-width: 700px', trnAutoTranslate)
   // width set for IE
 

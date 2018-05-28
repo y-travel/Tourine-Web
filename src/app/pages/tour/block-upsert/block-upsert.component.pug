@@ -1,7 +1,6 @@
 include ../../../mixin
-.modal-header(mat-dialog-title)
-  .modal-title
-    | {{ (vModel.isEdit?"tour.edit":"tour.reserve")|translate }}
++matTitle(
+  '{{ (vModel.isEdit?"tour.edit":"tour.reserve")|translate }}','close')
 .modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="300", trnAutoTranslate)
   // width set for IE
   mat-horizontal-stepper(#stepper, [linear]="true")

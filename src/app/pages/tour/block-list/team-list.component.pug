@@ -1,7 +1,5 @@
 include ../../../mixin
-.modal-header(mat-dialog-title)
-  .modal-title
-    | {{ "team.list"|translate }}
++matTitle('{{ "team.list"|translate }}','close')
 form([formGroup]="data.form")
   div
     mat-card([stretch]="true")

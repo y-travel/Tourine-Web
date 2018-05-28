@@ -1,6 +1,5 @@
-.modal-header(mat-dialog-title)
-  .modal-title
-    | {{ "reports.*"|translate }}
+include ../../../mixin
++matTitle('{{ "reports.*"|translate }}','close')
 .right.modal-body(dir="rtl", [style.width.px]="1000", [style.height.px]="500")
   mat-tab-group((selectedTabChange)="mainTab($event)")
     mat-tab(label="{{'reports.ticket'|translate}}")

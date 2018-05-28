@@ -1,6 +1,5 @@
-.modal-header(mat-dialog-title)
-  .modal-title
-    | {{ "tour.passengers"|translate }}
+include ../../../mixin
++matTitle('{{ "tour.passengers"|translate }}','close')
 .right.modal-body(dir="rtl", style="min-width: 700px", trnAutoTranslate)
   form([formGroup]="data.form", (keydown.enter)="$event.preventDefault()")
     div

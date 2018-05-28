@@ -1,7 +1,5 @@
 include ../../../mixin
-.modal-header(mat-dialog-title)
-  .modal-title
-    | {{ "leader.add"|translate }}
+  +matTitle('{{ "leader.add"|translate }}','close')
 .modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="300", trnAutoTranslate)
   form([formGroup]="vModel.form")
     div(fxLayout="row", layout-align="space-between center")

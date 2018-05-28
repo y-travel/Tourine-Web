@@ -1,7 +1,5 @@
 include ../../../mixin
-.modal-header(mat-dialog-title)
-  .modal-title
-    | {{"passenger.upsert"|translate}}
++matTitle('{{"passenger.upsert"|translate}}','close')
 .modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="400", trnAutoTranslate)
   form([formGroup]="data.form.get('person')")
     mat-horizontal-stepper(#stepper, [linear]="true")
