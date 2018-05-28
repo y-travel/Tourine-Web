@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { GridOptions } from 'ag-grid';
-import { TeamMember, Person, OptionType, Tour, Dictionary, Agency } from '../../../@core/data/models';
-import { ToolbarItem, CellToolbarComponent } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
+import { Agency, Dictionary, OptionType, Person, TeamMember, Tour } from '../../../@core/data/models';
+import { CellToolbarComponent, ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { TranslateService } from '@ngx-translate/core';
 import { FormatterService } from '../../../@core/utils/formatter.service';
@@ -26,14 +26,13 @@ export class TourPassengersGridService {
   gridApi: any;
 
   constructor(public personService: PersonService,
-    private translate: TranslateService,
-    private formatter: FormatterService,
-    @Inject(UTILS) private utils: AppUtils, ) {
+              private translate: TranslateService,
+              private formatter: FormatterService,
+              @Inject(UTILS) private utils: AppUtils,) {
     this.init();
   }
 
   init() {
-    this.loadTourAgency(this.selectedTourId);
     this.rows = [];
     this.gridOptions = {
       defaultColDef: {
@@ -65,7 +64,7 @@ export class TourPassengersGridService {
       {
         headerName: 'agency.*',
         field: 'tourId',
-        cellRenderer: (params: any) => this.tourAgency[params.value].name,
+        cellRenderer: (params: any) => this.getAgencyName(params.value),
       },
       {
         headerName: 'options',
@@ -75,19 +74,19 @@ export class TourPassengersGridService {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room) },
+            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room)},
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus) },
+            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus)},
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
-            headerComponentParams: { matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food) },
+            headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food)},
             cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`
           }
         ]
@@ -136,6 +135,9 @@ export class TourPassengersGridService {
   }
 
   refresh() {
+    if (this.utils.isNullOrUndefined(this.gridApi)) {
+      return;
+    }
     this.gridApi.redrawRows();
   }
 
@@ -155,6 +157,11 @@ export class TourPassengersGridService {
   loadTourAgency(tourId: string) {
     this.personService.getTourAgency(tourId).subscribe((tours: Tour[]) => {
       tours.forEach(t => this.tourAgency[t.id] = t.agency);
+      this.refresh();
     });
+  }
+
+  getAgencyName(data) {
+    return this.tourAgency[data] ? this.tourAgency[data].name : '';
   }
 }
