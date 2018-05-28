@@ -6,11 +6,12 @@ mixin matField(formControlName,placeholder,validationFormGroup='',subText = '',i
     if subText
       mat-hint(align='end', translate)=subText
     if validationFormGroup
-      mat-error(translate)="{{"+ validationFormGroup +".get('"+formControlName+"')['errorMessage']}}"
+      mat-error(translate)="{{" + validationFormGroup + ".get('" + formControlName + "')['errorMessage']}}"
     block
 
 mixin matTitle(title, icon)
   .modal-header(mat-dialog-title)
-    .modal-title= title
-       button(mat-icon-button mat-dialog-close class="close")
+    .modal-title
+      span= title
+      button(mat-icon-button, mat-dialog-close, class="close",tabindex="-1")
         mat-icon= icon

@@ -28,7 +28,7 @@ export class TourPassengersGridService {
   constructor(public personService: PersonService,
               private translate: TranslateService,
               private formatter: FormatterService,
-              @Inject(UTILS) private utils: AppUtils,) {
+              @Inject(UTILS) private utils: AppUtils) {
     this.init();
   }
 

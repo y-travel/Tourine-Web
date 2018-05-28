@@ -1,6 +1,6 @@
 include ../../../mixin
 +matTitle(
-  '{{ (vModel.isEdit?"tour.edit":"tour.reserve")|translate }}','close')
+'{{ (vModel.isEdit?"tour.edit":"tour.reserve")|translate }}','close')
 .modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="300", trnAutoTranslate)
   // width set for IE
   mat-horizontal-stepper(#stepper, [linear]="true")
@@ -27,7 +27,7 @@ include ../../../mixin
             'adultCount',
             'vModel.form',
             '{{ "emptyCount"|translate:({value:(vModel.freeSpace-adultCount.value)}) }}'
-            )(mask='number', #adultCount)
+            )(mask='number', #adultCount, cdkFocusInitial)
             +matField("basePrice", "tour.price", "vModel.form", "price.irFormated", "landscape")(mask="number")
             +matField("infantPrice", "infantPrice", "vModel.form", "price.irFormated", "child_care")(mask="number")
           div(fxLayout="column", fxFlex, formArrayName="options")
