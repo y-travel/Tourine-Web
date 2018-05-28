@@ -66,11 +66,14 @@ export class PassengerReplacementComponent implements OnInit, ModalInterface {
 
   onSelectionChanged() {
     const selectedRows = this.tourGridService.gridApi.getSelectedRows();
-    if (selectedRows.length === 1 && selectedRows[0].freeSpace > 0) {
-      this.nextButton.disabled = false;
+    this.nextButton.disabled = selectedRows.length !== 1 || selectedRows[0].freeSpace <= 0;
+    if (selectedRows.length === 0) {
+      return;
+    }
+    if (!this.nextButton.disabled) {
       this.destinationTourId = selectedRows[0].id;
     } else {
-      this.nextButton.disabled = true;
+      this.dialogService.openDialog('msg.thereIsNoFreeSpace');
     }
   }
 

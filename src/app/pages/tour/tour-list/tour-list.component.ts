@@ -18,7 +18,6 @@ import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { TourReportsComponent } from '../tour-reports/tour-reports.component';
 import { FileService } from '../../../@core/data/file.service';
-import { GetTicketReportTemplate } from '../../../@core/data/models/server.dtos';
 
 @Component({
   selector: 'trn-tour-list',
@@ -117,13 +116,6 @@ export class TourListComponent {
               private fileService: FileService) {
 
     this.tourGridService.initToolbar(this.sharedItems, this.tourItems, this.blockItems);
-  }
-
-  testFile() {
-    const dto = new GetTicketReportTemplate();
-    this.fileService.get(dto).subscribe(x => {
-      console.log(x);
-    });
   }
 
   refresh() {

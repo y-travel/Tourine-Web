@@ -18,7 +18,9 @@ class TrnDialogConfig<T> extends MatDialogConfig<T> {
 @Injectable()
 export class DialogService {
 
-  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private translate: TranslateService) {
+  constructor(private dialog: MatDialog,
+              private snackBar: MatSnackBar,
+              private translate: TranslateService) {
   }
 
   openPopup<T extends ModalInterface>(type: ComponentType<T>, data: FormService<T> | any, dialogMode = DialogMode.Create): MatDialogRef<ModalInterface> {
