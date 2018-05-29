@@ -44,7 +44,7 @@ fdescribe('BlockUpsertViewModel', () => {
     expect(vModel.form.get('basePrice').valid).toBeTruthy();
 
     // edit
-    vModel.init(<Tour>defaultTour, <Block>defaultTour);
+    vModel.init(<Tour>defaultTour, <Block>{basePrice: 12});
     vModel.updateForm(<Tour>{basePrice: 11});
     expect(vModel.form.get('basePrice').valid).toBeTruthy();
   });
@@ -88,5 +88,6 @@ fdescribe('BlockUpsertViewModel', () => {
       vModel.init(undefined);
     }).toThrow();
   });
+
 });
 

@@ -27,7 +27,7 @@ include ../../../mixin
             'adultCount',
             'vModel.form',
             '{{ "emptyCount"|translate:({value:(vModel.freeSpace-adultCount.value)}) }}'
-            )(mask='number', #adultCount, cdkFocusInitial)
+            )(mask='number', #adultCount)
             +matField("basePrice", "tour.price", "vModel.form", "price.irFormated", "landscape")(mask="number")
             +matField("infantPrice", "infantPrice", "vModel.form", "price.irFormated", "child_care")(mask="number")
           div(fxLayout="column", fxFlex, formArrayName="options")

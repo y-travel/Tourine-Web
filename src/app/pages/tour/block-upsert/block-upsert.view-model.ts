@@ -69,7 +69,7 @@ export class BlockUpsertViewModel {
       ],
       // @TODO Create maxOrEqual validator
       infantPrice: [model.infantPrice || undefined, Validators.required],
-      basePrice: [model.basePrice || undefined, [Validators.required, Validators.min(model.basePrice)]],
+      basePrice: [model.basePrice || undefined, [Validators.required, Validators.min(this.parentBlock.basePrice)]],
       options: new FormBuilder().array(
         (model.options || new Tour().options)
           .map(x => this.formFactory.createTourOptionForm(model.id, x)) //@TODO find a good solution for initializing options
