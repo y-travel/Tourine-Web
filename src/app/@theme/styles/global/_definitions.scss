@@ -1,3 +1,4 @@
+
 @mixin trn-definition() {
   .card-stretch {
     margin: 20px;
@@ -35,10 +36,24 @@
   .white_bcolor{
     background-color:white;
   }
-  .close{
-    float: right;
-    margin-top: -20px;
-    margin-right: -20px;
+
+  .modal-title{
+    height: 40px;
+    background-color: trn-theme(color-primary);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+    span{color: white;}
+    mat-icon{color: white;}
+      button{
+        float: right;}
   }
 
+  .mat-fab{
+    mat-icon{
+      color:white;
+    }
+  }
+
+  .modal-header{
+    margin: -24px -24px 30px -24px;
+  }
 }
