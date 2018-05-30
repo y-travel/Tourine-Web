@@ -134,7 +134,10 @@ export class TourListComponent {
     if (!tour) {
       return;
     }
-    this.tourService.deleteTour(tour).subscribe(() => this.reloadTourList());
+    this.tourService.deleteTour(tour).subscribe(() => {
+      this.reloadTourList();
+      this.tourGridService.reloadBlocks();
+    });
   }
 
   tourReports(tour: Tour = new Tour()) {
@@ -143,7 +146,10 @@ export class TourListComponent {
 
   blockUpsert(tour: Tour, block?: Block, isEdit = false) {
     const ref = this.dialogService.openPopup(BlockUpsertComponent, {tour: tour, block: block}, isEdit ? DialogMode.Edit : DialogMode.Create);
-    ref.afterClosed().subscribe(() => this.tourGridService.reloadBlocks());
+    ref.afterClosed().subscribe(() => {
+      this.reloadTourList();
+      this.tourGridService.reloadBlocks();
+    });
   }
 
   passengerUpsert(block = new Block()) {
@@ -151,12 +157,19 @@ export class TourListComponent {
       return;
     }
     const ref = this.dialogService.openPopup(PassengerUpsertComponent, {block: block});
-    ref.afterClosed().subscribe(() => this.tourGridService.reloadBlocks());
+    ref.afterClosed().subscribe(() => {
+        this.tourGridService.reloadBlocks();
+        this.reloadTourList();
+      }
+    );
   }
 
   teamList(block = new Block()) {
     const ref = this.dialogService.openPopup(TeamListComponent, this.formFactory.createTeamListForm(block));
-    ref.afterClosed().subscribe(() => this.tourGridService.reloadBlocks());
+    ref.afterClosed().subscribe(() => {
+      this.reloadTourList();
+      this.tourGridService.reloadBlocks();
+    });
   }
 
   tourPassengers(tour: Tour = new Tour()) {
