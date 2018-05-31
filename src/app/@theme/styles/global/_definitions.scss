@@ -1,18 +1,21 @@
-
 @mixin trn-definition() {
   .card-stretch {
     margin: 20px;
     padding: 0;
     direction: rtl;
-    .mat-card-footer{
+    .mat-card-footer {
       margin: 0;
     }
   }
   .card-shadow-thick {
-    box-shadow: 2px 2px 30px 10px trn-theme(shadow-color) !important;//cos mat-card class is over it
+    box-shadow: 2px 2px 30px 10px trn-theme(shadow-color) !important; //cos mat-card class is over it
   }
-  .pull-right{float:right}
-  .pull-left{float:left}
+  .pull-right {
+    float: right
+  }
+  .pull-left {
+    float: left
+  }
 
   ::-webkit-scrollbar {
     width: 5px;
@@ -30,30 +33,37 @@
     background: #03a9f4;
   }
 
-  .white_color{
-    color:white;
+  .white_color {
+    color: white;
   }
-  .white_bcolor{
-    background-color:white;
+  .white_bcolor {
+    background-color: white;
   }
 
-  .modal-title{
+  .modal-header {
+    padding: 6px 0 5px 0;
     height: 40px;
     background-color: trn-theme(color-primary);
-    box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
-    span{color: white;}
-    mat-icon{color: white;}
-      button{
-        float: right;}
-  }
-
-  .mat-fab{
-    mat-icon{
-      color:white;
+    .modal-title {
+      width: 100%;
+      text-align: center;
+      color: white;
+      mat-icon {
+        color: white;
+      }
+      button {
+        float: right;
+      }
     }
   }
 
-  .modal-header{
+  .mat-fab {
+    mat-icon {
+      color: white;
+    }
+  }
+
+  .modal-header {
     margin: -24px -24px 30px -24px;
   }
 }

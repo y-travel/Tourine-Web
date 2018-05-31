@@ -56,9 +56,9 @@
     margin: 20px;
   }
 
-  .mat-form-field{
-    font-size:14px;
-    margin:0 5px;
+  .mat-form-field {
+    font-size: 14px;
+    margin: 0 5px;
   }
 
   .mat-mini-fab {
@@ -89,12 +89,15 @@
     position: absolute;
     left: 0;
   }
-//disable wizard header selection
-  .mat-horizontal-stepper-header{
+  //disable wizard header selection
+  .mat-horizontal-stepper-header {
     pointer-events: none !important;
     height: 35px;
   }
 
+  .mat-dialog-title {
+    font-size: 1.2rem;
+  }
 }
 
 @mixin trn-material-theme() {
