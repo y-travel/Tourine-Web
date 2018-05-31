@@ -51,7 +51,7 @@ export class TourListComponent {
     },
     <ToolbarItem>{
       icon: 'attach_money',
-      title: 'team.list',
+      title: 'buyer.list',
       color: '#E040FB',
       command: (block: any) => this.teamList(block),
       disability: (block: Tour) => block.freeSpace === block.capacity,
