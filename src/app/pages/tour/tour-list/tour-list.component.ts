@@ -21,6 +21,7 @@ import { FileService } from '../../../@core/data/file.service';
 import { GetTicketReportTemplate } from '../../../@core/data/models/server.dtos';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { WorkBook } from 'xlsx';
 
 
 @Component({
@@ -189,35 +190,34 @@ export class TourListComponent {
     const dto = new GetTicketReportTemplate();
     this.fileService.get(dto).subscribe(x => {
       console.log(x);
-      // let workbook = XLSX.utils.decode_range(x.toString());
-      //
-      // /* bookType can be 'xlsx' or 'xlsm' or 'xlsb' or 'ods' */
-      // var wopts = { bookType:'xlsx', bookSST:false, type:'binary' };
-      // var wbout = XLSX.write(workbook,wopts);
-      // /* the saveAs call downloads a file on the local machine */
-      // saveAs(new Blob([this.s2ab(wbout)],{type:"application/octet-stream"}), "test.xlsx");
 
-      var blob = new Blob([x], { type: 'application/octet-stream' });
+      // var blob = new Blob([x], { type: 'application/octet-stream' });
       //saveAs is a function in the FileSaver.js library https://github.com/eligrey/FileSaver.js
-      saveAs(blob, "results.xlsx");
+      // saveAs(blob, "results.xlsx");
 
-      // var oo = [x,[]]; //all is the data i got from server
-      // var ranges = oo[1];
-      // var data = oo[0];
-      // var ws_name = "SheetJS";
-      // var wb = new Workbook(), ws = sheet_from_array_of_arrays(data);
-      // ws['!merges'] = ranges;
-      // wb.SheetNames.push(ws_name);
-      // wb.Sheets[ws_name] = ws;
-      // var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:false, type: 'binary'});
-      // saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), "allData.xlsx");
+      /* convert data to binary string */
+      var data = new Uint8Array(x);
+      var arr = new Array();
+      for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+      var bstr = arr.join("");
+
+      /* Call XLSX */
+      var workbook = XLSX.read(bstr, {type:'binary'});
+
+      var wbout = XLSX.write(workbook,  { bookType:'xlsx', bookSST:false , type: 'binary'});
+
+      /* the saveAs call downloads a file on the local machine */
+      var blob = new Blob([this.s2ab(wbout)], {type: 'application/octet-stream'});
+      saveAs(blob, 'test.xlsx');
+
 
     });
   }
+
   s2ab(s) {
     var buf = new ArrayBuffer(s.length);
     var view = new Uint8Array(buf);
-    for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+    for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
     return buf;
   }
 }
