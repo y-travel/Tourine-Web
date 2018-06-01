@@ -15,7 +15,6 @@
     "phoneNumber": "شماره تلفن آژانس",
     "upsert": "ثبت آژانس"
   },
-  "agencyName": "نام آژانس",
   "allPriceIsPerOne": "قیمت های وارد شده به ازای هر نفر می باشد",
   "apply": "تایید",
   "bedCount": "تعداد تخت",

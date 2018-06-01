@@ -134,7 +134,7 @@ export class TourGridService {
             cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
           },
           {
-            headerName: 'buyer.names',
+            headerName: 'agency.name',
             field: 'agencyId',
             cellRenderer: (params: any) => this.agencies[params.value],
           },
