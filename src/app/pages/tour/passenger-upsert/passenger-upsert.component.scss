@@ -6,7 +6,15 @@
 //     }
 //   }
 
-    .card-stretch {
-        margin: 10;
-        padding: 10;
-    }
+.card-stretch {
+    margin: 10;
+    padding: 10;
+}
+
+.margin{
+  margin-top: 20px;
+}
+
+mat-icon:hover{
+  cursor: pointer;
+}

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar, MatSnackBarRef } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
+
 import { ComponentType } from './serializable';
 import { FormService } from '../data/form.service';
 import { ModalInterface } from '../../@theme/components/modal.interface';
 import { DialogButtonType, DialogMode } from '../data/models/enums';
 import { AlertDialogData, DialogComponent } from '../../@theme/components/dialog/dialog.component';
-import { TranslateService } from '@ngx-translate/core';
 
 class TrnDialogConfig<T> extends MatDialogConfig<T> {
   constructor(data: T, public dialogMode?: DialogMode) {

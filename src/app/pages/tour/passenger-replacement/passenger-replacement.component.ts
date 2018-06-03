@@ -109,6 +109,7 @@ export class PassengerReplacementComponent implements ModalInterface {
   }
 
   tourUpsert(tour = new Tour(), isEdit = false) {
+    console.log(tour)
     const ref = this.dialogService.openPopup(TourUpsertComponent, tour, isEdit ? DialogMode.Edit : DialogMode.Create);
     ref.afterClosed().subscribe(() => this.tourGridService.reloadData());
   }

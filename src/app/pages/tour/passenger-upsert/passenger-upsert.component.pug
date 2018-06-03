@@ -4,25 +4,19 @@ include ../../../mixin
   mat-horizontal-stepper(#stepper, [linear]="true")
     mat-step([stepControl]="buyerForm", label="{{'buyer.info'|translate}}")
       form([formGroup]="buyerForm", (keydown.enter)="$event.preventDefault()")
-        div(fxLayout="row", fxLayoutAlign="space-around start")
-          mat-card(fxLayout="column", fxFlex)
-            div
-              div(fxLayout="row", fxFlex)
-                +matField('nationalCode', 'person.nc', 'buyerForm')((focusout)="findPerson(natCode)", #natCode )
-                +matField('mobileNumber', 'person.mobileNumber', 'buyerForm')
-              div(fxLayout="row", fxFlex)
-                trn-slider(fxFlex, trueText="male", falseText="female", formControlName="gender")
-              div(fxLayout="row")
-                +matField('name', 'person.name', 'buyerForm')
-                +matField('family', 'person.family', 'buyerForm')
-              div(fxLayout="row")
-                +matField('englishName', 'person.englishName', 'buyerForm')
-                +matField('englishFamily', 'person.englishFamily', 'buyerForm')
-              div(fxLayout="row")
-                +matField('birthDate', 'person.birthDate', 'buyerForm')((click)="personBirthDate.open()", [matDatepicker]="personBirthDate",readonly )
-                  mat-datepicker-toggle(utc="true", matSuffix, [for]="personBirthDate",disabled="true")
-                  mat-datepicker(#personBirthDate, startView="multi-year", readonly)
-          mat-card.card-stretch(fxLayout="column", fxFlex="30")
+        div(fxLayout="column")
+          div(fxLayout="row")
+            +matField('nationalCode', 'person.nc', 'buyerForm','','',{fxFlex: "30"})((keyup.enter)="doAction(nationalCode,'search')", #nationalCode, (input)="icon = 'search'",  autocomplete="off")
+              mat-icon.pull-left(matSuffix, matTooltip="{{'iconKind.'+icon|translate}}", (click) = "doAction(nationalCode, icon)") {{icon}}
+          span(*ngIf="!user.id") {{"msg.notFound"|translate}}
+          div.margin(fxLayout="column", *ngIf="user.id && icon !== 'search'")
+            div(fxLayout="row")
+              label.margin(fxFlex="30") {{"person.name"|translate}} : {{buyerForm.controls.name.value}}
+            div(fxLayout="row")
+              label.margin(fxFlex="30") {{"person.family"|translate}} : {{buyerForm.controls.family.value}}
+            div(fxLayout='row')
+              label.margin(fxFlex="30") {{"person.mobileNumber"|translate}} : {{buyerForm.controls.mobileNumber.value}}
+          mat-card.card-stretch.margin(fxLayout="row", fxFlex)
             mat-form-field(fxFlex)
               input(matInput, mask="number", placeholder="tour.price", [formControl]="blockForm.form.get('basePrice')", (input)="onPriceChange()")
               mat-hint(align="end", translate) price.irFormated
@@ -46,7 +40,7 @@ include ../../../mixin
             label(fxFlex)
               | {{ 'total'|translate }} : {{ blockForm.form.value.totalPrice }} {{ 'price.irFormated'|translate }}
 div(fxLayout="row", align="end")
-  button.pull-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="stepper.selectedIndex==1")
+  button.pull-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="stepper.selectedIndex==1 || !user.id")
     mat-icon navigate_before
   button.pull-right(mat-mini-fab, color="primary", (click)="previousStep(stepper)", [disabled]="stepper.selectedIndex==0")
     mat-icon navigate_next

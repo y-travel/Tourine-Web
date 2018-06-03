@@ -12,6 +12,9 @@ import { PersonService } from '../../../@core/data/person.service';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { Block } from '../../../@core/data/models/client.model';
+import { PersonUpsertComponent } from '../../person/person-upsert/person-upsert.component';
+
+declare type iconKind = 'search' | 'edit' | 'person_add';
 
 @Component({
   selector: 'trn-passenger-upsert',
@@ -22,6 +25,8 @@ import { Block } from '../../../@core/data/models/client.model';
 export class PassengerUpsertComponent implements ModalInterface {
 
   dialogMode: DialogMode;
+  user: any = {id: 1};
+  icon: iconKind = 'search';
 
   @ViewChild('nextButton') nextButton: MatButton;
   @ViewChild('submit') submit: MatButton;
@@ -105,19 +110,45 @@ export class PassengerUpsertComponent implements ModalInterface {
     });
   }
 
-  findPerson(natCode: any) {
-    this.service.GetPerson(natCode.value).subscribe(
-      person => {
-        this.buyerForm.updateForm(person);
-        this.buyerForm.disableControl(true, this.disablingItems);
-      },
-      () => {
-        //we use Object.assign cos last data remained in form by using dynamic cast.
-        const person = <Person>{};
-        person.nationalCode = this.buyerForm.value.nationalCode;
-        this.buyerForm.updateForm(person);
-        this.buyerForm.disableControl(false, this.disablingItems);
-      });
+  userUpsert(person = <Person> {}, isEdit) {
+    const ref = this.dialogService.openPopup(PersonUpsertComponent, person, isEdit === 'edit' ? DialogMode.Edit : DialogMode.Create);
+    ref.afterClosed().subscribe(newPerson => {
+      // @todo check
+      if (newPerson == null) {
+        return;
+      }
+      this.buyerForm.updateForm(newPerson);
+      this.user = newPerson;
+      this.icon = 'edit';
+    });
+  }
+
+  doAction(nationalCode: any, action: iconKind) {
+    if (action === 'search') {
+      this.findPerson(nationalCode);
+    } else {
+      this.userUpsert(this.user, action);
+    }
+  }
+
+  findPerson(nationalCode: any) {
+    if (nationalCode && this.buyerForm.validate()) {
+      this.service.GetPerson(nationalCode.value).subscribe(
+        person => {
+          this.user = person;
+          if (nationalCode.value !== '') {
+            this.icon = 'edit';
+          } else {
+            this.icon = 'search';
+          }
+          this.buyerForm.updateForm(person);
+        },
+        () => {
+          //we use Object.assign cos last data remained in form by using dynamic cast.
+          this.icon = 'person_add';
+          this.user = {'nationalCode': nationalCode.value};
+        });
+    }
   }
 
   nextStep(stepper: MatStepper) {
