@@ -12,6 +12,8 @@ export class CellToolbarComponent implements ICellRendererAngularComp {
   items: any[];
   visibility: VisibilityType = 'autoHide';
 
+  getData = () => this.params.node.data;
+
   refresh(params: any): boolean {
     return undefined;
   }
@@ -21,20 +23,20 @@ export class CellToolbarComponent implements ICellRendererAngularComp {
   }
 
   doCommand(item: ToolbarItem) {
-    item.command(this.params.data, ...item.commandParams);
+    item.command(this.getData(), ...item.commandParams);
   }
 
   disablityFunction(item: any) {
-    return item.disability ? item.disability(this.params.data) : false;
+    return item.disability ? item.disability(this.getData()) : false;
   }
 
   visibilityFunction(item: any) {
-    return item.visibility ? item.visibility(this.params.data) : true;
+    return item.visibility ? item.visibility(this.getData()) : true;
   }
 }
 
 export class ICellRendererToolbarParams {
-  data: any;
+  node: any;
   items: ToolbarItem[];
 }
 
