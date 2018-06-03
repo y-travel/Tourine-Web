@@ -218,6 +218,7 @@ export class TourGridService {
     this.tourService.getList().subscribe(tours => {
       this.rows = tours;
       this.gridApi.setRowData(this.rows);
+      this.gridApi.redrawRows();
     });
   }
 
