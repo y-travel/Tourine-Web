@@ -25,7 +25,6 @@ declare type iconKind = 'search' | 'edit' | 'person_add';
 export class PassengerUpsertComponent implements ModalInterface {
 
   dialogMode: DialogMode;
-  user: any = {id: 1};
   icon: iconKind = 'search';
 
   @ViewChild('nextButton') nextButton: MatButton;
@@ -75,7 +74,6 @@ export class PassengerUpsertComponent implements ModalInterface {
     if (this.blockForm.model.parentId) {
       this.blockForm.disableControl(true, ['basePrice', 'infantPrice']);
     }
-    this.buyerForm.disableControl(true, this.disablingItems);
     this.passengerGridService.initToolbar(this.toolbarItems);
     this.service.getTourFreeSpace(this.blockForm.model.id).subscribe(x => this.tourFreeSpace = +x);
     this.service.getTourOptions(this.blockForm.model.id).subscribe(x => {
@@ -110,15 +108,14 @@ export class PassengerUpsertComponent implements ModalInterface {
     });
   }
 
-  userUpsert(person = <Person> {}, isEdit) {
-    const ref = this.dialogService.openPopup(PersonUpsertComponent, person, isEdit === 'edit' ? DialogMode.Edit : DialogMode.Create);
+  buyerUpsert(isEdit) {
+    const ref = this.dialogService.openPopup(PersonUpsertComponent, this.buyerForm.value, isEdit === 'edit' ? DialogMode.Edit : DialogMode.Create);
     ref.afterClosed().subscribe(newPerson => {
       // @todo check
       if (newPerson == null) {
         return;
       }
       this.buyerForm.updateForm(newPerson);
-      this.user = newPerson;
       this.icon = 'edit';
     });
   }
@@ -127,28 +124,24 @@ export class PassengerUpsertComponent implements ModalInterface {
     if (action === 'search') {
       this.findPerson(nationalCode);
     } else {
-      this.userUpsert(this.user, action);
+      this.buyerUpsert(action);
     }
   }
 
   findPerson(nationalCode: any) {
-    if (nationalCode && this.buyerForm.validate()) {
-      this.service.GetPerson(nationalCode.value).subscribe(
-        person => {
-          this.user = person;
-          if (nationalCode.value !== '') {
-            this.icon = 'edit';
-          } else {
-            this.icon = 'search';
-          }
-          this.buyerForm.updateForm(person);
-        },
-        () => {
-          //we use Object.assign cos last data remained in form by using dynamic cast.
-          this.icon = 'person_add';
-          this.user = {'nationalCode': nationalCode.value};
-        });
+    this.buyerForm.markAllFieldAsTouch();
+    if (!this.buyerForm.get('nationalCode').valid) {
+      return;
     }
+    this.service.GetPerson(nationalCode).subscribe(
+      person => {
+        this.icon = nationalCode !== '' ? 'edit' : 'search';
+        this.buyerForm.updateForm(person);
+      },
+      () => {
+        this.icon = 'person_add';
+        this.buyerForm.reset({nationalCode: nationalCode});
+      });
   }
 
   nextStep(stepper: MatStepper) {
@@ -159,7 +152,6 @@ export class PassengerUpsertComponent implements ModalInterface {
         } else {
           this.service.AddPerson(this.buyerForm.value).subscribe(x => {
             this.buyerForm.updateForm(x);
-            this.buyerForm.disableControl(false, this.disablingItems);
             this.nextButton.disabled = false;
 
             if (x.isInfant) {

@@ -22,6 +22,7 @@ import { GetTicketReportTemplate } from '../../../@core/data/models/server.dtos'
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { WorkBook } from 'xlsx';
+import { Alert } from 'selenium-webdriver';
 
 
 @Component({
@@ -142,6 +143,8 @@ export class TourListComponent {
     this.tourService.deleteTour(tour).subscribe(() => {
       this.reloadTourList();
       this.tourGridService.reloadBlocks();
+      const dialog = new AlertDialogData('حذف با شکست مواجه شد.', undefined, 'باشه', DialogButtonType.Negative);
+      dialog
     });
   }
 
