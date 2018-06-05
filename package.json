@@ -155,6 +155,7 @@
     "tether": "1.4.0",
     "web-animations-js": "2.2.5",
     "xlsx": "^0.12.13",
+    "xlsx-populate": "^1.17.0",
     "zone.js": "^0.8.26"
   }
 }

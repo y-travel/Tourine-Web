@@ -6,6 +6,7 @@
 
 /* SystemJS module definition */
 declare var module: NodeModule;
+
 interface NodeModule {
   id: string;
 }
@@ -13,3 +14,5 @@ interface NodeModule {
 declare var tinymce: any;
 
 declare var echarts: any;
+
+declare var XlsxPopulate: any;
