@@ -6,7 +6,7 @@ export abstract class ReportInterface {
 
 export abstract class ReportBase {
   print() {
-    const data = this.this.resolveData();
+    const data = this.resolveData();
     const engine = this.resolveEngine();
     data.forEach(x => {
       engine.setValue(x);
