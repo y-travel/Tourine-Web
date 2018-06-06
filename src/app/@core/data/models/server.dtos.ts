@@ -845,9 +845,8 @@ export class GetTourBuyers implements IReturn<Array<TourBuyer>> {
 }
 
 @Route('/download/ticketReportTemplate', 'GET')
-export class GetTicketReportTemplate implements IReturn<any[]> {
-  createResponse() {
-    return  [];
+export class GetTicketReportTemplate implements IReturn<any> {
+  createResponse(): void {
   }
 
   getTypeName() {

@@ -7,7 +7,7 @@ export class TourReport extends ReportBase {
   }
 
   resolveEngine(): ReportInterface {
-    return new XlsxPopulateInterface();
+    return new XlsxPopulateInterface(null);
   }
 
   resolveData(): CellInfo[] {
