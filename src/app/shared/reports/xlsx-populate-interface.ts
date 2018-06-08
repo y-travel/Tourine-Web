@@ -4,8 +4,8 @@ export class XlsxPopulateInterface extends ReportInterface {
 
   workbook: any;
 
-  init(file: any): Promise<any> {
-    return XlsxPopulate.fromDataAsync(file).then(workbook => this.workbook = workbook);
+  async init(file: any) {
+    await XlsxPopulate.fromDataAsync(file).then(workbook => this.workbook = workbook);
   }
 
   save() {
