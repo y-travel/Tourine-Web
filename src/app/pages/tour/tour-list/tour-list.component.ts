@@ -141,7 +141,7 @@ export class TourListComponent {
       this.reloadTourList();
       this.tourGridService.reloadBlocks();
     }, error => {
-      this.dialogService.openDialog('حذف امکان پذیر نمی باشد.');
+      this.dialogService.openDialog('msg.deleteError');
     });
   }
 

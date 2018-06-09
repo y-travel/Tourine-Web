@@ -81,6 +81,7 @@
   "msg": {
     "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزرو شد",
     "delete": "در صورت حذف اطلاعات غیر قابل بازگشت میباشد",
+    "deleteError": "حذف امکان پذیر نمی باشد",
     "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
     "thereIsNoFreeSpace": "ظرفیت خالی برای این تور وجود ندارد",
     "connectionError": "خطا در برقراری ارتباط با سرور",
