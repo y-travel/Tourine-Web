@@ -17,6 +17,7 @@ import { PassengerReplacementComponent } from './passenger-replacement/passenger
 import { PassengerReplacementTourGridService } from './passenger-replacement/passenger-replacement-tour-grid.service';
 import { TourReportsComponent } from './tour-reports/tour-reports.component';
 import { TourReportGridService } from './tour-reports/tour-reports.service';
+import { PersonModule } from '../person/person.module';
 
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,
@@ -36,6 +37,7 @@ const ENTRY_COMPONENTS = [
     ...COMMON_MODULES,
     TourRoutingModule,
     TrnAgGridModule.withAgModule(),
+    PersonModule,
   ],
   declarations: [
     ...ENTRY_COMPONENTS,

@@ -51,8 +51,8 @@ export class LeaderListComponent implements OnInit {
   }
 
   personUpsert(person = <Person> {}, isEdit = false) {
-    const inst = this.dialogService.openPopup(PersonUpsertComponent, person, isEdit ? DialogMode.Edit : DialogMode.Create);
-    inst.afterClosed().subscribe(() => {
+    const ref = this.dialogService.openPopup(PersonUpsertComponent, person, isEdit ? DialogMode.Edit : DialogMode.Create);
+    ref.afterClosed().subscribe(() => {
       this.leaderGridService.loadData();
     });
   }

@@ -86,7 +86,8 @@
     "connectionError": "خطا در برقراری ارتباط با سرور",
     "buyerCannotBeInfant": "خریدار نمی تواند اینفنت باشد",
     "buyerCannotBeUnder5": "خریدار نمی تواند زیر 5 سال باشد",
-    "allowedPaassengerToReplace": "فقط مسافرین مشخص شده را می توانید جابجا کنید"
+    "allowedPaassengerToReplace": "فقط مسافرین مشخص شده را می توانید جابجا کنید",
+      "notFound": "موردی یافت نشد."
   },
   "name": "نام",
   "nationalCode": "کد ملی",
@@ -221,5 +222,12 @@
     "countbiggerthan": "تعداد باید بیش از {{requiredValue}} عدد باشد",
     "areequal": "باید برابر با {{requiredField}} باشد"
   },
-  "withOutPrice": "بدون قیمت"
+  "withOutPrice": "بدون قیمت",
+
+  "iconKind": {
+    "search": "جستجوی خریدار",
+    "edit": "ویرایش خریدار",
+    "person_add": "افزودن خریدار"
+  }
+
 }

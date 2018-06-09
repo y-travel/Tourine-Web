@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 //
 import { FormFactory } from '../../../@core/data/models';
@@ -39,7 +39,7 @@ export class PersonUpsertComponent implements ModalInterface {
   close() {
     if (this.vModel.isValid()) {
       this.personService.upsertLeader(this.vModel.model).subscribe(x => {
-        this.dialogInstance.close();
+        this.dialogInstance.close(this.vModel.model);
       });
     }
   }
