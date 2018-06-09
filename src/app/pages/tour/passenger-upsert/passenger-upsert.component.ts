@@ -145,7 +145,6 @@ export class PassengerUpsertComponent implements ModalInterface {
   }
 
   nextStep(stepper: MatStepper) {
-    console.log(stepper)
     if (stepper.selectedIndex === 0) {
       if (this.buyerForm.value.id === null) {
         if (!this.buyerForm.valid) {
