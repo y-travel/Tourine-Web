@@ -49,10 +49,10 @@ export class PersonUpsertViewModel {
   createAddLeaderForm(model = <Person>{}): NewFormService<Person> {
     const form = new FormBuilder().group({
       id: [model.id || '0'],
-      name: [model.name, [Validators.required, Validators.minLength(1)]],
-      family: [model.family, [Validators.required, Validators.minLength(1)]],
-      englishName: [model.englishName, [Validators.required, Validators.minLength(1)]],
-      englishFamily: [model.englishFamily, [Validators.required, Validators.minLength(1)]],
+      name: [model.name, [Validators.required, Validators.minLength(2)]],
+      family: [model.family, [Validators.required, Validators.minLength(2)]],
+      englishName: [model.englishName, [Validators.required, Validators.minLength(2)]],
+      englishFamily: [model.englishFamily, [Validators.required, Validators.minLength(2)]],
       nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(this.config.isDev() ? 1 : 10)]],
       gender: [model.gender || true],
       mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
