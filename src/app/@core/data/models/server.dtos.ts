@@ -21,7 +21,7 @@ import {
   TourTeamMember,
   User,
 } from './client.model';
-import { IncomeStatus, OptionType } from './enums';
+import { IncomeStatus, OptionType, ReportType } from './enums';
 
 
 export class HttpResult {
@@ -845,12 +845,14 @@ export class GetTourBuyers implements IReturn<Array<TourBuyer>> {
 }
 
 @Route('/download/ticketReportTemplate', 'GET')
-export class GetTicketReportTemplate implements IReturn<any[]> {
-  createResponse() {
-    return  [];
+export class GetReportTemplate implements IReturn<Blob> {
+  reportType: ReportType;
+
+  createResponse(): Blob {
+    return undefined;
   }
 
   getTypeName() {
-    return 'GetTicketReportTemplate';
+    return 'GetReportTemplate';
   }
 }

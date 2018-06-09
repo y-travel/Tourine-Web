@@ -48,47 +48,16 @@ function getInvalidTaskErrorMessage(invalid: string[], file: string) {
   return error;
 }
 
-/**
- * Defines complex, composite tasks. The composite tasks
- * are simply a composition of another tasks.
- * Each composite tasks has the following format:
- *
- * "composite_task": ["task1", "task2"]
- *
- * This means that the format should be flat, with no nesting.
- *
- * The existing composite tasks are defined in
- * "tools/config/seed.tasks.json" and can be overriden by
- * editing the composite tasks base configuration.
- *
- * By default it is located in: "tools/config/base.tasks.json".
- *
- * Override existing tasks by simply providing a task
- * name and a list of tasks that this task hould execute.
- *
- * For instance:
- * ```
- * {
- *  "test": [
- *    "build.test",
- *    "mocha.run"
- *  ]
- * }
- * ```
- *
- * Note that the tasks do not support nested objects.
- */
-export function loadCompositeTasks(seedTasksFile: string, projectTasksFile: string): void {
-  let seedTasks: any;
+
+export function loadCompositeTasks(projectTasksFile: string): void {
   let projectTasks: any;
   try {
-    seedTasks = JSON.parse(readFileSync(seedTasksFile).toString());
     projectTasks = JSON.parse(readFileSync(projectTasksFile).toString());
   } catch (e) {
     util.log('Cannot load the task configuration files: ' + e.toString());
     return;
   }
-  [[seedTasks, seedTasksFile], [projectTasks, projectTasksFile]]
+  [[projectTasks, projectTasksFile]]
     .forEach(([tasks, file]: [string, string]) => {
       const invalid = validateTasks(tasks);
       if (invalid.length) {
@@ -97,8 +66,7 @@ export function loadCompositeTasks(seedTasksFile: string, projectTasksFile: stri
         process.exit(1);
       }
     });
-  const mergedTasks = Object.assign({}, seedTasks, projectTasks);
-  registerTasks(mergedTasks);
+  registerTasks(projectTasks);
 }
 
 function normalizeTask(task: any, taskName: string) {

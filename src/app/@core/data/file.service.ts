@@ -35,10 +35,6 @@ export class FileService extends DataService {
   private internalSend<T>(data: IReturn<T>): Observable<T | any> {
     return this.request(this.utils.getHttpMethod(data), data.getTypeName(), Serializable.toJSON(data))
       .pipe(map(res => {
-        const type = data.createResponse();
-        if (type) {
-          return Serializable.fromJSON(type, res);
-        }
         return res;
       }));
   }

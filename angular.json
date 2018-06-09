@@ -28,7 +28,9 @@
               "src/app/@theme/styles/material-icon.scss",
               "src/app/@theme/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/xlsx-populate/browser/xlsx-populate.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -188,15 +188,6 @@ export class SeedConfig {
    */
   TOOLS_DIR = 'tools';
 
-  /**
-   * Seed tasks which are composition of other tasks.
-   */
-  SEED_COMPOSITE_TASKS = join(
-    process.cwd(),
-    this.TOOLS_DIR,
-    'config',
-    'seed.tasks.json'
-  );
 
   /**
    * Project tasks which are composition of other tasks

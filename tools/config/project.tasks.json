@@ -6,17 +6,15 @@
   ],
   "build.prod": [
     "clean.all",
+    "tslint",
     "build.pug",
     "build.ng",
     "move.to.server"
   ],
   "serve.dev": [
+    "tslint",
     "build.pug",
     "serve.ng"
-  ],
-  "build.watch": [
-    "watch.sync",
-    "build.ng"
   ],
   "move.to.server":[
     "clean.server",

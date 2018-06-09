@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
+import { first, map } from 'rxjs/operators';
 
 import { ApiService } from '../data/api.service';
 import { Agency, Person, User } from '../data/models';
@@ -6,7 +7,6 @@ import { AppUtils, UTILS } from './app-utils';
 import { APP_CONFIG, AppConfig } from './app.config';
 import { Authenticate, GetCurrentPerson } from '../data/models/server.dtos';
 import { Serializable } from './serializable';
-import { first, map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -44,12 +44,13 @@ export class AuthService {
     auth.rememberMe = true;
     auth.useTokenCookie = true;
     auth.provider = 'credentials';
-    const result = await this.apiService.send(auth).pipe(map(res => {
-      this.person = Object.assign(<Person>{}, res);
-
-      this.agency = Serializable.fromJSONToType(Agency, res);
-      return this.isAuthenticated();
-    }), first())
+    const result = await this.apiService
+      .send(auth)
+      .pipe(map(res => {
+        this.person = Object.assign(<Person>{}, res);
+        this.agency = Serializable.fromJSONToType(Agency, res);
+        return this.isAuthenticated();
+      }), first())
       .toPromise().catch(() => undefined);
     return result;
   }

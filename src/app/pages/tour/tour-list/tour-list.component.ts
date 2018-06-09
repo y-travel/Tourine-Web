@@ -18,11 +18,8 @@ import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { TourReportsComponent } from '../tour-reports/tour-reports.component';
 import { FileService } from '../../../@core/data/file.service';
-import { GetTicketReportTemplate } from '../../../@core/data/models/server.dtos';
-import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import { WorkBook } from 'xlsx';
-import { Alert } from 'selenium-webdriver';
+import { TourReport } from '../../../shared/reports/tour-report';
 
 
 @Component({
@@ -143,8 +140,6 @@ export class TourListComponent {
     this.tourService.deleteTour(tour).subscribe(() => {
       this.reloadTourList();
       this.tourGridService.reloadBlocks();
-      const dialog = new AlertDialogData('حذف با شکست مواجه شد.', undefined, 'باشه', DialogButtonType.Negative);
-      dialog
     });
   }
 
@@ -190,37 +185,7 @@ export class TourListComponent {
   }
 
   testFile() {
-    const dto = new GetTicketReportTemplate();
-    this.fileService.get(dto).subscribe(x => {
-      console.log(x);
-
-      // var blob = new Blob([x], { type: 'application/octet-stream' });
-      //saveAs is a function in the FileSaver.js library https://github.com/eligrey/FileSaver.js
-      // saveAs(blob, "results.xlsx");
-
-      /* convert data to binary string */
-      var data = new Uint8Array(x);
-      var arr = new Array();
-      for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-      var bstr = arr.join("");
-
-      /* Call XLSX */
-      var workbook = XLSX.read(bstr, {type:'binary'});
-
-      var wbout = XLSX.write(workbook,  { bookType:'xlsx', bookSST:false , type: 'binary'});
-
-      /* the saveAs call downloads a file on the local machine */
-      var blob = new Blob([this.s2ab(wbout)], {type: 'application/octet-stream'});
-      saveAs(blob, 'test.xlsx');
-
-
-    });
-  }
-
-  s2ab(s) {
-    var buf = new ArrayBuffer(s.length);
-    var view = new Uint8Array(buf);
-    for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
-    return buf;
+    const tourReport = new TourReport(this.fileService);
+    tourReport.print();
   }
 }
