@@ -6,5 +6,7 @@ export = () => {
     'serve',
     `--port=${config.PORT}`,
     '--open',
+    '--proxy-config',
+    'proxy.conf.json',
   ], {stdio: 'inherit'});
 };
