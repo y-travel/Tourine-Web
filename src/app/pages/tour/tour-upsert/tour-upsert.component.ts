@@ -59,7 +59,7 @@ export class TourUpsertComponent implements ModalInterface {
       this.dialogInstance.close(this.vModel.model);
     }, error => {
       console.log(error);
-      this.dialogService.openDialog('ظرفیت کل نمی تواند از ظرفیت رزرو شده کمتر باشد');
+      this.dialogService.openDialog('msg.editError');
     });
   }
 
