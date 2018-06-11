@@ -57,7 +57,7 @@ export class ExceptionHandler implements ErrorHandler {
       }
     } else if (this.config.isDev()) {
       this.dialogService.showSnack(error.toString());
-           }
+    }
   }
 
   private findOriginalError(error: any): any {

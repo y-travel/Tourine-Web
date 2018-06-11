@@ -81,13 +81,15 @@
   "msg": {
     "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزرو شد",
     "delete": "در صورت حذف اطلاعات غیر قابل بازگشت میباشد",
+    "deleteError": "حذف امکان پذیر نمی باشد",
     "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
     "thereIsNoFreeSpace": "ظرفیت خالی برای این تور وجود ندارد",
     "connectionError": "خطا در برقراری ارتباط با سرور",
     "buyerCannotBeInfant": "خریدار نمی تواند اینفنت باشد",
     "buyerCannotBeUnder5": "خریدار نمی تواند زیر 5 سال باشد",
     "allowedPaassengerToReplace": "فقط مسافرین مشخص شده را می توانید جابجا کنید",
-      "notFound": "موردی یافت نشد."
+    "notFound": "موردی یافت نشد.",
+    "editError": "ظرفیت کل نمی تواند از ظرفیت رزرو شده کمتر باشد"
   },
   "name": "نام",
   "nationalCode": "کد ملی",
@@ -177,6 +179,7 @@
   },
   "roomPrice": "قیمت تخت",
   "row": "ردیف",
+  "search": "جستوجو",
   "save": "ثبت",
   "second": "دوم",
   "selectPerson": "انتخاب فرد",

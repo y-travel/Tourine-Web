@@ -8,7 +8,7 @@ include ../../../mixin
           div(fxLayout="row")
             +matField('nationalCode', 'person.nc', 'buyerForm','','',{fxFlex: "30"})((keyup.enter)="doAction(nationalCode.value,'search')", #nationalCode, (input)="icon = 'search'",  autocomplete="off")
               mat-icon.pull-left(matSuffix, matTooltip="{{'iconKind.'+icon|translate}}", (click) = "doAction(nationalCode.value, icon)") {{icon}}
-          span(*ngIf="!buyerForm.value.id && buyerForm.get('nationalCode').touched") {{"msg.notFound"|translate}}
+          span(*ngIf="icon === 'person_add'") {{"msg.notFound"|translate}}
           div.margin(fxLayout="column", *ngIf="buyerForm.value.id && icon !== 'search'")
             div(fxLayout="row")
               label.margin(fxFlex="30") {{"person.name"|translate}} : {{buyerForm.value.name}}
@@ -40,7 +40,7 @@ include ../../../mixin
             label(fxFlex)
               | {{ 'total'|translate }} : {{ blockForm.form.value.totalPrice }} {{ 'price.irFormated'|translate }}
 div(fxLayout="row", align="end")
-  button.pull-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="stepper.selectedIndex==1 || !buyerForm.value.id")
+  button.pull-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="stepper.selectedIndex==1 || icon !== 'edit'")
     mat-icon navigate_before
   button.pull-right(mat-mini-fab, color="primary", (click)="previousStep(stepper)", [disabled]="stepper.selectedIndex==0")
     mat-icon navigate_next

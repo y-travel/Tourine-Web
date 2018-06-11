@@ -8,6 +8,7 @@ import { DialogMode, ENUMS, EnumsDefinition, OptionType } from '../../../@core/d
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { TourUpsertViewModel } from './tour-upsert.view-model';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
+import { DialogService } from '../../../@core/utils/dialog.service';
 
 @Component({
   selector: 'trn-tour-upsert',
@@ -26,6 +27,7 @@ export class TourUpsertComponent implements ModalInterface {
               public dialogInstance: MatDialogRef<ModalInterface>,
               public service: TourService,
               public vModel: TourUpsertViewModel,
+              public dialogService: DialogService,
               @Inject(UTILS) public utils: AppUtils,
               @Inject(ENUMS) public enums: EnumsDefinition) {
   }
@@ -55,6 +57,9 @@ export class TourUpsertComponent implements ModalInterface {
     }
     this.service.upsertTour(this.vModel.model).subscribe(tour => {
       this.dialogInstance.close(this.vModel.model);
+    }, error => {
+      console.log(error);
+      this.dialogService.openDialog('msg.editError');
     });
   }
 

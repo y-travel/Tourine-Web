@@ -140,6 +140,8 @@ export class TourListComponent {
     this.tourService.deleteTour(tour).subscribe(() => {
       this.reloadTourList();
       this.tourGridService.reloadBlocks();
+    }, error => {
+      this.dialogService.openDialog('msg.deleteError');
     });
   }
 
