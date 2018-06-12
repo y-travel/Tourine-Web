@@ -63,7 +63,7 @@ export class TourGridService {
         field: 'id',
         minWidth: 50,
         maxWidth: 50,
-        cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
+        cellRenderer: (params: any) => (params.node.childIndex + 1).toString(),
       },
       {
         headerName: 'tour.code',

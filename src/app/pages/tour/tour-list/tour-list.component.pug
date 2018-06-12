@@ -19,7 +19,7 @@ mat-card([stretch]="true", style="height: 100%")
   [enableRtl]="true" ,
   [deltaRowDataMode] = "true" ,
   [animateRows] = "true" ,
-  [getRowNodeId] = "tourGridService.getRowNodeId")
+  [getRowNodeId] = "tourGridService.getRowNodeId",
+  rowClickExpand)
   button.pull-right.fab-grid(mat-fab, (click)="tourUpsert()")
     mat-icon add
-button( (click)="testFile()") hello

@@ -121,10 +121,6 @@ export class TourListComponent {
     this.tourGridService.initToolbar(this.sharedItems, this.tourItems, this.blockItems);
   }
 
-  refresh() {
-    this.tourGrid.api.sizeColumnsToFit();
-  }
-
   tourUpsert(tour = new Tour(), isEdit = false) {
     const ref = this.dialogService.openPopup(TourUpsertComponent, tour, isEdit ? DialogMode.Edit : DialogMode.Create);
     ref.afterClosed().subscribe(() => {
