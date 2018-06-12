@@ -10,9 +10,17 @@ export class RowClickExpandDirective {
   }
 
   @HostListener('rowClicked', ['$event']) onRowClicked(event) {
+    console.log(event)
+    this.Grid.gridOptions.api.forEachNode(node => {
+      console.log(node.rowIndex);
+      if (event.node !== node) {
+        node.expanded = false;
+      }
+    })
     if (event.event.target.nodeName !== 'I' && event.event.target.nodeName !== 'MAT-ICON') {
       event.node.expanded = event.node.expanded ? false : true;
-      this.Grid.gridOptions.api.onGroupExpandedOrCollapsed(event.rowIndex);
     }
+    this.Grid.gridOptions.api.onGroupExpandedOrCollapsed(event.rowIndex);
+
   }
 }

@@ -121,19 +121,6 @@ export class TourListComponent {
     this.tourGridService.initToolbar(this.sharedItems, this.tourItems, this.blockItems);
   }
 
-  click() {
-
-  }
-
-  // expand(event: any) {
-  //   if (event.isTrusted && event.target.nodeName !== 'I' && event.target.nodeName !== 'MAT-ICON') {
-  //     const element: HTMLElement = document.querySelector('.ag-row-hover div span span i') as HTMLElement;
-  //     if (element && element.click) {
-  //       element.click();
-  //     }
-  //   }
-  // }
-
   tourUpsert(tour = new Tour(), isEdit = false) {
     const ref = this.dialogService.openPopup(TourUpsertComponent, tour, isEdit ? DialogMode.Edit : DialogMode.Create);
     ref.afterClosed().subscribe(() => {
