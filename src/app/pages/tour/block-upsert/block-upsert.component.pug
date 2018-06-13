@@ -51,7 +51,7 @@ include ../../../mixin
           br
           |  {{ "addPassengerMessage"|translate }}
         mat-dialog-actions
-          button(mat-raised-button, color="primary", fxFlex, type="button", (click)="addPassengers()", [disabled]="dialogMode!==DialogMode.Create", #addPassengerBtn)
+          button(mat-raised-button, color="primary", fxFlex, type="button", (click)="addPassengers()", #addPassengerBtn)
             | {{ "add"|translate }}
             mat-icon.icon-text-color add
         br
