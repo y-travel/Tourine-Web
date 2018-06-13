@@ -4,6 +4,7 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatStepper } from '@angular/material';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
+import { FormService } from '../../../@core/data/form.service';
 import { AgencyService } from '../../../@core/data/agency.service';
 import { Observable } from 'rxjs';
 import { AgencyUpsertComponent } from '../agency-upsert/agency-upsert.component';
@@ -14,7 +15,6 @@ import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { TourService } from '../../../@core/data/tour.service';
 import { Serializable } from '../../../@core/utils/serializable';
 import { first } from 'rxjs/operators';
-import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'trn-block-upsert',
@@ -29,6 +29,8 @@ export class BlockUpsertComponent implements ModalInterface, ModalInterface {
   optionType = OptionType;
   @ViewChild('addPassengerBtn') addPassengerBtn: MatButton;
   formGroup: any;
+  tourFreeSpace = 0;
+  blockForm: FormService<Block>;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -38,21 +40,23 @@ export class BlockUpsertComponent implements ModalInterface, ModalInterface {
               private dialogService: DialogService,
               private tourService: TourService,
               public formFactory: FormFactory,
-              public service: AgencyService) {
+              public agencyService: AgencyService) {
   }
 
   initDialog() {
+    this.blockForm = this.formFactory.createAddPassengersForm(this.data.block);
     this.vModel.init(this.data.tour, this.data.block);
     this.tourService
       .getOptions(this.vModel.isEdit ? this.vModel.model.id : this.vModel.parentBlock.id)
       .subscribe(x => this.vModel.form.updateForm(<Tour>{options: x}));
-    this.agencies = this.service.getList();
+    this.agencies = this.agencyService.getList();
+    this.tourService.getTourFreeSpace(this.blockForm.model.id).subscribe(x => this.tourFreeSpace = +x);
 
   }
 
   agencyUpsert() {
     const ref = this.dialogService.openPopup(AgencyUpsertComponent, this.formFactory.createAddAgencyForm());
-    ref.afterClosed().subscribe(data => this.agencies = this.service.getList());
+    ref.afterClosed().subscribe(data => this.agencies = this.agencyService.getList());
   }
 
   async next(stepper: MatStepper) {
@@ -74,9 +78,15 @@ export class BlockUpsertComponent implements ModalInterface, ModalInterface {
 
   addPassengers() {
     //@TODO tmp
+    console.log('hi');
+    if (this.tourFreeSpace <= 0) {
+      this.dialogService.openDialog('msg.thereIsNoFreeSpace');
+      return;
+    }
     const tmpBlock = Serializable.fromJSON(new Block(), this.vModel.model);
-    const ref = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(tmpBlock));
+    const ref = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(this.data.block));
     ref.afterClosed().subscribe(x => {
+      console.log(x);
       if (x > 0) {
         this.addPassengerBtn.disabled = true;
       } else {

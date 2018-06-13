@@ -3,19 +3,15 @@ import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import {
   AddNewPerson,
-  Agency,
   Block,
   DeleteLeader,
   DeleteTeam,
   FindPersonFromNc,
-  GetAgencies,
   GetLeaders,
   GetPersons,
   GetPersonsOfTeam,
   GetPersonsOfTour,
   GetTourAgency,
-  GetTourFreeSpace,
-  GetTourOptions,
   GetTourTeams,
   PassengerReplacement,
   PassengerReplacementTeamAccomplish,
@@ -24,7 +20,6 @@ import {
   TeamMember,
   TeamPassenger,
   Tour,
-  TourOption,
   TourPassenger,
   TourTeamMember,
   UpdatePerson,
@@ -76,18 +71,8 @@ export class PersonService {
     return this.apiService.get(query);
   }
 
-  getPersons(): Observable<Person[]> {
-    const dto = new GetPersons();
-    return this.apiService.getEntities(dto);
-  }
-
   getLeaders(): Observable<Person[]> {
     const dto = new GetLeaders();
-    return this.apiService.getEntities(dto);
-  }
-
-  getAgency(): Observable<Agency[]> {
-    const dto = new GetAgencies();
     return this.apiService.getEntities(dto);
   }
 
@@ -104,17 +89,7 @@ export class PersonService {
   }
 
   //@TODO: ugly
-  getTourFreeSpace(id: string): Observable<string> {
-    const query = new GetTourFreeSpace();
-    query.tourId = id;
-    return this.apiService.send(query);
-  }
 
-  getTourOptions(id: string): Observable<TourOption[]> {
-    const query = new GetTourOptions();
-    query.tourId = id;
-    return this.apiService.getEntities(query);
-  }
 
   getTourTeams(id: string): Observable<Block[]> {
     const query = new GetTourTeams();

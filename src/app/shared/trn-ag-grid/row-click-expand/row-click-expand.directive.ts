@@ -6,17 +6,19 @@ import { AgGridNg2 } from 'ag-grid-angular';
 })
 export class RowClickExpandDirective {
 
+  collapseOthers: Boolean = true;
+
   constructor(private Grid: AgGridNg2) {
   }
 
   @HostListener('rowClicked', ['$event']) onRowClicked(event) {
-    console.log(event)
-    this.Grid.gridOptions.api.forEachNode(node => {
-      console.log(node.rowIndex);
-      if (event.node !== node) {
-        node.expanded = false;
-      }
-    })
+    if (this.collapseOthers) {
+      this.Grid.gridOptions.api.forEachNode(node => {
+        if (event.node !== node) {
+          node.expanded = false;
+        }
+      });
+    }
     if (event.event.target.nodeName !== 'I' && event.event.target.nodeName !== 'MAT-ICON') {
       event.node.expanded = event.node.expanded ? false : true;
     }

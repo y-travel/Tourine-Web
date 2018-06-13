@@ -19,6 +19,7 @@ import {
   GetTourVisa,
   UpsertTour
 } from './models/server.dtos';
+import { GetTourFreeSpace } from './models';
 
 @Injectable()
 export class TourService {
@@ -96,5 +97,17 @@ export class TourService {
     const query = new GetTourBuyers();
     query.tourId = tourId;
     return this.apiService.get(query);
+  }
+
+  getTourFreeSpace(id: string): Observable<string> {
+    const query = new GetTourFreeSpace();
+    query.tourId = id;
+    return this.apiService.send(query);
+  }
+
+  getTourOptions(id: string): Observable<TourOption[]> {
+    const query = new GetTourOptions();
+    query.tourId = id;
+    return this.apiService.getEntities(query);
   }
 }

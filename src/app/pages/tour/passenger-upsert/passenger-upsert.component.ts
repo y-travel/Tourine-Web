@@ -9,6 +9,7 @@ import { OptionType, Person, TeamMember } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
+import { TourService} from '../../../@core/data/tour.service';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { Block } from '../../../@core/data/models/client.model';
@@ -64,7 +65,8 @@ export class PassengerUpsertComponent implements ModalInterface {
               private dialogService: DialogService,
               public formFactory: FormFactory,
               public passengerGridService: PassengerGridService,
-              public service: PersonService) {
+              public personService: PersonService,
+              public tourService: TourService) {
   }
 
   initDialog() {
@@ -75,8 +77,8 @@ export class PassengerUpsertComponent implements ModalInterface {
       this.blockForm.disableControl(true, ['basePrice', 'infantPrice']);
     }
     this.passengerGridService.initToolbar(this.toolbarItems);
-    this.service.getTourFreeSpace(this.blockForm.model.id).subscribe(x => this.tourFreeSpace = +x);
-    this.service.getTourOptions(this.blockForm.model.id).subscribe(x => {
+    this.tourService.getTourFreeSpace(this.blockForm.model.id).subscribe(x => this.tourFreeSpace = +x);
+    this.tourService.getTourOptions(this.blockForm.model.id).subscribe(x => {
       this.blockForm.model.foodPrice = x.find(y => y.optionType === OptionType.Food).price;
       this.blockForm.model.roomPrice = x.find(y => y.optionType === OptionType.Room).price;
       this.blockForm.model.busPrice = x.find(y => y.optionType === OptionType.Bus).price;
@@ -133,7 +135,7 @@ export class PassengerUpsertComponent implements ModalInterface {
     if (!this.buyerForm.get('nationalCode').valid) {
       return;
     }
-    this.service.GetPerson(nationalCode).subscribe(
+    this.personService.GetPerson(nationalCode).subscribe(
       person => {
         this.icon = nationalCode !== '' ? 'edit' : 'search';
         this.buyerForm.updateForm(person);
@@ -150,7 +152,7 @@ export class PassengerUpsertComponent implements ModalInterface {
         if (!this.buyerForm.valid) {
           stepper.next();
         } else {
-          this.service.AddPerson(this.buyerForm.value).subscribe(x => {
+          this.personService.AddPerson(this.buyerForm.value).subscribe(x => {
             this.buyerForm.updateForm(x);
             this.nextButton.disabled = false;
 
@@ -195,7 +197,7 @@ export class PassengerUpsertComponent implements ModalInterface {
     if (this.passengerGridService.rows.length === 0) {
       this.dialogInstance.close(this.passengerGridService.rows.length);
     } else {
-      this.service.upsertTeam(this.buyerForm.value, this.passengerGridService.rows, this.blockForm.model, this.teamId).subscribe(x => {
+      this.personService.upsertTeam(this.buyerForm.value, this.passengerGridService.rows, this.blockForm.model, this.teamId).subscribe(x => {
         this.dialogInstance.close(this.passengerGridService.rows.length);
       });
     }
