@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { PersonService } from '../../../@core/data/person.service';
-import { FormFactory, TeamMember, Tour } from '../../../@core/data/models';
+import { FormFactory, Passenger, Tour } from '../../../@core/data/models';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
@@ -45,7 +45,7 @@ export class TourPassengersComponent implements OnInit, ModalInterface {
 
 // @TODO Should be refactor
   passengerReplacement() {
-    const selectedPassengrs: TeamMember[] = this.passengerGridService.gridApi.getSelectedRows();
+    const selectedPassengrs: Passenger[] = this.passengerGridService.gridApi.getSelectedRows();
     if (selectedPassengrs.length > 0 &&
       selectedPassengrs.length === selectedPassengrs.filter(x => x.tourId === selectedPassengrs[0].tourId).length) {
       const ref = this.dialogService.openPopup(

@@ -13,12 +13,11 @@ import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.c
 import { TeamListComponent } from '../block-list/team-list.component';
 import { TourPassengersComponent } from '../tour-passengers/tour-passengers.component';
 import { PersonService } from '../../../@core/data/person.service';
-import { TeamMember } from '../../../@core/data/models';
+import { Passenger } from '../../../@core/data/models';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { TourReportsComponent } from '../tour-reports/tour-reports.component';
 import { FileService } from '../../../@core/data/file.service';
-import { saveAs } from 'file-saver';
 import { TourReport } from '../../../shared/reports/tour-report';
 
 
@@ -177,7 +176,7 @@ export class TourListComponent {
     const form = this.formFactory.createTourPassengerForm(tour);
     const rows = this.personService.getTourMembers(tour.id).subscribe(x => {
       const ref = this.dialogService.openPopup(TourPassengersComponent, form);
-      const list: TeamMember[] = x.passengers;
+      const list: Passenger[] = x.passengers;
       (<any>ref.componentInstance).passengerGridService.setRow(list);
     });
   }

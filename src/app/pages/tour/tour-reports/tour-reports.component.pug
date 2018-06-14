@@ -63,14 +63,14 @@ ng-template(#visaTemplate)
       div(fxLayout="row", fxLayoutAlign="space-between center")
         div(fxLayout="column")
           div(fxLayout="row")
-            label {{ 'person.numberOfHaveVisa'|translate }} :
-            label {{ haveVisaCount }}
+            label {{ 'person.numberOfHasVisa'|translate }} :
+            label {{ hasVisaCount }}
           div(fxLayout="row")
             label {{ 'person.numberOfEmmisionableVisa'|translate }} :
-            label {{ noHaveVisaCount }}
+            label {{ noHasVisaCount }}
     mat-card([stretch]="true")
       mat-tab-group((selectedTabChange)="visaTab($event)")
-        mat-tab(label="{{'person.haveVisa'|translate}}")
+        mat-tab(label="{{'person.hasVisa'|translate}}")
         mat-tab(label="{{'person.emissionVisa'|translate}}")
       ng-template(*ngTemplateOutlet="reportGridTemplate; context:{tab:'visa'}")
 ng-template(#tourTemplate)

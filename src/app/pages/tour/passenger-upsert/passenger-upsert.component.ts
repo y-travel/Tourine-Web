@@ -5,7 +5,7 @@ import { FormService, NewFormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { PassengerGridService } from '../passenger-grid.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
-import { OptionType, Person, TeamMember } from '../../../@core/data/models';
+import { OptionType, Person, Passenger } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
@@ -85,13 +85,13 @@ export class PassengerUpsertComponent implements ModalInterface {
     });
   }
 
-  teamMemberDelete(teamMember: TeamMember) {
+  teamMemberDelete(teamMember: Passenger) {
     this.passengerGridService.remove(teamMember);
     this.tourFreeSpace++;
     this.updateTotalPrice();
   }
 
-  teamMemberUpsert(teamMember: TeamMember = new TeamMember(), isAdd: boolean = true) {
+  teamMemberUpsert(teamMember: Passenger = new Passenger(), isAdd: boolean = true) {
     if (this.tourFreeSpace <= 0 && isAdd) {
       this.dialogService.openDialog('msg.thereIsNoFreeSpace');
       return;
@@ -207,7 +207,7 @@ export class PassengerUpsertComponent implements ModalInterface {
     this.updateTotalPrice();
   }
 
-  getTotal(members: TeamMember[]): number {
+  getTotal(members: Passenger[]): number {
 
     let total = 0;
     this.infantCount = 0;
@@ -229,9 +229,9 @@ export class PassengerUpsertComponent implements ModalInterface {
       }
 
       if (!person.person.isInfant) {
-        noneOptionFoodCount += person.personIncomes.some(x => x.optionType === OptionType.Food) ? 0 : 1;
-        noneOptionRoomCount += person.personIncomes.some(x => x.optionType === OptionType.Room) ? 0 : 1;
-        noneOptionBusCount += person.personIncomes.some(x => x.optionType === OptionType.Bus) ? 0 : 1;
+        noneOptionFoodCount += person.optionType.some(x => x.optionType === OptionType.Food) ? 0 : 1;
+        noneOptionRoomCount += person.optionType.some(x => x.optionType === OptionType.Room) ? 0 : 1;
+        noneOptionBusCount += person.optionType.some(x => x.optionType === OptionType.Bus) ? 0 : 1;
       }
     });
 

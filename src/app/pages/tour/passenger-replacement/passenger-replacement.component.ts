@@ -1,6 +1,6 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatInput, MatStepper } from '@angular/material';
-import { Agency, DialogMode, FormFactory, OptionType, Team, TeamMember, Tour } from '../../../@core/data/models';
+import { Agency, DialogMode, FormFactory, OptionType, Team, Passenger, Tour } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { PersonService } from '../../../@core/data/person.service';
@@ -20,7 +20,7 @@ export class PassengerReplacementComponent implements ModalInterface {
   replacementTourResultForm: FormService<any>;
   replacementTeamResultForm: FormService<Team>;
   dialogMode: DialogMode;
-  selectedPassengers: TeamMember[];
+  selectedPassengers: Passenger[];
   selectedAgency: Agency;
   sourceBlockId: string;
   sourceTourId: string;

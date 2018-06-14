@@ -1,7 +1,7 @@
 /* tslint:disable */
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatCheckboxChange, MatDialogRef } from '@angular/material';
-import { FormFactory, OptionType, Person, PersonIncome, TeamMember } from '../../../@core/data/models';
+import { FormFactory, OptionType, Person, PersonIncome, Passenger } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { AppUtils, UTILS } from '../../../@core/utils';
@@ -19,7 +19,7 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalI
   dialogMode: DialogMode;
   optionType = OptionType;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<TeamMember>,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: FormService<Passenger>,
               public dialogInstance: MatDialogRef<ModalInterface>,
               private dialogService: DialogService,
               public formFactory: FormFactory,
@@ -32,11 +32,11 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalI
   }
 
   checkChanged(ev: MatCheckboxChange, type: OptionType) {
-    const index = this.data.model.personIncomes.findIndex(x => x.optionType === type);
+    const index = this.data.model.optionType.findIndex(x => x.optionType === type);
     if (index < 0) {
-      this.data.model.personIncomes.push(new PersonIncome(type));
+      this.data.model.optionType.push(new PersonIncome(type));
     } else {
-      this.data.model.personIncomes[index].optionType = OptionType.Empty;
+      this.data.model.optionType[index].optionType = OptionType.Empty;
     }
   }
 
@@ -50,15 +50,15 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalI
   findPerson(natCode: any) {
     this.service.GetPerson(natCode.value).subscribe(
       person => {
-        const team = new TeamMember();
+        const team = new Passenger();
         if (person.isInfant) {
-          team.personIncomes.forEach(x => x.optionType = OptionType.Empty);
+          team.optionType.forEach(x => x.optionType = OptionType.Empty);
         }
         person.type |= PersonType.Passenger;
         this.data.updateForm(Object.assign(team, {person: person, personId: person.id}));
       },
       () => {
-        const teamMember = new TeamMember();
+        const teamMember = new Passenger();
         //we use Object.assign cos last data remained in form by using dynamic cast.
         teamMember.person = <Person>{};
         teamMember.person.nationalCode = this.data.model.person.nationalCode;
@@ -93,27 +93,27 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalI
     if (age < 2) {
       this.data.model.person.isInfant = true;
       this.data.model.person.isUnder5 = false;
-      this.data.model.personIncomes.forEach(element => element.optionType = OptionType.Empty);
+      this.data.model.optionType.forEach(element => element.optionType = OptionType.Empty);
     } else if (age < 5) {
       this.data.model.person.isUnder5 = true;
       this.data.model.person.isInfant = false;
       //@TODO: ughly
-      this.data.model.personIncomes[0].optionType = OptionType.Bus;
-      this.data.model.personIncomes[1].optionType = OptionType.Room;
-      this.data.model.personIncomes[2].optionType = OptionType.Food;
+      this.data.model.optionType[0].optionType = OptionType.Bus;
+      this.data.model.optionType[1].optionType = OptionType.Room;
+      this.data.model.optionType[2].optionType = OptionType.Food;
     } else {
       //@TODO: ughly
       this.data.model.person.isUnder5 = false;
       this.data.model.person.isInfant = false;
-      this.data.model.personIncomes[0].optionType = OptionType.Bus;
-      this.data.model.personIncomes[1].optionType = OptionType.Room;
-      this.data.model.personIncomes[2].optionType = OptionType.Food;
+      this.data.model.optionType[0].optionType = OptionType.Bus;
+      this.data.model.optionType[1].optionType = OptionType.Room;
+      this.data.model.optionType[2].optionType = OptionType.Food;
     }
 
     this.data.updateForm(this.data.model);
   }
 
   getOptionValue(type: OptionType) {
-    return this.data.form.value.personIncomes.some(x => x.optionType === type);
+    return this.data.form.value.optionType.some(x => x.optionType === type);
   }
 }

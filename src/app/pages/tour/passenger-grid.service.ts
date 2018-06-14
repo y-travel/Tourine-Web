@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-header.component';
 import { FormatterService } from '../../@core/utils/formatter.service';
 import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
-import { OptionType, Person, TeamMember } from '../../@core/data/models';
+import { OptionType, Person, Passenger } from '../../@core/data/models';
 import { CellToolbarComponent, ToolbarItem } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { AppUtils, UTILS } from '../../@core/utils/app-utils';
 import { PersonService } from '../../@core/data/person.service';
@@ -14,7 +14,7 @@ import { PersonService } from '../../@core/data/person.service';
 export class PassengerGridService {
   gridOptions: GridOptions;
   gridColumnApi: any;
-  rows: TeamMember[];
+  rows: Passenger[];
 
   columnDefs: any[];
   toolbarTourItems: ToolbarItem[] = [];
@@ -97,7 +97,7 @@ export class PassengerGridService {
         minWidth: 80,
         maxWidth: 80,
         field: 'person.visaExpireDate',
-        cellRenderer: (params: any) => params.data.haveVisa ? this.formatter.getDateFormat(params.value) : ' - ',
+        cellRenderer: (params: any) => params.data.hasVisa ? this.formatter.getDateFormat(params.value) : ' - ',
       },
       {
         headerName: 'options',
@@ -108,19 +108,19 @@ export class PassengerGridService {
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room)},
-            cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`
+            cellRenderer: params => `<input type='checkbox' ${params.data.optionType.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus)},
-            cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`
+            cellRenderer: params => `<input type='checkbox' ${params.data.optionType.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food)},
-            cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`
+            cellRenderer: params => `<input type='checkbox' ${params.data.optionType.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`
           }
         ]
       },
@@ -171,7 +171,7 @@ export class PassengerGridService {
     this.gridApi.refreshView();
   }
 
-  addItem(model: TeamMember) {
+  addItem(model: Passenger) {
     const index = this.rows.findIndex(p => p.personId === model.personId);
     if (index === -1) {
       this.rows.push(model);
@@ -190,7 +190,7 @@ export class PassengerGridService {
     this.gridApi.setRowData(this.rows);
   }
 
-  setRow(row: TeamMember[]) {
+  setRow(row: Passenger[]) {
     this.rows = row;
   }
 

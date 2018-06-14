@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TourService } from '../../../@core/data/tour.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabChangeEvent } from '@angular/material';
-import { Destination, Dictionary, Person, TeamMember, Tour, TourBuyer, TourPassenger } from '../../../@core/data/models/client.model';
+import { Destination, Dictionary, Person, Passenger, Tour, TourBuyer, TourPassenger } from '../../../@core/data/models/client.model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { TourReportGridService } from './tour-reports.service';
@@ -19,7 +19,7 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 export class TourReportsComponent implements ModalInterface, ModalInterface, OnInit {
 
   dialogMode: DialogMode;
-  tourMembers: TeamMember[];
+  tourMembers: Passenger[];
   tourBuyers: TourBuyer[];
   destinationList: Dictionary<string> = {};
   selectedTab: ReportTab = 'ticket';
@@ -32,8 +32,8 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
   destination = '';
   tourCode = '';
   leader: Person;
-  haveVisaCount = 0;
-  noHaveVisaCount = 0;
+  hasVisaCount = 0;
+  noHasVisaCount = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: NewFormService<Tour>,
               public dialogInstance: MatDialogRef<ModalInterface>,
@@ -60,7 +60,7 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
       this.reportGridService.gridApi.setColumnDefs(this.reportGridService.ticketColumnDef);
       this.personService.getTourMembers(this.data.value.id).subscribe(x => {
         this.tourMembers = x.passengers;
-        const leader = new TeamMember();
+        const leader = new Passenger();
         this.leader = x.leader || <Person>{};
         if (x.leader) {
           this.tourMembers.unshift(Object.assign(leader, {person: x.leader}));
@@ -70,7 +70,7 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
       });
     } else if (tab === 'visa') {
       this.reportGridService.gridApi.setColumnDefs(this.reportGridService.visaColumnDef);
-      this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa && x.person.id !== this.leader.id));
+      this.reportGridService.setRow(this.tourMembers.filter(x => x.hasVisa && x.person.id !== this.leader.id));
     } else if (tab === 'tour') {
       this.reportGridService.gridApi.setColumnDefs(this.reportGridService.tourColumnDef);
       this.reportGridService.setRow(this.tourMembers);
@@ -110,10 +110,10 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
 
   visaTab(event: MatTabChangeEvent) {
     if (event.index === 0) {
-      this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === true && x.person.id !== this.leader.id));
+      this.reportGridService.setRow(this.tourMembers.filter(x => x.hasVisa === true && x.person.id !== this.leader.id));
     }
     if (event.index === 1) {
-      this.reportGridService.setRow(this.tourMembers.filter(x => x.haveVisa === false && x.person.id !== this.leader.id));
+      this.reportGridService.setRow(this.tourMembers.filter(x => x.hasVisa === false && x.person.id !== this.leader.id));
     }
 
     this.reportGridService.refresh();
@@ -134,11 +134,11 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
     const date = new Date(Date.parse(members.tour.tourDetail.startDate));
     date.setDate(date.getDate() + members.tour.tourDetail.duration);
     this.endDate = this.formatter.getDateFormat(date.toISOString());
-    this.noHaveVisaCount = this.tourMembers.filter(x => x.haveVisa === false && x.person.id !== this.leader.id).length;
-    this.haveVisaCount = this.tourMembers.filter(x => x.haveVisa === true && x.person.id !== this.leader.id).length;
+    this.noHasVisaCount = this.tourMembers.filter(x => x.hasVisa === false && x.person.id !== this.leader.id).length;
+    this.hasVisaCount = this.tourMembers.filter(x => x.hasVisa === true && x.person.id !== this.leader.id).length;
     this.bedCount = 0;
     this.tourMembers.forEach(x => {
-      return this.bedCount += x.personIncomes.some(y => y.optionType === OptionType.Room) ? 1 : 0;
+      return this.bedCount += x.optionType.some(y => y.optionType === OptionType.Room) ? 1 : 0;
     });
   }
 }

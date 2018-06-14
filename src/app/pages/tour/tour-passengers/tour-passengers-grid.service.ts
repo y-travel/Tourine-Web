@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { GridOptions } from 'ag-grid';
-import { Agency, Dictionary, OptionType, Person, TeamMember, Tour } from '../../../@core/data/models';
+import { Agency, Dictionary, OptionType, Person, Passenger, Tour } from '../../../@core/data/models';
 import { CellToolbarComponent, ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,7 +13,7 @@ import { CellDetailComponent } from '../../../shared/trn-ag-grid/cell-detail/cel
 export class TourPassengersGridService {
   gridOptions: GridOptions;
   gridColumnApi: any;
-  rows: TeamMember[];
+  rows: Passenger[];
 
   selectedTourId: string;
   tourAgency: Dictionary<Agency> = {};
@@ -75,19 +75,19 @@ export class TourPassengersGridService {
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room)},
-            cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`
+            cellRenderer: params => `<input type='checkbox' ${params.data.optionType.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus)},
-            cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`
+            cellRenderer: params => `<input type='checkbox' ${params.data.optionType.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food)},
-            cellRenderer: params => `<input type='checkbox' ${params.data.personIncomes.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`
+            cellRenderer: params => `<input type='checkbox' ${params.data.optionType.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`
           }
         ]
       },
@@ -150,7 +150,7 @@ export class TourPassengersGridService {
     this.gridApi.setRowData(this.rows);
   }
 
-  setRow(row: TeamMember[]) {
+  setRow(row: Passenger[]) {
     this.rows = row;
   }
 

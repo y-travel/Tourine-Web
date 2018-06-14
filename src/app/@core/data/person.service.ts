@@ -17,7 +17,7 @@ import {
   PassengerReplacementTeamAccomplish,
   PassengerReplacementTourAccomplish,
   Person,
-  TeamMember,
+  Passenger,
   TeamPassenger,
   Tour,
   TourPassenger,
@@ -76,7 +76,7 @@ export class PersonService {
     return this.apiService.getEntities(dto);
   }
 
-  upsertTeam(buyer: Person, model: TeamMember[], blockModel: Block, teamId?: string): Observable<void> {
+  upsertTeam(buyer: Person, model: Passenger[], blockModel: Block, teamId?: string): Observable<void> {
     const dto = new UpsertTeam();
     dto.tourId = blockModel.id; //@TODO
     dto.buyer = buyer;
@@ -121,7 +121,7 @@ export class PersonService {
     return this.apiService.send(query);
   }
 
-  passengerReplacement(tourId: string, destId: string, passengers: TeamMember[], agencyId: string): Observable<TourTeamMember> {
+  passengerReplacement(tourId: string, destId: string, passengers: Passenger[], agencyId: string): Observable<TourTeamMember> {
     const dto = new PassengerReplacement();
     //@TODO: ughly
     dto.tourId = tourId;

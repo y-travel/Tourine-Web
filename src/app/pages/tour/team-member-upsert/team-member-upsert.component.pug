@@ -30,10 +30,10 @@ include ../../../mixin
             mat-datepicker(#passExpireDate, disabled="false")
         div(fxLayout="row")
           div(fxFlex)
-            mat-checkbox(#haveVisa, checked="true", [formControl]="data.form.get('haveVisa')")
-              | {{"person.haveVisa"|translate}}
+            mat-checkbox(#hasVisa, checked="true", [formControl]="data.form.get('hasVisa')")
+              | {{"person.hasVisa"|translate}}
         div(fxLayout="row")
-          +matField('visaExpireDate', 'person.visaExpireDate', 'data.form.get("person")')((click)="visaExpDate._open($event)", [matDatepicker]="visaExpireDate",[disabled]="!haveVisa.checked")
+          +matField('visaExpireDate', 'person.visaExpireDate', 'data.form.get("person")')((click)="visaExpDate._open($event)", [matDatepicker]="visaExpireDate",[disabled]="!hasVisa.checked")
             mat-datepicker-toggle(utc="true", #visaExpDate, matSuffix, [for]="visaExpireDate")
             mat-datepicker(#visaExpireDate, disabled="false")
         br

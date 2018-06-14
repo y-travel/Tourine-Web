@@ -10,7 +10,7 @@ import {
   Role,
   Route,
   Team,
-  TeamMember,
+  Passenger,
   TeamPassenger,
   Tour,
   TourBuyer,
@@ -90,24 +90,6 @@ export class QueryResponse<T> {
 
   // @DataMember(Order=5)
   responseStatus: ResponseStatus;
-}
-
-export class PassengerList {
-  id: string;
-  // @References(typeof(Person))
-  personId: string;
-
-  person: Person;
-  // @References(typeof(Tour))
-  tourId: string;
-
-  tour: Tour;
-  optionType: OptionType;
-  receivedMoney: number;
-  currencyFactor: number;
-  incomeStatus: IncomeStatus;
-  visaDelivered: boolean;
-  passportDelivered: boolean;
 }
 
 export class AgencyPerson {
@@ -269,7 +251,7 @@ export class UpsertTeam implements IReturnVoid {
   tourId: string;
   teamId: string;
   buyer: Person;
-  passengers: TeamMember[];
+  passengers: Passenger[];
   infantPrice: number;
   basePrice: number;
   totalPrice: number;
@@ -288,7 +270,7 @@ export class PassengerReplacement implements IReturn<TourTeamMember> {
   tourId: string;
   destTourId: string;
   agencyId: string;
-  passengers: TeamMember[];
+  passengers: Passenger[];
 
   createResponse() {
     return new TourTeamMember();

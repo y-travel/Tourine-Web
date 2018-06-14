@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormatterService } from '../../../@core/utils/formatter.service';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { CellHeaderComponent } from '../../../shared/trn-ag-grid/cell-header/cell-header.component';
-import { Dictionary, TeamMember, Tour } from '../../../@core/data/models/client.model';
+import { Dictionary, Passenger, Tour } from '../../../@core/data/models/client.model';
 import { OptionType } from '../../../@core/data/models/enums';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class TourReportGridService {
 
   gridOptions: GridOptions;
   gridColumnApi: any;
-  rows: TeamMember[];
+  rows: Passenger[];
   selectedTourId: string;
   ticketColumnDef: any[];
   visaColumnDef: any[];
@@ -222,12 +222,12 @@ export class TourReportGridService {
   }
 
   getOptions(params: any) {
-    if (params.personIncomes.length === 0) {
+    if (params.optionType.length === 0) {
       return this.translate.instant('noneOptions');
     }
     let templateStr = '';
     let rev = Array(...this.utils.getEnumNames(OptionType)).filter(x => x !== OptionType[OptionType.Empty]);
-    rev = rev.filter(x => !params.personIncomes.some(z => OptionType[z.optionType] === x));
+    rev = rev.filter(x => !params.optionType.some(z => OptionType[z.optionType] === x));
     if (rev.length === 0) {
       return this.translate.instant('haveAllOptions');
     }

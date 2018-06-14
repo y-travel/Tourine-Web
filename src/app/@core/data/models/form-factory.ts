@@ -10,7 +10,7 @@ import {
   PersonAgency,
   PersonIncome,
   Team,
-  TeamMember,
+  Passenger,
   Tour,
   TourDetail,
   TourOption,
@@ -112,15 +112,15 @@ export class FormFactory {
     return new NewFormService<Person>(form, this.validation);
   }
 
-  createTeamMemberForm(model: TeamMember = new TeamMember()): FormService<TeamMember> {
+  createTeamMemberForm(model: Passenger = new Passenger()): FormService<Passenger> {
     const form = new FormBuilder().group({
       personId: [model.personId || ''],
       person: this.createPersonForm(model.person || undefined),
-      personIncomes: new FormBuilder().array(model.personIncomes.map(this.createPersonIncome)),
-      haveVisa: [model.haveVisa || ''],
+      optionType: new FormBuilder().array(model.optionType.map(this.createPersonIncome)),
+      hasVisa: [model.hasVisa || ''],
       passportDelivered: [model.passportDelivered || ''],
     });
-    return new FormService(TeamMember, form);
+    return new FormService(Passenger, form);
   }
 
   createAddPassengersForm(model: Block = new Block()): FormService<Block> {

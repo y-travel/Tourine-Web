@@ -128,17 +128,17 @@ export class PersonIncome {
   }
 }
 
-export class TeamMember {
+export class Passenger {
   personId: string = undefined;
   person: Person = <Person>{};
-  personIncomes: PersonIncome[] = this.person && this.person.isInfant
+  optionType: PersonIncome[] = this.person && this.person.isInfant
     ? null
     : [
       new PersonIncome(OptionType.Room),
       new PersonIncome(OptionType.Bus),
       new PersonIncome(OptionType.Food),
     ]; // @TODO check ugly
-  haveVisa = true;
+  hasVisa = true;
   passportDelivered: boolean = undefined;
   tourId: string = undefined;
   teamId: string = undefined;
@@ -161,15 +161,15 @@ export class User extends Model {
 }
 
 export class TeamPassenger {
-  buyer: TeamMember;
-  passengers: TeamMember[];
+  buyer: Passenger;
+  passengers: Passenger[];
 }
 
 
 export class TourPassenger {
   tour: Tour;
   leader: Person;
-  passengers: TeamMember[];
+  passengers: Passenger[];
 }
 
 // @TODO replace with a good class
