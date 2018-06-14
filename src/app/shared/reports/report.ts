@@ -1,4 +1,4 @@
-import { GetReportTemplate } from '../../@core/data/models/server.dtos';
+import { GetReport } from '../../@core/data/models/server.dtos';
 import { ReportType } from '../../@core/data/models/enums';
 import { FileService } from '../../@core/data/file.service';
 import { first } from 'rxjs/operators';
@@ -12,10 +12,10 @@ export abstract class ReportInterface {
 }
 
 export abstract class ReportBase {
-  dto: GetReportTemplate;
+  dto: GetReport;
 
   constructor(reportType: ReportType, private fileService: FileService) {
-    this.dto = new GetReportTemplate();
+    this.dto = new GetReport();
     this.dto.reportType = reportType;
   }
 

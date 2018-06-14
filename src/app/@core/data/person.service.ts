@@ -10,7 +10,7 @@ import {
   GetLeaders,
   GetPersons,
   GetPersonsOfTeam,
-  GetPersonsOfTour,
+  GetTourPassengers,
   GetTourAgency,
   GetTourTeams,
   PassengerReplacement,
@@ -110,7 +110,7 @@ export class PersonService {
   }
 
   getTourMembers(id: string): Observable<TourPassenger> {
-    const query = new GetPersonsOfTour();
+    const query = new GetTourPassengers();
     query.tourId = id;
     return this.apiService.get(query);
   }

@@ -332,8 +332,8 @@ export class GetPersonsOfTeam implements IReturn<TeamPassenger> {
 }
 
 
-@Route('/tour/{TourId}/persons/', 'GET')
-export class GetPersonsOfTour implements IReturn<TourPassenger> {
+@Route('/tour/{TourId}/passengers/', 'GET')
+export class GetTourPassengers implements IReturn<TourPassenger> {
   tourId: string;
 
   createResponse() {
@@ -341,7 +341,7 @@ export class GetPersonsOfTour implements IReturn<TourPassenger> {
   }
 
   getTypeName() {
-    return 'GetPersonsOfTour';
+    return 'GetTourPassengers';
   }
 }
 
@@ -826,8 +826,8 @@ export class GetTourBuyers implements IReturn<Array<TourBuyer>> {
   }
 }
 
-@Route('/download/ticketReportTemplate', 'GET')
-export class GetReportTemplate implements IReturn<Blob> {
+@Route('/reports/{reportType}', 'GET')
+export class GetReport implements IReturn<Blob> {
   reportType: ReportType;
 
   createResponse(): Blob {
@@ -835,6 +835,6 @@ export class GetReportTemplate implements IReturn<Blob> {
   }
 
   getTypeName() {
-    return 'GetReportTemplate';
+    return 'GetReport';
   }
 }
