@@ -44,6 +44,8 @@ import { DialogService } from '../@core/utils/dialog.service';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { JalaliMomentDateAdapter } from '../@core/utils/date/jalali-moment-date-adapter';
 import { JALALI_MOMENT_FORMATS } from '../@core/utils/date/jalali-moment-format';
+import { TextMaskModule } from 'angular2-text-mask';
+import { MatFormFieldDirective } from './directives/mat-form-field.directive';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -71,6 +73,7 @@ const MAT_MODULES = [
 
 const OTHER_MODULES = [
   FlexLayoutModule,
+  TextMaskModule,
 ];
 
 const COMPONENTS = [
@@ -84,6 +87,7 @@ const COMPONENTS = [
   TrnSidebarComponent,
   AutoTranslateDirective,
   MatCardDirective,
+  MatFormFieldDirective,
   DialogComponent,
   DialogDirective,
 ];

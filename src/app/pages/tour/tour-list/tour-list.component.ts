@@ -1,5 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
-import { AgGridNg2 } from 'ag-grid-angular';
+import { Component } from '@angular/core';
 
 import { TourService } from '../../../@core/data/tour.service';
 import { TourUpsertComponent } from '../tour-upsert/tour-upsert.component';
@@ -18,7 +17,6 @@ import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { TourReportsComponent } from '../tour-reports/tour-reports.component';
 import { FileService } from '../../../@core/data/file.service';
-import { TourReport } from '../../../shared/reports/tour-report';
 
 
 @Component({
@@ -106,7 +104,6 @@ export class TourListComponent {
       command: (tour: any) => this.tourReports(tour),
     },
   ];
-  @ViewChild('tourGrid') tourGrid: AgGridNg2;
 
   reloadTourList = () => this.tourGridService.reloadData();
 
@@ -179,10 +176,5 @@ export class TourListComponent {
       const list: Passenger[] = x.passengers;
       (<any>ref.componentInstance).passengerGridService.setRow(list);
     });
-  }
-
-  testFile() {
-    const tourReport = new TourReport(this.fileService);
-    tourReport.print();
   }
 }
