@@ -5,7 +5,7 @@ import { Block, FormFactory } from '../../../@core/data/models';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { TeamGridService } from '../team-grid.service';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
-import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
+import { PassengerRegisterComponent } from '../passenger-register/passenger-register.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
@@ -31,7 +31,7 @@ export class TeamListComponent implements OnInit, ModalInterface {
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (team: any) => this.passengerUpsert(team),
+      command: (team: any) => this.passengerRegister(team),
     },
   ];
 
@@ -53,7 +53,7 @@ export class TeamListComponent implements OnInit, ModalInterface {
   ngOnInit() {
   }
 
-  passengerUpsert(team: any) {
+  passengerRegister(team: any) {
     //@TODO: ughly
     //we want show team price instead of tour/block basePrice and infantPrice
     this.data.model.infantPrice = team.infantPrice;
@@ -61,7 +61,7 @@ export class TeamListComponent implements OnInit, ModalInterface {
     this.data.model.totalPrice = team.totalPrice;
     const block = this.data.model;
     const rows = this.personService.getTeamMembers(team.id).subscribe(x => {
-      const ref = this.dialogService.openPopup(PassengerUpsertComponent, {buyer: team.buyer, teamId: team.id, block: block});
+      const ref = this.dialogService.openPopup(PassengerRegisterComponent, {buyer: team.buyer, teamId: team.id, block: block});
       (<any>ref.componentInstance).passengerGridService.setRow(x.passengers);
       (<any>ref.componentInstance).updateCount();
       ref.afterClosed().subscribe(() => this.dialogInstance.close());

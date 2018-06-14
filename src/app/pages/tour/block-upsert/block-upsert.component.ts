@@ -8,7 +8,7 @@ import { FormService } from '../../../@core/data/form.service';
 import { AgencyService } from '../../../@core/data/agency.service';
 import { Observable } from 'rxjs';
 import { AgencyUpsertComponent } from '../agency-upsert/agency-upsert.component';
-import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
+import { PassengerRegisterComponent } from '../passenger-register/passenger-register.component';
 import { BlockUpsertViewModel } from './block-upsert.view-model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
@@ -84,7 +84,7 @@ export class BlockUpsertComponent implements ModalInterface, ModalInterface {
       return;
     }
     const tmpBlock = Serializable.fromJSON(new Block(), this.vModel.model);
-    const ref = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(this.data.block));
+    const ref = this.dialogService.openPopup(PassengerRegisterComponent, this.formFactory.createAddPassengersForm(this.data.block));
     ref.afterClosed().subscribe(x => {
       console.log(x);
       if (x > 0) {

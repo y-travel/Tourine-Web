@@ -8,7 +8,7 @@ import { COMMON_MODULES } from '../default';
 import { TrnAgGridModule } from '../../shared/trn-ag-grid/trn-ag-grid.module';
 import { AgencyUpsertComponent } from './agency-upsert/agency-upsert.component';
 import { BlockUpsertComponent } from './block-upsert/block-upsert.component';
-import { PassengerUpsertComponent } from './passenger-upsert/passenger-upsert.component';
+import { PassengerRegisterComponent } from './passenger-register/passenger-register.component';
 import { TeamMemberUpsertComponent } from './team-member-upsert/team-member-upsert.component';
 import { TeamListComponent } from './block-list/team-list.component';
 import { PersonService } from '../../@core/data/person.service';
@@ -24,7 +24,7 @@ const ENTRY_COMPONENTS = [
   EditPasswordComponent,
   AgencyUpsertComponent,
   BlockUpsertComponent,
-  PassengerUpsertComponent,
+  PassengerRegisterComponent,
   TeamMemberUpsertComponent,
   TeamListComponent,
   TourPassengersComponent,
@@ -42,7 +42,7 @@ const ENTRY_COMPONENTS = [
   declarations: [
     ...ENTRY_COMPONENTS,
     ...ROUTED_COMPONENTS,
-    PassengerUpsertComponent,
+    PassengerRegisterComponent,
     TeamMemberUpsertComponent,
     TeamListComponent,
     TourPassengersComponent,

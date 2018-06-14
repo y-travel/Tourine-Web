@@ -9,7 +9,7 @@ import { TourGridService } from '../tour-grid.service';
 import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { Agency, Block, Tour } from '../../../@core/data/models/client.model';
-import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
+import { PassengerRegisterComponent } from '../passenger-register/passenger-register.component';
 import { TeamListComponent } from '../block-list/team-list.component';
 import { TourPassengersComponent } from '../tour-passengers/tour-passengers.component';
 import { PersonService } from '../../../@core/data/person.service';
@@ -156,7 +156,7 @@ export class TourListComponent {
     if (block.freeSpace === 0) {
       return;
     }
-    const ref = this.dialogService.openPopup(PassengerUpsertComponent, {block: block});
+    const ref = this.dialogService.openPopup(PassengerRegisterComponent, {block: block});
     ref.afterClosed().subscribe(() => {
         this.tourGridService.reloadBlocks();
         this.reloadTourList();

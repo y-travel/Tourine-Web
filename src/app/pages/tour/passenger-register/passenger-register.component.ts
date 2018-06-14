@@ -18,12 +18,12 @@ import { PersonUpsertComponent } from '../../person/person-upsert/person-upsert.
 declare type iconKind = 'search' | 'edit' | 'person_add';
 
 @Component({
-  selector: 'trn-passenger-upsert',
-  templateUrl: './passenger-upsert.component.gen.html',
-  styleUrls: ['./passenger-upsert.component.scss'],
+  selector: 'trn-passenger-register',
+  templateUrl: './passenger-register.component.gen.html',
+  styleUrls: ['./passenger-register.component.scss'],
   providers: [PassengerGridService]
 })
-export class PassengerUpsertComponent implements ModalInterface {
+export class PassengerRegisterComponent implements ModalInterface {
 
   dialogMode: DialogMode;
   icon: iconKind = 'search';
