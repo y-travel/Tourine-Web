@@ -8,6 +8,8 @@ $dark-primary-palette: $mat-blue-grey;
 $dark-accent-palette: $mat-amber;
 $dark-warning-palette: $mat-deep-orange;
 
+$input-icon-padding:10px;
+
 $theme-default: (
   material:(), //@todo should be set from material.theme
   is-dark:false,
