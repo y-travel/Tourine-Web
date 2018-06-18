@@ -43,5 +43,8 @@ $grid-size: 4px;
       width: 100%;
       text-align: center;
     }
+    .ag-body-viewport{
+      overflow-x: hidden;//prevent to horizontal scrolling cos we don't need it
+    }
   }
 }

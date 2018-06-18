@@ -27,8 +27,6 @@ import { FileService } from '../../../@core/data/file.service';
 })
 export class TourListComponent {
 
-  //@TODO: should get from auth
-  agency = Object.assign(new Agency(), {id: '5d0fd1903c6a45d99987f698b700cd43'});
   blockItems = [
     <ToolbarItem>{
       icon: 'delete',
@@ -36,18 +34,14 @@ export class TourListComponent {
       color: '#f44336',
       alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
       command: (tourBlock: any) => this.tourDelete(tourBlock),
-      visibility: (tour: Tour) => {
-        return tour.agencyId !== this.agency.id;
-      },
+      visibility: (tour: Tour) => tour.isBlock,
     },
     <ToolbarItem>{
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
       command: (block: any) => this.blockUpsert(block.parent, block),
-      visibility: (tour: Tour) => {
-        return tour.agencyId !== this.agency.id;
-      },
+      visibility: (tour: Tour) => tour.isBlock,
     },
     <ToolbarItem>{
       icon: 'attach_money',
