@@ -62,6 +62,7 @@ export class BlockUpsertViewModel {
       id: [model.id],
       parentId: [model.parentId],
       agencyId: [model.agencyId, Validators.required],
+      freeSpace: [model.freeSpace],
       capacity: [model.capacity || undefined,
         [Validators.required,
           Validators.min(1),
