@@ -12,17 +12,28 @@ export class RowClickExpandDirective {
   }
 
   @HostListener('rowClicked', ['$event']) onRowClicked(event) {
-    if (this.collapseOthers) {
-      this.Grid.gridOptions.api.forEachNode(node => {
-        if (event.node !== node) {
-          node.expanded = false;
-        }
-      });
-    }
-    if (event.event.target.nodeName !== 'I' && event.event.target.nodeName !== 'MAT-ICON') {
-      event.node.expanded = event.node.expanded ? false : true;
-    }
-    this.Grid.gridOptions.api.onGroupExpandedOrCollapsed(event.rowIndex);
+    const toolbarIcon = 'MAT-ICON';
+    const row_expander = 'I';
+    const nodeName = event.event.target.nodeName;
 
+    if (nodeName !== toolbarIcon) {
+      if (this.collapseOthers) {
+        this.collapseAll(event);
+      }
+      if (nodeName !== row_expander) {
+        this.rowToggle(event);
+      }
+      this.Grid.gridOptions.api.onGroupExpandedOrCollapsed(event.rowIndex);
+    }
+  }
+
+  rowToggle(event) {
+    event.node.expanded = event.node.expanded ? false : true;
+  }
+
+  collapseAll(event) {
+    this.Grid.gridOptions.api.forEachNode(node => {
+      node.expanded = event.node !== node ? false : node.expanded;
+    });
   }
 }
