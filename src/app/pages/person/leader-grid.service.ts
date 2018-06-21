@@ -40,7 +40,7 @@ export class LeaderGridService {
         maxWidth: 30,
         cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
       }, {
-        headerName: 'person.nc',
+        headerName: 'nationalCode',
         minWidth: 100,
         maxWidth: 100,
         field: 'nationalCode',

@@ -3,7 +3,7 @@ include ../../../mixin
 .modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="300", trnAutoTranslate)
   form([formGroup]="vModel.form")
     div(fxLayout="row", )
-      +matField("nationalCode","person.nc","vModel.form","","",{"fxFlex": "50"})((focusout)="onNationalCodeChanged(natCode)" ,#natCode)
+      +matField("nationalCode","nationalCode","vModel.form","","",{"fxFlex": "50"})((focusout)="onNationalCodeChanged(natCode)" ,#natCode)
       trn-slider(fxFlex, tabindex="-1", trueText="male", falseText="female", formControlName="gender", fxLayoutAlign="end center")
     div(fxLayout="row")
       +matField("mobileNumber","person.mobileNumber","vModel.form")

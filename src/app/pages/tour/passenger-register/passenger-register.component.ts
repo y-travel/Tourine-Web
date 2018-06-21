@@ -5,11 +5,11 @@ import { FormService, NewFormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { PassengerGridService } from '../passenger-grid.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
-import { OptionType, Person, Passenger } from '../../../@core/data/models';
+import { OptionType, Passenger, Person } from '../../../@core/data/models';
 import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
-import { TourService} from '../../../@core/data/tour.service';
+import { TourService } from '../../../@core/data/tour.service';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { Block } from '../../../@core/data/models/client.model';
@@ -69,6 +69,7 @@ export class PassengerRegisterComponent implements ModalInterface {
               public tourService: TourService) {
   }
 
+
   initDialog() {
     this.buyerForm = this.formFactory.createPersonForm(this.data.buyer);
     this.teamId = this.data.teamId;
@@ -98,7 +99,8 @@ export class PassengerRegisterComponent implements ModalInterface {
     }
     const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
     inst.afterClosed().subscribe(x => {
-      if (x == null) {
+      console.log(x);
+      if (x == null || x === '') {
         return;
       }
       if (isAdd || (!isAdd && teamMember.person.id === x.person.id)) {

@@ -47,7 +47,7 @@ export class PassengerGridService {
         cellRenderer: (params: any) => (params.node.rowIndex + 1).toString(),
       },
       {
-        headerName: 'person.nc',
+        headerName: 'nationalCode',
         minWidth: 95,
         maxWidth: 95,
         field: 'person.nationalCode',
