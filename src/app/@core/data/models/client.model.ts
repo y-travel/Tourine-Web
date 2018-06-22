@@ -131,7 +131,7 @@ export class PersonIncome {
 export class Passenger {
   personId: string = undefined;
   person: Person = <Person>{};
-  optionType: OptionType = OptionType.Empty;
+  optionType: OptionType = OptionType.getAll();
   hasVisa = true;
   passportDelivered: boolean = undefined;
   tourId: string = undefined;
