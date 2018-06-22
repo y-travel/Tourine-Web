@@ -3,12 +3,12 @@ import { GridApi, GridOptions } from 'ag-grid';
 import { AgGridNg2 } from 'ag-grid-angular';
 
 import { TourService } from '../../@core/data/tour.service';
+import { CellToolbarComponent, ToolbarItem } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-header.component';
+import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
 import { Dictionary, Place } from '../../@core/data/models';
 import { FormatterService } from '../../@core/utils/formatter.service';
-import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
 import { Agency, Tour } from '../../@core/data/models/client.model';
-import { CellToolbarComponent, ToolbarItem } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { AppUtils, UTILS } from '../../@core/utils/app-utils';
 
 @Injectable()

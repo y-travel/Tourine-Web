@@ -18,6 +18,7 @@ import { PassengerReplacementTourGridService } from './passenger-replacement/pas
 import { TourReportsComponent } from './tour-reports/tour-reports.component';
 import { TourReportGridService } from './tour-reports/tour-reports.service';
 import { PersonModule } from '../person/person.module';
+import { AgencyTourListComponent } from './agensy-tour-list/agency-tour-list.component';
 
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,
@@ -30,6 +31,7 @@ const ENTRY_COMPONENTS = [
   TourPassengersComponent,
   PassengerReplacementComponent,
   TourReportsComponent,
+  AgencyTourListComponent,
 ];
 
 @NgModule({

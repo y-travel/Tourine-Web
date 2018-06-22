@@ -1,0 +1,19 @@
+include ../../../mixin
++matTitle("' ' {{'agency.tours'|translate}}","close")
+
+mat-card([stretch]="true", style="width:550px; height:400px;")
+  ag-grid-angular.ag-theme-material(
+  #tourGrid,
+  style="width:100%; height: 100%",
+  (gridSizeChanged)="tourGrid.api.sizeColumnsToFit()",
+  [columnDefs]="agencyTourListGridService.columnDefs",
+  [rowHeight]= 35,
+  [headerHeight]= 35,
+  [enableRtl]= "true",
+  (gridReady)="agencyTourListGridService.onGridReady($event)",
+  [gridOptions]="agencyTourListGridService.gridOptions",
+  [getRowNodeId]="agencyTourListGridService.getRowNodeId",
+  [deltaRowDataMode]= "true")
+
+mat-dialog-actions
+  button(mat-raised-button, mat-dialog-close, fxFlex, color='primary') {{'close'|translate}}

@@ -78,7 +78,6 @@ export class BlockUpsertComponent implements ModalInterface, ModalInterface {
 
   addPassengers() {
     //@TODO tmp
-    console.log('hi');
     if (this.tourFreeSpace <= 0) {
       this.dialogService.openDialog('msg.thereIsNoFreeSpace');
       return;
@@ -86,7 +85,6 @@ export class BlockUpsertComponent implements ModalInterface, ModalInterface {
     const tmpBlock = Serializable.fromJSON(new Block(), this.vModel.model);
     const ref = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createAddPassengersForm(this.data.block));
     ref.afterClosed().subscribe(x => {
-      console.log(x);
       if (x > 0) {
         this.addPassengerBtn.disabled = true;
       } else {

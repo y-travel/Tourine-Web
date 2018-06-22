@@ -12,9 +12,10 @@
   "agency": {
     "*": "آژانس",
     "name": "نام آژانس",
-    "ownerName":"نام مدیر",
+    "ownerName": "نام مدیر",
     "phoneNumber": "شماره تلفن آژانس",
-    "upsert": "ثبت آژانس و معرف"
+    "upsert": "ثبت آژانس و معرف",
+    "tours": "تورهای"
   },
   "allPriceIsPerOne": "قیمت های وارد شده به ازای هر نفر می باشد",
   "apply": "تایید",
@@ -193,7 +194,7 @@
     "infantCount": "تعداد بلیط اینفنت",
     "adultCount": "تعداد بلیط بزرگسال"
   },
-  "total": "جمع کل",
+  "total": "جمع مبلغ",
   "tour": {
     "code": "کد تور",
     "date": "تاریخ اجرا",
@@ -207,7 +208,8 @@
     "startDate": "تاریخ حرکت",
     "endDate": "تاریخ بازگشت",
     "destination": "مقصد",
-    "information": "اطلاعات تور"
+    "information": "اطلاعات تور",
+    "description": "شرح"
   },
   "user": {
     "upsert": "ثبت کاربر"
@@ -226,11 +228,9 @@
     "areequal": "باید برابر با {{requiredField}} باشد"
   },
   "withOutPrice": "بدون قیمت",
-
   "iconKind": {
     "search": "جستجوی خریدار",
     "edit": "ویرایش خریدار",
     "person_add": "افزودن خریدار"
   }
-
 }
