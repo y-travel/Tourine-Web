@@ -7,7 +7,6 @@ import { FormatterService } from '../../../@core/utils/formatter.service';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { CellHeaderComponent } from '../../../shared/trn-ag-grid/cell-header/cell-header.component';
 import { Dictionary, Passenger, Tour } from '../../../@core/data/models/client.model';
-import { OptionType } from '../../../@core/data/models/enums';
 
 @Injectable()
 export class TourReportGridService {
@@ -28,7 +27,7 @@ export class TourReportGridService {
               public tourservice: TourService,
               private translate: TranslateService,
               private formatter: FormatterService,
-              @Inject(UTILS) private utils: AppUtils, ) {
+              @Inject(UTILS) private utils: AppUtils,) {
     this.init();
   }
 
@@ -222,17 +221,6 @@ export class TourReportGridService {
   }
 
   getOptions(params: any) {
-    if (params.optionType.length === 0) {
-      return this.translate.instant('noneOptions');
-    }
-    let templateStr = '';
-    let rev = Array(...this.utils.getEnumNames(OptionType)).filter(x => x !== OptionType[OptionType.Empty]);
-    rev = rev.filter(x => !params.optionType.some(z => OptionType[z.optionType] === x));
-    if (rev.length === 0) {
-      return this.translate.instant('haveAllOptions');
-    }
-    rev = rev.map(x => 'optionType.' + x);
-    rev.forEach(x => templateStr += this.translate.instant(x) + '،');
-    return this.translate.instant('nonePrefix') + ' ' + templateStr.slice(0, templateStr.length - 1);
+    return ''; //we will get it from server;
   }
 }

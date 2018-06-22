@@ -1,7 +1,7 @@
 /* tslint:disable */
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatCheckboxChange, MatDialogRef } from '@angular/material';
-import { FormFactory, OptionType, Passenger, Person, PersonIncome } from '../../../@core/data/models';
+import { FormFactory, OptionType, Passenger, Person } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { AppUtils, UTILS } from '../../../@core/utils';
@@ -30,13 +30,8 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalI
   initDialog() {
   }
 
-  checkChanged(ev: MatCheckboxChange, type: OptionType) {
-    const index = this.data.model.optionType.findIndex(x => x.optionType === type);
-    if (index < 0) {
-      this.data.model.optionType.push(new PersonIncome(type));
-    } else {
-      this.data.model.optionType[index].optionType = OptionType.Empty;
-    }
+  checkChanged(ev: MatCheckboxChange, optionType: OptionType) {
+    this.data.model.optionType ^= optionType;
   }
 
   optionTypes() {
@@ -49,12 +44,12 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalI
   findPerson(nationalCode: any) {
     this.service.GetPerson(nationalCode).subscribe(
       person => {
-        const team = new Passenger();
-        if (person.isInfant) {
-          team.optionType.forEach(x => x.optionType = OptionType.Empty);
-        }
         person.type |= PersonType.Passenger;
-        this.data.updateForm(Object.assign(team, {person: person, personId: person.id}));
+        this.data.updateForm(<Passenger>{
+          person: person,
+          personId: person.id,
+          optionType: person.isInfant ? OptionType.Empty : OptionType.getAll()
+        });
       },
       () => {
         const teamMember = new Passenger();
@@ -92,27 +87,21 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalI
     if (age < 2) {
       this.data.model.person.isInfant = true;
       this.data.model.person.isUnder5 = false;
-      this.data.model.optionType.forEach(element => element.optionType = OptionType.Empty);
+      this.data.model.optionType = OptionType.Empty;
     } else if (age < 5) {
       this.data.model.person.isUnder5 = true;
       this.data.model.person.isInfant = false;
-      //@TODO: ughly
-      this.data.model.optionType[0].optionType = OptionType.Bus;
-      this.data.model.optionType[1].optionType = OptionType.Room;
-      this.data.model.optionType[2].optionType = OptionType.Food;
+      this.data.model.optionType = OptionType.getAll();
     } else {
-      //@TODO: ughly
       this.data.model.person.isUnder5 = false;
       this.data.model.person.isInfant = false;
-      this.data.model.optionType[0].optionType = OptionType.Bus;
-      this.data.model.optionType[1].optionType = OptionType.Room;
-      this.data.model.optionType[2].optionType = OptionType.Food;
+      this.data.model.optionType = OptionType.getAll();
     }
 
     this.data.updateForm(this.data.model);
   }
 
   getOptionValue(type: OptionType) {
-    return this.data.form.value.optionType.some(x => x.optionType === type);
+    return OptionType.hasFlag(this.data.form.value.optionType, type);
   }
 }

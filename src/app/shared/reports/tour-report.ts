@@ -5,7 +5,7 @@ import { FileService } from '../../@core/data/file.service';
 
 export class TourReport extends ReportBase {
   constructor(fileService: FileService) {
-    super(ReportType.Tour, fileService);
+    super(ReportType.TourPassenger, fileService);
   }
 
   resolveEngine(): ReportInterface {

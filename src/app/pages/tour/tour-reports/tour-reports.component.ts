@@ -138,7 +138,7 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
     this.hasVisaCount = this.tourMembers.filter(x => x.hasVisa === true && x.person.id !== this.leader.id).length;
     this.bedCount = 0;
     this.tourMembers.forEach(x => {
-      return this.bedCount += x.optionType.some(y => y.optionType === OptionType.Room) ? 1 : 0;
+      return this.bedCount += OptionType.hasFlag(x.optionType, OptionType.Room) ? 1 : 0;
     });
   }
 }

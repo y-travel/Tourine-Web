@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CellHeaderComponent } from '../../shared/trn-ag-grid/cell-header/cell-header.component';
 import { FormatterService } from '../../@core/utils/formatter.service';
 import { CellDetailComponent } from '../../shared/trn-ag-grid/cell-detail/cell-detail.component';
-import { OptionType, Person, Passenger } from '../../@core/data/models';
+import { OptionType, Passenger } from '../../@core/data/models';
 import { CellToolbarComponent, ToolbarItem } from '../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { AppUtils, UTILS } from '../../@core/utils/app-utils';
 import { PersonService } from '../../@core/data/person.service';
@@ -108,19 +108,19 @@ export class PassengerGridService {
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Room)},
-            cellRenderer: params => `<input type='checkbox' ${params.data.optionType.some(x => x.optionType === OptionType.Room) ? 'checked' : ''} disabled />`
+            cellRenderer: params => `<input type='checkbox' ${OptionType.hasFlag(params.data.optionType, OptionType.Room) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Bus)},
-            cellRenderer: params => `<input type='checkbox' ${params.data.optionType.some(x => x.optionType === OptionType.Bus) ? 'checked' : ''} disabled />`
+            cellRenderer: params => `<input type='checkbox' ${OptionType.hasFlag(params.data.optionType, OptionType.Bus) ? 'checked' : ''} disabled />`
           }, {
             headerName: '',
             minWidth: 30,
             maxWidth: 30,
             headerComponentParams: {matIcon: this.utils.mapOptionTypeToIcon(OptionType.Food)},
-            cellRenderer: params => `<input type='checkbox' ${params.data.optionType.some(x => x.optionType === OptionType.Food) ? 'checked' : ''} disabled />`
+            cellRenderer: params => `<input type='checkbox' ${OptionType.hasFlag(params.data.optionType, OptionType.Food) ? 'checked' : ''} disabled />`
           }
         ]
       },
@@ -143,6 +143,7 @@ export class PassengerGridService {
     };
 
   }
+
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

@@ -80,10 +80,10 @@ export class PassengerRegisterComponent implements ModalInterface {
     }
     this.passengerGridService.initToolbar(this.toolbarItems);
     this.tourService.getTourFreeSpace(this.blockForm.model.id).subscribe(x => this.tourFreeSpace = +x);
-    this.tourService.getTourOptions(this.blockForm.model.id).subscribe(x => {
-      this.blockForm.model.foodPrice = x.find(y => y.optionType === OptionType.Food).price;
-      this.blockForm.model.roomPrice = x.find(y => y.optionType === OptionType.Room).price;
-      this.blockForm.model.busPrice = x.find(y => y.optionType === OptionType.Bus).price;
+    this.tourService.getTourOptions(this.blockForm.model.id).subscribe(tourOptions => {
+      this.blockForm.model.foodPrice = tourOptions.find(y => y.optionType === OptionType.Food).price;
+      this.blockForm.model.roomPrice = tourOptions.find(y => y.optionType === OptionType.Room).price;
+      this.blockForm.model.busPrice = tourOptions.find(y => y.optionType === OptionType.Bus).price;
     });
     if (this.data.buyer) {
       this.buyerForm.updateForm(this.data.buyer);
@@ -242,9 +242,9 @@ export class PassengerRegisterComponent implements ModalInterface {
       }
 
       if (!person.person.isInfant) {
-        noneOptionFoodCount += person.optionType.some(x => x.optionType === OptionType.Food) ? 0 : 1;
-        noneOptionRoomCount += person.optionType.some(x => x.optionType === OptionType.Room) ? 0 : 1;
-        noneOptionBusCount += person.optionType.some(x => x.optionType === OptionType.Bus) ? 0 : 1;
+        noneOptionFoodCount += OptionType.hasFlag(person.optionType, OptionType.Food) ? 0 : 1;
+        noneOptionRoomCount += OptionType.hasFlag(person.optionType, OptionType.Room) ? 0 : 1;
+        noneOptionBusCount += OptionType.hasFlag(person.optionType, OptionType.Bus) ? 0 : 1;
       }
     });
 

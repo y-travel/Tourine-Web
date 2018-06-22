@@ -2,21 +2,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Injectable } from '@angular/core';
 //
 import { FormService, NewFormService } from '../form.service';
-import {
-  Agency,
-  Block,
-  EditPassword,
-  Person,
-  PersonAgency,
-  PersonIncome,
-  Team,
-  Passenger,
-  Tour,
-  TourDetail,
-  TourOption,
-  TourTeamMember,
-  User
-} from './client.model';
+import { Agency, Block, EditPassword, Passenger, Person, PersonAgency, Team, Tour, TourDetail, TourOption, TourTeamMember, User } from './client.model';
 import { CustomValidations, ValidationService } from '../../utils/validation.service';
 
 @Injectable()
@@ -94,8 +80,8 @@ export class FormFactory {
   createPersonForm(model = <Person>{}): NewFormService<Person> {
     const form = new FormBuilder().group({
       id: [model.id],
-      name: [model.name ? model.name : '',  [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      family: [model.family ? model.family : '',  [Validators.required, Validators.minLength(2)]],
+      name: [model.name ? model.name : '', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      family: [model.family ? model.family : '', [Validators.required, Validators.minLength(2)]],
       mobileNumber: [model.mobileNumber, [Validators.required, CustomValidations.lengthEqual(11)]],
       nationalCode: [model.nationalCode, [Validators.required, CustomValidations.lengthEqual(2)]], //@TODO: must be lenght of 10
       englishName: [model.englishName, Validators.required],
@@ -116,7 +102,7 @@ export class FormFactory {
     const form = new FormBuilder().group({
       personId: [model.personId || ''],
       person: this.createPersonForm(model.person || undefined),
-      optionType: new FormBuilder().array(model.optionType.map(this.createPersonIncome)),
+      optionType: [model.optionType],
       hasVisa: [model.hasVisa || ''],
       passportDelivered: [model.passportDelivered || ''],
     });
@@ -153,16 +139,6 @@ export class FormFactory {
       password: [model.password, Validators.required]
     });
     return new FormService(User, form);
-  }
-
-  createPersonIncome(model: PersonIncome = new PersonIncome()): FormGroup {
-    return new FormBuilder().group({
-      reserved: [model.reserved],
-      optionType: [model.optionType, Validators.required],
-      receivedMoney: [model.receivedMoney],
-      incomeStatus: [model.incomeStatus],
-      currencyFactor: model.currencyFactor,
-    });
   }
 
   createTeamListForm(model: Block = new Block()): FormService<Block> {

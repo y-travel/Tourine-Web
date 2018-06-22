@@ -131,13 +131,7 @@ export class PersonIncome {
 export class Passenger {
   personId: string = undefined;
   person: Person = <Person>{};
-  optionType: PersonIncome[] = this.person && this.person.isInfant
-    ? null
-    : [
-      new PersonIncome(OptionType.Room),
-      new PersonIncome(OptionType.Bus),
-      new PersonIncome(OptionType.Food),
-    ]; // @TODO check ugly
+  optionType: OptionType = OptionType.Empty;
   hasVisa = true;
   passportDelivered: boolean = undefined;
   tourId: string = undefined;

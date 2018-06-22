@@ -11,6 +11,16 @@ export enum OptionType {
   Food = 4,
 }
 
+export namespace OptionType {
+  export function getAll() {
+    return OptionType.Room | OptionType.Bus | OptionType.Food;
+  }
+
+  export function hasFlag(source: OptionType, expectedOption: OptionType): boolean {
+    return (source & expectedOption) > 0;
+  }
+}
+
 export enum IncomeStatus {
   Settled = 1,
   Unsettled = 2,
@@ -43,7 +53,7 @@ export enum DialogButtonType {
 }
 
 export enum ReportType {
-  Tour = 1,
+  TourPassenger = 1,
   Ticket = 2
 }
 

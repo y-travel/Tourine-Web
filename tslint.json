@@ -43,7 +43,7 @@
       }
     ],
     "no-arg": true,
-    "no-bitwise": true,
+    "no-bitwise": false, // we intentionally set it false hope in future
     "no-console": [
       true,
       "debug",

@@ -64,7 +64,6 @@ export class TeamListComponent implements OnInit, ModalInterface {
       const ref = this.dialogService.openPopup(PassengerRegisterComponent, {buyer: team.buyer, teamId: team.id, block: block});
       (<any>ref.componentInstance).passengerGridService.setRow(x.passengers);
       (<any>ref.componentInstance).updateCount();
-      ref.afterClosed().subscribe(() => this.dialogInstance.close());
     });
 
   }
