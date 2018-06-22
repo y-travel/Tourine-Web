@@ -98,8 +98,8 @@
   .mat-dialog-title {
     font-size: 1.2rem;
   }
-  .mat-form-field-infix {
-    padding-left: $input-icon-padding !important;//@todo after refactoring css infrastructure '!important' should be remove
+  .mat-form-field-suffix {
+    padding-right: $input-icon-padding !important;//@todo after refactoring css infrastructure '!important' should be remove
   }
 }
 
