@@ -7,7 +7,7 @@ import { FormFactory } from '../../../@core/data/models/form-factory';
 import { TourGridService } from '../tour-grid.service';
 import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
-import { Agency, Block, Tour } from '../../../@core/data/models/client.model';
+import { Block, Tour } from '../../../@core/data/models/client.model';
 import { PassengerRegisterComponent } from '../passenger-register/passenger-register.component';
 import { TeamListComponent } from '../block-list/team-list.component';
 import { TourPassengersComponent } from '../tour-passengers/tour-passengers.component';

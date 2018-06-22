@@ -1,7 +1,7 @@
 /* tslint:disable */
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatCheckboxChange, MatDialogRef } from '@angular/material';
-import { FormFactory, OptionType, Person, PersonIncome, Passenger } from '../../../@core/data/models';
+import { FormFactory, OptionType, Passenger, Person, PersonIncome } from '../../../@core/data/models';
 import { FormService } from '../../../@core/data/form.service';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { AppUtils, UTILS } from '../../../@core/utils';
@@ -12,7 +12,7 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 @Component({
   selector: 'trn-team-member-upsert',
   templateUrl: './team-member-upsert.component.gen.html',
-  styleUrls: ['./team-member-upsert.component.scss']
+  styleUrls: ['./team-member-upsert.component.scss'],
 })
 
 export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalInterface {
@@ -25,7 +25,6 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalI
               public formFactory: FormFactory,
               public service: PersonService,
               @Inject(UTILS) public utils: AppUtils) {
-
   }
 
   initDialog() {
@@ -47,8 +46,8 @@ export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalI
   ngOnInit() {
   }
 
-  findPerson(natCode: any) {
-    this.service.GetPerson(natCode.value).subscribe(
+  findPerson(nationalCode: any) {
+    this.service.GetPerson(nationalCode).subscribe(
       person => {
         const team = new Passenger();
         if (person.isInfant) {

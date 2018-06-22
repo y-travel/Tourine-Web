@@ -7,7 +7,7 @@ include ../../../mixin
         br
         div
           div(fxLayout="row", fxFlex)
-            +matField('nationalCode', 'nationalCode', 'data.form.get("person")')((focusout)="findPerson(nationalCode)",#nationalCode, cdkFocusInitial)
+            +matField('nationalCode', 'nationalCode', 'data.form.get("person")')((focusout)="findPerson(nationalCode.value)",#nationalCode, cdkFocusInitial)
             +matField('mobileNumber', 'person.mobileNumber', 'data.form.get("person")')
           div(fxLayout="row", fxFlex)
             trn-slider(fxFlex, trueText="male", falseText="female", formControlName="gender")

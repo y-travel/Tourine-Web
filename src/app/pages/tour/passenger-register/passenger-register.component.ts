@@ -14,6 +14,7 @@ import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { Block } from '../../../@core/data/models/client.model';
 import { PersonUpsertComponent } from '../../person/person-upsert/person-upsert.component';
+import { Serializable } from '../../../@core/utils/serializable';
 
 declare type iconKind = 'search' | 'edit' | 'person_add';
 
@@ -27,6 +28,7 @@ export class PassengerRegisterComponent implements ModalInterface {
 
   dialogMode: DialogMode;
   icon: iconKind = 'search';
+  isBuyerAsPassenger = true;
 
   @ViewChild('nextButton') nextButton: MatButton;
   @ViewChild('submit') submit: MatButton;
@@ -56,7 +58,6 @@ export class PassengerRegisterComponent implements ModalInterface {
   noneOptionCount = 0;
   rows: any[];
   teamId: string = undefined;
-  isEditable = true;
   buyerForm: NewFormService<Person>;
   blockForm: FormService<Block>;
 
@@ -84,6 +85,10 @@ export class PassengerRegisterComponent implements ModalInterface {
       this.blockForm.model.roomPrice = x.find(y => y.optionType === OptionType.Room).price;
       this.blockForm.model.busPrice = x.find(y => y.optionType === OptionType.Bus).price;
     });
+    if (this.data.buyer) {
+      this.buyerForm.updateForm(this.data.buyer);
+      this.icon = 'edit';
+    }
   }
 
   teamMemberDelete(teamMember: Passenger) {
@@ -99,7 +104,6 @@ export class PassengerRegisterComponent implements ModalInterface {
     }
     const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
     inst.afterClosed().subscribe(x => {
-      console.log(x);
       if (x == null || x === '') {
         return;
       }
@@ -177,6 +181,12 @@ export class PassengerRegisterComponent implements ModalInterface {
           if (this.buyerForm.valid) {
             this.nextButton.disabled = false;
             stepper.next();
+            if (this.isBuyerAsPassenger) {
+              const passenger = new Passenger();
+              passenger.person = Serializable.fromJSON(passenger.person, this.buyerForm.value);
+              passenger.personId = this.buyerForm.value.id;
+              this.teamMemberUpsert(passenger, true);
+            }
           }
         }
       }
@@ -188,6 +198,7 @@ export class PassengerRegisterComponent implements ModalInterface {
 
   previousStep(stepper: MatStepper) {
     stepper.previous();
+    this.isBuyerAsPassenger = false;
     if (stepper.selectedIndex === 0) {
       this.nextButton.disabled = false;
     } else {

@@ -6,14 +6,14 @@ include ../../../mixin
       form([formGroup]="buyerForm", (keydown.enter)="$event.preventDefault()")
         div(fxLayout="column")
           div(fxLayout="row")
-            +matField('nationalCode', 'nationalCode', 'buyerForm','','',{fxFlex: "30"})((keyup.enter)="doAction(nationalCode.value,'search')", #nationalCode, (input)="icon = 'search'",  autocomplete="off")
+            +matField('nationalCode', 'nationalCode', 'buyerForm','','',{fxFlex: "30"})((keyup.enter)="doAction(nationalCode.value,'search')", #nationalCode,
+            (input)="icon = 'search'",  autocomplete="off",cdkFocusInitial)
               mat-icon.pull-left(matSuffix, matTooltip="{{'iconKind.'+icon|translate}}", (click) = "doAction(nationalCode.value, icon)") {{icon}}
             mat-checkbox(#check, [(ngModel)]="isBuyerAsPassenger", [ngModelOptions]="{standalone: true}", id="buyerAsPassenger") {{"buyer.asPassenger"|translate}}
           span(*ngIf="icon === 'person_add'") {{"msg.notFound"|translate}}
           div.margin(fxLayout="column", *ngIf="buyerForm.value.id && icon !== 'search'")
-            mat-form-field(fxLayout="row")
-              mat-label.margin(fxFlex="30") {{"person.name"|translate}} :
-              input.margin(matInput value= "{{buyerForm.value.name}}", [disabled]="true")
+            div(fxLayout="row")
+              mat-label.margin(fxFlex="30") {{"person.name"|translate}} : {{buyerForm.value.name}}
             div(fxLayout="row")
               mat-label.margin(fxFlex="30") {{"person.family"|translate}} : {{buyerForm.value.family}}
             div(fxLayout='row')

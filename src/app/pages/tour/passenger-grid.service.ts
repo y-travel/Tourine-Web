@@ -143,13 +143,6 @@ export class PassengerGridService {
     };
 
   }
-
-  getPerson(model: Person) {
-    this.personService.getPerson(model).subscribe((persons: Person[]) => {
-      console.log(persons);
-    });
-  }
-
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

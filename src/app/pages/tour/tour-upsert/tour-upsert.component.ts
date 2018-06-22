@@ -57,10 +57,7 @@ export class TourUpsertComponent implements ModalInterface {
     }
     this.service.upsertTour(this.vModel.model).subscribe(tour => {
       this.dialogInstance.close(this.vModel.model);
-    }, error => {
-      console.log(error);
-      this.dialogService.openDialog('msg.editError');
-    });
+    }, error => this.dialogService.openDialog('msg.editError'));
   }
 
 }

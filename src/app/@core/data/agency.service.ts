@@ -21,7 +21,6 @@ export class AgencyService {
   addNewAgency(model: PersonAgency): Observable<Agency> {
     const dto = new CreateAgency();
     Serializable.fromJSON(dto, model);
-    console.log(dto);
     return this.apiService.send(dto);
   }
 

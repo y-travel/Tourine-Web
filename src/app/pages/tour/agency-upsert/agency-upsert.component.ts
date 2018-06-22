@@ -28,10 +28,7 @@ export class AgencyUpsertComponent implements OnInit, ModalInterface {
   save() {
     //@TODO check validation
     if (this.data.form.valid) {
-      this.service.addNewAgency(this.data.model).subscribe(agency => {
-        this.dialogRef.close(this.data.model);
-        console.log(agency);
-      });
+      this.service.addNewAgency(this.data.model).subscribe(agency => this.dialogRef.close(this.data.model));
     }
   }
 }
