@@ -11,13 +11,13 @@ import { BlockUpsertComponent } from './block-upsert/block-upsert.component';
 import { PassengerRegisterComponent } from './passenger-register/passenger-register.component';
 import { TeamMemberUpsertComponent } from './team-member-upsert/team-member-upsert.component';
 import { TeamListComponent } from './block-list/team-list.component';
-import { PersonService } from '../../@core/data/person.service';
 import { TourPassengersComponent } from './tour-passengers/tour-passengers.component';
 import { PassengerReplacementComponent } from './passenger-replacement/passenger-replacement.component';
 import { PassengerReplacementTourGridService } from './passenger-replacement/passenger-replacement-tour-grid.service';
 import { TourReportsComponent } from './tour-reports/tour-reports.component';
 import { TourReportGridService } from './tour-reports/tour-reports.service';
 import { PersonModule } from '../person/person.module';
+import { SharedComponentsModule } from '../../shared/shared-components/shared-components.module';
 
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,
@@ -38,6 +38,7 @@ const ENTRY_COMPONENTS = [
     TourRoutingModule,
     TrnAgGridModule.withAgModule(),
     PersonModule,
+    SharedComponentsModule,
   ],
   declarations: [
     ...ENTRY_COMPONENTS,
@@ -51,7 +52,6 @@ const ENTRY_COMPONENTS = [
   ],
   providers: [
     DialogService,
-    PersonService,
     PassengerReplacementTourGridService,
     TourReportGridService,
   ],
