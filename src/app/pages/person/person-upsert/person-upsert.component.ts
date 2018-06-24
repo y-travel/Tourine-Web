@@ -29,11 +29,11 @@ export class PersonUpsertComponent implements ModalInterface {
     this.vModel.init(this.data, this.dialogMode !== DialogMode.Create);
   }
 
-  onNationalCodeChanged(inputBox: any) {
+  onNationalCodeChanged(nationalCode: any) {
     if (this.dialogMode !== DialogMode.Create) {
       return;
     }
-    this.vModel.findPerson(inputBox.value);
+    this.vModel.findPerson(nationalCode);
   }
 
   close() {
@@ -47,5 +47,4 @@ export class PersonUpsertComponent implements ModalInterface {
   onBirthDateChanged(event: Date) {
     this.vModel.updatePersonAge(event);
   }
-
 }

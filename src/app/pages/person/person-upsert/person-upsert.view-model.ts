@@ -10,6 +10,7 @@ import { PersonService } from '../../../@core/data/person.service';
 @Injectable()
 export class PersonUpsertViewModel {
   form: NewFormService<Person>;
+  isEdit: Boolean;
 
   constructor(private validationService: ValidationService,
               public personService: PersonService,
@@ -22,6 +23,7 @@ export class PersonUpsertViewModel {
 
   init(model?: Person, isEdit = false) {
     this.form = this.createAddLeaderForm(model);
+    this.isEdit = isEdit;
   }
 
   isValid() {
@@ -54,7 +56,7 @@ export class PersonUpsertViewModel {
       englishName: [model.englishName, [Validators.required, Validators.minLength(2)]],
       englishFamily: [model.englishFamily, [Validators.required, Validators.minLength(2)]],
       nationalCode: [model.nationalCode, [Validators.required, Validators.minLength(this.config.isDev() ? 1 : 10)]],
-      gender: [model.gender || true],
+      gender: [this.isEdit ? model.gender : true],
       mobileNumber: [model.mobileNumber, [Validators.required, Validators.minLength(11)]],
       birthDate: [model.birthDate, Validators.required],
       passportExpireDate: [model.passportExpireDate],

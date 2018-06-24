@@ -27,7 +27,7 @@ export class TourReportGridService {
               public tourservice: TourService,
               private translate: TranslateService,
               private formatter: FormatterService,
-              @Inject(UTILS) private utils: AppUtils,) {
+              @Inject(UTILS) private utils: AppUtils) {
     this.init();
   }
 
