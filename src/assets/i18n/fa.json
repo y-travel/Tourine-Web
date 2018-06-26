@@ -93,7 +93,6 @@
     "editError": "ظرفیت کل نمی تواند از ظرفیت رزرو شده کمتر باشد"
   },
   "name": "نام",
-  "nationalCode": "کد ملی",
   "nextStep": "مرحله بعد",
   "nightFormat": "(شب)",
   "nonOptionCountLbl": "تعداد بدون خدمات",

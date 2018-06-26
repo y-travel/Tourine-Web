@@ -6,18 +6,8 @@ include ../../../mixin
       form([formGroup]="buyerForm", (keydown.enter)="$event.preventDefault()")
         div(fxLayout="column")
           div(fxLayout="row")
-            +matField('nationalCode', 'nationalCode', 'buyerForm','','',{fxFlex: "30"})((keyup.enter)="doAction(nationalCode.value,'search')", #nationalCode,
-            (input)="icon = 'search'",  autocomplete="off",cdkFocusInitial)
-              mat-icon.pull-left(matSuffix, matTooltip="{{'iconKind.'+icon|translate}}", (click) = "doAction(nationalCode.value, icon)") {{icon}}
+            trn-find-person([personForm]="buyerForm")
             mat-checkbox(#check, [(ngModel)]="isBuyerAsPassenger", [ngModelOptions]="{standalone: true}", id="buyerAsPassenger") {{"buyer.asPassenger"|translate}}
-          span(*ngIf="icon === 'person_add'") {{"msg.notFound"|translate}}
-          div.margin(fxLayout="column", *ngIf="buyerForm.value.id && icon !== 'search'")
-            div(fxLayout="row")
-              mat-label.margin(fxFlex="30") {{"person.name"|translate}} : {{buyerForm.value.name}}
-            div(fxLayout="row")
-              mat-label.margin(fxFlex="30") {{"person.family"|translate}} : {{buyerForm.value.family}}
-            div(fxLayout='row')
-              mat-label.margin(fxFlex="30") {{"person.mobileNumber"|translate}} : {{buyerForm.value.mobileNumber}}
           mat-card.card-stretch.margin(fxLayout="row", fxFlex)
             mat-form-field(fxFlex)
               input(matInput, mask="number", placeholder="tour.price", [formControl]="blockForm.form.get('basePrice')", (input)="onPriceChange()")
@@ -42,7 +32,7 @@ include ../../../mixin
             label(fxFlex)
               | {{ 'total'|translate }} : {{ blockForm.form.value.totalPrice }} {{ 'price.irFormated'|translate }}
 div(fxLayout="row", align="end")
-  button.pull-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="stepper.selectedIndex==1 || icon !== 'edit'")
+  button.pull-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="stepper.selectedIndex==1 || !buyerForm.value.id")
     mat-icon navigate_before
   button.pull-right(mat-mini-fab, color="primary", (click)="previousStep(stepper)", [disabled]="stepper.selectedIndex==0")
     mat-icon navigate_next

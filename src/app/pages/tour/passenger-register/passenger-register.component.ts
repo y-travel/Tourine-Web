@@ -6,17 +6,15 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { PassengerGridService } from '../passenger-grid.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { OptionType, Passenger, Person } from '../../../@core/data/models';
-import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { TourService } from '../../../@core/data/tour.service';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { Block } from '../../../@core/data/models/client.model';
-import { PersonUpsertComponent } from '../../person/person-upsert/person-upsert.component';
 import { Serializable } from '../../../@core/utils/serializable';
+import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
 
-declare type iconKind = 'search' | 'edit' | 'person_add';
 
 @Component({
   selector: 'trn-passenger-register',
@@ -27,7 +25,6 @@ declare type iconKind = 'search' | 'edit' | 'person_add';
 export class PassengerRegisterComponent implements ModalInterface {
 
   dialogMode: DialogMode;
-  icon: iconKind = 'search';
   isBuyerAsPassenger = true;
 
   @ViewChild('nextButton') nextButton: MatButton;
@@ -87,7 +84,6 @@ export class PassengerRegisterComponent implements ModalInterface {
     });
     if (this.data.buyer) {
       this.buyerForm.updateForm(this.data.buyer);
-      this.icon = 'edit';
     }
   }
 
@@ -114,42 +110,6 @@ export class PassengerRegisterComponent implements ModalInterface {
       //@TODO: update to a new person
       this.updateTotalPrice();
     });
-  }
-
-  buyerUpsert(isEdit) {
-    const ref = this.dialogService.openPopup(PersonUpsertComponent, this.buyerForm.value, isEdit === 'edit' ? DialogMode.Edit : DialogMode.Create);
-    ref.afterClosed().subscribe(newPerson => {
-      // @todo check
-      if (newPerson == null) {
-        return;
-      }
-      this.buyerForm.updateForm(newPerson);
-      this.icon = 'edit';
-    });
-  }
-
-  doAction(nationalCode: any, action: iconKind) {
-    if (action === 'search') {
-      this.findPerson(nationalCode);
-    } else {
-      this.buyerUpsert(action);
-    }
-  }
-
-  findPerson(nationalCode: any) {
-    this.buyerForm.markAllFieldAsTouch();
-    if (!this.buyerForm.get('nationalCode').valid) {
-      return;
-    }
-    this.personService.GetPerson(nationalCode).subscribe(
-      person => {
-        this.icon = nationalCode !== '' ? 'edit' : 'search';
-        this.buyerForm.updateForm(person);
-      },
-      () => {
-        this.icon = 'person_add';
-        this.buyerForm.reset({nationalCode: nationalCode});
-      });
   }
 
   nextStep(stepper: MatStepper) {
