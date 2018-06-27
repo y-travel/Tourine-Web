@@ -11,6 +11,7 @@ import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
 import { AgencyService } from './agency.service';
 import { FileService } from './file.service';
+import { PersonService } from './person.service';
 
 const SERVICES = [
   UserService,
@@ -22,6 +23,7 @@ const SERVICES = [
   DataService,
   FormFactory,
   PlayerService,
+  PersonService,
 ];
 
 @NgModule({

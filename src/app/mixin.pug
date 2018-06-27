@@ -20,4 +20,5 @@ mixin matTitle(title, icon)
 
 mixin matSlideToggle(trueText, falseText)
   span(translate)= trueText
-  mat-slide-toggle(fxFlex, translate)&attributes(attributes)= falseText
+  mat-slide-toggle(fxFlex)&attributes(attributes)
+    span(translate)= falseText

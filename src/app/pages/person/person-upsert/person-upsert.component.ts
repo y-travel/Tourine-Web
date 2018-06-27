@@ -36,10 +36,10 @@ export class PersonUpsertComponent implements ModalInterface {
     this.vModel.findPerson(nationalCode);
   }
 
-  close() {
+  save() {
     if (this.vModel.isValid()) {
       this.personService.upsertLeader(this.vModel.model).subscribe(x => {
-        this.dialogInstance.close(this.vModel.model);
+        this.dialogInstance.close(x);
       });
     }
   }

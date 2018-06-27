@@ -6,6 +6,7 @@ import { TrnAgGridModule } from '../../shared/trn-ag-grid/trn-ag-grid.module';
 import { PersonService } from '../../@core/data/person.service';
 import { DialogService } from '../../@core/utils/dialog.service';
 import { PersonUpsertComponent } from './person-upsert/person-upsert.component';
+import {SharedComponentsModule} from '../../shared/shared-components/shared-components.module';
 
 const COMPONENTS = [
   PersonComponent,
@@ -17,6 +18,7 @@ const COMPONENTS = [
     ...COMMON_MODULES,
     TrnAgGridModule.withAgModule(),
     PersonRoutingModule,
+    SharedComponentsModule
   ],
   declarations: [...routedComponents, ...COMPONENTS],
   providers: [DialogService, PersonService],
