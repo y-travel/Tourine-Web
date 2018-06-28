@@ -30,17 +30,7 @@ export class TrnHeaderComponent implements OnInit {
     this.sidebarService.toggle(true);
     return false;
   }
-
-  toggleSettings(): boolean {
-    this.sidebarService.toggle(false);
-    return false;
-  }
-
   goToHome() {
     this.menuService.navigateHome();
-  }
-
-  startSearch() {
-    this.analyticsService.trackEvent('startSearch');
   }
 }

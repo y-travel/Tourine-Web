@@ -78,7 +78,7 @@
     visibility: collapse;
   }
 
-  .ag-row-hover .mat-toolbar[data-visibility='autoHide'] {
+  .ag-row-hover.ag-row-level-0 .mat-toolbar[data-visibility='autoHide'] {
     visibility: visible !important;
   }
 
@@ -100,7 +100,7 @@
     font-size: 1.2rem;
   }
   .mat-form-field-suffix {
-    padding-right: $input-icon-padding !important;//@todo after refactoring css infrastructure '!important' should be remove
+    padding-right: $input-icon-padding !important; //@todo after refactoring css infrastructure '!important' should be remove
   }
 }
 
