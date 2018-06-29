@@ -8,6 +8,7 @@
     "copy.to.sync.folder": "gulp copy.to.sync --client ..",
     "build:sync": "gulp build.sync --color --env-config prod --build-type prod",
     "build:prod": "gulp build.prod --color --env-config prod --build-type prod",
+    "build:prod:deploy": "gulp build.prod.deploy --color --env-config prod --build-type prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

@@ -63,5 +63,10 @@ tools/env/env-config.interface.ngsummary.json
 tools/manual_typings/project/sample.package.ngsummary.json
 #ignore workspace folders
 .*
+#Add webstorm workspace
 !.idea
+#Add yaml ci config
+!.vsts-ci.yml
 *.gen.html
+
+
