@@ -18,7 +18,7 @@ declare type iconKind = 'search' | 'edit' | 'person_add';
 export class FindPersonComponent implements OnInit {
 
   dialogMode: DialogMode;
-  icon: String = 'search';
+  icon: iconKind = 'search';
   model: any;
   readOnly: Boolean = false;
 
