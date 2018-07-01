@@ -8,7 +8,7 @@ queue:
   - node.js
 
 variables:
-  VersionSharePath: '\\WIN-NLK2NU95VLS\Version'
+  VersionSharePath: '%HomePath%\Version'
 steps:
 - task: gittools.gitversion.gitversion-task.GitVersion@3
   displayName: GitVersion
