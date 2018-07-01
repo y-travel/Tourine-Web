@@ -26,12 +26,12 @@ steps:
   inputs:
     command: custom
     verbose: false
-    customCommand: 'run build:prod:deploy'
+    customCommand: 'run build:prod'
 
 - task: ArchiveFiles@2
   displayName: Create Archive
   inputs:
-    rootFolderOrFile: 'Tourine/app'
+    rootFolderOrFile: 'dist/adminPanel'
     archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
 
 - task: PublishBuildArtifacts@1
