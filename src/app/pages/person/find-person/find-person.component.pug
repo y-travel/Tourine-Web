@@ -4,10 +4,14 @@ div(fxLayout="row", [formGroup]="personForm", fxFlex="30")
   (input)="inputChanage(nationalCode.value)", [readonly]="readOnly", autocomplete="off",cdkFocusInitial)
     mat-icon.pull-left(matSuffix, id='search-icon', matTooltip="{{'iconKind.'+ icon|translate}}", , (click) = "doAction(nationalCode.value, icon)") {{icon}}
 span(*ngIf="icon === 'person_add'") {{"msg.notFound"|translate}}
-div.margin(fxLayout="column", *ngIf="personForm.value.id && icon !== 'search'")
-  div(fxLayout="row")
-    mat-label.margin {{'person.name'|translate}} : {{ personForm.value.name}}
-  div(fxLayout="row")
-    mat-label.margin {{'person.family'|translate}} : {{personForm.value.family}}
-  div(fxLayout='row')
-    mat-label.margin {{'person.mobileNumber'|translate}} : {{personForm.value.mobileNumber}}
+div#person-details(fxLayout="column", *ngIf="personForm.value.id && icon !== 'search'")
+  div(fxLayout="column")
+    mat-hint(size="small") {{'person.name'|translate}} :
+    mat-label  {{ personForm.value.name}}
+  div(fxLayout="column")
+    mat-hint(size="small") {{'person.family'|translate}} :
+    mat-label  {{personForm.value.family}}
+  div(fxLayout='column')
+    mat-hint(size="small") {{'person.mobileNumber'|translate}} :
+    mat-label  {{personForm.value.mobileNumber}}
+

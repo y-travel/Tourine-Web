@@ -1,7 +1,11 @@
-#search-icon:hover {
+#search-icon:hover{
   cursor: pointer;
 }
 
-.margin-top {
+#person-details {
   margin-top: 20px;
+  mat-label{
+    margin-right: 10px;
+  }
 }
+

@@ -1,3 +1,5 @@
+@import "../../../@theme/styles/core/variables";
+
 @mixin trn-definition() {
   .card-stretch {
     margin: 20px;
@@ -19,6 +21,11 @@
 
   ::-webkit-scrollbar {
     width: 5px;
+  }
+
+  mat-hint[size="small"] {
+    font-size: 0.7rem;
+    color: map_get($mat-blue, 500);
   }
 
   ::-webkit-scrollbar-button {
