@@ -25,8 +25,3 @@ const routes: Routes = [{
 })
 export class TourRoutingModule {
 }
-
-export const ROUTED_COMPONENTS = [
-  TourComponent,
-  TourListComponent,
-];

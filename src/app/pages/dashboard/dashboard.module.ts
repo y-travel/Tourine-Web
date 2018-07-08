@@ -13,9 +13,10 @@ import { COMMON_MODULES } from '../default';
 import { TourModule } from '../tour/tour.module';
 import { UserModule } from '../user/user.module';
 import { PersonModule } from '../person/person.module';
-import { SharedComponentsModule } from '../../shared/shared-components/shared-components.module';
+import { PassengerModule } from '../passenger/passenger.module';
+import { AgencyModule } from '../agency/agency.module';
 
-const DASHBOARD_COMPONENTS = [
+const COMPONENTS = [
   DashboardComponent,
 ];
 // we use these modules to prevent cross module definition
@@ -24,6 +25,8 @@ const TEMP_MODULES = [
   PersonModule,
   UserModule,
   TourModule,
+  PassengerModule,
+  AgencyModule,
 ];
 
 @NgModule({
@@ -31,9 +34,7 @@ const TEMP_MODULES = [
     ...COMMON_MODULES,
     ...TEMP_MODULES,
   ],
-  declarations: [
-    ...DASHBOARD_COMPONENTS
-  ],
+  declarations: COMPONENTS,
 })
 export class DashboardModule {
 }

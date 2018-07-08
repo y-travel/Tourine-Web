@@ -7,7 +7,7 @@ import { FormFactory } from '../../../@core/data/models/form-factory';
 import { AgencyService } from '../../../@core/data/agency.service';
 import { Observable } from 'rxjs';
 import { AgencyUpsertComponent } from '../agency-upsert/agency-upsert.component';
-import { PassengerRegisterComponent } from '../passenger-register/passenger-register.component';
+import { PassengerRegisterComponent } from '../../passenger/passenger-register/passenger-register.component';
 import { BlockUpsertViewModel } from './block-upsert.view-model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';

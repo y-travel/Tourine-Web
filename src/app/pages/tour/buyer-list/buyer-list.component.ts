@@ -5,7 +5,7 @@ import { Block, FormFactory } from '../../../@core/data/models';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { TeamGridService } from '../team-grid.service';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
-import { PassengerRegisterComponent } from '../passenger-register/passenger-register.component';
+import { PassengerRegisterComponent } from '../../passenger/passenger-register/passenger-register.component';
 import { PersonService } from '../../../@core/data/person.service';
 import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';

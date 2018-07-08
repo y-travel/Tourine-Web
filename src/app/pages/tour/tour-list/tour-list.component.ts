@@ -8,7 +8,7 @@ import { TourGridService } from '../tour-grid.service';
 import { BlockUpsertComponent } from '../block-upsert/block-upsert.component';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { Block, Tour } from '../../../@core/data/models/client.model';
-import { PassengerRegisterComponent } from '../passenger-register/passenger-register.component';
+import { PassengerRegisterComponent } from '../../passenger/passenger-register/passenger-register.component';
 import { BuyerListComponent } from '../buyer-list/buyer-list.component';
 import { TourPassengersComponent } from '../tour-passengers/tour-passengers.component';
 import { PersonService } from '../../../@core/data/person.service';

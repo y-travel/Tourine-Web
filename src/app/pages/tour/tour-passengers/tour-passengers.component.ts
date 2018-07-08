@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatButton, MatDialogRef } from '@angular/material';
 import { FormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { TourPassengersGridService } from './tour-passengers-grid.service';
-import { PassengerReplacementComponent } from '../passenger-replacement/passenger-replacement.component';
+import { PassengerReplacementComponent } from '../../passenger/passenger-replacement/passenger-replacement.component';
 import { DialogMode } from '../../../@core/data/models/enums';
 
 @Component({

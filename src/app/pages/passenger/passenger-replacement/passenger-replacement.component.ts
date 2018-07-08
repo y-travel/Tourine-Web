@@ -8,7 +8,7 @@ import { AppUtils, UTILS } from '../../../@core/utils';
 import { PassengerReplacementTourGridService } from './passenger-replacement-tour-grid.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
-import { TourUpsertComponent } from '../tour-upsert/tour-upsert.component';
+import { TourUpsertComponent } from '../../tour/tour-upsert/tour-upsert.component';
 
 @Component({
   selector: 'trn-passenger-replacement',

@@ -23,8 +23,3 @@ const routes: Routes = [
 })
 export class PersonRoutingModule {
 }
-
-export const routedComponents = [
-
-  LeaderListComponent,
-];

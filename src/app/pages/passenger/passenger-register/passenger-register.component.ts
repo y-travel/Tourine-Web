@@ -3,7 +3,7 @@ import { DialogService } from '../../../@core/utils/dialog.service';
 import { MAT_DIALOG_DATA, MatButton, MatDialogRef, MatStepper } from '@angular/material';
 import { FormService, NewFormService } from '../../../@core/data/form.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
-import { PassengerGridService } from '../passenger-grid.service';
+import { PassengerGridService } from '../../tour/passenger-grid.service';
 import { FormFactory } from '../../../@core/data/models/form-factory';
 import { OptionType, Passenger, Person } from '../../../@core/data/models';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
