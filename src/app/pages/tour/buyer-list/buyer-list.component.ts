@@ -13,12 +13,12 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 
 @Component({
   selector: 'trn-block-list',
-  templateUrl: './team-list.component.gen.html',
-  styleUrls: ['./team-list.component.scss'],
+  templateUrl: './buyer-list.component.gen.html',
+  styleUrls: ['./buyer-list.component.scss'],
   providers: [TeamGridService],
 })
 
-export class TeamListComponent implements OnInit, ModalInterface {
+export class BuyerListComponent implements OnInit, ModalInterface {
   dialogMode: DialogMode;
   teamsItem: ToolbarItem[] = [
     <ToolbarItem>{

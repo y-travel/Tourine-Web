@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { FindPersonComponent } from '../../pages/person/find-person/find-person.component';
+import { FindPersonComponent } from './find-person/find-person.component';
 import { COMMON_MODULES } from '../../pages/default';
 
 const COMPONENTS = [

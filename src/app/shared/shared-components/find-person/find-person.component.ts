@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NewFormService } from '../../../@core/data/form.service';
 import { Person } from '../../../@core/data/models';
 import { DialogMode } from '../../../@core/data/models/enums';
-import { PersonUpsertComponent } from '../person-upsert/person-upsert.component';
+import { PersonUpsertComponent } from '../../../pages/person/person-upsert/person-upsert.component';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { PersonService } from '../../../@core/data/person.service';
 

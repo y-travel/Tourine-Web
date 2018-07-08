@@ -11,12 +11,12 @@ import { FormGroup } from '@angular/forms';
 
 
 @Component({
-  selector: 'trn-team-member-upsert',
-  templateUrl: './team-member-upsert.component.gen.html',
-  styleUrls: ['./team-member-upsert.component.scss'],
+  selector: 'trn-passenger-upsert',
+  templateUrl: './passenger-upsert.component.gen.html',
+  styleUrls: ['./passenger-upsert.component.scss'],
 })
 
-export class TeamMemberUpsertComponent implements OnInit, ModalInterface, ModalInterface {
+export class PassengerUpsertComponent implements OnInit, ModalInterface, ModalInterface {
   dialogMode: DialogMode;
   optionType = OptionType;
   model: any;

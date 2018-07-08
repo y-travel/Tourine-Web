@@ -83,7 +83,7 @@ export class FormFactory {
       name: [model.name ? model.name : '', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       family: [model.family ? model.family : '', [Validators.required, Validators.minLength(2)]],
       mobileNumber: [model.mobileNumber, [Validators.required, CustomValidations.lengthEqual(11)]],
-      nationalCode: [model.nationalCode, [Validators.required, CustomValidations.lengthEqual(2)]], //@TODO: must be lenght of 10
+      nationalCode: [model.nationalCode, [Validators.required, CustomValidations.lengthEqual(10)]], //@TODO: must be lenght of 10
       englishName: [model.englishName, Validators.required],
       englishFamily: [model.englishFamily, Validators.required],
       birthDate: [model.birthDate, Validators.required],

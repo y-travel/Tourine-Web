@@ -6,6 +6,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { ThemeModule } from '../../@theme/theme.module';
 import { AppTranslationModule } from '../../app-translation.module';
+import { EditPasswordComponent } from './edit-password/edit-password.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { AppTranslationModule } from '../../app-translation.module';
     UserRoutingModule,
     ThemeModule,
   ],
-  declarations: [LoginComponent, UserComponent]
+  declarations: [LoginComponent, UserComponent, EditPasswordComponent],
+  entryComponents: [EditPasswordComponent]
 })
 export class UserModule {
 }

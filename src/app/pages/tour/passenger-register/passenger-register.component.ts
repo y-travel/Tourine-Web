@@ -13,7 +13,7 @@ import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
 import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 import { Block } from '../../../@core/data/models/client.model';
 import { Serializable } from '../../../@core/utils/serializable';
-import { TeamMemberUpsertComponent } from '../team-member-upsert/team-member-upsert.component';
+import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.component';
 
 
 @Component({
@@ -29,7 +29,6 @@ export class PassengerRegisterComponent implements ModalInterface {
 
   @ViewChild('nextButton') nextButton: MatButton;
   @ViewChild('submit') submit: MatButton;
-  disablingItems = ['name', 'family', 'mobileNumber', 'gender', 'englishName', 'englishFamily', 'birthDate'];
 
   toolbarItems: ToolbarItem[] = [
     <ToolbarItem>{
@@ -38,13 +37,12 @@ export class PassengerRegisterComponent implements ModalInterface {
       color: '#f44336',
       alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
       command: (teamMember) => this.teamMemberDelete(teamMember),
-    }, <ToolbarItem>{
+    },
+    <ToolbarItem>{
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (teamMember) => {
-        this.teamMemberUpsert(teamMember, false);
-      },
+      command: (teamMember) => this.teamMemberUpsert(teamMember, false),
     },
   ];
 
@@ -98,7 +96,7 @@ export class PassengerRegisterComponent implements ModalInterface {
       this.dialogService.openDialog('msg.thereIsNoFreeSpace');
       return;
     }
-    const inst = this.dialogService.openPopup(TeamMemberUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
+    const inst = this.dialogService.openPopup(PassengerUpsertComponent, this.formFactory.createTeamMemberForm(teamMember));
     inst.afterClosed().subscribe(x => {
       if (x == null || x === '') {
         return;

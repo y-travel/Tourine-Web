@@ -10,14 +10,26 @@ thanks for your attention!
 import { NgModule } from '@angular/core';
 import { DashboardComponent } from './dashboard.component';
 import { COMMON_MODULES } from '../default';
+import { TourModule } from '../tour/tour.module';
+import { UserModule } from '../user/user.module';
+import { PersonModule } from '../person/person.module';
+import { SharedComponentsModule } from '../../shared/shared-components/shared-components.module';
 
 const DASHBOARD_COMPONENTS = [
   DashboardComponent,
+];
+// we use these modules to prevent cross module definition
+// cos we hope in future angular support lazy component
+const TEMP_MODULES = [
+  PersonModule,
+  UserModule,
+  TourModule,
 ];
 
 @NgModule({
   imports: [
     ...COMMON_MODULES,
+    ...TEMP_MODULES,
   ],
   declarations: [
     ...DASHBOARD_COMPONENTS
