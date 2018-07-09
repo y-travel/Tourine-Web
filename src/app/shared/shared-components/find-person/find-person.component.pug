@@ -1,7 +1,17 @@
 include ../../../mixin
 div(fxLayout="row", [formGroup]="personForm", fxFlex="30")
-  +matField("nationalCode", "{{'nationalCode'|translate}}", "personForm","","")((keyup.enter)="doAction(nationalCode.value,'search')", #nationalCode,
-  (input)="inputChanage(nationalCode.value)", [readonly]="readOnly", autocomplete="off",cdkFocusInitial)
+  +matField(
+  "nationalCode",
+  "nationalCode",
+  "personForm",
+  "",
+  "")((keyup.enter)="doAction(nationalCode.value,'search')",
+  #nationalCode,
+  (input)="inputChanage(nationalCode.value)",
+  [readonly]="readOnly",
+  autocomplete="off",
+  placeholder="{{'buyer.enterNationalCode'|translate}}"
+  cdkFocusInitial)
     mat-icon.pull-left(matSuffix, id='search-icon', matTooltip="{{'iconKind.'+ icon|translate}}", , (click) = "doAction(nationalCode.value, icon)") {{icon}}
 span(*ngIf="icon === 'person_add'") {{"msg.notFound"|translate}}
 div#person-details(fxLayout="column", *ngIf="personForm.value.id && icon !== 'search'")

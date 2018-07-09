@@ -33,7 +33,7 @@ include ../../../mixin
           div(fxLayout="column", fxFlex, formArrayName="options")
             +matField(
             'price',
-            "{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}",
+            "'+optionType[formGroup.value.optionType].toLowerCase()+'Price'+'",
             'vModel.form.get(\'options\').get(i.toString())',
             'price.irFormated',
             '{{ utils.mapOptionTypeToIcon(formGroup.value.optionType) }}',

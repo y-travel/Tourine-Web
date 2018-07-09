@@ -11,7 +11,6 @@ import { TourPassengersComponent } from './tour-passengers/tour-passengers.compo
 import { PassengerReplacementTourGridService } from '../passenger/passenger-replacement/passenger-replacement-tour-grid.service';
 import { TourReportsComponent } from './tour-reports/tour-reports.component';
 import { TourReportGridService } from './tour-reports/tour-reports.service';
-import { SharedComponentsModule } from '../../shared/shared-components/shared-components.module';
 import { TourComponent } from './tour.component';
 import { TourListComponent } from './tour-list/tour-list.component';
 

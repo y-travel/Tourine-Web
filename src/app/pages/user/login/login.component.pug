@@ -3,8 +3,8 @@ div
   form([formGroup]="formService.form")
     mat-card
       div(fxLayout="column")
-        +matField("username","{{'mobileNumber'|translate}}","formService.form")(autofocus)
-        +matField("password","{{'password'|translate}}","formService.form")(type="password")
+        +matField("username","mobileNumber","formService.form")(autofocus)
+        +matField("password","password","formService.form")(type="password")
         mat-error {{errorMessage|translate}}
       mat-card-actions(fxLayout="column")
         button.card-footer(mat-raised-button="", color="primary", fxFlex, (click)="login()") {{"save"|translate}}

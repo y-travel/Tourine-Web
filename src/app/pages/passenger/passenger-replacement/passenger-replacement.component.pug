@@ -32,21 +32,21 @@ include ../../../mixin
             div(fxLayout="row")
               +matField(
               'agency',
-              "{{'agency.name'|translate}}",
+              "agency.name",
               'replacementTourResultForm.form',
               '',
               '',
               {fxFlex: "30"})
               +matField(
               'basePrice',
-              "{{'tour.price'|translate}}",
+              "tour.price",
               'replacementTourResultForm.form',
               'price.irFormated',
               'landscape',
               {fxFlex: "30"})
               +matField(
               'infantPrice',
-              "{{'infantPrice'|translate}}",
+              "infantPrice",
               'replacementTourResultForm.form',
               'price.irFormated',
               'child_for',
@@ -55,20 +55,21 @@ include ../../../mixin
             div(fxLayout="row")
               +matField(
               'foodPrice',
-              "{{'foodPrice'|translate}}",
-              'replacementTourResultForm.form', 'price.irFormated',
+              "foodPrice",
+              'replacementTourResultForm.form',
+              'price.irFormated',
               '{{ utils.mapOptionTypeToIcon(optionType.Food) }}',
               {fxFlex: "30"})
               +matField(
               'busPrice',
-              "{{'busPrice'|translate}}",
+              "busPrice",
               'replacementTourResultForm.form',
               'price.irFormated',
               '{{ utils.mapOptionTypeToIcon(optionType.Bus) }}',
               {fxFlex: "30"})
               +matField(
               'roomPrice',
-              "{{'roomPrice'|translate}}",
+              "roomPrice",
               'replacementTourResultForm.form',
               'price.irFormated',
               "{{ utils.mapOptionTypeToIcon(optionType.Room) }}",
@@ -77,17 +78,17 @@ include ../../../mixin
           .teamCard(formArrayName="teams")
             mat-card(*ngFor="let team of replacementTeamResultForm.form.get('teams')['controls'];let i=index")
               div(fxLayout="row", [formGroupName]="i")
-                +matField('buyer', "{{'buyer.name'|translate}}", 'team','','',{fxFlex: "30"} )
+                +matField('buyer', "buyer.name", 'team','','',{fxFlex: "30"} )
                 +matField(
                 'basePrice',
-                "{{'tour.price'|translate}}",
+                "tour.price",
                 'replacementTourResultForm.form',
                 'price.irFormated',
                 'landscape',
                 {fxFlex: "30"} )
                 +matField(
                 'infantPrice',
-                "{{'infantPrice'|translate}}",
+                "infantPrice",
                 'replacementTourResultForm.form',
                 'price.irFormated',
                 'child_care',

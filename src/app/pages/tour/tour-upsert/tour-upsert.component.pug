@@ -42,13 +42,14 @@ include ../../../mixin
               mat-option(*ngFor='let item of places|async', [value]='item.id') {{ item.name }}
             mat-error(translate) {{vModel.form.get('tourDetail').get('placeId')['errorMessage']}}
       mat-card(fxLayout='column', fxFlex='40', formArrayName='options')
+        //- @todo make placeholder it clean
         +matField(
         'price',
-        "{{optionType[formGroup.value.optionType].toLowerCase()+'Price'|translate}}",
+        "'+optionType[formGroup.value.optionType].toLowerCase()+'Price'+'",
         'vModel.form.get(\'options\').get(i.toString())',
         'price.irFormated',
         '{{ utils.mapOptionTypeToIcon(formGroup.value.optionType) }}',
-        {'*ngFor':"let formGroup of vModel.form.get('options')['controls'];let i=index", '[formGroupName]':'i'}
+        {'*ngFor': "let formGroup of vModel.form.get('options')['controls'];let i=index", '[formGroupName]': 'i'}
         )(mask='number')
 mat-dialog-actions
   button(mat-raised-button, color='primary', fxFlex, (click)='save()') {{ "save"|translate }}
