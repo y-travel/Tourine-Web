@@ -11,7 +11,7 @@ import { DialogMode } from '../../../@core/data/models/enums';
 
 @Component({
   selector: 'trn-tour-passengers',
-  templateUrl: './tour-passengers.component.gen.html',
+  templateUrl: './tour-passengers.component.pug',
   styleUrls: ['./tour-passengers.component.scss'],
   providers: [TourPassengersGridService],
 })

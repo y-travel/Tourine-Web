@@ -13,7 +13,7 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 
 @Component({
   selector: 'trn-block-list',
-  templateUrl: './buyer-list.component.gen.html',
+  templateUrl: './buyer-list.component.pug',
   styleUrls: ['./buyer-list.component.scss'],
   providers: [TeamGridService],
 })

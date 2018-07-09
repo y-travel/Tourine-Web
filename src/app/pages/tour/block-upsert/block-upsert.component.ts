@@ -17,7 +17,7 @@ import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'trn-block-upsert',
-  templateUrl: './block-upsert.component.gen.html',
+  templateUrl: './block-upsert.component.pug',
   styleUrls: ['./block-upsert.component.scss'],
   providers: [BlockUpsertViewModel],
 })

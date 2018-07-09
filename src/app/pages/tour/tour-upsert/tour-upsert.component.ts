@@ -12,7 +12,7 @@ import { DialogService } from '../../../@core/utils/dialog.service';
 
 @Component({
   selector: 'trn-tour-upsert',
-  templateUrl: './tour-upsert.component.gen.html',
+  templateUrl: './tour-upsert.component.pug',
   styleUrls: ['./tour-upsert.component.scss'],
   providers: [TourUpsertViewModel],
 })

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectTasksOptions">
     <TaskOptions isEnabled="true">
-      <option name="arguments" value="-P -E gen.html --doctype html $FileName$ " />
+      <option name="arguments" value="-P -E gen.html --doctype html -o $ProjectFileDir$\dist\pugFiles $FileName$ " />
       <option name="checkSyntaxErrors" value="false" />
       <option name="description" />
       <option name="exitCodeBehavior" value="ERROR" />
@@ -15,7 +15,6 @@
       </option>
       <option name="outputFromStdout" value="false" />
       <option name="program" value="$PROJECT_DIR$/node_modules/.bin/pug.cmd" />
-      <option name="runOnExternalChanges" value="true" />
       <option name="scopeName" value="Project Files" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="$FileDir$" />

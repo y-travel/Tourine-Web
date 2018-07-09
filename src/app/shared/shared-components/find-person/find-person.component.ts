@@ -12,7 +12,7 @@ declare type iconKind = 'search' | 'edit' | 'person_add';
 
 @Component({
   selector: 'trn-find-person',
-  templateUrl: './find-person.component.gen.html',
+  templateUrl: './find-person.component.pug',
   styleUrls: ['./find-person.component.scss']
 })
 export class FindPersonComponent implements OnInit {

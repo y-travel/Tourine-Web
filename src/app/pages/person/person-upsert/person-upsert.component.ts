@@ -10,7 +10,7 @@ import { PersonService } from '../../../@core/data/person.service';
 
 @Component({
   selector: 'trn-person-upsert',
-  templateUrl: './person-upsert.component.gen.html',
+  templateUrl: './person-upsert.component.pug',
   styleUrls: ['./person-upsert.component.scss'],
   providers: [PersonUpsertViewModel],
 })

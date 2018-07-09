@@ -18,7 +18,7 @@ import { PassengerUpsertComponent } from '../passenger-upsert/passenger-upsert.c
 
 @Component({
   selector: 'trn-passenger-register',
-  templateUrl: './passenger-register.component.gen.html',
+  templateUrl: './passenger-register.component.pug',
   styleUrls: ['./passenger-register.component.scss'],
   providers: [PassengerGridService]
 })

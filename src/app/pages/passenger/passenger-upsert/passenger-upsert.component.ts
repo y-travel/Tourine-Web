@@ -12,7 +12,7 @@ import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'trn-passenger-upsert',
-  templateUrl: './passenger-upsert.component.gen.html',
+  templateUrl: './passenger-upsert.component.pug',
   styleUrls: ['./passenger-upsert.component.scss'],
 })
 

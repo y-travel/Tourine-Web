@@ -12,7 +12,7 @@ import { TourUpsertComponent } from '../../tour/tour-upsert/tour-upsert.componen
 
 @Component({
   selector: 'trn-passenger-replacement',
-  templateUrl: './passenger-replacement.component.gen.html',
+  templateUrl: './passenger-replacement.component.pug',
   styleUrls: ['./passenger-replacement.component.scss'],
   providers: [PassengerReplacementTourGridService]
 })

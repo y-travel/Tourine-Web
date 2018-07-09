@@ -8,7 +8,7 @@ import { SpinnerService } from '../../../@core/utils/spinner.service';
 
 @Component({
   selector: 'trn-login',
-  templateUrl: './login.component.gen.html',
+  templateUrl: './login.component.pug',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {

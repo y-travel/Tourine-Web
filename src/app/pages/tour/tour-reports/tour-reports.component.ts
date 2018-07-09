@@ -13,7 +13,7 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 
 @Component({
   selector: 'trn-tour-reports',
-  templateUrl: './tour-reports.component.gen.html',
+  templateUrl: './tour-reports.component.pug',
   styleUrls: ['./tour-reports.component.scss']
 })
 export class TourReportsComponent implements ModalInterface, ModalInterface, OnInit {

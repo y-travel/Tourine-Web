@@ -21,7 +21,7 @@ import { FileService } from '../../../@core/data/file.service';
 
 @Component({
   selector: 'trn-tour-list',
-  templateUrl: './tour-list.component.gen.html',
+  templateUrl: './tour-list.component.pug',
   styleUrls: ['./tour-list.component.scss'],
   providers: [TourGridService],
 })

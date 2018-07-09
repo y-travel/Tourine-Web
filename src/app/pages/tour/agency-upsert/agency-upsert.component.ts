@@ -8,7 +8,7 @@ import { ModalInterface } from '../../../@theme/components/modal.interface';
 
 @Component({
   selector: 'trn-agency-upsert',
-  templateUrl: './agency-upsert.component.gen.html',
+  templateUrl: './agency-upsert.component.pug',
   styleUrls: ['./agency-upsert.component.scss']
 })
 export class AgencyUpsertComponent implements OnInit, ModalInterface {
