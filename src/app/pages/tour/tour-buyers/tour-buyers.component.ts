@@ -12,13 +12,13 @@ import { AlertDialogData } from '../../../@theme/components/dialog/dialog.compon
 import { ModalInterface } from '../../../@theme/components/modal.interface';
 
 @Component({
-  selector: 'trn-block-list',
-  templateUrl: './buyer-list.component.pug',
-  styleUrls: ['./buyer-list.component.scss'],
+  selector: 'trn-tour-buyers',
+  templateUrl: './tour-buyers.component.pug',
+  styleUrls: ['./tour-buyers.component.scss'],
   providers: [TeamGridService],
 })
 
-export class BuyerListComponent implements OnInit, ModalInterface {
+export class TourBuyersComponent implements OnInit, ModalInterface {
   dialogMode: DialogMode;
   teamsItem: ToolbarItem[] = [
     <ToolbarItem>{

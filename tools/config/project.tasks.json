@@ -7,7 +7,6 @@
   "build.prod": [
     "clean.all",
     "tslint",
-    "build.pug",
     "build.ng"
   ],
   "build.prod.deploy": [
@@ -16,7 +15,6 @@
   ],
   "serve.dev": [
     "tslint",
-    "build.pug",
     "serve.ng"
   ],
   "move.to.server": [

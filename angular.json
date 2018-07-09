@@ -129,8 +129,13 @@
   },
   "schematics": {
     "@schematics/angular:component": {
-      "styleext": "scss"
+      "styleext": "scss",
+      "skipImport":true,
+      "spec":false
     },
-    "@schematics/angular:directive": {}
+    "@schematics/angular:module":{
+      "spec":false
+    }
+
   }
 }

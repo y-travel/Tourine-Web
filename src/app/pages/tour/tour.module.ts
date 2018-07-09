@@ -6,7 +6,7 @@ import { DialogService } from '../../@core/utils/dialog.service';
 import { COMMON_MODULES } from '../default';
 import { TrnAgGridModule } from '../../shared/trn-ag-grid/trn-ag-grid.module';
 import { BlockUpsertComponent } from './block-upsert/block-upsert.component';
-import { BuyerListComponent } from './buyer-list/buyer-list.component';
+import { TourBuyersComponent } from './tour-buyers/tour-buyers.component';
 import { TourPassengersComponent } from './tour-passengers/tour-passengers.component';
 import { PassengerReplacementTourGridService } from '../passenger/passenger-replacement/passenger-replacement-tour-grid.service';
 import { TourReportsComponent } from './tour-reports/tour-reports.component';
@@ -17,7 +17,7 @@ import { TourListComponent } from './tour-list/tour-list.component';
 const ENTRY_COMPONENTS = [
   TourUpsertComponent,
   BlockUpsertComponent,
-  BuyerListComponent,
+  TourBuyersComponent,
   TourPassengersComponent,
   TourReportsComponent,
 ];
