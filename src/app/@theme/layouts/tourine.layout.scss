@@ -1,20 +1,16 @@
 @import '../styles/install';
+@import "../styles/core/variables";
 
+$article-margin: 20px;
 @include trn-install-component() {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   #article {
-    //@TODO define breakpoints
-    @media (max-width: 1000px) {
-      width: 900px;
-      height: 300px;
-    }
-    @media (min-width: 1001px) {
-      width: 1200px;
-      height: 500px;
-    }
+    margin: $article-margin;
+    height: calc(100vh - #{$toolbar-height} - (#{$article-margin} * 2));
+    width: calc(100vw - (#{$article-margin} * 2));
   }
 }
 

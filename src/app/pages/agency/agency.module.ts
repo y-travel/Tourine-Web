@@ -5,9 +5,10 @@ import { COMMON_MODULES } from '../default';
 const ENTRY_COMPONENTS = [
   AgencyUpsertComponent,
 ];
+
 const COMPONENTS = [
   ...ENTRY_COMPONENTS,
-]
+];
 
 @NgModule({
   imports: [

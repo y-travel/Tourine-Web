@@ -1,0 +1,15 @@
+@import '../../../@theme/styles/install';
+
+@include trn-install-component() {
+
+  #tour-card {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    ag-grid-angular {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+}
