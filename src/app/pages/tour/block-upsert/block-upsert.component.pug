@@ -1,6 +1,6 @@
 include ../../../mixin
 +matTitle(
-'{{ (vModel.isEdit?"tour.edit":"tour.reserve")|translate }}','close')
+'{{ (vModel.isEdit?"tour.edit":"tour.reserve")|translate }}')
 .modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="300", trnAutoTranslate)
   // width set for IE
   mat-horizontal-stepper(#stepper, [linear]="true")
@@ -42,7 +42,7 @@ include ../../../mixin
               "[formGroupName]": "i"
             }
             )(mask="number")
-    mat-step(label="{{'tour.passengers'|translate}}")
+    mat-step(label="{{'passenger.swap'|translate}}")
       form
         div(fxLayout="row")
           br

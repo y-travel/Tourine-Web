@@ -1,5 +1,5 @@
 include ../../../mixin
-+matTitle('{{ "reports.*"|translate }}','close')
++matTitle('{{ "reports.*"|translate }}')
 .right.modal-body(dir="rtl", [style.width.px]="1000", [style.height.px]="500")
   mat-tab-group((selectedTabChange)="mainTab($event)")
     mat-tab(label="{{'reports.ticket'|translate}}")

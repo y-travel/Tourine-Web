@@ -44,7 +44,7 @@ export class TourListComponent {
       visibility: (tour: Tour) => tour.isBlock,
     },
     <ToolbarItem>{
-      icon: 'attach_money',
+      icon: 'list',
       title: 'buyer.list',
       color: '#E040FB',
       command: (block: any) => this.teamList(block),
@@ -56,8 +56,8 @@ export class TourListComponent {
   //@TODO get colors from global variables
   sharedItems: ToolbarItem[] = [
     <ToolbarItem>{
-      icon: 'list',
-      title: 'tour.passengers',
+      icon: 'swap_horiz',
+      title: 'passenger.swap',
       color: '#E040FB',
       command: (tour: any) => this.tourPassengers(tour),
       disability: (tour: Tour) => tour.freeSpace === tour.capacity,

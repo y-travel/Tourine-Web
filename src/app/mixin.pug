@@ -12,12 +12,12 @@ mixin matField(formControlName,placeholder,validationFormGroup='',subText = '',i
       mat-error(translate)="{{" + validationFormGroup + ".get('" + formControlName + "')['errorMessage']}}"
     block
 
-mixin matTitle(title, icon)
+mixin matTitle(title)
   .modal-header(mat-dialog-title)
     .modal-title
       span= title
       button(mat-icon-button, mat-dialog-close, tabindex="-1")
-        mat-icon= icon
+        mat-icon close
 
 mixin matSlideToggle(trueText, falseText)
   span(translate)= trueText
