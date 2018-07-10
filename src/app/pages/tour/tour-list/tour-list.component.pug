@@ -20,5 +20,5 @@ mat-card#tour-card.full-size([stretch]="true")
   [animateRows] = "true" ,
   [getRowNodeId] = "tourGridService.getRowNodeId",
   rowClickExpand)
-  button.pull-right.fab-grid(mat-fab, (click)="tourUpsert()")
+  button.pull-right.fab-grid(mat-fab, (click)="tourUpsert()",matTooltip="{{'tour.upsert'|translate}}",matTooltipPosition="right")
     mat-icon add

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import { TourService } from '../../../@core/data/tour.service';
 import { TourUpsertComponent } from '../tour-upsert/tour-upsert.component';
@@ -24,79 +24,75 @@ import { FileService } from '../../../@core/data/file.service';
   templateUrl: './tour-list.component.pug',
   styleUrls: ['./tour-list.component.scss'],
   providers: [TourGridService],
+  encapsulation: ViewEncapsulation.Emulated, //@TODO clear it after changing theme infrastructure, cos ag-theme-material override new font-family
 })
 export class TourListComponent {
 
   blockItems = [
     <ToolbarItem>{
-      icon: 'delete',
-      title: 'delete',
-      color: '#f44336',
-      alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
-      command: (tourBlock: any) => this.tourDelete(tourBlock),
-      visibility: (tour: Tour) => tour.isBlock,
-    },
-    <ToolbarItem>{
-      icon: 'mode_edit',
-      title: 'edit',
-      color: '#03a9f4',
-      command: (block: any) => this.blockUpsert(block.parent, block),
-      visibility: (tour: Tour) => tour.isBlock,
-    },
-    <ToolbarItem>{
+      index: 1,
       icon: 'list',
       title: 'buyer.list',
       color: '#E040FB',
       command: (block: any) => this.teamList(block),
-      disability: (block: Tour) => block.freeSpace === block.capacity,
+      canEnable: (block: Tour) => block.freeSpace !== block.capacity,
     },
   ];
-  //@TODO use index to arrange items
   source: any;
   //@TODO get colors from global variables
   sharedItems: ToolbarItem[] = [
     <ToolbarItem>{
-      icon: 'swap_horiz',
-      title: 'passenger.swap',
-      color: '#E040FB',
-      command: (tour: any) => this.tourPassengers(tour),
-      disability: (tour: Tour) => tour.freeSpace === tour.capacity,
-    },
-    <ToolbarItem>{
-      icon: 'group_add',
-      title: 'passenger.detailUpsert',
-      color: '#4caf50',
-      command: (tourBlock: any) => this.passengerUpsert(tourBlock),
-      disability: (tour: any) => tour.freeSpace <= 0,
-    },
-  ];
-  tourItems = [
-    <ToolbarItem>{
+      index: -1,
       icon: 'delete',
       title: 'delete',
       color: '#f44336',
       alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
       command: (tourBlock: any) => this.tourDelete(tourBlock),
+      canShow: (tour: Tour) => tour.isBlock || tour.agency != null, //@todo clean, checking it's not first tour in block
     },
     <ToolbarItem>{
+      index: -1,
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (tour: any) => this.tourUpsert(tour, true),
+      command: (tour: Tour) => tour.isBlock ? this.blockUpsert(tour.parent, <Block>tour) : this.tourUpsert(tour, true),
+      canShow: (tour: Tour) => tour.isBlock || tour.agency != null, //@todo clean, checking it's not first tour in block
     },
     <ToolbarItem>{
+      index: 1,
+      icon: 'swap_horiz',
+      title: 'passenger.swap',
+      color: '#E040FB',
+      command: (tour: any) => this.tourPassengers(tour),
+      canEnable: (tour: Tour) => tour.freeSpace !== tour.capacity,
+      canShow: (tour: Tour) => tour.agency != null, //@todo clean, checking it's not first tour in block
+    },
+    <ToolbarItem>{
+      index: 1,
+      icon: 'group_add',
+      title: 'passenger.detailUpsert',
+      color: '#4caf50',
+      command: (tourBlock: any) => this.passengerUpsert(tourBlock),
+      canEnable: (tour: any) => tour.freeSpace > 0,
+      canShow: (tour: Tour) => tour.agency != null, //@todo clean, checking it's not first tour in block
+    },
+  ];
+  tourItems = [
+    <ToolbarItem>{
+      index: 1,
       icon: 'work',
       title: 'tour.reserve',
       color: '#4caf50',
       command: (tour: any) => this.blockUpsert(tour, undefined, true),
-      disability: (tour: any) => tour.freeSpace <= 0,
+      canEnable: (tour: any) => tour.freeSpace > 0,
     },
     <ToolbarItem>{
+      index: 1,
       icon: 'pageview',
       title: 'reports.*',
       color: '#FF8F00',
       command: (tour: any) => this.tourReports(tour),
-    },
+    }
   ];
 
   reloadTourList = () => this.tourGridService.reloadData();

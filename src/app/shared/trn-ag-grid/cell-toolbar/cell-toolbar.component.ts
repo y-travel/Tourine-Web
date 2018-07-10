@@ -8,11 +8,16 @@ import { AlertDialogData } from '../../../@theme/components/dialog/dialog.compon
   styleUrls: ['./cell-toolbar.component.scss'],
 })
 export class CellToolbarComponent implements ICellRendererAngularComp {
+  private _items: ToolbarItem[];
   params: ICellRendererToolbarParams;
-  items: any[];
-  visibility: VisibilityType = 'autoHide';
+  data: any;
+  canEnable = (item: ToolbarItem) => item.canEnable != null ? item.canEnable(this.data) : true;
 
-  getData = () => this.params.node.data;
+  canShow = (item: ToolbarItem) => item.canShow != null ? item.canShow(this.data) : true
+
+  get items(): ToolbarItem[] {
+    return this._items;
+  }
 
   refresh(params: any): boolean {
     return undefined;
@@ -20,18 +25,12 @@ export class CellToolbarComponent implements ICellRendererAngularComp {
 
   agInit(params: any): void {
     this.params = params;
+    this._items = this.params.items.sort((a, b) => a.index - b.index);
+    this.data = this.params.node.data;
   }
 
   doCommand(item: ToolbarItem) {
-    item.command(this.getData(), ...item.commandParams);
-  }
-
-  disablityFunction(item: any) {
-    return item.disability ? item.disability(this.getData()) : false;
-  }
-
-  visibilityFunction(item: any) {
-    return item.visibility ? item.visibility(this.getData()) : true;
+    item.command(this.data, ...item.commandParams);
   }
 }
 
@@ -41,14 +40,14 @@ export class ICellRendererToolbarParams {
 }
 
 export class ToolbarItem {
+  index = 0;
   icon = 'border_clear';
   title = '';
   color = '';
   command: (data: any, items?) => void;
   commandParams = [];
-  disability: (data: any) => boolean;
-  visibility: (data: any) => boolean;
+  canEnable: (data: any) => boolean;
+  canShow: (data: any) => boolean;
   alertData: AlertDialogData;
 }
 
-declare type VisibilityType = 'autoHide' | 'hidden' | 'show';

@@ -14,7 +14,7 @@ $toolbar-height:64px;
 $theme-default: (
   material:(), //@todo should be set from material.theme
   is-dark:false,
-  font-main: one-iransans,
+  font-main: one-iransans !important,
   font-secondary: font-main,
   base-font-size: 14px,
   shadow-color:map_get($mat-grey, 600),
