@@ -51,7 +51,8 @@ ng-template(#tickeTemplate)
             label {{ 'tour.destination'|translate }} :
             label {{ destination }}
           div(fxLayout="row")
-            label  
+            button(mat-mini-fab,color="accent",(click)="reportService.showTicketReport(tourId)")
+              mat-icon printer
     mat-card([stretch]="true")
       mat-tab-group((selectedTabChange)="ticketTab($event)")
         mat-tab(label="{{'adult.*'|translate}}")
@@ -68,6 +69,9 @@ ng-template(#visaTemplate)
           div(fxLayout="row")
             label {{ 'person.numberOfEmmisionableVisa'|translate }} :
             label {{ noHasVisaCount }}
+          div(fxLayout="row")
+            button(mat-mini-fab, color="accent",(click)="reportService.showVisaReport(tourId)")
+              mat-icon printer
     mat-card([stretch]="true")
       mat-tab-group((selectedTabChange)="visaTab($event)")
         mat-tab(label="{{'person.hasVisa'|translate}}")
@@ -99,6 +103,10 @@ ng-template(#tourTemplate)
             div(fxLayout="row")
               label {{ 'bedCount'|translate }} :
               label {{ bedCount }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            button(mat-mini-fab,color="accent",(click)="reportService.showPassengerReport(tourId)")
+              mat-icon printer
     mat-card([stretch]="true")
       ng-template(*ngTemplateOutlet="reportGridTemplate; context:{tab:'tour'}")
 ng-template(#buyerTemplate)

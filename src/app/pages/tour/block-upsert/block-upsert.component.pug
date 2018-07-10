@@ -56,9 +56,9 @@ include ../../../mixin
             mat-icon.icon-text-color add
         br
 div(fxLayout="row", align="end")
-  button.pull-left(mat-mini-fab, color="primary", (click)="next(stepper)", [disabled]="stepper.selectedIndex==2")
+  button.float-left(mat-mini-fab, color="primary", (click)="next(stepper)", [disabled]="stepper.selectedIndex==2")
     mat-icon navigate_before
-  button.pull-right(mat-mini-fab, color="primary", (click)="stepper.previous()", [disabled]="stepper.selectedIndex==0")
+  button.float-right(mat-mini-fab, color="primary", (click)="stepper.previous()", [disabled]="stepper.selectedIndex==0")
     mat-icon navigate_next
   label(fxFlex, [hidden]="stepper.selectedIndex!==1")
     | {{ "allPriceIsPerOne"|translate }}

@@ -54,7 +54,8 @@ export enum DialogButtonType {
 
 export enum ReportType {
   TourPassenger = 1,
-  Ticket = 2
+  Ticket = 2,
+  Visa = 3
 }
 
 // cos: we can't access enums inside html files

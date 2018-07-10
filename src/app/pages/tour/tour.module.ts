@@ -10,7 +10,7 @@ import { TourBuyersComponent } from './tour-buyers/tour-buyers.component';
 import { TourPassengersComponent } from './tour-passengers/tour-passengers.component';
 import { PassengerReplacementTourGridService } from '../passenger/passenger-replacement/passenger-replacement-tour-grid.service';
 import { TourReportsComponent } from './tour-reports/tour-reports.component';
-import { TourReportGridService } from './tour-reports/tour-reports.service';
+import { TourReportGridService } from './tour-reports/tour-reports-grid.service';
 import { TourComponent } from './tour.component';
 import { TourListComponent } from './tour-list/tour-list.component';
 

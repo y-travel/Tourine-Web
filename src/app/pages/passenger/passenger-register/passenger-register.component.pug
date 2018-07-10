@@ -22,7 +22,7 @@ include ../../../mixin
           mat-card([stretch]="true")
             ag-grid-angular.ag-theme-material(#agGrid, style="height:280px", [columnDefs]="passengerGridService.columnDefs", [gridOptions]="passengerGridService.gridOptions", [frameworkComponents]="passengerGridService.frameworkComponents", (gridReady)="passengerGridService.onGridReady($event)", [enableRtl]="true", rowHeight="35", headerHeight="35")
             div(dir="ltr")
-              button.pull-right.fab-grid(mat-fab, color="accent", (click)="teamMemberUpsert()")
+              button.float-right.fab-grid(mat-fab, color="accent", (click)="teamMemberUpsert()")
                 mat-icon.icon-text-color add
         mat-card
           div(fxLayout="row", layout-align="space-between center")
@@ -32,9 +32,9 @@ include ../../../mixin
             label(fxFlex)
               | {{ 'total'|translate }} : {{ blockForm.form.value.totalPrice }} {{ 'price.irFormated'|translate }}
 div(fxLayout="row", align="end")
-  button.pull-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="stepper.selectedIndex==1 || !buyerForm.value.id")
+  button.float-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="stepper.selectedIndex==1 || !buyerForm.value.id")
     mat-icon navigate_before
-  button.pull-right(mat-mini-fab, color="primary", (click)="previousStep(stepper)", [disabled]="stepper.selectedIndex==0")
+  button.float-right(mat-mini-fab, color="primary", (click)="previousStep(stepper)", [disabled]="stepper.selectedIndex==0")
     mat-icon navigate_next
 mat-dialog-actions
   button(mat-raised-button, color="primary", fxFlex, (click)="save()", [disabled]="passengerGridService.rows\&\&passengerGridService.rows.length > 0 ? false : true", #submit)

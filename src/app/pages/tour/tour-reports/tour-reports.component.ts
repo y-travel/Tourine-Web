@@ -1,15 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { TourService } from '../../../@core/data/tour.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabChangeEvent } from '@angular/material';
-import { Destination, Dictionary, Person, Passenger, Tour, TourBuyer, TourPassenger } from '../../../@core/data/models/client.model';
+import { Destination, Dictionary, Passenger, Person, Tour, TourBuyer, TourPassenger } from '../../../@core/data/models/client.model';
 import { DialogMode, OptionType } from '../../../@core/data/models/enums';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
-import { TourReportGridService } from './tour-reports.service';
+import { TourReportGridService } from './tour-reports-grid.service';
 import { NewFormService } from '../../../@core/data/form.service';
 import { FormatterService } from '../../../@core/utils/formatter.service';
 import { PersonService } from '../../../@core/data/person.service';
 import { ModalInterface } from '../../../@theme/components/modal.interface';
+import { ReportService } from './report.service';
 
 @Component({
   selector: 'trn-tour-reports',
@@ -34,15 +34,19 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
   leader: Person;
   hasVisaCount = 0;
   noHasVisaCount = 0;
+  tourId: string;
+  form: NewFormService<Tour>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: NewFormService<Tour>,
+  constructor(@Inject(MAT_DIALOG_DATA) private data: NewFormService<Tour>,
               public dialogInstance: MatDialogRef<ModalInterface>,
-              public tourSerivce: TourService,
+              public tourService: TourService,
               public personService: PersonService,
               public reportGridService: TourReportGridService,
-              private translateService: TranslateService,
               private formatter: FormatterService,
+              public reportService: ReportService,
               @Inject(UTILS) public utils: AppUtils) {
+    this.form = data;
+    this.tourId = this.form.value.id;
   }
 
   initDialog() {
@@ -50,7 +54,7 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
 
   ngOnInit() {
     this.loadDestination();
-    this.reportGridService.loadTourAgency(this.data.value.id);
+    this.reportGridService.loadTourAgency(this.tourId);
   }
 
   onGridReady(event: any, tab: ReportTab) {
@@ -58,7 +62,7 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
     this.reportGridService.onGridReady(event);
     if (tab === 'ticket') {
       this.reportGridService.gridApi.setColumnDefs(this.reportGridService.ticketColumnDef);
-      this.personService.getTourMembers(this.data.value.id).subscribe(x => {
+      this.personService.getTourMembers(this.tourId).subscribe(x => {
         this.tourMembers = x.passengers;
         const leader = new Passenger();
         this.leader = x.leader || <Person>{};
@@ -76,7 +80,7 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
       this.reportGridService.setRow(this.tourMembers);
     } else if (tab === 'buyer') {
       this.reportGridService.gridApi.setColumnDefs(this.reportGridService.buyerColumnDef);
-      this.tourSerivce.getTourBuyers(this.data.value.id).subscribe(x => {
+      this.tourService.getTourBuyers(this.tourId).subscribe(x => {
         this.tourBuyers = x;
         this.reportGridService.setRow(this.tourBuyers);
       });
@@ -120,7 +124,7 @@ export class TourReportsComponent implements ModalInterface, ModalInterface, OnI
   }
 
   loadDestination() {
-    this.tourSerivce.getDistinations().subscribe((dests: Destination[]) => {
+    this.tourService.getDistinations().subscribe((dests: Destination[]) => {
       dests.forEach(des => this.destinationList[des.id] = des.name);
     });
   }

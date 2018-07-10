@@ -38,9 +38,9 @@ include ../../../mixin
             | {{"optionIsAvailableForUnder5"| translate}}
   // width set for IE
 div(fxLayout="row", align="end")
-  button.pull-left(mat-mini-fab, color="primary", (click)="stepper.next()", [disabled]="stepper.selectedIndex==1 || !model.person.id")
+  button.float-left(mat-mini-fab, color="primary", (click)="stepper.next()", [disabled]="stepper.selectedIndex==1 || !model.person.id")
     mat-icon navigate_before
-  button.pull-right(mat-mini-fab, color="primary", (click)="stepper.previous()", [disabled]="stepper.selectedIndex==0")
+  button.float-right(mat-mini-fab, color="primary", (click)="stepper.previous()", [disabled]="stepper.selectedIndex==0")
     mat-icon navigate_next
 mat-dialog-actions
   button(fxFlex, mat-raised-button, color="primary", (click)="save()", [disabled]="stepper.selectedIndex !== 1") {{"save"|translate}}

@@ -4,13 +4,13 @@ import {
   Destination,
   IReturn,
   IReturnVoid,
+  Passenger,
   Person,
   Place,
   QueryDb,
   Role,
   Route,
   Team,
-  Passenger,
   TeamPassenger,
   Tour,
   TourBuyer,
@@ -21,7 +21,7 @@ import {
   TourTeamMember,
   User,
 } from './client.model';
-import { IncomeStatus, OptionType, ReportType } from './enums';
+import { ReportType } from './enums';
 
 
 export class HttpResult {
@@ -829,6 +829,8 @@ export class GetTourBuyers implements IReturn<Array<TourBuyer>> {
 @Route('/reports/{reportType}', 'GET')
 export class GetReport implements IReturn<Blob> {
   reportType: ReportType;
+  tourId: string;
+  timeStamp = Date.now().toString();
 
   createResponse(): Blob {
     return undefined;

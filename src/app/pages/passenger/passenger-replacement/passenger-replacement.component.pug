@@ -96,9 +96,9 @@ include ../../../mixin
         br
   // width set for IE
 div(fxLayout="row", align="end")
-  button.pull-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="true")
+  button.float-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="true")
     mat-icon navigate_before
-  button.pull-right(mat-mini-fab, color="primary", (click)="previousStep(stepper)", [disabled]="stepper.selectedIndex==0")
+  button.float-right(mat-mini-fab, color="primary", (click)="previousStep(stepper)", [disabled]="stepper.selectedIndex==0")
     mat-icon navigate_next
 mat-dialog-actions
   button(fxFlex, mat-raised-button, color="primary", (click)="updateReplacement()", #submit) {{"save"|translate}}

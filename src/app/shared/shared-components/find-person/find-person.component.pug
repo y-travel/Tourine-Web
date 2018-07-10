@@ -12,7 +12,7 @@ div(fxLayout="row", [formGroup]="personForm", fxFlex="30")
   autocomplete="off",
   placeholder="{{'buyer.enterNationalCode'|translate}}"
   cdkFocusInitial)
-    mat-icon.pull-left(matSuffix, id='search-icon', matTooltip="{{'iconKind.'+ icon|translate}}", , (click) = "doAction(nationalCode.value, icon)") {{icon}}
+    mat-icon.float-left(matSuffix, id='search-icon', matTooltip="{{'iconKind.'+ icon|translate}}", , (click) = "doAction(nationalCode.value, icon)") {{icon}}
 span(*ngIf="icon === 'person_add'") {{"msg.notFound"|translate}}
 div#person-details(fxLayout="column", *ngIf="personForm.value.id && icon !== 'search'")
   div(fxLayout="column")

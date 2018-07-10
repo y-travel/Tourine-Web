@@ -6,7 +6,7 @@ include ../../../mixin
       mat-card([stretch]="true")
         ag-grid-angular.ag-theme-material(#agGrid, style="height:330px", [columnDefs]="passengerGridService.columnDefs", [gridOptions]="passengerGridService.gridOptions", [getRowStyle]="setStyle", [frameworkComponents]="passengerGridService.frameworkComponents", (gridReady)="passengerGridService.onGridReady($event)", (selectionChanged)="onSelectionChanged()", [enableRtl]="true", rowHeight="35", headerHeight="35", rowSelection="multiple")
         div(dir="ltr")
-          button.pull-right.fab-grid(mat-fab, color="accent", disabled, (click)="passengerReplacement()", #passengerReplacementFab)
+          button.float-right.fab-grid(mat-fab, color="accent", disabled, (click)="passengerReplacement()", #passengerReplacementFab)
             mat-icon.icon-text-color swap_horiz
 mat-dialog-actions
   button(mat-raised-button, color="primary", fxFlex, type="button", mat-dialog-close) {{ "close"|translate }}

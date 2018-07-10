@@ -21,21 +21,15 @@ export class FileService extends DataService {
   }
 
   get<T>(data: IReturn<T>): Observable<T> {
-
     return this.internalSend(data);
   }
 
   protected createRequest(method: HttpMethod, url: string, body: string, httpParams: any) {
     return this.http.request(method, url, {body: body, observe: 'response', headers: this.headers, params: httpParams, responseType: 'blob'})
-      .pipe(map((response: HttpResponse<any>) => {
-        return response.body;
-      }));
+      .pipe(map((response: HttpResponse<any>) => response.body));
   }
 
   private internalSend<T>(data: IReturn<T>): Observable<T | any> {
-    return this.request(this.utils.getHttpMethod(data), data.getTypeName(), Serializable.toJSON(data))
-      .pipe(map(res => {
-        return res;
-      }));
+    return this.request(this.utils.getHttpMethod(data), data.getTypeName(), Serializable.toJSON(data));
   }
 }

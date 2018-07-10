@@ -74,6 +74,14 @@
     }
   }
 
+  .mat-fab, .mat-mini-fab {
+    &[color="accent"] {
+      mat-icon {
+        color: white;
+      }
+    }
+  }
+
   mat-toolbar[data-visibility='autoHide'] {
     visibility: collapse;
   }
