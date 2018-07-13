@@ -7,6 +7,7 @@ import { FormatterService } from '../../../@core/utils/formatter.service';
 import { AppUtils, UTILS } from '../../../@core/utils/app-utils';
 import { CellHeaderComponent } from '../../../shared/trn-ag-grid/cell-header/cell-header.component';
 import { Dictionary, Passenger, Tour } from '../../../@core/data/models/client.model';
+import { TabType } from './tab-type';
 
 @Injectable()
 export class TourReportGridService {
@@ -222,5 +223,24 @@ export class TourReportGridService {
 
   getOptions(params: any) {
     return ''; //we will get it from server;
+  }
+
+  changeGridColumnType(tabType: TabType) {
+    let columnDef = [];
+    switch (tabType) {
+      case TabType.ticket:
+        columnDef = this.ticketColumnDef;
+        break;
+      case TabType.visa:
+        columnDef = this.visaColumnDef;
+        break;
+      case TabType.tour:
+        columnDef = this.tourColumnDef;
+        break;
+      case TabType.buyer:
+        columnDef = this.buyerColumnDef;
+        break;
+    }
+    this.gridApi.setColumnDefs(columnDef);
   }
 }

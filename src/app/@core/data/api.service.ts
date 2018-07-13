@@ -25,7 +25,6 @@ export class ApiService extends DataService {
   }
 
   get<T>(data: IReturn<T>): Observable<T> {
-
     return this.internalSend(data);
   }
 

@@ -1,4 +1,4 @@
-import { HttpMethod, IncomeStatus, OptionStatus, OptionType, PersonType, TourStatus } from './enums';
+import { HttpMethod, OptionStatus, OptionType, PersonType, TourStatus } from './enums';
 import { NewFormService } from '../form.service';
 
 export interface IModel {
@@ -42,6 +42,7 @@ export class TourDetail extends Model {
   destination: Destination;
   duration: number;
   startDate: string;
+  endDate: string;
   placeId: string;
   place: Place;
   isFlight = true;
@@ -101,6 +102,12 @@ export class EditPassword extends Model {
 export interface Person extends Model {
   name: string ;
   family: string;
+  displayTitle: string;
+
+  englishName: string;
+  englishFamily: string;
+  displayTitleEn: string;
+
   mobileNumber: string;
   nationalCode: string;
   fatherName: string;
@@ -113,19 +120,6 @@ export interface Person extends Model {
   socialNumber: string;
   isUnder5: boolean;
   isInfant: boolean;
-  englishFamily: string;
-  englishName: string;
-}
-
-export class PersonIncome {
-  // temp
-  reserved = true;
-  receivedMoney: number;
-  incomeStatus: IncomeStatus;
-  currencyFactor: number;
-
-  constructor(public optionType: OptionType = OptionType.Empty) {
-  }
 }
 
 export class Passenger {
@@ -210,6 +204,18 @@ export class TourBuyer {
   price: number;
   gender: boolean;
 }
+
+export interface PassengerDataReportBase {
+  tourID: string;
+  tourDetail: TourDetail;
+  passengersInfos: Passenger[];
+  adultCount: number;
+  infantCount: number;
+  bedCount: number;
+  foodCount: number;
+  buyerNames: Dictionary<string>;
+}
+
 
 export interface IReturn<T> {
   createResponse(): T;

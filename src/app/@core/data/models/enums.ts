@@ -53,6 +53,7 @@ export enum DialogButtonType {
 }
 
 export enum ReportType {
+  None = 0,
   TourPassenger = 1,
   Ticket = 2,
   Visa = 3

@@ -5,6 +5,7 @@ import {
   IReturn,
   IReturnVoid,
   Passenger,
+  PassengerDataReportBase,
   Person,
   Place,
   QueryDb,
@@ -826,8 +827,8 @@ export class GetTourBuyers implements IReturn<Array<TourBuyer>> {
   }
 }
 
-@Route('/reports/{reportType}', 'GET')
-export class GetReport implements IReturn<Blob> {
+@Route('/reports/{reportType}/file', 'GET')
+export class GetReportFile implements IReturn<Blob> {
   reportType: ReportType;
   tourId: string;
   timeStamp = Date.now().toString();
@@ -837,6 +838,21 @@ export class GetReport implements IReturn<Blob> {
   }
 
   getTypeName() {
-    return 'GetReport';
+    return 'GetReportFile';
+  }
+}
+
+@Route('/reports/{reportType}/data', 'GET')
+export class GetReportData implements IReturn<PassengerDataReportBase> {
+  reportType: ReportType;
+  tourId: string;
+  timeStamp = Date.now().toString();
+
+  createResponse(): PassengerDataReportBase {
+    return <PassengerDataReportBase>{};
+  }
+
+  getTypeName() {
+    return 'GetReportData';
   }
 }

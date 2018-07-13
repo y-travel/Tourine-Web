@@ -8,12 +8,12 @@ import { AlertDialogData } from '../../../@theme/components/dialog/dialog.compon
   styleUrls: ['./cell-toolbar.component.scss'],
 })
 export class CellToolbarComponent implements ICellRendererAngularComp {
+  private _items: ToolbarItem[];
   params: ICellRendererToolbarParams;
   data: any;
   canEnable = (item: ToolbarItem) => item.canEnable != null ? item.canEnable(this.data) : true;
-  canShow = (item: ToolbarItem) => item.canShow != null ? item.canShow(this.data) : true;
 
-  private _items: ToolbarItem[];
+  canShow = (item: ToolbarItem) => item.canShow != null ? item.canShow(this.data) : true;
 
   get items(): ToolbarItem[] {
     return this._items;
