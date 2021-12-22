@@ -49,7 +49,7 @@ export class TourService {
     return this.apiService.getEntities(dto);
   }
 
-  getList(): Observable<Tour[]> {
+  getList(agencyId?: string): Observable<Tour[]> {
     const query = new GetTours();
     return this.apiService.getEntities(query);
   }
