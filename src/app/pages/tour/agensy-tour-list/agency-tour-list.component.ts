@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'trn-agency-list',
-  templateUrl: './agency-tour-list.component.gen.html',
+  templateUrl: './agency-tour-list.component.pug',
   styleUrls: ['./agency-tour-list.component.scss'],
   providers: [AgencyTourListGridService]
 })
