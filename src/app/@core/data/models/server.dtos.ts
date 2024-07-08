@@ -2,23 +2,32 @@ import {
   Agency,
   Block,
   Destination,
-  IPost,
   IReturn,
   IReturnVoid,
+  Passenger,
+  PassengerDataReportBase,
   Person,
   Place,
   QueryDb,
   Role,
   Route,
-  TeamMember,
+  Team,
   TeamPassenger,
   Tour,
+  TourBuyer,
   TourDetail,
   TourOption,
   TourPassenger,
-  User
+  TourPassengers,
+  TourTeamMember,
+  User,
 } from './client.model';
-import { IncomeStatus, OptionType } from './enums';
+import { ReportType } from './enums';
+
+
+export class HttpResult {
+  response: Object;
+}
 
 // @DataContract
 export class ResponseError {
@@ -65,12 +74,6 @@ export class TeamPerson {
   person: Person;
 }
 
-// @Flags()
-export enum PersonType {
-  Passenger = 1,
-  Customer = 2,
-  Leader = 4,
-}
 
 // @DataContract
 export class QueryResponse<T> {
@@ -88,24 +91,6 @@ export class QueryResponse<T> {
 
   // @DataMember(Order=5)
   responseStatus: ResponseStatus;
-}
-
-export class PassengerList {
-  id: string;
-  // @References(typeof(Person))
-  personId: string;
-
-  person: Person;
-  // @References(typeof(Tour))
-  tourId: string;
-
-  tour: Tour;
-  optionType: OptionType;
-  receivedMoney: number;
-  currencyFactor: number;
-  incomeStatus: IncomeStatus;
-  visaDelivered: boolean;
-  passportDelivered: boolean;
 }
 
 export class AgencyPerson {
@@ -262,17 +247,12 @@ export class GetTourDetail implements IReturn<TourDetail> {
   }
 }
 
-@Route('/tourDetail', 'PUT')
-export class UpdateTourDetail {
-  tourDetail: TourDetail;
-}
-
 @Route('/tours/{TourId}/teams/{TeamId}', 'POST')
 export class UpsertTeam implements IReturnVoid {
   tourId: string;
   teamId: string;
-  buyer: TeamMember;
-  passengers: TeamMember[];
+  buyer: Person;
+  passengers: Passenger[];
   infantPrice: number;
   basePrice: number;
   totalPrice: number;
@@ -286,12 +266,29 @@ export class UpsertTeam implements IReturnVoid {
   }
 }
 
+@Route('/tours/{TourId}/passengers/toTour/{DestTourId}/{AgencyId}', 'POST')
+export class PassengerReplacement implements IReturn<TourTeamMember> {
+  tourId: string;
+  destTourId: string;
+  agencyId: string;
+  passengers: Passenger[];
+
+  createResponse() {
+    return new TourTeamMember();
+  }
+
+  // @DataContract
+  getTypeName(): string {
+    return 'PassengerReplacement';
+  }
+}
+
 @Route('/team', 'PUT')
 export class UpdateTeam {
   team: Block;
 }
 
-@Route('/places')
+@Route('/destinationList')
 export class GetPlaces extends QueryDb<Place> implements IReturn<QueryResponse<Place>> {
   createResponse() {
     return new QueryResponse<Place>();
@@ -336,8 +333,8 @@ export class GetPersonsOfTeam implements IReturn<TeamPassenger> {
 }
 
 
-@Route('/tour/{TourId}/persons/', 'GET')
-export class GetPersonsOfTour implements IReturn<TourPassenger> {
+@Route('/tour/{TourId}/passengers/', 'GET')
+export class GetTourPassengers implements IReturn<TourPassenger> {
   tourId: string;
 
   createResponse() {
@@ -345,7 +342,7 @@ export class GetPersonsOfTour implements IReturn<TourPassenger> {
   }
 
   getTypeName() {
-    return 'GetPersonsOfTour';
+    return 'GetTourPassengers';
   }
 }
 
@@ -354,7 +351,7 @@ export class AddNewPerson implements IReturn<Person> {
   person: Person;
 
   createResponse() {
-    return new Person();
+    return <Person>{};
   }
 
   getTypeName() {
@@ -367,7 +364,7 @@ export class UpsertLeader implements IReturn<Person> {
   person: Person;
 
   createResponse() {
-    return new Person();
+    return <Person>{};
   }
 
   getTypeName() {
@@ -392,7 +389,7 @@ export class UpdatePerson implements IReturn<Person> {
   person: Person;
 
   createResponse() {
-    return new Person();
+    return <Person>{};
   }
 
   getTypeName() {
@@ -424,7 +421,7 @@ export class FindPersonFromNc implements IReturn<Person> {
   nationalCode: string;
 
   createResponse() {
-    return new Person();
+    return <Person>{};
   }
 
   getTypeName() {
@@ -476,7 +473,7 @@ export class RegisterPerson implements IReturn<Block> {
 @Route('/persons/current', 'GET')
 export class GetCurrentPerson implements IReturn<Person> {
   createResponse() {
-    return new Person();
+    return <Person>{};
   }
 
   getTypeName() {
@@ -610,8 +607,24 @@ export class UpdateAgency {
   agency: Agency;
 }
 
-@Route('/agencies', 'GET')
+@Route('/tours/{TourId}/agencies/{LoadChilds}')
+export class GetTourAgency implements IReturn<Array<Tour>> {
+  tourId: string;
+  loadChild = false;
+
+  createResponse() {
+    return new Array<Tour>();
+  }
+
+  getTypeName(): string {
+    return 'GetTourAgency';
+  }
+}
+
+@Route('/agencies/{IsAll}', 'GET')
 export class GetAgencies extends QueryDb<Agency> implements IReturn<QueryResponse<Agency>> {
+  isAll = true;
+
   createResponse() {
     return new QueryResponse<Agency>();
   }
@@ -635,7 +648,7 @@ export class FindAgency extends QueryDb<Agency> implements IReturn<QueryResponse
 }
 
 @Route('/auth', 'POST')
-export class Authenticate implements IReturn<AuthenticateResponse>, IPost {
+export class Authenticate implements IReturn<AuthenticateResponse> {
   // @DataMember(Order=1)
   provider: string;
 
@@ -734,5 +747,112 @@ export class DeleteTeam implements IReturnVoid {
 
   getTypeName() {
     return 'DeleteTeam';
+  }
+}
+
+@Route('/tours/{OldTourId}/teams/list', 'PUT')
+export class PassengerReplacementTeamAccomplish implements IReturnVoid {
+
+  oldTourId: string;
+
+  teams: Team[];
+
+  createResponse(): void {
+  }
+
+  getTypeName() {
+    return 'PassengerReplacementTeamAccomplish';
+  }
+}
+
+@Route('/tours/{TourId}/{oldTourId}/accomplish', 'PUT')
+export class PassengerReplacementTourAccomplish implements IReturnVoid {
+
+  oldTourId: string;
+  tourId: string;
+  infantPrice: number;
+  basePrice: number;
+  busPrice: number;
+  foodPrice: number;
+  roomPrice: number;
+
+  createResponse(): void {
+  }
+
+  getTypeName() {
+    return 'PassengerReplacementTourAccomplish';
+  }
+}
+
+@Route('/tours/{TourId}/tickets', 'GET')
+export class GetTourTicket implements IReturn<TourPassengers> {
+
+  tourId: string;
+
+  createResponse() {
+    return new TourPassengers();
+  }
+
+  getTypeName() {
+    return 'GetTourTicket';
+  }
+}
+
+@Route('/tours/{TourId}/visa/{Have}', 'GET')
+export class GetTourVisa implements IReturn<TourPassengers> {
+
+  tourId: string;
+  have = true;
+
+  createResponse() {
+    return new TourPassengers();
+  }
+
+  getTypeName() {
+    return 'GetTourVisa';
+  }
+}
+
+@Route('/tours/{TourId}/buyers', 'GET')
+export class GetTourBuyers implements IReturn<Array<TourBuyer>> {
+
+  tourId: string;
+
+  createResponse() {
+    return new Array<TourBuyer>();
+  }
+
+  getTypeName() {
+    return 'GetTourBuyers';
+  }
+}
+
+@Route('/reports/{reportType}/file', 'GET')
+export class GetReportFile implements IReturn<Blob> {
+  reportType: ReportType;
+  tourId: string;
+  timeStamp = Date.now().toString();
+
+  createResponse(): Blob {
+    return undefined;
+  }
+
+  getTypeName() {
+    return 'GetReportFile';
+  }
+}
+
+@Route('/reports/{reportType}/data', 'GET')
+export class GetReportData implements IReturn<PassengerDataReportBase> {
+  reportType: ReportType;
+  tourId: string;
+  timeStamp = Date.now().toString();
+
+  createResponse(): PassengerDataReportBase {
+    return <PassengerDataReportBase>{};
+  }
+
+  getTypeName() {
+    return 'GetReportData';
   }
 }

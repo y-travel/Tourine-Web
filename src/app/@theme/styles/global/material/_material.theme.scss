@@ -42,6 +42,7 @@
   input {
     &[matInput][mask="number"] {
       direction: ltr;
+      text-align: left;
     }
   }
 
@@ -55,9 +56,10 @@
     margin: 20px;
   }
 
-  .mat-form-field{
-    font-size:14px;
-    margin:0 5px;
+  .mat-form-field {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 5px;
   }
 
   .mat-mini-fab {
@@ -72,11 +74,19 @@
     }
   }
 
+  .mat-fab, .mat-mini-fab {
+    &[color="accent"] {
+      mat-icon {
+        color: white;
+      }
+    }
+  }
+
   mat-toolbar[data-visibility='autoHide'] {
     visibility: collapse;
   }
 
-  .ag-row-hover .mat-toolbar[data-visibility='autoHide'] {
+  .ag-row-hover.ag-row-level-0 .mat-toolbar[data-visibility='autoHide'] {
     visibility: visible !important;
   }
 
@@ -88,11 +98,18 @@
     position: absolute;
     left: 0;
   }
-//disable wizard header selection
-  .mat-horizontal-stepper-header{
+  //disable wizard header selection
+  .mat-horizontal-stepper-header {
     pointer-events: none !important;
+    height: 35px;
   }
 
+  .mat-dialog-title {
+    font-size: 1.2rem;
+  }
+  .mat-form-field-suffix {
+    padding-right: $input-icon-padding !important; //@todo after refactoring css infrastructure '!important' should be remove
+  }
 }
 
 @mixin trn-material-theme() {

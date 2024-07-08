@@ -33,12 +33,18 @@ $grid-size: 4px;
     .ag-header-cell {
       text-align: center;
     }
+    .ag-cell-focus {
+      border: none;
+    }
     .ag-header-container {
       background-color: trn-theme(grid-header-color);
     }
     .ag-header-group-text {
       width: 100%;
       text-align: center;
+    }
+    .ag-body-viewport{
+      overflow-x: hidden;//prevent to horizontal scrolling cos we don't need it
     }
   }
 }

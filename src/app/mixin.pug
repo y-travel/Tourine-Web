@@ -1,0 +1,25 @@
+//- please notice:
+//- use single quote inside double quote e.g: " 'sample' +'sample' "
+mixin matField(formControlName,placeholder,validationFormGroup='',subText = '',icon ='', fieldAttributes ={})
+  mat-form-field(fxFlex)&attributes(fieldAttributes)
+    mat-label= "{{'" + placeholder + "'|translate}}"
+    input(matInput , formControlName= formControlName, autocomplete="off")&attributes(attributes)
+    if icon
+      mat-icon(matSuffix)=icon
+    if subText
+      mat-hint(align='end', translate)=subText
+    if validationFormGroup
+      mat-error(translate)="{{" + validationFormGroup + ".get('" + formControlName + "')['errorMessage']}}"
+    block
+
+mixin matTitle(title)
+  .modal-header(mat-dialog-title)
+    .modal-title
+      span= title
+      button(mat-icon-button, mat-dialog-close, tabindex="-1")
+        mat-icon close
+
+mixin matSlideToggle(trueText, falseText)
+  span(translate)= trueText
+  mat-slide-toggle(fxFlex)&attributes(attributes)
+    span(translate)= falseText

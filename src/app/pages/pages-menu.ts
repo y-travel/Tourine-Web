@@ -1,32 +1,32 @@
 export const MENU_ITEMS = [
   {
-    title: "homePage",
+    title: 'homePage',
     icon: 'home',
-    link: '/dashboard',
+    link: '/pages/tour/list',
     home: true,
   },
   {
-    title: "tour.list",
-    icon: "view_list",
-    link: "/pages/tour/list",
+    title: 'tour.list',
+    icon: 'view_list',
+    link: '/pages/tour/list',
     children: [
       {
-        title: "tourList",
-        link: "/pages/tour/list",
-        icon: "view_list"
+        title: 'tourList',
+        link: '/pages/tour/list',
+        icon: 'view_list'
       }
     ]
   },
-  {
-    title: "personel",
-    icon: "account_circle",
-    link: "/pages/person/leader/list",
-    children: [
-      {
-        title: "personel",
-        link: "/pages/person/leader/list",
-        icon: "account_circle"
-      }
-    ]
-  }
+  // {
+  //   title: 'contactList',
+  //   icon: 'account_circle',
+  //   link: '/pages/person/leader/list',
+  //   children: [
+  //     {
+  //       title: 'personel',
+  //       link: '/pages/person/leader/list',
+  //       icon: 'account_circle'
+  //     }
+  //   ]
+  // }
 ];

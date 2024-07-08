@@ -1,6 +1,6 @@
-<mat-card [stretch]="true" [thickShadow]="true">
-  <mat-card-content>
-    <div style="width: 100%;">
+<mat-card [stretch]="true" [thickShadow]="true" style="height: 90%">
+  <mat-card-content style="height: 100%">
+    <div style="width: 100%;height: 100%;">
       <!--@TODO globalize height-->
       <ag-grid-angular (gridSizeChanged)="refreshView()" #agGrid
                        id="cell-detail"

@@ -1,0 +1,66 @@
+include ../../../mixin
++matTitle(
+'{{ (vModel.isEdit?"tour.edit":"tour.reserve")|translate }}')
+.modal-body(dir="rtl", [style.width.px]="500", [style.height.px]="300", trnAutoTranslate)
+  // width set for IE
+  mat-horizontal-stepper(#stepper, [linear]="true")
+    mat-step(label="{{'agency.name'|translate}}")
+      form([formGroup]="vModel.form")
+        div(fxLayout="row")
+          br
+          |  {{ "addAgencyMessage"|translate }}
+          br
+          br
+        div(fxLayout="row")
+          mat-form-field
+            mat-select(placeholder="agency.name", formControlName="agencyId", (selectionChange)="stepper.next()")
+              mat-option(*ngFor="let item of agencies | async", [value]="item.id") {{ item.name }}
+            mat-error(translate) {{vModel.form.get('agencyId')['errorMessage']}}
+          button(mat-mini-fab, color="accent", (click)="agencyUpsert()")
+            mat-icon.icon-text-color add
+    mat-step([stepControl]="vModel.form", label="{{'tour.information'|translate}}")
+      form([formGroup]="vModel.form")
+        div(fxLayout='row', fxFlex)
+          div(fxLayout='column', fxFlex)
+            +matField(
+            'capacity',
+            'adultCount',
+            'vModel.form',
+            '{{ "emptyCount"|translate:({value:(vModel.freeSpace-adultCount.value)}) }}'
+            )(mask='number', #adultCount)
+            +matField("basePrice", "tour.price", "vModel.form", "price.irFormated", "landscape")(mask="number")
+            +matField("infantPrice", "infantPrice", "vModel.form", "price.irFormated", "child_care")(mask="number")
+          div(fxLayout="column", fxFlex, formArrayName="options")
+            +matField(
+            'price',
+            "'+optionType[formGroup.value.optionType].toLowerCase()+'Price'+'",
+            'vModel.form.get(\'options\').get(i.toString())',
+            'price.irFormated',
+            '{{ utils.mapOptionTypeToIcon(formGroup.value.optionType) }}',
+            {
+              "*ngFor": "let formGroup of vModel.form.get('options')['controls']; let i=index",
+              "[formGroupName]": "i"
+            }
+            )(mask="number")
+    mat-step(label="{{'passenger.swap'|translate}}")
+      form
+        div(fxLayout="row")
+          br
+          |  {{ "msg.blockReservation"|translate:({capacity:vModel.model.capacity}) }}
+          br
+          br
+          |  {{ "addPassengerMessage"|translate }}
+        mat-dialog-actions
+          button(mat-raised-button, color="primary", fxFlex, type="button", (click)="addPassengers()", #addPassengerBtn)
+            | {{ "add"|translate }}
+            mat-icon.icon-text-color add
+        br
+div(fxLayout="row", align="end")
+  button.float-left(mat-mini-fab, color="primary", (click)="next(stepper)", [disabled]="stepper.selectedIndex==2")
+    mat-icon navigate_before
+  button.float-right(mat-mini-fab, color="primary", (click)="stepper.previous()", [disabled]="stepper.selectedIndex==0")
+    mat-icon navigate_next
+  label(fxFlex, [hidden]="stepper.selectedIndex!==1")
+    | {{ "allPriceIsPerOne"|translate }}
+mat-dialog-actions
+  button(mat-raised-button, color="primary", fxFlex, type="button", mat-dialog-close, [disabled]="stepper.selectedIndex!==2") {{ "close"|translate }}

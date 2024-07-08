@@ -1,8 +1,0 @@
-@import "../../styles/install";
-
-@include trn-install-component() {
-  .form-control {
-    padding: 0;
-    height: 35px;
-  }
-}

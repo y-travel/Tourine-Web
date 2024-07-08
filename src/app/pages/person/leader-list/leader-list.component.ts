@@ -5,60 +5,54 @@ import { PersonService } from '../../../@core/data/person.service';
 import { ToolbarItem } from '../../../shared/trn-ag-grid/cell-toolbar/cell-toolbar.component';
 import { DialogService } from '../../../@core/utils/dialog.service';
 import { AgGridNg2 } from 'ag-grid-angular';
-import { LeaderUpsertComponent } from '../leader-upsert/leader-upsert.component';
+import { PersonUpsertComponent } from '../person-upsert/person-upsert.component';
+import { DialogButtonType, DialogMode } from '../../../@core/data/models/enums';
+import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
-  selector: 'app-leader-list',
+  selector: 'trn-leader-list',
   templateUrl: './leader-list.component.html',
-  styleUrls: ['./leader-list.component.scss']
+  styleUrls: ['./leader-list.component.scss'],
+  providers: [LeaderGridService],
 })
 export class LeaderListComponent implements OnInit {
-
-
   leaderItems: ToolbarItem[] = [
     <ToolbarItem>{
       icon: 'delete',
       title: 'delete',
       color: '#f44336',
-      command: (leader: Person) => this.leaderDelete(leader),
+      alertData: new AlertDialogData('msg.delete', undefined, 'delete', DialogButtonType.Negative),
+      command: (leader: Person) => this.personDelete(leader),
     }, <ToolbarItem>{
       icon: 'mode_edit',
       title: 'edit',
       color: '#03a9f4',
-      command: (leader: Person) => this.leaderEdit(leader),
+      command: (leader: Person) => this.personUpsert(leader, true),
     },
   ];
 
   @ViewChild('leaderGrid') leaderGrid: AgGridNg2;
 
-  constructor(
-    public formFactory: FormFactory,
-    public leaderGridService: LeaderGridService,
-    public personService: PersonService,
-    public dialogService: DialogService, ) {
+  constructor(public formFactory: FormFactory,
+              public leaderGridService: LeaderGridService,
+              public personService: PersonService,
+              public dialogService: DialogService, ) {
 
-    this.leaderGridService.leaderToolbar.push(...this.leaderItems);
+    this.leaderGridService.initToolbar(this.leaderItems);
   }
 
   ngOnInit() {
   }
 
-  leaderDelete(leader: Person) {
-    this.personService.deleteLeader(leader.id).subscribe(() =>
+  personDelete(person: Person) {
+    this.personService.deleteLeader(person.id).subscribe(() =>
       this.leaderGridService.loadData()
     );
   }
 
-  leaderEdit(person: Person = new Person()) {
-    const inst = this.dialogService.openPopup(LeaderUpsertComponent, this.formFactory.createAddLeaderForm(person));
-    inst.afterClosed().subscribe(() => {
-      this.leaderGridService.loadData();
-    });
-  }
-
-  leaderUpsert(person: Person = new Person()) {
-    const inst = this.dialogService.openPopup(LeaderUpsertComponent, this.formFactory.createAddLeaderForm(person));
-    inst.afterClosed().subscribe(() => {
+  personUpsert(person = <Person> {}, isEdit = false) {
+    const ref = this.dialogService.openPopup(PersonUpsertComponent, person, isEdit ? DialogMode.Edit : DialogMode.Create);
+    ref.afterClosed().subscribe(() => {
       this.leaderGridService.loadData();
     });
   }

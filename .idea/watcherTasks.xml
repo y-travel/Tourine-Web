@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectTasksOptions" suppressed-tasks="SCSS;Compass SCSS">
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="-P -E gen.html --doctype html -o $ProjectFileDir$\dist\pugFiles $FileName$ " />
+      <option name="checkSyntaxErrors" value="false" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="jade" />
+      <option name="immediateSync" value="false" />
+      <option name="name" value="Pug/Jade" />
+      <option name="output" value="$FileNameWithoutExtension$.gen.html" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PROJECT_DIR$/node_modules/.bin/pug.cmd" />
+      <option name="scopeName" value="Project Files" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$FileDir$" />
+      <envs />
+    </TaskOptions>
+  </component>
+</project>

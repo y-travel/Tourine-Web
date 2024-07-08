@@ -1,28 +1,30 @@
-﻿import { Inject, Injectable } from "@angular/core";
-import { DataService } from "./data.service";
-import { Observable } from "rxjs/Rx";
+﻿import { Inject, Injectable } from '@angular/core';
+import { DataService } from './data.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 //
-import { Serializable } from "../utils/serializable";
-import { IReturn } from "./models/index";
-import { APP_CONFIG, AppConfig } from "../utils/app.config";
-import { AppUtils, UTILS } from "../utils";
-import { HttpHeaders } from "@angular/common/http";
-import { QueryResponse } from "./models/server.dtos";
+import { Serializable } from '../utils/serializable';
+import { IReturn } from './models/index';
+import { APP_CONFIG, AppConfig } from '../utils/app.config';
+import { AppUtils, UTILS } from '../utils';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { QueryResponse } from './models/server.dtos';
 
 @Injectable()
-export class ApiService {
-  private headers: HttpHeaders;
+export class ApiService extends DataService {
 
-  constructor(public dataService: DataService, @Inject(APP_CONFIG) config: AppConfig,@Inject(UTILS) private utils: AppUtils) {
-    dataService.baseAddress = config.ApiUrl + "json/reply/";
+  constructor(@Inject(APP_CONFIG) config: AppConfig,
+              @Inject(UTILS) private utils: AppUtils,
+              http: HttpClient) {
+    super(http);
+    this.baseAddress = config.ApiUrl + 'json/reply/';
     this.headers = new HttpHeaders({
-      "Content-Type": "application/json",
-      "Accept": "application/json"
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     });
   }
 
   get<T>(data: IReturn<T>): Observable<T> {
-
     return this.internalSend(data);
   }
 
@@ -31,22 +33,17 @@ export class ApiService {
   }
 
   getEntities<T>(data: IReturn<QueryResponse<T>>): Observable<T[]> {
-    return this.internalSend(data).map(res => res.results);
+    return this.internalSend(data).pipe(map(res => res.results));
   }
 
-  //
-  // protected saveEntity<T>(data: IReturn<EntityCreatedResponse<T>>): Observable<EntityCreatedResponse<T>> {
-  //   return this.internalSend(data);
-  // }
-
   private internalSend<T>(data: IReturn<T>): Observable<T | any> {
-    return this.dataService
-      .request(this.utils.getHttpMethod(data), data.getTypeName(), Serializable.toJSON(data), this.headers)
-      .map(res => {
+    return this.request(this.utils.getHttpMethod(data), data.getTypeName(), Serializable.toJSON(data))
+      .pipe(map(res => {
         const type = data.createResponse();
-        if (type)
+        if (type) {
           return Serializable.fromJSON(type, res);
+        }
         return res;
-      });
+      }));
   }
 }

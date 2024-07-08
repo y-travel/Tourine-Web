@@ -1,14 +1,10 @@
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AppTranslationModule } from "../app-translation.module";
-import { MatDialogModule } from "@angular/material";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppTranslationModule } from '../app-translation.module';
 
-import { ThemeModule } from "../@theme/theme.module";
-import { ToasterModule } from "angular2-toaster";
+import { ThemeModule } from '../@theme/theme.module';
 
 export const COMMON_MODULES = [
   ThemeModule,
-  MatDialogModule,
-  ToasterModule,
   AppTranslationModule,
   FormsModule,
   ReactiveFormsModule,

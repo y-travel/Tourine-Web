@@ -1,7 +1,6 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { RouterGuard } from "./app-router-guard";
-import { LeaderUpsertComponent } from './pages/person/leader-upsert/leader-upsert.component';
+import { RouterGuard } from './app-router-guard';
 
 const routes: Routes = [
   {
@@ -9,9 +8,9 @@ const routes: Routes = [
     canLoad: [RouterGuard],
     canActivateChild: [RouterGuard],
     canActivate: [RouterGuard],
-    loadChildren: 'app/pages/pages.module#PagesModule'
+    loadChildren: './pages/pages.module#PagesModule'
   },
-  {path: 'user', loadChildren: 'app/pages/user/user.module#UserModule'},
+  {path: 'user', loadChildren: './pages/user/user.module#UserModule'},
   {path: '', redirectTo: 'user', pathMatch: 'full'},
   {path: '**', redirectTo: 'user'},
 ];

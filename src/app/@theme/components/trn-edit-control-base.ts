@@ -1,4 +1,4 @@
-import { ControlValueAccessor } from "@angular/forms";
+import { ControlValueAccessor } from '@angular/forms';
 //
 export const noop = () => {
 };
@@ -23,8 +23,9 @@ export class TrnEditControlBase  implements ControlValueAccessor {
 
   //-------  ControlValueAccessor interface
   writeValue(value: any): void {
-    if (value !== this.innervalue)
+    if (value !== this.innervalue) {
       this.innervalue = value;
+    }
   }
 
   registerOnChange(fn: any): void {

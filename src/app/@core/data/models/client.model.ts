@@ -1,4 +1,5 @@
-import { HttpMethod, IncomeStatus, OptionStatus, OptionType, TourStatus } from './enums';
+import { HttpMethod, OptionStatus, OptionType, PersonType, TourStatus } from './enums';
+import { NewFormService } from '../form.service';
 
 export interface IModel {
   isNew(): boolean;
@@ -12,12 +13,46 @@ export class Model implements IModel {
   }
 }
 
+export interface IViewModel<T> {
+  form: NewFormService<T>;
+
+  init(model?: T, ...params);
+}
+
 export class Destination extends Model {
   name = '';
 }
 
 export class Place extends Model {
   name = '';
+}
+
+export class TourOption extends Model {
+  price: number;
+  tourId: string;
+
+  constructor(public optionType = OptionType.Empty,
+              public optionStatus: OptionStatus = OptionStatus.Limited) {
+    super();
+  }
+}
+
+export class TourDetail extends Model {
+  destinationId: string;
+  destination: Destination;
+  duration: number;
+  startDate: string;
+  endDate: string;
+  placeId: string;
+  place: Place;
+  isFlight = true;
+  infantPrice: number;
+  busPrice: number;
+  roomPrice: number;
+  foodPrice: number;
+  creationDate: string;
+  leaderId: string;
+  leader: Person;
 }
 
 export class Tour extends Model {
@@ -38,33 +73,7 @@ export class Tour extends Model {
   agencyId: string;
   agency: Agency;
   isBlock: boolean;
-}
-
-export class TourOption extends Model {
-  price: number;
-  tourId: string;
-
-  constructor(public optionType = OptionType.Empty,
-              public optionStatus: OptionStatus = OptionStatus.Limited) {
-    super();
-  }
-}
-
-export class TourDetail extends Model {
-  destinationId: string;
-  destination: Destination;
-  duration: number;
-  startDate: string;
-  placeId: string;
-  place: Place;
-  isFlight = true;
-  infantPrice: number;
-  busPrice: number;
-  roomPrice: number;
-  foodPrice: number;
-  creationDate: string;
-  leaderId: string;
-  leader: Person;
+  freeSpace: number;
 }
 
 export class Agency extends Model {
@@ -72,39 +81,15 @@ export class Agency extends Model {
   phoneNumber: string;
 }
 
-export class AgencyInfo extends Model {
-  name: string;
-  phoneNumber: string;
-  person: Person;
-}
-
 export class PersonAgency {
   agency: Agency;
   person: Person;
 }
 
-export class Coupon extends Model {
-  reagentId: number = undefined;
-  reagent: Person = undefined;
-  passengers: Person[] = [];
-  adultCount: number = undefined;
-  adultPrice: number = undefined;
-  infantCount: number = undefined;
-  infantPrice: number = undefined;
+export class Block extends Tour {
   busPrice: number = undefined;
   roomPrice: number = undefined;
   foodPrice: number = undefined;
-}
-
-export class Block extends Model {
-  agencyId: string = undefined;
-  parentId: string = undefined;
-  capacity: number = undefined;
-  infantPrice: number = undefined;
-  busPrice: number = undefined;
-  roomPrice: number = undefined;
-  foodPrice: number = undefined;
-  basePrice: number = undefined;
   totalPrice: number = undefined;
 }
 
@@ -114,61 +99,37 @@ export class EditPassword extends Model {
   rePassword: string = undefined;
 }
 
-export class Reagent extends Model {
-  name: string = undefined;
-  family: string = undefined;
-  agencyName: string = undefined;
-  mobileNumber: string = undefined;
-  phone: string = undefined;
-  email: string = undefined;
+export interface Person extends Model {
+  name: string ;
+  family: string;
+  displayTitle: string;
 
-  get title(): string {
-    return `${this.name} ${this.family}`;
-  }
-}
+  englishName: string;
+  englishFamily: string;
+  displayTitleEn: string;
 
-export class Person extends Model {
-  name = '';
-  family = '';
-  mobileNumber = '';
-  nationalCode = '';
-  fatherName = '';
+  mobileNumber: string;
+  nationalCode: string;
+  fatherName: string;
   birthDate: Date;
   passportExpireDate: Date;
   visaExpireDate: Date;
-  passportNo = 0;
-  gender = true;
-  personType = 0;
-  socialNumber = '';
-  isUnder5 = false;
-  isInfant = false;
-  englishFamily = '';
-  englishName = '';
+  passportNo: number;
+  gender: boolean;
+  type: PersonType;
+  socialNumber: string;
+  isUnder5: boolean;
+  isInfant: boolean;
 }
 
-export class PersonIncome {
-  //temp
-  reserved = true;
-  receivedMoney: number;
-  incomeStatus: IncomeStatus;
-  currencyFactor: number;
-
-  constructor(public optionType: OptionType = OptionType.Empty,) {
-  }
-}
-
-export class TeamMember {
+export class Passenger {
   personId: string = undefined;
-  person: Person = new Person();
-  personIncomes: PersonIncome[] = this.person && this.person.isInfant
-    ? null
-    : [
-      new PersonIncome(OptionType.Room),
-      new PersonIncome(OptionType.Bus),
-      new PersonIncome(OptionType.Food),
-    ]; //@TODO check ugly
-  haveVisa: boolean = true;
+  person: Person = <Person>{};
+  optionType: OptionType = OptionType.getAll();
+  hasVisa = true;
   passportDelivered: boolean = undefined;
+  tourId: string = undefined;
+  teamId: string = undefined;
 }
 
 export enum Role {
@@ -188,20 +149,73 @@ export class User extends Model {
 }
 
 export class TeamPassenger {
-  buyer: TeamMember;
-  passengers: TeamMember[];
+  buyer: Passenger;
+  passengers: Passenger[];
 }
 
 
 export class TourPassenger {
+  tour: Tour;
   leader: Person;
-  passengers: TeamMember[];
+  passengers: Passenger[];
 }
 
-//@TODO replace with a good class
+// @TODO replace with a good class
 export interface Dictionary<T> {
   [index: string]: T;
 }
+
+export class Team extends Model {
+  tourId: string;
+  count: number;
+  buyerId: string;
+  buyer: Person;
+  infantPrice: number;
+  basePrice: number;
+  totalPrice: number;
+  buyerIsPassenger: boolean;
+}
+
+export class TourTeamMember {
+  isTeam: boolean;
+  tourId: string;
+  basePrice: number;
+  infantPrice: number;
+  foodPrice: number;
+  roomPrice: number;
+  busPrice: number;
+  agencyName: string;
+  teams: Team[];
+}
+
+export class TourPassengers {
+  tour: Tour;
+  leader: Person;
+  passengers: Person[];
+}
+
+export class TourBuyer {
+  id: string;
+  isAgency: boolean;
+  title: string;
+  prefix: string;
+  phone: string;
+  count: number;
+  price: number;
+  gender: boolean;
+}
+
+export interface PassengerDataReportBase {
+  tourID: string;
+  tourDetail: TourDetail;
+  passengersInfos: Passenger[];
+  adultCount: number;
+  infantCount: number;
+  bedCount: number;
+  foodCount: number;
+  buyerNames: Dictionary<string>;
+}
+
 
 export interface IReturn<T> {
   createResponse(): T;
@@ -210,10 +224,6 @@ export interface IReturn<T> {
 }
 
 export interface IReturnVoid extends IReturn<void> {
-}
-
-export interface IPost {
-
 }
 
 export class QueryBase {
@@ -243,25 +253,25 @@ export class QueryBase {
 export class QueryDb<T> extends QueryBase {
 }
 
-export function Route(path: string, type: HttpMethod = 'GET') {
+export function Route(originPath: string, type: HttpMethod = 'GET') {
   return (target: any) => {
 
     const original = target;
     const createApiPath = function (path: string, object: any) {
       let newPath = path;
-      for (const field in object) {
+      for (const field in Object.keys(object)) {
         newPath = newPath.replace(`{${field}}`, object[field]);
       }
       return newPath;
     };
     const pathFn = function () {
-      return createApiPath(path, this);
-    }; //by using ()=>{} "this" got a wrong value
+      return createApiPath(originPath, this);
+    }; // by using ()=>{} "this" got a wrong value
     const httpMethodFn = function () {
       return type;
     };
 
-    const wrapper: any = function (...args: any[]) {//if we use (...args)=> or without parameters raise error: <classname> is not a constructor
+    const wrapper: any = function (...args: any[]) {// if we use (...args)=> or without parameters raise error: <classname> is not a constructor
       Reflect.defineProperty(wrapper.prototype,
         'apiPath',
         {

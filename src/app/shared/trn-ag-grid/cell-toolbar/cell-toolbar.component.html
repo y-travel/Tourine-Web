@@ -1,6 +1,15 @@
 <mat-toolbar dir="ltr" data-visibility="autoHide">
-  <button matTooltip="{{item.title|translate}}" mat-mini-fab class="toolbar-item" *ngFor="let item of params.items"
-          [style.color]="item.color" (click)="doCommand(item)">
-    <mat-icon>{{item.icon}}</mat-icon>
-  </button>
+  <div *ngFor="let item of items">
+    <button [trnDialog]="item.alertData"
+            matTooltip="{{item.title|translate}}"
+            mat-mini-fab
+            class="toolbar-item"
+            [class.disabled]="!canEnable(item)"
+            *ngIf="canShow(item)"
+            [style.color]="item.color"
+            (confirmClick)="doCommand(item)"
+            [disabled]="!canEnable(item)">
+      <mat-icon>{{item.icon}}</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>

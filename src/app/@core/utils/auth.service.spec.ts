@@ -1,15 +1,22 @@
-import { TestBed, inject } from '@angular/core/testing';
-
 import { AuthService } from './auth.service';
+import { TestBed } from '@angular/core/testing';
+import { AppModule } from '../../app.module';
 
-describe('AuthService', () => {
+describe('Auth Service', () => {
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AuthService]
+      imports: [AppModule],
     });
   });
 
-  it('should be created', inject([AuthService], (service: AuthService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('isAuthenticated should return proper value depend on person exist', () => {
+    const auth = TestBed.get(AuthService);
+    auth.config.isDev = () => false;
+
+    auth.person = null;
+    expect(auth.isAuthenticated()).toBe(false);
+    auth.person = {};
+    expect(auth.isAuthenticated()).toBe(true);
+  });
 });

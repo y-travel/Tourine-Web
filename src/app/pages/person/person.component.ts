@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'person',
+  selector: 'trn-person',
   template: `<router-outlet></router-outlet>`,
 })
 export class PersonComponent implements OnInit {

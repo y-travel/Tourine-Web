@@ -8,12 +8,13 @@ import { CellHeaderComponent } from './cell-header/cell-header.component';
 import { CellDetailComponent } from './cell-detail/cell-detail.component';
 import { ThemeModule } from '../../@theme/theme.module';
 import { CellToolbarComponent } from './cell-toolbar/cell-toolbar.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { RowClickExpandDirective } from './row-click-expand/row-click-expand.directive';
 
 const COMPONENTS = [
   CellHeaderComponent,
   CellDetailComponent,
   CellToolbarComponent,
+  RowClickExpandDirective,
 ];
 const GRID_MODULE = AgGridModule.withComponents([
   ...COMPONENTS
@@ -26,7 +27,8 @@ const GRID_MODULE = AgGridModule.withComponents([
     ThemeModule,
     GRID_MODULE,
   ],
-  declarations: [...COMPONENTS, CellToolbarComponent, ToolbarComponent]
+  exports: COMPONENTS,
+  declarations: COMPONENTS,
 })
 export class TrnAgGridModule {
   static withAgModule(): ModuleWithProviders[] {

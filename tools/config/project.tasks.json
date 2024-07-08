@@ -1,15 +1,25 @@
 {
-  "build.prod": [
-    "build.ng",
+  "build.sync": [
+    "build.prod",
     "clean.sync",
     "copy.to.sync"
   ],
+  "build.prod": [
+    "clean.all",
+    "tslint",
+    "build.ng"
+  ],
+  "build.prod.deploy": [
+    "build.prod",
+    "move.to.server"
+  ],
   "serve.dev": [
+    "tslint",
     "serve.ng"
   ],
-  "build.watch": [
-    "watch.sync",
-    "build.ng"
+  "move.to.server": [
+    "clean.server",
+    "copy.to.server"
   ],
   "test": [
     "tslint",

@@ -1,0 +1,24 @@
+mat-card#tour-card.full-size([stretch]="true")
+  // @TODO globalize height
+  ag-grid-angular.ag-theme-material(
+  (gridSizeChanged)="tourGrid.api.sizeColumnsToFit()",
+  #tourGrid,
+  [columnDefs]="tourGridService.columnDefs",
+  [rowDragManaged]="true",
+  [enableSorting]="true",
+  [rowHeight]="35",
+  [headerHeight]="35",
+  [icons]="tourGridService.icons",
+  [masterDetail]="true",
+  [gridOptions]="tourGridService.gridOptions",
+  [detailCellRenderer]="tourGridService.detailCellRenderer",
+  [frameworkComponents]="tourGridService.frameworkComponents",
+  [detailCellRendererParams]="tourGridService.detailCellRendererParams",
+  (gridReady)="tourGridService.onGridReady($event)",
+  [enableRtl]="true" ,
+  [deltaRowDataMode] = "true" ,
+  [animateRows] = "true" ,
+  [getRowNodeId] = "tourGridService.getRowNodeId",
+  rowClickExpand)
+  button.float-right.fab-grid(mat-fab,color="accent", (click)="tourUpsert()",matTooltip="{{'tour.upsert'|translate}}",matTooltipPosition="right")
+    mat-icon add

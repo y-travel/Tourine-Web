@@ -7,7 +7,7 @@ import { loadCompositeTasks, loadTasks } from './tools/utils';
 
 loadTasks(Config.PROJECT_TASKS_DIR);
 
-loadCompositeTasks(Config.SEED_COMPOSITE_TASKS, Config.PROJECT_COMPOSITE_TASKS);
+loadCompositeTasks(Config.PROJECT_COMPOSITE_TASKS);
 
 // --------------
 // Clean dev/coverage that will only run once

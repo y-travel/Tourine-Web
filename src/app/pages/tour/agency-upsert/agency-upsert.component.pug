@@ -1,0 +1,22 @@
+include ../../../mixin
++matTitle('{{"agency.upsert"|translate}}')
+.right.modal-body(dir="rtl", [style.width.px]="400", trnAutoTranslate)
+  // width set for IE
+  form([formGroup]="data.form", fxLayout="column")
+    div(fxLayout="row", formGroupName="agency")
+      +matField("name","agency.name","data.form.get('agency')")
+      +matField("phoneNumber","agency.phoneNumber","data.form.get('agency')","optional")
+    div(fxLayout="row", formGroupName="person")
+      trn-slider(formControlName="gender", falseText="female", trueText="male")
+    div(fxLayout="row", formGroupName="person")
+      mat-form-field(fxFlex)
+        input(matInput, placeholder="agency.ownerName", formControlName="name")
+      mat-form-field(fxFlex)
+        input(matInput, placeholder="person.family", formControlName="family")
+    div(fxLayout="row", formGroupName="person")
+      mat-form-field(fxFlex)
+        input(matInput, placeholder="person.mobileNumber", formControlName="mobileNumber")
+      mat-form-field(fxFlex)
+        input(matInput, placeholder="person.socialNumber", formControlName="socialNumber")
+mat-dialog-actions
+  button(fxFlex, mat-raised-button="", color="primary", (click)="save()") {{"save"|translate}}

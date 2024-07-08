@@ -1,27 +1,35 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { PersonComponent } from './person.component';
-import { routedComponents, PersonRoutingModule } from './person-routing.module';
+import { PersonRoutingModule } from './person-routing.module';
 import { COMMON_MODULES } from '../default';
-import { LeaderListComponent } from './leader-list/leader-list.component';
 import { TrnAgGridModule } from '../../shared/trn-ag-grid/trn-ag-grid.module';
 import { PersonService } from '../../@core/data/person.service';
-import { LeaderGridService } from './leader-grid.service';
 import { DialogService } from '../../@core/utils/dialog.service';
-import { LeaderUpsertComponent } from './leader-upsert/leader-upsert.component';
+import { PersonUpsertComponent } from './person-upsert/person-upsert.component';
+import { SharedComponentsModule } from '../../shared/shared-components/shared-components.module';
+import { LeaderListComponent } from './leader-list/leader-list.component';
 
-const COMPONENTS =[
-  PersonComponent,
-  LeaderUpsertComponent,
+const ENTRY_COMPONENTS = [
+  PersonUpsertComponent,
 ];
+
+const COMPONENTS = [
+  ...ENTRY_COMPONENTS,
+  PersonComponent,
+  LeaderListComponent,
+];
+
 @NgModule({
   imports: [
     ...COMMON_MODULES,
     TrnAgGridModule.withAgModule(),
     PersonRoutingModule,
+    SharedComponentsModule
   ],
-  declarations: [...routedComponents,...COMPONENTS],
-  providers: [DialogService,PersonService,LeaderGridService],
-  entryComponents: COMPONENTS
+  providers: [DialogService, PersonService],
+  declarations: COMPONENTS,
+  entryComponents: ENTRY_COMPONENTS,
 })
-export class PersonModule { }
+export class PersonModule {
+}

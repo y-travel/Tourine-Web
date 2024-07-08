@@ -5,23 +5,25 @@ import { UserService } from './users.service';
 import { StateService } from './state.service';
 import { TourService } from './tour.service';
 import { PlayerService } from './player.service';
-import { FormFactory } from "./models/form-factory";
-import { DataService } from "./data.service";
-import { ApiService } from "./api.service";
-import { CouponService } from "./coupon.service";
-import { HttpClient } from "@angular/common/http";
+import { FormFactory } from './models/form-factory';
+import { DataService } from './data.service';
+import { ApiService } from './api.service';
+import { HttpClient } from '@angular/common/http';
 import { AgencyService } from './agency.service';
+import { FileService } from './file.service';
+import { PersonService } from './person.service';
 
 const SERVICES = [
   UserService,
   AgencyService,
   StateService,
   TourService,
-  CouponService,
   ApiService,
+  FileService,
   DataService,
   FormFactory,
   PlayerService,
+  PersonService,
 ];
 
 @NgModule({

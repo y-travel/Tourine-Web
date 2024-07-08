@@ -1,0 +1,116 @@
+include ../../../mixin
++matTitle('{{ "reports.*"|translate }}')
+.right.modal-body(dir="rtl", [style.width.px]="1000", [style.height.px]="500")
+  mat-tab-group(#mainTab,(selectedTabChange)="selectedTab=$event.index")
+    mat-tab(label="{{'reports.ticket'|translate}}")
+    mat-tab(label="{{'reports.visa'|translate}}")
+    mat-tab(label="{{'reports.buyer'|translate}}")
+    mat-tab(label="{{'reports.tour'|translate}}")
+  div([ngSwitch]="selectedTab")
+    div(*ngSwitchCase="TabType.ticket")
+      ng-template(*ngTemplateOutlet="ticketTemplate")
+    div(*ngSwitchCase="TabType.visa")
+      ng-template(*ngTemplateOutlet="visaTemplate")
+    div(*ngSwitchCase="TabType.tour")
+      ng-template(*ngTemplateOutlet="tourTemplate")
+    div(*ngSwitchCase="TabType.buyer")
+      ng-template(*ngTemplateOutlet="buyerTemplate")
+mat-dialog-actions
+  button(mat-raised-button, color="primary", fxFlex, matDialogClose) {{ "close"|translate }}
+ng-template(#reportGridTemplate, let-tabIndex="tab")
+  ag-grid-angular.ag-theme-material(
+  #aggrid,
+  style="height:300px",
+  [columnDefs]="reportGridService.ticketColumnDef",
+  [gridOptions]="reportGridService.gridOptions",
+  [frameworkComponents]="reportGridService.frameworkComponents",
+  (gridReady)="onGridReady($event,tabIndex)",
+  [enableRtl]="true",
+  rowHeight="35",
+  headerHeight="35")
+ng-template(#ticketTemplate)
+  div
+    mat-card
+      div(fxLayout="row", fxLayoutAlign="space-between center")
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'ticket.adultCount'|translate }} :
+            label {{ reportData.adultCount }}
+          div(fxLayout="row")
+            label {{ 'ticket.infantCount'|translate }} :
+            label {{ reportData.infantCount }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'tour.startDate'|translate }} :
+            label {{ reportData.tourDetail.startDate }}
+          div(fxLayout="row")
+            label {{ 'tour.endDate'|translate }} :
+            label {{ reportData.tourDetail.endDate }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'tour.destination'|translate }} :
+            label {{ reportData.tourDetail.destination?.name}}
+          div(fxLayout="row")
+            button(mat-mini-fab,color="accent",(click)="reportService.showTicketReport(tourId)")
+              mat-icon printer
+    mat-card([stretch]="true")
+      mat-tab-group((selectedTabChange)="ticketTab($event.index)")
+        mat-tab(label="{{'adult.*'|translate}}")
+        mat-tab(label="{{'infant'|translate}}")
+      ng-template(*ngTemplateOutlet="reportGridTemplate; context:{tab:TabType.ticket}")
+ng-template(#visaTemplate)
+  div
+    mat-card
+      div(fxLayout="row", fxLayoutAlign="space-between center")
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'person.numberOfHasVisa'|translate }} :
+            label {{ '-' }}
+          div(fxLayout="row")
+            label {{ 'person.numberOfEmmisionableVisa'|translate }} :
+            label {{ reportData.passengersInfos?.length }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            button(mat-mini-fab, color="accent",(click)="reportService.showVisaReport(tourId)")
+              mat-icon printer
+    mat-card([stretch]="true")
+      mat-tab-group((selectedTabChange)="visaTab($event.index)")
+        mat-tab(label="{{'person.hasVisa'|translate}}")
+        mat-tab(label="{{'person.emissionVisa'|translate}}")
+      ng-template(*ngTemplateOutlet="reportGridTemplate; context:{tab:TabType.visa}")
+ng-template(#tourTemplate)
+  div
+    mat-card
+      div(fxLayout="row", fxLayoutAlign="space-between center")
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'tour.date'|translate }} :
+            label {{ reportData.tourDetail.startDate }}
+          div(fxLayout="row")
+            label {{ 'tour.code'|translate }} :
+            label {{ form.value.tourCode }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'tour.leader'|translate }} :
+            label {{ reportData.leader?report.leader.displayTitle:'' }}
+          div(fxLayout="row")
+            label {{ 'passenger.count'|translate }} :
+            label {{ reportData.adultCount+reportData.infantCount }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            label {{ 'infantCount'|translate }} :
+            label {{ reportData.infantCount }}
+          div(fxLayout="row")
+            div(fxLayout="row")
+              label {{ 'bedCount'|translate }} :
+              label {{ reportData.bedCount }}
+        div(fxLayout="column")
+          div(fxLayout="row")
+            button(mat-mini-fab,color="accent",(click)="reportService.showPassengerReport(tourId)")
+              mat-icon printer
+    mat-card([stretch]="true")
+      ng-template(*ngTemplateOutlet="reportGridTemplate; context:{tab:TabType.tour}")
+ng-template(#buyerTemplate)
+  div
+    mat-card([stretch]="true")
+      ng-template(*ngTemplateOutlet="reportGridTemplate; context:{tab:TabType.buyer}")

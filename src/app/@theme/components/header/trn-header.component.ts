@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
-import { SidebarService } from "../sidebar/sidebar.service";
-import { MenuService } from "../menu/menu.service";
+import { SidebarService } from '../sidebar/sidebar.service';
+import { MenuService } from '../menu/menu.service';
 
 @Component({
   selector: 'trn-header',
@@ -30,17 +30,7 @@ export class TrnHeaderComponent implements OnInit {
     this.sidebarService.toggle(true);
     return false;
   }
-
-  toggleSettings(): boolean {
-    this.sidebarService.toggle(false);
-    return false;
-  }
-
   goToHome() {
     this.menuService.navigateHome();
-  }
-
-  startSearch() {
-    this.analyticsService.trackEvent('startSearch');
   }
 }

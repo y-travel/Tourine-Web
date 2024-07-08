@@ -31,15 +31,6 @@
     @extend .RightToLeft;
   }
 
-  .modal-header {
-    @extend .RightToLeft;
-    height: 20px;
-  }
-
-  .modal-title {
-    width: 100%;
-    text-align: center;
-  }
   .modal-content{
     width: fit-content;
   }

@@ -1,15 +1,23 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { AlertDialogData } from '../../../@theme/components/dialog/dialog.component';
 
 @Component({
-  selector: 'app-cell-toolbar',
+  selector: 'trn-cell-toolbar',
   templateUrl: './cell-toolbar.component.html',
   styleUrls: ['./cell-toolbar.component.scss'],
 })
 export class CellToolbarComponent implements ICellRendererAngularComp {
+  private _items: ToolbarItem[];
   params: ICellRendererToolbarParams;
-  items: any[];
-  visibility: VisibilityType = 'autoHide';
+  data: any;
+  canEnable = (item: ToolbarItem) => item.canEnable != null ? item.canEnable(this.data) : true;
+
+  canShow = (item: ToolbarItem) => item.canShow != null ? item.canShow(this.data) : true;
+
+  get items(): ToolbarItem[] {
+    return this._items;
+  }
 
   refresh(params: any): boolean {
     return undefined;
@@ -17,24 +25,29 @@ export class CellToolbarComponent implements ICellRendererAngularComp {
 
   agInit(params: any): void {
     this.params = params;
+    this._items = this.params.items.sort((a, b) => a.index - b.index);
+    this.data = this.params.node.data;
   }
 
   doCommand(item: ToolbarItem) {
-    item.command(this.params.data, ...item.commandParams);
+    item.command(this.data, ...item.commandParams);
   }
 }
 
 export class ICellRendererToolbarParams {
-  data: any;
+  node: any;
   items: ToolbarItem[];
 }
 
 export class ToolbarItem {
+  index = 0;
   icon = 'border_clear';
   title = '';
   color = '';
-  command: (data) => void;
+  command: (data: any, items?) => void;
   commandParams = [];
+  canEnable: (data: any) => boolean;
+  canShow: (data: any) => boolean;
+  alertData: AlertDialogData;
 }
 
-declare type VisibilityType = 'autoHide' | 'hidden' | 'show';

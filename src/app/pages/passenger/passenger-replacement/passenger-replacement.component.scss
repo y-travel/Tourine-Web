@@ -1,0 +1,9 @@
+@import '../../../@theme/styles/install';
+
+@include trn-install-component() {
+
+  .teamCard {
+    height: 360px;
+    overflow-y: scroll;
+  }
+}

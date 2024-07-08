@@ -1,15 +1,70 @@
+@import "../../../@theme/styles/core/variables";
+
 @mixin trn-definition() {
   .card-stretch {
     margin: 20px;
     padding: 0;
     direction: rtl;
-    .mat-card-footer{
+    .mat-card-footer {
       margin: 0;
     }
   }
   .card-shadow-thick {
-    box-shadow: 5px 5px 20px trn-theme(shadow-color) !important;//cos mat-card class is over it
+    box-shadow: 2px 2px 30px 10px trn-theme(shadow-color) !important; //cos mat-card class is over it
   }
-  .pull-right{float:right}
-  .pull-left{float:left}
+  .float-right {
+    float: right
+  }
+  .float-left {
+    float: left
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  mat-hint[size="small"] {
+    font-size: 0.7rem;
+    color: map_get($mat-blue, 500);
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background: #eee;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #03a9f4;
+  }
+
+  .white_color {
+    color: white;
+  }
+  .white_bcolor {
+    background-color: white;
+  }
+
+  .modal-header {
+    padding: 6px 0 5px 0;
+    height: 40px;
+    background-color: trn-theme(color-primary);
+    .modal-title {
+      width: 100%;
+      text-align: center;
+      color: white;
+      mat-icon {
+        color: white;
+      }
+      button {
+        float: right;
+      }
+    }
+  }
+
+  .modal-header {
+    margin: -24px -24px 5px -24px;
+  }
 }

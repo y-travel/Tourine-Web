@@ -1,0 +1,46 @@
+resources:
+- repo: self
+  fetchDepth: 15
+queue:
+  name: Default
+  demands: 
+  - npm
+  - node.js
+
+variables:
+  VersionSharePath: '%HomePath%\Version'
+steps:
+- task: gittools.gitversion.gitversion-task.GitVersion@3
+  displayName: GitVersion
+
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-installer-task.YarnInstaller@2
+  displayName: Install Yarn
+  inputs:
+    checkLatest: true
+
+- task: geeklearningio.gl-vsts-tasks-yarn.yarn-task.Yarn@2
+  displayName: Restore Packages Using Yarn
+
+- task: Npm@1
+  displayName: Build
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run build:prod'
+
+- task: ArchiveFiles@2
+  displayName: Create Archive
+  inputs:
+    rootFolderOrFile: 'dist/adminPanel'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/app.zip'
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Artifacts
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/app.zip'
+    ArtifactName: '$(Build.BuildNumber)'
+    publishLocation: FilePath
+    TargetPath: '$(VersionSharePath)\SPA'
+
+
+

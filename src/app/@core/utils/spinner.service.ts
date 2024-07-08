@@ -33,6 +33,21 @@ export class SpinnerService {
     this.executeAll();
   }
 
+  // TODO is there any better way of doing this?
+  showSpinner(): void {
+    const el = this.getSpinnerElement();
+    if (el) {
+      el.style['display'] = 'block';
+    }
+  }
+
+  hideSpinner(): void {
+    const el = this.getSpinnerElement();
+    if (el) {
+      el.style['display'] = 'none';
+    }
+  }
+
   private executeAll(done = () => {
   }): void {
     Promise.all(this.loaders).then((values) => {
@@ -43,21 +58,6 @@ export class SpinnerService {
         // TODO: Promise.reject
         console.error(error);
       });
-  }
-
-  // TODO is there any better way of doing this?
-  private showSpinner(): void {
-    const el = this.getSpinnerElement();
-    if (el) {
-      el.style['display'] = 'block';
-    }
-  }
-
-  private hideSpinner(): void {
-    const el = this.getSpinnerElement();
-    if (el) {
-      el.style['display'] = 'none';
-    }
   }
 
   private getSpinnerElement() {

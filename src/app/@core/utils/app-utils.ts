@@ -18,8 +18,12 @@ export class AppUtils {
     return Reflect.get(object, 'httpMethod');
   }
 
-  isNullorUndefined(obj: any) {
+  isNullOrUndefined(obj: any) {
     return obj === undefined || obj === null;
+  }
+
+  isNullOrEmpty(str: string) {
+    return str === '' || this.isNullOrUndefined(str);
   }
 
   getEnumNames(item: any): string[] {
@@ -35,6 +39,10 @@ export class AppUtils {
       case (OptionType.Food):
         return 'restaurant';
     }
+  }
+
+  setDelayFocus(control, timeout = 400) {
+    setTimeout(() => control.focus(), timeout);
   }
 }
 

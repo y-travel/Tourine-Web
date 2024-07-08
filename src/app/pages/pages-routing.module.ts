@@ -9,21 +9,21 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-      path: "",
-      redirectTo: "dashboard",
-      pathMatch: "full",
+      path: '',
+      redirectTo: 'tour',
+      pathMatch: 'full',
     },
     {
-      path: "dashboard",
+      path: 'dashboard',
       component: DashboardComponent,
     },
     {
-      path: "tour",
-      loadChildren: "./tour/tour.module#TourModule",
+      path: 'tour',
+      loadChildren: './tour/tour.module#TourModule',
     },
     {
-      path: "person",
-      loadChildren: "./person/person.module#PersonModule",
+      path: 'person',
+      loadChildren: './person/person.module#PersonModule',
     },
   ],
 }];

@@ -5,7 +5,7 @@ import { IDetailCellRendererParams } from 'ag-grid-enterprise/dist/lib/rendering
 import { CellHeaderComponent } from '../cell-header/cell-header.component';
 
 @Component({
-  selector: 'app-cell-detail',
+  selector: 'trn-cell-detail',
   templateUrl: './cell-detail.component.html',
   styleUrls: ['./cell-detail.component.scss']
 })

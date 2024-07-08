@@ -4,7 +4,12 @@
       <mat-icon>menu</mat-icon>
     </button>
     <div class="logo" (click)="goToHome()">تورینه</div>
-    <trn-theme-switcher></trn-theme-switcher>
+    <trn-theme-switcher class="logo"></trn-theme-switcher>
+    <form>
+      <mat-form-field class="width" >
+        <input matInput placeholder="{{'search'|translate}}" autocomplete="off">
+      </mat-form-field>
+    </form>
     <span fxFlex></span><!--spacer-->
     <button mat-icon-button>
       <mat-icon>account_box</mat-icon>

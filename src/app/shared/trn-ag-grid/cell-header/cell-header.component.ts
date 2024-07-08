@@ -3,7 +3,7 @@ import { IHeaderAngularComp } from 'ag-grid-angular/dist/interfaces';
 import { IHeaderParams } from 'ag-grid';
 
 @Component({
-  selector: 'app-cell-header',
+  selector: 'trn-cell-header',
   templateUrl: 'cell-header.component.html',
   styleUrls: ['cell-header.component.scss']
 })

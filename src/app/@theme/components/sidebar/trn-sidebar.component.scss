@@ -1,5 +1,7 @@
 @import "../../styles/install";
-$breakpoint-screen-xs:600px;
+@import "../../styles/core/variables";
+
+$breakpoint-screen-xs: 600px;
 @include trn-install-component() {
   mat-sidenav {
     width: 250px;
@@ -11,7 +13,7 @@ $breakpoint-screen-xs:600px;
   .content {
     // Each magic number is from <mat-toolbar> height,
     // which is different depending on the viewport width.
-    height: calc(100vh - 64px);
+    height: calc(100vh - #{$toolbar-height});
     @media (max-width: $breakpoint-screen-xs) {
       height: calc(100vh - 56px);
     }

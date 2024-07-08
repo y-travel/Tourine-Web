@@ -1,0 +1,41 @@
+include ../../../mixin
++matTitle('{{ "passenger.detailUpsert"|translate }}')
+.right.modal-body(dir="rtl", [style.width.px]="1000", [style.height.px]="435", trnAutoTranslate)
+  mat-horizontal-stepper(#stepper, [linear]="true")
+    mat-step([stepControl]="buyerForm", label="{{'buyer.info'|translate}}")
+      form([formGroup]="buyerForm", (keydown.enter)="$event.preventDefault()")
+        div(fxLayout="column")
+          div(fxLayout="row")
+            trn-find-person([personForm]="buyerForm")
+            mat-checkbox(#check, [(ngModel)]="isBuyerAsPassenger", [ngModelOptions]="{standalone: true}", id="buyerAsPassenger") {{"buyer.asPassenger"|translate}}
+          mat-card.card-stretch.margin(fxLayout="row", fxFlex)
+            mat-form-field(fxFlex)
+              input(matInput, mask="number", placeholder="tour.price", [formControl]="blockForm.form.get('basePrice')", (input)="onPriceChange()")
+              mat-hint(align="end", translate) price.irFormated
+            mat-form-field(fxFlex)
+              input(matInput, mask="number", placeholder="infantPrice", [formControl]="blockForm.form.get('infantPrice')", (input)="onPriceChange()")
+              span(matPrefix, align="end") $ 
+              mat-hint(align="end", translate) price.irFormated
+    mat-step(label="{{'passenger.add'|translate}}")
+      form([formGroup]="blockForm.form", (keydown.enter)="$event.preventDefault()")
+        div
+          mat-card([stretch]="true")
+            ag-grid-angular.ag-theme-material(#agGrid, style="height:280px", [columnDefs]="passengerGridService.columnDefs", [gridOptions]="passengerGridService.gridOptions", [frameworkComponents]="passengerGridService.frameworkComponents", (gridReady)="passengerGridService.onGridReady($event)", [enableRtl]="true", rowHeight="35", headerHeight="35")
+            div(dir="ltr")
+              button.float-right.fab-grid(mat-fab, color="accent", (click)="teamMemberUpsert()")
+                mat-icon.icon-text-color add
+        mat-card
+          div(fxLayout="row", layout-align="space-between center")
+            label(fxFlex) {{ 'adultCountLbl'|translate }} : {{ adultCount }}
+            label(fxFlex) {{ 'nonOptionCountLbl'|translate }} : {{ noneOptionCount }}
+            label(fxFlex) {{ 'infantCount'|translate }} : {{ infantCount }}
+            label(fxFlex)
+              | {{ 'total'|translate }} : {{ blockForm.form.value.totalPrice }} {{ 'price.irFormated'|translate }}
+div(fxLayout="row", align="end")
+  button.float-left(mat-mini-fab, color="primary", #nextButton, (click)="nextStep(stepper)", [disabled]="stepper.selectedIndex==1 || !buyerForm.value.id")
+    mat-icon navigate_before
+  button.float-right(mat-mini-fab, color="primary", (click)="previousStep(stepper)", [disabled]="stepper.selectedIndex==0")
+    mat-icon navigate_next
+mat-dialog-actions
+  button(mat-raised-button, color="primary", fxFlex, (click)="save()", [disabled]="passengerGridService.rows\&\&passengerGridService.rows.length > 0 ? false : true", #submit)
+    | {{ "save"|translate }}

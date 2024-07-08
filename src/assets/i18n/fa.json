@@ -3,17 +3,23 @@
   "addAgencyMessage": "نام آژانس را از لیست انتخاب نمایید و یا آژانس جدید ایجاد نمایید",
   "addPassengerMessage": "برای افزودن مسافر به این تور، بر روی گزینه ثبت کلیک نمایید",
   "adult": {
+    "*": "بزرگسال",
     "count": "تعداد ظرفیت بزرگسال",
     "minPrice": "حداقل قیمت ثبت نام بزرگسال"
   },
   "adultCount": "تعداد مسافران",
+  "adultCountLbl": "تعداد بزرگسال",
   "agency": {
+    "*": "آژانس",
     "name": "نام آژانس",
+    "ownerName": "نام مدیر",
     "phoneNumber": "شماره تلفن آژانس",
-    "upsert": "ثبت آژانس"
+    "upsert": "ثبت آژانس و معرف",
+    "tours": "تورهای"
   },
-  "agencyName": "نام آژانس",
   "allPriceIsPerOne": "قیمت های وارد شده به ازای هر نفر می باشد",
+  "apply": "تایید",
+  "bedCount": "تعداد تخت",
   "birthDate": "تاریخ تولد",
   "block": {
     "save": "ذخیره تور",
@@ -21,12 +27,22 @@
   },
   "busPrice": "قیمت صندلی",
   "buyer": {
-    "names": "نام خریداران"
+    "*": "خریدار",
+    "enterNationalCode": "کدملی خریدار را وارد نمایید",
+    "name": "نام خریدار",
+    "names": "نام خریداران",
+    "info": "مشخصات خریدار",
+    "list": "لیست خریداران",
+    "asPassenger": "ثبت خریدار به عنوان مسافر."
   },
+  "contactList": "لیست مخاطبین",
+  "cancel": "انصراف",
   "capacity": {
     "*": "ظرفیت",
     "all": "کل",
-    "registered": "ثبت شده"
+    "noName": "بدون اسم",
+    "remained": "مانده",
+    "reserved": "رزرو شده"
   },
   "close": "بستن",
   "count": "تعداد",
@@ -41,11 +57,12 @@
   "duration": "مدت زمان",
   "edit": "ویرایش",
   "email": "رایانامه",
-  "emptyCount": "ظرفیت خالی {{value}} نفر",
+  "emptyCount": "ظرفیت خالی تور {{value}} نفر",
   "family": "نام خانوادگی",
   "fatherName": "نام پدر",
   "fellows": "همراهان",
   "female": "زن",
+  "femaleTitle": "خانم",
   "first": "اول",
   "flight": "هوایی",
   "foodPrice": "قیمت غذا",
@@ -53,6 +70,8 @@
   "ground": "زمینی",
   "homePage": "صفحه اصلی",
   "hotel": "هتل",
+  "haveAllOptions": "خدمات کامل",
+  "infant": "اینفنت",
   "infantCount": "تعداد اینفنت",
   "infantPrice": "قیمت اینفنت",
   "leader": {
@@ -60,15 +79,27 @@
     "add": "افزودن راهنمای تور"
   },
   "male": "مرد",
+  "maleTitle": "آقای",
   "mobileNumber": "شماره همراه",
   "msg": {
-    "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزور شد",
-    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است"
+    "blockReservation": "تعداد {{capacity}}  نفر با موفقیت رزرو شد",
+    "delete": "در صورت حذف اطلاعات غیر قابل بازگشت میباشد",
+    "deleteError": "حذف امکان پذیر نمی باشد",
+    "invalidUsernameOrPassword": "نام کاربری و یا کلمه عبور اشتباه است",
+    "thereIsNoFreeSpace": "ظرفیت خالی برای این تور وجود ندارد",
+    "connectionError": "خطا در برقراری ارتباط با سرور",
+    "buyerCannotBeInfant": "خریدار نمی تواند اینفنت باشد",
+    "buyerCannotBeUnder5": "خریدار نمی تواند زیر 5 سال باشد",
+    "allowedPaassengerToReplace": "فقط مسافرین مشخص شده را می توانید جابجا کنید",
+    "notFound": "موردی یافت نشد.",
+    "editError": "ظرفیت کل نمی تواند از ظرفیت رزرو شده کمتر باشد"
   },
   "name": "نام",
-  "nationalCode": "کد ملی",
   "nextStep": "مرحله بعد",
   "nightFormat": "(شب)",
+  "nonOptionCountLbl": "تعداد بدون خدمات",
+  "nationalCode": "کدملی",
+  "nonePrefix": "بدون",
   "none": "هیچکدام",
   "offValue": "تخفیف",
   "oldPassword": "کلمه عبور فعلی",
@@ -79,9 +110,15 @@
   },
   "optional": "اختیاری",
   "options": "خدمات",
+  "optionIsAvailableForUnder5": "   خدمات فقط برای افراد بین 2 و 5 سال قابل تغییر می باشد",
+  "noneOptions": "بدون خدمات",
   "passenger": {
     "*": "مسافر",
-    "upsert": "ثبت مشخصات مسافران"
+    "count": "تعداد مسافرین",
+    "detailUpsert": "ثبت مشخصات مسافران",
+    "upsert": "مشخصات مسافر",
+    "add": "افزودن مسافر",
+    "swap": "جابجایی مسافرین"
   },
   "passengerReplacementSuccessfull": "جابجایی با موفیت انجام شد",
   "passport": {
@@ -99,14 +136,16 @@
     "birthDate": "تاریخ تولد",
     "englishFamily": "نام خانوادگی انگلیسی",
     "englishName": "نام انگلیسی",
-    "engllishNameAndFamily": "(لاتین) نام و نام خانوادگی",
+    "englishNameAndFamily": "نام و نام خانوادگی(لاتین)",
     "family": "نام خانوادگی",
     "gender": "جنسیت",
-    "haveVisa": "ویزا دارد",
+    "hasVisa": "ویزا دارد",
+    "numberOfHasVisa": "تعداد مسافرین دارای ویزا",
+    "numberOfEmmisionableVisa": "تعداد ویزاهای قابل دریافت",
+    "emissionVisa": "صدور ویزا",
     "mobileNumber": "شماره همراه",
     "name": "نام",
     "nameAndFamily": "نام و نام خانوادگی",
-    "nc": "کد ملی",
     "passport": "گذرنامه",
     "passportDelivered": "تحویل گذرنامه",
     "replacement": "جابجایی مسافران",
@@ -114,7 +153,9 @@
     "upsert": "ثبت شخص",
     "visa": "ویزا",
     "visaDelivered": "تحویل ویزا",
-    "visaExpireDate": "اعتبار ویزا"
+    "visaExpireDate": "اعتبار ویزا",
+    "info": "اطلاعات فردی",
+    "extraInfo": "اطلاعات تکمیلی"
   },
   "personel": "پرسنل",
   "phone": "تلفن",
@@ -126,36 +167,71 @@
     "irFormated": "(ریال)"
   },
   "rePassword": "تکرار کلمه عبور",
+  "read": "خواندم",
   "reagent": {
     "name": "نام معرف",
     "upsert": "ثبت معرف"
   },
   "replacedPassenger": "مسافرین جابجا شده عبارتند از:",
+  "reports": {
+    "*": "گزارشات",
+    "buyer": "خریداران",
+    "ticket": "بلیط",
+    "tour": "تور",
+    "visa": "ویزا"
+  },
   "roomPrice": "قیمت تخت",
   "row": "ردیف",
+  "search": "جستجو",
   "save": "ثبت",
   "second": "دوم",
   "selectPerson": "انتخاب فرد",
-  "steps": "گام {{value}}",
-  "submitDate": "تاریخ رزور",
-  "team": {
-    "*": "گروه",
-    "list": "لیست گروه ها"
+  "steps": {
+    "level": "گام {{value}}",
+    "end": "اتمام"
   },
+  "submitDate": "تاریخ رزرو",
   "third": "سوم",
-  "total": "جمع کل",
+  "ticket": {
+    "infantCount": "تعداد بلیط اینفنت",
+    "adultCount": "تعداد بلیط بزرگسال"
+  },
+  "total": "جمع مبلغ",
   "tour": {
     "code": "کد تور",
     "date": "تاریخ اجرا",
     "list": "لیست تورها",
-    "passengers": "مسافرین تور",
     "price": "قیمت تور",
     "reserve": "رزرو تور",
-    "upsert": "ثبت تور"
+    "upsert": "ثبت تور",
+    "edit": "ویرایش تور",
+    "leader": "مدیرگروه",
+    "startDate": "تاریخ حرکت",
+    "endDate": "تاریخ بازگشت",
+    "destination": "مقصد",
+    "information": "اطلاعات تور",
+    "description": "شرح"
   },
   "user": {
     "upsert": "ثبت کاربر"
   },
   "username": "نام کاربری",
-  "withOutPrice": "بدون قیمت"
+  "validation": {
+    "min": "حداقل {{min}} باشد",
+    "max": "حداکثر {{max}} باشد",
+    "minlength": "باید حداقل {{requiredLength}} حرف باشد",
+    "maxlength": "باید حداکثر {{requiredLength}} حرف باشد",
+    "fixlength": "باید {{requiredLength}} حرف باشد",
+    "required": "الزامی",
+    "pattern": "خطا در نوشتار",
+    "greaterthan": "باید بزرگتر از {{requiredValue}} حرف باشد",
+    "countbiggerthan": "تعداد باید بیش از {{requiredValue}} عدد باشد",
+    "areequal": "باید برابر با {{requiredField}} باشد"
+  },
+  "withOutPrice": "بدون قیمت",
+  "iconKind": {
+    "search": "جستجوی خریدار",
+    "edit": "ویرایش خریدار",
+    "person_add": "افزودن خریدار"
+  }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LeaderUpsertComponent } from './leader-upsert/leader-upsert.component';
+import { PersonUpsertComponent } from './person-upsert/person-upsert.component';
 import { PersonComponent } from './person.component';
 import { LeaderListComponent } from './leader-list/leader-list.component';
 
@@ -23,8 +23,3 @@ const routes: Routes = [
 })
 export class PersonRoutingModule {
 }
-
-export const routedComponents = [
-
-  LeaderListComponent,
-];

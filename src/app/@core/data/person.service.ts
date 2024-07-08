@@ -1,7 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
-import { Block , Person, FindPersonFromNc, UpdatePerson, AddNewPerson, GetPersons, GetLeaders, GetAgencies, Agency, UpsertTeam, TeamMember, GetTourFreeSpace, TourOption, PersonIncome, OptionType, GetTourOptions, GetTourTeams, DeleteTeam, GetPersonsOfTeam, TeamPassenger, UpsertLeader, DeleteLeader, GetPersonsOfTour, TourPassenger } from './models';
+import {
+  AddNewPerson,
+  Block,
+  DeleteLeader,
+  DeleteTeam,
+  FindPersonFromNc,
+  GetLeaders,
+  GetPersons,
+  GetPersonsOfTeam,
+  GetTourAgency,
+  GetTourPassengers,
+  GetTourTeams,
+  Passenger,
+  PassengerReplacement,
+  PassengerReplacementTeamAccomplish,
+  PassengerReplacementTourAccomplish,
+  Person,
+  TeamPassenger,
+  Tour,
+  TourPassenger,
+  TourTeamMember,
+  UpdatePerson,
+  UpsertLeader,
+  UpsertTeam
+} from './models';
 import { Serializable } from '../utils/serializable';
 
 @Injectable()
@@ -28,7 +52,7 @@ export class PersonService {
     return this.apiService.send(dto);
   }
 
-  upsertLeader(model: Person):Observable<Person> {
+  upsertLeader(model: Person): Observable<Person> {
     const dto = new UpsertLeader();
     dto.person = model;
     return this.apiService.send(dto);
@@ -40,10 +64,11 @@ export class PersonService {
     return this.apiService.getEntities(dto);
   }
 
-
-  getPersons(): Observable<Person[]> {
-    const dto = new GetPersons();
-    return this.apiService.getEntities(dto);
+  getTourAgency(tourId: string): Observable<Tour[]> {
+    const query = new GetTourAgency();
+    query.tourId = tourId;
+    query.loadChild = true;
+    return this.apiService.get(query);
   }
 
   getLeaders(): Observable<Person[]> {
@@ -51,17 +76,12 @@ export class PersonService {
     return this.apiService.getEntities(dto);
   }
 
-  getAgency(): Observable<Agency[]> {
-    const dto = new GetAgencies();
-    return this.apiService.getEntities(dto);
-  }
-
-  upsertTeam(model: TeamMember[], blockModel: Block, teamId: string = undefined): Observable<void> {
+  upsertTeam(buyer: Person, model: Passenger[], blockModel: Block, teamId?: string): Observable<void> {
     const dto = new UpsertTeam();
-    dto.tourId = blockModel.id;//@TODO
-    dto.buyer = model[0];
+    dto.tourId = blockModel.id; //@TODO
+    dto.buyer = buyer;
     dto.teamId = teamId ? teamId : undefined;
-    dto.passengers = model.slice(1, model.length)
+    dto.passengers = model;
     dto.infantPrice = blockModel.infantPrice;
     dto.basePrice = blockModel.basePrice;
     dto.totalPrice = blockModel.totalPrice;
@@ -69,17 +89,7 @@ export class PersonService {
   }
 
   //@TODO: ugly
-  getTourFreeSpace(id: string): Observable<string> {
-    const query = new GetTourFreeSpace();
-    query.tourId = id;
-    return this.apiService.send(query);
-  }
 
-  getTourOptions(id: string): Observable<TourOption[]> {
-    const query = new GetTourOptions();
-    query.tourId = id;
-    return this.apiService.getEntities(query);
-  }
 
   getTourTeams(id: string): Observable<Block[]> {
     const query = new GetTourTeams();
@@ -100,14 +110,43 @@ export class PersonService {
   }
 
   getTourMembers(id: string): Observable<TourPassenger> {
-    const query = new GetPersonsOfTour();
+    const query = new GetTourPassengers();
     query.tourId = id;
     return this.apiService.get(query);
   }
 
-  deleteLeader(id: string){
+  deleteLeader(id: string) {
     const query = new DeleteLeader();
     query.id = id;
     return this.apiService.send(query);
+  }
+
+  passengerReplacement(tourId: string, destId: string, passengers: Passenger[], agencyId: string): Observable<TourTeamMember> {
+    const dto = new PassengerReplacement();
+    //@TODO: ughly
+    dto.tourId = tourId;
+    dto.destTourId = destId;
+    dto.passengers = passengers;
+    dto.agencyId = agencyId;
+    return this.apiService.send(dto);
+  }
+
+  teamAccomplish(model: any, oldTourId: string) {
+    const dto = new PassengerReplacementTeamAccomplish();
+    dto.teams = model.teams;
+    dto.oldTourId = oldTourId;
+    return this.apiService.send(dto);
+  }
+
+  tourAccomplish(model: any, oldTourId: string) {
+    const dto = new PassengerReplacementTourAccomplish();
+    dto.oldTourId = oldTourId;
+    dto.basePrice = model.basePrice;
+    dto.tourId = model.id;
+    dto.infantPrice = model.infantPrice;
+    dto.busPrice = model.busPrice;
+    dto.roomPrice = model.roomPrice;
+    dto.foodPrice = model.foodPrice;
+    return this.apiService.send(dto);
   }
 }

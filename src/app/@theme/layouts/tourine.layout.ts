@@ -1,29 +1,25 @@
-import { Component, ElementRef, Input, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/withLatestFrom';
-import 'rxjs/add/operator/delay';
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { BehaviorSubject } from 'rxjs';
 
 import { StateService } from '../../@core/data/state.service';
-import { SidebarService } from "../components/sidebar/sidebar.service";
-import { ThemeService } from "../../@core/utils/theme.service";
-import { MenuService } from "../components/menu/menu.service";
-import { SpinnerService } from "../../@core/utils/spinner.service";
+import { SidebarService } from '../components/sidebar/sidebar.service';
+import { ThemeService } from '../../@core/utils/theme.service';
+import { MenuService } from '../components/menu/menu.service';
+import { SpinnerService } from '../../@core/utils/spinner.service';
 
-declare type LayoutType = "layout1" | "layout2";
+declare type LayoutType = 'layout1' | 'layout2';
 
 // TODO: move layouts into the framework
 @Component({
-  selector: 'tourine-layout',
-  templateUrl: "tourine.layout.html",
+  selector: 'trn-tourine-layout',
+  templateUrl: 'tourine.layout.html',
   styleUrls: ['tourine.layout.scss'],
 })
-export class TourineLayoutComponent implements OnDestroy {
-
+export class TourineLayoutComponent implements OnDestroy, OnInit {
   layout: any = {};
   sidebar: any = {};
-  @Input() layoutType: LayoutType = "layout1";
-
+  @Input() layoutType: LayoutType = 'layout1';
   protected afterViewInit$ = new BehaviorSubject(null);
   protected layoutState$: Subscription;
   protected sidebarState$: Subscription;
@@ -61,14 +57,13 @@ export class TourineLayoutComponent implements OnDestroy {
     this.removeClassSubscription = this.themeService.onRemoveLayoutClass().subscribe((className) => {
       this.renderer.removeClass(this.elementRef.nativeElement, className);
     });
-
-    this.spinnerService.registerLoader(new Promise((resolve, reject) => {
-      this.afterViewInit$.subscribe((_) => resolve());
-    }));
     this.spinnerService.load();
     this.menuService.onClick.subscribe(res => this.sidebarService.toggle(false));
     // trigger first time so that after the change we have the initial value
     this.themeService.changeWindowWidth(window.innerWidth);
+  }
+
+  ngOnInit(): void {
   }
 
   ngOnDestroy() {
