@@ -46,7 +46,7 @@
     "apply-loader": "^2.0.0",
     "async": "^2.6.0",
     "autoprefixer": "^7.1.6",
-    "browser-sync": "^2.18.13",
+    "browser-sync": "^2.29.3",
     "codelyzer": "~4.2.1",
     "connect-history-api-fallback": "^1.5.0",
     "cssnano": "^3.10.0",
