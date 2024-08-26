@@ -790,13 +790,24 @@ after@0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
 
+ag-charts-community@9.3.2:
+  version "9.3.2"
+  resolved "https://registry.yarnpkg.com/ag-charts-community/-/ag-charts-community-9.3.2.tgz#f3229fb0a8077441b1accee19a5373635e0e44ce"
+
 ag-grid-angular@^16.0.0:
   version "16.0.0"
   resolved "https://registry.yarnpkg.com/ag-grid-angular/-/ag-grid-angular-16.0.0.tgz#de14f659c2da7f4e548a26953970133e1c97a125"
 
-ag-grid-enterprise@^16.0.0:
-  version "16.0.1"
-  resolved "https://registry.yarnpkg.com/ag-grid-enterprise/-/ag-grid-enterprise-16.0.1.tgz#b3621f88955340a3ca3b0446ed220046fff2c391"
+ag-grid-community@31.3.4:
+  version "31.3.4"
+  resolved "https://registry.yarnpkg.com/ag-grid-community/-/ag-grid-community-31.3.4.tgz#d9397672d6941aebc633a37b2b32e3637aa05642"
+
+ag-grid-enterprise@^31.3.4:
+  version "31.3.4"
+  resolved "https://registry.yarnpkg.com/ag-grid-enterprise/-/ag-grid-enterprise-31.3.4.tgz#239ab3807f4babb993a2b091a01211af56cc9628"
+  dependencies:
+    ag-charts-community "9.3.2"
+    ag-grid-community "31.3.4"
 
 ag-grid@^16.0.0:
   version "16.0.1"
@@ -2299,7 +2310,7 @@ compressible@~2.0.13:
 
 compression@^1.5.2:
   version "1.7.2"
-  resolved "http://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
+  resolved "https://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
   dependencies:
     accepts "~1.3.4"
     bytes "3.0.0"
@@ -3422,7 +3433,7 @@ event-emitter@^0.3.5:
 
 event-stream@^3.1.0, event-stream@^3.3.4, event-stream@latest, event-stream@~3.3.0:
   version "3.3.4"
-  resolved "http://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
+  resolved "https://registry.npmjs.org/event-stream/-/event-stream-3.3.4.tgz#4ab4c9a0f5a54db9338b4c34d86bfce8f4b35571"
   dependencies:
     duplexer "~0.1.1"
     from "~0"
